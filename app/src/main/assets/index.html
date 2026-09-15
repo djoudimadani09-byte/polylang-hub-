@@ -1,0 +1,2109 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Polylang Hub | منصة الترجمة المتخصصة وتطوير المهارات اللغوية</title>
+
+  <!-- Google Fonts: Tajawal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* -------------------------------------------------------------
+       CSS VARIABLES & THEME ENGINE (LIGHT & DARK MODES)
+       ------------------------------------------------------------- */
+    :root {
+      /* Brand Palette: Luxurious Rich Red */
+      --primary: #e53935;
+      --primary-dark: #b71c1c;
+      --primary-light: #ffcdd2;
+      --primary-subtle: #fff5f5;
+      --primary-gradient: linear-gradient(135deg, #e53935 0%, #b71c1c 100%);
+      
+      /* Light Surface Palette */
+      --bg-base: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-surface-secondary: #f1f5f9;
+      --bg-surface-elevated: #ffffff;
+      
+      /* Text Colors */
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-inverted: #ffffff;
+      
+      /* Borders & Dividers */
+      --border-main: #e2e8f0;
+      --border-subtle: #edf2f7;
+      
+      /* Accents & Status */
+      --success: #10b981;
+      --success-bg: #ecfdf5;
+      --warning: #f59e0b;
+      --warning-bg: #fffbeb;
+      --info: #0284c7;
+      --info-bg: #f0f9ff;
+      --danger: #ef4444;
+      
+      /* Shadows */
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.07);
+      --shadow-lg: 0 16px 32px rgba(183, 28, 28, 0.12);
+      
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      
+      --font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    [data-theme="dark"] {
+      --bg-base: #090d16;
+      --bg-surface: #111827;
+      --bg-surface-secondary: #1e293b;
+      --bg-surface-elevated: #1f293d;
+      
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      
+      --border-main: #283548;
+      --border-subtle: #1e293b;
+      
+      --primary-subtle: rgba(229, 57, 53, 0.12);
+      --success-bg: rgba(16, 185, 129, 0.15);
+      --warning-bg: rgba(245, 158, 11, 0.15);
+      --info-bg: rgba(2, 132, 199, 0.15);
+      
+      --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.6);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-family);
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.25s ease, border-color 0.25s ease, color 0.2s ease;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* -------------------------------------------------------------
+       HEADER & NAVIGATION BAR
+       ------------------------------------------------------------- */
+    header {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-main);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0.8rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand-block {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      background: var(--primary-gradient);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 1.4rem;
+      box-shadow: 0 4px 12px rgba(229, 57, 53, 0.35);
+    }
+
+    .brand-title {
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--primary-dark);
+      letter-spacing: -0.3px;
+      line-height: 1.1;
+    }
+
+    [data-theme="dark"] .brand-title {
+      color: #ef5350;
+    }
+
+    .brand-subtitle {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .nav-tabs-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      list-style: none;
+    }
+
+    .nav-tab-btn {
+      background: transparent;
+      border: none;
+      padding: 0.6rem 0.95rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s;
+    }
+
+    .nav-tab-btn:hover, .nav-tab-btn.active {
+      color: var(--primary);
+      background: var(--primary-subtle);
+    }
+
+    .header-tools {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .icon-btn {
+      background: var(--bg-surface-secondary);
+      border: 1px solid var(--border-main);
+      color: var(--text-main);
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.05rem;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s;
+    }
+
+    .icon-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    .badge-count {
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      background: var(--primary);
+      color: #ffffff;
+      font-size: 0.68rem;
+      font-weight: 800;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--bg-surface);
+    }
+
+    .pill-btn {
+      background: var(--bg-surface-secondary);
+      border: 1.5px solid var(--border-main);
+      color: var(--text-main);
+      padding: 0.42rem 0.85rem;
+      border-radius: var(--radius-full);
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.2s;
+    }
+
+    .pill-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .user-profile-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.3rem 0.75rem;
+      background: var(--bg-surface-secondary);
+      border: 1px solid var(--border-main);
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .user-profile-btn:hover {
+      border-color: var(--primary);
+    }
+
+    .user-avatar-circle {
+      width: 32px;
+      height: 32px;
+      background: var(--primary-gradient);
+      color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.85rem;
+    }
+
+    .role-tag-pill {
+      font-size: 0.7rem;
+      padding: 0.12rem 0.5rem;
+      border-radius: 12px;
+      font-weight: 800;
+      background: #fee2e2;
+      color: var(--primary-dark);
+    }
+
+    [data-theme="dark"] .role-tag-pill {
+      background: rgba(239, 68, 68, 0.2);
+      color: #fca5a5;
+    }
+
+    /* -------------------------------------------------------------
+       NOTIFICATIONS DROPDOWN MENU
+       ------------------------------------------------------------- */
+    .notifications-popover {
+      position: absolute;
+      top: 54px;
+      left: 70px;
+      width: 340px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-main);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      display: none;
+      flex-direction: column;
+      z-index: 2500;
+      overflow: hidden;
+      animation: popIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html[dir="ltr"] .notifications-popover {
+      left: auto;
+      right: 70px;
+    }
+
+    .notifications-popover.open {
+      display: flex;
+    }
+
+    .notif-header {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border-main);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-surface-secondary);
+    }
+
+    .notif-list {
+      max-height: 350px;
+      overflow-y: auto;
+      list-style: none;
+    }
+
+    .notif-item {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .notif-item:hover {
+      background: var(--bg-surface-secondary);
+    }
+
+    .notif-item.unread {
+      background: var(--primary-subtle);
+    }
+
+    .notif-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg-surface-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+
+    /* -------------------------------------------------------------
+       MAIN APPLICATION LAYOUT
+       ------------------------------------------------------------- */
+    main {
+      flex: 1;
+      max-width: 1320px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.75rem 1.25rem 3.5rem;
+    }
+
+    .app-pane {
+      display: none;
+      animation: fadeIn 0.22s ease-out;
+    }
+
+    .app-pane.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.96) translateY(-6px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* Card System */
+    .card {
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-main);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+
+    /* Buttons & Form Inputs */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.68rem 1.35rem;
+      border-radius: var(--radius-md);
+      font-size: 0.94rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--primary-gradient);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(229, 57, 53, 0.25);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 6px 20px rgba(229, 57, 53, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: var(--bg-surface);
+      border-color: var(--border-main);
+      color: var(--text-main);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-subtle);
+    }
+
+    .btn-sm {
+      padding: 0.38rem 0.8rem;
+      font-size: 0.82rem;
+      border-radius: var(--radius-sm);
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-label {
+      display: block;
+      font-weight: 700;
+      font-size: 0.88rem;
+      margin-bottom: 0.45rem;
+      color: var(--text-main);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--border-main);
+      background: var(--bg-surface-secondary);
+      font-size: 0.92rem;
+      color: var(--text-main);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-control:focus {
+      background: var(--bg-surface);
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.15);
+    }
+
+    /* -------------------------------------------------------------
+       ROLE-BASED BANNER & SELECTOR
+       ------------------------------------------------------------- */
+    .role-navigator-bar {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-main);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .role-switcher-chips {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .role-chip {
+      padding: 0.45rem 0.95rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      border: 1.5px solid var(--border-main);
+      background: var(--bg-surface-secondary);
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.2s;
+    }
+
+    .role-chip:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .role-chip.active {
+      background: var(--primary-gradient);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 4px 12px rgba(229, 57, 53, 0.3);
+    }
+
+    /* -------------------------------------------------------------
+       REAL FILE UPLOADER SIMULATOR WITH LIVE PROGRESS
+       ------------------------------------------------------------- */
+    .dropzone-box {
+      border: 2px dashed var(--border-main);
+      border-radius: var(--radius-md);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      background: var(--bg-surface-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .dropzone-box:hover, .dropzone-box.dragover {
+      border-color: var(--primary);
+      background: var(--primary-subtle);
+    }
+
+    .upload-progress-wrapper {
+      margin-top: 1rem;
+      display: none;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background: var(--border-main);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 0.45rem;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: var(--primary-gradient);
+      transition: width 0.15s ease;
+    }
+
+    /* -------------------------------------------------------------
+       TABLE STYLING
+       ------------------------------------------------------------- */
+    .table-responsive {
+      overflow-x: auto;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-main);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: right;
+    }
+
+    th, td {
+      padding: 0.85rem 1.15rem;
+      border-bottom: 1px solid var(--border-main);
+      font-size: 0.88rem;
+    }
+
+    th {
+      background: var(--bg-surface-secondary);
+      font-weight: 800;
+      color: var(--text-muted);
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 0.2rem 0.65rem;
+      border-radius: 12px;
+      font-size: 0.74rem;
+      font-weight: 800;
+    }
+    .status-badge.completed { background: var(--success-bg); color: var(--success); }
+    .status-badge.active { background: var(--info-bg); color: var(--info); }
+    .status-badge.pending { background: var(--warning-bg); color: var(--warning); }
+    .status-badge.disputed { background: #fee2e2; color: var(--danger); }
+
+    /* -------------------------------------------------------------
+       INTERACTIVE LEARNING FLASHCARDS & VOCABULARY BUILDER
+       ------------------------------------------------------------- */
+    .flashcard-stage {
+      perspective: 1000px;
+      margin: 1.5rem 0;
+      min-height: 220px;
+    }
+
+    .flashcard-inner {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+
+    .flashcard-inner.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .flashcard-front, .flashcard-back {
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius-lg);
+      border: 2px solid var(--border-main);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      text-align: center;
+      backface-visibility: hidden;
+      background: var(--bg-surface);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .flashcard-back {
+      transform: rotateY(180deg);
+      background: var(--primary-subtle);
+      border-color: var(--primary-light);
+    }
+
+    /* -------------------------------------------------------------
+       MODALS & TOASTS
+       ------------------------------------------------------------- */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(4px);
+      z-index: 3000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--bg-surface);
+      width: 100%;
+      max-width: 520px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-main);
+      overflow: hidden;
+      animation: popIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-top {
+      padding: 1.1rem 1.5rem;
+      background: var(--bg-surface-secondary);
+      border-bottom: 1px solid var(--border-main);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-body-content {
+      padding: 1.5rem;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    #toastStack {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .toast-card {
+      background: var(--bg-surface-elevated);
+      color: var(--text-main);
+      padding: 0.85rem 1.25rem;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      font-size: 0.92rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-right: 4px solid var(--primary);
+      border-top: 1px solid var(--border-main);
+      border-bottom: 1px solid var(--border-main);
+      border-left: 1px solid var(--border-main);
+      animation: toastIn 0.25s ease;
+    }
+
+    @keyframes toastIn {
+      from { transform: translateY(12px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* LTR layout fixes */
+    html[dir="ltr"] { text-align: left; }
+    html[dir="ltr"] table { text-align: left; }
+    html[dir="ltr"] .toast-card { border-right: 1px solid var(--border-main); border-left: 4px solid var(--primary); }
+    html[dir="ltr"] #toastStack { left: auto; right: 24px; }
+
+    @media (max-width: 900px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .nav-tabs-wrapper { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =============================================================
+       HEADER & NAVIGATION BAR
+       ============================================================= -->
+  <header>
+    <div class="header-inner">
+      <div class="brand-block" onclick="activateNavTab('dashboard')">
+        <div class="brand-logo">P</div>
+        <div>
+          <div class="brand-title">Polylang Hub</div>
+          <div class="brand-subtitle" id="lblBrandSubtitle">منصة الترجمة المتخصصة والتدريب اللغوي</div>
+        </div>
+      </div>
+
+      <!-- Dynamic Navigation Tabs (Tailored per Role) -->
+      <ul class="nav-tabs-wrapper" id="dynamicNavLinks">
+        <!-- Injected via JavaScript based on active role -->
+      </ul>
+
+      <div class="header-tools">
+        <!-- Language Switcher -->
+        <button class="pill-btn" onclick="toggleLanguage()" id="btnLangToggle">
+          🌐 <span id="lblLangText">English</span>
+        </button>
+
+        <!-- Dark Mode Toggle Button -->
+        <button class="icon-btn" onclick="toggleDarkMode()" id="btnThemeToggle" title="تبديل المظهر الداكن/الفاتح">
+          🌙
+        </button>
+
+        <!-- Real-time Notifications Bell with Badge -->
+        <div style="position: relative;">
+          <button class="icon-btn" onclick="toggleNotificationsMenu()" id="btnNotificationBell" title="الإشعارات والتنبيهات">
+            🔔
+            <span class="badge-count" id="notifBadge">3</span>
+          </button>
+
+          <!-- Notifications Dropdown Popover -->
+          <div class="notifications-popover" id="notificationsPopover">
+            <div class="notif-header">
+              <strong style="font-size: 0.92rem;">مركز الإشعارات والتنبيهات</strong>
+              <button class="btn-sm btn-outline" onclick="markAllNotificationsAsRead()">تحديد كمقروء</button>
+            </div>
+            <ul class="notif-list" id="notifListContainer">
+              <!-- Dynamically populated -->
+            </ul>
+          </div>
+        </div>
+
+        <!-- User Authentication & Profile Slot -->
+        <div id="userHeaderProfile">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- =============================================================
+       MAIN CONTENT CONTAINER
+       ============================================================= -->
+  <main>
+    <!-- Role Switcher Ribbon (Quick switch & Visual clarity) -->
+    <div class="role-navigator-bar">
+      <div>
+        <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700;">الصفة والدور الحالي:</span>
+        <div style="font-size: 1.15rem; font-weight: 900; color: var(--primary-dark);" id="currentRoleTitleDisplay">
+          عميل طالب ترجمة (Client)
+        </div>
+      </div>
+
+      <div class="role-switcher-chips">
+        <button class="role-chip" id="chip-admin" onclick="switchActiveRole('admin')">
+          🛡️ مسؤول المنصة (Admin)
+        </button>
+        <button class="role-chip" id="chip-translator" onclick="switchActiveRole('translator')">
+          🎓 مترجم معتمد (Translator)
+        </button>
+        <button class="role-chip active" id="chip-client" onclick="switchActiveRole('client')">
+          👤 عميل (Client)
+        </button>
+        <button class="role-chip" id="chip-enthusiast" onclick="switchActiveRole('enthusiast')">
+          💡 محب للغات (Enthusiast)
+        </button>
+      </div>
+    </div>
+
+    <!-- ===========================================================
+         ROLE 1: ADMIN (مسؤول المنصة) DASHBOARD VIEW
+         =========================================================== -->
+    <div id="roleView-admin" class="role-view-section" style="display: none;">
+      <!-- System-Wide Analytics KPIs -->
+      <div class="grid-4">
+        <div class="card">
+          <span style="font-size: 0.82rem; color: var(--text-muted);">إجمالي الكلمات المترجمة في المنصة</span>
+          <h3 style="font-size: 1.75rem; font-weight: 900; color: var(--primary-dark); margin-top: 0.25rem;">1,480,250</h3>
+          <span style="font-size: 0.78rem; color: var(--success); font-weight: 700;">+14.2% مقارنة بالشهر السابق</span>
+        </div>
+        <div class="card">
+          <span style="font-size: 0.82rem; color: var(--text-muted);">حجم المعاملات المالية المكتملة</span>
+          <h3 style="font-size: 1.75rem; font-weight: 900; margin-top: 0.25rem;">5,920,000 <small style="font-size: 0.9rem; color: var(--text-muted);">دج</small></h3>
+          <span style="font-size: 0.78rem; color: var(--success); font-weight: 700;">عبر الذهبية وCIB</span>
+        </div>
+        <div class="card">
+          <span style="font-size: 0.82rem; color: var(--text-muted);">المترجمون المعتمدون النشطون</span>
+          <h3 style="font-size: 1.75rem; font-weight: 900; color: var(--info); margin-top: 0.25rem;">452</h3>
+          <span style="font-size: 0.78rem; color: var(--text-muted);">موزعون على 18 تخصص لغوي</span>
+        </div>
+        <div class="card">
+          <span style="font-size: 0.82rem; color: var(--text-muted);">النزاعات المفتوحة للمراجعة</span>
+          <h3 style="font-size: 1.75rem; font-weight: 900; color: var(--warning); margin-top: 0.25rem;" id="adminDisputesCount">2</h3>
+          <span style="font-size: 0.78rem; color: var(--warning); font-weight: 700;">تتطلب التحكيم المعتمد</span>
+        </div>
+      </div>
+
+      <!-- User & Linguist Management -->
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+          <div>
+            <h3 style="font-weight: 900; font-size: 1.15rem;">إدارة المستخدمين والمترجمين المعتمدين</h3>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">التحقق من التراخيص المهنية وتفعيل حسابات المترجمين</p>
+          </div>
+          <input type="text" class="form-control" style="width: 250px; padding: 0.45rem 0.85rem;" placeholder="بحث باسم المستخدم أو البريد..." oninput="filterAdminUsersTable(this.value)">
+        </div>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>المستخدم</th>
+                <th>الدور / الصفة</th>
+                <th>التخصص اللغوي</th>
+                <th>تاريخ الانضمام</th>
+                <th>حالة الحساب</th>
+                <th>الإجراء الإداري</th>
+              </tr>
+            </thead>
+            <tbody id="adminUsersTbody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Dispute Resolution Center & Audit Logs -->
+      <div class="grid-2">
+        <div class="card">
+          <h3 style="font-weight: 900; font-size: 1.15rem; margin-bottom: 0.75rem;">مركز التحكيم وفض النزاعات (Dispute Center)</h3>
+          <p style="font-size: 0.84rem; color: var(--text-muted); margin-bottom: 1rem;">
+            الطلبات التي تم تقديم اعتراض بخصوص مصطلحاتها أو مواعيد تسليمها:
+          </p>
+
+          <div id="adminDisputesContainer">
+            <!-- Dynamically populated disputes -->
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="font-weight: 900; font-size: 1.15rem; margin-bottom: 0.75rem;">سجل التدقيق العام (Global Audit Logs)</h3>
+          <p style="font-size: 0.84rem; color: var(--text-muted); margin-bottom: 1rem;">
+            أحدث الأنشطة الحساسة والعمليات التوثيقية المسجلة في الخادم:
+          </p>
+
+          <ul style="list-style: none; font-size: 0.84rem; line-height: 1.9;" id="adminAuditLogsList">
+            <!-- Rendered via JS -->
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===========================================================
+         ROLE 2: PROFESSIONAL TRANSLATOR (مترجم معتمد) VIEW
+         =========================================================== -->
+    <div id="roleView-translator" class="role-view-section" style="display: none;">
+      <!-- Quick Translator KPIs -->
+      <div class="grid-4">
+        <div class="card">
+          <span style="font-size: 0.82rem; color: var(--text-muted);">رصيد المحفظة المتاح للسحب</span>
+          <h3 style="font-size: 1.7rem; font-weight: 900; color: var(--primary-dark); margin-top: 0.25rem;">48,500 دج</h3>
+          <button class="btn btn-outline btn-sm" style="margin-top: 0.5rem; width: 100%;" onclick="pushNotificationAlert('تم تقديم طلب سحب الرصيد إلى حسابك البريدي الجاري (CCP)')">طلب سحب الرصيد</button>
+        </div>
+        <div class="card">
+          <span style="font-size: 0.82rem; color: var(--text-muted);">الكلمات المنجزة هذا الشهر</span>
+          <h3 style="font-size: 1.7rem; font-weight: 900; margin-top: 0.25rem;">32,400 كلمة</h3>
+          <span style="font-size: 0.78rem; color: var(--success); font-weight: 700;">تقييم الجودة: 99.1%</span>
+        </div>
+        <div class="card">
+          <span style="font-size: 0.82rem; color: var(--text-muted);">المشاريع قيد الترجمة والتدقيق</span>
+          <h3 style="font-size: 1.7rem; font-weight: 900; color: var(--info); margin-top: 0.25rem;">2 مشاريع</h3>
+          <span style="font-size: 0.78rem; color: var(--text-muted);">موعد التسليم القادم: غداً 14:00</span>
+        </div>
+        <div class="card">
+          <span style="font-size: 0.82rem; color: var(--text-muted);">المستوى والاعتماد المهني</span>
+          <h3 style="font-size: 1.3rem; font-weight: 900; color: var(--success); margin-top: 0.4rem;">مترجم رسمي محلف</h3>
+          <span style="font-size: 0.78rem; color: var(--text-muted);">رقم الاعتماد: #DZ-2024-89</span>
+        </div>
+      </div>
+
+      <!-- Job Marketplace (سوق طلبات الترجمة المتاحة) -->
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+          <div>
+            <h3 style="font-weight: 900; font-size: 1.15rem;">سوق المشاريع وطلبات الترجمة المتاحة (Job Marketplace)</h3>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">مشاريع معتمدة بانتظار استلام المترجمين</p>
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button class="btn btn-outline btn-sm" onclick="filterMarketplaceJobs('all')">الكل</button>
+            <button class="btn btn-outline btn-sm" onclick="filterMarketplaceJobs('legal')">قانوني</button>
+            <button class="btn btn-outline btn-sm" onclick="filterMarketplaceJobs('technical')">تقني</button>
+            <button class="btn btn-outline btn-sm" onclick="filterMarketplaceJobs('medical')">طبي</button>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>رقم المشروع</th>
+                <th>العنوان والمجال</th>
+                <th>زوج اللغات</th>
+                <th>الحجم</th>
+                <th>المكافأة (DZD)</th>
+                <th>فترة الإنجاز</th>
+                <th>الإجراء</th>
+              </tr>
+            </thead>
+            <tbody id="marketplaceJobsTbody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Terminology Glossary & SRT Quick Access -->
+      <div class="grid-2">
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <h3 style="font-weight: 900; font-size: 1.1rem;">مسرد المصطلحات الموحد (Terminology Glossaries)</h3>
+            <button class="btn btn-outline btn-sm" onclick="openAddTermModal()">➕ إضافة مصطلح</button>
+          </div>
+
+          <input type="text" class="form-control" style="margin-bottom: 0.85rem;" placeholder="ابحث في المسرد (مثال: Force Majeure, Ultra Vires)..." oninput="searchGlossaryTerms(this.value)">
+
+          <div style="max-height: 260px; overflow-y: auto;" id="glossaryListContainer">
+            <!-- Glossary items -->
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="font-weight: 900; font-size: 1.1rem; margin-bottom: 0.5rem;">محرر ترجمة الفيديو ومزامنة SRT</h3>
+          <p style="font-size: 0.84rem; color: var(--text-muted); margin-bottom: 1rem;">
+            بيئة العمل المتزامنة لتحرير ملفات الترجمة التحتية وتصديرها بصيغة .srt المعتمدة.
+          </p>
+
+          <div style="background: var(--bg-surface-secondary); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-main); margin-bottom: 1rem;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <span style="font-weight: 700; font-size: 0.86rem;">المشروع النشط: وثائقي التحول الطاقوي</span>
+              <span class="role-tag-pill">SRT جاهز</span>
+            </div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">
+              عدد مقاطع التوقيت: 42 مقطع | اللغات: AR, EN, FR | نسبة المزامنة: 100%
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 0.5rem;">
+            <button class="btn btn-primary btn-sm" onclick="triggerSrtDemoExport()">⬇️ تنزيل ملف SRT المترجم</button>
+            <button class="btn btn-outline btn-sm" onclick="pushNotificationAlert('تم فتح ورشة مزامنة مقاطع التوقيت في المشغل')">فتح استوديو SRT</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===========================================================
+         ROLE 3: CLIENT (عميل طالب ترجمة) VIEW
+         =========================================================== -->
+    <div id="roleView-client" class="role-view-section">
+      <!-- Order Creation & Real File Upload Simulator -->
+      <div class="grid-2">
+        <div class="card">
+          <h3 style="font-weight: 900; font-size: 1.15rem; margin-bottom: 1.25rem;">طلب ترجمة معتمدة جديد</h3>
+
+          <div class="form-group">
+            <label class="form-label">المجال التخصصي للمستند</label>
+            <select class="form-control" id="clientDocDomain" onchange="calculateClientQuote()">
+              <option value="legal">⚖️ ترجمة قانونية ورسمية (عقود، شهادات، توثيق)</option>
+              <option value="technical">⚙️ ترجمة تقنية وهندسية (كتيبات، براءات اختراع)</option>
+              <option value="institutional">🏛️ ترجمة مؤسساتية وإدارية (مراسلات، تقارير سنوية)</option>
+              <option value="medical">🩺 ترجمة طبية ودوائية (تحاليل، نشرات سريرية)</option>
+            </select>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label">لغة المصدر</label>
+              <select class="form-control" id="clientSrcLang">
+                <option value="en" selected>الإنجليزية (EN)</option>
+                <option value="ar">العربية (AR)</option>
+                <option value="fr">الفرنسية (FR)</option>
+                <option value="de">الألمانية (DE)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">لغة الهدف</label>
+              <select class="form-control" id="clientTgtLang">
+                <option value="ar" selected>العربية (AR)</option>
+                <option value="en">الإنجليزية (EN)</option>
+                <option value="fr">الفرنسية (FR)</option>
+                <option value="de">الألمانية (DE)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">حجم المستند التقريبي (عدد الكلمات)</label>
+            <input type="number" class="form-control" id="clientWordsCount" value="750" min="50" step="50" oninput="calculateClientQuote()">
+          </div>
+
+          <!-- Real File Upload Simulation Box with Progress -->
+          <div class="form-group">
+            <label class="form-label">إرفاق المستند أو الفيديو (PDF, DOCX, MP4, SRT)</label>
+            <div class="dropzone-box" id="clientDropzone" onclick="document.getElementById('realFileInput').click()">
+              <div style="font-size: 2rem; margin-bottom: 0.25rem;">📁</div>
+              <strong style="font-size: 0.9rem;" id="dropzonePrompt">انقر لتحديد الملف أو اسحبه هنا</strong>
+              <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;">الحجم الأقصى: 50MB (يتم فحص وتشفير المستندات فوراً)</p>
+            </div>
+            <input type="file" id="realFileInput" style="display: none;" onchange="startSimulatedFileUpload(this)">
+
+            <!-- Live Progress Bar Element -->
+            <div class="upload-progress-wrapper" id="uploadProgressBox">
+              <div style="display: flex; justify-content: space-between; font-size: 0.8rem;">
+                <span id="uploadFileNameLabel">document.pdf</span>
+                <strong id="uploadPercentageLabel">0%</strong>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" id="uploadProgressFill"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cost Breakdown & Submission -->
+        <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <h3 style="font-weight: 900; font-size: 1.15rem; margin-bottom: 1.25rem;">تقدير التكلفة والإنجاز</h3>
+
+            <div style="background: var(--bg-surface-secondary); border: 1.5px solid var(--border-main); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 0.65rem;">
+                <span style="color: var(--text-muted);">التصنيف التخصصي:</span>
+                <strong id="quoteDomainLabel">ترجمة قانونية ورسمية</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; margin-bottom: 0.65rem;">
+                <span style="color: var(--text-muted);">الحجم التقديري:</span>
+                <strong><span id="quoteWordsCount">750</span> كلمة</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; margin-bottom: 0.65rem;">
+                <span style="color: var(--text-muted);">زمن التسليم التقديري:</span>
+                <strong id="quoteDeliveryTime">24 - 48 ساعة</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; margin-bottom: 0.65rem;">
+                <span style="color: var(--text-muted);">التدقيق اللغوي والختم:</span>
+                <span style="color: var(--success); font-weight: 800;">مشمول في التسعير ✓</span>
+              </div>
+              <hr style="border: 0; border-top: 1px solid var(--border-main); margin: 0.85rem 0;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-weight: 900;">المبلغ الإجمالي:</span>
+                <span style="font-size: 1.95rem; font-weight: 900; color: var(--primary-dark);">
+                  <span id="quoteTotalCostDzd">3,000</span> <small style="font-size: 0.95rem; color: var(--text-muted);">دج (DZD)</small>
+                </span>
+              </div>
+            </div>
+
+            <p style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.6;">
+              تتم معالجة جميع المستندات وفق اتفاقية سرية تامة (NDA). يقدم الدفع عبر <strong>البطاقة الذهبية</strong> أو <strong>بطاقة CIB</strong> مع فواتير ضريبية نظامية.
+            </p>
+          </div>
+
+          <button class="btn btn-primary" style="width: 100%; padding: 0.95rem; margin-top: 1.5rem;" onclick="submitClientOrder()">
+            تأكيد الطلب والمتابعة للدفع الإلكتروني
+          </button>
+        </div>
+      </div>
+
+      <!-- Client Active Projects Table -->
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+          <h3 style="font-weight: 900; font-size: 1.15rem;">مشاريعك وطلبات الترجمة النشطة</h3>
+          <button class="btn btn-outline btn-sm" onclick="renderClientOrdersTable()">🔄 تحديث الحالة</button>
+        </div>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>رقم الطلب</th>
+                <th>عنوان المستند</th>
+                <th>اللغات</th>
+                <th>الكلمات والتكلفة</th>
+                <th>حالة المشروع</th>
+                <th>الإجراء</th>
+              </tr>
+            </thead>
+            <tbody id="clientOrdersTbody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===========================================================
+         ROLE 4: LANGUAGE ENTHUSIAST & LEARNER (محب للغات) VIEW
+         =========================================================== -->
+    <div id="roleView-enthusiast" class="role-view-section" style="display: none;">
+      <!-- Stats & Progress -->
+      <div class="grid-3">
+        <div class="card" style="text-align: center;">
+          <span style="font-size: 0.82rem; color: var(--text-muted);">سلسلة الممارسة اليومية (Streak)</span>
+          <h3 style="font-size: 2.2rem; font-weight: 900; color: var(--warning); margin: 0.35rem 0;">🔥 12 يوماً</h3>
+          <p style="font-size: 0.8rem; color: var(--text-muted);">واصل الحفاظ على استمراريتك اليومية</p>
+        </div>
+        <div class="card" style="text-align: center;">
+          <span style="font-size: 0.82rem; color: var(--text-muted);">المصطلحات المكتسبة (Vocabulary)</span>
+          <h3 style="font-size: 2.2rem; font-weight: 900; color: var(--primary-dark); margin: 0.35rem 0;" id="vocabLearnedCount">380 كلمة</h3>
+          <p style="font-size: 0.8rem; color: var(--success); font-weight: 700;">+25 مصطلح هذا الأسبوع</p>
+        </div>
+        <div class="card" style="text-align: center;">
+          <span style="font-size: 0.82rem; color: var(--text-muted);">معدل دقة التمارين</span>
+          <h3 style="font-size: 2.2rem; font-weight: 900; color: var(--info); margin: 0.35rem 0;">94.8%</h3>
+          <p style="font-size: 0.8rem; color: var(--text-muted);">المستوى التقديري: C1 Advanced</p>
+        </div>
+      </div>
+
+      <!-- Feature 1: Interactive Vocabulary Flashcard Builder -->
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+          <div>
+            <h3 style="font-weight: 900; font-size: 1.15rem;">بنك بطاقات الذاكرة التفاعلية (Flashcard Builder)</h3>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">انقر على البطاقة لقلبها واكتشاف المعنى والسياق والنطق الصوتي</p>
+          </div>
+          <div style="display: flex; gap: 0.45rem;">
+            <button class="btn btn-outline btn-sm" onclick="previousFlashcard()">⬅️ السابق</button>
+            <span style="font-weight: 800; font-size: 0.85rem; padding: 0.35rem 0.65rem;" id="flashcardCounter">1 / 5</span>
+            <button class="btn btn-outline btn-sm" onclick="nextFlashcard()">التالي ➡️</button>
+          </div>
+        </div>
+
+        <div class="flashcard-stage" onclick="flipActiveFlashcard()">
+          <div class="flashcard-inner" id="flashcardInnerElement">
+            <div class="flashcard-front">
+              <span class="role-tag-pill" style="margin-bottom: 0.5rem;" id="cardCategory">مصطلح قانوني</span>
+              <h2 style="font-size: 2rem; font-weight: 900; color: var(--primary-dark);" id="cardWord">Force Majeure</h2>
+              <p style="font-size: 0.95rem; color: var(--text-muted); margin-top: 0.5rem;" id="cardPhonetic">/ˌfɔːrs məˈʒɜːr/</p>
+              <span style="font-size: 0.78rem; color: var(--primary); margin-top: 1rem; font-weight: 700;">🔄 انقر للكشف عن المقابل العربي والأمثلة</span>
+            </div>
+            <div class="flashcard-back">
+              <h3 style="font-size: 1.8rem; font-weight: 900; color: var(--text-main);" id="cardMeaning">القوة القاهرة / الحادث الفجائي</h3>
+              <p style="font-size: 0.88rem; color: var(--text-muted); max-width: 600px; margin-top: 0.5rem;" id="cardExample">
+                "Neither party shall be liable for failure to perform due to a Force Majeure event."
+              </p>
+              <div style="margin-top: 1rem;">
+                <button class="btn btn-primary btn-sm" onclick="event.stopPropagation(); playPronunciationAudio()">🔊 استمع للنطق</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 2: Speed Translation Trivia Challenge Game -->
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <div>
+            <h3 style="font-weight: 900; font-size: 1.15rem;">تحدي سرعة الترجمة والبدائل الدقيقة (Trivia Challenge)</h3>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">اختر أفضل مقابل سياقي دقيق للجملة قبل انتهاء الوقت</p>
+          </div>
+          <div style="font-size: 1.1rem; font-weight: 900; color: var(--primary-dark);">
+            النقاط: <span id="gameScoreDisplay">140</span> 🏆
+          </div>
+        </div>
+
+        <div style="background: var(--bg-surface-secondary); border: 1px solid var(--border-main); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1rem;">
+          <span class="role-tag-pill" style="margin-bottom: 0.4rem;">السياق الدبلوماسي</span>
+          <h4 style="font-size: 1.1rem; font-weight: 800; margin-top: 0.35rem;" id="triviaQuestionText">
+            "The resolution was adopted unanimously by the general assembly."
+          </h4>
+        </div>
+
+        <div class="grid-2" id="triviaOptionsContainer">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- =============================================================
+       MODAL: AUTHENTICATION & ROLE SWITCHER
+       ============================================================= -->
+  <div class="modal-backdrop" id="authModalBackdrop">
+    <div class="modal-box">
+      <div class="modal-top">
+        <h4 style="font-weight: 900;" id="authModalHeading">تسجيل الدخول إلى Polylang Hub</h4>
+        <button style="background: none; border: none; font-size: 1.25rem; cursor: pointer; color: var(--text-main);" onclick="closeAuthModal()">✕</button>
+      </div>
+      <div class="modal-body-content">
+        <form onsubmit="handleAuthSubmit(event)">
+          <div class="form-group">
+            <label class="form-label">الاسم الكامل</label>
+            <input type="text" id="authNameInput" class="form-control" placeholder="مثال: ياسمين بن علي" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">البريد الإلكتروني</label>
+            <input type="email" id="authEmailInput" class="form-control" placeholder="user@domain.dz" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">الدور والصفة المهنية للمستخدم:</label>
+            <select class="form-control" id="authRoleSelect">
+              <option value="client">👤 عميل طالب ترجمة (Client)</option>
+              <option value="translator">🎓 مترجم معتمد ومحترف (Translator)</option>
+              <option value="enthusiast">💡 محب للغات ومتعلم (Enthusiast)</option>
+              <option value="admin">🛡️ مسؤول المنصة والإشراف (Admin)</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.85rem;">
+            تسجيل الدخول والبدء
+          </button>
+        </form>
+
+        <div style="margin-top: 1.25rem; padding-top: 0.9rem; border-top: 1px solid var(--border-main); text-align: center;">
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem;">تجربة سريعة للأدوار بنقرة واحدة:</p>
+          <div style="display: flex; gap: 0.35rem; justify-content: center; flex-wrap: wrap;">
+            <button class="btn btn-outline btn-sm" onclick="quickLoginRole('admin')">🛡️ مسؤول</button>
+            <button class="btn btn-outline btn-sm" onclick="quickLoginRole('translator')">🎓 مترجم</button>
+            <button class="btn btn-outline btn-sm" onclick="quickLoginRole('client')">👤 عميل</button>
+            <button class="btn btn-outline btn-sm" onclick="quickLoginRole('enthusiast')">💡 متعلم</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============================================================
+       MODAL: LOCAL PAYMENT SIMULATOR (EDAHABIA / CIB / BARIDIMOB)
+       ============================================================= -->
+  <div class="modal-backdrop" id="paymentModalBackdrop">
+    <div class="modal-box">
+      <div class="modal-top">
+        <div>
+          <h4 style="font-weight: 900;">إتمام الدفع الإلكتروني المعتمد</h4>
+          <p style="font-size: 0.78rem; color: var(--text-muted);" id="paymentSummaryMeta">الطلب #PL-9104 - المبلغ: 3,000 دج</p>
+        </div>
+        <button style="background: none; border: none; font-size: 1.25rem; cursor: pointer; color: var(--text-main);" onclick="closePaymentModal()">✕</button>
+      </div>
+      <div class="modal-body-content">
+        <label class="form-label">اختر وسيلة الدفع المحلية:</label>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin-bottom: 1.25rem;">
+          <div class="role-chip active" style="justify-content: center;" onclick="pushNotificationAlert('تم تحديد وسيلة الدفع: البطاقة الذهبية')">
+            💳 الذهبية
+          </div>
+          <div class="role-chip" style="justify-content: center;" onclick="pushNotificationAlert('تم تحديد وسيلة الدفع: بطاقة CIB البنكية')">
+            🏦 CIB
+          </div>
+          <div class="role-chip" style="justify-content: center;" onclick="pushNotificationAlert('تم تحديد وسيلة الدفع: BaridiMob')">
+            📱 BaridiMob
+          </div>
+        </div>
+
+        <form onsubmit="handlePaymentSubmit(event)">
+          <div class="form-group">
+            <label class="form-label">رقم البطاقة (16 رقماً)</label>
+            <input type="text" class="form-control" value="6280 4455 8899 1234" maxlength="19" required>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label">تاريخ الانتهاء</label>
+              <input type="text" class="form-control" value="12/28" maxlength="5" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">رمز الأمان (CVV2)</label>
+              <input type="password" class="form-control" value="382" maxlength="3" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">رقم الهاتف لاستلام رمز التأكيد (SMS OTP)</label>
+            <input type="tel" class="form-control" value="0661 23 45 67" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.85rem;">
+            🔒 تأكيد الدفع واستلام الفاتورة الرسمية
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Host Shelf -->
+  <div id="toastStack"></div>
+
+  <!-- =============================================================
+       JAVASCRIPT FULL APPLICATION LOGIC
+       ============================================================= -->
+  <script>
+    /* -------------------------------------------------------------
+       1. STATE MANAGEMENT & LOCALSTORAGE PERSISTENCE
+       ------------------------------------------------------------- */
+    const STORAGE_KEYS = {
+      USER: 'polylang_user_v2',
+      ROLE: 'polylang_role_v2',
+      THEME: 'polylang_theme_v2',
+      LANG: 'polylang_lang_v2',
+      NOTIFS: 'polylang_notifs_v2',
+      ORDERS: 'polylang_orders_v2'
+    };
+
+    // Default System State
+    let activeRole = localStorage.getItem(STORAGE_KEYS.ROLE) || 'client';
+    let currentTheme = localStorage.getItem(STORAGE_KEYS.THEME) || 'light';
+    let currentLanguage = localStorage.getItem(STORAGE_KEYS.LANG) || 'ar';
+
+    let activeUser = JSON.parse(localStorage.getItem(STORAGE_KEYS.USER)) || {
+      name: 'كريم حمداوي',
+      email: 'karim@polylang.dz',
+      role: 'client'
+    };
+
+    let notifications = JSON.parse(localStorage.getItem(STORAGE_KEYS.NOTIFS)) || [
+      { id: 1, icon: '📄', title: 'تم استلام مسودة الترجمة القانونية', time: 'منذ 10 دقائق', unread: true },
+      { id: 2, icon: '💳', title: 'تأكيد الدفع بالبطاقة الذهبية للطلب #PL-8940', time: 'منذ ساعتين', unread: true },
+      { id: 3, icon: '🎓', title: 'مشروع جديد متاح في سوق المترجمين', time: 'منذ 4 ساعات', unread: false }
+    ];
+
+    let clientOrders = JSON.parse(localStorage.getItem(STORAGE_KEYS.ORDERS)) || [
+      { id: 'PL-8821', title: 'عقد توريد معدات طاقة شمسية', category: 'قانونية', lang: 'EN ➔ AR', words: 2400, price: 9600, status: 'completed' },
+      { id: 'PL-8940', title: 'دليل أنظمة الشبكات والاتصال', category: 'تقنية', lang: 'FR ➔ AR', words: 1850, price: 7400, status: 'active' },
+      { id: 'PL-9012', title: 'اتفاقية سرية وعدم إفصاح مؤسساتية', category: 'مؤسساتية', lang: 'AR ➔ EN', words: 950, price: 3800, status: 'pending' }
+    ];
+
+    function persistState() {
+      localStorage.setItem(STORAGE_KEYS.ROLE, activeRole);
+      localStorage.setItem(STORAGE_KEYS.THEME, currentTheme);
+      localStorage.setItem(STORAGE_KEYS.LANG, currentLanguage);
+      localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(activeUser));
+      localStorage.setItem(STORAGE_KEYS.NOTIFS, JSON.stringify(notifications));
+      localStorage.setItem(STORAGE_KEYS.ORDERS, JSON.stringify(clientOrders));
+    }
+
+    /* -------------------------------------------------------------
+       2. DARK MODE & THEME TOGGLE
+       ------------------------------------------------------------- */
+    function applyTheme(theme) {
+      currentTheme = theme;
+      document.documentElement.setAttribute('data-theme', theme);
+      const btn = document.getElementById('btnThemeToggle');
+      if (btn) btn.innerText = theme === 'dark' ? '☀️' : '🌙';
+      localStorage.setItem(STORAGE_KEYS.THEME, theme);
+    }
+
+    function toggleDarkMode() {
+      const next = currentTheme === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      pushToast(next === 'dark' ? 'تم تفعيل المظهر الداكن 🌙' : 'تم تفعيل المظهر الفاتح ☀️');
+    }
+
+    /* -------------------------------------------------------------
+       3. LOCALIZATION (RTL / LTR)
+       ------------------------------------------------------------- */
+    const dictionary = {
+      ar: {
+        dir: 'rtl',
+        langBtn: 'English',
+        brandSubtitle: 'منصة الترجمة المتخصصة والتدريب اللغوي',
+        roleLabels: {
+          admin: 'مسؤول المنصة (Admin)',
+          translator: 'مترجم معتمد ومحترف (Translator)',
+          client: 'عميل طالب ترجمة (Client)',
+          enthusiast: 'محب للغات ومتعلم (Enthusiast)'
+        }
+      },
+      en: {
+        dir: 'ltr',
+        langBtn: 'العربية',
+        brandSubtitle: 'Certified Translation & Language Training Platform',
+        roleLabels: {
+          admin: 'Platform Administrator (Admin)',
+          translator: 'Certified Translator (Translator)',
+          client: 'Translation Client (Client)',
+          enthusiast: 'Language Enthusiast & Learner'
+        }
+      }
+    };
+
+    function applyLanguage(lang) {
+      currentLanguage = lang;
+      const dict = dictionary[lang];
+      document.documentElement.lang = lang;
+      document.documentElement.dir = dict.dir;
+      document.getElementById('lblLangText').innerText = dict.langBtn;
+      document.getElementById('lblBrandSubtitle').innerText = dict.brandSubtitle;
+      localStorage.setItem(STORAGE_KEYS.LANG, lang);
+      updateRoleDisplayHeader();
+    }
+
+    function toggleLanguage() {
+      const next = currentLanguage === 'ar' ? 'en' : 'ar';
+      applyLanguage(next);
+      pushToast(next === 'ar' ? 'تم التبديل إلى اللغة العربية' : 'Switched to English');
+    }
+
+    /* -------------------------------------------------------------
+       4. MULTI-ROLE DYNAMIC DASHBOARD ENGINE
+       ------------------------------------------------------------- */
+    function switchActiveRole(role) {
+      activeRole = role;
+      activeUser.role = role;
+      persistState();
+
+      // Update role chips active state
+      document.querySelectorAll('.role-chip').forEach(chip => chip.classList.remove('active'));
+      const activeChip = document.getElementById(`chip-${role}`);
+      if (activeChip) activeChip.classList.add('active');
+
+      // Hide all role sections, show only the active one
+      document.querySelectorAll('.role-view-section').forEach(sec => sec.style.display = 'none');
+      const targetSec = document.getElementById(`roleView-${role}`);
+      if (targetSec) targetSec.style.display = 'block';
+
+      updateRoleDisplayHeader();
+      renderDynamicNavTabs();
+      renderUserProfilePill();
+
+      // Refresh specific role sub-components
+      if (role === 'admin') renderAdminView();
+      else if (role === 'translator') renderTranslatorView();
+      else if (role === 'client') renderClientOrdersTable();
+      else if (role === 'enthusiast') renderFlashcard();
+
+      pushToast(`تم تفعيل واجهة: ${getRoleLabel(role)}`);
+    }
+
+    function getRoleLabel(role) {
+      return dictionary[currentLanguage].roleLabels[role] || role;
+    }
+
+    function updateRoleDisplayHeader() {
+      const display = document.getElementById('currentRoleTitleDisplay');
+      if (display) display.innerText = getRoleLabel(activeRole);
+    }
+
+    function renderDynamicNavTabs() {
+      const container = document.getElementById('dynamicNavLinks');
+      if (!container) return;
+
+      let navItems = [];
+      if (activeRole === 'admin') {
+        navItems = [
+          { label: 'لوحة الإحصائيات', action: 'stats' },
+          { label: 'إدارة المستخدمين', action: 'users' },
+          { label: 'مركز النزاعات', action: 'disputes' },
+          { label: 'سجل التدقيق', action: 'logs' }
+        ];
+      } else if (activeRole === 'translator') {
+        navItems = [
+          { label: 'سوق المشاريع', action: 'jobs' },
+          { label: 'محرر SRT', action: 'srt' },
+          { label: 'مسرد المصطلحات', action: 'glossary' },
+          { label: 'المحفظة والأرباح', action: 'wallet' }
+        ];
+      } else if (activeRole === 'client') {
+        navItems = [
+          { label: 'طلب ترجمة جديد', action: 'new-order' },
+          { label: 'مشاريعي النشطة', action: 'orders' },
+          { label: 'الفواتير والمدفوعات', action: 'billing' }
+        ];
+      } else if (activeRole === 'enthusiast') {
+        navItems = [
+          { label: 'بطاقات الذاكرة', action: 'flashcards' },
+          { label: 'تحدي السرعة', action: 'trivia' },
+          { label: 'تمارين القواعد', action: 'grammar' }
+        ];
+      }
+
+      container.innerHTML = navItems.map((item, idx) => `
+        <li>
+          <button class="nav-tab-btn ${idx === 0 ? 'active' : ''}" onclick="pushToast('الانتقال إلى: ${item.label}')">
+            ${item.label}
+          </button>
+        </li>
+      `).join('');
+    }
+
+    function renderUserProfilePill() {
+      const host = document.getElementById('userHeaderProfile');
+      if (!host) return;
+      const initial = activeUser.name ? activeUser.name.charAt(0) : 'U';
+      host.innerHTML = `
+        <div class="user-profile-btn" onclick="openAuthModal()">
+          <div class="user-avatar-circle">${initial}</div>
+          <div style="display: flex; flex-direction: column; text-align: start;">
+            <strong style="font-size: 0.82rem; line-height: 1.1;">${activeUser.name}</strong>
+            <span class="role-tag-pill" style="align-self: start;">${getRoleLabel(activeRole).split(' ')[0]}</span>
+          </div>
+        </div>
+      `;
+    }
+
+    /* -------------------------------------------------------------
+       5. REAL FILE UPLOAD SIMULATOR (PROGRESS BAR)
+       ------------------------------------------------------------- */
+    function startSimulatedFileUpload(input) {
+      if (!input.files || !input.files[0]) return;
+      const file = input.files[0];
+      const box = document.getElementById('uploadProgressBox');
+      const fill = document.getElementById('uploadProgressFill');
+      const percent = document.getElementById('uploadPercentageLabel');
+      const name = document.getElementById('uploadFileNameLabel');
+
+      box.style.display = 'block';
+      name.innerText = `${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+      percent.innerText = '0%';
+      fill.style.width = '0%';
+
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += Math.floor(Math.random() * 18) + 8;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(interval);
+          percent.innerText = '100% اكتمل الرفع والتحقق ✓';
+          pushToast(`تم رفع وتشفير الملف ${file.name} بنجاح!`);
+          document.getElementById('dropzonePrompt').innerText = `📄 تم إرفاق: ${file.name}`;
+        } else {
+          percent.innerText = `${progress}%`;
+          fill.style.width = `${progress}%`;
+        }
+      }, 120);
+    }
+
+    /* -------------------------------------------------------------
+       6. REAL-TIME NOTIFICATIONS CENTER
+       ------------------------------------------------------------- */
+    function renderNotifications() {
+      const container = document.getElementById('notifListContainer');
+      const badge = document.getElementById('notifBadge');
+      if (!container || !badge) return;
+
+      const unreadCount = notifications.filter(n => n.unread).length;
+      badge.innerText = unreadCount;
+      badge.style.display = unreadCount > 0 ? 'flex' : 'none';
+
+      container.innerHTML = notifications.map(n => `
+        <li class="notif-item ${n.unread ? 'unread' : ''}" onclick="markNotificationRead(${n.id})">
+          <div class="notif-icon">${n.icon}</div>
+          <div style="flex: 1;">
+            <div style="font-size: 0.85rem; font-weight: 700;">${n.title}</div>
+            <div style="font-size: 0.74rem; color: var(--text-muted);">${n.time}</div>
+          </div>
+        </li>
+      `).join('');
+    }
+
+    function toggleNotificationsMenu() {
+      const pop = document.getElementById('notificationsPopover');
+      if (pop) pop.classList.toggle('open');
+    }
+
+    function markNotificationRead(id) {
+      const notif = notifications.find(n => n.id === id);
+      if (notif) notif.unread = false;
+      persistState();
+      renderNotifications();
+    }
+
+    function markAllNotificationsAsRead() {
+      notifications.forEach(n => n.unread = false);
+      persistState();
+      renderNotifications();
+      pushToast('تم تحديد كافة الإشعارات كمقروءة');
+    }
+
+    function pushNotificationAlert(title) {
+      notifications.unshift({
+        id: Date.now(),
+        icon: '🔔',
+        title: title,
+        time: 'الآن',
+        unread: true
+      });
+      persistState();
+      renderNotifications();
+      pushToast(title);
+    }
+
+    /* -------------------------------------------------------------
+       7. CLIENT ORDERS & CALCULATOR
+       ------------------------------------------------------------- */
+    function calculateClientQuote() {
+      const domain = document.getElementById('clientDocDomain').value;
+      const count = parseInt(document.getElementById('clientWordsCount').value) || 0;
+      let rate = 4.0;
+      let label = 'ترجمة قانونية ورسمية';
+      let delivery = '24 - 48 ساعة';
+
+      if (domain === 'technical') { rate = 3.8; label = 'ترجمة تقنية وهندسية'; }
+      else if (domain === 'institutional') { rate = 4.2; label = 'ترجمة مؤسساتية وإدارية'; }
+      else if (domain === 'medical') { rate = 4.5; label = 'ترجمة طبية ودوائية'; }
+
+      if (count > 3000) delivery = '3 - 5 أيام عمل';
+      else if (count > 1000) delivery = '48 - 72 ساعة';
+
+      const total = Math.round(count * rate);
+      document.getElementById('quoteDomainLabel').innerText = label;
+      document.getElementById('quoteWordsCount').innerText = count.toLocaleString();
+      document.getElementById('quoteDeliveryTime').innerText = delivery;
+      document.getElementById('quoteTotalCostDzd').innerText = total.toLocaleString();
+    }
+
+    function submitClientOrder() {
+      const domainSelect = document.getElementById('clientDocDomain');
+      const domainLabel = domainSelect.options[domainSelect.selectedIndex].text.split(' ')[1] || 'تخصصي';
+      const words = parseInt(document.getElementById('clientWordsCount').value) || 750;
+      const price = parseInt(document.getElementById('quoteTotalCostDzd').innerText.replace(/,/g, '')) || 3000;
+      const src = document.getElementById('clientSrcLang').value.toUpperCase();
+      const tgt = document.getElementById('clientTgtLang').value.toUpperCase();
+
+      const newOrder = {
+        id: 'PL-' + Math.floor(1000 + Math.random() * 9000),
+        title: `مستند (${domainLabel})`,
+        category: domainLabel,
+        lang: `${src} ➔ ${tgt}`,
+        words: words,
+        price: price,
+        status: 'pending'
+      };
+
+      clientOrders.unshift(newOrder);
+      persistState();
+      renderClientOrdersTable();
+
+      // Open Payment simulation
+      document.getElementById('paymentSummaryMeta').innerText = `الطلب #${newOrder.id} - المبلغ: ${price.toLocaleString()} دج`;
+      openPaymentModal();
+      pushNotificationAlert(`تم تقديم الطلب #${newOrder.id} بنجاح`);
+    }
+
+    function renderClientOrdersTable() {
+      const tbody = document.getElementById('clientOrdersTbody');
+      if (!tbody) return;
+
+      tbody.innerHTML = clientOrders.map(o => `
+        <tr>
+          <td><strong>${o.id}</strong></td>
+          <td>${o.title} <span style="font-size: 0.75rem; color: var(--text-muted);">(${o.category})</span></td>
+          <td><strong>${o.lang}</strong></td>
+          <td>${o.words.toLocaleString()} كلمة / <strong>${o.price.toLocaleString()} دج</strong></td>
+          <td>
+            <span class="status-badge ${o.status}">
+              ${o.status === 'completed' ? 'مكتمل ومسلّم ✓' : (o.status === 'active' ? 'قيد الترجمة والتدقيق' : 'قيد المراجعة')}
+            </span>
+          </td>
+          <td>
+            <button class="btn btn-outline btn-sm" onclick="pushToast('جاري تجهيز حزمة المستند ${o.id} للتحميل...')">📥 تحميل النسخة</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    /* -------------------------------------------------------------
+       8. ADMIN DATA & MANAGEMENT
+       ------------------------------------------------------------- */
+    const adminUsersList = [
+      { name: 'د. ليلى مزياني', role: 'مترجم معتمد', spec: 'قانوني وتجاري', joined: '12-03-2023', active: true },
+      { name: 'أحمد شريف', role: 'مترجم محترف', spec: 'هندسي وتقني', joined: '05-06-2023', active: true },
+      { name: 'شركة أوراس للطاقة', role: 'عميل مؤسساتي', spec: 'طاقة ومناجم', joined: '18-09-2023', active: true },
+      { name: 'سليم بوجمعة', role: 'مترجم متدرب', spec: 'أدبي وإعلامي', joined: '10-01-2024', active: false }
+    ];
+
+    const adminDisputes = [
+      { id: 'DSP-104', orderId: 'PL-8720', client: 'شركة نفط الشمال', translator: 'أحمد شريف', issue: 'طلب تعديل صياغة البند 4 في العقد التقني', status: 'مفتوح' },
+      { id: 'DSP-105', orderId: 'PL-8891', client: 'مكتب بن قادة للاستشارات', translator: 'د. ليلى مزياني', issue: 'فحص مصطلح القوة القاهرة ومطابقته للتشريع الجزائري', status: 'مفتوح' }
+    ];
+
+    function renderAdminView() {
+      // Users Table
+      const tbody = document.getElementById('adminUsersTbody');
+      if (tbody) {
+        tbody.innerHTML = adminUsersList.map((u, i) => `
+          <tr>
+            <td><strong>${u.name}</strong></td>
+            <td>${u.role}</td>
+            <td>${u.spec}</td>
+            <td>${u.joined}</td>
+            <td><span class="status-badge ${u.active ? 'completed' : 'pending'}">${u.active ? 'نشط ومفعل' : 'بانتظار التحقق'}</span></td>
+            <td>
+              <button class="btn btn-outline btn-sm" onclick="toggleUserStatus(${i})">${u.active ? 'تجميد الحساب' : 'تفعيل الحساب'}</button>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      // Disputes
+      const dContainer = document.getElementById('adminDisputesContainer');
+      if (dContainer) {
+        dContainer.innerHTML = adminDisputes.map(d => `
+          <div style="background: var(--bg-surface-secondary); border: 1px solid var(--border-main); padding: 0.95rem; border-radius: var(--radius-md); margin-bottom: 0.75rem;">
+            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 800;">
+              <span>${d.id} (الطلب ${d.orderId})</span>
+              <span class="status-badge disputed">${d.status}</span>
+            </div>
+            <p style="font-size: 0.82rem; margin: 0.4rem 0; color: var(--text-main);">${d.issue}</p>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.45rem;">
+              <span style="font-size: 0.75rem; color: var(--text-muted);">${d.client} ➔ ${d.translator}</span>
+              <button class="btn btn-primary btn-sm" onclick="resolveDispute('${d.id}')">التحكيم وإغلاق النزاع</button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Audit Logs
+      const logList = document.getElementById('adminAuditLogsList');
+      if (logList) {
+        logList.innerHTML = `
+          <li>🛡️ <strong>14:22</strong> - تم اعتماد تقرير الفحص الأمني للوثيقة #PL-9012</li>
+          <li>💳 <strong>12:45</strong> - تسجيل دفعة مكتملة (4,500 دج) عبر محول بريد الجزائر</li>
+          <li>🎓 <strong>11:10</strong> - تفعيل ترخيص المترجم المحلف رقم #DZ-892</li>
+          <li>⚖️ <strong>09:30</strong> - توثيق شهادة المطابقة الرسمية للطلب #PL-8821</li>
+        `;
+      }
+    }
+
+    function toggleUserStatus(index) {
+      adminUsersList[index].active = !adminUsersList[index].active;
+      renderAdminView();
+      pushToast(`تم تحديث حالة حساب المستخدم: ${adminUsersList[index].name}`);
+    }
+
+    function resolveDispute(id) {
+      const idx = adminDisputes.findIndex(d => d.id === id);
+      if (idx !== -1) {
+        adminDisputes.splice(idx, 1);
+        document.getElementById('adminDisputesCount').innerText = adminDisputes.length;
+        renderAdminView();
+        pushNotificationAlert(`تم التحكيم في النزاع ${id} واعتماد الصياغة المصطلحية المرجعية`);
+      }
+    }
+
+    /* -------------------------------------------------------------
+       9. TRANSLATOR MARKETPLACE & GLOSSARY
+       ------------------------------------------------------------- */
+    const marketplaceJobs = [
+      { id: 'JOB-441', title: 'عقد امتياز تجاري وحصري دولي', domain: 'قانوني', domainKey: 'legal', pair: 'EN ➔ AR', words: 3200, pay: 12800, deadline: '48 ساعة' },
+      { id: 'JOB-442', title: 'دليل تشغيل محطات تحلية المياه', domain: 'تقني', domainKey: 'technical', pair: 'FR ➔ AR', words: 2100, pay: 8400, deadline: '24 ساعة' },
+      { id: 'JOB-443', title: 'بروتوكول التجارب السريرية للقاح', domain: 'طبي', domainKey: 'medical', pair: 'EN ➔ AR', words: 1600, pay: 7200, deadline: '36 ساعة' }
+    ];
+
+    let glossaryTerms = [
+      { en: 'Force Majeure', ar: 'القوة القاهرة', category: 'قانوني' },
+      { en: 'Indemnification', ar: 'التعويض عن الضرر', category: 'قانوني' },
+      { en: 'Supervisory Control and Data Acquisition', ar: 'أنظمة التحكم والمراقبة الصناعية (سكادا)', category: 'تقني' },
+      { en: 'Clinical Trial Protocol', ar: 'بروتوكول التجارب السريرية', category: 'طبي' }
+    ];
+
+    function renderTranslatorView() {
+      // Marketplace Jobs
+      const tbody = document.getElementById('marketplaceJobsTbody');
+      if (tbody) {
+        tbody.innerHTML = marketplaceJobs.map((j, i) => `
+          <tr>
+            <td><strong>${j.id}</strong></td>
+            <td>${j.title} <span class="role-tag-pill">${j.domain}</span></td>
+            <td><strong>${j.pair}</strong></td>
+            <td>${j.words.toLocaleString()} كلمة</td>
+            <td><strong style="color: var(--primary-dark);">${j.pay.toLocaleString()} دج</strong></td>
+            <td>${j.deadline}</td>
+            <td>
+              <button class="btn btn-primary btn-sm" onclick="acceptJob(${i})">استلام المشروع</button>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      // Glossaries
+      renderGlossaryList(glossaryTerms);
+    }
+
+    function filterMarketplaceJobs(domain) {
+      const tbody = document.getElementById('marketplaceJobsTbody');
+      if (!tbody) return;
+      const filtered = domain === 'all' ? marketplaceJobs : marketplaceJobs.filter(j => j.domainKey === domain);
+      tbody.innerHTML = filtered.map((j, i) => `
+        <tr>
+          <td><strong>${j.id}</strong></td>
+          <td>${j.title} <span class="role-tag-pill">${j.domain}</span></td>
+          <td><strong>${j.pair}</strong></td>
+          <td>${j.words.toLocaleString()} كلمة</td>
+          <td><strong style="color: var(--primary-dark);">${j.pay.toLocaleString()} دج</strong></td>
+          <td>${j.deadline}</td>
+          <td>
+            <button class="btn btn-primary btn-sm" onclick="acceptJob(${i})">استلام المشروع</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function acceptJob(index) {
+      const job = marketplaceJobs[index];
+      marketplaceJobs.splice(index, 1);
+      renderTranslatorView();
+      pushNotificationAlert(`تم استلام المشروع ${job.id} بنجاح وإضافته إلى مساحة عملك`);
+    }
+
+    function renderGlossaryList(terms) {
+      const container = document.getElementById('glossaryListContainer');
+      if (!container) return;
+      container.innerHTML = terms.map(t => `
+        <div style="background: var(--bg-surface-secondary); border: 1px solid var(--border-main); padding: 0.65rem 0.85rem; border-radius: var(--radius-sm); margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <strong style="font-size: 0.88rem; color: var(--primary-dark);">${t.en}</strong>
+            <div style="font-size: 0.82rem; color: var(--text-main); font-weight: 700;">${t.ar}</div>
+          </div>
+          <span class="role-tag-pill">${t.category}</span>
+        </div>
+      `).join('');
+    }
+
+    function searchGlossaryTerms(query) {
+      const q = query.toLowerCase();
+      const matched = glossaryTerms.filter(t => t.en.toLowerCase().includes(q) || t.ar.includes(q));
+      renderGlossaryList(matched);
+    }
+
+    function triggerSrtDemoExport() {
+      const srtData = `1\n00:00:01,000 --> 00:00:04,500\nمرحباً بكم في منصة Polylang Hub للترجمة المرئية.\n\n2\n00:00:05,000 --> 00:00:09,000\nنستعرض هنا قدرات التحرير والمزامنة الزمنية المعتمدة.\n`;
+      const blob = new Blob([srtData], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'polylang_certified_subtitles.srt';
+      a.click();
+      URL.revokeObjectURL(url);
+      pushToast('تم تنزيل ملف SRT المعتمد بنجاح!');
+    }
+
+    /* -------------------------------------------------------------
+       10. LANGUAGE ENTHUSIAST (FLASHCARDS & TRIVIA)
+       ------------------------------------------------------------- */
+    const flashcardsData = [
+      { word: 'Force Majeure', phonetic: '/ˌfɔːrs məˈʒɜːr/', cat: 'مصطلح قانوني', meaning: 'القوة القاهرة / الحادث الفجائي', example: 'Neither party shall be liable for delay due to a Force Majeure event.' },
+      { word: 'Indemnify and Hold Harmless', phonetic: '/ɪnˈdɛmnɪfaɪ/', cat: 'عقود دولية', meaning: 'التعويض وإبراء الذمة من المسؤولية', example: 'The contractor agrees to indemnify and hold harmless the client.' },
+      { word: 'Ultra Vires', phonetic: '/ˌʌltrə ˈvaɪriːz/', cat: 'تشريعات وشركات', meaning: 'تجاوز حدود الاختصاص القانوني أو الصلاحيات', example: 'Any decision beyond the corporate charter is deemed ultra vires.' },
+      { word: 'Subpoena', phonetic: '/səˈpiːnə/', cat: 'إجراءات قضائية', meaning: 'أمر تكليف رسمي بالحضور أو تقديم مستندات', example: 'The court issued a subpoena for the witness to appear in person.' },
+      { word: 'Sine Qua Non', phonetic: '/ˌsɪneɪ kwɑː ˈnəʊn/', cat: 'مصطلحات جوهرية', meaning: 'شرط لا غنى عنه / ركن أساسي', example: 'Mutual consent is the sine qua non of any legally binding contract.' }
+    ];
+
+    let currentCardIndex = 0;
+
+    function renderFlashcard() {
+      const c = flashcardsData[currentCardIndex];
+      const card = document.getElementById('flashcardInnerElement');
+      if (card) card.classList.remove('flipped');
+
+      document.getElementById('cardWord').innerText = c.word;
+      document.getElementById('cardPhonetic').innerText = c.phonetic;
+      document.getElementById('cardCategory').innerText = c.cat;
+      document.getElementById('cardMeaning').innerText = c.meaning;
+      document.getElementById('cardExample').innerText = `"${c.example}"`;
+      document.getElementById('flashcardCounter').innerText = `${currentCardIndex + 1} / ${flashcardsData.length}`;
+    }
+
+    function flipActiveFlashcard() {
+      const inner = document.getElementById('flashcardInnerElement');
+      if (inner) inner.classList.toggle('flipped');
+    }
+
+    function nextFlashcard() {
+      currentCardIndex = (currentCardIndex + 1) % flashcardsData.length;
+      renderFlashcard();
+    }
+
+    function previousFlashcard() {
+      currentCardIndex = (currentCardIndex - 1 + flashcardsData.length) % flashcardsData.length;
+      renderFlashcard();
+    }
+
+    function playPronunciationAudio() {
+      const c = flashcardsData[currentCardIndex];
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(c.word);
+        u.lang = 'en-US';
+        window.speechSynthesis.speak(u);
+      }
+      pushToast(`🔊 الاستماع لنطق: ${c.word}`);
+    }
+
+    // Trivia Game
+    const triviaQuestions = [
+      {
+        q: "The resolution was adopted unanimously by the general assembly.",
+        options: [
+          { text: "أُقرّ القرار بالإجماع من قبل الجمعية العامة.", correct: true },
+          { text: "رُفض القرار بأغلبية الأصوات في الجمعية العامة.", correct: false },
+          { text: "تمت مناقشة القرار بشكل عشوائي في الجمعية العامة.", correct: false },
+          { text: "صدر القرار بصفة فردية عن الجمعية العامة.", correct: false }
+        ]
+      }
+    ];
+
+    let triviaScore = 140;
+
+    function renderTrivia() {
+      const container = document.getElementById('triviaOptionsContainer');
+      if (!container) return;
+      const q = triviaQuestions[0];
+      document.getElementById('triviaQuestionText').innerText = `"${q.q}"`;
+
+      container.innerHTML = q.options.map((opt, i) => `
+        <button class="btn btn-outline" style="text-align: start; padding: 0.95rem; justify-content: flex-start;" onclick="answerTrivia(${opt.correct}, this)">
+          ${String.fromCharCode(65 + i)}) ${opt.text}
+        </button>
+      `).join('');
+    }
+
+    function answerTrivia(isCorrect, btn) {
+      if (isCorrect) {
+        btn.style.background = '#ecfdf5';
+        btn.style.borderColor = '#10b981';
+        btn.style.color = '#065f46';
+        triviaScore += 20;
+        document.getElementById('gameScoreDisplay').innerText = triviaScore;
+        pushToast('✓ إجابة صحيحة ومطابقة للسياق الدبلوماسي (+20 نقطة)');
+      } else {
+        btn.style.background = '#fee2e2';
+        btn.style.borderColor = '#ef4444';
+        pushToast('✕ صياغة غير دقيقة، حاول مجدداً');
+      }
+    }
+
+    /* -------------------------------------------------------------
+       11. MODAL UTILITIES & EVENT HANDLERS
+       ------------------------------------------------------------- */
+    function openAuthModal() {
+      document.getElementById('authModalBackdrop').classList.add('active');
+    }
+    function closeAuthModal() {
+      document.getElementById('authModalBackdrop').classList.remove('active');
+    }
+    function openPaymentModal() {
+      document.getElementById('paymentModalBackdrop').classList.add('active');
+    }
+    function closePaymentModal() {
+      document.getElementById('paymentModalBackdrop').classList.remove('active');
+    }
+
+    function handleAuthSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('authNameInput').value.trim();
+      const email = document.getElementById('authEmailInput').value.trim();
+      const role = document.getElementById('authRoleSelect').value;
+
+      activeUser = { name, email, role };
+      closeAuthModal();
+      switchActiveRole(role);
+    }
+
+    function quickLoginRole(role) {
+      const names = {
+        admin: 'المهندس مصطفى بلحاج (مدير النظام)',
+        translator: 'د. ليلى مزياني (مترجم محلف)',
+        client: 'كريم حمداوي (عميل مؤسساتي)',
+        enthusiast: 'ياسمين بن علي (متعلمة لغات)'
+      };
+      activeUser = {
+        name: names[role],
+        email: `${role}@polylang.dz`,
+        role: role
+      };
+      closeAuthModal();
+      switchActiveRole(role);
+    }
+
+    function handlePaymentSubmit(e) {
+      e.preventDefault();
+      closePaymentModal();
+      pushToast('⏳ جاري تأكيد المعاملة المالية مع الخادم البنكي...');
+
+      setTimeout(() => {
+        if (clientOrders.length > 0) {
+          clientOrders[0].status = 'active';
+        }
+        persistState();
+        renderClientOrdersTable();
+        pushNotificationAlert('🎉 تم استلام دفعتك بنجاح وبدأت أعمال الترجمة والتدقيق للطلب');
+      }, 1200);
+    }
+
+    function pushToast(message) {
+      const stack = document.getElementById('toastStack');
+      if (!stack) return;
+      const card = document.createElement('div');
+      card.className = 'toast-card';
+      card.innerHTML = `<span>🔔</span> <span>${message}</span>`;
+      stack.appendChild(card);
+
+      setTimeout(() => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(10px)';
+        card.style.transition = 'all 0.25s ease';
+        setTimeout(() => card.remove(), 250);
+      }, 3500);
+    }
+
+    // Close notifications popover on click outside
+    window.addEventListener('click', (e) => {
+      const pop = document.getElementById('notificationsPopover');
+      const btn = document.getElementById('btnNotificationBell');
+      if (pop && pop.classList.contains('open') && !pop.contains(e.target) && !btn.contains(e.target)) {
+        pop.classList.remove('open');
+      }
+    });
+
+    /* -------------------------------------------------------------
+       12. APPLICATION BOOTSTRAP
+       ------------------------------------------------------------- */
+    window.addEventListener('DOMContentLoaded', () => {
+      applyTheme(currentTheme);
+      applyLanguage(currentLanguage);
+      renderNotifications();
+      renderTrivia();
+      calculateClientQuote();
+      switchActiveRole(activeRole);
+    });
+  </script>
+</body>
+</html>

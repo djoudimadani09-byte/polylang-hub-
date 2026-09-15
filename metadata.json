@@ -1,0 +1,6 @@
+{
+  "name": "Polylang Hub",
+  "description": "Professional translation and language learning SaaS platform with document translation, video subtitling, training academy, and billing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
