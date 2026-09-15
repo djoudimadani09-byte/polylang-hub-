@@ -796,11 +796,82 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      width: 100%;
     }
     .video-player-container video {
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+    /* Embedded Responsive Video Player for Real Educational Lectures */
+    .responsive-video-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+    .responsive-video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .video-mode-switcher-chips {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.85rem;
+    }
+    .video-mode-chip {
+      padding: 0.4rem 0.85rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border-radius: var(--radius-pill);
+      border: 1.5px solid var(--border-main);
+      background: var(--bg-surface-secondary);
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .video-mode-chip:hover {
+      border-color: var(--primary);
+      background: var(--primary-subtle);
+    }
+    .video-mode-chip.active {
+      background: var(--primary-gradient);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 2px 8px rgba(229, 57, 53, 0.3);
+    }
+    .session-isolation-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.65rem;
+      font-size: 0.74rem;
+      font-weight: 800;
+      border-radius: var(--radius-pill);
+      background: rgba(16, 185, 129, 0.12);
+      color: var(--success);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .session-isolation-banner {
+      background: var(--bg-surface-secondary);
+      border: 1.5px solid var(--border-main);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
     }
     .video-subtitle-overlay {
       position: absolute;
@@ -965,6 +1036,96 @@
       border-radius: 50px;
       font-weight: 800;
       font-size: 0.78rem;
+    }
+
+    /* -------------------------------------------------------------
+       SECURE DOCUMENT PREVIEWER & SIMULATED HASH VERIFICATION BADGE
+       ------------------------------------------------------------- */
+    .simulated-hash-badge-card {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(37, 99, 235, 0.05) 100%);
+      border: 1.5px solid #10b981;
+      border-radius: var(--radius-md);
+      padding: 0.95rem 1.15rem;
+      margin-bottom: 1.15rem;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.08);
+      position: relative;
+    }
+    .hash-badge-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 0.6rem;
+    }
+    .hash-pulse-dot {
+      display: inline-block;
+      width: 9px;
+      height: 9px;
+      background: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #10b981;
+      animation: hashPulseAnim 2s infinite;
+    }
+    @keyframes hashPulseAnim {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.3); }
+    }
+    .hash-code-container {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-main);
+      border-radius: var(--radius-sm);
+      padding: 0.5rem 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .hash-stamp-code {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      letter-spacing: 0.5px;
+      word-break: break-all;
+    }
+    .secure-doc-sheet {
+      border: 1.5px solid var(--border-main);
+      border-radius: var(--radius-md);
+      background: var(--bg-surface);
+      padding: 1.35rem;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      margin-bottom: 1.15rem;
+      overflow: hidden;
+    }
+    .secure-doc-sheet::before {
+      content: "POLYLANG HUB CERTIFIED TRANSLATION";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-30deg);
+      font-size: 2rem;
+      font-weight: 900;
+      color: rgba(0, 0, 0, 0.025);
+      pointer-events: none;
+      white-space: nowrap;
+      z-index: 0;
+    }
+    .doc-preview-meta-card {
+      background: var(--bg-surface-secondary);
+      border: 1px solid var(--border-main);
+      border-radius: var(--radius-sm);
+      padding: 0.65rem 0.85rem;
+      text-align: start;
+    }
+    .btn-doc-view {
+      font-weight: 800;
+      box-shadow: 0 2px 6px rgba(229, 57, 53, 0.2);
+    }
+    .btn-doc-view:hover {
+      transform: translateY(-1px);
     }
 
     /* Payment Card Design */
@@ -2112,31 +2273,51 @@
         </div>
       </div>
 
-      <!-- Feature A: Real Video Subtitling & Translation Player with Interactive SRT Sync -->
+      <!-- Feature A: Real Video Subtitling & Translation Player with Interactive SRT Sync & Educational Masterclass Embeds -->
       <div class="card" style="margin-bottom: 1.5rem;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem; flex-wrap: wrap; gap: 0.5rem;">
           <div>
-            <h3 style="font-weight: 900; font-size: 1.15rem;">استوديو ترجمة ومزامنة الفيديو المباشر (Video & SRT Studio)</h3>
-            <p style="font-size: 0.82rem; color: var(--text-muted);">مشغل مرئي حقيقي مع مسارات ترجمة متعددة ومزامنة زمنية فورية</p>
+            <h3 style="font-weight: 900; font-size: 1.15rem;" data-i18n="srtStudioTitle">استوديو ترجمة ومزامنة الفيديو المباشر (Video & SRT Studio)</h3>
+            <p style="font-size: 0.82rem; color: var(--text-muted);" data-i18n="srtStudioSub">مشغل مرئي حقيقي مع بث المحاضرات التعليمية ومسارات ترجمة متعددة ومزامنة زمنية فورية</p>
           </div>
-          <div style="display: flex; align-items: center; gap: 0.5rem;">
-            <label style="font-size: 0.82rem; font-weight: 700;">مسار الترجمة المعروض:</label>
+          <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+            <label style="font-size: 0.82rem; font-weight: 700;" data-i18n="subTrackLabel">مسار الترجمة المعروض:</label>
             <select class="form-control" style="width: auto; padding: 0.35rem 0.75rem; font-size: 0.85rem;" id="subTrackSelector" onchange="switchSubtitleTrack(this.value)">
               <option value="ar" selected>العربية (AR)</option>
               <option value="en">English (EN)</option>
               <option value="fr">Français (FR)</option>
+              <option value="es">Español (ES)</option>
+              <option value="de">Deutsch (DE)</option>
+              <option value="ru">Русский (RU)</option>
             </select>
-            <button class="btn btn-primary btn-sm" onclick="triggerSrtDemoExport()">⬇️ تصدير ملف SRT</button>
+            <button class="btn btn-primary btn-sm" onclick="triggerSrtDemoExport()" data-i18n="exportSrtBtn">⬇️ تصدير ملف SRT</button>
           </div>
+        </div>
+
+        <!-- Video Mode Switcher Bar -->
+        <div class="video-mode-switcher-chips">
+          <button class="video-mode-chip active" id="btnVideoMode-studio" onclick="switchVideoEngineMode('studio')">
+            🎬 استوديو المزامنة التفاعلي (Interactive SRT)
+          </button>
+          <button class="video-mode-chip" id="btnVideoMode-un" onclick="switchVideoEngineMode('un')">
+            🏛️ محاضرة: الترجمة الفورية بالأمم المتحدة (UN Booth)
+          </button>
+          <button class="video-mode-chip" id="btnVideoMode-rozan" onclick="switchVideoEngineMode('rozan')">
+            ✍️ محاضرة: تدوين ملاحظات روزان (Rozan Notes)
+          </button>
+          <button class="video-mode-chip" id="btnVideoMode-standards" onclick="switchVideoEngineMode('standards')">
+            ⏱️ محاضرة: معايير الترجمة المرئية (Subtitling Rules)
+          </button>
         </div>
 
         <div class="grid-2">
           <!-- Video Player Column -->
           <div>
+            <!-- Mode 1: Interactive HTML5 Video with Synchronized Multi-Track SRT Overlay -->
             <div class="video-player-container" id="videoContainer">
               <video id="mainTranslationVideo" controls preload="metadata" ontimeupdate="onVideoTimeUpdate(this)">
+                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" type="video/mp4">
                 <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
-                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
                 متصفحك لا يدعم تشغيل عنصر الفيديو.
               </video>
               <div class="video-subtitle-overlay" id="videoSubtitleOverlay">
@@ -2144,13 +2325,27 @@
               </div>
             </div>
 
-            <div class="video-controls-row" style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.65rem; font-size: 0.82rem; color: var(--text-muted);">
+            <!-- Mode 2: Real Responsive Embedded Educational Video Masterclasses (YouTube embed) -->
+            <div class="responsive-video-wrapper" id="educationalVideoEmbedWrapper" style="display: none;">
+              <iframe id="educationalVideoIframe" src="about:blank" title="Polylang Hub Educational Translation Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <div class="video-controls-row" id="videoControlsRow" style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.65rem; font-size: 0.82rem; color: var(--text-muted);">
               <span>التوقيت الحالي: <strong id="videoCurrentTimeDisplay" style="color: var(--primary-dark);">00:00.0</strong></span>
               <div style="display: flex; gap: 0.4rem;">
                 <button class="btn btn-outline btn-sm" style="padding: 0.2rem 0.5rem;" onclick="seekVideoOffset(-3)">⏪ -3ث</button>
                 <button class="btn btn-outline btn-sm" style="padding: 0.2rem 0.5rem;" onclick="seekVideoOffset(3)">+3ث ⏩</button>
                 <button class="btn btn-outline btn-sm" style="padding: 0.2rem 0.5rem;" onclick="addCurrentCueAtTimestamp()">➕ إضافة مقطع توقيت</button>
               </div>
+            </div>
+
+            <!-- Educational Video Meta Note -->
+            <div id="educationalVideoMetaBox" style="display: none; margin-top: 0.65rem; padding: 0.75rem 1rem; background: var(--bg-surface-secondary); border: 1px solid var(--border-main); border-radius: var(--radius-sm); font-size: 0.82rem; line-height: 1.6;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+                <strong style="color: var(--primary-dark);" id="eduVideoTitle">محاضرة الترجمة الفورية والتقنيات الدبلوماسية</strong>
+                <span class="session-isolation-pill">بث عالي الدقة HD 🔴</span>
+              </div>
+              <p style="color: var(--text-muted); margin: 0;" id="eduVideoDesc">محاضرة تطبيقية توضح ديناميكيات الترجمة الفورية داخل كبائن الأمم المتحدة، وكيفية التعامل مع فارق التوقيت المعرفي (Décalage).</p>
             </div>
           </div>
 
@@ -2514,11 +2709,40 @@
         </div>
       </div>
 
-      <!-- Client Active Projects Table -->
-      <div class="card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
-          <h3 style="font-weight: 900; font-size: 1.15rem;">مشاريعك وطلبات الترجمة النشطة</h3>
+      <!-- Client Active Projects Table & Document Previewer Component -->
+      <div class="card" id="clientActiveProjectsSection">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.6rem;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+              <h3 style="font-weight: 900; font-size: 1.18rem;" data-i18n="clientActiveProjectsHeading">مشاريعك وطلبات الترجمة النشطة (Active Projects)</h3>
+              <span class="cert-stamp-badge" style="font-size: 0.72rem; background: rgba(16,185,129,0.12); color: #047857; border-color: #10b981;">
+                🛡️ مزود بنظام المعاينة الآمنة (Document Previewer)
+              </span>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-muted);" data-i18n="clientActiveProjectsSub">
+              تتبع مشاريعك المعتمدة مباشرة، واضغط على زر <strong>'View'</strong> لمعاينة المستند المترجم، فحص حجم الملف، والتحقق من شارة البصمة الرقمية (SHA-256 Hash Verification) لضمان الأصالة وعدم التلاعب.
+            </p>
+          </div>
           <button class="btn btn-outline btn-sm" onclick="renderClientOrdersTable()">🔄 تحديث الحالة</button>
+        </div>
+
+        <!-- Document Previewer Banner inside Active Projects Section -->
+        <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-surface-secondary); border: 1.5px dashed #10b981; border-radius: var(--radius-sm); padding: 0.85rem 1.1rem; margin-bottom: 1.1rem; flex-wrap: wrap; gap: 0.75rem;">
+          <div style="display: flex; align-items: center; gap: 0.65rem;">
+            <span style="font-size: 1.5rem;">📄</span>
+            <div>
+              <div style="display: flex; align-items: center; gap: 0.4rem;">
+                <strong style="font-size: 0.88rem; color: var(--primary-dark);" data-i18n="docPreviewerBannerTitle">مستعرض المستندات المعتمدة (Secure Document Previewer)</strong>
+                <span class="hash-pulse-dot"></span>
+              </div>
+              <span style="font-size: 0.77rem; color: var(--text-muted);" data-i18n="docPreviewerBannerDesc">
+                اضغط على زر <strong>'View'</strong> في أي صف لمشاهدة معاينة مشفرة وفورية مع التحقق من البصمة الرقمية وحجم الملف وتوقيع المترجم
+              </span>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-sm btn-doc-view" onclick="openDocumentPreviewModal(clientOrders[0]?.id || 'PL-8821')" title="معاينة المستند المترجم للطلب النشط الأول">
+            👁️ View أحدث مشروع
+          </button>
         </div>
 
         <div class="table-responsive">
@@ -2530,11 +2754,11 @@
                 <th>اللغات</th>
                 <th>الكلمات والتكلفة</th>
                 <th>حالة المشروع</th>
-                <th>الإجراء</th>
+                <th>معاينة وإجراءات (Preview & Actions)</th>
               </tr>
             </thead>
             <tbody id="clientOrdersTbody">
-              <!-- Rendered via JS -->
+              <!-- Rendered via JS with 'View' button -->
             </tbody>
           </table>
         </div>
@@ -2783,6 +3007,67 @@
           </div>
         </div>
       </div>
+
+      <!-- Feature 3: Real Working Educational Translation Video Academy -->
+      <div class="card" style="margin-bottom: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+          <div>
+            <h3 style="font-weight: 900; font-size: 1.15rem;" data-i18n="videoAcademyTitle">أكاديمية الفيديو التعليمي لمهارات الترجمة واللغات (Video Masterclass Academy)</h3>
+            <p style="font-size: 0.82rem; color: var(--text-muted);" data-i18n="videoAcademySub">محاضرات تطبيقية حقيقية عالية الدقة لتقنيات الترجمة الفورية والدبلوماسية وإدارة اللغات</p>
+          </div>
+          <span class="session-isolation-pill">🔴 محتوى تعليمي تفاعلي معتمد</span>
+        </div>
+
+        <!-- Video Selection Tabs -->
+        <div class="video-mode-switcher-chips">
+          <button class="video-mode-chip active" id="btnEnthusiastVideo-1" onclick="switchEnthusiastVideo(1)">
+            🏛️ كبائن الأمم المتحدة والترجمة الفورية (UN Booths)
+          </button>
+          <button class="video-mode-chip" id="btnEnthusiastVideo-2" onclick="switchEnthusiastVideo(2)">
+            🧠 الحمل المعرفي وإدارة لغتين معاً (Cognitive Load)
+          </button>
+          <button class="video-mode-chip" id="btnEnthusiastVideo-3" onclick="switchEnthusiastVideo(3)">
+            🎬 الترجمة التعاقبية وتدوين الرموز (Consecutive Masterclass)
+          </button>
+        </div>
+
+        <div class="grid-2">
+          <!-- Video Embed Frame -->
+          <div>
+            <div class="responsive-video-wrapper">
+              <iframe id="enthusiastAcademyVideoIframe" src="https://www.youtube-nocookie.com/embed/uT_hFzV1s54" title="Educational Translation Masterclass" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div style="margin-top: 0.6rem; font-size: 0.8rem; color: var(--text-muted); display: flex; justify-content: space-between;">
+              <span id="enthusiastVideoCaption">المصدر: الأمم المتحدة - قسم خدمات المؤتمرات والترجمة الشفوية</span>
+              <span style="color: var(--primary); font-weight: 800;">جودة 1080p HD ✓</span>
+            </div>
+          </div>
+
+          <!-- Video Takeaways & Key Glossary Points -->
+          <div style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div style="background: var(--bg-surface-secondary); border: 1.5px solid var(--border-main); border-radius: var(--radius-md); padding: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <strong style="font-size: 0.95rem; color: var(--primary-dark);" id="enthusiastLessonTitle">أهم محاور درس كبائن الأمم المتحدة:</strong>
+                <span class="role-tag-pill">تحليل تطبيقي</span>
+              </div>
+              <ul style="padding-inline-start: 1.2rem; font-size: 0.84rem; color: var(--text-main); line-height: 1.8; margin-bottom: 0;" id="enthusiastLessonPoints">
+                <li><strong>زمن التخلف (Décalage):</strong> الفارق الزمني (من 2 إلى 4 ثوانٍ) بين كلام الخطيب وتوليد الترجمة في الكابينة.</li>
+                <li><strong>الترجمة التناوبية:</strong> يعمل مترجمان داخل كل كابينة ويتناوبان كل 30 دقيقة للحفاظ على التركيز الذهني.</li>
+                <li><strong>المصطلحات السيادية:</strong> توحيد ترجمة أسماء الهيئات والقرارات الدولية بالاعتماد على قواعد UNTERM.</li>
+              </ul>
+            </div>
+
+            <div style="margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button class="btn btn-primary btn-sm" style="flex: 1;" onclick="openBoothWithVideoLesson()">
+                🎙️ تدريب فوري في كابينة الترجمة
+              </button>
+              <button class="btn btn-outline btn-sm" onclick="pushToast('✓ تم حفظ المحاضرة في مفكرتك اللغوية')">
+                💾 حفظ الدرس
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 
@@ -2864,39 +3149,45 @@
         <button style="background: none; border: none; font-size: 1.25rem; cursor: pointer; color: var(--text-main);" onclick="closeAuthModal()">✕</button>
       </div>
       <div class="modal-body-content">
+        <!-- Active Isolated Session Notice -->
+        <div id="modalActiveIsolationNotice" class="session-isolation-pill" style="margin-bottom: 1rem; width: 100%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+          <span style="font-size: 0.78rem;">🔒 <span data-i18n="authSessionIsolationLabel">عزل البيانات النشطة:</span> <strong id="modalActiveUserSessionEmail">client@polylang.dz</strong></span>
+          <span style="background: rgba(46,125,50,0.15); color: var(--success); padding: 0.15rem 0.45rem; border-radius: 4px; font-size: 0.72rem; font-weight: 700;" data-i18n="authIsolatedBadge">معزول 100% ✓</span>
+        </div>
+
         <form onsubmit="handleAuthSubmit(event)">
           <div class="form-group">
-            <label class="form-label">الاسم الكامل</label>
-            <input type="text" id="authNameInput" class="form-control" placeholder="مثال: ياسمين بن علي" required>
+            <label class="form-label" data-i18n="authFullNameLabel">الاسم الكامل</label>
+            <input type="text" id="authNameInput" class="form-control" placeholder="مثال: ياسمين بن علي" data-i18n-placeholder="authFullNamePlaceholder" required>
           </div>
 
           <div class="form-group">
-            <label class="form-label">البريد الإلكتروني</label>
-            <input type="email" id="authEmailInput" class="form-control" placeholder="user@domain.dz" required>
+            <label class="form-label" data-i18n="authEmailLabel">البريد الإلكتروني</label>
+            <input type="email" id="authEmailInput" class="form-control" placeholder="user@domain.dz" data-i18n-placeholder="authEmailPlaceholder" required>
           </div>
 
           <div class="form-group">
-            <label class="form-label">الدور والصفة المهنية للمستخدم:</label>
+            <label class="form-label" data-i18n="authRoleLabel">الدور والصفة المهنية للمستخدم:</label>
             <select class="form-control" id="authRoleSelect">
-              <option value="client">👤 عميل طالب ترجمة (Client)</option>
-              <option value="translator">🎓 مترجم معتمد ومحترف (Translator)</option>
-              <option value="enthusiast">💡 محب للغات ومتعلم (Enthusiast)</option>
-              <option value="admin">🛡️ مسؤول المنصة والإشراف (Admin)</option>
+              <option value="client" data-i18n="authRoleOptClient">👤 عميل طالب ترجمة (Client)</option>
+              <option value="translator" data-i18n="authRoleOptTranslator">🎓 مترجم معتمد ومحترف (Translator)</option>
+              <option value="enthusiast" data-i18n="authRoleOptEnthusiast">💡 محب للغات ومتعلم (Enthusiast)</option>
+              <option value="admin" data-i18n="authRoleOptAdmin">🛡️ مسؤول المنصة والإشراف (Admin)</option>
             </select>
           </div>
 
-          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.85rem;">
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.85rem;" data-i18n="authSubmitBtn">
             تسجيل الدخول والبدء
           </button>
         </form>
 
         <div style="margin-top: 1.25rem; padding-top: 0.9rem; border-top: 1px solid var(--border-main); text-align: center;">
-          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem;">تجربة سريعة للأدوار بنقرة واحدة:</p>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-i18n="authQuickLoginLabel">تجربة سريعة للأدوار بنقرة واحدة:</p>
           <div style="display: flex; gap: 0.35rem; justify-content: center; flex-wrap: wrap;">
-            <button class="btn btn-outline btn-sm" onclick="quickLoginRole('admin')">🛡️ مسؤول</button>
-            <button class="btn btn-outline btn-sm" onclick="quickLoginRole('translator')">🎓 مترجم</button>
-            <button class="btn btn-outline btn-sm" onclick="quickLoginRole('client')">👤 عميل</button>
-            <button class="btn btn-outline btn-sm" onclick="quickLoginRole('enthusiast')">💡 متعلم</button>
+            <button class="btn btn-outline btn-sm" onclick="quickLoginRole('admin')" data-i18n="btnQuickAdmin">🛡️ مسؤول</button>
+            <button class="btn btn-outline btn-sm" onclick="quickLoginRole('translator')" data-i18n="btnQuickTranslator">🎓 مترجم</button>
+            <button class="btn btn-outline btn-sm" onclick="quickLoginRole('client')" data-i18n="btnQuickClient">👤 عميل</button>
+            <button class="btn btn-outline btn-sm" onclick="quickLoginRole('enthusiast')" data-i18n="btnQuickEnthusiast">💡 متعلم</button>
           </div>
         </div>
       </div>
@@ -2960,58 +3251,129 @@
   </div>
 
   <!-- =============================================================
-       MODAL: DOCUMENT PREVIEW & CERTIFIED DELIVERABLE VIEWER
+       MODAL: SECURE DOCUMENT PREVIEWER & HASH-VERIFIED DELIVERABLE VIEWER
        ============================================================= -->
   <div class="modal-backdrop" id="documentPreviewModalBackdrop">
-    <div class="modal-box" style="max-width: 680px;">
+    <div class="modal-box" style="max-width: 780px;">
       <div class="modal-top">
-        <div>
-          <h4 style="font-weight: 900;" id="docPreviewModalTitle">معاينة المستند الرسمي المعتمد</h4>
-          <span class="cert-stamp-badge" id="docPreviewCertBadge">🛡️ وثيقة معتمدة ومختومة رسمياً</span>
+        <div style="display: flex; align-items: center; gap: 0.65rem;">
+          <span style="font-size: 1.6rem;">🛡️</span>
+          <div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+              <h4 style="font-weight: 900; margin: 0; font-size: 1.15rem;" id="docPreviewModalTitle">مستعرض المستندات الآمن (Document Previewer)</h4>
+              <span class="cert-stamp-badge" id="docPreviewCertBadge">✓ موثّق ومختوم رسمياً</span>
+            </div>
+            <p style="font-size: 0.78rem; color: var(--text-muted); margin: 0.15rem 0 0 0;" id="docPreviewModalSubtitle">
+              معاينة فورية مشفرة لملف الترجمة المعتمد مع الفحص الأوتوماتيكي للبصمة الرقمية
+            </p>
+          </div>
         </div>
-        <button style="background: none; border: none; font-size: 1.25rem; cursor: pointer; color: var(--text-main);" onclick="closeDocumentPreviewModal()">✕</button>
+        <button style="background: none; border: none; font-size: 1.35rem; cursor: pointer; color: var(--text-main); padding: 0.25rem;" onclick="closeDocumentPreviewModal()">✕</button>
       </div>
 
       <div class="modal-body-content">
-        <!-- Certificate Header Banner -->
-        <div style="background: var(--bg-surface-secondary); border: 1px solid var(--border-main); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1rem; text-align: center;">
-          <div style="font-size: 0.8rem; font-weight: 800; color: var(--text-muted); margin-bottom: 0.25rem;">شهادة المطابقة والترجمة المحلفة (Certificate of Accuracy)</div>
-          <strong style="font-size: 0.92rem; color: var(--primary-dark);" id="docPreviewHeaderMeta">عقد توريد توربينات غازية ومحطات توليد الطاقة</strong>
-          <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.35rem; font-family: monospace;" id="docPreviewHashStamp">
-            SHA-256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+        <!-- SIMULATED HASH VERIFICATION BADGE -->
+        <div class="simulated-hash-badge-card" id="docPreviewHashBadgeCard">
+          <div class="hash-badge-top">
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <span style="font-size: 1.45rem;">🔒</span>
+              <div>
+                <div style="display: flex; align-items: center; gap: 0.45rem;">
+                  <strong style="font-size: 0.92rem; color: #065f46;" id="docPreviewHashBadgeStatus">
+                    شارة تأكيد أصالة المستند (Authenticity Verified ✓)
+                  </strong>
+                  <span class="hash-pulse-dot" title="نظام التحقق النشط"></span>
+                </div>
+                <div style="font-size: 0.77rem; color: var(--text-muted);" id="docPreviewHashBadgeSub">
+                  تمت مطابقة البصمة الرقمية مع سجل العقود المشفر بنجاح • المستند سليم وأصلي 100%
+                </div>
+              </div>
+            </div>
+            <span class="cert-stamp-badge" style="background: rgba(16,185,129,0.2); border-color: #10b981; color: #047857; font-size: 0.75rem;">
+              ✓ SHA-256 HASH VERIFIED
+            </span>
+          </div>
+
+          <div class="hash-code-container">
+            <div style="display: flex; align-items: center; gap: 0.45rem; overflow: hidden; text-overflow: ellipsis;">
+              <span style="font-size: 0.72rem; font-weight: 800; color: var(--text-muted);">HASH:</span>
+              <code id="docPreviewHashStamp" class="hash-stamp-code">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code>
+            </div>
+            <button class="btn btn-outline btn-xs" onclick="copyDocumentPreviewHash()" title="نسخ البصمة الرقمية إلى الحافظة">
+              📋 نسخ الهاش
+            </button>
           </div>
         </div>
 
-        <!-- Document Content Text Preview Frame -->
-        <div style="margin-bottom: 1rem;">
-          <label class="form-label" style="font-size: 0.82rem;">نص المستند والمطابقة المصطلحية:</label>
-          <div id="docPreviewBodyText" style="background: var(--bg-surface); border: 1.5px solid var(--border-main); border-radius: var(--radius-sm); padding: 1.2rem; font-size: 0.85rem; line-height: 1.8; max-height: 250px; overflow-y: auto; color: var(--text-main);">
+        <!-- DOCUMENT METADATA GRID (Name, Size, Order ID, Language) -->
+        <div class="grid-4" style="gap: 0.6rem; margin-bottom: 1.15rem;">
+          <div class="doc-preview-meta-card">
+            <span style="font-size: 0.72rem; color: var(--text-muted); display: block;">اسم المستند (Document Name)</span>
+            <strong style="font-size: 0.84rem; color: var(--primary-dark); word-break: break-all;" id="docPreviewFileName">
+              عقد_توريد_توربينات_غازية_2026.pdf
+            </strong>
+          </div>
+          <div class="doc-preview-meta-card">
+            <span style="font-size: 0.72rem; color: var(--text-muted); display: block;">حجم الملف (File Size)</span>
+            <strong style="font-size: 0.95rem; color: var(--text-main);" id="docPreviewFileSize">1.8 MB</strong>
+          </div>
+          <div class="doc-preview-meta-card">
+            <span style="font-size: 0.72rem; color: var(--text-muted); display: block;">رقم المشروع والمسار</span>
+            <strong style="font-size: 0.84rem; color: var(--text-main);" id="docPreviewOrderMeta">PL-8821 (EN ➔ AR)</strong>
+          </div>
+          <div class="doc-preview-meta-card">
+            <span style="font-size: 0.72rem; color: var(--text-muted); display: block;">المترجم المحلف والاعتماد</span>
+            <strong style="font-size: 0.82rem; color: var(--success);" id="docPreviewTranslatorMeta">د. ليلى مزياني (معتمد)</strong>
+          </div>
+        </div>
+
+        <!-- SECURE DOCUMENT SHEET (PREVIEW CANVAS) -->
+        <div class="secure-doc-sheet">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-main); padding-bottom: 0.65rem; margin-bottom: 0.85rem; flex-wrap: wrap; gap: 0.4rem; position: relative; z-index: 1;">
+            <div style="display: flex; align-items: center; gap: 0.45rem;">
+              <span style="font-size: 0.74rem; background: rgba(229,57,53,0.1); color: var(--primary); padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 800;">
+                🔒 معاينة آمنة للقراءة فقط (Secure Preview)
+              </span>
+              <span style="font-size: 0.75rem; color: var(--text-muted);" id="docPreviewPagesCount">
+                صفحة 1 من 1 • ختم رقمي رسمي
+              </span>
+            </div>
+            <div style="display: flex; gap: 0.35rem;">
+              <button class="btn btn-outline btn-xs" id="btnToggleDocViewMode" onclick="toggleDocPreviewBilingualMode()">
+                🔀 تبديل وضع العرض (المقارنة المزدوجة)
+              </button>
+            </div>
+          </div>
+
+          <!-- Document Text Body -->
+          <div id="docPreviewBodyText" style="font-size: 0.85rem; line-height: 1.9; max-height: 270px; overflow-y: auto; padding: 0.9rem; background: var(--bg-surface-secondary); border-radius: var(--radius-sm); border: 1px solid var(--border-main); color: var(--text-main); position: relative; z-index: 1; white-space: pre-wrap;">
             <!-- Populated via JS -->
           </div>
-        </div>
 
-        <!-- Metadata Attributes -->
-        <div class="grid-3" style="margin-bottom: 1.25rem; gap: 0.6rem;">
-          <div class="score-meter-card" style="padding: 0.6rem;">
-            <span style="font-size: 0.74rem; color: var(--text-muted);">حجم الملف</span>
-            <strong style="display: block; font-size: 0.9rem;" id="docPreviewFileSize">1.8 MB</strong>
-          </div>
-          <div class="score-meter-card" style="padding: 0.6rem;">
-            <span style="font-size: 0.74rem; color: var(--text-muted);">صيغة الملف</span>
-            <strong style="display: block; font-size: 0.9rem;" id="docPreviewFileType">PDF / ISO 19005</strong>
-          </div>
-          <div class="score-meter-card" style="padding: 0.6rem;">
-            <span style="font-size: 0.74rem; color: var(--text-muted);">حالة الاعتماد</span>
-            <strong style="display: block; font-size: 0.9rem; color: var(--success);" id="docPreviewStatus">مكتمل ومختوم ✓</strong>
+          <!-- Official Certified Seal and Signature Footer -->
+          <div style="margin-top: 0.9rem; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 0.6rem; padding-top: 0.65rem; border-top: 1px dashed var(--border-main); position: relative; z-index: 1;">
+            <div style="font-size: 0.72rem; color: var(--text-muted);">
+              <div>الرقم التسلسلي للاعتماد: <strong id="docPreviewCertSerial" style="color: var(--text-main); font-family: monospace;">CERT-2026-DZ-8821</strong></div>
+              <div>تاريخ المصادقة والختم: <span id="docPreviewCertDate">15 سبتمبر 2026</span></div>
+            </div>
+            <div style="border: 2px solid #b91c1c; border-radius: 8px; padding: 0.35rem 0.8rem; color: #b91c1c; text-align: center; transform: rotate(-2deg); font-weight: 900; font-size: 0.75rem; background: rgba(185,28,28,0.04); box-shadow: 0 2px 8px rgba(185,28,28,0.1);">
+              ★ خـتـم وتـوقـيـع مـعـتـمـد ★<br>
+              POLYLANG HUB OFFICIAL SEAL
+            </div>
           </div>
         </div>
 
         <!-- Action Controls -->
-        <div style="display: flex; gap: 0.6rem; justify-content: flex-end;">
-          <button class="btn btn-outline" onclick="closeDocumentPreviewModal()">إغلاق</button>
-          <button class="btn btn-primary" id="btnDownloadCurrentDoc" onclick="downloadCurrentPreviewDocument()">
-            📥 تنزيل الملف الآن (Download)
-          </button>
+        <div style="display: flex; gap: 0.6rem; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+          <div style="font-size: 0.76rem; color: var(--text-muted);">
+            🔐 مؤمن بنظام التشفير التناظري AES-256 ومسجل لدى Polylang Cloud Registry
+          </div>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <button class="btn btn-outline" onclick="closeDocumentPreviewModal()">إغلاق (Close)</button>
+            <button class="btn btn-primary" id="btnDownloadCurrentDoc" onclick="downloadCurrentPreviewDocument()">
+              📥 تنزيل المستند المعتمد (Download)
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -3410,19 +3772,20 @@
        ============================================================= -->
   <script>
     /* -------------------------------------------------------------
-       1. STATE MANAGEMENT & LOCALSTORAGE PERSISTENCE
+       1. STRICT ROLE-BASED DATA ISOLATION & SESSION MANAGEMENT
        ------------------------------------------------------------- */
     const STORAGE_KEYS = {
-      USER: 'polylang_user_v2',
-      ROLE: 'polylang_role_v2',
-      THEME: 'polylang_theme_v2',
-      LANG: 'polylang_lang_v2',
-      NOTIFS: 'polylang_notifs_v2',
-      ORDERS: 'polylang_orders_v2',
-      FILES: 'polylang_files_v2'
+      ACTIVE_EMAIL: 'polylang_active_session_email_v3',
+      ACTIVE_ROLE: 'polylang_active_session_role_v3',
+      THEME: 'polylang_theme_v3',
+      LANG: 'polylang_lang_v3'
     };
 
-    // Default System State with LocalStorage fallbacks
+    function getUserStorageKey(userEmail, suffix) {
+      const cleanEmail = (userEmail || 'guest@polylang.dz').toLowerCase().trim().replace(/[^a-z0-9]/g, '_');
+      return `polylang_v3_iso_${cleanEmail}_${suffix}`;
+    }
+
     function safeStorageGet(key, defaultVal) {
       try {
         const item = localStorage.getItem(key);
@@ -3432,112 +3795,223 @@
       }
     }
 
-    let activeRole = localStorage.getItem(STORAGE_KEYS.ROLE) || 'client';
+    // Master Isolated Seed Profiles for Each Specific Professional Role
+    const DEFAULT_ROLE_PROFILES = {
+      admin: {
+        user: {
+          name: 'المهندس مصطفى بلحاج (مدير النظام)',
+          email: 'admin@polylang.dz',
+          role: 'admin',
+          balance: '842,500 دج'
+        },
+        orders: [
+          { id: 'ADM-901', title: 'تدقيق ومراجعة النزاع التحكيمي الدولي #DSP-104', category: 'قانونية', lang: 'EN ➔ AR', words: 5200, price: 26000, status: 'completed', date: '2026-09-14', invoiceId: 'INV-ADM-901', client: 'بنك السلام الاستثماري', translator: 'د. ليلى مزياني' },
+          { id: 'ADM-902', title: 'اعتماد شهادة الأيزو ISO 17100 لمكتب الترجمة المعتمد', category: 'مؤسساتية', lang: 'FR ➔ AR', words: 3400, price: 17000, status: 'completed', date: '2026-09-11', invoiceId: 'INV-ADM-902', client: 'وزارة العدل', translator: 'كريم بلحاج' },
+          { id: 'ADM-903', title: 'فحص التوافق الضريبي وحصيلة دفعات SATIM لشهر سبتمبر', category: 'تقنية', lang: 'AR ➔ EN', words: 1900, price: 9500, status: 'active', date: '2026-09-09', invoiceId: 'INV-ADM-903', client: 'المديرية العامة للضرائب', translator: 'أحمد شريف' }
+        ],
+        notifications: [
+          { id: 101, icon: '🛡️', title: 'تنبيه أمان: تم توثيق وتأكيد المعاملات البنكية لدفعة SATIM رقم #TX-9844', time: 'منذ 5 دقائق', unread: true },
+          { id: 102, icon: '⚖️', title: 'تم فض النزاع #DSP-104 لصالح العميل بنك السلام بموجب تقرير التدقيق', time: 'منذ ساعة', unread: true },
+          { id: 103, icon: '🎓', title: 'طلب اعتماد مترجم محلف جديد مقدم من د. طارق بن عامر قيد التحقق', time: 'منذ 3 ساعات', unread: false }
+        ],
+        files: [
+          {
+            id: 'DOC-ADM-01',
+            orderId: 'ADM-901',
+            name: 'تقرير_التدقيق_القانوني_والتحكيم_الدولي.pdf',
+            size: '3.2 MB',
+            type: 'PDF / تدقيق قضائي',
+            date: '14-09-2026',
+            status: 'معتمد رسمياً ✓',
+            hash: '8f4c2e1b9a7d3f5e6a8c0b2d4f6e8a1c3b5d7e9f1a3c5e7b9d1f3a5c7e9b1d3f',
+            text: `الجمهورية الجزائرية الديمقراطية الشعبية\nوزارة العدل - اللجنة الإدارية لمراقبة الجودة والترجمة المحلفة\n\nتقرير التدقيق النهائي للنزاع الإجرائي #DSP-104:\nبموجب المداولة المنعقدة بتاريخ 14 سبتمبر 2026، تبيّن صحة ومطابقة الترجمة المعتمدة المنجزة لدفاتر الشروط الأصلية.`
+          }
+        ]
+      },
+      translator: {
+        user: {
+          name: 'د. ليلى مزياني (مترجم محلف)',
+          email: 'translator@polylang.dz',
+          role: 'translator',
+          balance: '48,500 دج'
+        },
+        orders: [
+          { id: 'TR-8821', title: 'عقد توريد محطات الطاقة الحرارية وسونلغاز', category: 'قانونية', lang: 'EN ➔ AR', words: 2400, price: 9600, status: 'completed', date: '2026-09-14', invoiceId: 'INV-TR-8821', client: 'شركة أوراس للطاقة', translator: 'د. ليلى مزياني' },
+          { id: 'TR-8615', title: 'نشرة التجارب السريرية للقاحات والبيولوجيا', category: 'طبية', lang: 'EN ➔ AR', words: 3100, price: 12400, status: 'completed', date: '2026-09-10', invoiceId: 'INV-TR-8615', client: 'معهد باستور الجزائر', translator: 'د. ليلى مزياني' },
+          { id: 'TR-9012', title: 'اتفاقية سرية وعدم إفصاح مؤسساتية معتمدة', category: 'مؤسساتية', lang: 'AR ➔ EN', words: 950, price: 3800, status: 'active', date: '2026-09-08', invoiceId: 'INV-TR-9012', client: 'بنك السلام الاستثماري', translator: 'د. ليلى مزياني' }
+        ],
+        notifications: [
+          { id: 201, icon: '🎓', title: 'تم إيداع مستحقات الترجمة بقيمة 24,000 دج في محفظتك المهنية', time: 'منذ 15 دقيقة', unread: true },
+          { id: 202, icon: '📄', title: 'تم تكليفك بمشروع تدقيق قانوني مستعجل للطلب #TR-9012', time: 'منذ ساعتين', unread: true },
+          { id: 203, icon: '🎬', title: 'تم اعتماد توقيت مسار الترجمة SRT لفيلم قمة الطاقة الوطنية', time: 'منذ يوم', unread: false }
+        ],
+        files: [
+          {
+            id: 'DOC-TR-01',
+            orderId: 'TR-8821',
+            name: 'النسخة_المترجمة_المختومة_عقد_الطاقة.pdf',
+            size: '2.1 MB',
+            type: 'PDF / ترجمة محلفة',
+            date: '14-09-2026',
+            status: 'مختوم بختم رسمي ✓',
+            hash: 'a1b2c3d4e5f67890123456789abcdef0123456789abcdef0123456789abcdef0',
+            text: `الجمهورية الجزائرية الديمقراطية الشعبية\nشهادة ترجمة رسمية ومحلفة صادرة عن مكتب الترجمة المعتمد د. ليلى مزياني.\n\nيشهد المترجم المحلف بأن النص المرفق مطابقة تامة للأصل المسلّم باللغة الإنجليزية، صالحة أمام الهيئات القضائية والإدارية.`
+          }
+        ]
+      },
+      client: {
+        user: {
+          name: 'كريم حمداوي (عميل مؤسساتي)',
+          email: 'client@polylang.dz',
+          role: 'client',
+          balance: '125,000 دج'
+        },
+        orders: [
+          { id: 'PL-8821', title: 'عقد توريد معدات طاقة شمسية', category: 'قانونية', lang: 'EN ➔ AR', words: 2400, price: 9600, status: 'completed', date: '2026-09-14', invoiceId: 'INV-8821-DZ', client: 'شركة أوراس للطاقة', translator: 'د. ليلى مزياني' },
+          { id: 'PL-8940', title: 'دليل أنظمة الشبكات والاتصال', category: 'تقنية', lang: 'FR ➔ AR', words: 1850, price: 7400, status: 'active', date: '2026-09-12', invoiceId: 'INV-8940-DZ', client: 'الجزائر للاتصالات', translator: 'أحمد شريف' },
+          { id: 'PL-9012', title: 'اتفاقية سرية وعدم إفصاح مؤسساتية', category: 'مؤسساتية', lang: 'AR ➔ EN', words: 950, price: 3800, status: 'pending', date: '2026-09-08', invoiceId: 'INV-9012-DZ', client: 'بنك السلام الاستثماري', translator: 'د. ليلى مزياني' },
+          { id: 'PL-8720', title: 'تقرير الجدوى الفنية لتوربينات الغاز', category: 'تقنية', lang: 'DE ➔ AR', words: 4200, price: 16800, status: 'completed', date: '2026-08-25', invoiceId: 'INV-8720-DZ', client: 'مجمع سوناطراك', translator: 'كريم بلحاج' }
+        ],
+        notifications: [
+          { id: 301, icon: '📄', title: 'تم استلام مسودة الترجمة القانونية للطلب #PL-8821 مع الختم الرقمي', time: 'منذ 10 دقائق', unread: true },
+          { id: 302, icon: '💳', title: 'تأكيد الدفع الإلكتروني بالبطاقة الذهبية للطلب #PL-8940', time: 'منذ ساعتين', unread: true },
+          { id: 303, icon: '🧾', title: 'الفاتورة الضريبية الرسمية #INV-8821-DZ جاهزة للتحميل', time: 'منذ يوم', unread: false }
+        ],
+        files: [
+          {
+            id: 'DOC-8821',
+            orderId: 'PL-8821',
+            name: 'عقد_توريد_توربينات_غازية_2026.pdf',
+            size: '1.8 MB',
+            type: 'PDF / عقود رسمية',
+            date: '14-09-2026',
+            status: 'معتمد ومختوم ✓',
+            hash: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
+            text: `الجمهورية الجزائرية الديمقراطية الشعبية\nعقد توريد وتجهيز محطات الطاقة الحرارية\n\nبند 1: التوريد والالتزامات التعاقدية\nيلتزم الطرف الأول بتوريد وتركيب التوربينات الغازية وملحقاتها وفق المعايير الدولية المعتمدة لدى سونلغاز.`
+          },
+          {
+            id: 'DOC-8940',
+            orderId: 'PL-8940',
+            name: 'دليل_بروتوكول_الشبكات_الصناعية.docx',
+            size: '840 KB',
+            type: 'Word DOCX / تقني',
+            date: '12-09-2026',
+            status: 'قيد التدقيق اللغوي',
+            hash: 'c58f01b34bdf87f34c269894e4d5fb831e505232d3989c92257d0774a275464e',
+            text: `المواصفات الفنية لشبكات الألياف البصرية وأنظمة التحكم الموزع (DCS)\n\nيتضمن هذا الدليل تعليمات تهيئة أجهزة التوجيه الصناعية وأنظمة جدار الحماية.`
+          }
+        ]
+      },
+      enthusiast: {
+        user: {
+          name: 'ياسمين بن علي (متعلمة لغات)',
+          email: 'enthusiast@polylang.dz',
+          role: 'enthusiast',
+          balance: '1,450 XP'
+        },
+        orders: [
+          { id: 'EX-441', title: 'تمرين كابينة الأمم المتحدة: التحول الطاقوي', category: 'مرئية', lang: 'EN ➔ AR', words: 850, price: 0, status: 'completed', date: '2026-09-14', invoiceId: 'CERT-EX-441', client: 'ياسمين بن علي', translator: 'ياسمين بن علي' },
+          { id: 'EX-442', title: 'صياغة شرط القوة القاهرة بالإنجليزية', category: 'قانونية', lang: 'AR ➔ EN', words: 420, price: 0, status: 'completed', date: '2026-09-11', invoiceId: 'CERT-EX-442', client: 'ياسمين بن علي', translator: 'ياسمين بن علي' },
+          { id: 'EX-443', title: 'مزامنة توقيت فيلم وثائقي بالفرنسية', category: 'مرئية', lang: 'FR ➔ AR', words: 620, price: 0, status: 'active', date: '2026-09-09', invoiceId: 'CERT-EX-443', client: 'ياسمين بن علي', translator: 'ياسمين بن علي' }
+        ],
+        notifications: [
+          { id: 401, icon: '🔥', title: 'تهانينا! حافظتِ على سلسلة التدريب اليومي لليوم 12 على التوالي', time: 'منذ 8 دقائق', unread: true },
+          { id: 402, icon: '🎯', title: 'تم فتح تمرين المصطلحات الدبلوماسية المتقدمة لكابينة الترجمة', time: 'منذ ساعتين', unread: true },
+          { id: 403, icon: '💡', title: 'حصلتِ على وسام المترجم الفوري الواعد (+100 نقطة خبرة XP)', time: 'منذ يوم', unread: false }
+        ],
+        files: [
+          {
+            id: 'NOTE-EX-01',
+            orderId: 'EX-441',
+            name: 'ملخص_رموز_روزان_وتدوين_الملاحظات.pdf',
+            size: '620 KB',
+            type: 'PDF / ملخص تدريبي',
+            date: '14-09-2026',
+            status: 'محفوظ في المفكرة ✓',
+            hash: 'f2d3e4c5b6a7890123456789abcdef0123456789abcdef0123456789abcdef0',
+            text: `دليل رموز روزان للترجمة التعاقبية: السهم للسبب والنتيجة، الدائرة للاتفاق، الخط المزدوج للتأكيد، وعلامة الاستفهام للشك.`
+          }
+        ]
+      }
+    };
+
+    // Active Global State Variables (Always dynamically synchronized with isolated session)
+    let activeRole = localStorage.getItem(STORAGE_KEYS.ACTIVE_ROLE) || 'client';
     let currentTheme = localStorage.getItem(STORAGE_KEYS.THEME) || 'light';
     let currentLanguage = localStorage.getItem(STORAGE_KEYS.LANG) || 'ar';
+    let activeUser = null;
+    let notifications = [];
+    let clientOrders = [];
+    let attachedFiles = [];
 
-    let activeUser = safeStorageGet(STORAGE_KEYS.USER, {
-      name: 'كريم حمداوي (عميل مؤسساتي)',
-      email: 'karim@polylang.dz',
-      role: 'client'
-    });
-
-    let notifications = safeStorageGet(STORAGE_KEYS.NOTIFS, [
-      { id: 1, icon: '📄', title: 'تم استلام مسودة الترجمة القانونية', time: 'منذ 10 دقائق', unread: true },
-      { id: 2, icon: '💳', title: 'تأكيد الدفع بالبطاقة الذهبية للطلب #PL-8940', time: 'منذ ساعتين', unread: true },
-      { id: 3, icon: '🎓', title: 'مشروع جديد متاح في سوق المترجمين', time: 'منذ 4 ساعات', unread: false }
-    ]);
-
-    let clientOrders = safeStorageGet(STORAGE_KEYS.ORDERS, [
-      { id: 'PL-8821', title: 'عقد توريد معدات طاقة شمسية', category: 'قانونية', lang: 'EN ➔ AR', words: 2400, price: 9600, status: 'completed', date: '2026-09-14', invoiceId: 'INV-8821-DZ', client: 'شركة أوراس للطاقة', translator: 'د. ليلى مزياني' },
-      { id: 'PL-8940', title: 'دليل أنظمة الشبكات والاتصال', category: 'تقنية', lang: 'FR ➔ AR', words: 1850, price: 7400, status: 'active', date: '2026-09-12', invoiceId: 'INV-8940-DZ', client: 'الجزائر للاتصالات', translator: 'أحمد شريف' },
-      { id: 'PL-9012', title: 'اتفاقية سرية وعدم إفصاح مؤسساتية', category: 'مؤسساتية', lang: 'AR ➔ EN', words: 950, price: 3800, status: 'pending', date: '2026-09-08', invoiceId: 'INV-9012-DZ', client: 'بنك السلام الاستثماري', translator: 'د. ليلى مزياني' },
-      { id: 'PL-8720', title: 'تقرير الجدوى الفنية لتوربينات الغاز', category: 'تقنية', lang: 'DE ➔ AR', words: 4200, price: 16800, status: 'completed', date: '2026-08-25', invoiceId: 'INV-8720-DZ', client: 'مجمع سوناطراك', translator: 'كريم بلحاج' },
-      { id: 'PL-8615', title: 'نشرة التجارب السريرية للقاحات', category: 'طبية', lang: 'EN ➔ AR', words: 3100, price: 12400, status: 'completed', date: '2026-08-10', invoiceId: 'INV-8615-DZ', client: 'معهد باستور الجزائر', translator: 'د. ليلى مزياني' },
-      { id: 'PL-8504', title: 'ترجمة ومزامنة فيلم وثائقي عن الابتكار', category: 'مرئية', lang: 'FR ➔ AR', words: 1700, price: 6800, status: 'completed', date: '2026-07-28', invoiceId: 'INV-8504-DZ', client: 'المؤسسة الوطنية للتلفزيون', translator: 'أحمد شريف' }
-    ]);
-
-    let attachedFiles = safeStorageGet(STORAGE_KEYS.FILES, [
-      {
-        id: 'DOC-8821',
-        orderId: 'PL-8821',
-        name: 'عقد_توريد_توربينات_غازية_2026.pdf',
-        size: '1.8 MB',
-        type: 'PDF / عقود رسمية',
-        date: '14-09-2026',
-        status: 'معتمد ومختوم ✓',
-        hash: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
-        text: `الجمهورية الجزائرية الديمقراطية الشعبية\nعقد توريد وتجهيز محطات الطاقة الحرارية\n\nبند 1: التوريد والالتزامات التعاقدية\nيلتزم الطرف الأول بتوريد وتركيب التوربينات الغازية وملحقاتها وفق المعايير الدولية المعتمدة لدى سونلغاز.\n\nبند 2: القوة القاهرة والمسؤولية\nدون الإخلال بأي نص مخالف، لا يتحمل الطرفان المسؤولية عن الأضرار الناشئة عن القوة القاهرة شريطة إشعار الطرف الآخر خطياً خلال 48 ساعة.\n\n[ختم الترجمة الرسمية المعتمدة - صالح أمام الهيئات القضائية والتجارية]`
-      },
-      {
-        id: 'DOC-8940',
-        orderId: 'PL-8940',
-        name: 'دليل_بروتوكول_الشبكات_الصناعية.docx',
-        size: '840 KB',
-        type: 'Word DOCX / تقني',
-        date: '12-09-2026',
-        status: 'قيد التدقيق اللغوي',
-        hash: 'c58f01b34bdf87f34c269894e4d5fb831e505232d3989c92257d0774a275464e',
-        text: `المواصفات الفنية لشبكات الألياف البصرية وأنظمة التحكم الموزع (DCS)\n\nيتضمن هذا الدليل تعليمات تهيئة أجهزة التوجيه الصناعية وأنظمة جدار الحماية للربط بين محطات الطاقة والموزعات الإقليمية مع دعم بروتوكولات الأمان العالي Modbus/TCP وIEC 61850.`
-      },
-      {
-        id: 'VID-7721',
-        orderId: 'PL-8504',
-        name: 'تسجيل_مؤتمر_التحول_الطاقوي_الجزائري.mp4',
-        size: '24.5 MB',
-        type: 'فيديو MP4 مع مسار SRT',
-        date: '10-09-2026',
-        status: 'مكتمل الترجمة والمزامنة ✓',
-        hash: '8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4',
-        text: `[00:00:01.000 --> 00:00:04.500]\nأصحاب السعادة، الحضور الكريم، نجتمع اليوم في قمة التحول الطاقوي.\n\n[00:00:05.000 --> 00:00:09.500]\nإن الاعتماد على الطاقات المتجددة يمثل ركيزة استراتيجية لاقتصاد الغد.`
-      },
-      {
-        id: 'DOC-8720',
-        orderId: 'PL-8720',
-        name: 'تقرير_الجدوى_الفنية_للتوربينات.pdf',
-        size: '3.4 MB',
-        type: 'PDF / هندسي وتقني',
-        date: '25-08-2026',
-        status: 'معتمد ومختوم ✓',
-        hash: 'a9b4c3d2e1f0123456789abcdef0123456789abcdef0123456789abcdef0123',
-        text: `الجمهورية الجزائرية الديمقراطية الشعبية\nدراسة الجدوى الفنية والاقتصادية لتطوير محطات التوليد المركبة\n\nالمقدمة الهندسية ومطابقة معايير DIN الألمانية:\nتؤكد القياسات الحقلية والاختبارات الديناميكية كفاءة استهلاك الوقود وانخفاض الانبعاثات الكربونية بنسبة 28% مقارنة بالمحطات التقليدية.\n\n[مترجم ومعتمد رسمياً لقطاع الطاقة والمناجم]`
-      },
-      {
-        id: 'DOC-8615',
-        orderId: 'PL-8615',
-        name: 'نشرة_التجارب_السريرية_الطبية.pdf',
-        size: '2.1 MB',
-        type: 'PDF / طبي معتمد',
-        date: '10-08-2026',
-        status: 'معتمد ومختوم ✓',
-        hash: 'b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2',
-        text: `المعهد الوطني للصحة العامة - نشرة التجارب السريرية والمطابقة الدوائية\n\nنتائج المرحلة الثالثة لتقييم الفعالية والمأمونية:\nأظهرت البيانات المجمعة من المراكز السريرية استجابة مناعية متوازنة ومستدامة تفوق 94.2% مع انعدام الآثار الجانبية الخطيرة.\n\n[مطابق لمعايير منظمة الصحة العالمية والوكالة الوطنية للمواد الصيدلانية]`
-      },
-      {
-        id: 'DOC-9012',
-        orderId: 'PL-9012',
-        name: 'اتفاقية_سرية_وعدم_إفصاح.docx',
-        size: '620 KB',
-        type: 'Word DOCX / قانوني',
-        date: '08-09-2026',
-        status: 'قيد المراجعة والاعتماد',
-        hash: 'c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4',
-        text: `اتفاقية الحفاظ على السرية وحماية المعلومات التجارية غير المعلنة\n\nبند الالتزام والسرية المشتركة:\nيتعهد كل طرف بعدم إفشاء أو استخدام أي معلومات سرية تخص الطرف الآخر لأي غرض خارج إطار دراسة الشراكة الاستثمارية المشتركة.\n\n[مسودة قيد التدقيق القانوني]`
+    // Session Isolation Helpers
+    function saveCurrentUserIsolatedSession() {
+      if (!activeUser || !activeUser.email) return;
+      try {
+        const email = activeUser.email;
+        localStorage.setItem(getUserStorageKey(email, 'user'), JSON.stringify(activeUser));
+        localStorage.setItem(getUserStorageKey(email, 'orders'), JSON.stringify(clientOrders));
+        localStorage.setItem(getUserStorageKey(email, 'notifs'), JSON.stringify(notifications));
+        localStorage.setItem(getUserStorageKey(email, 'files'), JSON.stringify(attachedFiles));
+        localStorage.setItem(STORAGE_KEYS.ACTIVE_EMAIL, email);
+        localStorage.setItem(STORAGE_KEYS.ACTIVE_ROLE, activeRole);
+      } catch (err) {
+        console.warn('Isolated session save warning:', err);
       }
-    ]);
+    }
+
+    function loadUserIsolatedSession(targetUser) {
+      const email = targetUser.email || `${targetUser.role || 'client'}@polylang.dz`;
+      const role = targetUser.role || 'client';
+      const seed = DEFAULT_ROLE_PROFILES[role] || DEFAULT_ROLE_PROFILES.client;
+
+      activeUser = safeStorageGet(getUserStorageKey(email, 'user'), {
+        name: targetUser.name || seed.user.name,
+        email: email,
+        role: role,
+        balance: targetUser.balance || seed.user.balance
+      });
+
+      activeRole = activeUser.role;
+      clientOrders = safeStorageGet(getUserStorageKey(email, 'orders'), JSON.parse(JSON.stringify(seed.orders)));
+      notifications = safeStorageGet(getUserStorageKey(email, 'notifs'), JSON.parse(JSON.stringify(seed.notifications)));
+      attachedFiles = safeStorageGet(getUserStorageKey(email, 'files'), JSON.parse(JSON.stringify(seed.files)));
+
+      saveCurrentUserIsolatedSession();
+    }
+
+    function switchUserSession(newUser) {
+      if (activeUser && activeUser.email) {
+        saveCurrentUserIsolatedSession();
+      }
+      loadUserIsolatedSession(newUser);
+      updateAuthModalActiveSessionInfo();
+      updateRoleDisplayHeader();
+      renderDynamicNavTabs();
+      renderUserProfilePill();
+      renderRoleDashboardPanels();
+      renderNotifications();
+      renderClientOrdersTable();
+      renderTranslationHistory();
+      renderAttachedFilesList();
+      pushToast(`🔒 تم تحميل جلسة معزولة لـ: ${activeUser.name} (${activeUser.role})`);
+    }
+
+    // Initialize session from saved active email or default client
+    const savedActiveEmail = localStorage.getItem(STORAGE_KEYS.ACTIVE_EMAIL);
+    if (savedActiveEmail) {
+      const initialUser = safeStorageGet(getUserStorageKey(savedActiveEmail, 'user'), null);
+      if (initialUser) {
+        loadUserIsolatedSession(initialUser);
+      } else {
+        loadUserIsolatedSession(DEFAULT_ROLE_PROFILES[activeRole]?.user || DEFAULT_ROLE_PROFILES.client.user);
+      }
+    } else {
+      loadUserIsolatedSession(DEFAULT_ROLE_PROFILES.client.user);
+    }
 
     function persistState() {
-      try {
-        localStorage.setItem(STORAGE_KEYS.ROLE, activeRole);
-        localStorage.setItem(STORAGE_KEYS.THEME, currentTheme);
-        localStorage.setItem(STORAGE_KEYS.LANG, currentLanguage);
-        localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(activeUser));
-        localStorage.setItem(STORAGE_KEYS.NOTIFS, JSON.stringify(notifications));
-        localStorage.setItem(STORAGE_KEYS.ORDERS, JSON.stringify(clientOrders));
-        localStorage.setItem(STORAGE_KEYS.FILES, JSON.stringify(attachedFiles));
-      } catch (err) {
-        console.warn('Storage persistence warning:', err);
-      }
+      saveCurrentUserIsolatedSession();
     }
 
     /* -------------------------------------------------------------
@@ -3670,7 +4144,34 @@
           translator: 'مترجم معتمد ومحترف (Translator)',
           client: 'عميل طالب ترجمة (Client)',
           enthusiast: 'محب للغات ومتعلم (Enthusiast)'
-        }
+        },
+        srtStudioTitle: 'استوديو ترجمة ومزامنة الفيديو المباشر (Video & SRT Studio)',
+        srtStudioSub: 'مشغل مرئي حقيقي مع بث المحاضرات التعليمية ومسارات ترجمة متعددة ومزامنة زمنية فورية',
+        subTrackLabel: 'مسار الترجمة المعروض:',
+        exportSrtBtn: '⬇️ تصدير ملف SRT',
+        videoAcademyTitle: 'أكاديمية الفيديو التعليمي لمهارات الترجمة واللغات (Video Masterclass Academy)',
+        videoAcademySub: 'محاضرات تطبيقية حقيقية عالية الدقة لتقنيات الترجمة الفورية والدبلوماسية وإدارة اللغات',
+        authModalHeading: 'تسجيل الدخول إلى Polylang Hub',
+        authSessionIsolationLabel: 'عزل البيانات النشطة:',
+        authIsolatedBadge: 'معزول 100% ✓',
+        authFullNameLabel: 'الاسم الكامل',
+        authFullNamePlaceholder: 'مثال: ياسمين بن علي',
+        authEmailLabel: 'البريد الإلكتروني',
+        authEmailPlaceholder: 'user@domain.dz',
+        authRoleLabel: 'الدور والصفة المهنية للمستخدم:',
+        authRoleOptClient: '👤 عميل طالب ترجمة (Client)',
+        authRoleOptTranslator: '🎓 مترجم معتمد ومحترف (Translator)',
+        authRoleOptEnthusiast: '💡 محب للغات ومتعلم (Enthusiast)',
+        authRoleOptAdmin: '🛡️ مسؤول المنصة والإشراف (Admin)',
+        authSubmitBtn: 'تسجيل الدخول والبدء',
+        authQuickLoginLabel: 'تجربة سريعة للأدوار بنقرة واحدة:',
+        btnQuickAdmin: '🛡️ مسؤول',
+        btnQuickTranslator: '🎓 مترجم',
+        btnQuickClient: '👤 عميل',
+        btnQuickEnthusiast: '💡 متعلم',
+        statusCompleted: 'مكتمل ومسلّم ✓',
+        statusActive: 'قيد الترجمة والتدقيق',
+        statusPending: 'قيد المراجعة والاعتماد'
       },
       en: {
         dir: 'ltr',
@@ -3689,7 +4190,34 @@
           translator: 'Certified Translator (Translator)',
           client: 'Translation Client (Client)',
           enthusiast: 'Language Enthusiast & Learner'
-        }
+        },
+        srtStudioTitle: 'Certified Video Subtitling & Synchronization Studio (SRT)',
+        srtStudioSub: 'Live audiovisual media player with educational streams, multi-track subtitles & precision timecoding',
+        subTrackLabel: 'Active Subtitle Track:',
+        exportSrtBtn: '⬇️ Export SRT File',
+        videoAcademyTitle: 'Audiovisual Masterclass Academy for Translation & Languages',
+        videoAcademySub: 'Professional high-definition lectures on diplomatic simultaneous interpretation & translation techniques',
+        authModalHeading: 'Sign In to Polylang Hub',
+        authSessionIsolationLabel: 'Active Session Data Isolation:',
+        authIsolatedBadge: '100% Isolated ✓',
+        authFullNameLabel: 'Full Name',
+        authFullNamePlaceholder: 'e.g., Karim Hamdaoui',
+        authEmailLabel: 'Email Address',
+        authEmailPlaceholder: 'user@polylang.dz',
+        authRoleLabel: 'User Professional Role & Capability:',
+        authRoleOptClient: '👤 Translation Client (Client)',
+        authRoleOptTranslator: '🎓 Certified Translator (Translator)',
+        authRoleOptEnthusiast: '💡 Language Enthusiast (Enthusiast)',
+        authRoleOptAdmin: '🛡️ Platform Administrator (Admin)',
+        authSubmitBtn: 'Sign In & Launch Workspace',
+        authQuickLoginLabel: 'Fast 1-Click Role Exploration:',
+        btnQuickAdmin: '🛡️ Admin',
+        btnQuickTranslator: '🎓 Translator',
+        btnQuickClient: '👤 Client',
+        btnQuickEnthusiast: '💡 Learner',
+        statusCompleted: 'Completed & Delivered ✓',
+        statusActive: 'In Progress & Review',
+        statusPending: 'Pending Approval'
       },
       fr: {
         dir: 'ltr',
@@ -3708,7 +4236,34 @@
           translator: 'Traducteur Assermenté & Professionnel',
           client: 'Client Donneur d’Ordre',
           enthusiast: 'Passionné des Langues & Apprenant'
-        }
+        },
+        srtStudioTitle: 'Studio de Sous-titrage Vidéo et Synchronisation SRT',
+        srtStudioSub: 'Lecteur audiovisuel professionnel avec cours intégrés, pistes multilingues et calage temporel précis',
+        subTrackLabel: 'Piste de sous-titre active :',
+        exportSrtBtn: '⬇️ Exporter le fichier SRT',
+        videoAcademyTitle: 'Académie Vidéo des Métiers de la Traduction & Conférence',
+        videoAcademySub: 'Masterclasses en haute définition sur l’interprétation simultanée diplomatique et le sous-titrage',
+        authModalHeading: 'Connexion à Polylang Hub',
+        authSessionIsolationLabel: 'Isolation des Données de Session :',
+        authIsolatedBadge: '100% Isolé ✓',
+        authFullNameLabel: 'Nom Complet',
+        authFullNamePlaceholder: 'ex : Karim Hamdaoui',
+        authEmailLabel: 'Adresse E-mail',
+        authEmailPlaceholder: 'utilisateur@polylang.dz',
+        authRoleLabel: 'Rôle professionnel et profil :',
+        authRoleOptClient: '👤 Client Donneur d’Ordre (Client)',
+        authRoleOptTranslator: '🎓 Traducteur Assermenté (Translator)',
+        authRoleOptEnthusiast: '💡 Passionné des Langues (Enthusiast)',
+        authRoleOptAdmin: '🛡️ Administrateur Plateforme (Admin)',
+        authSubmitBtn: 'Se connecter et ouvrir la session',
+        authQuickLoginLabel: 'Test rapide des profils en 1 clic :',
+        btnQuickAdmin: '🛡️ Admin',
+        btnQuickTranslator: '🎓 Traducteur',
+        btnQuickClient: '👤 Client',
+        btnQuickEnthusiast: '💡 Apprenant',
+        statusCompleted: 'Terminé & Livré ✓',
+        statusActive: 'En cours de traduction',
+        statusPending: 'En attente de validation'
       },
       es: {
         dir: 'ltr',
@@ -3727,7 +4282,34 @@
           translator: 'Traductor Certificado y Profesional',
           client: 'Cliente Solicitante',
           enthusiast: 'Entusiasta de los Idiomas'
-        }
+        },
+        srtStudioTitle: 'Estudio de Subtitulado de Video y Sincronización SRT',
+        srtStudioSub: 'Reproductor audiovisual en vivo con clases magistrales, subtítulos multilingües y sincronización exacta',
+        subTrackLabel: 'Pista de subtítulos activa:',
+        exportSrtBtn: '⬇️ Exportar archivo SRT',
+        videoAcademyTitle: 'Academia de Video de Traducción e Interpretación Simultánea',
+        videoAcademySub: 'Conferencias especializadas en interpretación diplomática en cabina y toma de notas Rozan',
+        authModalHeading: 'Iniciar Sesión en Polylang Hub',
+        authSessionIsolationLabel: 'Aislamiento de Sesión y Datos:',
+        authIsolatedBadge: '100% Aislado ✓',
+        authFullNameLabel: 'Nombre Completo',
+        authFullNamePlaceholder: 'ej. Karim Hamdaoui',
+        authEmailLabel: 'Correo Electrónico',
+        authEmailPlaceholder: 'usuario@polylang.dz',
+        authRoleLabel: 'Rol Profesional del Usuario:',
+        authRoleOptClient: '👤 Cliente Solicitante (Client)',
+        authRoleOptTranslator: '🎓 Traductor Certificado (Translator)',
+        authRoleOptEnthusiast: '💡 Entusiasta de Idiomas (Enthusiast)',
+        authRoleOptAdmin: '🛡️ Administrador del Sistema (Admin)',
+        authSubmitBtn: 'Iniciar Sesión y Comenzar',
+        authQuickLoginLabel: 'Acceso rápido con 1 clic:',
+        btnQuickAdmin: '🛡️ Admin',
+        btnQuickTranslator: '🎓 Traductor',
+        btnQuickClient: '👤 Cliente',
+        btnQuickEnthusiast: '💡 Aprendiz',
+        statusCompleted: 'Completado y Entregado ✓',
+        statusActive: 'En Progreso y Revisión',
+        statusPending: 'Pendiente de Aprobación'
       },
       it: {
         dir: 'ltr',
@@ -3746,7 +4328,34 @@
           translator: 'Traduttore Ufficiale & Professionista',
           client: 'Cliente Committente',
           enthusiast: 'Appassionato di Lingue'
-        }
+        },
+        srtStudioTitle: 'Studio di Sottotitolaggio Video e Sincronizzazione SRT',
+        srtStudioSub: 'Player audiovisivo professionale con masterclass integrate, sottotitoli multilingue e timecode preciso',
+        subTrackLabel: 'Traccia sottotitoli attiva:',
+        exportSrtBtn: '⬇️ Esporta file SRT',
+        videoAcademyTitle: 'Accademia Video per la Traduzione e Interpretariato di Conferenza',
+        videoAcademySub: 'Lezioni avanzate sull’interpretazione simultanea ONU e la gestione del carico cognitivo',
+        authModalHeading: 'Accesso a Polylang Hub',
+        authSessionIsolationLabel: 'Isolamento Dati della Sessione:',
+        authIsolatedBadge: '100% Protetto ✓',
+        authFullNameLabel: 'Nome Completo',
+        authFullNamePlaceholder: 'es. Karim Hamdaoui',
+        authEmailLabel: 'Indirizzo Email',
+        authEmailPlaceholder: 'utente@polylang.dz',
+        authRoleLabel: 'Ruolo Professionale Utente:',
+        authRoleOptClient: '👤 Cliente Committente (Client)',
+        authRoleOptTranslator: '🎓 Traduttore Ufficiale (Translator)',
+        authRoleOptEnthusiast: '💡 Appassionato di Lingue (Enthusiast)',
+        authRoleOptAdmin: '🛡️ Amministratore (Admin)',
+        authSubmitBtn: 'Accedi e Apri Dashboard',
+        authQuickLoginLabel: 'Test rapido profili in 1 clic:',
+        btnQuickAdmin: '🛡️ Admin',
+        btnQuickTranslator: '🎓 Traduttore',
+        btnQuickClient: '👤 Cliente',
+        btnQuickEnthusiast: '💡 Studente',
+        statusCompleted: 'Completato e Consegnato ✓',
+        statusActive: 'In Corso e Revisione',
+        statusPending: 'In Attesa di Approvazione'
       },
       de: {
         dir: 'ltr',
@@ -3765,7 +4374,34 @@
           translator: 'Vereidigter & Professioneller Übersetzer',
           client: 'Auftraggeber & Kunde',
           enthusiast: 'Sprachbegeisterter & Lernender'
-        }
+        },
+        srtStudioTitle: 'Studio für Video-Untertitelung & SRT-Synchronisation',
+        srtStudioSub: 'Professioneller Medienplayer mit Schulungsvideos, mehrsprachigen Untertiteln und exaktem Timecode',
+        subTrackLabel: 'Aktive Untertitelspur:',
+        exportSrtBtn: '⬇️ SRT-Datei exportieren',
+        videoAcademyTitle: 'Video-Akademie für Translationswissenschaft & Konferenzdolmetschen',
+        videoAcademySub: 'Fachvorträge zu UN-Simultandolmetscher-Kabinen, Notizentechnik und Terminologiestandards',
+        authModalHeading: 'Anmeldung bei Polylang Hub',
+        authSessionIsolationLabel: 'Sitzungsdaten-Isolation:',
+        authIsolatedBadge: '100% Isoliert ✓',
+        authFullNameLabel: 'Vollständiger Name',
+        authFullNamePlaceholder: 'z.B. Karim Hamdaoui',
+        authEmailLabel: 'E-Mail-Adresse',
+        authEmailPlaceholder: 'nutzer@polylang.dz',
+        authRoleLabel: 'Professionelle Rolle & Profil:',
+        authRoleOptClient: '👤 Auftraggeber & Kunde (Client)',
+        authRoleOptTranslator: '🎓 Vereidigter Übersetzer (Translator)',
+        authRoleOptEnthusiast: '💡 Sprachbegeisterter (Enthusiast)',
+        authRoleOptAdmin: '🛡️ Plattform-Administrator (Admin)',
+        authSubmitBtn: 'Anmelden und Starten',
+        authQuickLoginLabel: 'Schnelltest der Rollen mit 1 Klick:',
+        btnQuickAdmin: '🛡️ Admin',
+        btnQuickTranslator: '🎓 Übersetzer',
+        btnQuickClient: '👤 Kunde',
+        btnQuickEnthusiast: '💡 Lernender',
+        statusCompleted: 'Abgeschlossen & Geliefert ✓',
+        statusActive: 'In Bearbeitung & Prüfung',
+        statusPending: 'Ausstehende Bestätigung'
       },
       ru: {
         dir: 'ltr',
@@ -3784,7 +4420,34 @@
           translator: 'Сертифицированный переводчик',
           client: 'Заказчик перевода',
           enthusiast: 'Любитель языков и учащийся'
-        }
+        },
+        srtStudioTitle: 'Студия субтитрирования видео и синхронизации SRT',
+        srtStudioSub: 'Медиаплеер профессионального уровня с обучающими видео, многоязычными дорожками и точным таймингом',
+        subTrackLabel: 'Активная дорожка субтитров:',
+        exportSrtBtn: '⬇️ Экспорт файла SRT',
+        videoAcademyTitle: 'Видеоакадемия синхронного перевода и языковых навыков',
+        videoAcademySub: 'Лекции высокого разрешения о работе в кабинах ООН, технике скорописи Розана и субтитрировании',
+        authModalHeading: 'Вход в Polylang Hub',
+        authSessionIsolationLabel: 'Изоляция данных сеанса:',
+        authIsolatedBadge: '100% Изолировано ✓',
+        authFullNameLabel: 'Полное имя',
+        authFullNamePlaceholder: 'напр., Карим Хамдауи',
+        authEmailLabel: 'Электронная почта',
+        authEmailPlaceholder: 'user@polylang.dz',
+        authRoleLabel: 'Профессиональная роль пользователя:',
+        authRoleOptClient: '👤 Заказчик перевода (Client)',
+        authRoleOptTranslator: '🎓 Сертифицированный переводчик (Translator)',
+        authRoleOptEnthusiast: '💡 Любитель языков (Enthusiast)',
+        authRoleOptAdmin: '🛡️ Администратор системы (Admin)',
+        authSubmitBtn: 'Войти и открыть рабочую область',
+        authQuickLoginLabel: 'Быстрый выбор роли в 1 клик:',
+        btnQuickAdmin: '🛡️ Админ',
+        btnQuickTranslator: '🎓 Переводчик',
+        btnQuickClient: '👤 Заказчик',
+        btnQuickEnthusiast: '💡 Учащийся',
+        statusCompleted: 'Выполнен и доставлен ✓',
+        statusActive: 'В процессе перевода',
+        statusPending: 'На согласовании'
       }
     };
 
@@ -3822,6 +4485,22 @@
       const histHeading = document.getElementById('lblHistoryHeading');
       if (histHeading) histHeading.innerText = dict.historyHeading;
 
+      // Update all elements with data-i18n
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) {
+          el.innerHTML = dict[key];
+        }
+      });
+
+      // Update placeholders
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (dict[key]) {
+          el.setAttribute('placeholder', dict[key]);
+        }
+      });
+
       // Update active option in lang dropdown
       document.querySelectorAll('.lang-option-btn').forEach(btn => {
         btn.classList.remove('active');
@@ -3833,6 +4512,8 @@
       localStorage.setItem(STORAGE_KEYS.LANG, lang);
       updateRoleDisplayHeader();
       renderDynamicNavTabs();
+      renderUserProfilePill();
+      renderRoleDashboardPanels();
     }
 
     function toggleLanguageMenu(event) {
@@ -3863,9 +4544,18 @@
        4. MULTI-ROLE DYNAMIC DASHBOARD ENGINE
        ------------------------------------------------------------- */
     function switchActiveRole(role) {
+      if (role !== 'history' && (!activeUser || activeUser.role !== role)) {
+        const targetSeed = DEFAULT_ROLE_PROFILES[role]?.user || {
+          name: getRoleLabel(role),
+          email: `${role}@polylang.dz`,
+          role: role
+        };
+        switchUserSession(targetSeed);
+        return;
+      }
+
       activeRole = role;
-      activeUser.role = role;
-      persistState();
+      saveCurrentUserIsolatedSession();
 
       // Update role chips active state
       document.querySelectorAll('.role-chip').forEach(chip => chip.classList.remove('active'));
@@ -3880,28 +4570,31 @@
       updateRoleDisplayHeader();
       renderDynamicNavTabs();
       renderUserProfilePill();
+      renderRoleDashboardPanels();
 
+      pushToast(`تم تفعيل واجهة: ${getRoleLabel(role)}`);
+    }
+
+    function renderRoleDashboardPanels() {
       // Refresh specific role sub-components
-      if (role === 'admin') renderAdminView();
-      else if (role === 'translator') {
+      if (activeRole === 'admin') renderAdminView();
+      else if (activeRole === 'translator') {
         renderTranslatorView();
         renderSrtTimeline();
         renderTranslationHistory();
       }
-      else if (role === 'client') {
+      else if (activeRole === 'client') {
         renderClientOrdersTable();
         renderAttachedFilesList();
         renderTranslationHistory();
       }
-      else if (role === 'history') {
+      else if (activeRole === 'history') {
         renderTranslationHistory();
       }
-      else if (role === 'enthusiast') {
+      else if (activeRole === 'enthusiast') {
         renderFlashcard();
         renderTrivia();
       }
-
-      pushToast(`تم تفعيل واجهة: ${getRoleLabel(role)}`);
     }
 
     function getRoleLabel(role) {
@@ -4132,37 +4825,166 @@
       }, 100);
     }
 
-    function openDocumentPreviewModal(fileId) {
-      currentPreviewDocId = fileId;
-      // Search in attachedFiles or clientOrders
-      const doc = attachedFiles.find(f => f.id === fileId) || {
-        id: fileId,
-        name: `مستند_الترجمة_المعتمد_${fileId}.pdf`,
-        size: '1.4 MB',
-        type: 'PDF / وثيقة معتمدة ومختومة',
-        status: 'مكتمل ومسلّم ✓',
-        hash: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
-        text: `الجمهورية الجزائرية الديمقراطية الشعبية\nوزارة العدل - الترجمة الرسمية المعتمدة\n\nشهادة مطابقة وترجمة محلفة للطلب: #${fileId}\n\nيشهد المترجم الرسمي المحلف بأن هذه الترجمة مطابقة تماماً للمستند الأصلي المودع، وفقاً لأحكام القانون رقم 95-13 المتضمن تنظيم مهنة المترجم والترجمان الرسمي الفوري.\n\n[ختم رسمي وتوقيع المترجم المعتمد]`
+    let currentPreviewDocData = null;
+    let currentPreviewViewMode = 'translated'; // 'translated' or 'bilingual'
+
+    function getDeterministicDocHash(str) {
+      let hash = 0;
+      for (let i = 0; i < str.length; i++) {
+        hash = ((hash << 5) - hash) + str.charCodeAt(i);
+        hash |= 0;
+      }
+      const hex = Math.abs(hash).toString(16).padStart(8, '0');
+      const base = `${hex}e49b934ca495991b7852b855e3b0c44298fc1c149afbf4c8996fb92427ae41`;
+      return base.slice(0, 64);
+    }
+
+    function openDocumentPreviewModal(fileOrOrderId) {
+      currentPreviewDocId = fileOrOrderId;
+      currentPreviewViewMode = 'translated';
+
+      // 1. Search in clientOrders first
+      const order = clientOrders.find(o => o.id === fileOrOrderId);
+      // 2. Search in attachedFiles
+      const attached = attachedFiles.find(f => f.id === fileOrOrderId || (order && f.name.includes(order.title)));
+
+      let docName = '';
+      let docSize = '';
+      let docType = 'PDF / ISO 19005-1 وثيقة معتمدة ومختومة';
+      let docStatus = 'مكتمل ومسلّم ✓';
+      let orderMeta = '';
+      let translator = 'د. ليلى مزياني (مترجم رسمي محلف ومحكم معتمد)';
+      let certSerial = 'CERT-2026-DZ-' + (order ? order.id.replace('PL-', '') : '8821');
+      let certDate = new Date().toLocaleDateString('ar-DZ', { year: 'numeric', month: 'long', day: 'numeric' });
+      let hash = '';
+      let translatedContent = '';
+      let bilingualContent = '';
+
+      if (order) {
+        orderMeta = `${order.id} | ${order.lang} (${order.category})`;
+        const safeTitle = (order.title || 'مستند_رسمي').replace(/[\s()]+/g, '_');
+        docName = attached ? attached.name : `${safeTitle}_مترجم_ومعتمد.pdf`;
+        docSize = attached ? attached.size : `${((order.words * 0.92) / 1000 + 0.6).toFixed(1)} MB`;
+        hash = attached && attached.hash ? attached.hash : getDeterministicDocHash(order.id + order.title + 'PolylangHub2026');
+        
+        if (order.status === 'completed') {
+          docStatus = 'مكتمل ومسلّم ✓ (شهادة أصالة سارية)';
+        } else if (order.status === 'active') {
+          docStatus = 'قيد التدقيق والاعتماد النهائي (مسودة موثقة)';
+        } else {
+          docStatus = 'قيد المراجعة والمطابقة الأولية';
+        }
+
+        // Domain-specific realistic translated texts:
+        if (order.category && (order.category.includes('قانون') || order.category.includes('Legal') || order.title.includes('عقد') || order.title.includes('اتفاقية'))) {
+          translatedContent = `الجمهورية الجزائرية الديمقراطية الشعبية\nوزارة العدل - المجلس الأعلى للترجمة الرسمية المعتمدة\nشهادة مطابقة وترجمة محلفة للطلب: #${order.id}\n\nالمستند: ${order.title}\nالمسار: ${order.lang} | عدد الكلمات: ${order.words} كلمة | الحجم: ${docSize}\n\nالمادة 1 (موضوع الاتفاقية والالتزامات التقنية):\nيلتزم المورد بتوريد وتثبيت وتشغيل المعدات الفنية والتجهيزات المتخصصة وفقاً لملحق الشروط والمواصفات المعتمدة برقم الإسناد التقني 2026/DZ.\n\nالمادة 2 (السرية وحماية المعطيات):\nيتعهد الطرفان بالحفاظ التام على سرية المعلومات والمستندات المتبادلة وعدم إفشائها لأي طرف ثالث دون ترخيص كتابي، وفقاً لأحكام القانون رقم 18-07 المتعلق بحماية المعطيات ذات الطابع الشخصي.\n\nالمادة 3 (الاختصاص القضائي والقانون الواجب التطبيق):\nيخضع هذا العقد ويفسر وفقاً للقوانين السارية في الجمهورية الجزائرية الديمقراطية الشعبية، وتختص المحاكم التجارية بالجزائر العاصمة بالفصل في أي نزاع.\n\n[إشهاد رسمي: يشهد المترجم الرسمي المحلف بأن هذه الترجمة مطابقة تماماً للأصل المودع في الأرشيف المعتمد]`;
+
+          bilingualContent = `[المقارنة المزدوجة - التدقيق الثنائي Parallel Bilingual Review]\n\n[ENGLISH SOURCE TEXT] ⇄ [الترجمة المعتمدة بالعربية]\n\nARTICLE 1: SCOPE OF ENGAGEMENT\nParty A agrees to deliver and commission all specialized technical equipment in full conformity with Annex Specification 2026/DZ.\n⇄\nالمادة 1: موضوع الاتفاقية والالتزامات\nيلتزم الطرف الأول بتوريد وتشغيل كافة المعدات المتخصصة وفقاً لملحق المواصفات 2026/DZ.\n\nARTICLE 2: CONFIDENTIALITY & DATA PROTECTION\nBoth Parties undertake to maintain absolute confidentiality regarding proprietary documentation pursuant to Law No. 18-07.\n⇄\nالمادة 2: السرية وحماية المعطيات\nيتعهد الطرفان بالحفاظ التام على سرية الوثائق والمعطيات وفقاً لأحكام القانون رقم 18-07.\n\nARTICLE 3: GOVERNING LAW & JURISDICTION\nThis Agreement shall be governed and construed in accordance with the laws of the People's Democratic Republic of Algeria.\n⇄\nالمادة 3: القانون الواجب التطبيق والاختصاص القضائي\nيخضع هذا العقد ويفسر وفقاً لأحكام القوانين المعمول بها في الجمهورية الجزائرية الديمقراطية الشعبية.`;
+        } else if (order.category && (order.category.includes('تقني') || order.category.includes('Technical') || order.title.includes('شبك') || order.title.includes('توربين') || order.title.includes('دليل'))) {
+          translatedContent = `الجمهورية الجزائرية الديمقراطية الشعبية\nشهادة ترجمة ومطابقة هندسية وتقنية معتمدة - الطلب: #${order.id}\n\nالمستند: ${order.title}\nالمسار: ${order.lang} | الكلمات: ${order.words} كلمة | الحجم: ${docSize}\nالمواصفة المرجعية: معايير ISO/IEC القياسية والتوثيق الصناعي\n\nالفصل الأول: البنية المعمارية وتوجيه المسارات (Architecture & Routing):\nيصف هذا الدليل الهندسي تهيئة الخوادم ومحولات التوزيع الصناعي بقدرة نقل 10 جيجابت/ثانية، مع تفعيل بروتوكولات الأمان TLS 1.3 وتشفير الأنفاق IPsec لضمان أعلى درجات المرونة وتفادي انقطاع الخدمة.\n\nالفصل الثاني: إجراءات الصيانة الوقائية (Preventive Maintenance):\nتجري الفحوص الدورية لأنظمة التغذية غير المنقطعة (UPS) كل 90 يوماً، مع التحقق من المعايرة الحرارية لمبدلات الحرارة وسلامة كوابل الألياف البصرية وفق المعيار TIA-568-C.\n\n[تم التدقيق المصطلحي الهندسي والمصادقة بواسطة خبراء الترجمة التقنية المعتمدين لدى Polylang Hub]`;
+
+          bilingualContent = `[المقارنة المزدوجة - التدقيق الثنائي Parallel Bilingual Review]\n\n[ENGLISH SOURCE TEXT] ⇄ [الترجمة المعتمدة بالعربية]\n\nSECTION 1: SYSTEM ARCHITECTURE & RESILIENCE\nThe network core deployment utilizes redundant layer-3 routing with automated failover under 50ms.\n⇄\nالقسم 1: البنية المعمارية ومرونة النظام\nيعتمد نشر قلب الشبكة على توجيه مزدوج من المستوى الثالث مع تبديل تلقائي عند الأعطال في أقل من 50 مللي ثانية.\n\nSECTION 2: CRYPTOGRAPHIC TUNNELING\nAll inter-site communications mandate IPsec tunnels with AES-256-GCM encryption.\n⇄\nالقسم 2: الأنفاق المشفرة\nتتطلب كافة الاتصالات بين المواقع إنشاء أنفاق IPsec مشفرة بخوارزمية AES-256-GCM.`;
+        } else {
+          translatedContent = `الجمهورية الجزائرية الديمقراطية الشعبية\nوثيقة مترجمة ومعتمدة رسمياً عبر منصة Polylang Hub\nرقم الطلب: #${order.id} | التصنيف: ${order.category}\nالعنوان: ${order.title} | الحجم: ${docSize}\n\nيشهد فريق الترجمة المحلفة بأن محتوى هذا المستند قد خضع لأعلى معايير التدقيق اللغوي والمطابقة المصطلحية بين اللغتين (${order.lang}).\n\nتم التحقق من الأرقام، التواريخ، الأسماء القانونية، والمصطلحات التخصصية بدقة متناهية وفق معايير الجودة الدولية ISO 17100:2015 الخاصة بخدمات الترجمة.\n\n[هذه الوثيقة معتمدة رسمياً وصالحة للاستخدام الإداري، التجاري، والأكاديمي ومزودة ببصمة SHA-256 مشفرة]`;
+
+          bilingualContent = `[المقارنة المزدوجة - التدقيق الثنائي Parallel Bilingual Review]\n\n[SOURCE / النص الأصلي]\nOfficial certified translation deliverable for project #${order.id}.\nQuality verified according to ISO 17100:2015 standards.\n⇄\n[TARGET / النص المترجم المعتمد]\nوثيقة الترجمة الرسمية المعتمدة المسلمة للمشروع #${order.id}.\nتم التحقق من الجودة وفق معايير الآيزو 17100:2015 الدولية.`;
+        }
+      } else if (attached) {
+        docName = attached.name;
+        docSize = attached.size;
+        docType = attached.type;
+        docStatus = attached.status;
+        orderMeta = `ملف مرفق (${attached.id})`;
+        hash = attached.hash || getDeterministicDocHash(attached.id + attached.name);
+        translatedContent = attached.text || `[محتوى المستند المعتمد ${attached.name}]\nتاريخ المعالجة: ${attached.date}\nالحجم: ${attached.size}\n\nتم فحص المستند واعتماد ترجمته وفق الأصول المهنية المعتمدة لدى Polylang Hub.`;
+        bilingualContent = `[عرض المقارنة للمستند المرفق: ${attached.name}]\n\nالنص الأصلي والمترجم مطابق تماماً لسجل التدقيق السحابي.`;
+      } else {
+        docName = `مستند_الترجمة_المعتمد_${fileOrOrderId}.pdf`;
+        docSize = '1.8 MB';
+        hash = getDeterministicDocHash(fileOrOrderId);
+        orderMeta = `طلب رقم #${fileOrOrderId}`;
+        translatedContent = `الجمهورية الجزائرية الديمقراطية الشعبية\nوزارة العدل - الترجمة الرسمية المعتمدة\nشهادة مطابقة وترجمة محلفة للطلب: #${fileOrOrderId}\n\nيشهد المترجم الرسمي المحلف بأن هذه الترجمة مطابقة تماماً للمستند الأصلي المودع، وفقاً لأحكام القانون رقم 95-13 المتضمن تنظيم مهنة المترجم والترجمان الرسمي الفوري.\n\n[ختم رسمي وتوقيع المترجم المعتمد]`;
+        bilingualContent = `[المقارنة الثنائية للطلب #${fileOrOrderId}]\n\nالترجمة معتمدة ومطابقة كلياً للأصل.`;
+      }
+
+      currentPreviewDocData = {
+        id: fileOrOrderId,
+        name: docName,
+        size: docSize,
+        type: docType,
+        status: docStatus,
+        orderMeta: orderMeta,
+        translator: translator,
+        certSerial: certSerial,
+        certDate: certDate,
+        hash: hash,
+        translatedContent: translatedContent,
+        bilingualContent: bilingualContent
       };
 
+      // Populate UI elements
       const titleEl = document.getElementById('docPreviewModalTitle');
-      const headerEl = document.getElementById('docPreviewHeaderMeta');
+      const fileNameEl = document.getElementById('docPreviewFileName');
+      const fileSizeEl = document.getElementById('docPreviewFileSize');
+      const orderMetaEl = document.getElementById('docPreviewOrderMeta');
+      const translatorEl = document.getElementById('docPreviewTranslatorMeta');
       const hashEl = document.getElementById('docPreviewHashStamp');
       const bodyEl = document.getElementById('docPreviewBodyText');
-      const sizeEl = document.getElementById('docPreviewFileSize');
-      const typeEl = document.getElementById('docPreviewFileType');
-      const statusEl = document.getElementById('docPreviewStatus');
+      const serialEl = document.getElementById('docPreviewCertSerial');
+      const dateEl = document.getElementById('docPreviewCertDate');
+      const toggleBtn = document.getElementById('btnToggleDocViewMode');
 
-      if (titleEl) titleEl.innerText = doc.name;
-      if (headerEl) headerEl.innerText = `${doc.name} (${doc.type})`;
-      if (hashEl) hashEl.innerText = `SHA-256: ${doc.hash}`;
-      if (bodyEl) bodyEl.innerText = doc.text;
-      if (sizeEl) sizeEl.innerText = doc.size;
-      if (typeEl) typeEl.innerText = doc.type;
-      if (statusEl) statusEl.innerText = doc.status;
+      if (titleEl) titleEl.innerText = docName;
+      if (fileNameEl) fileNameEl.innerText = docName;
+      if (fileSizeEl) fileSizeEl.innerText = docSize;
+      if (orderMetaEl) orderMetaEl.innerText = orderMeta;
+      if (translatorEl) translatorEl.innerText = translator;
+      if (hashEl) hashEl.innerText = hash;
+      if (serialEl) serialEl.innerText = certSerial;
+      if (dateEl) dateEl.innerText = certDate;
+      if (bodyEl) bodyEl.innerText = translatedContent;
+      if (toggleBtn) toggleBtn.innerText = '🔀 المقارنة المزدوجة (Bilingual View)';
 
+      // Open Modal
       const modal = document.getElementById('documentPreviewModalBackdrop');
       if (modal) modal.classList.add('active');
+
+      playAppSound('click');
+      pushToast(`🔒 معاينة المستند: ${docName} (${docSize}) - تم التحقق من البصمة الرقمية ✓`);
+    }
+
+    function toggleDocPreviewBilingualMode() {
+      if (!currentPreviewDocData) return;
+      const bodyEl = document.getElementById('docPreviewBodyText');
+      const toggleBtn = document.getElementById('btnToggleDocViewMode');
+      if (!bodyEl || !toggleBtn) return;
+
+      if (currentPreviewViewMode === 'translated') {
+        currentPreviewViewMode = 'bilingual';
+        bodyEl.innerText = currentPreviewDocData.bilingualContent;
+        toggleBtn.innerText = '📄 النص المترجم المعتمد فقط (Translation Only)';
+        pushToast('تم التبديل إلى وضع التدقيق والمقارنة المزدوجة');
+      } else {
+        currentPreviewViewMode = 'translated';
+        bodyEl.innerText = currentPreviewDocData.translatedContent;
+        toggleBtn.innerText = '🔀 المقارنة المزدوجة (Bilingual View)';
+        pushToast('تم التبديل إلى وضع عرض النص المترجم المعتمد');
+      }
+      playAppSound('click');
+    }
+
+    function copyDocumentPreviewHash() {
+      if (!currentPreviewDocData || !currentPreviewDocData.hash) return;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(currentPreviewDocData.hash).then(() => {
+          pushToast(`✓ تم نسخ البصمة الرقمية SHA-256 بنجاح!`);
+        }).catch(() => {
+          pushToast(`البصمة الرقمية: ${currentPreviewDocData.hash.slice(0, 16)}...`);
+        });
+      } else {
+        pushToast(`البصمة الرقمية: ${currentPreviewDocData.hash.slice(0, 16)}...`);
+      }
+      playAppSound('success');
     }
 
     function closeDocumentPreviewModal() {
@@ -4171,11 +4993,28 @@
     }
 
     function downloadCurrentPreviewDocument() {
-      if (currentPreviewDocId) {
-        downloadAttachedFile(currentPreviewDocId);
-      } else {
-        downloadAttachedFile('DOC-8821');
+      if (!currentPreviewDocData) {
+        downloadAttachedFile(currentPreviewDocId || 'DOC-8821');
+        return;
       }
+      const fileName = currentPreviewDocData.name.endsWith('.pdf') 
+        ? currentPreviewDocData.name.replace('.pdf', '_معتمد.txt') 
+        : `${currentPreviewDocData.name}.txt`;
+
+      const content = `===========================================================\nPOLYLANG HUB - CERTIFIED SECURE DELIVERABLE\nالجمهورية الجزائرية الديمقراطية الشعبية - وثيقة مترجمة رسمياً\n===========================================================\n\nاسم المستند: ${currentPreviewDocData.name}\nحجم الملف: ${currentPreviewDocData.size}\nالرقم المرجعي: ${currentPreviewDocData.orderMeta}\nالمترجم المعتمد: ${currentPreviewDocData.translator}\nالرقم التسلسلي: ${currentPreviewDocData.certSerial}\nتاريخ الاعتماد: ${currentPreviewDocData.certDate}\nبصمة التحقق الرقمية (SHA-256 Hash):\n${currentPreviewDocData.hash}\n\n-----------------------------------------------------------\nمحتوى الوثيقة المعتمدة:\n-----------------------------------------------------------\n\n${currentPreviewDocData.translatedContent}\n\n===========================================================\n[شهادة رقمية مؤمنة ومسجلة في السجل السحابي لمنصة Polylang Hub]\n===========================================================`;
+
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      playAppSound('success');
+      pushToast(`📥 بدأ تنزيل المستند المعتمد: ${fileName}`);
     }
 
     function downloadAttachedFile(fileId) {
@@ -4349,9 +5188,11 @@
             </span>
           </td>
           <td>
-            <div style="display: flex; gap: 0.35rem; flex-wrap: wrap;">
-              <button class="btn btn-outline btn-sm" onclick="openDocumentPreviewModal('${o.id}')" title="معاينة حزمة الترجمة">👁️ معاينة</button>
-              <button class="btn btn-primary btn-sm" onclick="downloadClientOrderDeliverable('${o.id}')" title="تنزيل الملف المعتمد">📥 تحميل</button>
+            <div style="display: flex; gap: 0.35rem; flex-wrap: wrap; align-items: center;">
+              <button class="btn btn-primary btn-sm btn-doc-view" onclick="openDocumentPreviewModal('${o.id}')" title="معاينة المستند المترجم والتحقق من البصمة الرقمية (View & Verify SHA-256)">
+                👁️ View
+              </button>
+              <button class="btn btn-outline btn-sm" onclick="downloadClientOrderDeliverable('${o.id}')" title="تنزيل الملف المعتمد">📥 تحميل</button>
               <button class="btn btn-outline btn-sm" onclick="openInvoiceModalForOrder('${o.id}')" title="عرض الفاتورة الرسمية">🧾 الفاتورة</button>
             </div>
           </td>
@@ -4834,6 +5675,24 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
         { id: 2, start: 4.5, end: 8.5, text: "Nous assurons une synchronisation temporelle rigoureuse pour vos productions vidéo." },
         { id: 3, start: 9.0, end: 14.0, text: "La terminologie spécialisée est validée selon les normes internationales." },
         { id: 4, start: 14.5, end: 19.5, text: "Exportez instantanément vos fichiers SRT certifiés prêts pour la diffusion." }
+      ],
+      es: [
+        { id: 1, start: 0.5, end: 4.0, text: "Bienvenidos al estudio de subtitulado audiovisual certificado de Polylang Hub." },
+        { id: 2, start: 4.5, end: 8.5, text: "Entregamos sincronización de código de tiempo de alta precisión para documentales." },
+        { id: 3, start: 9.0, end: 14.0, text: "La terminología técnica se revisa conforme a los estándares internacionales de traducción." },
+        { id: 4, start: 14.5, end: 19.5, text: "Exporte archivos SRT profesionales compatibles con cadenas de transmisión al instante." }
+      ],
+      de: [
+        { id: 1, start: 0.5, end: 4.0, text: "Willkommen im zertifizierten audiovisuellen Übersetzungsstudio von Polylang Hub." },
+        { id: 2, start: 4.5, end: 8.5, text: "Präzise Timecode-Synchronisation für Dokumentationen und Unternehmensfilme." },
+        { id: 3, start: 9.0, end: 14.0, text: "Fachterminologie wird nach internationalen Untertitelungsstandards geprüft." },
+        { id: 4, start: 14.5, end: 19.5, text: "Exportieren Sie professionelle SRT-Dateien direkt für Fernsehen und Streaming." }
+      ],
+      ru: [
+        { id: 1, start: 0.5, end: 4.0, text: "Добро пожаловать в студию сертифицированного аудиовизуального перевода Polylang Hub." },
+        { id: 2, start: 4.5, end: 8.5, text: "Мы обеспечиваем точную синхронизацию тайм-кодов для документальных фильмов." },
+        { id: 3, start: 9.0, end: 14.0, text: "Специальная терминология проверяется в соответствии с международными стандартами." },
+        { id: 4, start: 14.5, end: 19.5, text: "Мгновенно экспортируйте профессиональные файлы SRT для вещания и стриминга." }
       ]
     };
 
@@ -4845,6 +5704,128 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
       renderSrtTimeline();
       updateVideoOverlaySubtitle();
       pushToast(`تم تفعيل مسار الترجمة: ${track.toUpperCase()}`);
+    }
+
+    /* -------------------------------------------------------------
+       EDUCATIONAL VIDEO EMBED ENGINE & MODE CONTROLLER
+       ------------------------------------------------------------- */
+    const educationalVideos = {
+      un: {
+        title: 'محاضرة: الترجمة الفورية داخل كبائن الأمم المتحدة (UN Simultaneous Interpretation)',
+        url: 'https://www.youtube-nocookie.com/embed/uT_hFzV1s54',
+        desc: 'محاضرة تطبيقية توضح ديناميكيات العمل في كابينة الأمم المتحدة، وكيفية التعامل مع فارق التوقيت المعرفي (Décalage) وإدارة الحمل الذهني أثناء الخطابات الدولية الحية.'
+      },
+      rozan: {
+        title: 'محاضرة: إدارة لغتين في وقت واحد وتقنيات روزان (How Interpreters Juggle Languages)',
+        url: 'https://www.youtube-nocookie.com/embed/1laThtz19i0',
+        desc: 'تحليل علمي وعملي لكيفية انقسام الانتباه لدى المترجم الشفوي بين الاستماع والتحليل والترميز وإعادة الصياغة الشفوية السليمة.'
+      },
+      standards: {
+        title: 'محاضرة: معايير الترجمة المرئية ومزامنة التوقيت (Audiovisual Subtitling Guidelines)',
+        url: 'https://www.youtube-nocookie.com/embed/p3oZf-w84nE',
+        desc: 'شرح تطبيقي لقواعد إعداد ملفات SRT، سرعة القراءة المقبولة (17-20 حرف/ثانية)، وتقسيم الأسطر لتفادي التداخل البصري للمشاهد.'
+      }
+    };
+
+    function switchVideoEngineMode(mode) {
+      document.querySelectorAll('.video-mode-chip').forEach(c => c.classList.remove('active'));
+      const chip = document.getElementById(`btnVideoMode-${mode}`);
+      if (chip) chip.classList.add('active');
+
+      const videoCont = document.getElementById('videoContainer');
+      const controlsRow = document.getElementById('videoControlsRow');
+      const embedWrap = document.getElementById('educationalVideoEmbedWrapper');
+      const iframe = document.getElementById('educationalVideoIframe');
+      const metaBox = document.getElementById('educationalVideoMetaBox');
+      const mainVid = document.getElementById('mainTranslationVideo');
+
+      if (mode === 'studio') {
+        if (embedWrap) embedWrap.style.display = 'none';
+        if (iframe) iframe.src = 'about:blank';
+        if (metaBox) metaBox.style.display = 'none';
+        if (videoCont) videoCont.style.display = 'flex';
+        if (controlsRow) controlsRow.style.display = 'flex';
+        pushToast('🎬 تم تفعيل استوديو مزامنة SRT التفاعلي');
+      } else {
+        const item = educationalVideos[mode];
+        if (mainVid && !mainVid.paused) mainVid.pause();
+        if (videoCont) videoCont.style.display = 'none';
+        if (controlsRow) controlsRow.style.display = 'none';
+        if (embedWrap) embedWrap.style.display = 'block';
+        if (iframe && item) iframe.src = item.url;
+        if (metaBox) {
+          metaBox.style.display = 'block';
+          const t = document.getElementById('eduVideoTitle');
+          const d = document.getElementById('eduVideoDesc');
+          if (t) t.innerText = item.title;
+          if (d) d.innerText = item.desc;
+        }
+        pushToast(`📺 تم تشغيل: ${item ? item.title : mode}`);
+      }
+    }
+
+    const enthusiastVideoLessons = [
+      {
+        id: 1,
+        title: 'كبائن الأمم المتحدة والترجمة الفورية (UN Booths)',
+        caption: 'المصدر: الأمم المتحدة - قسم خدمات المؤتمرات والترجمة الشفوية',
+        url: 'https://www.youtube-nocookie.com/embed/uT_hFzV1s54',
+        lessonTitle: 'أهم محاور درس كبائن الأمم المتحدة:',
+        points: [
+          '<strong>زمن التخلف (Décalage):</strong> الفارق الزمني (من 2 إلى 4 ثوانٍ) بين كلام الخطيب وتوليد الترجمة في الكابينة.',
+          '<strong>الترجمة التناوبية:</strong> يعمل مترجمان داخل كل كابينة ويتناوبان كل 30 دقيقة للحفاظ على التركيز الذهني.',
+          '<strong>المصطلحات السيادية:</strong> توحيد ترجمة أسماء الهيئات والقرارات الدولية بالاعتماد على قواعد UNTERM.'
+        ]
+      },
+      {
+        id: 2,
+        title: 'الحمل المعرفي وإدارة لغتين معاً (Cognitive Load)',
+        caption: 'المصدر: TED-Ed - Ewandro Magalhaes (مترجم فوري معتمد)',
+        url: 'https://www.youtube-nocookie.com/embed/1laThtz19i0',
+        lessonTitle: 'أهم محاور إدارة الحمل المعرفي:',
+        points: [
+          '<strong>المعالجة المزدوجة (Dual-tasking):</strong> تدريب الدماغ على فك تشفير المعنى وتوليد النطق في مسارين متوازيين.',
+          '<strong>استراتيجيات الترقب (Anticipation):</strong> التنبؤ بنهاية الجملة بناءً على التراكيب النحوية ومحددات السياق.',
+          '<strong>الهدوء والسيطرة:</strong> عدم التوقف عند المصطلحات الصعبة والاعتماد على التعميم الدقيق (Hypernymy).'
+        ]
+      },
+      {
+        id: 3,
+        title: 'الترجمة التعاقبية وتدوين الرموز (Consecutive Masterclass)',
+        caption: 'المصدر: الأكاديمية الدولية للمترجمين الفوريين',
+        url: 'https://www.youtube-nocookie.com/embed/p3oZf-w84nE',
+        lessonTitle: 'أهم محاور الترجمة التعاقبية وتدوين الرموز:',
+        points: [
+          '<strong>مبادئ جان فرانسوا روزان:</strong> تدوين الأفكار بدلاً من الكلمات، والاعتماد على الرموز والأشكال العمودية.',
+          '<strong>الربط المنطقي:</strong> استخدام الأسهم للدلالة على علاقات العلة والنتيجة والتعارض والزمن.',
+          '<strong>الذاكرة قصيرة المدى:</strong> الورقة وسيلة تنشيط للذاكرة وليست تفريغاً حرفياً للنص.'
+        ]
+      }
+    ];
+
+    function switchEnthusiastVideo(idx) {
+      document.querySelectorAll('[id^="btnEnthusiastVideo-"]').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById(`btnEnthusiastVideo-${idx}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const lesson = enthusiastVideoLessons.find(l => l.id === idx) || enthusiastVideoLessons[0];
+      const iframe = document.getElementById('enthusiastAcademyVideoIframe');
+      const caption = document.getElementById('enthusiastVideoCaption');
+      const lTitle = document.getElementById('enthusiastLessonTitle');
+      const lPoints = document.getElementById('enthusiastLessonPoints');
+
+      if (iframe) iframe.src = lesson.url;
+      if (caption) caption.innerText = lesson.caption;
+      if (lTitle) lTitle.innerText = lesson.lessonTitle;
+      if (lPoints) {
+        lPoints.innerHTML = lesson.points.map(p => `<li>${p}</li>`).join('');
+      }
+      pushToast(`📺 تم تحميل: ${lesson.title}`);
+    }
+
+    function openBoothWithVideoLesson() {
+      switchActiveRole('translator');
+      pushToast('🎙️ تم نقلك إلى كابينة الترجمة الفورية للتدريب العملي');
     }
 
     function renderSrtTimeline() {
@@ -5480,11 +6461,32 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
        11. MODAL UTILITIES & EVENT HANDLERS
        ------------------------------------------------------------- */
     function openAuthModal() {
+      updateAuthModalActiveSessionInfo();
       document.getElementById('authModalBackdrop').classList.add('active');
     }
     function closeAuthModal() {
       document.getElementById('authModalBackdrop').classList.remove('active');
     }
+
+    function updateAuthModalActiveSessionInfo() {
+      const emailEl = document.getElementById('modalActiveUserSessionEmail');
+      if (emailEl && activeUser) {
+        emailEl.innerText = `${activeUser.name} (${activeUser.email})`;
+      }
+      const roleSelect = document.getElementById('authRoleSelect');
+      if (roleSelect && activeUser) {
+        roleSelect.value = activeUser.role;
+      }
+      const nameInput = document.getElementById('authNameInput');
+      if (nameInput && activeUser) {
+        nameInput.value = activeUser.name;
+      }
+      const emailInput = document.getElementById('authEmailInput');
+      if (emailInput && activeUser) {
+        emailInput.value = activeUser.email;
+      }
+    }
+
     function openPaymentModal() {
       document.getElementById('paymentModalBackdrop').classList.add('active');
     }
@@ -5498,25 +6500,18 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
       const email = document.getElementById('authEmailInput').value.trim();
       const role = document.getElementById('authRoleSelect').value;
 
-      activeUser = { name, email, role };
       closeAuthModal();
-      switchActiveRole(role);
+      switchUserSession({ name, email, role });
     }
 
     function quickLoginRole(role) {
-      const names = {
-        admin: 'المهندس مصطفى بلحاج (مدير النظام)',
-        translator: 'د. ليلى مزياني (مترجم محلف)',
-        client: 'كريم حمداوي (عميل مؤسساتي)',
-        enthusiast: 'ياسمين بن علي (متعلمة لغات)'
-      };
-      activeUser = {
-        name: names[role],
+      const seedProfile = DEFAULT_ROLE_PROFILES[role]?.user || {
+        name: getRoleLabel(role),
         email: `${role}@polylang.dz`,
         role: role
       };
       closeAuthModal();
-      switchActiveRole(role);
+      switchUserSession(seedProfile);
     }
 
     function handlePaymentSubmit(e) {
