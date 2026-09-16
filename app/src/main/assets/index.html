@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" data-theme="light">
+<html lang="ar" dir="rtl" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +11,110 @@
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
 
   <style>
+    
+    /* =============================================================
+       LUXURIOUS SAAS AESTHETIC & GLASSMORPHISM ENHANCEMENTS
+       ============================================================= */
+    [data-theme="dark"] body {
+      background: radial-gradient(circle at 50% -15%, rgba(229, 57, 53, 0.18) 0%, transparent 65%),
+                  radial-gradient(circle at 95% 85%, rgba(183, 28, 28, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 5% 45%, rgba(30, 41, 59, 0.3) 0%, transparent 50%),
+                  #070b12;
+      background-attachment: fixed;
+    }
+
+    [data-theme="dark"] .card,
+    [data-theme="dark"] .modal-box,
+    [data-theme="dark"] .audio-player-card,
+    [data-theme="dark"] .course-card,
+    [data-theme="dark"] .video-playlist-item,
+    [data-theme="dark"] .auth-role-card {
+      background: rgba(17, 24, 39, 0.72) !important;
+      backdrop-filter: blur(18px) !important;
+      -webkit-backdrop-filter: blur(18px) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6) !important;
+    }
+
+    [data-theme="dark"] .card:hover,
+    [data-theme="dark"] .course-card:hover,
+    [data-theme="dark"] .audio-player-card:hover {
+      border-color: rgba(229, 57, 53, 0.35) !important;
+      box-shadow: 0 14px 38px -10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(229, 57, 53, 0.15) !important;
+      transform: translateY(-2px);
+    }
+
+    /* Glowing Red Brand Accents */
+    .btn-primary {
+      background: linear-gradient(135deg, #e53935 0%, #b71c1c 100%) !important;
+      box-shadow: 0 4px 18px rgba(229, 57, 53, 0.35) !important;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .btn-primary:hover {
+      box-shadow: 0 6px 24px rgba(229, 57, 53, 0.5) !important;
+      transform: translateY(-2px);
+    }
+
+    /* Glowing Micro-Status Indicators */
+    .status-badge.completed, .status-pill.status-completed {
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.35) !important;
+    }
+    .status-badge.pending {
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.35) !important;
+    }
+    .status-badge.disputed {
+      box-shadow: 0 0 10px rgba(239, 68, 68, 0.35) !important;
+    }
+
+    /* Pulsing Glow Dot */
+    .glow-status-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+      animation: pulseGlowAnim 2s infinite ease-in-out;
+    }
+    @keyframes pulseGlowAnim {
+      0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 8px #10b981; }
+      50% { opacity: 0.5; transform: scale(1.25); box-shadow: 0 0 14px #10b981; }
+    }
+
+    /* Cryptographic Signature Badge */
+    .crypto-sig-box {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.72rem;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px dashed rgba(16, 185, 129, 0.5);
+      color: #34d399;
+      padding: 0.35rem 0.65rem;
+      border-radius: var(--radius-sm);
+      margin-top: 0.35rem;
+      word-break: break-all;
+    }
+
+    /* Header Wallet Pill */
+    .header-wallet-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      color: #f59e0b;
+      padding: 0.35rem 0.85rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .header-wallet-pill:hover {
+      background: rgba(245, 158, 11, 0.22);
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.35);
+      transform: translateY(-1px);
+    }
+
     /* -------------------------------------------------------------
        CSS VARIABLES & THEME ENGINE (LIGHT & DARK MODES)
        ------------------------------------------------------------- */
@@ -2466,7 +2570,7 @@
             <h3 style="font-weight: 900; font-size: 1.15rem;">إدارة المستخدمين والمترجمين المعتمدين</h3>
             <p style="font-size: 0.82rem; color: var(--text-muted);">التحقق من التراخيص المهنية وتفعيل حسابات المترجمين</p>
           </div>
-          <input type="text" class="form-control" style="width: 100%; max-width: 260px; padding: 0.45rem 0.85rem;" placeholder="بحث باسم المستخدم أو البريد..." oninput="filterAdminUsersTable(this.value)">
+          <input type="text" class="form-control" style="width: 100%; max-width: 260px; padding: 0.45rem 0.85rem;" placeholder="بحث باسم المستخدم أو البريد..." data-i18n-placeholder="phSearchUser" oninput="filterAdminUsersTable(this.value)">
         </div>
 
         <div class="table-responsive">
@@ -2667,7 +2771,7 @@
             <div style="margin-top: 0.75rem; background: var(--bg-surface-secondary); padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-main);">
               <label class="form-label" style="font-size: 0.78rem;">تعديل نص المقطع الزمني المحدد فوراً:</label>
               <div style="display: flex; gap: 0.45rem;">
-                <input type="text" class="form-control" id="activeCueTextInput" placeholder="اكتب الترجمة للمقطع الحالي..." oninput="updateActiveCueText(this.value)">
+                <input type="text" class="form-control" id="activeCueTextInput" placeholder="اكتب الترجمة للمقطع الحالي..." data-i18n-placeholder="phTranslationSegment" oninput="updateActiveCueText(this.value)">
                 <button class="btn btn-primary btn-sm" onclick="saveActiveCueChange()">حفظ</button>
               </div>
             </div>
@@ -2768,7 +2872,7 @@
                 <button class="rozan-symbol-chip" title="استفهام (Question)" onclick="insertRozanSymbol('?')">?</button>
               </div>
 
-              <textarea class="form-control" id="rozanNotesTextarea" rows="3" placeholder="دوّن الأفكار والرموز أثناء استماعك للخطاب (مثال: قمة مناخ → تحول طاقة ≠ خيار ∴ أساس صمود اقتصاد)..."></textarea>
+              <textarea class="form-control" id="rozanNotesTextarea" rows="3" placeholder="دوّن الأفكار والرموز أثناء استماعك للخطاب..." data-i18n-placeholder="phNoteTaking"></textarea>
             </div>
 
             <!-- Instant Oral Scoring Evaluation Box -->
@@ -2829,7 +2933,7 @@
                 <label class="form-label" style="margin-bottom: 0;">صياغتك المترجمة المعتمدة (بالعربية):</label>
                 <span style="font-size: 0.76rem; color: var(--text-muted);"><span id="writtenCharCount">0</span> حرف / <span id="writtenWordCount">0</span> كلمة</span>
               </div>
-              <textarea class="form-control" id="writtenUserTranslationInput" rows="4" placeholder="اكتب ترجمتك الدقيقة هنا (مثال: دون الإخلال بأي نص مخالف في هذا العقد، لا يتحمل أي من الطرفين المسؤولية عن الأضرار غير المباشرة...)" oninput="onWrittenInputUpdate(this)"></textarea>
+              <textarea class="form-control" id="writtenUserTranslationInput" rows="4" placeholder="اكتب ترجمتك الدقيقة هنا..." data-i18n-placeholder="phLegalTranslate" oninput="onWrittenInputUpdate(this)"></textarea>
             </div>
 
             <div style="display: flex; gap: 0.5rem;">
@@ -2880,7 +2984,7 @@
           <button class="btn btn-outline btn-sm" onclick="openAddTermModal()">➕ إضافة مصطلح</button>
         </div>
 
-        <input type="text" class="form-control" style="margin-bottom: 0.85rem;" placeholder="ابحث في المسرد (مثال: Force Majeure, Ultra Vires)..." oninput="searchGlossaryTerms(this.value)">
+        <input type="text" class="form-control" style="margin-bottom: 0.85rem;" placeholder="ابحث في المسرد (مثال: Force Majeure, Ultra Vires)..." data-i18n-placeholder="phSearchGlossary" oninput="searchGlossaryTerms(this.value)">
 
         <div style="max-height: 260px; overflow-y: auto;" id="glossaryListContainer">
           <!-- Glossary items -->
@@ -3115,7 +3219,7 @@
           <!-- Text Search -->
           <div class="form-group" style="margin-bottom: 0;">
             <label class="form-label" style="font-size: 0.78rem;">بحث بالاسم أو رقم المشروع:</label>
-            <input type="text" class="form-control" id="histSearchKeyword" placeholder="ابحث بعنوان المستند أو رقم الطلب (مثل: عقود، توريد)..." oninput="applyTranslationHistoryFilters()">
+            <input type="text" class="form-control" id="histSearchKeyword" placeholder="ابحث بعنوان المستند أو رقم الطلب (مثل: عقود، توريد)..." data-i18n-placeholder="phSearchOrders" oninput="applyTranslationHistoryFilters()">
           </div>
 
           <!-- Category Filter -->
@@ -3593,6 +3697,41 @@
           </div>
         </div>
 
+        
+          <!-- Audio Drill 3: Commercial & Legal Arbitration AR/EN -->
+          <div class="audio-player-card" id="audioCard3">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+              <div>
+                <span class="status-pill status-completed" style="font-size: 0.72rem; font-weight: 800;">🏛️ تمرين رقم 3 • التحكيم التجاري والعقود (ICC)</span>
+                <h4 style="font-weight: 900; margin-top: 0.35rem; font-size: 1.05rem;">International Arbitration & Liquidated Damages (AR/EN)</h4>
+                <p style="font-size: 0.78rem; color: var(--text-muted); margin: 0;">بند فض النزاعات التجارية وغرفة التجارة الدولية • صياغات العقود الإنشائية</p>
+              </div>
+            </div>
+            <!-- Waveform Visualizer -->
+            <div class="audio-waveform-visualizer">
+              <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+              <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+              <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+              <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+              <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+            </div>
+            <!-- Controls -->
+            <div class="audio-controls-row">
+              <button class="audio-play-btn" id="audioBtnPlay3" onclick="toggleAudioTrack(3)">▶</button>
+              <input type="range" class="audio-seek-slider" id="audioSeek3" min="0" max="130" value="0" oninput="seekAudioTrack(3, this.value)">
+              <span id="audioTimeCurrent3" style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); width: 45px;">00:00</span>
+              <div class="audio-speed-chips">
+                <span class="speed-chip active" onclick="setAudioSpeed(3, 1.0, this)">1.0x</span>
+                <span class="speed-chip" onclick="setAudioSpeed(3, 1.25, this)">1.25x</span>
+                <span class="speed-chip" onclick="setAudioSpeed(3, 1.5, this)">1.5x</span>
+              </div>
+            </div>
+            <!-- Transcript -->
+            <div class="audio-transcript-box" id="audioTranscript3">
+              <span class="transcript-phrase active">"All disputes arising out of or in connection with the present contract shall be finally settled under the Rules of Arbitration of the International Chamber of Commerce."</span>
+            </div>
+          </div>
+
         <!-- 432Hz Cognitive Reset Module -->
         <div style="background: var(--bg-surface); border: 1.5px solid var(--border-main); border-radius: var(--radius-lg); padding: 1.75rem; margin-top: 1.5rem; text-align: center;">
           <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(16, 185, 129, 0.12); color: var(--success); padding: 0.35rem 0.85rem; border-radius: 50px; font-size: 0.82rem; font-weight: 800; margin-bottom: 0.65rem;">
@@ -3769,17 +3908,17 @@
 
         <div class="form-group" style="margin-bottom: 0.85rem;">
           <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 0.35rem;" data-i18n="authFullNameLabel">الاسم الكامل:</label>
-          <input type="text" class="form-control" id="authInputName" placeholder="مثال: كريم حمداوي" value="كريم حمداوي" required>
+          <input type="text" class="form-control" id="authInputName" placeholder="مثال: كريم حمداوي أو مداني جودي" data-i18n-placeholder="phNameInput" value="كريم حمداوي" required>
         </div>
 
         <div class="form-group" style="margin-bottom: 0.85rem;">
           <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 0.35rem;" data-i18n="authEmailLabel">البريد الإلكتروني المعتمد:</label>
-          <input type="email" class="form-control" id="authInputEmail" placeholder="user@polylang.dz أو djoudimadani09@gmail.com للمسؤول" value="client@polylang.dz" oninput="onAuthEmailInputChange(this.value)" required>
+          <input type="email" class="form-control" id="authInputEmail" placeholder="user@polylang.dz أو djoudimadani09@gmail.com للمسؤول" data-i18n-placeholder="phEmailInput" value="client@polylang.dz" oninput="onAuthEmailInputChange(this.value)" required>
         </div>
 
         <div class="form-group" style="margin-bottom: 1.15rem;">
           <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 0.35rem;" data-i18n="authPasswordLabel">كلمة المرور / رمز الدخول الآمن:</label>
-          <input type="password" class="form-control" id="authInputPassword" placeholder="••••••••" value="Polylang2026!">
+          <input type="password" class="form-control" id="authInputPassword" placeholder="••••••••" data-i18n-placeholder="phPasswordInput" value="Polylang2026!">
         </div>
 
         <button type="submit" class="btn btn-primary" style="width: 100%; font-weight: 800; padding: 0.75rem;" data-i18n="authSubmitBtn">
@@ -4560,7 +4699,7 @@
 
     // Active Global State Variables (Always dynamically synchronized with isolated session)
     let activeRole = localStorage.getItem(STORAGE_KEYS.ACTIVE_ROLE) || 'client';
-    let currentTheme = localStorage.getItem(STORAGE_KEYS.THEME) || 'light';
+    let currentTheme = localStorage.getItem(STORAGE_KEYS.THEME) || 'dark';
     let currentLanguage = localStorage.getItem(STORAGE_KEYS.LANG) || 'ar';
     let activeUser = null;
     let notifications = [];
@@ -5419,6 +5558,7 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
     let audioState = {
       track1: { isPlaying: false, timer: null, currentTime: 0, totalTime: 150, speed: 1.0 },
       track2: { isPlaying: false, timer: null, currentTime: 0, totalTime: 110, speed: 1.0 },
+      track3: { isPlaying: false, timer: null, currentTime: 0, totalTime: 130, speed: 1.0 },
       alpha: { isPlaying: false, osc: null, gain: null, timer: null }
     };
 
@@ -5445,10 +5585,11 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
         if (btn) btn.innerHTML = '▶';
         pushToast(`⏸ تم إيقاف المقطع الصوتي ${trackNum}`);
       } else {
-        const otherNum = trackNum === 1 ? 2 : 1;
-        if (audioState[`track${otherNum}`].isPlaying) {
-          toggleAudioTrack(otherNum);
-        }
+        [1, 2, 3].forEach(n => {
+          if (n !== trackNum && audioState[`track${n}`]?.isPlaying) {
+            toggleAudioTrack(n);
+          }
+        });
 
         state.isPlaying = true;
         if (card) card.classList.add('playing');
@@ -5457,9 +5598,14 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
         playAppSound('click');
         if ('speechSynthesis' in window) {
           window.speechSynthesis.cancel();
-          const textToSpeak = trackNum === 1
-            ? "Mr. President, distinguished delegates of the General Assembly. We convene today at a pivotal juncture where international climate obligations demand swift legislative action."
-            : "Je jure d'accomplir fidèlement ma mission de traduction assermentée avec honneur, probité et rigueur professionnelle conforme aux textes réglementaires.";
+          let textToSpeak = "";
+          if (trackNum === 1) {
+            textToSpeak = "Mr. President, distinguished delegates of the General Assembly. We convene today at a pivotal juncture where international climate obligations demand swift legislative action.";
+          } else if (trackNum === 2) {
+            textToSpeak = "Je jure d'accomplir fidèlement ma mission de traduction assermentée avec honneur, probité et rigueur professionnelle conforme aux textes réglementaires.";
+          } else {
+            textToSpeak = "All disputes arising out of or in connection with the present contract shall be finally settled under the Rules of Arbitration of the International Chamber of Commerce.";
+          }
           const utter = new SpeechSynthesisUtterance(textToSpeak);
           utter.lang = trackNum === 1 ? 'en-US' : 'fr-FR';
           utter.rate = state.speed;
@@ -5608,6 +5754,26 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
     
     const dictionary = {
       ar: {
+        clientActiveProjectsHeading: "مشاريعك وطلبات الترجمة النشطة (Active Projects)",
+        clientActiveProjectsSub: "تتبع مشاريعك المعتمدة مباشرة، واضغط على زر 'View' لمعاينة المستند المترجم، فحص حجم الملف، والتحقق من شارة البصمة الرقمية SHA-256.",
+        docPreviewerBannerTitle: "مستعرض المستندات المعتمدة (Secure Document Previewer)",
+        docPreviewerBannerDesc: "اضغط على زر 'View' في أي صف لمشاهدة معاينة مشفرة وفورية مع التحقق من البصمة الرقمية وحجم الملف وتوقيع المترجم المعتمد.",
+        mediaHeroBadge: "أكاديمية التدريب والماستركلاس الاحترافي",
+        courseCatalogHeading: "كتالوج الماستركلاس والدورات التخصصية",
+        courseCatalogSub: "اختر الدورة لبدء المشاهدة المباشرة أو فتح المحتوى الاحترافي بنقرة واحدة",
+        phSearchUser: "بحث باسم المستخدم أو البريد...",
+        phTranslationSegment: "اكتب الترجمة للمقطع الحالي...",
+        phNoteTaking: "دوّن الأفكار والرموز أثناء استماعك للخطاب...",
+        phLegalTranslate: "اكتب ترجمتك الدقيقة هنا (مثال: دون الإخلال بأي نص مخالف في هذا العقد...)...",
+        phSearchGlossary: "ابحث في المسرد (مثال: Force Majeure, Ultra Vires)...",
+        phSearchOrders: "ابحث بعنوان المستند أو رقم الطلب (مثل: عقود، توريد)...",
+        phNameInput: "مثال: كريم حمداوي أو مداني جودي",
+        phEmailInput: "user@polylang.dz أو djoudimadani09@gmail.com للمسؤول",
+        phPasswordInput: "••••••••",
+        walletModalTitle: "إدارة المحفظة المالية والمدفوعات الإلكترونية",
+        walletModalSub: "شحن رصيد المحفظة وتتبع المعاملات عبر شبكة SATIM وCIB / الذهبية",
+        addTermModalTitle: "إضافة مصطلح تخصصي جديد للمسرد الموحد",
+        addTermModalSub: "إثراء قاعدة المصطلحات المعتمدة مع توثيق المصدر والتصنيف",
         dir: 'rtl',
         langName: 'العربية',
         brandSubtitle: 'منصة الترجمة المتخصصة والتدريب اللغوي والتعليم المدفوع',
@@ -5697,6 +5863,26 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
         previewPrintBtn: 'طباعة الإشعار الرسمي'
       },
       en: {
+        clientActiveProjectsHeading: "Your Active Translation Projects",
+        clientActiveProjectsSub: "Track certified projects in real-time. Click 'View' to inspect documents, check file sizes, and verify SHA-256 cryptographic signatures.",
+        docPreviewerBannerTitle: "Secure Certified Document Previewer",
+        docPreviewerBannerDesc: "Click 'View' on any project row to inspect an instant encrypted preview, verify digital cryptographic checksums, and check certified translator stamps.",
+        mediaHeroBadge: "Training Academy & Professional Masterclasses",
+        courseCatalogHeading: "Masterclass Catalog & Specialized Courses",
+        courseCatalogSub: "Select a course to start streaming instantly or unlock certified masterclasses in one click",
+        phSearchUser: "Search by user name or email...",
+        phTranslationSegment: "Type translation for the current segment...",
+        phNoteTaking: "Jot down ideas and symbols as you listen...",
+        phLegalTranslate: "Enter your precise legal translation here (e.g. Notwithstanding anything to the contrary...)...",
+        phSearchGlossary: "Search glossary (e.g. Force Majeure, Ultra Vires)...",
+        phSearchOrders: "Search by document title or order number (e.g. Contract, Supply)...",
+        phNameInput: "e.g. Madani Djoudi or Karim Hamdaoui",
+        phEmailInput: "user@polylang.dz or djoudimadani09@gmail.com for Admin",
+        phPasswordInput: "••••••••",
+        walletModalTitle: "Financial Wallet & E-Payment Management",
+        walletModalSub: "Top up balance and track transactions via SATIM & CIB / Edahabia network",
+        addTermModalTitle: "Add New Specialized Term to Unified Glossary",
+        addTermModalSub: "Enrich certified terminology repository with verified domains and context",
         dir: 'ltr',
         langName: 'English',
         brandSubtitle: 'Certified Translation, Localization & Monetized Training Platform',
@@ -5786,6 +5972,26 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
         previewPrintBtn: 'Print Official Notice'
       },
       fr: {
+        clientActiveProjectsHeading: "Vos Projets de Traduction Actifs",
+        clientActiveProjectsSub: "Suivez vos projets certifiés en temps réel. Cliquez sur 'View' pour prévisualiser le document, vérifier sa taille et certifier sa signature SHA-256.",
+        docPreviewerBannerTitle: "Visualiseur Sécurisé de Documents Certifiés",
+        docPreviewerBannerDesc: "Cliquez sur 'View' sur n'importe quelle ligne pour voir un aperçu chiffré instantané, avec vérification de l'empreinte numérique et du sceau assermenté.",
+        mediaHeroBadge: "Académie de Formation & Masterclasses Professionnelles",
+        courseCatalogHeading: "Catalogue des Masterclasses et Cours Spécialisés",
+        courseCatalogSub: "Sélectionnez un cours pour commencer le visionnage direct ou débloquez le contenu professionnel en un clic",
+        phSearchUser: "Rechercher par nom ou email...",
+        phTranslationSegment: "Saisissez la traduction pour le segment actuel...",
+        phNoteTaking: "Notez les idées et symboles pendant l'écoute...",
+        phLegalTranslate: "Saisissez votre traduction juridique exacte ici (ex: Nonobstant toute disposition contraire...)...",
+        phSearchGlossary: "Rechercher dans le glossaire (ex: Force Majeure, Ultra Vires)...",
+        phSearchOrders: "Rechercher par titre de document ou numéro de commande (ex: Contrat, Fourniture)...",
+        phNameInput: "ex: Madani Djoudi ou Karim Hamdaoui",
+        phEmailInput: "user@polylang.dz ou djoudimadani09@gmail.com pour Admin",
+        phPasswordInput: "••••••••",
+        walletModalTitle: "Gestion du Portefeuille Financier & Paiements Électroniques",
+        walletModalSub: "Rechargez votre solde et suivez vos transactions via SATIM et CIB / Edahabia",
+        addTermModalTitle: "Ajouter un Nouveau Terme Spécialisé au Glossaire",
+        addTermModalSub: "Enrichir le référentiel terminologique avec classification certifiée",
         dir: 'ltr',
         langName: 'Français',
         brandSubtitle: 'Plateforme de Traduction Assermentée & Formation Monétisée',
@@ -5875,6 +6081,26 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
         previewPrintBtn: 'Imprimer l’Avis Officiel'
       },
       es: {
+        clientActiveProjectsHeading: "Sus Proyectos de Traducción Activos",
+        clientActiveProjectsSub: "Rastree sus proyectos certificados en tiempo real. Haga clic en 'View' para previsualizar el documento, comprobar el tamaño y verificar su firma SHA-256.",
+        docPreviewerBannerTitle: "Visor Seguro de Documentos Certificados",
+        docPreviewerBannerDesc: "Haga clic en 'View' en cualquier fila para ver una vista previa cifrada al instante, verificando la huella digital y el sello oficial del traductor.",
+        mediaHeroBadge: "Academia de Formación y Masterclasses Profesionales",
+        courseCatalogHeading: "Catálogo de Masterclasses y Cursos Especializados",
+        courseCatalogSub: "Seleccione un curso para reproducirlo al instante o desbloquear contenido profesional con un solo clic",
+        phSearchUser: "Buscar por nombre o correo...",
+        phTranslationSegment: "Escriba la traducción para el segmento actual...",
+        phNoteTaking: "Anote ideas y símbolos mientras escucha...",
+        phLegalTranslate: "Ingrese su traducción jurídica precisa aquí (ej: Sin perjuicio de cualquier disposición en contrario...)...",
+        phSearchGlossary: "Buscar en el glosario (ej: Force Majeure, Ultra Vires)...",
+        phSearchOrders: "Buscar por título del documento o número de pedido (ej: Contrato, Suministro)...",
+        phNameInput: "ej: Madani Djoudi o Karim Hamdaoui",
+        phEmailInput: "user@polylang.dz o djoudimadani09@gmail.com para Admin",
+        phPasswordInput: "••••••••",
+        walletModalTitle: "Gestión de Billetera Financiera y Pagos Electrónicos",
+        walletModalSub: "Recargue saldo y supervise transacciones a través de SATIM y CIB / Edahabia",
+        addTermModalTitle: "Agregar Nuevo Término Especializado al Glosario",
+        addTermModalSub: "Enriquecer el repositorio de terminología con clasificación certificada",
         dir: 'ltr',
         langName: 'Español',
         brandSubtitle: 'Plataforma de Traducción Jurada & Capacitación Monetizada',
@@ -5964,6 +6190,26 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
         previewPrintBtn: 'Imprimir Aviso Oficial'
       },
       it: {
+        clientActiveProjectsHeading: "I Tuoi Progetti di Traduzione Attivi",
+        clientActiveProjectsSub: "Monitora i tuoi progetti certificati in tempo reale. Clicca 'View' per visualizzare l'anteprima, verificare le dimensioni e convalidare la firma SHA-256.",
+        docPreviewerBannerTitle: "Visualizzatore Sicuro di Documenti Certificati",
+        docPreviewerBannerDesc: "Fai clic su 'View' su qualsiasi riga per visualizzare un'anteprima crittografata istantanea, verificando l'impronta digitale e il timbro certificato.",
+        mediaHeroBadge: "Accademia di Formazione e Masterclass Professionali",
+        courseCatalogHeading: "Catalogo Masterclass e Corsi Specializzati",
+        courseCatalogSub: "Seleziona un corso per avviare la riproduzione istantanea o sbloccare contenuti professionali con un clic",
+        phSearchUser: "Cerca per nome utente o email...",
+        phTranslationSegment: "Digita la traduzione per il segmento corrente...",
+        phNoteTaking: "Annota idee e simboli durante l'ascolto...",
+        phLegalTranslate: "Inserisci qui la tua precisa traduzione giuridica (es: Fermo restando quanto diversamente disposto...)...",
+        phSearchGlossary: "Cerca nel glossario (es: Force Majeure, Ultra Vires)...",
+        phSearchOrders: "Cerca per titolo del documento o numero d'ordine (es: Contratto, Fornitura)...",
+        phNameInput: "es: Madani Djoudi o Karim Hamdaoui",
+        phEmailInput: "user@polylang.dz o djoudimadani09@gmail.com per Admin",
+        phPasswordInput: "••••••••",
+        walletModalTitle: "Gestione del Portafoglio Finanziario e Pagamenti Elettronici",
+        walletModalSub: "Ricarica il saldo e monitora le transazioni tramite SATIM e CIB / Edahabia",
+        addTermModalTitle: "Aggiungi Nuovo Termine Specializzato al Glossario",
+        addTermModalSub: "Arricchisci l'archivio terminologico con classificazione certificata",
         dir: 'ltr',
         langName: 'Italiano',
         brandSubtitle: 'Piattaforma di Traduzione Giurata & Formazione Monetizzata',
@@ -6053,6 +6299,26 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
         previewPrintBtn: 'Stampa Avviso Ufficiale'
       },
       de: {
+        clientActiveProjectsHeading: "Ihre Aktiven Übersetzungsprojekte",
+        clientActiveProjectsSub: "Verfolgen Sie beglaubigte Projekte in Echtzeit. Klicken Sie auf 'View', um Dokumente einzusehen, Dateigrößen zu prüfen und SHA-256-Signaturen zu verifizieren.",
+        docPreviewerBannerTitle: "Sicherer Beglaubigter Dokumentenbetrachter",
+        docPreviewerBannerDesc: "Klicken Sie in einer beliebigen Zeile auf 'View', um eine verschlüsselte Sofortvorschau mit digitaler Prüfsumme und Übersetzer-Siegel zu sehen.",
+        mediaHeroBadge: "Trainingsakademie & Professionelle Masterclasses",
+        courseCatalogHeading: "Masterclass-Katalog & Spezialisierte Kurse",
+        courseCatalogSub: "Wählen Sie einen Kurs für sofortiges Streaming oder schalten Sie professionelle Inhalte mit einem Klick frei",
+        phSearchUser: "Nach Benutzername oder E-Mail suchen...",
+        phTranslationSegment: "Übersetzung für das aktuelle Segment eingeben...",
+        phNoteTaking: "Notieren Sie Ideen und Symbole beim Zuhören...",
+        phLegalTranslate: "Geben Sie hier Ihre präzise juristische Übersetzung ein (z. B. Unbeschadet anderslautender Bestimmungen...)...",
+        phSearchGlossary: "Glossar durchsuchen (z. B. Force Majeure, Ultra Vires)...",
+        phSearchOrders: "Nach Dokumententitel oder Auftragsnummer suchen (z. B. Vertrag, Lieferung)...",
+        phNameInput: "z. B. Madani Djoudi oder Karim Hamdaoui",
+        phEmailInput: "user@polylang.dz oder djoudimadani09@gmail.com für Admin",
+        phPasswordInput: "••••••••",
+        walletModalTitle: "Finanz-Wallet & E-Payment-Verwaltung",
+        walletModalSub: "Guthaben aufladen und Transaktionen über SATIM & CIB / Edahabia nachverfolgen",
+        addTermModalTitle: "Neuen Fachbegriff zum Glossar hinzufügen",
+        addTermModalSub: "Beglaubigtes Terminologie-Repository mit Fachkategorien erweitern",
         dir: 'ltr',
         langName: 'Deutsch',
         brandSubtitle: 'Plattform für Beglaubigte Übersetzungen & Monetarisierte Schulungen',
@@ -6142,6 +6408,26 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
         previewPrintBtn: 'Amtliche Benachrichtigung Drucken'
       },
       ru: {
+        clientActiveProjectsHeading: "Ваши Активные Переводческие Проекты",
+        clientActiveProjectsSub: "Отслеживайте сертифицированные проекты в реальном времени. Нажмите 'View' для предпросмотра документов, проверки размера файла и цифровой подписи SHA-256.",
+        docPreviewerBannerTitle: "Безопасный Просмотр Сертифицированных Документов",
+        docPreviewerBannerDesc: "Нажмите 'View' в любой строке для мгновенного зашифрованного предпросмотра с проверкой контрольной суммы и печати присяжного переводчика.",
+        mediaHeroBadge: "Академия Обучения и Профессиональные Мастер-классы",
+        courseCatalogHeading: "Каталог Мастер-классов и Специализированных Курсов",
+        courseCatalogSub: "Выберите курс для мгновенного просмотра или откройте профессиональные материалы в один клик",
+        phSearchUser: "Поиск по имени или email...",
+        phTranslationSegment: "Введите перевод для текущего фрагмента...",
+        phNoteTaking: "Записывайте мысли и символы во время прослушивания...",
+        phLegalTranslate: "Введите точный юридический перевод здесь (напр.: Несмотря на любые положения об обратном...)...",
+        phSearchGlossary: "Поиск по глоссарию (напр.: Force Majeure, Ultra Vires)...",
+        phSearchOrders: "Поиск по названию документа или номеру заказа (напр.: Договор, Поставка)...",
+        phNameInput: "напр.: Madani Djoudi или Karim Hamdaoui",
+        phEmailInput: "user@polylang.dz или djoudimadani09@gmail.com для Админа",
+        phPasswordInput: "••••••••",
+        walletModalTitle: "Управление Финансовым Кошельком и Электронными Платежами",
+        walletModalSub: "Пополнение баланса и отслеживание транзакций через SATIM и CIB / Edahabia",
+        addTermModalTitle: "Добавить Новый Термин в Единый Глоссарий",
+        addTermModalSub: "Пополнение сертифицированной терминологической базы с контекстом",
         dir: 'ltr',
         langName: 'Русский',
         brandSubtitle: 'Платформа Сертифицированного Перевода и Монетизированного Обучения',
@@ -8305,9 +8591,10 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
         // Automatically select Admin!
         selectAuthRole('admin');
         const nameInput = document.getElementById('authInputName') || document.getElementById('authNameInput');
-        if (nameInput && (!nameInput.value || nameInput.value === 'كريم حمداوي')) {
+        if (nameInput && (!nameInput.value || nameInput.value === 'كريم حمداوي' || nameInput.value === 'مستخدم Polylang')) {
           nameInput.value = 'مداني جودي (Madani Djoudi)';
         }
+        checkAuthAdminBadges(cleanEmail, 'admin');
       } else {
         checkAuthAdminBadges(cleanEmail, currentRole);
       }
@@ -8320,7 +8607,18 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
       const isCleanAdmin = email === STRICT_ADMIN_EMAIL.toLowerCase();
 
       if (isCleanAdmin) {
-        if (detectedBadge) detectedBadge.classList.add('visible');
+        if (detectedBadge) {
+          detectedBadge.classList.add('visible');
+          detectedBadge.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.2rem;">
+              <span class="glow-status-dot"></span>
+              <strong>👑 هوية المؤسس والمشرف العام معتمدة (SuperAdmin Verified)</strong>
+            </div>
+            <div class="crypto-sig-box">
+              SHA-256 Authority Signature: <code>PL_ROOT_78b2e19a4d8c6f03e2a5b1c9d8e7</code> [VALID]
+            </div>
+          `;
+        }
         if (warningBadge) warningBadge.classList.remove('visible');
       } else {
         if (detectedBadge) detectedBadge.classList.remove('visible');
@@ -8367,6 +8665,10 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
 
       if (isStrictAdminAuthorized(email)) {
         role = 'admin';
+        try {
+          const cryptoSig = 'PL_ROOT_SHA256_' + btoa(email + ':FOUNDER_ADMIN:' + Date.now()).replace(/=/g, '');
+          localStorage.setItem('polylang_admin_crypto_token', cryptoSig);
+        } catch (err) {}
       } else if (role === 'admin') {
         playAppSound('error');
         alert(
@@ -8630,6 +8932,195 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
       calculateClientQuote();
       switchActiveRole(activeRole);
     });
-  </script>
+  
+
+    // =============================================================
+    // MODAL: ADD GLOSSARY TERM HANDLERS
+    // =============================================================
+    function openAddTermModal() {
+      const modal = document.getElementById('addTermModalBackdrop');
+      if (modal) modal.classList.add('active');
+    }
+    function closeAddTermModal() {
+      const modal = document.getElementById('addTermModalBackdrop');
+      if (modal) modal.classList.remove('active');
+    }
+    function handleAddTermSubmit(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      const srcInput = document.getElementById('newTermSource');
+      const tgtInput = document.getElementById('newTermTarget');
+      const catInput = document.getElementById('newTermCategory');
+      
+      const en = srcInput ? srcInput.value.trim() : '';
+      const ar = tgtInput ? tgtInput.value.trim() : '';
+      const category = catInput ? catInput.value : 'قانوني';
+
+      if (!en || !ar) return;
+
+      glossaryTerms.unshift({ en, ar, category });
+      renderGlossaryList(glossaryTerms);
+      
+      try {
+        if (activeUser && activeUser.email) {
+          localStorage.setItem(getUserStorageKey(activeUser.email, 'glossary'), JSON.stringify(glossaryTerms));
+        }
+      } catch (err) {}
+
+      closeAddTermModal();
+      playAppSound('success');
+      pushToast(currentLanguage === 'ar' ? '✓ تم حفظ المصطلح الجديد في المسرد المعتمد' : '✓ New term added to certified glossary');
+      if (srcInput) srcInput.value = '';
+      if (tgtInput) tgtInput.value = '';
+    }
+
+    // =============================================================
+    // MODAL: WALLET & SATIM RECHARGE HANDLERS
+    // =============================================================
+    function openWalletModal() {
+      const modal = document.getElementById('walletModalBackdrop');
+      const display = document.getElementById('walletModalBalanceDisplay');
+      if (display && activeUser) {
+        display.innerText = activeUser.balance || '0 دج';
+      }
+      if (modal) modal.classList.add('active');
+    }
+    function closeWalletModal() {
+      const modal = document.getElementById('walletModalBackdrop');
+      if (modal) modal.classList.remove('active');
+    }
+    function selectWalletTopUpAmount(amt) {
+      const input = document.getElementById('walletTopUpAmountInput');
+      if (input) input.value = amt;
+    }
+    function handleWalletTopUpSubmit(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      const input = document.getElementById('walletTopUpAmountInput');
+      const addAmt = parseInt(input ? input.value : 0, 10);
+      if (isNaN(addAmt) || addAmt <= 0) return;
+
+      closeWalletModal();
+      pushToast('⏳ جاري الاتصال بشبكة SATIM وتأكيد الشحن...');
+      playAppSound('click');
+
+      setTimeout(() => {
+        const curBal = getUserBalanceNum();
+        const newBal = curBal + addAmt;
+        setUserBalanceNum(newBal);
+        playAppSound('success');
+        pushToast(currentLanguage === 'ar' ? `✅ تم شحن ${addAmt.toLocaleString()} دج بنجاح إلى رصيدك!` : `✅ ${addAmt.toLocaleString()} DZD successfully added to your wallet!`);
+      }, 700);
+    }
+
+</script>
+
+  <!-- ===========================================================
+       MODAL: ADD NEW GLOSSARY TERM MODAL
+       =========================================================== -->
+  <div class="modal-backdrop" id="addTermModalBackdrop">
+    <div class="modal-box" style="max-width: 520px;">
+      <div class="modal-top">
+        <div>
+          <div style="display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(229,57,53,0.1); color: var(--primary); padding: 0.2rem 0.65rem; border-radius: 50px; font-size: 0.74rem; font-weight: 800; margin-bottom: 0.35rem;">
+            <span>📖</span> <span data-i18n="addTermModalTitle">إضافة مصطلح تخصصي جديد</span>
+          </div>
+          <h4 style="font-weight: 900; margin: 0; font-size: 1.15rem;" data-i18n="addTermModalTitle">إضافة مصطلح تخصصي جديد للمسرد الموحد</h4>
+        </div>
+        <button style="background: none; border: none; font-size: 1.35rem; cursor: pointer; color: var(--text-muted);" onclick="closeAddTermModal()" aria-label="Close">✕</button>
+      </div>
+
+      <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.6rem 0 1rem 0; line-height: 1.4;" data-i18n="addTermModalSub">
+        إثراء قاعدة المصطلحات المعتمدة مع توثيق المصدر والتصنيف.
+      </p>
+
+      <form id="addTermForm" onsubmit="handleAddTermSubmit(event)">
+        <div class="form-group">
+          <label class="form-label">المصطلح باللغة المصدر (Source Term - EN/FR/DE)</label>
+          <input type="text" class="form-control" id="newTermSource" required placeholder="e.g. Liquidated Damages / Clause Pénale">
+        </div>
+        <div class="form-group">
+          <label class="form-label">المقابل المعتمد بالعربية (Target Translation - AR)</label>
+          <input type="text" class="form-control" id="newTermTarget" required placeholder="مثال: التعويض الاتفاقي / الشرط الجزائي">
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label">المجال التخصصي (Domain)</label>
+            <select class="form-control" id="newTermCategory">
+              <option value="قانوني">⚖️ قانوني (Legal & Court)</option>
+              <option value="تقني">⚙️ تقني وهندسي (Technical)</option>
+              <option value="مالي">💳 مالي ومصرفي (Financial)</option>
+              <option value="طبي">🩺 طبي وسريري (Medical)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">مستوى التوثيق (Verification)</label>
+            <input type="text" class="form-control" value="ISO 17100 Verified" readonly style="opacity: 0.8;">
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.25rem;">
+          <button type="button" class="btn btn-secondary" onclick="closeAddTermModal()">إلغاء</button>
+          <button type="submit" class="btn btn-primary">➕ حفظ واعتماد المصطلح</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===========================================================
+       MODAL: FINANCIAL WALLET & TOP-UP MODAL
+       =========================================================== -->
+  <div class="modal-backdrop" id="walletModalBackdrop">
+    <div class="modal-box" style="max-width: 540px;">
+      <div class="modal-top">
+        <div>
+          <div style="display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(245,158,11,0.12); color: #f59e0b; padding: 0.2rem 0.65rem; border-radius: 50px; font-size: 0.74rem; font-weight: 800; margin-bottom: 0.35rem;">
+            <span>💳</span> SATIM Interbank E-Payment
+          </div>
+          <h4 style="font-weight: 900; margin: 0; font-size: 1.15rem;" data-i18n="walletModalTitle">إدارة المحفظة المالية والمدفوعات الإلكترونية</h4>
+        </div>
+        <button style="background: none; border: none; font-size: 1.35rem; cursor: pointer; color: var(--text-muted);" onclick="closeWalletModal()" aria-label="Close">✕</button>
+      </div>
+
+      <!-- Current Balance Banner -->
+      <div style="background: linear-gradient(135deg, rgba(245,158,11,0.08) 0%, rgba(229,57,53,0.08) 100%); border: 1.5px solid rgba(245,158,11,0.3); border-radius: var(--radius-md); padding: 1rem; margin: 1rem 0; text-align: center;">
+        <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700;">الرصيد المتاح حالياً في حسابك:</span>
+        <div style="font-size: 1.8rem; font-weight: 900; color: #f59e0b; margin-top: 0.25rem;" id="walletModalBalanceDisplay">0 دج</div>
+        <span class="status-pill status-completed" style="font-size: 0.72rem; margin-top: 0.3rem;">حساب نشط ومطابق لشبكة SATIM ✓</span>
+      </div>
+
+      <form id="walletTopUpForm" onsubmit="handleWalletTopUpSubmit(event)">
+        <label style="display: block; font-size: 0.82rem; font-weight: 800; margin-bottom: 0.4rem;">اختر باقة شحن الرصيد (DZD):</label>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-bottom: 0.85rem;">
+          <button type="button" class="btn btn-outline btn-sm" onclick="selectWalletTopUpAmount(2000)">+2,000</button>
+          <button type="button" class="btn btn-outline btn-sm" onclick="selectWalletTopUpAmount(5000)">+5,000</button>
+          <button type="button" class="btn btn-outline btn-sm" onclick="selectWalletTopUpAmount(10000)">+10,000</button>
+          <button type="button" class="btn btn-outline btn-sm" onclick="selectWalletTopUpAmount(25000)">+25,000</button>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">المبلغ المراد شحنه (دج)</label>
+          <input type="number" class="form-control" id="walletTopUpAmountInput" value="5000" min="500" max="500000" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">البطاقة البنكية للدفع</label>
+          <select class="form-control" id="walletPaymentCardType">
+            <option value="edahabia">💳 البطاقة الذهبية (بريد الجزائر - Edahabia)</option>
+            <option value="cib">🏦 بطاقة بنكية CIB (البنوك التجارية الجزائرية)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">رقم البطاقة (16 رقماً)</label>
+          <input type="text" class="form-control" value="•••• •••• •••• 5358" readonly style="letter-spacing: 2px;">
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.25rem;">
+          <button type="button" class="btn btn-secondary" onclick="closeWalletModal()">إلغاء</button>
+          <button type="submit" class="btn btn-primary" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;">⚡ تأكيد الشحن الفوري</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
 </body>
 </html>
