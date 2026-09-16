@@ -3377,206 +3377,195 @@
     <!-- ===========================================================
          ROLE 5: TRAINING & MEDIA CENTER (مركز التدريب والوسائط)
          =========================================================== -->
-    <div id="roleView-media" class="role-view-section" style="display: none;">
+        <div id="roleView-media" class="role-view-section" style="display: none;">
       <!-- Hero Banner -->
       <div class="media-center-hero">
         <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
           <div>
-            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem;">
-              <span style="font-size: 1.5rem;">🎬</span>
-              <h2 style="font-size: 1.45rem; font-weight: 900; color: var(--primary-dark);" data-i18n="mediaHeroTitle">
-                مركز التدريب والوسائط المتعددة (Training & Media Center)
-              </h2>
-              <span class="cert-stamp-badge" style="background: rgba(229, 57, 53, 0.1); color: var(--primary); border-color: var(--primary); font-size: 0.75rem;">
-                ISO 17100:2015 Accredited
-              </span>
+            <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(229,57,53,0.12); color: var(--primary); padding: 0.25rem 0.85rem; border-radius: 50px; font-size: 0.8rem; font-weight: 800; margin-bottom: 0.6rem;">
+              <span style="font-size: 1rem;">🎓</span> <span data-i18n="mediaHeroBadge">أكاديمية التدريب والماستركلاس الاحترافي</span>
             </div>
-            <p style="font-size: 0.88rem; color: var(--text-muted); max-width: 820px; line-height: 1.6;" data-i18n="mediaHeroDesc">
-              أكاديمية تدريبية متقدمة للمترجمين المحلفين وطلبة الترجمة الفورية، تقدم محاضرات فيديو معتمدة لكبائن الأمم المتحدة، التوطين السمعي البصري (AVT)، وتدريبات صوتية تفاعلية لتقنية التظليل اللغوي (Speech Shadowing) مع إعادة ضبط التركيز الذهني.
+            <h2 style="font-weight: 900; margin-bottom: 0.4rem; font-size: 1.5rem;" data-i18n="mediaHeroTitle">أكاديمية التدريب والماستركلاس (Training & Masterclasses Hub)</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; max-width: 780px; line-height: 1.6;" data-i18n="mediaHeroDesc">
+              أكاديمية تدريبية متقدمة للمترجمين المحلفين وطلبة الترجمة الفورية، تقدم محاضرات مجانية وتدريبات ماستركلاس احترافية مدفوعة لكبائن الأمم المتحدة، التوطين السمعي البصري (AVT)، ومختبر التظليل الصوتي.
             </p>
           </div>
-          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-            <button class="btn btn-primary btn-sm" onclick="openBoothSimulationModal()">
-              🎙️ <span data-i18n="btnOpenSimBooth">فتح كابينة المحاكاة الفورية</span>
+          <div style="display: flex; gap: 0.65rem; flex-wrap: wrap;">
+            <button class="btn btn-primary" onclick="openSimBoothModal()" style="font-weight: 800;" data-i18n="btnOpenSimBooth">
+              🎙️ فتح كابينة المحاكاة الفورية
             </button>
-            <button class="btn btn-outline btn-sm" onclick="pushToast('✓ تم تحديث مكتبة الوسائط من خادم Render بنجاح')">
-              🔄 <span data-i18n="btnSyncMedia">تحديث المحتوى</span>
+            <button class="btn btn-secondary" onclick="renderVideoPlaylistAndCatalog(); pushToast('🔄 تم تحديث قائمة المحاضرات بنجاح');" data-i18n="btnSyncMedia">
+              🔄 تحديث المحتوى
             </button>
-          </div>
-        </div>
-
-        <!-- Filter Category Tabs -->
-        <div class="media-category-tabs" style="margin-top: 1.25rem;">
-          <button class="media-tab-btn active" onclick="filterMediaCategory('all', this)" data-i18n="tabAllMedia">🎬 جميع الوسائط (All Media)</button>
-          <button class="media-tab-btn" onclick="filterMediaCategory('video', this)" data-i18n="tabVideoMasterclasses">📺 ماستركلاس الفيديو (Video Masterclasses)</button>
-          <button class="media-tab-btn" onclick="filterMediaCategory('audio', this)" data-i18n="tabAudioShadowing">🎧 استوديو التظليل الصوتي (Audio Shadowing)</button>
-          <button class="media-tab-btn" onclick="filterMediaCategory('cognitive', this)" data-i18n="tabCognitiveReset">🧠 التحمل الذهني والتركيز (Cognitive Reset)</button>
-        </div>
-      </div>
-
-      <!-- Video Masterclass Hub Grid -->
-      <div id="mediaCategoryVideos">
-        <div class="grid-3" style="margin-bottom: 1.5rem;">
-          <div class="card" style="grid-column: span 2;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem; flex-wrap: wrap; gap: 0.5rem;">
-              <div>
-                <span class="history-pill-tag" id="activeVideoTag" style="background: rgba(37, 99, 235, 0.1); color: #1d4ed8; border-color: #3b82f6;">🎙️ كابينة الأمم المتحدة</span>
-                <h3 style="font-size: 1.15rem; font-weight: 900; margin-top: 0.25rem;" id="activeVideoTitle">
-                  محاضرة كابينة الترجمة الفورية: إدارة الفارق الزمني (Décalage) وضبط الضغط
-                </h3>
-              </div>
-              <span style="font-size: 0.8rem; color: var(--text-muted);" id="activeVideoDuration">⏱️ المدة: 14:20 دقيقة</span>
-            </div>
-
-            <!-- Responsive 16:9 Video Embed -->
-            <div class="video-main-wrapper">
-              <iframe id="mainVideoPlayerIframe" src="https://www.youtube-nocookie.com/embed/uT_hFzV1s54?enablejsapi=1" title="Polylang Masterclass Player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-
-            <!-- Video Lesson Takeaways -->
-            <div style="margin-top: 1rem; background: var(--bg-surface-secondary); border: 1px solid var(--border-main); border-radius: var(--radius-md); padding: 1rem;">
-              <h4 style="font-size: 0.92rem; font-weight: 800; margin-bottom: 0.4rem; color: var(--primary-dark);" data-i18n="videoTakeawaysHeading">
-                📌 أهم محاور ومخرجات الدرس التدريبي (Key Learning Takeaways):
-              </h4>
-              <ul style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; padding-inline-start: 1.2rem;" id="activeVideoTakeawaysList">
-                <li>التحكم في الفارق الزمني (Décalage / Ear-Voice Span) بمعدل 2 إلى 4 ثوانٍ دون فقدان ترابط السياق.</li>
-                <li>تقسيم الجمل المركبة واستخدام استراتيجية التجزئة الدلالية (Semantic Chunking) تحت ضغط المؤتمرات.</li>
-                <li>بروتوكول التناوب الثنائي في الكابينة كل 30 دقيقة وفق معايير منظمة AIIC العالمية.</li>
-              </ul>
-              <div style="display: flex; gap: 0.5rem; margin-top: 0.85rem; flex-wrap: wrap;">
-                <button class="btn btn-primary btn-sm" onclick="openBoothSimulationModal()">
-                  🎙️ <span data-i18n="btnPracticeLive">بدء تدريب فوري في الكابينة</span>
-                </button>
-                <button class="btn btn-outline btn-sm" onclick="pushToast('✓ تم تنزيل ملخص الدرس وصيغة SRT للمصطلحات')">
-                  📥 <span data-i18n="btnDownloadNotes">تنزيل ملخص الدرس والمصطلحات (PDF)</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Video Playlist Selector -->
-          <div class="card">
-            <h3 style="font-weight: 900; font-size: 1.05rem; margin-bottom: 0.85rem;" data-i18n="videoPlaylistTitle">
-              قائمة المحاضرات التدريبية (Masterclasses)
-            </h3>
-            <div id="videoPlaylistContainer">
-              <div class="video-playlist-item active" onclick="switchMediaVideo(0)">
-                <div class="video-thumb-icon">🎙️</div>
-                <div>
-                  <strong style="font-size: 0.84rem; display: block; line-height: 1.3;">كابينة الترجمة الفورية بالأمم المتحدة</strong>
-                  <span style="font-size: 0.74rem; color: var(--text-muted);">14:20 دقيقة • تقنيات Décalage</span>
-                </div>
-              </div>
-              <div class="video-playlist-item" onclick="switchMediaVideo(1)">
-                <div class="video-thumb-icon" style="background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);">🎬</div>
-                <div>
-                  <strong style="font-size: 0.84rem; display: block; line-height: 1.3;">التوطين السمعي البصري وهندسة SRT</strong>
-                  <span style="font-size: 0.74rem; color: var(--text-muted);">18:45 دقيقة • معايير 17 CPS</span>
-                </div>
-              </div>
-              <div class="video-playlist-item" onclick="switchMediaVideo(2)">
-                <div class="video-thumb-icon" style="background: linear-gradient(135deg, #059669 0%, #065f46 100%);">⚖️</div>
-                <div>
-                  <strong style="font-size: 0.84rem; display: block; line-height: 1.3;">الترجمة القضائية والمحلفة (ISO 17100)</strong>
-                  <span style="font-size: 0.74rem; color: var(--text-muted);">22:10 دقيقة • المصادقة والـ Apostille</span>
-                </div>
-              </div>
-              <div class="video-playlist-item" onclick="switchMediaVideo(3)">
-                <div class="video-thumb-icon" style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%);">📝</div>
-                <div>
-                  <strong style="font-size: 0.84rem; display: block; line-height: 1.3;">تدوين روزان للترجمة التتبعية (Rozan)</strong>
-                  <span style="font-size: 0.74rem; color: var(--text-muted);">16:30 دقيقة • الترميز العمودي</span>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
 
-      <!-- Interactive Audio Hub -->
+      <!-- Category Filter Tabs -->
+      <div class="media-category-tabs">
+        <button class="media-tab-btn active" onclick="filterMediaCategory('all', this)" data-i18n="tabAllMedia">🎬 جميع المحاضرات (All)</button>
+        <button class="media-tab-btn" onclick="filterMediaCategory('free', this)" data-i18n="tabFreeTutorials">🆓 دروس مجانية (Free)</button>
+        <button class="media-tab-btn" onclick="filterMediaCategory('premium', this)" data-i18n="tabVideoMasterclasses">⭐ ماستركلاس مدفوع (Premium)</button>
+        <button class="media-tab-btn" onclick="filterMediaCategory('unlocked', this)" data-i18n="tabMyUnlocked">🔓 دوراتي المفتوحة (My Unlocked)</button>
+        <button class="media-tab-btn" onclick="filterMediaCategory('audio', this)" data-i18n="tabAudioShadowing">🎧 تمارين التظليل الصوتي (Audio)</button>
+        <button class="media-tab-btn" onclick="filterMediaCategory('cognitive', this)" data-i18n="tabCognitiveReset">🧠 التحمل الذهني (432Hz)</button>
+      </div>
+
+      <!-- VIDEO SECTION -->
+      <div id="mediaCategoryVideos" style="margin-bottom: 2rem;">
+        <div style="display: grid; grid-template-columns: 1fr 340px; gap: 1.5rem; align-items: start;">
+          <!-- Primary Video Theater -->
+          <div>
+            <!-- Unlocked Banner -->
+            <div id="videoUnlockedBanner" class="video-unlocked-banner">
+              <span id="videoUnlockedBannerText">🔓 ماستركلاس احترافي مفتوح ومرخص لك بالكامل ✓</span>
+              <span style="font-size: 0.75rem; background: rgba(16,185,129,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-weight: 800;">ISO 17100 Verified</span>
+            </div>
+
+            <!-- 16:9 Player with Embedded Iframe & Frosted Paywall Overlay -->
+            <div class="video-main-wrapper" id="mainVideoPlayerWrapper">
+              <iframe id="mainVideoPlayerIframe" src="https://www.youtube-nocookie.com/embed/uT_hFzV1s54?enablejsapi=1" title="Training Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              
+              <!-- Paywall Overlay -->
+              <div id="videoPaywallOverlay" class="video-paywall-overlay hidden">
+                <div class="paywall-lock-icon">🔒</div>
+                <div class="paywall-price-badge" id="paywallPriceBadge">⭐ 3,500 دج • ماستركلاس احترافي</div>
+                <h3 style="font-weight: 900; margin-bottom: 0.4rem; font-size: 1.25rem; color: #ffffff;" id="paywallCourseTitle">ماستركلاس كابينة الأمم المتحدة المتقدم</h3>
+                <p style="color: #cbd5e1; font-size: 0.85rem; max-width: 480px; margin-bottom: 0.75rem; line-height: 1.5;" data-i18n="paywallSub">
+                  هذا المحتوى التدريبي مخصص للمترجمين المحترفين ويتطلب ترخيصاً رسمياً لفتح كامل المحاضرة والملحقات.
+                </p>
+                <div class="paywall-features-list">
+                  <span data-i18n="paywallFeature1">✓ تسجيل كامل بدقة فائقة 4K</span>
+                  <span data-i18n="paywallFeature2">✓ شهادة إتمام معتمدة ISO 17100</span>
+                  <span data-i18n="paywallFeature3">✓ مسرد المصطلحات وملفات SRT وPDF</span>
+                </div>
+                <div class="paywall-actions-row">
+                  <button class="btn btn-primary" id="btnUnlockWithWallet" onclick="unlockActiveVideoWithWallet()" style="font-weight: 800; padding: 0.65rem 1.1rem; font-size: 0.88rem;">
+                    💳 فتح فوراً من رصيد المحفظة
+                  </button>
+                  <button class="btn btn-secondary" id="btnPayWithEdahabia" onclick="payActiveVideoWithEdahabia()" style="background: rgba(255,255,255,0.12); color: #ffffff; border-color: rgba(255,255,255,0.3); font-weight: 800; padding: 0.65rem 1.1rem; font-size: 0.88rem;">
+                    🏦 الدفع بالبطاقة الذهبية / CIB
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Video Info & Takeaways -->
+            <div style="background: var(--bg-surface); border: 1.5px solid var(--border-main); border-radius: var(--radius-md); padding: 1.25rem; margin-top: 1rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
+                <div>
+                  <span id="activeVideoTag" class="status-pill status-completed" style="font-size: 0.76rem; font-weight: 800;">🎙️ كابينة الأمم المتحدة</span>
+                  <span id="activeVideoDuration" style="font-size: 0.8rem; color: var(--text-muted); margin-inline-start: 0.5rem;">⏱️ المدة: 14:20 دقيقة</span>
+                </div>
+                <div style="display: flex; gap: 0.5rem;">
+                  <button class="btn btn-sm btn-secondary" onclick="openSimBoothModal()" data-i18n="btnPracticeLive">🎙️ بدء تدريب فوري في الكابينة</button>
+                  <button class="btn btn-sm btn-secondary" onclick="downloadCurriculumNotesPdf()" data-i18n="btnDownloadNotes">📥 تنزيل مسرد المصطلحات (PDF)</button>
+                </div>
+              </div>
+              <h3 id="activeVideoTitle" style="font-weight: 900; font-size: 1.2rem; margin-bottom: 0.85rem;">
+                مبادئ الترجمة الفورية وكابينة المؤتمرات (Simultaneous Interpretation Foundations)
+              </h3>
+              
+              <div style="background: var(--bg-surface-secondary); border-radius: var(--radius-sm); padding: 1rem; border: 1px solid var(--border-main);">
+                <h5 style="font-weight: 800; font-size: 0.9rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.35rem;" data-i18n="videoTakeawaysHeading">
+                  <span>📌</span> أهم محاور ومخرجات الدرس التدريبي (Key Takeaways):
+                </h5>
+                <ul id="activeVideoTakeawaysList" style="padding-inline-start: 1.25rem; font-size: 0.84rem; line-height: 1.6; color: var(--text-muted); margin: 0;">
+                  <li>التحكم في الفارق الزمني (Décalage / Ear-Voice Span) بمعدل 2 إلى 4 ثوانٍ دون فقدان ترابط السياق.</li>
+                  <li>تقسيم الجمل المركبة واستخدام استراتيجية التجزئة الدلالية (Semantic Chunking) تحت ضغط المؤتمرات.</li>
+                  <li>بروتوكول التناوب الثنائي في الكابينة كل 30 دقيقة وفق معايير منظمة AIIC العالمية.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video Sidebar Playlist -->
+          <div style="background: var(--bg-surface); border: 1.5px solid var(--border-main); border-radius: var(--radius-md); padding: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem; padding-bottom: 0.65rem; border-bottom: 1.5px solid var(--border-main);">
+              <h4 style="font-weight: 900; font-size: 0.95rem; margin: 0;" data-i18n="videoPlaylistTitle">قائمة المحاضرات (Courses)</h4>
+              <span class="status-pill status-completed" id="videoPlaylistCountBadge" style="font-size: 0.72rem; font-weight: 800;">6 دورات</span>
+            </div>
+            <div id="mediaPlaylistContainer" style="max-height: 520px; overflow-y: auto; padding-right: 2px;">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Full Course Catalog Grid -->
+        <div style="margin-top: 2rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem;">
+            <div>
+              <h3 style="font-weight: 900; font-size: 1.15rem; margin-bottom: 0.2rem;" data-i18n="courseCatalogHeading">كتالوج الماستركلاس والدورات التخصصية</h3>
+              <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0;" data-i18n="courseCatalogSub">اختر الدورة لبدء المشاهدة المباشرة أو فتح المحتوى الاحترافي بنقرة واحدة</p>
+            </div>
+          </div>
+          <div class="courses-catalog-grid" id="coursesCatalogGrid">
+            <!-- Dynamically populated by renderVideoPlaylistAndCatalog() -->
+          </div>
+        </div>
+      </div>
+
+      <!-- AUDIO LAB SECTION -->
       <div id="mediaCategoryAudio">
-        <div style="margin-bottom: 1rem;">
-          <h3 style="font-size: 1.15rem; font-weight: 900; color: var(--primary-dark);" data-i18n="audioHubHeading">
-            🎧 مختبر التمارين الصوتية التفاعلية والتظليل السريع (Interactive Audio Hub)
-          </h3>
-          <p style="font-size: 0.82rem; color: var(--text-muted);" data-i18n="audioHubSub">
-            استمع وتدرّب مع تسجيلات صوتية عالية الدقة مصممة خصيصاً لاختبار سرعة الاستجابة اللفظية، مع إمكانية تسريع/إبطاء الصوت، وتظليل النص المتزامن.
+        <div style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.04) 0%, rgba(229, 57, 53, 0.04) 100%); border: 1.5px solid var(--border-main); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.5rem;">
+          <h3 style="font-weight: 900; margin-bottom: 0.4rem; font-size: 1.35rem;" data-i18n="audioHubHeading">🎧 مختبر التمارين الصوتية والتظليل السريع (Interactive Audio Lab)</h3>
+          <p style="color: var(--text-muted); font-size: 0.88rem; max-width: 800px; line-height: 1.6;" data-i18n="audioHubSub">
+            استمع وتدرّب مع تسجيلات صوتية عالية الدقة مصممة لاختبار سرعة الاستجابة اللفظية، مع إمكانية تسريع الصوت وتظليل النص المتزامن.
           </p>
         </div>
 
-        <div class="grid-2">
-          <!-- Audio Drill 1 -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+          <!-- Audio Drill 1: English UN Speech -->
           <div class="audio-player-card" id="audioCard1">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem;">
-              <span class="history-pill-tag" style="background: rgba(229, 57, 53, 0.1); color: var(--primary); border-color: var(--primary);">
-                🎙️ تدريب تظليل شفهي (Shadowing Drill)
-              </span>
-              <span style="font-size: 0.78rem; color: var(--text-muted); font-weight: 700;">سرعة: 140 WPM</span>
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+              <div>
+                <span class="status-pill status-completed" style="font-size: 0.72rem; font-weight: 800;">🎙️ تمرين رقم 1 • خطابات الجمعية العامة</span>
+                <h4 style="font-weight: 900; margin-top: 0.35rem; font-size: 1.05rem;">UN General Assembly Climate Address (EN)</h4>
+                <p style="font-size: 0.78rem; color: var(--text-muted); margin: 0;">لهجة دبلوماسية رسمية • معدل السرعة القياسي: 130 كلمة/دقيقة</p>
+              </div>
             </div>
 
-            <h4 style="font-weight: 900; font-size: 1rem; margin-bottom: 0.25rem;">
-              خطاب الجمعية العامة للأمم المتحدة: تغير المناخ والاستدامة
-            </h4>
-            <p style="font-size: 0.78rem; color: var(--text-muted);">
-              الزوج اللغوي: الإنجليزية ➔ العربية | المتحدث: د. سفيان معمري
-            </p>
-
+            <!-- Waveform Visualizer -->
             <div class="audio-waveform-visualizer">
               <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
               <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
               <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
               <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
               <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
-              <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
-              <div class="eq-bar"></div><div class="eq-bar"></div>
             </div>
 
+            <!-- Controls -->
             <div class="audio-controls-row">
-              <div style="display: flex; align-items: center; gap: 0.75rem; flex: 1;">
-                <button class="audio-play-btn" id="audioBtnPlay1" onclick="toggleAudioTrack(1)" title="تشغيل / إيقاف">
-                  ▶
-                </button>
-                <div style="flex: 1;">
-                  <div style="display: flex; justify-content: space-between; font-size: 0.76rem; color: var(--text-muted); margin-bottom: 0.25rem;">
-                    <span id="audioTimeCurrent1">00:00</span>
-                    <span id="audioTimeTotal1">02:30</span>
-                  </div>
-                  <input type="range" class="audio-seek-slider" id="audioSeek1" min="0" max="150" value="0" oninput="seekAudioTrack(1, this.value)">
-                </div>
-              </div>
-
+              <button class="audio-play-btn" id="audioBtnPlay1" onclick="toggleAudioTrack(1)">▶</button>
+              <input type="range" class="audio-seek-slider" id="audioSeek1" min="0" max="150" value="0" oninput="seekAudioTrack(1, this.value)">
+              <span id="audioTimeCurrent1" style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); width: 45px;">00:00</span>
               <div class="audio-speed-chips">
-                <button class="speed-chip" onclick="setAudioSpeed(1, 0.75, this)">0.75x</button>
-                <button class="speed-chip active" onclick="setAudioSpeed(1, 1.0, this)">1.0x</button>
-                <button class="speed-chip" onclick="setAudioSpeed(1, 1.25, this)">1.25x</button>
-                <button class="speed-chip" onclick="setAudioSpeed(1, 1.5, this)">1.5x</button>
+                <span class="speed-chip active" onclick="setAudioSpeed(1, 1.0, this)">1.0x</span>
+                <span class="speed-chip" onclick="setAudioSpeed(1, 1.25, this)">1.25x</span>
+                <span class="speed-chip" onclick="setAudioSpeed(1, 1.5, this)">1.5x</span>
               </div>
             </div>
 
-            <div class="audio-transcript-box" id="audioTranscriptBox1">
-              <p><span class="transcript-phrase" id="tr1_p1">"Mr. President, distinguished delegates of the General Assembly..."</span></p>
-              <p><span class="transcript-phrase" id="tr1_p2">"السيد الرئيس، أصحاب السعادة المندوبين الموقرين في الجمعية العامة للأمم المتحدة..."</span></p>
-              <p><span class="transcript-phrase" id="tr1_p3">"We convene today at a pivotal juncture where international climate obligations demand swift legislative action."</span></p>
-              <p><span class="transcript-phrase" id="tr1_p4">"نجتمع اليوم في منعطف حاسم تتطلب فيه الالتزامات المناخية الدولية إجراءات تشريعية عاجلة وفورية."</span></p>
+            <!-- Transcript -->
+            <div class="audio-transcript-box" id="audioTranscript1">
+              <span class="transcript-phrase" id="tr1_p1">"Mr. President, distinguished delegates of the General Assembly."</span>
+              <span class="transcript-phrase" id="tr1_p2">"We convene today at a pivotal juncture where international climate obligations demand swift legislative action."</span>
+              <span class="transcript-phrase" id="tr1_p3">"No sovereign nation can remain isolated from the systemic repercussions of global environmental degradation."</span>
+              <span class="transcript-phrase" id="tr1_p4">"The multilateral frameworks established under the Paris Accords provide the definitive roadmap for decarbonization."</span>
             </div>
           </div>
 
-          <!-- Audio Drill 2 -->
+          <!-- Audio Drill 2: French Court Oaths -->
           <div class="audio-player-card" id="audioCard2">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem;">
-              <span class="history-pill-tag" style="background: rgba(5, 150, 105, 0.1); color: #047857; border-color: #10b981;">
-                ⚖️ مختبر النطق والمصطلحات القضائية
-              </span>
-              <span style="font-size: 0.78rem; color: var(--text-muted); font-weight: 700;">دقة صوتية Phonetics</span>
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+              <div>
+                <span class="status-pill status-completed" style="font-size: 0.72rem; font-weight: 800;">⚖️ تمرين رقم 2 • المصطلحات القضائية واليمين</span>
+                <h4 style="font-weight: 900; margin-top: 0.35rem; font-size: 1.05rem;">Serment d'Interprète Judiciaire & Code Pénal (FR)</h4>
+                <p style="font-size: 0.78rem; color: var(--text-muted); margin: 0;">صيغ اليمين القانوني ومصطلحات المحاكم الجنائية</p>
+              </div>
             </div>
 
-            <h4 style="font-weight: 900; font-size: 1rem; margin-bottom: 0.25rem;">
-              صيغ اليمين القضائية والتحكيم الدولي (Tribunal & Arbitrage)
-            </h4>
-            <p style="font-size: 0.78rem; color: var(--text-muted);">
-              الزوج اللغوي: الفرنسية ➔ الإسبانية | مراجعة المخارج الصوتية للمحلفين
-            </p>
-
+            <!-- Waveform Visualizer -->
             <div class="audio-waveform-visualizer">
               <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
               <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
@@ -3585,75 +3574,51 @@
               <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
             </div>
 
+            <!-- Controls -->
             <div class="audio-controls-row">
-              <div style="display: flex; align-items: center; gap: 0.75rem; flex: 1;">
-                <button class="audio-play-btn" id="audioBtnPlay2" onclick="toggleAudioTrack(2)" title="تشغيل / إيقاف" style="background: #059669;">
-                  ▶
-                </button>
-                <div style="flex: 1;">
-                  <div style="display: flex; justify-content: space-between; font-size: 0.76rem; color: var(--text-muted); margin-bottom: 0.25rem;">
-                    <span id="audioTimeCurrent2">00:00</span>
-                    <span id="audioTimeTotal2">01:50</span>
-                  </div>
-                  <input type="range" class="audio-seek-slider" id="audioSeek2" min="0" max="110" value="0" oninput="seekAudioTrack(2, this.value)">
-                </div>
-              </div>
-
+              <button class="audio-play-btn" id="audioBtnPlay2" onclick="toggleAudioTrack(2)">▶</button>
+              <input type="range" class="audio-seek-slider" id="audioSeek2" min="0" max="110" value="0" oninput="seekAudioTrack(2, this.value)">
+              <span id="audioTimeCurrent2" style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); width: 45px;">00:00</span>
               <div class="audio-speed-chips">
-                <button class="speed-chip" onclick="setAudioSpeed(2, 0.75, this)">0.75x</button>
-                <button class="speed-chip active" onclick="setAudioSpeed(2, 1.0, this)">1.0x</button>
-                <button class="speed-chip" onclick="setAudioSpeed(2, 1.25, this)">1.25x</button>
+                <span class="speed-chip active" onclick="setAudioSpeed(2, 1.0, this)">1.0x</span>
+                <span class="speed-chip" onclick="setAudioSpeed(2, 1.25, this)">1.25x</span>
+                <span class="speed-chip" onclick="setAudioSpeed(2, 1.5, this)">1.5x</span>
               </div>
             </div>
 
-            <div class="audio-transcript-box">
-              <p><strong>FR:</strong> "Je jure d'accomplir fidèlement ma mission de traduction assermentée..."</p>
-              <p><strong>ES:</strong> "Juro cumplir fielmente mi misión de traducción jurada conforme a la ley..."</p>
-              <p style="color: var(--text-muted); font-size: 0.78rem; margin-top: 0.4rem;">
-                💡 ملاحظة المترجم: ركّز على نبرة الكلمات القانونية المشددة مثل "Fidèlement" و "Jurada".
-              </p>
+            <!-- Transcript -->
+            <div class="audio-transcript-box" id="audioTranscript2">
+              <span class="transcript-phrase active">"Je jure d'accomplir fidèlement ma mission de traduction assermentée avec honneur, probité et rigueur professionnelle conforme aux textes réglementaires."</span>
             </div>
           </div>
         </div>
 
-        <!-- Audio 3 / Cognitive Reset -->
-        <div class="card" style="margin-top: 1.25rem;">
-          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.85rem;">
-            <div style="flex: 1; min-width: 280px;">
-              <span class="history-pill-tag" style="background: rgba(37, 99, 235, 0.1); color: #2563eb; border-color: #3b82f6;">
-                🧠 تمرين التركيز العصبي للمترجم الشفهي (Alpha 432Hz Soundscape)
-              </span>
-              <h3 style="font-weight: 900; font-size: 1.1rem; margin: 0.35rem 0;">
-                إعادة ضبط التنفس وموجات ألفا بين جولات الكابينة (30-Minute Rotation Reset)
-              </h3>
-              <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.6;">
-                نغمة صوتية هارمونية عيار 432Hz تخفض معدل ضربات القلب وتقلل الإجهاد الذهني الناتج عن المعالجة الفورية المزدوجة للغات. اضغط على الزر واتبع حركة دائرة التنفس المتزامنة (شهيق 4 ثوانٍ، حبس 4 ثوانٍ، زفير 6 ثوانٍ).
-              </p>
-              <div style="display: flex; gap: 0.5rem; margin-top: 0.85rem; align-items: center; flex-wrap: wrap;">
-                <button class="btn btn-primary btn-sm" id="btnAlphaWavePlay" onclick="toggleAlphaWavePlayer()">
-                  ▶ <span id="lblAlphaWaveBtnText">تشغيل موجات التركيز (432Hz)</span>
-                </button>
-                <span id="alphaWaveStatusText" style="font-size: 0.78rem; color: var(--text-muted); font-weight: 700;">متوقف</span>
-              </div>
-            </div>
+        <!-- 432Hz Cognitive Reset Module -->
+        <div style="background: var(--bg-surface); border: 1.5px solid var(--border-main); border-radius: var(--radius-lg); padding: 1.75rem; margin-top: 1.5rem; text-align: center;">
+          <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(16, 185, 129, 0.12); color: var(--success); padding: 0.35rem 0.85rem; border-radius: 50px; font-size: 0.82rem; font-weight: 800; margin-bottom: 0.65rem;">
+            <span>🧘</span> جلسة استعادة التركيز وتفريغ إجهاد الكابينة (Cognitive Respiration)
+          </div>
+          <h3 style="font-weight: 900; margin-bottom: 0.5rem; font-size: 1.25rem;">موجات ألفا التوافقية (432Hz Harmonic Frequency)</h3>
+          <p style="color: var(--text-muted); font-size: 0.88rem; max-width: 600px; margin: 0 auto 1.25rem auto; line-height: 1.6;">
+            تولد ترددات توافقية متناغمة 432Hz تساعد المترجمين على استعادة التوازن الذهني وخفض مستويات التوتر بعد جلسات الترجمة الفورية الطويلة.
+          </p>
 
-            <!-- Breathing Visualizer Circle -->
-            <div class="breathe-circle-container">
-              <div class="breathe-circle" id="breatheCircleElement">
-                شهيق
-              </div>
-              <span style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700;" id="breathePhaseLabel">
-                دورة التنفس المتوازن
-              </span>
-            </div>
+          <div class="breathe-circle-container">
+            <div class="breathe-circle" id="breatheCircleElement">جاهز</div>
+            <div id="breathePhaseLabel" style="font-size: 0.88rem; font-weight: 700; color: var(--text-muted); margin-top: 0.75rem;">دورة التنفس المتوازن</div>
+          </div>
+
+          <div style="margin-top: 1.25rem; display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap;">
+            <button class="btn btn-primary" id="btnAlphaWavePlay" onclick="toggleAlphaWavePlayer()" style="font-weight: 800;">
+              🎵 <span id="lblAlphaWaveBtnText">تشغيل موجات التركيز (432Hz)</span>
+            </button>
+            <span class="status-pill status-pending" id="alphaWaveStatusText" style="align-self: center; font-size: 0.8rem; font-weight: 700;">متوقف</span>
           </div>
         </div>
       </div>
     </div>
 
-  </main>
-
-  <!-- =============================================================
+    <!-- =============================================================
        INSTITUTIONAL FOOTER & ABOUT HUB CALLOUT
        ============================================================= -->
   <footer class="site-footer">
@@ -3724,61 +3689,127 @@
   <!-- =============================================================
        MODAL: AUTHENTICATION & ROLE SWITCHER
        ============================================================= -->
-  <div class="modal-backdrop" id="authModalBackdrop">
-    <div class="modal-box">
+    <div class="modal-backdrop" id="authModalBackdrop">
+    <div class="modal-box" style="max-width: 580px;">
       <div class="modal-top">
-        <h4 style="font-weight: 900;" id="authModalHeading">تسجيل الدخول إلى Polylang Hub</h4>
-        <button style="background: none; border: none; font-size: 1.25rem; cursor: pointer; color: var(--text-main);" onclick="closeAuthModal()">✕</button>
+        <div>
+          <div style="display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(229,57,53,0.1); color: var(--primary); padding: 0.2rem 0.65rem; border-radius: 50px; font-size: 0.74rem; font-weight: 800; margin-bottom: 0.35rem;">
+            <span>🛡️</span> Polylang Hub Enterprise Gateway
+          </div>
+          <h4 style="font-weight: 900; margin: 0; font-size: 1.15rem;" id="authModalHeading" data-i18n="authModalHeading">بوابة الدخول الموحدة وإدارة الجلسات</h4>
+        </div>
+        <button style="background: none; border: none; font-size: 1.35rem; cursor: pointer; color: var(--text-muted);" onclick="closeAuthModal()" aria-label="Close">✕</button>
       </div>
-      <div class="modal-body-content">
-        <!-- Active Isolated Session Notice -->
-        <div id="modalActiveIsolationNotice" class="session-isolation-pill" style="margin-bottom: 1rem; width: 100%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
-          <span style="font-size: 0.78rem;">🔒 <span data-i18n="authSessionIsolationLabel">عزل البيانات النشطة:</span> <strong id="modalActiveUserSessionEmail">client@polylang.dz</strong></span>
-          <span style="background: rgba(46,125,50,0.15); color: var(--success); padding: 0.15rem 0.45rem; border-radius: 4px; font-size: 0.72rem; font-weight: 700;" data-i18n="authIsolatedBadge">معزول 100% ✓</span>
+      
+      <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.6rem 0 1rem 0; line-height: 1.4;" data-i18n="authModalSubHeading">
+        يرجى اختيار صفتك المهنية أو إدخال بريدك الإلكتروني للدخول المباشر مع عزل تام للبيانات.
+      </p>
+
+      <!-- Dynamic Active Isolated Storage Pill -->
+      <div style="background: var(--bg-surface-secondary); border: 1.5px solid var(--border-main); border-radius: var(--radius-sm); padding: 0.55rem 0.85rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem;">
+        <span style="color: var(--text-muted);" data-i18n="authSessionIsolationLabel">عزل بيانات الجلسة (Data Isolation):</span>
+        <span class="status-pill status-completed" id="authModalActiveEmailBadge" style="font-weight: 800; font-size: 0.75rem;">100% معزول ومحمي ✓</span>
+      </div>
+
+      <form id="authLoginForm" onsubmit="handleAuthSubmit(event)">
+        <!-- Role Selection Cards -->
+        <label style="display: block; font-size: 0.82rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main);" data-i18n="authRoleLabel">
+          اختر الدور المهني للوصول (Professional Role):
+        </label>
+        <div class="auth-roles-grid" id="authRolesSelectionGrid">
+          <!-- Role 1: Admin -->
+          <div class="auth-role-card" id="authCardAdmin" onclick="selectAuthRole('admin')">
+            <div class="auth-role-header">
+              <span>🛡️ مسؤول المنصة (Admin)</span>
+              <span style="font-size: 0.68rem; background: rgba(229,57,53,0.15); color: var(--primary); padding: 2px 6px; border-radius: 4px;">🔒 محمي</span>
+            </div>
+            <div class="auth-role-desc">إدارة المنصة والنزاعات والاعتمادات (محصور للمهندس المؤسس djoudimadani09@gmail.com)</div>
+          </div>
+
+          <!-- Role 2: Translator -->
+          <div class="auth-role-card" id="authCardTranslator" onclick="selectAuthRole('translator')">
+            <div class="auth-role-header">
+              <span>🎓 مترجم محلف (Translator)</span>
+              <span style="font-size: 0.68rem; background: rgba(16,185,129,0.15); color: var(--success); padding: 2px 6px; border-radius: 4px;">معتمد</span>
+            </div>
+            <div class="auth-role-desc">استلام مشاريع الترجمة، محرر SRT، والمسارد التخصصية</div>
+          </div>
+
+          <!-- Role 3: Client -->
+          <div class="auth-role-card selected" id="authCardClient" onclick="selectAuthRole('client')">
+            <div class="auth-role-header">
+              <span>👤 عميل طالب للترجمة (Client)</span>
+              <span style="font-size: 0.68rem; background: rgba(59,130,246,0.15); color: #3b82f6; padding: 2px 6px; border-radius: 4px;">نشط</span>
+            </div>
+            <div class="auth-role-desc">طلب عروض أسعار، توثيق العقود، وفواتير SATIM المعتمدة</div>
+          </div>
+
+          <!-- Role 4: Enthusiast -->
+          <div class="auth-role-card" id="authCardEnthusiast" onclick="selectAuthRole('enthusiast')">
+            <div class="auth-role-header">
+              <span>💡 محب للغات (Enthusiast)</span>
+              <span style="font-size: 0.68rem; background: rgba(245,158,11,0.15); color: #d97706; padding: 2px 6px; border-radius: 4px;">تدريب</span>
+            </div>
+            <div class="auth-role-desc">بطاقات الذاكرة، التحديات اللغوية، واختبارات القواعد</div>
+          </div>
         </div>
 
-        <form onsubmit="handleAuthSubmit(event)">
-          <div class="form-group">
-            <label class="form-label" data-i18n="authFullNameLabel">الاسم الكامل</label>
-            <input type="text" id="authNameInput" class="form-control" placeholder="مثال: ياسمين بن علي" data-i18n-placeholder="authFullNamePlaceholder" required>
-          </div>
+        <!-- Hidden input storing selected role -->
+        <input type="hidden" id="authRoleSelect" value="client">
 
-          <div class="form-group">
-            <label class="form-label" data-i18n="authEmailLabel">البريد الإلكتروني</label>
-            <input type="email" id="authEmailInput" class="form-control" placeholder="user@domain.dz" data-i18n-placeholder="authEmailPlaceholder" required>
-          </div>
+        <!-- Admin Detected Live Badge -->
+        <div id="authAdminDetectedBadge" class="auth-admin-detected-badge">
+          <span>🛡️</span> <span data-i18n="authAdminDetected">تم التحقق من هوية المؤسس والمسؤول العام المعتمد (Admin Verified) ✓</span>
+        </div>
 
-          <div class="form-group">
-            <label class="form-label" data-i18n="authRoleLabel">الدور والصفة المهنية للمستخدم:</label>
-            <select class="form-control" id="authRoleSelect">
-              <option value="client" data-i18n="authRoleOptClient">👤 عميل طالب ترجمة (Client)</option>
-              <option value="translator" data-i18n="authRoleOptTranslator">🎓 مترجم معتمد ومحترف (Translator)</option>
-              <option value="enthusiast" data-i18n="authRoleOptEnthusiast">💡 محب للغات ومتعلم (Enthusiast)</option>
-              <option value="admin" data-i18n="authRoleOptAdmin">🛡️ مسؤول المنصة والإشراف (Admin)</option>
-            </select>
-          </div>
+        <!-- Admin Warning Live Badge -->
+        <div id="authAdminWarningBadge" class="auth-admin-warning-badge">
+          <span>⚠️</span> <span data-i18n="authAdminWarning">تنبيه: صلاحية المشرف محصورة لـ djoudimadani09@gmail.com - سيتم تحويلك لدور العميل.</span>
+        </div>
 
-          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.85rem;" data-i18n="authSubmitBtn">
-            تسجيل الدخول والبدء
+        <div class="form-group" style="margin-bottom: 0.85rem;">
+          <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 0.35rem;" data-i18n="authFullNameLabel">الاسم الكامل:</label>
+          <input type="text" class="form-control" id="authInputName" placeholder="مثال: كريم حمداوي" value="كريم حمداوي" required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 0.85rem;">
+          <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 0.35rem;" data-i18n="authEmailLabel">البريد الإلكتروني المعتمد:</label>
+          <input type="email" class="form-control" id="authInputEmail" placeholder="user@polylang.dz أو djoudimadani09@gmail.com للمسؤول" value="client@polylang.dz" oninput="onAuthEmailInputChange(this.value)" required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.15rem;">
+          <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 0.35rem;" data-i18n="authPasswordLabel">كلمة المرور / رمز الدخول الآمن:</label>
+          <input type="password" class="form-control" id="authInputPassword" placeholder="••••••••" value="Polylang2026!">
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; font-weight: 800; padding: 0.75rem;" data-i18n="authSubmitBtn">
+          🔒 تأكيد الدخول وتفعيل الجلسة
+        </button>
+      </form>
+
+      <!-- 1-Click Fast Profile Switcher -->
+      <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1.5px dashed var(--border-main);">
+        <label style="display: block; font-size: 0.78rem; font-weight: 800; color: var(--text-muted); margin-bottom: 0.5rem;" data-i18n="authQuickLoginLabel">
+          دخول سريع للأدوار بنقرة واحدة (1-Click Fast Profile):
+        </label>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+          <button type="button" class="btn btn-sm btn-secondary" onclick="quickLoginAs('djoudimadani09@gmail.com', 'admin', 'مداني جودي (Madani Djoudi)')" style="font-size: 0.74rem; font-weight: 800; border-color: rgba(229,57,53,0.4); color: var(--primary);">
+            🛡️ المؤسس djoudimadani09@gmail.com
           </button>
-        </form>
-
-        <div style="margin-top: 1.25rem; padding-top: 0.9rem; border-top: 1px solid var(--border-main); text-align: center;">
-          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-i18n="authQuickLoginLabel">تجربة سريعة للأدوار بنقرة واحدة:</p>
-          <div style="display: flex; gap: 0.35rem; justify-content: center; flex-wrap: wrap;">
-            <button class="btn btn-outline btn-sm" onclick="quickLoginRole('admin')" data-i18n="btnQuickAdmin">🛡️ مسؤول</button>
-            <button class="btn btn-outline btn-sm" onclick="quickLoginRole('translator')" data-i18n="btnQuickTranslator">🎓 مترجم</button>
-            <button class="btn btn-outline btn-sm" onclick="quickLoginRole('client')" data-i18n="btnQuickClient">👤 عميل</button>
-            <button class="btn btn-outline btn-sm" onclick="quickLoginRole('enthusiast')" data-i18n="btnQuickEnthusiast">💡 متعلم</button>
-          </div>
+          <button type="button" class="btn btn-sm btn-secondary" onclick="quickLoginAs('translator@polylang.dz', 'translator', 'د. سامية بلحاج')" style="font-size: 0.74rem; font-weight: 700;">
+            🎓 مترجم محلف (Translator)
+          </button>
+          <button type="button" class="btn btn-sm btn-secondary" onclick="quickLoginAs('client@polylang.dz', 'client', 'كريم حمداوي')" style="font-size: 0.74rem; font-weight: 700;">
+            👤 عميل مؤسساتي (Client)
+          </button>
+          <button type="button" class="btn btn-sm btn-secondary" onclick="quickLoginAs('enthusiast@polylang.dz', 'enthusiast', 'ياسمين بوخالفة')" style="font-size: 0.74rem; font-weight: 700;">
+            💡 متعلم لغات (Enthusiast)
+          </button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- =============================================================
-       MODAL: LOCAL PAYMENT SIMULATOR (EDAHABIA / CIB / BARIDIMOB)
-       ============================================================= -->
   <div class="modal-backdrop" id="paymentModalBackdrop">
     <div class="modal-box">
       <div class="modal-top">
@@ -4962,13 +4993,22 @@
     /* =============================================================
        TRAINING & MEDIA CENTER CONTROLLERS (VIDEOS & AUDIO)
        ============================================================= */
+    // =============================================================
+    // 3. MEDIA CENTER ENGINE (FREEMIUM VIDEOS & INTERACTIVE LAB)
+    // =============================================================
     const MEDIA_VIDEOS = [
       {
-        id: 'vid-1',
-        title: 'محاضرة كابينة الترجمة الفورية: إدارة الفارق الزمني (Décalage) وضبط الضغط',
+        id: 'vid-free-1',
+        isPremium: false,
+        price: 0,
+        title: 'مبادئ الترجمة الفورية وكابينة المؤتمرات (Simultaneous Interpretation Foundations)',
         tag: '🎙️ كابينة الأمم المتحدة',
-        duration: '⏱️ المدة: 14:20 دقيقة',
+        level: 'مبتدئ / Beginner',
+        duration: '14:20 دقيقة',
         url: 'https://www.youtube-nocookie.com/embed/uT_hFzV1s54?enablejsapi=1',
+        thumbIcon: '🎙️',
+        rating: 4.9,
+        students: 1840,
         takeaways: [
           'التحكم في الفارق الزمني (Décalage / Ear-Voice Span) بمعدل 2 إلى 4 ثوانٍ دون فقدان ترابط السياق.',
           'تقسيم الجمل المركبة واستخدام استراتيجية التجزئة الدلالية (Semantic Chunking) تحت ضغط المؤتمرات.',
@@ -4976,11 +5016,17 @@
         ]
       },
       {
-        id: 'vid-2',
-        title: 'التوطين السمعي البصري (AVT) وهندسة ملفات SRT ومعايير القراءة السريعة',
+        id: 'vid-free-2',
+        isPremium: false,
+        price: 0,
+        title: 'أساسيات التوطين السمعي البصري (AVT) وهندسة ملفات SRT ومعايير القراءة',
         tag: '🎬 توطين مرئي وSRT',
-        duration: '⏱️ المدة: 18:45 دقيقة',
+        level: 'متوسط / Intermediate',
+        duration: '18:45 دقيقة',
         url: 'https://www.youtube-nocookie.com/embed/1la40WqPUVE?enablejsapi=1',
+        thumbIcon: '🎬',
+        rating: 4.8,
+        students: 1420,
         takeaways: [
           'الحد الأقصى لطول السطر (Characters Per Line - CPL): لا يتجاوز 37 إلى 42 حرفاً لكل سطر.',
           'معدل سرعة القراءة المقبول عالمياً: 15 إلى 17 حرفاً في الثانية (CPS) لضمان تجربة مشاهدة مريحة.',
@@ -4988,56 +5034,315 @@
         ]
       },
       {
-        id: 'vid-3',
-        title: 'الترجمة القضائية والمحلفة: معايير ISO 17100 والمصادقة على أختام الأبوستيل',
-        tag: '⚖️ ترجمة محلفة وقضائية',
-        duration: '⏱️ المدة: 22:10 دقيقة',
-        url: 'https://www.youtube-nocookie.com/embed/d0yGdNEWdn0?enablejsapi=1',
-        takeaways: [
-          'التدقيق الإلزامي المزدوج (Dual Review) بموجب المعيار الدولي ISO 17100:2015 قبل الختم الرسمي.',
-          'ضوابط مطابقة الأسماء والأرقام الثبوتية في السجلات القضائية ووثائق الحالة المدنية الصادرة عن المحاكم.',
-          'التوثيق الرقمي للبصمة المشفرة SHA-256 لضمان عدم تزوير أو تعديل النص بعد التوقيع والمصادقة.'
-        ]
-      },
-      {
-        id: 'vid-4',
-        title: 'تدوين روزان للترجمة التتبعية (Rozan Note-Taking Masterclass)',
+        id: 'vid-free-3',
+        isPremium: false,
+        price: 0,
+        title: 'أسلوب روزان السريع لتدوين ملاحظات الترجمة التتبعية (Rozan Note-Taking Fast Track)',
         tag: '📝 تدوين روزان',
-        duration: '⏱️ المدة: 16:30 دقيقة',
+        level: 'مبتدئ / Beginner',
+        duration: '12:15 دقيقة',
         url: 'https://www.youtube-nocookie.com/embed/7X8IIhm_zcg?enablejsapi=1',
+        thumbIcon: '📝',
+        rating: 4.95,
+        students: 2150,
         takeaways: [
           'المبادئ السبعة لجان فرانسوا روزان: التعبير عن الأفكار وليس الكلمات المجردة.',
           'التدوين العمودي والتفريع المتدرج (Verticality & Shift) لتسهيل القراءة اللحظية أثناء إلقاء الخطاب.',
           'استخدام الرموز السهمية والخطية لتمثيل الروابط المنطقية (السبب والنتيجة، التضاد، الإضافة).'
         ]
+      },
+      {
+        id: 'vid-pro-1',
+        isPremium: true,
+        price: 3500,
+        title: 'ماستركلاس كابينة الأمم المتحدة المتقدم: إدارة الفارق الزمني والضغط العالي (UN Booth Pro Décalage)',
+        tag: '⭐ ماستركلاس احترافي (Pro)',
+        level: 'متقدم / Professional',
+        duration: '45:00 دقيقة',
+        url: 'https://www.youtube-nocookie.com/embed/d0yGdNEWdn0?enablejsapi=1',
+        thumbIcon: '🏛️',
+        rating: 5.0,
+        students: 690,
+        takeaways: [
+          'تقنيات التحكم التنفسي وعزل ضوضاء الكابينة المزدحمة في الجمعية العامة للأمم المتحدة.',
+          'الاستباق النحوي والدلالي (Anticipation Strategies) في الخطب الدبلوماسية المعقدة.',
+          'شهادة معتمدة بنظام الساعات التدريبية المهنية المعتمدة دولياً برقم توثيق رسمي.'
+        ]
+      },
+      {
+        id: 'vid-pro-2',
+        isPremium: true,
+        price: 5000,
+        title: 'الدبلوم المهني في الترجمة القضائية والتحكيم الدولي ومصادقة ISO 17100 (Court Translation Certification)',
+        tag: '⭐ شهادة مهنية معتمدة',
+        level: 'خبير / Expert',
+        duration: '58:30 دقيقة',
+        url: 'https://www.youtube-nocookie.com/embed/1laThtz19i0?enablejsapi=1',
+        thumbIcon: '⚖️',
+        rating: 4.98,
+        students: 530,
+        takeaways: [
+          'التدقيق الإلزامي المزدوج (Dual Review) بموجب المعيار الدولي ISO 17100:2015 قبل الختم الرسمي.',
+          'ضوابط مطابقة الأسماء والأرقام الثبوتية في السجلات القضائية ووثائق الحالة المدنية الصادرة عن المحاكم.',
+          'التوثيق الرقمي للبصمة المشفرة SHA-256 وأختام الأبوستيل (Apostille) المعتمدة.'
+        ]
+      },
+      {
+        id: 'vid-pro-3',
+        isPremium: true,
+        price: 4200,
+        title: 'هندسة الترجمة المرئية المتقدمة لشبكات البث العالمية (Advanced AVT & Subtitling for Streaming Networks)',
+        tag: '⭐ توطين شبكات البث',
+        level: 'متقدم / Professional',
+        duration: '40:15 دقيقة',
+        url: 'https://www.youtube-nocookie.com/embed/p3oZf-w84nE?enablejsapi=1',
+        thumbIcon: '🎥',
+        rating: 4.92,
+        students: 480,
+        takeaways: [
+          'هندسة توقيت الإطارات (Frames) ومزامنة الفواصل الزمنية مع بوابات التقطيع.',
+          'قوالب الترجمة المعتمدة لمنصات البث مثل Netflix وBBC وAmazon Prime.',
+          'تصدير مسارات الترجمة الاحترافية بصيغ DFXP وWebVTT والـ SRT المتوافقة مع المشغلات السينمائية.'
+        ]
       }
     ];
 
-    function switchMediaVideo(idx) {
-      const video = MEDIA_VIDEOS[idx];
-      if (!video) return;
+    let activeMediaVideoIndex = 0;
+    let pendingPaymentVideoId = null;
 
+    // Helper: Parse numeric balance from activeUser
+    function getUserBalanceNum() {
+      if (!activeUser || !activeUser.balance) return 0;
+      const num = parseInt(String(activeUser.balance).replace(/[^0-9]/g, ''), 10);
+      return isNaN(num) ? 0 : num;
+    }
+
+    // Helper: Set user numeric balance
+    function setUserBalanceNum(newBal) {
+      if (!activeUser) return;
+      activeUser.balance = `${newBal.toLocaleString()} دج`;
+      saveCurrentUserIsolatedSession();
+      renderUserProfilePill();
+    }
+
+    // Helper: Check if video is unlocked for active user
+    function isVideoUnlocked(video) {
+      if (!video) return false;
+      if (!video.isPremium || video.price === 0) return true;
+      if (activeUser && isStrictAdminAuthorized(activeUser.email)) return true;
+      if (!activeUser) return false;
+      const unlocked = activeUser.unlockedVideos || [];
+      return unlocked.includes(video.id);
+    }
+
+    function switchMediaVideo(idx) {
+      if (idx < 0 || idx >= MEDIA_VIDEOS.length) return;
+      activeMediaVideoIndex = idx;
+      const video = MEDIA_VIDEOS[idx];
+
+      const unlocked = isVideoUnlocked(video);
       const iframe = document.getElementById('mainVideoPlayerIframe');
+      const paywall = document.getElementById('videoPaywallOverlay');
+      const unlockedBanner = document.getElementById('videoUnlockedBanner');
       const title = document.getElementById('activeVideoTitle');
       const tag = document.getElementById('activeVideoTag');
       const duration = document.getElementById('activeVideoDuration');
       const takeaways = document.getElementById('activeVideoTakeawaysList');
 
-      if (iframe) iframe.src = video.url;
       if (title) title.innerText = video.title;
       if (tag) tag.innerText = video.tag;
-      if (duration) duration.innerText = video.duration;
-      if (takeaways) {
+      if (duration) duration.innerText = `⏱️ ${video.duration}`;
+      if (takeaways && video.takeaways) {
         takeaways.innerHTML = video.takeaways.map(t => `<li>${t}</li>`).join('');
       }
 
-      const items = document.querySelectorAll('.video-playlist-item');
-      items.forEach((item, i) => {
-        if (i === idx) item.classList.add('active');
-        else item.classList.remove('active');
-      });
+      if (unlocked) {
+        if (paywall) paywall.classList.add('hidden');
+        if (iframe) {
+          iframe.style.display = 'block';
+          iframe.src = video.url;
+        }
+        if (unlockedBanner) {
+          if (video.isPremium) {
+            unlockedBanner.style.display = 'flex';
+            const dict = dictionary[currentLanguage] || dictionary.ar;
+            unlockedBanner.innerHTML = `
+              <span>🔓 ${dict.btnCourseUnlocked || 'ماستركلاس احترافي مفتوح ومرخص لك بالكامل ✓'}</span>
+              <span style="font-size: 0.75rem; background: rgba(16,185,129,0.2); padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 800;">ISO 17100 Verified</span>
+            `;
+          } else {
+            unlockedBanner.style.display = 'none';
+          }
+        }
+      } else {
+        // Locked paywall
+        if (iframe) {
+          iframe.src = '';
+          iframe.style.display = 'none';
+        }
+        if (unlockedBanner) unlockedBanner.style.display = 'none';
+        if (paywall) {
+          paywall.classList.remove('hidden');
+          const badge = document.getElementById('paywallPriceBadge');
+          const courseTitle = document.getElementById('paywallCourseTitle');
+          const btnWallet = document.getElementById('btnUnlockWithWallet');
 
-      pushToast(`📺 تم تشغيل: ${video.title}`);
+          if (badge) badge.innerText = `⭐ ${video.price.toLocaleString()} دج • ${video.tag}`;
+          if (courseTitle) courseTitle.innerText = video.title;
+          if (btnWallet) {
+            const bal = getUserBalanceNum();
+            btnWallet.innerText = `💳 فتح فوراً بخصم من الرصيد (${bal.toLocaleString()} دج)`;
+          }
+        }
+      }
+
+      renderVideoPlaylistAndCatalog();
+      pushToast(`📺 ${video.title}`);
+    }
+
+    function unlockActiveVideoWithWallet() {
+      const video = MEDIA_VIDEOS[activeMediaVideoIndex];
+      if (!video) return;
+      unlockVideoWithWallet(video.id);
+    }
+
+    function unlockVideoWithWallet(videoId) {
+      const video = MEDIA_VIDEOS.find(v => v.id === videoId);
+      if (!video) return;
+      if (!activeUser) {
+        openAuthModal();
+        return;
+      }
+      const balNum = getUserBalanceNum();
+      if (balNum < video.price) {
+        playAppSound('error');
+        const isAr = currentLanguage === 'ar';
+        const msg = isAr
+          ? `رصيد محفظتك الحالي (${balNum.toLocaleString()} دج) غير كافٍ لشراء هذا الماستركلاس (${video.price.toLocaleString()} دج).\n\nهل ترغب بالدفع المباشر عبر البطاقة الذهبية أو CIB؟`
+          : `Your wallet balance (${balNum.toLocaleString()} DZD) is insufficient for this course (${video.price.toLocaleString()} DZD).\n\nWould you like to pay with Edahabia or CIB?`;
+        if (confirm(msg)) {
+          openVideoPaymentModal(video.id);
+        }
+        return;
+      }
+
+      // Deduct balance
+      const newBal = balNum - video.price;
+      setUserBalanceNum(newBal);
+
+      if (!activeUser.unlockedVideos) activeUser.unlockedVideos = [];
+      if (!activeUser.unlockedVideos.includes(video.id)) {
+        activeUser.unlockedVideos.push(video.id);
+      }
+      saveCurrentUserIsolatedSession();
+
+      playAppSound('payment');
+      pushNotificationAlert(`🎉 تم فتح الماستركلاس الاحترافي بنجاح: ${video.title}`);
+      pushToast(currentLanguage === 'ar' ? `✓ تم خصم ${video.price.toLocaleString()} دج وفتح الدورة بنجاح!` : `✓ ${video.price.toLocaleString()} DZD deducted. Masterclass unlocked!`);
+
+      switchMediaVideo(activeMediaVideoIndex);
+    }
+
+    function payActiveVideoWithEdahabia() {
+      const video = MEDIA_VIDEOS[activeMediaVideoIndex];
+      if (!video) return;
+      openVideoPaymentModal(video.id);
+    }
+
+    function openVideoPaymentModal(videoId) {
+      const video = MEDIA_VIDEOS.find(v => v.id === videoId);
+      if (!video) return;
+      pendingPaymentVideoId = videoId;
+      const summary = document.getElementById('paymentSummaryMeta');
+      if (summary) {
+        summary.innerText = `${video.title} - ${video.price.toLocaleString()} دج (ماستركلاس معتمد ISO 17100)`;
+      }
+      openPaymentModal();
+    }
+
+    function renderVideoPlaylistAndCatalog() {
+      const playlist = document.getElementById('mediaPlaylistContainer');
+      const catalog = document.getElementById('coursesCatalogGrid');
+      const countBadge = document.getElementById('videoPlaylistCountBadge');
+      const dict = dictionary[currentLanguage] || dictionary.ar;
+
+      if (countBadge) {
+        countBadge.innerText = `${MEDIA_VIDEOS.length} ${currentLanguage === 'ar' ? 'دورات' : 'Courses'}`;
+      }
+
+      // 1. Sidebar Playlist
+      if (playlist) {
+        playlist.innerHTML = MEDIA_VIDEOS.map((vid, idx) => {
+          const unlocked = isVideoUnlocked(vid);
+          const isCurrent = idx === activeMediaVideoIndex;
+          let badgeHtml = '';
+          if (vid.isPremium) {
+            if (unlocked) {
+              badgeHtml = `<span class="status-pill status-completed" style="font-size: 0.68rem; padding: 2px 6px;">${dict.unlockedBadge || '🔓 مفتوح'}</span>`;
+            } else {
+              badgeHtml = `<span class="status-pill" style="font-size: 0.68rem; padding: 2px 6px; background: rgba(245,158,11,0.15); color: #d97706; border: 1px solid #f59e0b;">⭐ ${vid.price.toLocaleString()} دج</span>`;
+            }
+          } else {
+            badgeHtml = `<span class="status-pill status-completed" style="font-size: 0.68rem; padding: 2px 6px;">${dict.freeBadge || '🆓 مجاني'}</span>`;
+          }
+
+          return `
+            <div class="video-playlist-item ${isCurrent ? 'active' : ''}" onclick="switchMediaVideo(${idx})">
+              <div class="video-thumb-icon">${vid.thumbIcon || '🎬'}</div>
+              <div style="flex: 1; min-width: 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+                  <span style="font-size: 0.72rem; color: var(--text-muted);">${vid.duration}</span>
+                  ${badgeHtml}
+                </div>
+                <h5 style="font-size: 0.82rem; font-weight: 800; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-main);">
+                  ${vid.title}
+                </h5>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // 2. Full Catalog Grid
+      if (catalog) {
+        catalog.innerHTML = MEDIA_VIDEOS.map((vid, idx) => {
+          const unlocked = isVideoUnlocked(vid);
+          const isCurrent = idx === activeMediaVideoIndex;
+          let badgePill = '';
+          let actionBtn = '';
+
+          if (vid.isPremium) {
+            if (unlocked) {
+              badgePill = `<span class="course-badge-pill" style="background: #059669; color: #fff;">${dict.unlockedBadge || '🔓 تم الشراء'}</span>`;
+              actionBtn = `<button class="btn btn-sm btn-primary" onclick="switchMediaVideo(${idx})" style="font-weight: 800; font-size: 0.74rem;">${dict.btnWatchNow || 'مشاهدة الآن ▶'}</button>`;
+            } else {
+              badgePill = `<span class="course-badge-pill" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #fff;">⭐ ${vid.price.toLocaleString()} دج</span>`;
+              actionBtn = `<button class="btn btn-sm btn-secondary" onclick="switchMediaVideo(${idx})" style="font-weight: 800; font-size: 0.74rem; border-color: #f59e0b; color: #d97706;">🔒 فتح الماستركلاس</button>`;
+            }
+          } else {
+            badgePill = `<span class="course-badge-pill" style="background: #10b981; color: #fff;">${dict.freeBadge || '🆓 مجاني'}</span>`;
+            actionBtn = `<button class="btn btn-sm btn-primary" onclick="switchMediaVideo(${idx})" style="font-weight: 800; font-size: 0.74rem;">${dict.btnWatchNow || 'مشاهدة مجاناً ▶'}</button>`;
+          }
+
+          return `
+            <div class="course-card ${isCurrent ? 'active-selected' : ''}">
+              <div class="course-card-thumb">
+                <span>${vid.thumbIcon || '🎓'}</span>
+                ${badgePill}
+                <span class="course-duration-pill">${vid.duration}</span>
+              </div>
+              <div class="course-card-body">
+                <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; margin-bottom: 2px;">${vid.tag} • ${vid.level}</span>
+                <div class="course-card-title">${vid.title}</div>
+                <div class="course-card-footer">
+                  <span style="font-weight: 700; color: #f59e0b;">⭐ ${vid.rating} (${vid.students})</span>
+                  ${actionBtn}
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
     }
 
     function filterMediaCategory(cat, btn) {
@@ -5046,17 +5351,69 @@
 
       const videosSec = document.getElementById('mediaCategoryVideos');
       const audioSec = document.getElementById('mediaCategoryAudio');
+      const catalog = document.getElementById('coursesCatalogGrid');
 
       if (cat === 'all') {
         if (videosSec) videosSec.style.display = 'block';
         if (audioSec) audioSec.style.display = 'block';
-      } else if (cat === 'video') {
+        renderVideoPlaylistAndCatalog();
+      } else if (cat === 'free') {
         if (videosSec) videosSec.style.display = 'block';
         if (audioSec) audioSec.style.display = 'none';
+        const freeIdx = MEDIA_VIDEOS.findIndex(v => !v.isPremium);
+        if (freeIdx !== -1) switchMediaVideo(freeIdx);
+      } else if (cat === 'premium') {
+        if (videosSec) videosSec.style.display = 'block';
+        if (audioSec) audioSec.style.display = 'none';
+        const proIdx = MEDIA_VIDEOS.findIndex(v => v.isPremium);
+        if (proIdx !== -1) switchMediaVideo(proIdx);
+      } else if (cat === 'unlocked') {
+        if (videosSec) videosSec.style.display = 'block';
+        if (audioSec) audioSec.style.display = 'none';
+        const unIdx = MEDIA_VIDEOS.findIndex(v => isVideoUnlocked(v));
+        if (unIdx !== -1) switchMediaVideo(unIdx);
       } else if (cat === 'audio' || cat === 'cognitive') {
         if (videosSec) videosSec.style.display = 'none';
         if (audioSec) audioSec.style.display = 'block';
       }
+    }
+
+    function downloadCurriculumNotesPdf() {
+      const video = MEDIA_VIDEOS[activeMediaVideoIndex] || MEDIA_VIDEOS[0];
+      const content = `============================================================
+POLYLANG HUB — OFFICIAL CURRICULUM & TERMINOLOGY NOTES
+============================================================
+Course Title: ${video.title}
+Level: ${video.level}
+Duration: ${video.duration}
+Accreditation: ISO 17100:2015 / AIIC Standards
+Director: Madani Djoudi (Founder & Lead Architect)
+User: ${activeUser?.name || 'Authorized Trainee'} (${activeUser?.email || 'Guest'})
+Date: ${new Date().toISOString()}
+
+KEY COMPETENCY SUMMARY:
+${video.takeaways.map((t, i) => `[${i+1}] ${t}`).join('\n')}
+
+RECOMMENDED BOOTH DRILLS:
+1. Active listening with 3-second ear-voice span.
+2. Rapid terminology lookups with hotkeys.
+3. Post-session cognitive respiration and hydration.
+
+Hash Verification: SHA-256 VALIDATED
+Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
+============================================================`;
+
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Polylang_Curriculum_${video.id}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      playAppSound('click');
+      pushToast('📥 تم تحميل مسرد المصطلحات وملخص الدرس التدريبي بنجاح');
     }
 
     let audioState = {
@@ -5253,10 +5610,11 @@
       ar: {
         dir: 'rtl',
         langName: 'العربية',
-        brandSubtitle: 'منصة الترجمة المتخصصة والتدريب اللغوي',
+        brandSubtitle: 'منصة الترجمة المتخصصة والتدريب اللغوي والتعليم المدفوع',
         aboutBtnText: 'من نحن',
-        footerTagline: 'منصة الترجمة المؤسسية المعتمدة وتوطين المحتوى الذكي',
-        footerDesc: 'المنصة السحابية الرائدة المتخصصة في الترجمة المحلفة، والتدقيق المصطلحي القانوني والفني، وهندسة ملفات الترجمة المرئية (SRT)، وكابينة الترجمة الفورية بالذكاء الاصطناعي التوليدي.',
+        switchAccountBtn: 'تبديل الحساب / تسجيل الدخول',
+        footerTagline: 'منصة الترجمة المؤسسية المعتمدة وتوطين المحتوى والتعليم التخصصي',
+        footerDesc: 'المنصة السحابية الرائدة المتخصصة في الترجمة المحلفة، التدقيق المصطلحي القانوني والفني، ماستركلاس الترجمة الفورية والسمعي البصري (AVT)، والدفع الإلكتروني المعتمد.',
         footerCopyright: '© 2026 <strong>Polylang Hub</strong>. جميع الحقوق محفوظة — تم التصميم والتطوير والإشراف التقني بواسطة <strong>مداني جودي (Madani Djoudi)</strong>.',
         aboutModalMainTitle: 'من نحن والرؤية المؤسسية لمنصة Polylang Hub',
         aboutModalSubTitle: 'الريادة والتميز في هندسة الترجمة التخصصية والحلول اللغوية الذكية',
@@ -5266,20 +5624,35 @@
         backendStatusLocal: 'مزامنة محلية محمية 🟡',
         roleChipMedia: 'مركز التدريب والوسائط (Media Hub)',
         roleChipEnthusiast: 'محب للغات (Enthusiast)',
-        mediaHeroTitle: 'مركز التدريب والوسائط المتعددة (Training & Media Center)',
-        mediaHeroDesc: 'أكاديمية تدريبية متقدمة للمترجمين المحلفين وطلبة الترجمة الفورية، تقدم محاضرات فيديو معتمدة لكبائن الأمم المتحدة، التوطين السمعي البصري (AVT)، وتدريبات صوتية تفاعلية لتقنية التظليل اللغوي (Speech Shadowing) مع إعادة ضبط التركيز الذهني.',
-        btnOpenSimBooth: 'فتح كابينة المحاكاة الفورية',
-        btnSyncMedia: 'تحديث المحتوى',
-        tabAllMedia: '🎬 جميع الوسائط (All Media)',
-        tabVideoMasterclasses: '📺 ماستركلاس الفيديو (Video Masterclasses)',
-        tabAudioShadowing: '🎧 استوديو التظليل الصوتي (Audio Shadowing)',
-        tabCognitiveReset: '🧠 التحمل الذهني والتركيز (Cognitive Reset)',
-        videoTakeawaysHeading: '📌 أهم محاور ومخرجات الدرس التدريبي (Key Learning Takeaways):',
-        btnPracticeLive: 'بدء تدريب فوري في الكابينة',
-        btnDownloadNotes: 'تنزيل ملخص الدرس والمصطلحات (PDF)',
-        videoPlaylistTitle: 'قائمة المحاضرات التدريبية (Masterclasses)',
-        audioHubHeading: '🎧 مختبر التمارين الصوتية التفاعلية والتظليل السريع (Interactive Audio Hub)',
-        audioHubSub: 'استمع وتدرّب مع تسجيلات صوتية عالية الدقة مصممة خصيصاً لاختبار سرعة الاستجابة اللفظية، مع إمكانية تسريع/إبطاء الصوت، وتظليل النص المتزامن.',
+        mediaHeroTitle: 'أكاديمية التدريب والماستركلاس (Training & Masterclasses Hub)',
+        mediaHeroDesc: 'أكاديمية تدريبية متقدمة للمترجمين المحلفين وطلبة الترجمة الفورية، تقدم محاضرات مجانية وتدريبات ماستركلاس احترافية مدفوعة لكبائن الأمم المتحدة، التوطين السمعي البصري (AVT)، ومختبر التظليل الصوتي.',
+        btnOpenSimBooth: '🎙️ فتح كابينة المحاكاة الفورية',
+        btnSyncMedia: '🔄 تحديث المحتوى',
+        tabAllMedia: '🎬 جميع المحاضرات (All)',
+        tabFreeTutorials: '🆓 دروس مجانية (Free)',
+        tabVideoMasterclasses: '⭐ ماستركلاس مدفوع (Premium)',
+        tabMyUnlocked: '🔓 دوراتي المفتوحة (My Unlocked)',
+        tabAudioShadowing: '🎧 تمارين التظليل الصوتي (Audio)',
+        tabCognitiveReset: '🧠 التحمل الذهني (432Hz)',
+        videoTakeawaysHeading: '📌 أهم محاور ومخرجات الدرس التدريبي (Key Takeaways):',
+        btnPracticeLive: '🎙️ بدء تدريب فوري في الكابينة',
+        btnDownloadNotes: '📥 تنزيل ملخص الدرس والمصطلحات (PDF)',
+        videoPlaylistTitle: 'قائمة المحاضرات والماستركلاس (Courses)',
+        audioHubHeading: '🎧 مختبر التمارين الصوتية والتظليل السريع (Interactive Audio Lab)',
+        audioHubSub: 'استمع وتدرّب مع تسجيلات صوتية عالية الدقة مصممة لاختبار سرعة الاستجابة اللفظية، مع إمكانية تسريع الصوت وتظليل النص المتزامن.',
+        paywallTitle: 'ماستركلاس احترافي مقفل (Premium Masterclass)',
+        paywallSub: 'هذا المحتوى التدريبي مخصص للمترجمين المحترفين ويتطلب ترخيصاً رسمياً أو شراءً لفتح كامل المحاضرة والملحقات.',
+        paywallBadge: '⭐ محتوى تخصصي مميز',
+        paywallFeature1: '✓ تسجيل كامل بدقة فائقة 4K',
+        paywallFeature2: '✓ شهادة إتمام معتمدة ISO 17100',
+        paywallFeature3: '✓ مسرد المصطلحات وملفات SRT وPDF',
+        btnUnlockWallet: '💳 فتح فوراً من رصيد المحفظة',
+        btnPayCib: '🏦 الدفع بالبطاقة الذهبية / CIB',
+        btnWatchNow: 'مشاهدة الآن ▶',
+        btnCourseUnlocked: '🔓 مفتوح ومملوك ✓',
+        freeBadge: '🆓 مجاني',
+        premiumBadge: '⭐ مدفوع',
+        unlockedBadge: '🔓 تم الشراء',
         roleLabels: {
           admin: 'مسؤول المنصة (Admin)',
           translator: 'مترجم محلف ومعتمد',
@@ -5293,24 +5666,28 @@
         exportSrtBtn: '⬇️ تصدير ملف SRT المعتمد',
         videoAcademyTitle: 'أكاديمية الفيديو لعلوم الترجمة وهندسة المؤتمرات',
         videoAcademySub: 'محاضرات عالية الجودة تغطي كبائن الترجمة الفورية في الأمم المتحدة، تقنيات تدوين روزان، والتوطين السمعي البصري.',
-        authModalHeading: 'تسجيل الدخول وإدارة الجلسات',
-        authSessionIsolationLabel: 'عزل بيانات الجلسة (Session Isolation):',
+        authModalHeading: 'بوابة الدخول الموحدة وإدارة الجلسات',
+        authModalSubHeading: 'يرجى اختيار صفتك المهنية أو إدخال بريدك الإلكتروني للدخول المباشر مع عزل تام للبيانات',
+        authSessionIsolationLabel: 'عزل بيانات الجلسة (Data Isolation):',
         authIsolatedBadge: 'معزول ومحمي 100% ✓',
         authFullNameLabel: 'الاسم الكامل:',
-        authFullNamePlaceholder: 'مثال: كريم حيمداوي',
-        authEmailLabel: 'البريد الإلكتروني:',
-        authEmailPlaceholder: 'user@polylang.dz',
+        authFullNamePlaceholder: 'مثال: مداني جودي',
+        authEmailLabel: 'البريد الإلكتروني المعتمد:',
+        authEmailPlaceholder: 'user@polylang.dz أو djoudimadani09@gmail.com للمسؤول',
+        authPasswordLabel: 'كلمة المرور / رمز الدخول الآمن:',
         authRoleLabel: 'الدور الوظيفي في المنصة:',
         authRoleOptClient: '👤 عميل طالب للترجمة (Client)',
         authRoleOptTranslator: '🎓 مترجم محلف ومعتمد (Translator)',
         authRoleOptEnthusiast: '💡 محب للغات ومتدرب (Enthusiast)',
-        authRoleOptAdmin: '🛡️ مسؤول النظام (Admin - محمي لـ djoudimadani09@gmail.com)',
-        authSubmitBtn: 'دخول وتفعيل الجلسة الآمنة',
-        authQuickLoginLabel: 'اختبار سريع للأدوار بضغطة واحدة:',
-        btnQuickAdmin: '🛡️ مسؤول (Admin)',
-        btnQuickTranslator: '🎓 مترجم',
-        btnQuickClient: '👤 عميل',
-        btnQuickEnthusiast: '💡 متدرب',
+        authRoleOptAdmin: '🛡️ مسؤول المنصة (Admin)',
+        authAdminDetected: '🛡️ تم التحقق من هوية المؤسس والمسؤول العام المعتمد (Admin Verified) ✓',
+        authAdminWarning: '⚠️ تنبيه: صلاحية المشرف محصورة لـ djoudimadani09@gmail.com - سيتم تحويلك لدور العميل.',
+        authSubmitBtn: '🔒 تأكيد الدخول وتفعيل الجلسة',
+        authQuickLoginLabel: 'دخول سريع للأدوار بنقرة واحدة:',
+        btnQuickAdmin: '🛡️ المؤسس والمسؤول (djoudimadani09@gmail.com)',
+        btnQuickTranslator: '🎓 مترجم محلف (translator@polylang.dz)',
+        btnQuickClient: '👤 عميل مؤسساتي (client@polylang.dz)',
+        btnQuickEnthusiast: '💡 متعلم لغات (enthusiast@polylang.dz)',
         statusCompleted: 'مكتمل ومسلّم ✓',
         statusActive: 'قيد الترجمة والتدقيق',
         statusPending: 'بانتظار الاعتماد',
@@ -5322,10 +5699,11 @@
       en: {
         dir: 'ltr',
         langName: 'English',
-        brandSubtitle: 'Certified Translation & Language Training Platform',
+        brandSubtitle: 'Certified Translation, Localization & Monetized Training Platform',
         aboutBtnText: 'About Us',
-        footerTagline: 'Certified Institutional Translation & Intelligent Localization',
-        footerDesc: 'Leading enterprise cloud SaaS for sworn translations, legal & technical terminology auditing, audiovisual SRT engineering, and AI-assisted conference interpretation.',
+        switchAccountBtn: 'Switch Account / Sign In',
+        footerTagline: 'Certified Institutional Translation, Smart Localization & Specialized Education',
+        footerDesc: 'Leading cloud SaaS platform for certified sworn translations, legal & technical terminology auditing, audiovisual SRT subtitling masterclasses, and SATIM-certified payments.',
         footerCopyright: '© 2026 <strong>Polylang Hub</strong>. All rights reserved — Designed, developed, and directed by <strong>Madani Djoudi</strong>.',
         aboutModalMainTitle: 'About Polylang Hub & Founder Madani Djoudi',
         aboutModalSubTitle: 'Pioneering Excellence in Certified Translation & Intelligent Language Engineering',
@@ -5335,20 +5713,35 @@
         backendStatusLocal: 'Local Sync (Protected) 🟡',
         roleChipMedia: 'Training & Media Hub',
         roleChipEnthusiast: 'Language Enthusiast',
-        mediaHeroTitle: 'Training & Media Center (Video & Audio Hub)',
-        mediaHeroDesc: 'Advanced academy for certified sworn translators and conference interpreters, featuring UN booth lectures, audiovisual localization (AVT), and interactive speech shadowing audio drills with cognitive respiration reset.',
-        btnOpenSimBooth: 'Open Live Interpretation Booth',
-        btnSyncMedia: 'Refresh Library',
-        tabAllMedia: '🎬 All Media Hub',
-        tabVideoMasterclasses: '📺 Video Masterclasses',
+        mediaHeroTitle: 'Training & Masterclasses Hub',
+        mediaHeroDesc: 'Advanced training academy for sworn translators and conference interpreters, featuring free lectures, premium paid masterclasses for UN booths, audiovisual subtitling (AVT), and speech shadowing labs.',
+        btnOpenSimBooth: '🎙️ Open Live Interpretation Booth',
+        btnSyncMedia: '🔄 Refresh Content',
+        tabAllMedia: '🎬 All Courses',
+        tabFreeTutorials: '🆓 Free Tutorials',
+        tabVideoMasterclasses: '⭐ Premium Masterclasses',
+        tabMyUnlocked: '🔓 My Unlocked Courses',
         tabAudioShadowing: '🎧 Audio Shadowing Drills',
-        tabCognitiveReset: '🧠 Cognitive Respiration Reset (432Hz)',
+        tabCognitiveReset: '🧠 Cognitive Respiration (432Hz)',
         videoTakeawaysHeading: '📌 Key Learning Takeaways & Competencies:',
-        btnPracticeLive: 'Launch Booth Simulation',
-        btnDownloadNotes: 'Download Lesson Notes & SRT (PDF)',
-        videoPlaylistTitle: 'Professional Masterclasses Playlist',
-        audioHubHeading: '🎧 Interactive Speech Shadowing & Pronunciation Lab',
+        btnPracticeLive: '🎙️ Launch Booth Simulation',
+        btnDownloadNotes: '📥 Download Lesson Notes & SRT (PDF)',
+        videoPlaylistTitle: 'Training Masterclasses & Courses',
+        audioHubHeading: '🎧 Interactive Speech Shadowing Lab',
         audioHubSub: 'Listen and train with high-precision audio drills specifically calibrated to benchmark verbal reaction latency, dynamic speed multipliers, and real-time highlighted transcripts.',
+        paywallTitle: 'Premium Interpretation Masterclass (Locked)',
+        paywallSub: 'This high-level professional course requires an official license or platform enrollment to access the complete video, handouts, and certified credentials.',
+        paywallBadge: '⭐ Specialized Pro Content',
+        paywallFeature1: '✓ Full 4K Ultra-HD Masterclass Recording',
+        paywallFeature2: '✓ ISO 17100 Certified Completion Credential',
+        paywallFeature3: '✓ Specialized Terminology Glossaries (SRT + PDF)',
+        btnUnlockWallet: '💳 Unlock with Wallet Balance',
+        btnPayCib: '🏦 Pay with Edahabia / CIB',
+        btnWatchNow: 'Watch Now ▶',
+        btnCourseUnlocked: '🔓 Purchased & Active ✓',
+        freeBadge: '🆓 Free',
+        premiumBadge: '⭐ Premium',
+        unlockedBadge: '🔓 Unlocked',
         roleLabels: {
           admin: 'Platform Administrator (Admin)',
           translator: 'Certified Sworn Translator',
@@ -5362,379 +5755,482 @@
         exportSrtBtn: '⬇️ Export Certified SRT File',
         videoAcademyTitle: 'Video Academy for Translation Studies & Conference Interpretation',
         videoAcademySub: 'High-definition masterclasses on UN simultaneous booths, Rozan note-taking methodology, and audiovisual subtitling.',
-        authModalHeading: 'Polylang Hub Secure Access',
+        authModalHeading: 'Polylang Hub Secure Access Gateway',
+        authModalSubHeading: 'Select your professional role or enter your credentials to launch an isolated workspace',
         authSessionIsolationLabel: 'Session Data Isolation Guarantee:',
         authIsolatedBadge: '100% Isolated & Protected ✓',
         authFullNameLabel: 'Full Name:',
-        authFullNamePlaceholder: 'e.g., Karim Hamdaoui',
-        authEmailLabel: 'Email Address:',
-        authEmailPlaceholder: 'user@polylang.dz',
+        authFullNamePlaceholder: 'e.g., Madani Djoudi',
+        authEmailLabel: 'Authorized Email Address:',
+        authEmailPlaceholder: 'user@polylang.dz or djoudimadani09@gmail.com for Admin',
+        authPasswordLabel: 'Password / Passcode:',
         authRoleLabel: 'User Role in Platform:',
         authRoleOptClient: '👤 Translation Client (Client)',
         authRoleOptTranslator: '🎓 Sworn Translator (Translator)',
         authRoleOptEnthusiast: '💡 Language Learner (Enthusiast)',
-        authRoleOptAdmin: '🛡️ Platform Admin (Protected to djoudimadani09@gmail.com)',
-        authSubmitBtn: 'Sign In & Launch Workspace',
+        authRoleOptAdmin: '🛡️ Platform Admin (Admin)',
+        authAdminDetected: '🛡️ Platform Administrator Identity Verified (djoudimadani09@gmail.com) ✓',
+        authAdminWarning: '⚠️ Notice: Admin role is restricted to djoudimadani09@gmail.com. You will be signed in as Client.',
+        authSubmitBtn: '🔒 Sign In & Launch Workspace',
         authQuickLoginLabel: '1-Click Fast Profile Switcher:',
-        btnQuickAdmin: '🛡️ Admin',
-        btnQuickTranslator: '🎓 Translator',
-        btnQuickClient: '👤 Client',
-        btnQuickEnthusiast: '💡 Learner',
+        btnQuickAdmin: '🛡️ Founder Admin (djoudimadani09@gmail.com)',
+        btnQuickTranslator: '🎓 Sworn Translator (translator@polylang.dz)',
+        btnQuickClient: '👤 Enterprise Client (client@polylang.dz)',
+        btnQuickEnthusiast: '💡 Language Learner (enthusiast@polylang.dz)',
         statusCompleted: 'Completed & Delivered ✓',
         statusActive: 'In Translation & Auditing',
         statusPending: 'Awaiting Approval',
         previewDocTitle: 'Certified Translated Document Preview',
-        previewHashValid: 'Cryptographic SHA-256 Hash Verified & Digitally Authenticated ✓',
+        previewHashValid: 'Cryptographic SHA-256 Hash Verified & Authenticated ✓',
         previewDownloadBtn: 'Download Certified Document (PDF)',
         previewPrintBtn: 'Print Official Notice'
       },
       fr: {
         dir: 'ltr',
         langName: 'Français',
-        brandSubtitle: 'Plateforme de Traduction Assermentée & Formation Linguistique',
+        brandSubtitle: 'Plateforme de Traduction Assermentée & Formation Monétisée',
         aboutBtnText: 'À Propos',
-        footerTagline: 'Traduction Institutionnelle Certifiée & Localisation Intelligente',
-        footerDesc: 'Plateforme SaaS cloud de référence pour la traduction assermentée, l’audit terminologique juridique et le sous-titrage audiovisuel assisté par IA.',
+        switchAccountBtn: 'Changer de Compte / Connexion',
+        footerTagline: 'Traduction Institutionnelle Certifiée & Formation Spécialisée',
+        footerDesc: 'Plateforme SaaS cloud de référence pour la traduction assermentée, l’audit terminologique, le sous-titrage audiovisuel et le paiement électronique SATIM.',
         footerCopyright: '© 2026 <strong>Polylang Hub</strong>. Tous droits réservés — Conçu et dirigé par <strong>Madani Djoudi</strong>.',
         aboutModalMainTitle: 'À Propos de Polylang Hub & du Fondateur Madani Djoudi',
         aboutModalSubTitle: 'Excellence et Innovation en Ingénierie Linguistique et Traduction Certifiée',
-        historyTab: 'Historique des Projets',
-        historyHeading: 'Historique et Archives des Projets de Traduction',
-        backendStatusLive: 'API NestJS en ligne 🟢',
-        backendStatusLocal: 'Synchro locale protégée 🟡',
+        historyTab: 'Historique des Traductions',
+        historyHeading: 'Archives & Historique des Projets',
+        backendStatusLive: 'API NestJS En Ligne 🟢',
+        backendStatusLocal: 'Synchro Locale Sécurisée 🟡',
         roleChipMedia: 'Centre de Médias & Formation',
         roleChipEnthusiast: 'Passionné de Langues',
-        mediaHeroTitle: 'Centre de Formation et Médias (Vidéos & Audio)',
-        mediaHeroDesc: 'Académie avancée pour traducteurs assermentés et interprètes de conférence, proposant des cours en cabine ONU, le sous-titrage AVT et des exercices de shadowing vocal avec réinitialisation cognitive.',
-        btnOpenSimBooth: 'Ouvrir la Cabine de Simulation',
-        btnSyncMedia: 'Actualiser le Contenu',
-        tabAllMedia: '🎬 Tous les Médias',
-        tabVideoMasterclasses: '📺 Masterclasses Vidéo',
-        tabAudioShadowing: '🎧 Exercices de Shadowing Audio',
-        tabCognitiveReset: '🧠 Réinitialisation Cognitive (432Hz)',
-        videoTakeawaysHeading: '📌 Principaux Acquis Pédagogiques du Cours :',
-        btnPracticeLive: 'Lancer l’Entraînement en Cabine',
-        btnDownloadNotes: 'Télécharger les Notes et SRT (PDF)',
-        videoPlaylistTitle: 'Liste des Masterclasses Professionnelles',
-        audioHubHeading: '🎧 Laboratoire Audio Interactif & Entraînement au Shadowing',
-        audioHubSub: 'Écoutez et entraînez-vous avec des enregistrements de haute précision calibrés pour tester la latence de réponse verbale et la fidélité phonétique.',
+        mediaHeroTitle: 'Académie de Formation & Masterclasses',
+        mediaHeroDesc: 'Académie avancée pour traducteurs assermentés et interprètes de conférence: cours gratuits et masterclasses professionnelles payantes sur les cabines ONU et le sous-titrage.',
+        btnOpenSimBooth: '🎙️ Ouvrir la Cabine de Simulation',
+        btnSyncMedia: '🔄 Actualiser le Contenu',
+        tabAllMedia: '🎬 Tous les Cours',
+        tabFreeTutorials: '🆓 Tutoriels Gratuits',
+        tabVideoMasterclasses: '⭐ Masterclasses Premium',
+        tabMyUnlocked: '🔓 Mes Formations Achetées',
+        tabAudioShadowing: '🎧 Exercices d’Ombrage Vocal',
+        tabCognitiveReset: '🧠 Récupération Cognitive (432Hz)',
+        videoTakeawaysHeading: '📌 Points Clés de la Leçon & Compétences:',
+        btnPracticeLive: '🎙️ Démarrer l’Entraînement en Cabine',
+        btnDownloadNotes: '📥 Télécharger les Notes & SRT (PDF)',
+        videoPlaylistTitle: 'Catalogue des Formations & Masterclasses',
+        audioHubHeading: '🎧 Laboratoire Audio Interactif & Ombrage',
+        audioHubSub: 'Entraînez-vous avec des enregistrements haute précision pour calibrer votre vitesse de réaction verbale et votre prononciation.',
+        paywallTitle: 'Masterclass Professionnelle Verrouillée (Paywall)',
+        paywallSub: 'Ce cours d’interprétation de haut niveau requiert une licence d’accès pour visionner la vidéo complète et obtenir les certificats ISO 17100.',
+        paywallBadge: '⭐ Contenu Pro Spécialisé',
+        paywallFeature1: '✓ Enregistrement intégral en Ultra-HD 4K',
+        paywallFeature2: '✓ Certificat officiel de réussite ISO 17100',
+        paywallFeature3: '✓ Glossaire de terminologie et fichiers SRT & PDF',
+        btnUnlockWallet: '💳 Débloquer avec le Solde du Portefeuille',
+        btnPayCib: '🏦 Payer par Carte Edahabia / CIB',
+        btnWatchNow: 'Regarder Maintenant ▶',
+        btnCourseUnlocked: '🔓 Acheté & Accessible ✓',
+        freeBadge: '🆓 Gratuit',
+        premiumBadge: '⭐ Premium',
+        unlockedBadge: '🔓 Débloqué',
         roleLabels: {
-          admin: 'Administrateur de la Plateforme',
-          translator: 'Traducteur Assermenté & Expert',
-          client: 'Client Commanditaire',
-          enthusiast: 'Passionné de Langues & Étudiant',
+          admin: 'Administrateur de la Plateforme (Admin)',
+          translator: 'Traducteur Assermenté Certifié',
+          client: 'Client Entreprise & Particulier',
+          enthusiast: 'Passionné & Étudiant en Langues',
           media: 'Centre de Médias & Formation'
         },
         srtStudioTitle: 'Studio de Sous-titrage Vidéo & Ingénierie SRT',
-        srtStudioSub: 'Lecteur multimédia professionnel avec masterclasses intégrées, pistes de sous-titres multilingues et synchronisation au millième de seconde.',
-        subTrackLabel: 'Piste de sous-titres active :',
-        exportSrtBtn: '⬇️ Exporter le fichier SRT certifié',
-        videoAcademyTitle: 'Académie Vidéo de Traductologie et Interprétation de Conférence',
-        videoAcademySub: 'Cours magistraux en haute résolution sur les cabines ONU, la méthode Rozan et le sous-titrage.',
-        authModalHeading: 'Connexion Sécurisée à Polylang Hub',
-        authSessionIsolationLabel: 'Garantie d’Isolation des Données de Session :',
-        authIsolatedBadge: '100% Isolé & Protégé ✓',
-        authFullNameLabel: 'Nom et Prénom :',
-        authFullNamePlaceholder: 'ex. Karim Hamdaoui',
-        authEmailLabel: 'Adresse E-mail :',
-        authEmailPlaceholder: 'utilisateur@polylang.dz',
-        authRoleLabel: 'Rôle Professionnel dans la Plateforme :',
-        authRoleOptClient: '👤 Client Commanditaire (Client)',
+        srtStudioSub: 'Lecteur multimédia professionnel avec masterclasses intégrées et synchronisation millimétrique.',
+        subTrackLabel: 'Piste de Sous-titres Active:',
+        exportSrtBtn: '⬇️ Exporter le Fichier SRT Certifié',
+        videoAcademyTitle: 'Académie Vidéo des Métiers de la Traduction',
+        videoAcademySub: 'Masterclasses haute définition sur les cabines de l’ONU et la prise de notes Rozan.',
+        authModalHeading: 'Passerelle d’Accès Sécurisée Polylang Hub',
+        authModalSubHeading: 'Sélectionnez votre rôle ou saisissez votre email pour ouvrir un espace de travail isolé',
+        authSessionIsolationLabel: 'Garantie d’Isolation des Données:',
+        authIsolatedBadge: '100% Isolé & Sécurisé ✓',
+        authFullNameLabel: 'Nom Complet:',
+        authFullNamePlaceholder: 'ex: Madani Djoudi',
+        authEmailLabel: 'Adresse Email Autorisée:',
+        authEmailPlaceholder: 'user@polylang.dz ou djoudimadani09@gmail.com pour Admin',
+        authPasswordLabel: 'Mot de Passe / Code Sécurisé:',
+        authRoleLabel: 'Rôle dans la Plateforme:',
+        authRoleOptClient: '👤 Client Demandeur de Traduction (Client)',
         authRoleOptTranslator: '🎓 Traducteur Assermenté (Translator)',
         authRoleOptEnthusiast: '💡 Passionné de Langues (Enthusiast)',
-        authRoleOptAdmin: '🛡️ Administrateur (Admin - réservé à djoudimadani09@gmail.com)',
-        authSubmitBtn: 'Se Connecter et Ouvrir l’Espace',
-        authQuickLoginLabel: 'Test rapide des profils en 1 clic :',
-        btnQuickAdmin: '🛡️ Admin',
-        btnQuickTranslator: '🎓 Traducteur',
-        btnQuickClient: '👤 Client',
-        btnQuickEnthusiast: '💡 Étudiant',
-        statusCompleted: 'Achevé et Livré ✓',
-        statusActive: 'En Cours de Traduction',
+        authRoleOptAdmin: '🛡️ Administrateur de la Plateforme (Admin)',
+        authAdminDetected: '🛡️ Identité Administrateur Vérifiée (djoudimadani09@gmail.com) ✓',
+        authAdminWarning: '⚠️ Attention: Rôle Admin réservé à djoudimadani09@gmail.com. Connexion en tant que Client.',
+        authSubmitBtn: '🔒 Connexion & Lancement de l’Espace',
+        authQuickLoginLabel: 'Connexion Rapide en 1 Clic:',
+        btnQuickAdmin: '🛡️ Fondateur Admin (djoudimadani09@gmail.com)',
+        btnQuickTranslator: '🎓 Traducteur Assermenté (translator@polylang.dz)',
+        btnQuickClient: '👤 Client Entreprise (client@polylang.dz)',
+        btnQuickEnthusiast: '💡 Étudiant en Langues (enthusiast@polylang.dz)',
+        statusCompleted: 'Terminé & Livré ✓',
+        statusActive: 'En Traduction & Révision',
         statusPending: 'En Attente de Validation',
-        previewDocTitle: 'Aperçu Sécurisé du Document Traduit Certifié',
-        previewHashValid: 'Empreinte Cryptographique SHA-256 Validée & Authentifiée ✓',
+        previewDocTitle: 'Aperçu du Document Traduit Certifié',
+        previewHashValid: 'Empreinte Cryptographique SHA-256 Authentifiée ✓',
         previewDownloadBtn: 'Télécharger le Document Certifié (PDF)',
         previewPrintBtn: 'Imprimer l’Avis Officiel'
       },
       es: {
         dir: 'ltr',
         langName: 'Español',
-        brandSubtitle: 'Plataforma de Traducción Jurada y Formación Lingüística',
+        brandSubtitle: 'Plataforma de Traducción Jurada & Capacitación Monetizada',
         aboutBtnText: 'Sobre Nosotros',
-        footerTagline: 'Traducción Institucional Certificada y Localización Inteligente',
-        footerDesc: 'Plataforma SaaS en la nube para traducciones juradas, auditoría terminológica legal y subtitulado audiovisual con IA.',
+        switchAccountBtn: 'Cambiar Cuenta / Iniciar Sesión',
+        footerTagline: 'Traducción Institucional Certificada & Formación Especializada',
+        footerDesc: 'Plataforma SaaS líder para traducción jurada, auditoría terminológica, subtitulado audiovisual y pagos electrónicos locales.',
         footerCopyright: '© 2026 <strong>Polylang Hub</strong>. Todos los derechos reservados — Diseñado y dirigido por <strong>Madani Djoudi</strong>.',
         aboutModalMainTitle: 'Acerca de Polylang Hub y el Fundador Madani Djoudi',
-        aboutModalSubTitle: 'Liderazgo en Traducción Certificada e Ingeniería Lingüística Inteligente',
-        historyTab: 'Historial de Traducciones',
-        historyHeading: 'Historial y Archivo de Proyectos de Traducción',
-        backendStatusLive: 'API NestJS en línea 🟢',
-        backendStatusLocal: 'Sincronización local protegida 🟡',
+        aboutModalSubTitle: 'Liderazgo e Innovación en Traducción Certificada e Ingeniería Lingüística',
+        historyTab: 'Historial de Traducción',
+        historyHeading: 'Archivo e Historial de Proyectos',
+        backendStatusLive: 'API NestJS En Línea 🟢',
+        backendStatusLocal: 'Sincronización Local Segura 🟡',
         roleChipMedia: 'Centro de Medios y Formación',
-        roleChipEnthusiast: 'Aficionado a los Idiomas',
-        mediaHeroTitle: 'Centro de Formación y Medios Multimedia (Vídeo y Audio)',
-        mediaHeroDesc: 'Academia avanzada para traductores jurados e intérpretes de conferencias, con clases sobre cabinas de la ONU, subtitulado AVT y ejercicios de shadowing auditivo con reseteo cognitivo.',
-        btnOpenSimBooth: 'Abrir Cabina de Simulación',
-        btnSyncMedia: 'Actualizar Contenido',
-        tabAllMedia: '🎬 Todos los Medios',
-        tabVideoMasterclasses: '📺 Clases Magistrales en Vídeo',
-        tabAudioShadowing: '🎧 Ejercicios de Shadowing Auditivo',
-        tabCognitiveReset: '🧠 Reseteo Cognitivo y Respiración (432Hz)',
-        videoTakeawaysHeading: '📌 Principales Competencias del Módulo:',
-        btnPracticeLive: 'Iniciar Práctica en Cabina',
-        btnDownloadNotes: 'Descargar Notas y SRT (PDF)',
-        videoPlaylistTitle: 'Lista de Clases Magistrales Profesionales',
-        audioHubHeading: '🎧 Laboratorio de Audio Interactivo y Shadowing Rápido',
-        audioHubSub: 'Escuche y practique con grabaciones de alta precisión calibradas para poner a prueba la latencia de respuesta verbal y la dicción.',
+        roleChipEnthusiast: 'Entusiasta de Idiomas',
+        mediaHeroTitle: 'Academia de Capacitación & Masterclasses',
+        mediaHeroDesc: 'Academia avanzada para traductores jurados e intérpretes de conferencias: clases gratuitas y masterclasses de pago sobre cabinas ONU y subtitulado SRT.',
+        btnOpenSimBooth: '🎙️ Abrir Cabina de Simulación',
+        btnSyncMedia: '🔄 Actualizar Contenido',
+        tabAllMedia: '🎬 Todos los Cursos',
+        tabFreeTutorials: '🆓 Tutoriales Gratuitos',
+        tabVideoMasterclasses: '⭐ Masterclasses Premium',
+        tabMyUnlocked: '🔓 Mis Cursos Desbloqueados',
+        tabAudioShadowing: '🎧 Prácticas de Sombreado Vocal',
+        tabCognitiveReset: '🧠 Reseteo Cognitivo (432Hz)',
+        videoTakeawaysHeading: '📌 Puntos Clave de la Lección:',
+        btnPracticeLive: '🎙️ Iniciar Práctica en Cabina',
+        btnDownloadNotes: '📥 Descargar Notas y SRT (PDF)',
+        videoPlaylistTitle: 'Catálogo de Formaciones & Masterclasses',
+        audioHubHeading: '🎧 Laboratorio Interactivo de Audio y Sombreado',
+        audioHubSub: 'Escuche y practique con audios de alta precisión para medir su latencia de respuesta verbal y pronunciación.',
+        paywallTitle: 'Masterclass Profesional Bloqueada (Paywall)',
+        paywallSub: 'Este curso avanzado de interpretación requiere matrícula o saldo de plataforma para acceder al video completo y credenciales ISO 17100.',
+        paywallBadge: '⭐ Contenido Profesional Exclusivo',
+        paywallFeature1: '✓ Grabación completa en Ultra-HD 4K',
+        paywallFeature2: '✓ Certificado oficial acreditado ISO 17100',
+        paywallFeature3: '✓ Glosarios terminológicos en SRT y PDF',
+        btnUnlockWallet: '💳 Desbloquear con Saldo de Billetera',
+        btnPayCib: '🏦 Pagar con Tarjeta Edahabia / CIB',
+        btnWatchNow: 'Ver Ahora ▶',
+        btnCourseUnlocked: '🔓 Comprado y Activo ✓',
+        freeBadge: '🆓 Gratis',
+        premiumBadge: '⭐ Premium',
+        unlockedBadge: '🔓 Desbloqueado',
         roleLabels: {
-          admin: 'Administrador de la Plataforma',
-          translator: 'Traductor Jurado y Certificado',
-          client: 'Cliente Solicitante',
-          enthusiast: 'Aficionado a los Idiomas',
+          admin: 'Administrador de la Plataforma (Admin)',
+          translator: 'Traductor Jurado Certificado',
+          client: 'Cliente Corporativo y Particular',
+          enthusiast: 'Estudiante y Entusiasta de Idiomas',
           media: 'Centro de Medios y Formación'
         },
-        srtStudioTitle: 'Estudio de Subtitulado de Vídeo e Ingeniería SRT',
-        srtStudioSub: 'Reproductor multimedia profesional con clases integradas, pistas de subtítulos multilingües y sincronización milimétrica.',
-        subTrackLabel: 'Pista de subtítulos activa:',
-        exportSrtBtn: '⬇️ Exportar archivo SRT certificado',
-        videoAcademyTitle: 'Academia de Vídeo para Estudios de Traducción e Interpretación',
-        videoAcademySub: 'Lecciones magistrales en alta resolución sobre cabinas ONU, toma de notas Rozan y subtitulado profesional.',
-        authModalHeading: 'Acceso Seguro a Polylang Hub',
-        authSessionIsolationLabel: 'Aislamiento Estricto de Datos de Sesión:',
-        authIsolatedBadge: '100% Protegido y Seguro ✓',
+        srtStudioTitle: 'Estudio de Subtitulado & Ingeniería SRT',
+        srtStudioSub: 'Reproductor multimedia profesional con masterclasses y sincronización temporal exacta.',
+        subTrackLabel: 'Pista de Subtítulos Activa:',
+        exportSrtBtn: '⬇️ Exportar Archivo SRT Certificado',
+        videoAcademyTitle: 'Academia de Video para Estudios de Traducción',
+        videoAcademySub: 'Masterclasses sobre cabinas de interpretación de la ONU y toma de notas de Rozan.',
+        authModalHeading: 'Pasarela de Acceso Seguro Polylang Hub',
+        authModalSubHeading: 'Seleccione su rol profesional o ingrese sus credenciales para iniciar su sesión aislada',
+        authSessionIsolationLabel: 'Garantía de Aislamiento de Datos:',
+        authIsolatedBadge: '100% Aislado y Protegido ✓',
         authFullNameLabel: 'Nombre Completo:',
-        authFullNamePlaceholder: 'ej. Karim Hamdaoui',
-        authEmailLabel: 'Correo Electrónico:',
-        authEmailPlaceholder: 'usuario@polylang.dz',
-        authRoleLabel: 'Rol Profesional en la Plataforma:',
+        authFullNamePlaceholder: 'ej: Madani Djoudi',
+        authEmailLabel: 'Correo Electrónico Autorizado:',
+        authEmailPlaceholder: 'user@polylang.dz o djoudimadani09@gmail.com para Admin',
+        authPasswordLabel: 'Contraseña / Clave de Acceso:',
+        authRoleLabel: 'Rol en la Plataforma:',
         authRoleOptClient: '👤 Cliente Solicitante (Client)',
         authRoleOptTranslator: '🎓 Traductor Jurado (Translator)',
-        authRoleOptEnthusiast: '💡 Aficionado a los Idiomas (Enthusiast)',
-        authRoleOptAdmin: '🛡️ Administrador (Admin - reservado a djoudimadani09@gmail.com)',
-        authSubmitBtn: 'Iniciar Sesión y Abrir Panel',
-        authQuickLoginLabel: 'Prueba rápida de roles con 1 clic:',
-        btnQuickAdmin: '🛡️ Admin',
-        btnQuickTranslator: '🎓 Traductor',
-        btnQuickClient: '👤 Cliente',
-        btnQuickEnthusiast: '💡 Estudiante',
+        authRoleOptEnthusiast: '💡 Estudiante de Idiomas (Enthusiast)',
+        authRoleOptAdmin: '🛡️ Administrador del Sistema (Admin)',
+        authAdminDetected: '🛡️ Identidad de Administrador Verificada (djoudimadani09@gmail.com) ✓',
+        authAdminWarning: '⚠️ Aviso: Rol Admin reservado para djoudimadani09@gmail.com. Accediendo como Cliente.',
+        authSubmitBtn: '🔒 Iniciar Sesión y Abrir Espacio',
+        authQuickLoginLabel: 'Inicio Rápido en 1 Clic:',
+        btnQuickAdmin: '🛡️ Administrador Fundador (djoudimadani09@gmail.com)',
+        btnQuickTranslator: '🎓 Traductor Jurado (translator@polylang.dz)',
+        btnQuickClient: '👤 Cliente Empresa (client@polylang.dz)',
+        btnQuickEnthusiast: '💡 Estudiante (enthusiast@polylang.dz)',
         statusCompleted: 'Completado y Entregado ✓',
-        statusActive: 'En Proceso de Traducción',
-        statusPending: 'Pendiente de Aprobación',
-        previewDocTitle: 'Vista Previa Segura del Documento Traducido',
-        previewHashValid: 'Huella Criptográfica SHA-256 Validada y Autenticada ✓',
+        statusActive: 'En Traducción y Revisión',
+        statusPending: 'Esperando Aprobación',
+        previewDocTitle: 'Vista Previa del Documento Jurado Certificado',
+        previewHashValid: 'Huella Criptográfica SHA-256 Verificada ✓',
         previewDownloadBtn: 'Descargar Documento Certificado (PDF)',
-        previewPrintBtn: 'Imprimir Comprobante Oficial'
+        previewPrintBtn: 'Imprimir Aviso Oficial'
       },
       it: {
         dir: 'ltr',
         langName: 'Italiano',
-        brandSubtitle: 'Piattaforma di Traduzione Asseverata e Formazione Linguistica',
+        brandSubtitle: 'Piattaforma di Traduzione Giurata & Formazione Monetizzata',
         aboutBtnText: 'Chi Siamo',
-        footerTagline: 'Traduzione Istituzionale Certificata e Localizzazione Intelligente',
-        footerDesc: 'Piattaforma cloud SaaS di riferimento per traduzioni asseverate, auditing terminologico legale e sottotitolaggio video assistito da IA.',
-        footerCopyright: '© 2026 <strong>Polylang Hub</strong>. Tutti i diritti riservati — Creato e sviluppato da <strong>Madani Djoudi</strong>.',
-        aboutModalMainTitle: 'Informazioni su Polylang Hub e sul Fondatore Madani Djoudi',
-        aboutModalSubTitle: 'Eccellenza nell’Ingegneria Linguistica e nella Traduzione Certificata',
+        switchAccountBtn: 'Cambia Account / Accedi',
+        footerTagline: 'Traduzione Istituzionale Certificata & Formazione Specialistica',
+        footerDesc: 'Piattaforma SaaS cloud d’eccellenza per traduzioni giurate, terminologia giuridica, masterclass di sottotitolaggio e pagamenti certificati.',
+        footerCopyright: '© 2026 <strong>Polylang Hub</strong>. Tutti i diritti riservati — Ideato e diretto da <strong>Madani Djoudi</strong>.',
+        aboutModalMainTitle: 'Chi Siamo & Visione del Fondatore Madani Djoudi',
+        aboutModalSubTitle: 'Eccellenza nell’Ingegneria Linguistica e nella Traduzione Ufficiale',
         historyTab: 'Cronologia Traduzioni',
-        historyHeading: 'Archivio e Cronologia Progetti di Traduzione',
-        backendStatusLive: 'API NestJS online 🟢',
-        backendStatusLocal: 'Sincronizzazione locale 🟡',
-        roleChipMedia: 'Centro Media e Formazione',
+        historyHeading: 'Archivio e Cronologia Progetti',
+        backendStatusLive: 'API NestJS Connessa 🟢',
+        backendStatusLocal: 'Sincronizzazione Locale Protetta 🟡',
+        roleChipMedia: 'Centro Formazione & Media',
         roleChipEnthusiast: 'Appassionato di Lingue',
-        mediaHeroTitle: 'Centro di Formazione e Media (Video e Audio Hub)',
-        mediaHeroDesc: 'Accademia avanzata per traduttori giurati e interpreti di conferenza, con lezioni in cabina ONU, sottotitolaggio AVT ed esercizi audio di shadowing con reset cognitivo.',
-        btnOpenSimBooth: 'Apri Cabina di Simulazione',
-        btnSyncMedia: 'Aggiorna Contenuti',
-        tabAllMedia: '🎬 Tutti i Media',
-        tabVideoMasterclasses: '📺 Masterclass Video',
-        tabAudioShadowing: '🎧 Esercizi di Shadowing Audio',
-        tabCognitiveReset: '🧠 Reset Cognitivo e Respirazione (432Hz)',
-        videoTakeawaysHeading: '📌 Obiettivi Formativi della Lezione:',
-        btnPracticeLive: 'Inizia Pratica in Cabina',
-        btnDownloadNotes: 'Scarica Sintesi e SRT (PDF)',
-        videoPlaylistTitle: 'Elenco Masterclass Professionali',
-        audioHubHeading: '🎧 Laboratorio Audio Interattivo e Shadowing Rapido',
-        audioHubSub: 'Ascolta ed esercitati con registrazioni ad alta fedeltà calibrate per testare la prontezza vocale e l’accento.',
+        mediaHeroTitle: 'Accademia di Formazione & Masterclass',
+        mediaHeroDesc: 'Accademia avanzata per traduttori giurati e interpreti di conferenza: lezioni gratuite e masterclass professionali a pagamento sulle cabine ONU e sottotitolaggio.',
+        btnOpenSimBooth: '🎙️ Apri Cabina di Simulazione',
+        btnSyncMedia: '🔄 Aggiorna Contenuti',
+        tabAllMedia: '🎬 Tutti i Corsi',
+        tabFreeTutorials: '🆓 Tutorial Gratuiti',
+        tabVideoMasterclasses: '⭐ Masterclass Premium',
+        tabMyUnlocked: '🔓 I Miei Corsi Sbloccati',
+        tabAudioShadowing: '🎧 Esercizi di Shadowing Vocale',
+        tabCognitiveReset: '🧠 Reset Cognitivo (432Hz)',
+        videoTakeawaysHeading: '📌 Obiettivi Chiave della Lezione:',
+        btnPracticeLive: '🎙️ Avvia Pratica in Cabina',
+        btnDownloadNotes: '📥 Scarica Note e Glossario (PDF)',
+        videoPlaylistTitle: 'Catalogo Corsi & Masterclass',
+        audioHubHeading: '🎧 Laboratorio Audio Interattivo e Shadowing',
+        audioHubSub: 'Ascolta ed esercitati con registrazioni ad alta fedeltà per testare i tuoi tempi di reazione verbale e pronuncia.',
+        paywallTitle: 'Masterclass Professionale Bloccata (Paywall)',
+        paywallSub: 'Questo corso specialistico richiede una licenza per accedere alla registrazione integrale e ai certificati ISO 17100.',
+        paywallBadge: '⭐ Contenuto Professionale Esclusivo',
+        paywallFeature1: '✓ Registrazione integrale in Ultra-HD 4K',
+        paywallFeature2: '✓ Certificato ufficiale accreditato ISO 17100',
+        paywallFeature3: '✓ Glossari terminologici e file SRT + PDF',
+        btnUnlockWallet: '💳 Sblocca con il Saldo del Portafoglio',
+        btnPayCib: '🏦 Paga con Carta Edahabia / CIB',
+        btnWatchNow: 'Guarda Ora ▶',
+        btnCourseUnlocked: '🔓 Acquistato e Attivo ✓',
+        freeBadge: '🆓 Gratuito',
+        premiumBadge: '⭐ Premium',
+        unlockedBadge: '🔓 Sbloccato',
         roleLabels: {
-          admin: 'Amministratore Piattaforma',
-          translator: 'Traduttore Ufficiale e Giurato',
-          client: 'Cliente Committente',
-          enthusiast: 'Appassionato di Lingue',
-          media: 'Centro Media e Formazione'
+          admin: 'Amministratore della Piattaforma (Admin)',
+          translator: 'Traduttore Giurato Certificato',
+          client: 'Cliente Aziendale e Privato',
+          enthusiast: 'Appassionato e Studente di Lingue',
+          media: 'Centro Formazione & Media'
         },
-        srtStudioTitle: 'Studio di Sottotitolaggio Video e Sincronizzazione SRT',
-        srtStudioSub: 'Player audiovisivo professionale con masterclass integrate, sottotitoli multilingue e timecode preciso.',
-        subTrackLabel: 'Traccia sottotitoli attiva:',
-        exportSrtBtn: '⬇️ Esporta file SRT certificato',
-        videoAcademyTitle: 'Accademia Video per la Traduzione e Interpretariato',
-        videoAcademySub: 'Lezioni avanzate sull’interpretazione simultanea ONU e la gestione del carico cognitivo.',
-        authModalHeading: 'Accesso Sicuro a Polylang Hub',
-        authSessionIsolationLabel: 'Isolamento Dati della Sessione:',
-        authIsolatedBadge: '100% Protetto ✓',
+        srtStudioTitle: 'Studio di Sottotitolaggio Video & Ingegneria SRT',
+        srtStudioSub: 'Player multimediale professionale con masterclass integrate e sincronizzazione temporale millimetrica.',
+        subTrackLabel: 'Traccia Sottotitoli Attiva:',
+        exportSrtBtn: '⬇️ Esporta File SRT Certificato',
+        videoAcademyTitle: 'Accademia Video per la Traduzione e l’Interpretariato',
+        videoAcademySub: 'Masterclass sulle cabine ONU e sulla tecnica di presa note Rozan.',
+        authModalHeading: 'Portale d’Accesso Sicuro Polylang Hub',
+        authModalSubHeading: 'Seleziona il tuo ruolo o inserisci le tue credenziali per avviare la sessione isolata',
+        authSessionIsolationLabel: 'Garanzia di Isolamento Dati:',
+        authIsolatedBadge: '100% Isolato & Protetto ✓',
         authFullNameLabel: 'Nome Completo:',
-        authFullNamePlaceholder: 'es. Karim Hamdaoui',
-        authEmailLabel: 'Indirizzo Email:',
-        authEmailPlaceholder: 'utente@polylang.dz',
-        authRoleLabel: 'Ruolo Professionale Utente:',
-        authRoleOptClient: '👤 Cliente Committente (Client)',
-        authRoleOptTranslator: '🎓 Traduttore Ufficiale (Translator)',
-        authRoleOptEnthusiast: '💡 Appassionato di Lingue (Enthusiast)',
-        authRoleOptAdmin: '🛡️ Amministratore (Admin - riservato a djoudimadani09@gmail.com)',
-        authSubmitBtn: 'Accedi e Apri Dashboard',
-        authQuickLoginLabel: 'Test rapido profili in 1 clic:',
-        btnQuickAdmin: '🛡️ Admin',
-        btnQuickTranslator: '🎓 Traduttore',
-        btnQuickClient: '👤 Cliente',
-        btnQuickEnthusiast: '💡 Studente',
-        statusCompleted: 'Completato e Consegnato ✓',
-        statusActive: 'In Corso di Traduzione',
+        authFullNamePlaceholder: 'es: Madani Djoudi',
+        authEmailLabel: 'Email Autorizzata:',
+        authEmailPlaceholder: 'user@polylang.dz o djoudimadani09@gmail.com per Admin',
+        authPasswordLabel: 'Password / Codice di Accesso:',
+        authRoleLabel: 'Ruolo nella Piattaforma:',
+        authRoleOptClient: '👤 Cliente Traduzione (Client)',
+        authRoleOptTranslator: '🎓 Traduttore Giurato (Translator)',
+        authRoleOptEnthusiast: '💡 Studente di Lingue (Enthusiast)',
+        authRoleOptAdmin: '🛡️ Amministratore (Admin)',
+        authAdminDetected: '🛡️ Identità Amministratore Verificata (djoudimadani09@gmail.com) ✓',
+        authAdminWarning: '⚠️ Avviso: Ruolo Admin riservato a djoudimadani09@gmail.com. Accesso come Cliente.',
+        authSubmitBtn: '🔒 Accedi e Avvia la Sessione',
+        authQuickLoginLabel: 'Accesso Rapido in 1 Clic:',
+        btnQuickAdmin: '🛡️ Fondatore Admin (djoudimadani09@gmail.com)',
+        btnQuickTranslator: '🎓 Traduttore Giurato (translator@polylang.dz)',
+        btnQuickClient: '👤 Cliente Aziendale (client@polylang.dz)',
+        btnQuickEnthusiast: '💡 Studente (enthusiast@polylang.dz)',
+        statusCompleted: 'Completato & Consegnato ✓',
+        statusActive: 'In Traduzione & Revisione',
         statusPending: 'In Attesa di Approvazione',
-        previewDocTitle: 'Anteprima Sicura del Documento Tradotto',
-        previewHashValid: 'Hash Crittografico SHA-256 Verificato e Confermato ✓',
+        previewDocTitle: 'Anteprima del Documento Ufficiale Certificato',
+        previewHashValid: 'Impronta Crittografica SHA-256 Verificata ✓',
         previewDownloadBtn: 'Scarica Documento Certificato (PDF)',
-        previewPrintBtn: 'Stampa Certificato Ufficiale'
+        previewPrintBtn: 'Stampa Avviso Ufficiale'
       },
       de: {
         dir: 'ltr',
         langName: 'Deutsch',
-        brandSubtitle: 'Plattform für Beglaubigte Übersetzungen & Sprachtraining',
+        brandSubtitle: 'Plattform für Beglaubigte Übersetzungen & Monetarisierte Schulungen',
         aboutBtnText: 'Über Uns',
-        footerTagline: 'Zertifizierte Plattform für Fachübersetzungen & Intelligente Lokalisierung',
-        footerDesc: 'Führende Cloud-SaaS-Plattform für vereidigte Übersetzungen, juristische Terminologieprüfung und KI-gestütztes Video-Subtitling.',
-        footerCopyright: '© 2026 <strong>Polylang Hub</strong>. Alle Rechte vorbehalten — Entwickelt von <strong>Madani Djoudi</strong>.',
+        switchAccountBtn: 'Konto Wechseln / Anmelden',
+        footerTagline: 'Zertifizierte Übersetzung, Lokalisierung & Fachschulungen',
+        footerDesc: 'Führende Enterprise-SaaS-Plattform für vereidigte Übersetzungen, Terminologie-Audits, SRT-Untertitelung und elektronische Zahlungsabwicklung.',
+        footerCopyright: '© 2026 <strong>Polylang Hub</strong>. Alle Rechte vorbehalten — Konzipiert und geleitet von <strong>Madani Djoudi</strong>.',
         aboutModalMainTitle: 'Über Polylang Hub & Gründer Madani Djoudi',
-        aboutModalSubTitle: 'Spitzenleistung in zertifizierten Übersetzungen & KI-Lösungen',
+        aboutModalSubTitle: 'Spitzenleistungen in Sprachingenieurwesen und Zertifizierter Übersetzung',
         historyTab: 'Übersetzungsverlauf',
-        historyHeading: 'Archiv & Verlauf der Übersetzungsaufträge',
-        backendStatusLive: 'NestJS-API online 🟢',
-        backendStatusLocal: 'Lokale Synchronisation 🟡',
+        historyHeading: 'Projektarchiv & Übersetzungshistorie',
+        backendStatusLive: 'NestJS API Online 🟢',
+        backendStatusLocal: 'Lokale Synchronisierung Gesichert 🟡',
         roleChipMedia: 'Medien- & Schulungszentrum',
         roleChipEnthusiast: 'Sprachbegeisterter',
-        mediaHeroTitle: 'Schulungs- und Medienzentrum (Video- & Audio-Hub)',
-        mediaHeroDesc: 'Fortgeschrittene Akademie für vereidigte Übersetzer und Konferenzdolmetscher mit Vorträgen über UN-Kabinen, AVT-Untertitelung und Shadowing-Übungen.',
-        btnOpenSimBooth: 'Simulationskabine Öffnen',
-        btnSyncMedia: 'Mediathek Aktualisieren',
-        tabAllMedia: '🎬 Alle Medien',
-        tabVideoMasterclasses: '📺 Video-Masterclasses',
-        tabAudioShadowing: '🎧 Audio-Shadowing-Übungen',
-        tabCognitiveReset: '🧠 Kognitive Erholung & Atmung (432Hz)',
-        videoTakeawaysHeading: '📌 Wichtigste Lernergebnisse der Lektion:',
-        btnPracticeLive: 'Kabinen-Training Starten',
-        btnDownloadNotes: 'Skript und SRT Herunterladen (PDF)',
-        videoPlaylistTitle: 'Liste der Professionellen Masterclasses',
-        audioHubHeading: '🎧 Interaktives Audiolabor & Schnelles Shadowing-Training',
-        audioHubSub: 'Trainieren Sie mit hochpräzisen Tonaufnahmen, die speziell zur Messung der Reaktionszeit und phonetischen Präzision erstellt wurden.',
+        mediaHeroTitle: 'Schulungsakademie & Masterclasses',
+        mediaHeroDesc: 'Fortgeschrittene Akademie für beeidigte Übersetzer und Konferenzdolmetscher: kostenlose Vorlesungen und kostenpflichtige Profi-Masterclasses zu UN-Dolmetschkabinen und AVT.',
+        btnOpenSimBooth: '🎙️ Dolmetschkabine Starten',
+        btnSyncMedia: '🔄 Inhalte Aktualisieren',
+        tabAllMedia: '🎬 Alle Kurse',
+        tabFreeTutorials: '🆓 Kostenlose Tutorials',
+        tabVideoMasterclasses: '⭐ Premium Masterclasses',
+        tabMyUnlocked: '🔓 Meine Gekauften Kurse',
+        tabAudioShadowing: '🎧 Sprach-Shadowing-Übungen',
+        tabCognitiveReset: '🧠 Kognitive Erholung (432Hz)',
+        videoTakeawaysHeading: '📌 Wichtigste Lerninhalte & Kompetenzen:',
+        btnPracticeLive: '🎙️ Live-Training in Kabine Starten',
+        btnDownloadNotes: '📥 Notizen & Glossar Herunterladen (PDF)',
+        videoPlaylistTitle: 'Kurskatalog & Masterclasses',
+        audioHubHeading: '🎧 Interaktives Audio- und Shadowing-Labor',
+        audioHubSub: 'Trainieren Sie mit hochpräzisen Tonaufnahmen, um Ihre verbale Reaktionszeit und Aussprache zu perfektionieren.',
+        paywallTitle: 'Gesperrte Profi-Masterclass (Paywall)',
+        paywallSub: 'Dieser fortgeschrittene Dolmetscherkurs erfordert eine Lizenz oder Plattform-Einschreibung für den vollständigen Zugriff und ISO 17100 Zertifikate.',
+        paywallBadge: '⭐ Exklusiver Fachinhalt',
+        paywallFeature1: '✓ Vollständige Aufnahme in Ultra-HD 4K',
+        paywallFeature2: '✓ Offizielles ISO 17100 Abschlusszertifikat',
+        paywallFeature3: '✓ Fachglossare und SRT- sowie PDF-Dateien',
+        btnUnlockWallet: '💳 Mit Guthaben Sofort Freischalten',
+        btnPayCib: '🏦 Mit Edahabia / CIB Bezahlen',
+        btnWatchNow: 'Jetzt Ansehen ▶',
+        btnCourseUnlocked: '🔓 Gekauft & Aktiviert ✓',
+        freeBadge: '🆓 Kostenlos',
+        premiumBadge: '⭐ Premium',
+        unlockedBadge: '🔓 Freigeschaltet',
         roleLabels: {
-          admin: 'Plattform-Administrator',
-          translator: 'Vereidigter & Professioneller Übersetzer',
-          client: 'Auftraggeber & Kunde',
-          enthusiast: 'Sprachbegeisterter & Lernender',
+          admin: 'Plattform-Administrator (Admin)',
+          translator: 'Vereidigter Übersetzer',
+          client: 'Unternehmens- & Privatkunde',
+          enthusiast: 'Sprachschüler & Interessierter',
           media: 'Medien- & Schulungszentrum'
         },
-        srtStudioTitle: 'Studio für Video-Untertitelung & SRT-Synchronisation',
-        srtStudioSub: 'Professioneller Medienplayer mit Schulungsvideos, mehrsprachigen Untertiteln und exaktem Timecode.',
+        srtStudioTitle: 'Video-Untertitelung & SRT-Engineering Studio',
+        srtStudioSub: 'Professioneller Medienplayer mit Masterclasses und millisekundengenauer Untertitel-Synchronisation.',
         subTrackLabel: 'Aktive Untertitelspur:',
-        exportSrtBtn: '⬇️ SRT-Datei exportieren',
-        videoAcademyTitle: 'Video-Akademie für Translationswissenschaft & Konferenzdolmetschen',
-        videoAcademySub: 'Fachvorträge zu UN-Simultandolmetscher-Kabinen, Notizentechnik und Terminologiestandards.',
-        authModalHeading: 'Sichere Anmeldung bei Polylang Hub',
-        authSessionIsolationLabel: 'Sitzungsdaten-Isolation:',
-        authIsolatedBadge: '100% Isoliert & Sicher ✓',
+        exportSrtBtn: '⬇️ Zertifizierte SRT-Datei Exportieren',
+        videoAcademyTitle: 'Video-Akademie für Translationswissenschaft',
+        videoAcademySub: 'Masterclasses zu UN-Dolmetschkabinen und Rozan-Notizentechnik.',
+        authModalHeading: 'Polylang Hub Sicheres Zugangsportal',
+        authModalSubHeading: 'Wählen Sie Ihre Berufsrolle oder melden Sie sich an, um Ihren isolierten Arbeitsbereich zu öffnen',
+        authSessionIsolationLabel: 'Garantie für Datenisolation:',
+        authIsolatedBadge: '100% Isoliert & Geschützt ✓',
         authFullNameLabel: 'Vollständiger Name:',
-        authFullNamePlaceholder: 'z.B. Karim Hamdaoui',
-        authEmailLabel: 'E-Mail-Adresse:',
-        authEmailPlaceholder: 'nutzer@polylang.dz',
-        authRoleLabel: 'Professionelle Rolle & Profil:',
-        authRoleOptClient: '👤 Auftraggeber & Kunde (Client)',
-        authRoleOptTranslator: '🎓 Vereidigter Übersetzer (Translator)',
-        authRoleOptEnthusiast: '💡 Sprachbegeisterter (Enthusiast)',
-        authRoleOptAdmin: '🛡️ Administrator (Admin - reserviert für djoudimadani09@gmail.com)',
-        authSubmitBtn: 'Anmelden und Starten',
-        authQuickLoginLabel: 'Schnelltest der Rollen mit 1 Klick:',
-        btnQuickAdmin: '🛡️ Admin',
-        btnQuickTranslator: '🎓 Übersetzer',
-        btnQuickClient: '👤 Kunde',
-        btnQuickEnthusiast: '💡 Lernender',
+        authFullNamePlaceholder: 'z.B. Madani Djoudi',
+        authEmailLabel: 'Autorisierte E-Mail-Adresse:',
+        authEmailPlaceholder: 'user@polylang.dz oder djoudimadani09@gmail.com für Admin',
+        authPasswordLabel: 'Passwort / Sicherheitscode:',
+        authRoleLabel: 'Rolle auf der Plattform:',
+        authRoleOptClient: '👤 Auftraggeber (Client)',
+        authRoleOptTranslator: '🎓 Beeidigter Übersetzer (Translator)',
+        authRoleOptEnthusiast: '💡 Sprachschüler (Enthusiast)',
+        authRoleOptAdmin: '🛡️ Plattform-Administrator (Admin)',
+        authAdminDetected: '🛡️ Administrator-Identität Bestätigt (djoudimadani09@gmail.com) ✓',
+        authAdminWarning: '⚠️ Hinweis: Admin-Rolle für djoudimadani09@gmail.com reserviert. Anmeldung als Kunde.',
+        authSubmitBtn: '🔒 Anmelden und Bereich Öffnen',
+        authQuickLoginLabel: 'Schnellanmeldung mit 1 Klick:',
+        btnQuickAdmin: '🛡️ Gründer-Admin (djoudimadani09@gmail.com)',
+        btnQuickTranslator: '🎓 Übersetzer (translator@polylang.dz)',
+        btnQuickClient: '👤 Unternehmenskunde (client@polylang.dz)',
+        btnQuickEnthusiast: '💡 Sprachlerner (enthusiast@polylang.dz)',
         statusCompleted: 'Abgeschlossen & Geliefert ✓',
-        statusActive: 'In Bearbeitung & Prüfung',
-        statusPending: 'Ausstehende Bestätigung',
-        previewDocTitle: 'Sichere Dokumentenvorschau des Beglaubigten Textes',
-        previewHashValid: 'Kryptografischer SHA-256-Hash Verifiziert & Bestätigt ✓',
-        previewDownloadBtn: 'Beglaubigtes Dokument Herunterladen (PDF)',
-        previewPrintBtn: 'Offiziellen Beleg Drucken'
+        statusActive: 'In Übersetzung & Prüfung',
+        statusPending: 'Wartet auf Genehmigung',
+        previewDocTitle: 'Vorschau des Beglaubigten Dokuments',
+        previewHashValid: 'Kryptografischer SHA-256 Hash Verifiziert ✓',
+        previewDownloadBtn: 'Zertifiziertes Dokument Herunterladen (PDF)',
+        previewPrintBtn: 'Amtliche Benachrichtigung Drucken'
       },
       ru: {
         dir: 'ltr',
         langName: 'Русский',
-        brandSubtitle: 'Платформа сертифицированного перевода и языкового обучения',
-        aboutBtnText: 'О нас',
-        footerTagline: 'Платформа институционального перевода и интеллектуальной локализации',
-        footerDesc: 'Ведущая облачная SaaS-платформа для заверенного перевода, юридического аудита терминологии и создания субтитров SRT.',
-        footerCopyright: '© 2026 <strong>Polylang Hub</strong>. Все права защищены — Создатель и разработчик <strong>Madani Djoudi</strong>.',
-        aboutModalMainTitle: 'О платформе Polylang Hub и основателе Madani Djoudi',
-        aboutModalSubTitle: 'Лидерство в сфере официального перевода и языковых решений',
-        historyTab: 'История переводов',
-        historyHeading: 'История и архив проектов перевода',
-        backendStatusLive: 'NestJS API онлайн 🟢',
-        backendStatusLocal: 'Локальная синхронизация 🟡',
-        roleChipMedia: 'Медиацентр и обучение',
-        roleChipEnthusiast: 'Любитель языков',
-        mediaHeroTitle: 'Учебный и мультимедийный центр (Видео и Аудио)',
-        mediaHeroDesc: 'Академия для присяжных переводчиков и специалистов синхронного перевода: лекции по работе в кабинах ООН, аудиовизуальному переводу (AVT) и дыхательным практикам (432 Гц).',
-        btnOpenSimBooth: 'Открыть кабину синхрона',
-        btnSyncMedia: 'Обновить библиотеку',
-        tabAllMedia: '🎬 Все медиаматериалы',
-        tabVideoMasterclasses: '📺 Видео мастер-классы',
-        tabAudioShadowing: '🎧 Аудио тренажер (Shadowing)',
-        tabCognitiveReset: '🧠 Ментальная разгрузка (432 Гц)',
-        videoTakeawaysHeading: '📌 Ключевые выводы и навыки урока:',
-        btnPracticeLive: 'Начать тренировку в кабине',
-        btnDownloadNotes: 'Скачать конспект и термины (PDF)',
-        videoPlaylistTitle: 'Список профессиональных мастер-классов',
-        audioHubHeading: '🎧 Интерактивная аудиолаборатория и тренинг речи',
-        audioHubSub: 'Слушайте и тренируйтесь с записями высокой четкости, калиброванными для проверки скорости вербальной реакции и акцента.',
+        brandSubtitle: 'Платформа Сертифицированного Перевода и Монетизированного Обучения',
+        aboutBtnText: 'О Нас',
+        switchAccountBtn: 'Сменить Аккаунт / Войти',
+        footerTagline: 'Сертифицированный Институциональный Перевод и Обучение',
+        footerDesc: 'Ведущая облачная SaaS-платформа для нотариального перевода, терминологического аудита, мастер-классов по субтитрированию SRT и защищенных платежей.',
+        footerCopyright: '© 2026 <strong>Polylang Hub</strong>. Все права защищены — Разработано и руководится <strong>Madani Djoudi</strong>.',
+        aboutModalMainTitle: 'О Polylang Hub и Основателе Madani Djoudi',
+        aboutModalSubTitle: 'Лидерство в Лингвистической Инженерии и Нотариальном Переводе',
+        historyTab: 'История Переводов',
+        historyHeading: 'Архив и История Проектов',
+        backendStatusLive: 'API NestJS Онлайн 🟢',
+        backendStatusLocal: 'Локальная Синхронизация Защищена 🟡',
+        roleChipMedia: 'Центр Обучения и Медиа',
+        roleChipEnthusiast: 'Любитель Языков',
+        mediaHeroTitle: 'Академия Обучения и Мастер-Классов',
+        mediaHeroDesc: 'Передовая академия для сертифицированных переводчиков и синхронистов: бесплатные уроки и платные мастер-классы по кабинам ООН, аудиовизуальному переводу и шедоуингу.',
+        btnOpenSimBooth: '🎙️ Открыть Кабину Синхрона',
+        btnSyncMedia: '🔄 Обновить Материалы',
+        tabAllMedia: '🎬 Все Курсы',
+        tabFreeTutorials: '🆓 Бесплатные Уроки',
+        tabVideoMasterclasses: '⭐ Премиум Мастер-Классы',
+        tabMyUnlocked: '🔓 Мои Купленные Курсы',
+        tabAudioShadowing: '🎧 Упражнения Шедоуинга',
+        tabCognitiveReset: '🧠 Ментальная Разгрузка (432Hz)',
+        videoTakeawaysHeading: '📌 Ключевые Навыки и Итоги Урока:',
+        btnPracticeLive: '🎙️ Начать Тренировку в Кабине',
+        btnDownloadNotes: '📥 Скачать Конспект и Глоссарий (PDF)',
+        videoPlaylistTitle: 'Каталог Курсов и Мастер-Классов',
+        audioHubHeading: '🎧 Интерактивная Аудиолаборатория Шедоуинга',
+        audioHubSub: 'Слушайте и тренируйтесь с высокоточным звуком для проверки скорости речевой реакции и синхронного повторения.',
+        paywallTitle: 'Платный Профессиональный Мастер-Класс (Paywall)',
+        paywallSub: 'Этот профессиональный курс требует лицензии или оплаты с баланса платформы для полного доступа к видео и сертификатам ISO 17100.',
+        paywallBadge: '⭐ Эксклюзивный Проф-Контент',
+        paywallFeature1: '✓ Полная запись в Ultra-HD 4K качестве',
+        paywallFeature2: '✓ Сертификат завершения стандарта ISO 17100',
+        paywallFeature3: '✓ Терминологические глоссарии и файлы SRT + PDF',
+        btnUnlockWallet: '💳 Открыть с Баланса Кошелька',
+        btnPayCib: '🏦 Оплатить Картой Edahabia / CIB',
+        btnWatchNow: 'Смотреть Сейчас ▶',
+        btnCourseUnlocked: '🔓 Куплено и Доступно ✓',
+        freeBadge: '🆓 Бесплатно',
+        premiumBadge: '⭐ Премиум',
+        unlockedBadge: '🔓 Разблокировано',
         roleLabels: {
-          admin: 'Администратор платформы',
-          translator: 'Сертифицированный переводчик',
-          client: 'Заказчик перевода',
-          enthusiast: 'Любитель языков и учащийся',
-          media: 'Медиацентр и обучение'
+          admin: 'Администратор Платформы (Admin)',
+          translator: 'Сертифицированный Присяжный Переводчик',
+          client: 'Корпоративный и Частный Клиент',
+          enthusiast: 'Любитель и Студент Языков',
+          media: 'Центр Обучения и Медиа'
         },
-        srtStudioTitle: 'Студия субтитрирования видео и синхронизации SRT',
-        srtStudioSub: 'Медиаплеер профессионального уровня с обучающими видео, многоязычными дорожками и точным таймингом.',
-        subTrackLabel: 'Активная дорожка субтитров:',
-        exportSrtBtn: '⬇️ Экспорт файла SRT',
-        videoAcademyTitle: 'Видеоакадемия синхронного перевода и языковых навыков',
-        videoAcademySub: 'Лекции высокого разрешения о работе в кабинах ООН, технике скорописи Розана и субтитрировании.',
-        authModalHeading: 'Безопасный вход в Polylang Hub',
-        authSessionIsolationLabel: 'Изоляция данных сеанса:',
-        authIsolatedBadge: '100% Изолировано ✓',
-        authFullNameLabel: 'Полное имя:',
-        authFullNamePlaceholder: 'напр., Карим Хамдауи',
-        authEmailLabel: 'Электронная почта:',
-        authEmailPlaceholder: 'user@polylang.dz',
-        authRoleLabel: 'Профессиональная роль пользователя:',
-        authRoleOptClient: '👤 Заказчик перевода (Client)',
-        authRoleOptTranslator: '🎓 Сертифицированный переводчик (Translator)',
-        authRoleOptEnthusiast: '💡 Любитель языков (Enthusiast)',
-        authRoleOptAdmin: '🛡️ Администратор (Admin - доступно для djoudimadani09@gmail.com)',
-        authSubmitBtn: 'Войти и открыть рабочую область',
-        authQuickLoginLabel: 'Быстрый выбор роли в 1 клик:',
-        btnQuickAdmin: '🛡️ Админ',
-        btnQuickTranslator: '🎓 Переводчик',
-        btnQuickClient: '👤 Заказчик',
-        btnQuickEnthusiast: '💡 Учащийся',
-        statusCompleted: 'Выполнен и доставлен ✓',
-        statusActive: 'В процессе перевода',
-        statusPending: 'На согласовании',
-        previewDocTitle: 'Предпросмотр заверенного документа',
-        previewHashValid: 'Криптографический хеш SHA-256 проверен и подтвержден ✓',
-        previewDownloadBtn: 'Скачать заверенный документ (PDF)',
-        previewPrintBtn: 'Распечатать официальную справку'
+        srtStudioTitle: 'Студия Субтитрирования и Инженерии SRT',
+        srtStudioSub: 'Профессиональный видеоплеер с интегрированными мастер-классами и точной синхронизацией до миллисекунд.',
+        subTrackLabel: 'Активная Дорожка Субтитров:',
+        exportSrtBtn: '⬇️ Экспорт Сертифицированного SRT',
+        videoAcademyTitle: 'Видеоакадемия Переводческого Мастерства',
+        videoAcademySub: 'Мастер-классы по кабинам синхронного перевода ООН и системе записей Розана.',
+        authModalHeading: 'Портал Безопасного Входа Polylang Hub',
+        authModalSubHeading: 'Выберите вашу профессиональную роль или войдите для открытия изолированного рабочего пространства',
+        authSessionIsolationLabel: 'Гарантия Изоляции Данных Сессии:',
+        authIsolatedBadge: '100% Изолировано и Защищено ✓',
+        authFullNameLabel: 'Полное Имя:',
+        authFullNamePlaceholder: 'напр.: Madani Djoudi',
+        authEmailLabel: 'Авторизованный Email:',
+        authEmailPlaceholder: 'user@polylang.dz или djoudimadani09@gmail.com для Admin',
+        authPasswordLabel: 'Пароль / Код Доступа:',
+        authRoleLabel: 'Роль на Платформе:',
+        authRoleOptClient: '👤 Клиент-Заказчик (Client)',
+        authRoleOptTranslator: '🎓 Присяжный Переводчик (Translator)',
+        authRoleOptEnthusiast: '💡 Изучающий Языки (Enthusiast)',
+        authRoleOptAdmin: '🛡️ Администратор Системы (Admin)',
+        authAdminDetected: '🛡️ Личность Администратора Подтверждена (djoudimadani09@gmail.com) ✓',
+        authAdminWarning: '⚠️ Внимание: Роль Admin доступна только для djoudimadani09@gmail.com. Вход в роли Клиента.',
+        authSubmitBtn: '🔒 Войти и Активировать Пространство',
+        authQuickLoginLabel: 'Быстрый Вход в 1 Клик:',
+        btnQuickAdmin: '🛡️ Основатель Admin (djoudimadani09@gmail.com)',
+        btnQuickTranslator: '🎓 Присяжный Переводчик (translator@polylang.dz)',
+        btnQuickClient: '👤 Корпоративный Клиент (client@polylang.dz)',
+        btnQuickEnthusiast: '💡 Студент Языков (enthusiast@polylang.dz)',
+        statusCompleted: 'Завершено и Доставлено ✓',
+        statusActive: 'В Процессе Перевода и Аудита',
+        statusPending: 'Ожидает Подтверждения',
+        previewDocTitle: 'Предпросмотр Сертифицированного Документа',
+        previewHashValid: 'Криптографический Хеш SHA-256 Подтвержден ✓',
+        previewDownloadBtn: 'Скачать Сертифицированный Документ (PDF)',
+        previewPrintBtn: 'Печать Официального Уведомления'
       }
     };
-
 
     function applyLanguage(lang) {
       if (!dictionary[lang]) lang = 'ar';
@@ -5799,6 +6295,7 @@
       renderDynamicNavTabs();
       renderUserProfilePill();
       renderRoleDashboardPanels();
+      renderVideoPlaylistAndCatalog();
     }
 
     function toggleLanguageMenu(event) {
@@ -7747,17 +8244,23 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
       if (emailEl && activeUser) {
         emailEl.innerText = `${activeUser.name} (${activeUser.email})`;
       }
+      const badge = document.getElementById('authModalActiveEmailBadge');
+      if (badge && activeUser) {
+        badge.innerText = `${activeUser.email} (${activeUser.role.toUpperCase()}) ✓`;
+      }
       const roleSelect = document.getElementById('authRoleSelect');
       if (roleSelect && activeUser) {
         roleSelect.value = activeUser.role;
+        selectAuthRole(activeUser.role);
       }
-      const nameInput = document.getElementById('authNameInput');
+      const nameInput = document.getElementById('authInputName') || document.getElementById('authNameInput');
       if (nameInput && activeUser) {
         nameInput.value = activeUser.name;
       }
-      const emailInput = document.getElementById('authEmailInput');
+      const emailInput = document.getElementById('authInputEmail') || document.getElementById('authEmailInput');
       if (emailInput && activeUser) {
         emailInput.value = activeUser.email;
+        onAuthEmailInputChange(activeUser.email);
       }
     }
 
@@ -7768,21 +8271,103 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
       document.getElementById('paymentModalBackdrop').classList.remove('active');
     }
 
-    async function handleAuthSubmit(e) {
-      e.preventDefault();
-      const name = document.getElementById('authNameInput').value.trim();
-      const email = document.getElementById('authEmailInput').value.trim();
-      let role = document.getElementById('authRoleSelect').value;
+    // =============================================================
+    // PROFESSIONAL AUTH MODAL & ROLE SELECTION LOGIC
+    // =============================================================
+    function selectAuthRole(role) {
+      document.querySelectorAll('.auth-role-card').forEach(c => {
+        c.classList.remove('selected', 'admin-selected');
+      });
+
+      const roleInput = document.getElementById('authRoleSelect');
+      if (roleInput) roleInput.value = role;
+
+      const card = document.getElementById(`authCard${role.charAt(0).toUpperCase() + role.slice(1)}`);
+      if (card) {
+        if (role === 'admin') {
+          card.classList.add('admin-selected');
+        } else {
+          card.classList.add('selected');
+        }
+      }
+
+      const emailInput = document.getElementById('authInputEmail') || document.getElementById('authEmailInput');
+      const email = emailInput ? emailInput.value.trim().toLowerCase() : '';
+      checkAuthAdminBadges(email, role);
+    }
+
+    function onAuthEmailInputChange(emailVal) {
+      const cleanEmail = String(emailVal || '').trim().toLowerCase();
+      const roleInput = document.getElementById('authRoleSelect');
+      const currentRole = roleInput ? roleInput.value : 'client';
+
+      if (cleanEmail === STRICT_ADMIN_EMAIL.toLowerCase()) {
+        // Automatically select Admin!
+        selectAuthRole('admin');
+        const nameInput = document.getElementById('authInputName') || document.getElementById('authNameInput');
+        if (nameInput && (!nameInput.value || nameInput.value === 'كريم حمداوي')) {
+          nameInput.value = 'مداني جودي (Madani Djoudi)';
+        }
+      } else {
+        checkAuthAdminBadges(cleanEmail, currentRole);
+      }
+    }
+
+    function checkAuthAdminBadges(email, role) {
+      const detectedBadge = document.getElementById('authAdminDetectedBadge');
+      const warningBadge = document.getElementById('authAdminWarningBadge');
+
+      const isCleanAdmin = email === STRICT_ADMIN_EMAIL.toLowerCase();
+
+      if (isCleanAdmin) {
+        if (detectedBadge) detectedBadge.classList.add('visible');
+        if (warningBadge) warningBadge.classList.remove('visible');
+      } else {
+        if (detectedBadge) detectedBadge.classList.remove('visible');
+        if (role === 'admin') {
+          if (warningBadge) warningBadge.classList.add('visible');
+        } else {
+          if (warningBadge) warningBadge.classList.remove('visible');
+        }
+      }
+    }
+
+    function quickLoginAs(email, role, name) {
+      const nameInput = document.getElementById('authInputName') || document.getElementById('authNameInput');
+      const emailInput = document.getElementById('authInputEmail') || document.getElementById('authEmailInput');
+
+      if (nameInput) nameInput.value = name;
+      if (emailInput) emailInput.value = email;
+
+      selectAuthRole(role);
+      onAuthEmailInputChange(email);
+
+      // Trigger submission
+      const form = document.getElementById('authLoginForm');
+      if (form) {
+        handleAuthSubmit(new Event('submit'));
+      }
+    }
+
+    function handleAuthSubmit(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      const nameInput = document.getElementById('authInputName') || document.getElementById('authNameInput');
+      const emailInput = document.getElementById('authInputEmail') || document.getElementById('authEmailInput');
+      const name = (nameInput?.value || 'مستخدم Polylang').trim();
+      const email = (emailInput?.value || 'client@polylang.dz').trim();
+      let role = document.getElementById('authRoleSelect')?.value || 'client';
 
       if (typeof ApiService !== 'undefined') {
         try {
-          await ApiService.login(email, 'session_auth', role);
+          ApiService.login(email, 'session_auth', role);
         } catch (err) {
           console.warn('API login notice:', err);
         }
       }
 
-      if (role === 'admin' && !isStrictAdminAuthorized(email)) {
+      if (isStrictAdminAuthorized(email)) {
+        role = 'admin';
+      } else if (role === 'admin') {
         playAppSound('error');
         alert(
           (currentLanguage === 'ar')
@@ -7792,8 +8377,13 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
         role = 'client';
       }
 
+      try {
+        sessionStorage.setItem('polylang_has_authenticated', 'true');
+      } catch (err) {}
+
       closeAuthModal();
       switchUserSession({ name, email, role });
+      pushToast(currentLanguage === 'ar' ? `✅ تم تفعيل جلسة: ${name} (${role})` : `✅ Session active: ${name} (${role})`);
     }
 
     function quickLoginRole(role) {
@@ -7813,11 +8403,26 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
     }
 
     function handlePaymentSubmit(e) {
-      e.preventDefault();
+      if (e && e.preventDefault) e.preventDefault();
       closePaymentModal();
       pushToast('⏳ جاري الاتصال بشبكة SATIM وتأكيد الخصم البنكي...');
 
       setTimeout(() => {
+        // If it was a video payment, unlock it!
+        if (pendingPaymentVideoId) {
+          const vidId = pendingPaymentVideoId;
+          pendingPaymentVideoId = null;
+          const vid = MEDIA_VIDEOS.find(v => v.id === vidId);
+          if (vid) {
+            if (!activeUser.unlockedVideos) activeUser.unlockedVideos = [];
+            if (!activeUser.unlockedVideos.includes(vid.id)) {
+              activeUser.unlockedVideos.push(vid.id);
+            }
+            saveCurrentUserIsolatedSession();
+            switchMediaVideo(activeMediaVideoIndex);
+          }
+        }
+
         let updatedOrder = null;
         if (clientOrders.length > 0) {
           clientOrders[0].status = 'active';
@@ -8005,6 +8610,19 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
        12. APPLICATION BOOTSTRAP
        ------------------------------------------------------------- */
     window.addEventListener('DOMContentLoaded', () => {
+      // Startup Authentication & Role Selection Gateway
+      try {
+        const hasAuth = sessionStorage.getItem('polylang_has_authenticated');
+        if (!hasAuth) {
+          setTimeout(() => {
+            openAuthModal();
+          }, 350);
+        }
+      } catch (e) {}
+
+      // Initial Render for Media Catalog
+      renderVideoPlaylistAndCatalog();
+
       applyTheme(currentTheme);
       applyLanguage(currentLanguage);
       renderNotifications();
