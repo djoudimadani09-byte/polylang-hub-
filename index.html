@@ -728,7 +728,6 @@
 
     table {
       width: 100%;
-      min-width: 660px;
       border-collapse: collapse;
       text-align: right;
     }
@@ -2692,6 +2691,27 @@
         grid-template-columns: 1fr !important;
       }
     }
+    @media (max-width: 768px) {
+      .table-responsive {
+        width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+      }
+      .table-responsive table {
+        min-width: 520px;
+      }
+      .grid-2, .grid-3, .grid-4 {
+        grid-template-columns: 1fr !important;
+      }
+      .header-tools {
+        flex-wrap: wrap;
+      }
+      .modal-box {
+        max-width: 95vw !important;
+        width: 95vw !important;
+        margin: auto !important;
+      }
+    }
     @media (max-width: 600px) {
       .video-main-wrapper {
         border-radius: var(--radius-sm);
@@ -2709,6 +2729,13 @@
       }
       .paywall-actions-row button {
         width: 100% !important;
+      }
+      .table-responsive table {
+        min-width: 480px;
+        font-size: 0.8rem;
+      }
+      th, td {
+        padding: 0.55rem 0.65rem !important;
       }
     }
 
@@ -3758,7 +3785,7 @@
           <!-- Video Embed Frame -->
           <div>
             <div class="responsive-video-wrapper">
-              <iframe id="enthusiastAcademyVideoIframe" src="https://www.youtube-nocookie.com/embed/uT_hFzV1s54" title="Educational Translation Masterclass" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe id="enthusiastAcademyVideoIframe" src="https://www.youtube.com/embed/g8evH3lQvB0" title="Educational Translation Masterclass" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
             <div style="margin-top: 0.6rem; font-size: 0.8rem; color: var(--text-muted); display: flex; justify-content: space-between;">
               <span id="enthusiastVideoCaption">المصدر: الأمم المتحدة - قسم خدمات المؤتمرات والترجمة الشفوية</span>
@@ -3942,7 +3969,7 @@
 
             <!-- 16:9 Player with Embedded Iframe & Frosted Paywall Overlay -->
             <div class="video-main-wrapper" id="mainVideoPlayerWrapper">
-              <iframe id="mainVideoPlayerIframe" src="https://www.youtube-nocookie.com/embed/uT_hFzV1s54?enablejsapi=1" title="Training Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe id="mainVideoPlayerIframe" src="https://www.youtube.com/embed/g8evH3lQvB0?enablejsapi=1" title="Training Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
               
               <!-- Paywall Overlay -->
               <div id="videoPaywallOverlay" class="video-paywall-overlay hidden">
@@ -5559,7 +5586,7 @@
         tag: '🎙️ كابينة الأمم المتحدة',
         level: 'مبتدئ / Beginner',
         duration: '14:20 دقيقة',
-        url: 'https://www.youtube-nocookie.com/embed/uT_hFzV1s54?enablejsapi=1',
+        url: 'https://www.youtube.com/embed/g8evH3lQvB0?enablejsapi=1',
         thumbIcon: '🎙️',
         rating: 4.9,
         students: 1840,
@@ -5579,7 +5606,7 @@
         tag: '🎬 توطين مرئي وSRT',
         level: 'متوسط / Intermediate',
         duration: '18:45 دقيقة',
-        url: 'https://www.youtube-nocookie.com/embed/1la40WqPUVE?enablejsapi=1',
+        url: 'https://www.youtube.com/embed/9Xv4iR9pC9g?enablejsapi=1',
         thumbIcon: '🎬',
         rating: 4.8,
         students: 1420,
@@ -5599,7 +5626,7 @@
         tag: '📝 تدوين روزان',
         level: 'مبتدئ / Beginner',
         duration: '12:15 دقيقة',
-        url: 'https://www.youtube-nocookie.com/embed/7X8IIhm_zcg?enablejsapi=1',
+        url: 'https://www.youtube.com/embed/o_XVt5rdpFY?enablejsapi=1',
         thumbIcon: '📝',
         rating: 4.95,
         students: 2150,
@@ -5619,7 +5646,7 @@
         tag: '⭐ ماستركلاس احترافي (Pro)',
         level: 'متقدم / Professional',
         duration: '45:00 دقيقة',
-        url: 'https://www.youtube-nocookie.com/embed/d0yGdNEWdn0?enablejsapi=1',
+        url: 'https://www.youtube.com/embed/1laThtz19i0?enablejsapi=1',
         thumbIcon: '🏛️',
         rating: 5.0,
         students: 690,
@@ -5639,7 +5666,7 @@
         tag: '⭐ شهادة مهنية معتمدة',
         level: 'خبير / Expert',
         duration: '58:30 دقيقة',
-        url: 'https://www.youtube-nocookie.com/embed/1laThtz19i0?enablejsapi=1',
+        url: 'https://www.youtube.com/embed/g8evH3lQvB0?enablejsapi=1',
         thumbIcon: '⚖️',
         rating: 4.98,
         students: 530,
@@ -5659,7 +5686,7 @@
         tag: '⭐ توطين شبكات البث',
         level: 'متقدم / Professional',
         duration: '40:15 دقيقة',
-        url: 'https://www.youtube-nocookie.com/embed/p3oZf-w84nE?enablejsapi=1',
+        url: 'https://www.youtube.com/embed/p3oZf-w84nE?enablejsapi=1',
         thumbIcon: '🎥',
         rating: 4.92,
         students: 480,
@@ -6241,6 +6268,8 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
         exportSrtBtn: '⬇️ تصدير ملف SRT المعتمد',
         videoAcademyTitle: 'أكاديمية الفيديو لعلوم الترجمة وهندسة المؤتمرات',
         videoAcademySub: 'محاضرات عالية الجودة تغطي كبائن الترجمة الفورية في الأمم المتحدة، تقنيات تدوين روزان، والتوطين السمعي البصري.',
+        goOffersHeading: 'باقات وعروض الاشتراك التنافسية',
+        goOffersSub: 'اختر باقة التدريب المعتمدة التي تناسب مسارك المهني أو متطلبات مؤسستك',
         authModalHeading: 'بوابة الدخول الموحدة وإدارة الجلسات',
         authModalSubHeading: 'يرجى اختيار صفتك المهنية أو إدخال بريدك الإلكتروني للدخول المباشر مع عزل تام للبيانات',
         authSessionIsolationLabel: 'عزل بيانات الجلسة (Data Isolation):',
@@ -6350,6 +6379,8 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
         exportSrtBtn: '⬇️ Export Certified SRT File',
         videoAcademyTitle: 'Video Academy for Translation Studies & Conference Interpretation',
         videoAcademySub: 'High-definition masterclasses on UN simultaneous booths, Rozan note-taking methodology, and audiovisual subtitling.',
+        goOffersHeading: 'Flexible & Competitive Training Packages',
+        goOffersSub: 'Select the certified training track that fits your career goals or organizational workflow',
         authModalHeading: 'Polylang Hub Secure Access Gateway',
         authModalSubHeading: 'Select your professional role or enter your credentials to launch an isolated workspace',
         authSessionIsolationLabel: 'Session Data Isolation Guarantee:',
@@ -6459,6 +6490,8 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
         exportSrtBtn: '⬇️ Exporter le Fichier SRT Certifié',
         videoAcademyTitle: 'Académie Vidéo des Métiers de la Traduction',
         videoAcademySub: 'Masterclasses haute définition sur les cabines de l’ONU et la prise de notes Rozan.',
+        goOffersHeading: 'Offres et Forfaits de Formation Compétitifs',
+        goOffersSub: 'Choisissez le parcours de formation certifié adapté à vos objectifs ou aux besoins de votre entreprise',
         authModalHeading: 'Passerelle d’Accès Sécurisée Polylang Hub',
         authModalSubHeading: 'Sélectionnez votre rôle ou saisissez votre email pour ouvrir un espace de travail isolé',
         authSessionIsolationLabel: 'Garantie d’Isolation des Données:',
@@ -6568,6 +6601,8 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
         exportSrtBtn: '⬇️ Exportar Archivo SRT Certificado',
         videoAcademyTitle: 'Academia de Video para Estudios de Traducción',
         videoAcademySub: 'Masterclasses sobre cabinas de interpretación de la ONU y toma de notas de Rozan.',
+        goOffersHeading: 'Paquetes de Formación y Ofertas Competitivas',
+        goOffersSub: 'Elija el programa de formación certificado adaptado a sus aspiraciones o a las necesidades de su empresa',
         authModalHeading: 'Pasarela de Acceso Seguro Polylang Hub',
         authModalSubHeading: 'Seleccione su rol profesional o ingrese sus credenciales para iniciar su sesión aislada',
         authSessionIsolationLabel: 'Garantía de Aislamiento de Datos:',
@@ -6677,6 +6712,8 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
         exportSrtBtn: '⬇️ Esporta File SRT Certificato',
         videoAcademyTitle: 'Accademia Video per la Traduzione e l’Interpretariato',
         videoAcademySub: 'Masterclass sulle cabine ONU e sulla tecnica di presa note Rozan.',
+        goOffersHeading: 'Pacchetti Formativi e Offerte Competitive',
+        goOffersSub: 'Scegli il percorso di formazione certificato più adatto ai tuoi obiettivi professionali o alla tua azienda',
         authModalHeading: 'Portale d’Accesso Sicuro Polylang Hub',
         authModalSubHeading: 'Seleziona il tuo ruolo o inserisci le tue credenziali per avviare la sessione isolata',
         authSessionIsolationLabel: 'Garanzia di Isolamento Dati:',
@@ -6786,6 +6823,8 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
         exportSrtBtn: '⬇️ Zertifizierte SRT-Datei Exportieren',
         videoAcademyTitle: 'Video-Akademie für Translationswissenschaft',
         videoAcademySub: 'Masterclasses zu UN-Dolmetschkabinen und Rozan-Notizentechnik.',
+        goOffersHeading: 'Flexible & Wettbewerbsfähige Trainingspakete',
+        goOffersSub: 'Wählen Sie das zertifizierte Trainingsprogramm, das optimal zu Ihren Karrierezielen passt',
         authModalHeading: 'Polylang Hub Sicheres Zugangsportal',
         authModalSubHeading: 'Wählen Sie Ihre Berufsrolle oder melden Sie sich an, um Ihren isolierten Arbeitsbereich zu öffnen',
         authSessionIsolationLabel: 'Garantie für Datenisolation:',
@@ -6895,6 +6934,8 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
         exportSrtBtn: '⬇️ Экспорт Сертифицированного SRT',
         videoAcademyTitle: 'Видеоакадемия Переводческого Мастерства',
         videoAcademySub: 'Мастер-классы по кабинам синхронного перевода ООН и системе записей Розана.',
+        goOffersHeading: 'Гибкие и Выгодные Пакеты Обучения',
+        goOffersSub: 'Выберите сертифицированную программу обучения, отвечающую вашим карьерным целям',
         authModalHeading: 'Портал Безопасного Входа Polylang Hub',
         authModalSubHeading: 'Выберите вашу профессиональную роль или войдите для открытия изолированного рабочего пространства',
         authSessionIsolationLabel: 'Гарантия Изоляции Данных Сессии:',
@@ -8178,17 +8219,17 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
     const educationalVideos = {
       un: {
         title: 'محاضرة: الترجمة الفورية داخل كبائن الأمم المتحدة (UN Simultaneous Interpretation)',
-        url: 'https://www.youtube-nocookie.com/embed/uT_hFzV1s54',
+        url: 'https://www.youtube.com/embed/g8evH3lQvB0',
         desc: 'محاضرة تطبيقية توضح ديناميكيات العمل في كابينة الأمم المتحدة، وكيفية التعامل مع فارق التوقيت المعرفي (Décalage) وإدارة الحمل الذهني أثناء الخطابات الدولية الحية.'
       },
       rozan: {
         title: 'محاضرة: إدارة لغتين في وقت واحد وتقنيات روزان (How Interpreters Juggle Languages)',
-        url: 'https://www.youtube-nocookie.com/embed/1laThtz19i0',
+        url: 'https://www.youtube.com/embed/1laThtz19i0',
         desc: 'تحليل علمي وعملي لكيفية انقسام الانتباه لدى المترجم الشفوي بين الاستماع والتحليل والترميز وإعادة الصياغة الشفوية السليمة.'
       },
       standards: {
         title: 'محاضرة: معايير الترجمة المرئية ومزامنة التوقيت (Audiovisual Subtitling Guidelines)',
-        url: 'https://www.youtube-nocookie.com/embed/p3oZf-w84nE',
+        url: 'https://www.youtube.com/embed/p3oZf-w84nE',
         desc: 'شرح تطبيقي لقواعد إعداد ملفات SRT، سرعة القراءة المقبولة (17-20 حرف/ثانية)، وتقسيم الأسطر لتفادي التداخل البصري للمشاهد.'
       }
     };
@@ -8235,7 +8276,7 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
         id: 1,
         title: 'كبائن الأمم المتحدة والترجمة الفورية (UN Booths)',
         caption: 'المصدر: الأمم المتحدة - قسم خدمات المؤتمرات والترجمة الشفوية',
-        url: 'https://www.youtube-nocookie.com/embed/uT_hFzV1s54',
+        url: 'https://www.youtube.com/embed/g8evH3lQvB0',
         lessonTitle: 'أهم محاور درس كبائن الأمم المتحدة:',
         points: [
           '<strong>زمن التخلف (Décalage):</strong> الفارق الزمني (من 2 إلى 4 ثوانٍ) بين كلام الخطيب وتوليد الترجمة في الكابينة.',
@@ -8247,7 +8288,7 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
         id: 2,
         title: 'الحمل المعرفي وإدارة لغتين معاً (Cognitive Load)',
         caption: 'المصدر: TED-Ed - Ewandro Magalhaes (مترجم فوري معتمد)',
-        url: 'https://www.youtube-nocookie.com/embed/1laThtz19i0',
+        url: 'https://www.youtube.com/embed/1laThtz19i0',
         lessonTitle: 'أهم محاور إدارة الحمل المعرفي:',
         points: [
           '<strong>المعالجة المزدوجة (Dual-tasking):</strong> تدريب الدماغ على فك تشفير المعنى وتوليد النطق في مسارين متوازيين.',
@@ -8259,7 +8300,7 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
         id: 3,
         title: 'الترجمة التعاقبية وتدوين الرموز (Consecutive Masterclass)',
         caption: 'المصدر: الأكاديمية الدولية للمترجمين الفوريين',
-        url: 'https://www.youtube-nocookie.com/embed/p3oZf-w84nE',
+        url: 'https://www.youtube.com/embed/p3oZf-w84nE',
         lessonTitle: 'أهم محاور الترجمة التعاقبية وتدوين الرموز:',
         points: [
           '<strong>مبادئ جان فرانسوا روزان:</strong> تدوين الأفكار بدلاً من الكلمات، والاعتماد على الرموز والأشكال العمودية.',
@@ -8758,7 +8799,10 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
       { word: 'Indemnify and Hold Harmless', phonetic: '/ɪnˈdɛmnɪfaɪ/', cat: 'عقود دولية', meaning: 'التعويض وإبراء الذمة من المسؤولية', example: 'The contractor agrees to indemnify and hold harmless the client.' },
       { word: 'Ultra Vires', phonetic: '/ˌʌltrə ˈvaɪriːz/', cat: 'تشريعات وشركات', meaning: 'تجاوز حدود الاختصاص القانوني أو الصلاحيات', example: 'Any decision beyond the corporate charter is deemed ultra vires.' },
       { word: 'Subpoena', phonetic: '/səˈpiːnə/', cat: 'إجراءات قضائية', meaning: 'أمر تكليف رسمي بالحضور أو تقديم مستندات', example: 'The court issued a subpoena for the witness to appear in person.' },
-      { word: 'Sine Qua Non', phonetic: '/ˌsɪneɪ kwɑː ˈnəʊn/', cat: 'مصطلحات جوهرية', meaning: 'شرط لا غنى عنه / ركن أساسي', example: 'Mutual consent is the sine qua non of any legally binding contract.' }
+      { word: 'Sine Qua Non', phonetic: '/ˌsɪneɪ kwɑː ˈnəʊn/', cat: 'مصطلحات جوهرية', meaning: 'شرط لا غنى عنه / ركن أساسي', example: 'Mutual consent is the sine qua non of any legally binding contract.' },
+      { word: 'Décalage / Ear-Voice Span', phonetic: '/de.ka.laʒ/', cat: 'ترجمة فورية', meaning: 'الفارق الزمني بين سماع الخطيب ونطق الترجمة', example: 'Maintaining an optimal décalage of 3 seconds prevents cognitive overload.' },
+      { word: 'Mutatis Mutandis', phonetic: '/mjuːˈteɪtɪs mjuːˈtændɪs/', cat: 'صياغة تشريعية', meaning: 'مع إجراء التعديلات اللازمة وفق مقتضى الحال', example: 'The clauses of Schedule A apply mutatis mutandis to Schedule B.' },
+      { word: 'Without Prejudice', phonetic: '/wɪˈðaʊt ˈprɛdʒʊdɪs/', cat: 'منازعات ومراسلات', meaning: 'دون المساس بالحقوق أو التحيز لأي طرف', example: 'All settlement negotiations are conducted strictly without prejudice.' }
     ];
 
     let currentCardIndex = 0;
@@ -8802,6 +8846,38 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
         window.speechSynthesis.speak(u);
       }
       pushToast(`🔊 الاستماع لنطق: ${c.word}`);
+    }
+
+    function copyFlashcardText() {
+      const c = flashcardsData[currentCardIndex];
+      const textToCopy = `${c.word} (${c.phonetic}) [${c.cat}]\nالمعنى: ${c.meaning}\nالسياق: ${c.example}`;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          playAppSound('submit');
+          pushToast(`📋 تم نسخ البطاقة: ${c.word}`);
+        }).catch(() => {
+          fallbackCopyText(textToCopy);
+        });
+      } else {
+        fallbackCopyText(textToCopy);
+      }
+    }
+
+    function fallbackCopyText(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        playAppSound('submit');
+        pushToast('📋 تم نسخ البطاقة بنجاح');
+      } catch (e) {
+        pushToast('⚠️ تعذر النسخ المباشر');
+      }
+      document.body.removeChild(ta);
     }
 
     // Multi-Question Trivia Game with Instant Scoring & Explanations
@@ -8970,6 +9046,45 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
     /* -------------------------------------------------------------
        11. MODAL UTILITIES & EVENT HANDLERS
        ------------------------------------------------------------- */
+    function activateNavTab(tabName) {
+      if (typeof switchPortalTab === 'function') {
+        switchPortalTab(tabName);
+      } else {
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        const targetBtn = document.querySelector(`[data-tab="${tabName}"]`);
+        if (targetBtn) targetBtn.classList.add('active');
+
+        document.querySelectorAll('.tab-content').forEach(pane => pane.classList.remove('active'));
+        const targetPane = document.getElementById(tabName);
+        if (targetPane) targetPane.classList.add('active');
+      }
+    }
+
+    function openSimBoothModal() {
+      const boothModal = document.getElementById('simBoothModalBackdrop') || document.getElementById('boothModal');
+      if (boothModal) {
+        boothModal.classList.add('active');
+        boothModal.style.display = 'flex';
+      } else {
+        // Direct jump to Booth / Live interpretation section
+        activateNavTab('tab-translator');
+        const boothEl = document.getElementById('simultaneousBoothContainer') || document.getElementById('interpretationBoothSection');
+        if (boothEl) {
+          boothEl.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+      playAppSound('click');
+      pushToast('🎙️ تم تفعيل كابينة المحاكاة الفورية المتقدمة');
+    }
+
+    function closeSimBoothModal() {
+      const boothModal = document.getElementById('simBoothModalBackdrop') || document.getElementById('boothModal');
+      if (boothModal) {
+        boothModal.classList.remove('active');
+        boothModal.style.display = 'none';
+      }
+    }
+
     function openAuthModal() {
       updateAuthModalActiveSessionInfo();
       document.getElementById('authModalBackdrop').classList.add('active');

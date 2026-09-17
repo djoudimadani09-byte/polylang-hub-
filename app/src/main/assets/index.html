@@ -728,7 +728,6 @@
 
     table {
       width: 100%;
-      min-width: 660px;
       border-collapse: collapse;
       text-align: right;
     }
@@ -2404,6 +2403,342 @@
       }
     }
 
+  
+    /* =============================================================
+       GOINTERPREP-INSPIRED PROFESSIONAL OFFER & TRAINING STYLES
+       ============================================================= */
+    .go-offers-wrapper {
+      margin-bottom: 2rem;
+    }
+    .go-offers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1rem;
+    }
+    .go-offer-card {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-main);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: all var(--transition-normal);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+    [data-theme="dark"] .go-offer-card {
+      background: rgba(17, 24, 39, 0.78) !important;
+      backdrop-filter: blur(18px) !important;
+      -webkit-backdrop-filter: blur(18px) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+    .go-offer-card:hover {
+      border-color: var(--primary) !important;
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(229, 57, 53, 0.15) !important;
+    }
+    .go-offer-card.featured {
+      border-color: var(--primary) !important;
+      background: linear-gradient(180deg, rgba(229, 57, 53, 0.05) 0%, var(--bg-surface) 100%);
+      box-shadow: 0 8px 30px rgba(229, 57, 53, 0.18) !important;
+    }
+    [data-theme="dark"] .go-offer-card.featured {
+      background: linear-gradient(180deg, rgba(229, 57, 53, 0.12) 0%, rgba(17, 24, 39, 0.85) 100%) !important;
+      border-color: rgba(229, 57, 53, 0.45) !important;
+    }
+    .go-offer-ribbon {
+      position: absolute;
+      top: 16px;
+      inset-inline-end: -32px;
+      background: linear-gradient(135deg, #e53935 0%, #b71c1c 100%);
+      color: #ffffff;
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 4px 38px;
+      transform: rotate(45deg);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 8px rgba(229, 57, 53, 0.4);
+    }
+    [dir="rtl"] .go-offer-ribbon {
+      transform: rotate(-45deg);
+      inset-inline-end: -32px;
+      inset-inline-start: auto;
+    }
+    .go-offer-header {
+      margin-bottom: 1rem;
+    }
+    .go-offer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-full);
+      font-size: 0.72rem;
+      font-weight: 800;
+      margin-bottom: 0.65rem;
+    }
+    .go-offer-price-box {
+      margin: 0.85rem 0 1rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.45rem;
+    }
+    .go-offer-price {
+      font-size: 1.85rem;
+      font-weight: 900;
+      color: var(--text-main);
+      line-height: 1;
+    }
+    .go-offer-period {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+    .go-offer-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .go-offer-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+      color: var(--text-main);
+      line-height: 1.45;
+    }
+    .go-offer-features li .check-icon {
+      color: var(--success);
+      font-weight: 900;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    /* Course Catalog Grid & Cards */
+    .courses-catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1rem;
+    }
+    .course-card {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-main);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all var(--transition-normal);
+      cursor: pointer;
+      position: relative;
+    }
+    .course-card:hover {
+      border-color: var(--primary) !important;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+    }
+    .course-card.active-selected {
+      border-color: var(--primary) !important;
+      box-shadow: 0 0 0 2px var(--primary), 0 8px 24px rgba(229, 57, 53, 0.25) !important;
+    }
+    .course-card-thumb {
+      position: relative;
+      height: 160px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: #ffffff;
+      overflow: hidden;
+    }
+    .course-card-thumb::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(229, 57, 53, 0.3) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .course-badge-pill {
+      position: absolute;
+      top: 10px;
+      inset-inline-start: 10px;
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-full);
+      font-size: 0.72rem;
+      font-weight: 800;
+      z-index: 2;
+    }
+    .course-duration-pill {
+      position: absolute;
+      bottom: 10px;
+      inset-inline-end: 10px;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      color: #ffffff;
+      padding: 0.2rem 0.55rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.72rem;
+      font-weight: 700;
+      z-index: 2;
+    }
+    .course-card-body {
+      padding: 1.15rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+    }
+    .course-card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+    .course-card-title {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.45;
+      margin-bottom: 0.65rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .course-progress-bar-wrap {
+      background: var(--bg-surface-secondary);
+      border-radius: var(--radius-full);
+      height: 6px;
+      overflow: hidden;
+      margin: 0.4rem 0 0.85rem;
+    }
+    .course-progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #e53935 0%, #10b981 100%);
+      border-radius: var(--radius-full);
+      transition: width 0.3s ease;
+    }
+    .course-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border-subtle);
+      margin-top: 0.5rem;
+    }
+
+    /* Terminology & Quiz Drills */
+    .quiz-card-option {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-main);
+      border-radius: var(--radius-md);
+      padding: 0.95rem 1.15rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-main);
+      cursor: pointer;
+      text-align: start;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      transition: all var(--transition-fast);
+      line-height: 1.4;
+      width: 100%;
+    }
+    .quiz-card-option:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: rgba(229, 57, 53, 0.04);
+      transform: translateX(-3px);
+    }
+    [dir="ltr"] .quiz-card-option:hover:not(:disabled) {
+      transform: translateX(3px);
+    }
+    .quiz-card-option.correct {
+      background: #ecfdf5 !important;
+      border-color: #10b981 !important;
+      color: #065f46 !important;
+    }
+    .quiz-card-option.wrong {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+      color: #991b1b !important;
+    }
+    .quiz-card-option:disabled {
+      cursor: default;
+    }
+
+    /* Strict Mobile & Android Responsiveness */
+    @media (max-width: 900px) {
+      .video-theatre-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .go-offers-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .courses-catalog-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+    @media (max-width: 768px) {
+      .table-responsive {
+        width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+      }
+      .table-responsive table {
+        min-width: 520px;
+      }
+      .grid-2, .grid-3, .grid-4 {
+        grid-template-columns: 1fr !important;
+      }
+      .header-tools {
+        flex-wrap: wrap;
+      }
+      .modal-box {
+        max-width: 95vw !important;
+        width: 95vw !important;
+        margin: auto !important;
+      }
+    }
+    @media (max-width: 600px) {
+      .video-main-wrapper {
+        border-radius: var(--radius-sm);
+      }
+      .go-offer-card {
+        padding: 1.15rem !important;
+      }
+      .course-card-thumb {
+        height: 130px !important;
+        font-size: 2.2rem !important;
+      }
+      .paywall-actions-row {
+        flex-direction: column !important;
+        width: 100%;
+      }
+      .paywall-actions-row button {
+        width: 100% !important;
+      }
+      .table-responsive table {
+        min-width: 480px;
+        font-size: 0.8rem;
+      }
+      th, td {
+        padding: 0.55rem 0.65rem !important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -3341,77 +3676,84 @@
 
       <!-- Feature 1: Interactive Vocabulary Flashcard Builder -->
       <div class="card">
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.85rem;">
           <div>
-            <h3 style="font-weight: 900; font-size: 1.15rem;">بنك بطاقات الذاكرة التفاعلية (Flashcard Builder)</h3>
-            <p style="font-size: 0.82rem; color: var(--text-muted);">انقر على البطاقة لقلبها واكتشاف المعنى والسياق والنطق الصوتي</p>
+            <div style="display: inline-flex; align-items: center; gap: 0.35rem; background: rgba(229,57,53,0.1); color: var(--primary); padding: 0.2rem 0.65rem; border-radius: 50px; font-size: 0.72rem; font-weight: 800; margin-bottom: 0.3rem;">
+              <span>🗂️</span> ACTIVE RECALL DRILL
+            </div>
+            <h3 style="font-weight: 900; font-size: 1.15rem; margin: 0;">بنك بطاقات الذاكرة التفاعلية (Flashcard Builder)</h3>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0.2rem 0 0;">انقر على البطاقة لقلبها واكتشاف المعنى الدقيق والسياق والنطق الصوتي</p>
           </div>
-          <div style="display: flex; gap: 0.45rem;">
+          <div style="display: flex; align-items: center; gap: 0.45rem;">
             <button class="btn btn-outline btn-sm" onclick="previousFlashcard()">⬅️ السابق</button>
-            <span style="font-weight: 800; font-size: 0.85rem; padding: 0.35rem 0.65rem;" id="flashcardCounter">1 / 5</span>
+            <span style="font-weight: 800; font-size: 0.85rem; padding: 0.35rem 0.65rem; background: var(--bg-surface-secondary); border-radius: var(--radius-sm);" id="flashcardCounter">1 / 8</span>
             <button class="btn btn-outline btn-sm" onclick="nextFlashcard()">التالي ➡️</button>
           </div>
         </div>
 
-        <div class="flashcard-stage" onclick="flipActiveFlashcard()">
+        <div class="flashcard-stage" onclick="flipActiveFlashcard()" style="cursor: pointer;">
           <div class="flashcard-inner" id="flashcardInnerElement">
             <div class="flashcard-front">
               <span class="role-tag-pill" style="margin-bottom: 0.5rem;" id="cardCategory">مصطلح قانوني</span>
               <h2 style="font-size: 2rem; font-weight: 900; color: var(--primary-dark);" id="cardWord">Force Majeure</h2>
               <p style="font-size: 0.95rem; color: var(--text-muted); margin-top: 0.5rem;" id="cardPhonetic">/ˌfɔːrs məˈʒɜːr/</p>
-              <span style="font-size: 0.78rem; color: var(--primary); margin-top: 1rem; font-weight: 700;">🔄 انقر للكشف عن المقابل العربي والأمثلة</span>
+              <span style="font-size: 0.78rem; color: var(--primary); margin-top: 1rem; font-weight: 700;">🔄 انقر للكشف عن المقابل العربي والأمثلة السياقية</span>
             </div>
             <div class="flashcard-back">
-              <h3 style="font-size: 1.8rem; font-weight: 900; color: var(--text-main);" id="cardMeaning">القوة القاهرة / الحادث الفجائي</h3>
-              <p style="font-size: 0.88rem; color: var(--text-muted); max-width: 600px; margin-top: 0.5rem;" id="cardExample">
+              <h3 style="font-size: 1.65rem; font-weight: 900; color: var(--text-main); margin-bottom: 0.4rem;" id="cardMeaning">القوة القاهرة / الحادث الفجائي</h3>
+              <p style="font-size: 0.86rem; color: var(--text-muted); max-width: 600px; margin: 0.5rem auto 0; line-height: 1.5;" id="cardExample">
                 "Neither party shall be liable for failure to perform due to a Force Majeure event."
               </p>
-              <div style="margin-top: 1rem;">
+              <div style="margin-top: 1rem; display: flex; justify-content: center; gap: 0.5rem;">
                 <button class="btn btn-primary btn-sm" onclick="event.stopPropagation(); playPronunciationAudio()">🔊 استمع للنطق</button>
+                <button class="btn btn-outline btn-sm" onclick="event.stopPropagation(); copyFlashcardText()">📋 نسخ المصطلح</button>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Feature 2: Speed Translation Trivia Challenge Game -->
-      <div class="card">
+      <!-- Feature 2: High-Performance GoInterPrep-Inspired Quiz Drill Section -->
+      <div class="card" style="margin-bottom: 1.5rem;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
           <div>
-            <h3 style="font-weight: 900; font-size: 1.15rem;">تحدي سرعة الترجمة والبدائل الدقيقة (Trivia Challenge)</h3>
-            <p style="font-size: 0.82rem; color: var(--text-muted);">اختر أفضل مقابل سياقي دقيق للجملة مع تقييم وتحليل فوري للبدائل</p>
+            <div style="display: inline-flex; align-items: center; gap: 0.35rem; background: rgba(16,185,129,0.1); color: var(--success); padding: 0.2rem 0.65rem; border-radius: 50px; font-size: 0.72rem; font-weight: 800; margin-bottom: 0.3rem;">
+              <span>🎯</span> SPEED & ACCURACY DRILLS
+            </div>
+            <h3 style="font-weight: 900; font-size: 1.15rem; margin: 0;">اختبارات الكابينة والدقة اللفظية (GoInterPrep Speed Trivia)</h3>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0.2rem 0 0;">اختر أفضل مقابل سياقي دقيق للجملة مع تقييم وتحليل فوري للبدائل وفق معايير UNTERM</p>
           </div>
-          <div style="display: flex; align-items: center; gap: 1rem;">
-            <span style="font-size: 0.85rem; font-weight: 700;" id="triviaQuestionCounter">السؤال 1 من 4</span>
-            <div style="font-size: 1.1rem; font-weight: 900; color: var(--primary-dark);">
+          <div style="display: flex; align-items: center; gap: 0.85rem;">
+            <span style="font-size: 0.85rem; font-weight: 700;" id="triviaQuestionCounter">السؤال 1 من 8</span>
+            <div style="font-size: 1.1rem; font-weight: 900; color: var(--primary); background: rgba(229,57,53,0.1); padding: 0.3rem 0.75rem; border-radius: var(--radius-sm);">
               النقاط: <span id="gameScoreDisplay">140</span> 🏆
             </div>
           </div>
         </div>
 
-        <div style="background: var(--bg-surface-secondary); border: 1px solid var(--border-main); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1rem;">
+        <div style="background: var(--bg-surface-secondary); border: 1.5px solid var(--border-main); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1rem;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
             <span class="role-tag-pill" id="triviaCategoryTag">السياق الدبلوماسي والسياسي</span>
             <span style="font-size: 0.78rem; color: var(--text-muted);">اختر الترجمة الأدق:</span>
           </div>
-          <h4 style="font-size: 1.1rem; font-weight: 800; margin-top: 0.35rem;" id="triviaQuestionText">
+          <h4 style="font-size: 1.15rem; font-weight: 800; margin: 0.4rem 0 0;" id="triviaQuestionText">
             "The resolution was adopted unanimously by the general assembly."
           </h4>
         </div>
 
-        <div class="grid-2" id="triviaOptionsContainer" style="margin-bottom: 1rem;">
+        <div class="grid-2" id="triviaOptionsContainer" style="margin-bottom: 1rem; gap: 0.85rem;">
           <!-- Populated by JS -->
         </div>
 
         <!-- Instant Feedback Explanation Box -->
-        <div id="triviaExplanationBox" style="display: none; background: var(--bg-surface-secondary); border: 1.5px solid var(--border-main); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1rem;">
+        <div id="triviaExplanationBox" style="display: none; background: var(--bg-surface-secondary); border: 1.5px solid var(--border-main); border-radius: var(--radius-md); padding: 1.15rem; margin-bottom: 1rem;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
-            <strong style="font-size: 0.9rem;" id="triviaExplanationTitle">التحليل اللغوي الفوري:</strong>
-            <span class="status-badge completed" id="triviaResultPill">+20 نقطة</span>
+            <strong style="font-size: 0.92rem; color: var(--primary);" id="triviaExplanationTitle">التحليل اللغوي والاصطلاحي الفوري:</strong>
+            <span class="status-badge completed" id="triviaResultPill">+25 نقطة</span>
           </div>
-          <p style="font-size: 0.84rem; color: var(--text-main); margin-bottom: 0.75rem;" id="triviaExplanationText"></p>
+          <p style="font-size: 0.86rem; color: var(--text-main); line-height: 1.55; margin-bottom: 0.85rem;" id="triviaExplanationText"></p>
           <div style="display: flex; justify-content: flex-end;">
-            <button class="btn btn-primary btn-sm" id="btnNextTrivia" onclick="nextTriviaQuestion()">السؤال التالي ➡️</button>
+            <button class="btn btn-primary btn-sm" id="btnNextTrivia" onclick="nextTriviaQuestion()" style="font-weight: 800; padding: 0.45rem 1rem;">السؤال التالي ➡️</button>
           </div>
         </div>
       </div>
@@ -3443,7 +3785,7 @@
           <!-- Video Embed Frame -->
           <div>
             <div class="responsive-video-wrapper">
-              <iframe id="enthusiastAcademyVideoIframe" src="https://www.youtube-nocookie.com/embed/uT_hFzV1s54" title="Educational Translation Masterclass" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe id="enthusiastAcademyVideoIframe" src="https://www.youtube.com/embed/g8evH3lQvB0" title="Educational Translation Masterclass" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
             <div style="margin-top: 0.6rem; font-size: 0.8rem; color: var(--text-muted); display: flex; justify-content: space-between;">
               <span id="enthusiastVideoCaption">المصدر: الأمم المتحدة - قسم خدمات المؤتمرات والترجمة الشفوية</span>
@@ -3464,9 +3806,8 @@
                 <li><strong>المصطلحات السيادية:</strong> توحيد ترجمة أسماء الهيئات والقرارات الدولية بالاعتماد على قواعد UNTERM.</li>
               </ul>
             </div>
-
             <div style="margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
-              <button class="btn btn-primary btn-sm" style="flex: 1;" onclick="openBoothWithVideoLesson()">
+              <button class="btn btn-primary btn-sm" style="flex: 1;" onclick="openSimBoothModal()">
                 🎙️ تدريب فوري في كابينة الترجمة
               </button>
               <button class="btn btn-outline btn-sm" onclick="pushToast('✓ تم حفظ المحاضرة في مفكرتك اللغوية')">
@@ -3477,8 +3818,7 @@
         </div>
       </div>
     </div>
-  
-    <!-- ===========================================================
+      <!-- ===========================================================
          ROLE 5: TRAINING & MEDIA CENTER (مركز التدريب والوسائط)
          =========================================================== -->
         <div id="roleView-media" class="role-view-section" style="display: none;">
@@ -3487,11 +3827,11 @@
         <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
           <div>
             <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(229,57,53,0.12); color: var(--primary); padding: 0.25rem 0.85rem; border-radius: 50px; font-size: 0.8rem; font-weight: 800; margin-bottom: 0.6rem;">
-              <span style="font-size: 1rem;">🎓</span> <span data-i18n="mediaHeroBadge">أكاديمية التدريب والماستركلاس الاحترافي</span>
+              <span style="font-size: 1rem;">🎓</span> <span data-i18n="mediaHeroBadge">أكاديمية التدريب والماستركلاس الاحترافي (GoInterPrep Track)</span>
             </div>
             <h2 style="font-weight: 900; margin-bottom: 0.4rem; font-size: 1.5rem;" data-i18n="mediaHeroTitle">أكاديمية التدريب والماستركلاس (Training & Masterclasses Hub)</h2>
-            <p style="color: var(--text-muted); font-size: 0.9rem; max-width: 780px; line-height: 1.6;" data-i18n="mediaHeroDesc">
-              أكاديمية تدريبية متقدمة للمترجمين المحلفين وطلبة الترجمة الفورية، تقدم محاضرات مجانية وتدريبات ماستركلاس احترافية مدفوعة لكبائن الأمم المتحدة، التوطين السمعي البصري (AVT)، ومختبر التظليل الصوتي.
+            <p style="color: var(--text-muted); font-size: 0.9rem; max-width: 820px; line-height: 1.6;" data-i18n="mediaHeroDesc">
+              منظومة إعداد مهني متقدمة مصممة على غرار المنصات الدولية (GoInterPrep Track): مسارات احترافية متدرجة، كبائن محاكاة فورية معتمدة وفق معايير AIIC وISO 17100، تدريبات التظليل الصوتي، وتمارين تفاعلية عالية التركيز.
             </p>
           </div>
           <div style="display: flex; gap: 0.65rem; flex-wrap: wrap;">
@@ -3501,6 +3841,107 @@
             <button class="btn btn-secondary" onclick="renderVideoPlaylistAndCatalog(); pushToast('🔄 تم تحديث قائمة المحاضرات بنجاح');" data-i18n="btnSyncMedia">
               🔄 تحديث المحتوى
             </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- GOINTERPREP-INSPIRED PROFESSIONAL OFFERS & ENROLLMENT ARCHITECTURE -->
+      <div class="go-offers-wrapper">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 0.5rem;">
+          <div>
+            <span style="font-size: 0.78rem; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px;">PRO PREPARATION PLANS</span>
+            <h3 style="font-weight: 900; font-size: 1.3rem; margin: 0.2rem 0 0;" data-i18n="goOffersHeading">باقات التأهيل والاعتماد المهني (Professional Tiers)</h3>
+            <p style="font-size: 0.84rem; color: var(--text-muted); margin: 0.2rem 0 0;" data-i18n="goOffersSub">اختر مسارك التدريبي المتوافق مع متطلبات كبائن الترجمة الفورية وهيئات الاعتماد القضائي الدولي</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.4rem; background: var(--bg-surface-secondary); padding: 0.35rem 0.75rem; border-radius: 50px; font-size: 0.75rem; font-weight: 800; color: var(--text-muted);">
+            <span class="glow-status-dot"></span> <span>شهادات اعتماد ISO 17100 وAIIC موثقة</span>
+          </div>
+        </div>
+
+        <div class="go-offers-grid">
+          <!-- Tier 1: Free Foundations Track -->
+          <div class="go-offer-card">
+            <div>
+              <div class="go-offer-header">
+                <span class="go-offer-badge" style="background: rgba(16, 185, 129, 0.12); color: #059669;">
+                  <span>🆓</span> المسار المفتوح (Foundations)
+                </span>
+                <h4 style="font-weight: 900; font-size: 1.15rem; margin: 0 0 0.35rem;">أساسيات الكابينة والتظليل</h4>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">مدخل شامل لطلبة الترجمة وممارسي التظليل الصوتي المبتدئين</p>
+              </div>
+              <div class="go-offer-price-box">
+                <span class="go-offer-price" style="color: var(--success);">0 دج</span>
+                <span class="go-offer-period">/ وصول مجاني دائم</span>
+              </div>
+              <ul class="go-offer-features">
+                <li><span class="check-icon">✓</span> <span>3 محاضرات فيديو كاملة بجودة 1080p HD</span></li>
+                <li><span class="check-icon">✓</span> <span>مختبر التظليل الصوتي (Audio Shadowing Lab)</span></li>
+                <li><span class="check-icon">✓</span> <span>أساسيات تدوين الملاحظات بطريقة روزان</span></li>
+                <li><span class="check-icon">✓</span> <span>مسرد المصطلحات الأساسية 500+ كلمة</span></li>
+              </ul>
+            </div>
+            <div>
+              <button class="btn btn-outline" style="width: 100%; font-weight: 800; border-color: var(--success); color: var(--success);" onclick="filterMediaCategory('free', document.querySelector('.media-tab-btn:nth-child(2)'))">
+                بدء التدريب المجاني الآن ▶
+              </button>
+            </div>
+          </div>
+
+          <!-- Tier 2: Conference & UN Booth Pro (Featured) -->
+          <div class="go-offer-card featured">
+            <div class="go-offer-ribbon">الأكثر طلباً</div>
+            <div>
+              <div class="go-offer-header">
+                <span class="go-offer-badge" style="background: rgba(229, 57, 53, 0.12); color: var(--primary);">
+                  <span>🎙️</span> مسار كابينة الأمم المتحدة (UN Pro)
+                </span>
+                <h4 style="font-weight: 900; font-size: 1.15rem; margin: 0 0 0.35rem;">ماستركلاس المؤتمرات الدولية</h4>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">تدريب مكثف على إدارة الفارق الزمني والضغط في المؤتمرات الكبرى</p>
+              </div>
+              <div class="go-offer-price-box">
+                <span class="go-offer-price" style="color: var(--primary);">3,500 دج</span>
+                <span class="go-offer-period">/ ترخيص دائم مدى الحياة</span>
+              </div>
+              <ul class="go-offer-features">
+                <li><span class="check-icon">✓</span> <span>محاكاة كابينة الجمعية العامة للأمم المتحدة</span></li>
+                <li><span class="check-icon">✓</span> <span>إدارة الفارق الزمني (Décalage / Ear-Voice Span)</span></li>
+                <li><span class="check-icon">✓</span> <span>شهادة إتمام رقمية معتمدة برقم توثيق SHA-256</span></li>
+                <li><span class="check-icon">✓</span> <span>حزم ملفات SRT ونصوص المؤتمرات الرسمية</span></li>
+              </ul>
+            </div>
+            <div>
+              <button class="btn btn-primary" style="width: 100%; font-weight: 900; padding: 0.75rem;" onclick="switchMediaVideo(3); scrollToMainPlayer();">
+                🚀 التسجيل وفتح المسار فوراً
+              </button>
+            </div>
+          </div>
+
+          <!-- Tier 3: Sworn & Judicial Masterclass -->
+          <div class="go-offer-card">
+            <div>
+              <div class="go-offer-header">
+                <span class="go-offer-badge" style="background: rgba(245, 158, 11, 0.12); color: #d97706;">
+                  <span>⚖️</span> الدبلوم القضائي المحلف (Sworn & Court)
+                </span>
+                <h4 style="font-weight: 900; font-size: 1.15rem; margin: 0 0 0.35rem;">التحكيم الدولي ومصادقة ISO</h4>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">إعداد كامل لاجتياز اختبارات الترجمة الرسمية أمام المحاكم والشركات</p>
+              </div>
+              <div class="go-offer-price-box">
+                <span class="go-offer-price" style="color: #d97706;">5,000 دج</span>
+                <span class="go-offer-period">/ ترخيص شامل مع التدقيق</span>
+              </div>
+              <ul class="go-offer-features">
+                <li><span class="check-icon">✓</span> <span>قواعد التدقيق المزدوج بموجب معيار ISO 17100</span></li>
+                <li><span class="check-icon">✓</span> <span>صياغات اتفاقيات التحكيم التجاري الدولي (ICC)</span></li>
+                <li><span class="check-icon">✓</span> <span>محاكي ختم الوثائق القضائية وتوليد البصمة</span></li>
+                <li><span class="check-icon">✓</span> <span>استشارات مباشرة مع المترجمين المعتمدين</span></li>
+              </ul>
+            </div>
+            <div>
+              <button class="btn btn-secondary" style="width: 100%; font-weight: 800; border-color: #f59e0b; color: #d97706;" onclick="switchMediaVideo(4); scrollToMainPlayer();">
+                ⭐ فتح الدبلوم القضائي
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -3517,7 +3958,7 @@
 
       <!-- VIDEO SECTION -->
       <div id="mediaCategoryVideos" style="margin-bottom: 2rem;">
-        <div style="display: grid; grid-template-columns: 1fr 340px; gap: 1.5rem; align-items: start;">
+        <div class="video-theatre-grid" style="display: grid; grid-template-columns: 1fr 340px; gap: 1.5rem; align-items: start;">
           <!-- Primary Video Theater -->
           <div>
             <!-- Unlocked Banner -->
@@ -3528,7 +3969,7 @@
 
             <!-- 16:9 Player with Embedded Iframe & Frosted Paywall Overlay -->
             <div class="video-main-wrapper" id="mainVideoPlayerWrapper">
-              <iframe id="mainVideoPlayerIframe" src="https://www.youtube-nocookie.com/embed/uT_hFzV1s54?enablejsapi=1" title="Training Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe id="mainVideoPlayerIframe" src="https://www.youtube.com/embed/g8evH3lQvB0?enablejsapi=1" title="Training Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
               
               <!-- Paywall Overlay -->
               <div id="videoPaywallOverlay" class="video-paywall-overlay hidden">
@@ -3595,11 +4036,11 @@
           </div>
         </div>
 
-        <!-- Full Course Catalog Grid -->
+        <!-- Full Course Catalog Grid with GoInterPrep Progress & Tier Styling -->
         <div style="margin-top: 2rem;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem;">
             <div>
-              <h3 style="font-weight: 900; font-size: 1.15rem; margin-bottom: 0.2rem;" data-i18n="courseCatalogHeading">كتالوج الماستركلاس والدورات التخصصية</h3>
+              <h3 style="font-weight: 900; font-size: 1.15rem; margin-bottom: 0.2rem;" data-i18n="courseCatalogHeading">كتالوج الماستركلاس والدورات التخصصية (GoInterPrep Catalog)</h3>
               <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0;" data-i18n="courseCatalogSub">اختر الدورة لبدء المشاهدة المباشرة أو فتح المحتوى الاحترافي بنقرة واحدة</p>
             </div>
           </div>
@@ -3608,7 +4049,6 @@
           </div>
         </div>
       </div>
-
       <!-- AUDIO LAB SECTION -->
       <div id="mediaCategoryAudio">
         <div style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.04) 0%, rgba(229, 57, 53, 0.04) 100%); border: 1.5px solid var(--border-main); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.5rem;">
@@ -5140,11 +5580,13 @@
         id: 'vid-free-1',
         isPremium: false,
         price: 0,
+        tier: 'Free Track',
+        progress: 100,
         title: 'مبادئ الترجمة الفورية وكابينة المؤتمرات (Simultaneous Interpretation Foundations)',
         tag: '🎙️ كابينة الأمم المتحدة',
         level: 'مبتدئ / Beginner',
         duration: '14:20 دقيقة',
-        url: 'https://www.youtube-nocookie.com/embed/uT_hFzV1s54?enablejsapi=1',
+        url: 'https://www.youtube.com/embed/g8evH3lQvB0?enablejsapi=1',
         thumbIcon: '🎙️',
         rating: 4.9,
         students: 1840,
@@ -5158,11 +5600,13 @@
         id: 'vid-free-2',
         isPremium: false,
         price: 0,
+        tier: 'Free Track',
+        progress: 85,
         title: 'أساسيات التوطين السمعي البصري (AVT) وهندسة ملفات SRT ومعايير القراءة',
         tag: '🎬 توطين مرئي وSRT',
         level: 'متوسط / Intermediate',
         duration: '18:45 دقيقة',
-        url: 'https://www.youtube-nocookie.com/embed/1la40WqPUVE?enablejsapi=1',
+        url: 'https://www.youtube.com/embed/9Xv4iR9pC9g?enablejsapi=1',
         thumbIcon: '🎬',
         rating: 4.8,
         students: 1420,
@@ -5176,11 +5620,13 @@
         id: 'vid-free-3',
         isPremium: false,
         price: 0,
+        tier: 'Free Track',
+        progress: 60,
         title: 'أسلوب روزان السريع لتدوين ملاحظات الترجمة التتبعية (Rozan Note-Taking Fast Track)',
         tag: '📝 تدوين روزان',
         level: 'مبتدئ / Beginner',
         duration: '12:15 دقيقة',
-        url: 'https://www.youtube-nocookie.com/embed/7X8IIhm_zcg?enablejsapi=1',
+        url: 'https://www.youtube.com/embed/o_XVt5rdpFY?enablejsapi=1',
         thumbIcon: '📝',
         rating: 4.95,
         students: 2150,
@@ -5194,11 +5640,13 @@
         id: 'vid-pro-1',
         isPremium: true,
         price: 3500,
+        tier: 'UN Booth Pro',
+        progress: 0,
         title: 'ماستركلاس كابينة الأمم المتحدة المتقدم: إدارة الفارق الزمني والضغط العالي (UN Booth Pro Décalage)',
         tag: '⭐ ماستركلاس احترافي (Pro)',
         level: 'متقدم / Professional',
         duration: '45:00 دقيقة',
-        url: 'https://www.youtube-nocookie.com/embed/d0yGdNEWdn0?enablejsapi=1',
+        url: 'https://www.youtube.com/embed/1laThtz19i0?enablejsapi=1',
         thumbIcon: '🏛️',
         rating: 5.0,
         students: 690,
@@ -5212,11 +5660,13 @@
         id: 'vid-pro-2',
         isPremium: true,
         price: 5000,
+        tier: 'Sworn Court',
+        progress: 0,
         title: 'الدبلوم المهني في الترجمة القضائية والتحكيم الدولي ومصادقة ISO 17100 (Court Translation Certification)',
         tag: '⭐ شهادة مهنية معتمدة',
         level: 'خبير / Expert',
         duration: '58:30 دقيقة',
-        url: 'https://www.youtube-nocookie.com/embed/1laThtz19i0?enablejsapi=1',
+        url: 'https://www.youtube.com/embed/g8evH3lQvB0?enablejsapi=1',
         thumbIcon: '⚖️',
         rating: 4.98,
         students: 530,
@@ -5230,11 +5680,13 @@
         id: 'vid-pro-3',
         isPremium: true,
         price: 4200,
+        tier: 'AVT Master',
+        progress: 0,
         title: 'هندسة الترجمة المرئية المتقدمة لشبكات البث العالمية (Advanced AVT & Subtitling for Streaming Networks)',
         tag: '⭐ توطين شبكات البث',
         level: 'متقدم / Professional',
         duration: '40:15 دقيقة',
-        url: 'https://www.youtube-nocookie.com/embed/p3oZf-w84nE?enablejsapi=1',
+        url: 'https://www.youtube.com/embed/p3oZf-w84nE?enablejsapi=1',
         thumbIcon: '🎥',
         rating: 4.92,
         students: 480,
@@ -5247,24 +5699,7 @@
     ];
 
     let activeMediaVideoIndex = 0;
-    let pendingPaymentVideoId = null;
 
-    // Helper: Parse numeric balance from activeUser
-    function getUserBalanceNum() {
-      if (!activeUser || !activeUser.balance) return 0;
-      const num = parseInt(String(activeUser.balance).replace(/[^0-9]/g, ''), 10);
-      return isNaN(num) ? 0 : num;
-    }
-
-    // Helper: Set user numeric balance
-    function setUserBalanceNum(newBal) {
-      if (!activeUser) return;
-      activeUser.balance = `${newBal.toLocaleString()} دج`;
-      saveCurrentUserIsolatedSession();
-      renderUserProfilePill();
-    }
-
-    // Helper: Check if video is unlocked for active user
     function isVideoUnlocked(video) {
       if (!video) return false;
       if (!video.isPremium || video.price === 0) return true;
@@ -5278,8 +5713,8 @@
       if (idx < 0 || idx >= MEDIA_VIDEOS.length) return;
       activeMediaVideoIndex = idx;
       const video = MEDIA_VIDEOS[idx];
-
       const unlocked = isVideoUnlocked(video);
+
       const iframe = document.getElementById('mainVideoPlayerIframe');
       const paywall = document.getElementById('videoPaywallOverlay');
       const unlockedBanner = document.getElementById('videoUnlockedBanner');
@@ -5290,9 +5725,9 @@
 
       if (title) title.innerText = video.title;
       if (tag) tag.innerText = video.tag;
-      if (duration) duration.innerText = `⏱️ ${video.duration}`;
+      if (duration) duration.innerText = '⏱️ ' + video.duration;
       if (takeaways && video.takeaways) {
-        takeaways.innerHTML = video.takeaways.map(t => `<li>${t}</li>`).join('');
+        takeaways.innerHTML = video.takeaways.map(t => '<li>' + t + '</li>').join('');
       }
 
       if (unlocked) {
@@ -5305,10 +5740,7 @@
           if (video.isPremium) {
             unlockedBanner.style.display = 'flex';
             const dict = dictionary[currentLanguage] || dictionary.ar;
-            unlockedBanner.innerHTML = `
-              <span>🔓 ${dict.btnCourseUnlocked || 'ماستركلاس احترافي مفتوح ومرخص لك بالكامل ✓'}</span>
-              <span style="font-size: 0.75rem; background: rgba(16,185,129,0.2); padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 800;">ISO 17100 Verified</span>
-            `;
+            unlockedBanner.innerHTML = '<span>🔓 ' + (dict.btnCourseUnlocked || 'ماستركلاس احترافي مفتوح ومرخص لك بالكامل ✓') + '</span><span style="font-size: 0.75rem; background: rgba(16,185,129,0.2); padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 800;">ISO 17100 Verified</span>';
           } else {
             unlockedBanner.style.display = 'none';
           }
@@ -5325,18 +5757,24 @@
           const badge = document.getElementById('paywallPriceBadge');
           const courseTitle = document.getElementById('paywallCourseTitle');
           const btnWallet = document.getElementById('btnUnlockWithWallet');
-
-          if (badge) badge.innerText = `⭐ ${video.price.toLocaleString()} دج • ${video.tag}`;
+          if (badge) badge.innerText = '⭐ ' + video.price.toLocaleString() + ' دج • ' + video.tag;
           if (courseTitle) courseTitle.innerText = video.title;
           if (btnWallet) {
             const bal = getUserBalanceNum();
-            btnWallet.innerText = `💳 فتح فوراً بخصم من الرصيد (${bal.toLocaleString()} دج)`;
+            btnWallet.innerText = '💳 فتح فوراً بخصم من الرصيد (' + bal.toLocaleString() + ' دج)';
           }
         }
       }
 
       renderVideoPlaylistAndCatalog();
-      pushToast(`📺 ${video.title}`);
+      pushToast('📺 ' + video.title);
+    }
+
+    function scrollToMainPlayer() {
+      const player = document.getElementById('mainVideoPlayerWrapper');
+      if (player) {
+        player.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
     }
 
     function unlockActiveVideoWithWallet() {
@@ -5348,24 +5786,26 @@
     function unlockVideoWithWallet(videoId) {
       const video = MEDIA_VIDEOS.find(v => v.id === videoId);
       if (!video) return;
+
       if (!activeUser) {
         openAuthModal();
         return;
       }
+
       const balNum = getUserBalanceNum();
       if (balNum < video.price) {
         playAppSound('error');
         const isAr = currentLanguage === 'ar';
-        const msg = isAr
-          ? `رصيد محفظتك الحالي (${balNum.toLocaleString()} دج) غير كافٍ لشراء هذا الماستركلاس (${video.price.toLocaleString()} دج).\n\nهل ترغب بالدفع المباشر عبر البطاقة الذهبية أو CIB؟`
-          : `Your wallet balance (${balNum.toLocaleString()} DZD) is insufficient for this course (${video.price.toLocaleString()} DZD).\n\nWould you like to pay with Edahabia or CIB?`;
-        if (confirm(msg)) {
-          openVideoPaymentModal(video.id);
-        }
+        alert(
+          isAr
+            ? '⚠️ رصيد محفظتك غير كافٍ لإتمام عملية الشراء!\n\nتكلفة الماستركلاس: ' + video.price.toLocaleString() + ' دج\nرصيدك الحالي: ' + balNum.toLocaleString() + ' دج\n\nيرجى شحن محفظتك أولاً عبر البطاقة الذهبية أو CIB.'
+            : '⚠️ Insufficient balance!\n\nCourse fee: ' + video.price.toLocaleString() + ' DZD\nYour balance: ' + balNum.toLocaleString() + ' DZD\n\nPlease top up your wallet via Edahabia or CIB first.'
+        );
+        openPaymentModal();
         return;
       }
 
-      // Deduct balance
+      // Deduct
       const newBal = balNum - video.price;
       setUserBalanceNum(newBal);
 
@@ -5373,30 +5813,18 @@
       if (!activeUser.unlockedVideos.includes(video.id)) {
         activeUser.unlockedVideos.push(video.id);
       }
-      saveCurrentUserIsolatedSession();
 
-      playAppSound('payment');
-      pushNotificationAlert(`🎉 تم فتح الماستركلاس الاحترافي بنجاح: ${video.title}`);
-      pushToast(currentLanguage === 'ar' ? `✓ تم خصم ${video.price.toLocaleString()} دج وفتح الدورة بنجاح!` : `✓ ${video.price.toLocaleString()} DZD deducted. Masterclass unlocked!`);
-
+      persistState();
+      playAppSound('success');
+      pushToast(currentLanguage === 'ar' ? '🎉 تم فتح الماستركلاس بنجاح بخصم من المحفظة!' : '🎉 Masterclass successfully unlocked!');
       switchMediaVideo(activeMediaVideoIndex);
     }
 
     function payActiveVideoWithEdahabia() {
       const video = MEDIA_VIDEOS[activeMediaVideoIndex];
       if (!video) return;
-      openVideoPaymentModal(video.id);
-    }
-
-    function openVideoPaymentModal(videoId) {
-      const video = MEDIA_VIDEOS.find(v => v.id === videoId);
-      if (!video) return;
-      pendingPaymentVideoId = videoId;
-      const summary = document.getElementById('paymentSummaryMeta');
-      if (summary) {
-        summary.innerText = `${video.title} - ${video.price.toLocaleString()} دج (ماستركلاس معتمد ISO 17100)`;
-      }
       openPaymentModal();
+      pushToast(currentLanguage === 'ar' ? '💳 يرجى إتمام الدفع بالبطاقة الذهبية / CIB' : '💳 Please complete payment via card');
     }
 
     function renderVideoPlaylistAndCatalog() {
@@ -5406,7 +5834,7 @@
       const dict = dictionary[currentLanguage] || dictionary.ar;
 
       if (countBadge) {
-        countBadge.innerText = `${MEDIA_VIDEOS.length} ${currentLanguage === 'ar' ? 'دورات' : 'Courses'}`;
+        countBadge.innerText = MEDIA_VIDEOS.length + ' ' + (currentLanguage === 'ar' ? 'دورات' : 'Courses');
       }
 
       // 1. Sidebar Playlist
@@ -5415,71 +5843,79 @@
           const unlocked = isVideoUnlocked(vid);
           const isCurrent = idx === activeMediaVideoIndex;
           let badgeHtml = '';
+
           if (vid.isPremium) {
             if (unlocked) {
-              badgeHtml = `<span class="status-pill status-completed" style="font-size: 0.68rem; padding: 2px 6px;">${dict.unlockedBadge || '🔓 مفتوح'}</span>`;
+              badgeHtml = '<span class="status-pill status-completed" style="font-size: 0.68rem; padding: 2px 6px;">' + (dict.unlockedBadge || '🔓 مفتوح') + '</span>';
             } else {
-              badgeHtml = `<span class="status-pill" style="font-size: 0.68rem; padding: 2px 6px; background: rgba(245,158,11,0.15); color: #d97706; border: 1px solid #f59e0b;">⭐ ${vid.price.toLocaleString()} دج</span>`;
+              badgeHtml = '<span class="status-pill" style="font-size: 0.68rem; padding: 2px 6px; background: rgba(245,158,11,0.15); color: #d97706; border: 1px solid #f59e0b;">⭐ ' + vid.price.toLocaleString() + ' دج</span>';
             }
           } else {
-            badgeHtml = `<span class="status-pill status-completed" style="font-size: 0.68rem; padding: 2px 6px;">${dict.freeBadge || '🆓 مجاني'}</span>`;
+            badgeHtml = '<span class="status-pill status-completed" style="font-size: 0.68rem; padding: 2px 6px;">' + (dict.freeBadge || '🆓 مجاني') + '</span>';
           }
 
-          return `
-            <div class="video-playlist-item ${isCurrent ? 'active' : ''}" onclick="switchMediaVideo(${idx})">
-              <div class="video-thumb-icon">${vid.thumbIcon || '🎬'}</div>
-              <div style="flex: 1; min-width: 0;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
-                  <span style="font-size: 0.72rem; color: var(--text-muted);">${vid.duration}</span>
-                  ${badgeHtml}
-                </div>
-                <h5 style="font-size: 0.82rem; font-weight: 800; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-main);">
-                  ${vid.title}
-                </h5>
-              </div>
-            </div>
-          `;
+          return '<div class="video-playlist-item ' + (isCurrent ? 'active' : '') + '" onclick="switchMediaVideo(' + idx + ')">' +
+            '<div class="video-thumb-icon">' + (vid.thumbIcon || '🎬') + '</div>' +
+            '<div style="flex: 1; min-width: 0;">' +
+              '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">' +
+                '<span style="font-size: 0.72rem; color: var(--text-muted);">' + vid.duration + '</span>' +
+                badgeHtml +
+              '</div>' +
+              '<h5 style="font-size: 0.82rem; font-weight: 800; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-main);">' +
+                vid.title +
+              '</h5>' +
+            '</div>' +
+          '</div>';
         }).join('');
       }
 
-      // 2. Full Catalog Grid
+      // 2. Full GoInterPrep-Style Catalog Grid
       if (catalog) {
         catalog.innerHTML = MEDIA_VIDEOS.map((vid, idx) => {
           const unlocked = isVideoUnlocked(vid);
           const isCurrent = idx === activeMediaVideoIndex;
           let badgePill = '';
           let actionBtn = '';
+          const currentProgress = unlocked ? 100 : (vid.progress || 0);
 
           if (vid.isPremium) {
             if (unlocked) {
-              badgePill = `<span class="course-badge-pill" style="background: #059669; color: #fff;">${dict.unlockedBadge || '🔓 تم الشراء'}</span>`;
-              actionBtn = `<button class="btn btn-sm btn-primary" onclick="switchMediaVideo(${idx})" style="font-weight: 800; font-size: 0.74rem;">${dict.btnWatchNow || 'مشاهدة الآن ▶'}</button>`;
+              badgePill = '<span class="course-badge-pill" style="background: #059669; color: #fff;">' + (dict.unlockedBadge || '🔓 تم الترخيص ✓') + '</span>';
+              actionBtn = '<button class="btn btn-sm btn-primary" onclick="switchMediaVideo(' + idx + '); scrollToMainPlayer();" style="font-weight: 800; font-size: 0.76rem; padding: 0.4rem 0.85rem;">' + (dict.btnWatchNow || 'مشاهدة الآن ▶') + '</button>';
             } else {
-              badgePill = `<span class="course-badge-pill" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #fff;">⭐ ${vid.price.toLocaleString()} دج</span>`;
-              actionBtn = `<button class="btn btn-sm btn-secondary" onclick="switchMediaVideo(${idx})" style="font-weight: 800; font-size: 0.74rem; border-color: #f59e0b; color: #d97706;">🔒 فتح الماستركلاس</button>`;
+              badgePill = '<span class="course-badge-pill" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #fff;">⭐ ' + vid.price.toLocaleString() + ' دج</span>';
+              actionBtn = '<button class="btn btn-sm btn-primary" onclick="switchMediaVideo(' + idx + '); scrollToMainPlayer();" style="font-weight: 900; font-size: 0.76rem; padding: 0.4rem 0.85rem;">🔒 فتح الماستركلاس</button>';
             }
           } else {
-            badgePill = `<span class="course-badge-pill" style="background: #10b981; color: #fff;">${dict.freeBadge || '🆓 مجاني'}</span>`;
-            actionBtn = `<button class="btn btn-sm btn-primary" onclick="switchMediaVideo(${idx})" style="font-weight: 800; font-size: 0.74rem;">${dict.btnWatchNow || 'مشاهدة مجاناً ▶'}</button>`;
+            badgePill = '<span class="course-badge-pill" style="background: #10b981; color: #fff;">' + (dict.freeBadge || '🆓 مجاني') + '</span>';
+            actionBtn = '<button class="btn btn-sm btn-outline" onclick="switchMediaVideo(' + idx + '); scrollToMainPlayer();" style="font-weight: 800; font-size: 0.76rem; border-color: var(--primary); color: var(--primary); padding: 0.4rem 0.85rem;">' + (dict.btnWatchNow || 'بدء التدريب ▶') + '</button>';
           }
 
-          return `
-            <div class="course-card ${isCurrent ? 'active-selected' : ''}">
-              <div class="course-card-thumb">
-                <span>${vid.thumbIcon || '🎓'}</span>
-                ${badgePill}
-                <span class="course-duration-pill">${vid.duration}</span>
-              </div>
-              <div class="course-card-body">
-                <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; margin-bottom: 2px;">${vid.tag} • ${vid.level}</span>
-                <div class="course-card-title">${vid.title}</div>
-                <div class="course-card-footer">
-                  <span style="font-weight: 700; color: #f59e0b;">⭐ ${vid.rating} (${vid.students})</span>
-                  ${actionBtn}
-                </div>
-              </div>
-            </div>
-          `;
+          return '<div class="course-card ' + (isCurrent ? 'active-selected' : '') + '" onclick="switchMediaVideo(' + idx + '); scrollToMainPlayer();">' +
+            '<div class="course-card-thumb">' +
+              '<span>' + (vid.thumbIcon || '🎓') + '</span>' +
+              badgePill +
+              '<span class="course-duration-pill">' + vid.duration + '</span>' +
+            '</div>' +
+            '<div class="course-card-body">' +
+              '<div class="course-card-meta">' +
+                '<span>' + vid.tag + '</span>' +
+                '<span>' + vid.level + '</span>' +
+              '</div>' +
+              '<div class="course-card-title">' + vid.title + '</div>' +
+              '<div class="course-progress-bar-wrap">' +
+                '<div class="course-progress-bar-fill" style="width: ' + currentProgress + '%;"></div>' +
+              '</div>' +
+              '<div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-muted); font-weight: 700;">' +
+                '<span>إنجاز المسار</span>' +
+                '<span>' + currentProgress + '%</span>' +
+              '</div>' +
+              '<div class="course-card-footer">' +
+                '<span style="font-weight: 800; color: #f59e0b; font-size: 0.8rem;">⭐ ' + vid.rating + ' (' + vid.students + ')</span>' +
+                actionBtn +
+              '</div>' +
+            '</div>' +
+          '</div>';
         }).join('');
       }
     }
@@ -5832,6 +6268,8 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
         exportSrtBtn: '⬇️ تصدير ملف SRT المعتمد',
         videoAcademyTitle: 'أكاديمية الفيديو لعلوم الترجمة وهندسة المؤتمرات',
         videoAcademySub: 'محاضرات عالية الجودة تغطي كبائن الترجمة الفورية في الأمم المتحدة، تقنيات تدوين روزان، والتوطين السمعي البصري.',
+        goOffersHeading: 'باقات وعروض الاشتراك التنافسية',
+        goOffersSub: 'اختر باقة التدريب المعتمدة التي تناسب مسارك المهني أو متطلبات مؤسستك',
         authModalHeading: 'بوابة الدخول الموحدة وإدارة الجلسات',
         authModalSubHeading: 'يرجى اختيار صفتك المهنية أو إدخال بريدك الإلكتروني للدخول المباشر مع عزل تام للبيانات',
         authSessionIsolationLabel: 'عزل بيانات الجلسة (Data Isolation):',
@@ -5941,6 +6379,8 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
         exportSrtBtn: '⬇️ Export Certified SRT File',
         videoAcademyTitle: 'Video Academy for Translation Studies & Conference Interpretation',
         videoAcademySub: 'High-definition masterclasses on UN simultaneous booths, Rozan note-taking methodology, and audiovisual subtitling.',
+        goOffersHeading: 'Flexible & Competitive Training Packages',
+        goOffersSub: 'Select the certified training track that fits your career goals or organizational workflow',
         authModalHeading: 'Polylang Hub Secure Access Gateway',
         authModalSubHeading: 'Select your professional role or enter your credentials to launch an isolated workspace',
         authSessionIsolationLabel: 'Session Data Isolation Guarantee:',
@@ -6050,6 +6490,8 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
         exportSrtBtn: '⬇️ Exporter le Fichier SRT Certifié',
         videoAcademyTitle: 'Académie Vidéo des Métiers de la Traduction',
         videoAcademySub: 'Masterclasses haute définition sur les cabines de l’ONU et la prise de notes Rozan.',
+        goOffersHeading: 'Offres et Forfaits de Formation Compétitifs',
+        goOffersSub: 'Choisissez le parcours de formation certifié adapté à vos objectifs ou aux besoins de votre entreprise',
         authModalHeading: 'Passerelle d’Accès Sécurisée Polylang Hub',
         authModalSubHeading: 'Sélectionnez votre rôle ou saisissez votre email pour ouvrir un espace de travail isolé',
         authSessionIsolationLabel: 'Garantie d’Isolation des Données:',
@@ -6159,6 +6601,8 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
         exportSrtBtn: '⬇️ Exportar Archivo SRT Certificado',
         videoAcademyTitle: 'Academia de Video para Estudios de Traducción',
         videoAcademySub: 'Masterclasses sobre cabinas de interpretación de la ONU y toma de notas de Rozan.',
+        goOffersHeading: 'Paquetes de Formación y Ofertas Competitivas',
+        goOffersSub: 'Elija el programa de formación certificado adaptado a sus aspiraciones o a las necesidades de su empresa',
         authModalHeading: 'Pasarela de Acceso Seguro Polylang Hub',
         authModalSubHeading: 'Seleccione su rol profesional o ingrese sus credenciales para iniciar su sesión aislada',
         authSessionIsolationLabel: 'Garantía de Aislamiento de Datos:',
@@ -6268,6 +6712,8 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
         exportSrtBtn: '⬇️ Esporta File SRT Certificato',
         videoAcademyTitle: 'Accademia Video per la Traduzione e l’Interpretariato',
         videoAcademySub: 'Masterclass sulle cabine ONU e sulla tecnica di presa note Rozan.',
+        goOffersHeading: 'Pacchetti Formativi e Offerte Competitive',
+        goOffersSub: 'Scegli il percorso di formazione certificato più adatto ai tuoi obiettivi professionali o alla tua azienda',
         authModalHeading: 'Portale d’Accesso Sicuro Polylang Hub',
         authModalSubHeading: 'Seleziona il tuo ruolo o inserisci le tue credenziali per avviare la sessione isolata',
         authSessionIsolationLabel: 'Garanzia di Isolamento Dati:',
@@ -6377,6 +6823,8 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
         exportSrtBtn: '⬇️ Zertifizierte SRT-Datei Exportieren',
         videoAcademyTitle: 'Video-Akademie für Translationswissenschaft',
         videoAcademySub: 'Masterclasses zu UN-Dolmetschkabinen und Rozan-Notizentechnik.',
+        goOffersHeading: 'Flexible & Wettbewerbsfähige Trainingspakete',
+        goOffersSub: 'Wählen Sie das zertifizierte Trainingsprogramm, das optimal zu Ihren Karrierezielen passt',
         authModalHeading: 'Polylang Hub Sicheres Zugangsportal',
         authModalSubHeading: 'Wählen Sie Ihre Berufsrolle oder melden Sie sich an, um Ihren isolierten Arbeitsbereich zu öffnen',
         authSessionIsolationLabel: 'Garantie für Datenisolation:',
@@ -6486,6 +6934,8 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
         exportSrtBtn: '⬇️ Экспорт Сертифицированного SRT',
         videoAcademyTitle: 'Видеоакадемия Переводческого Мастерства',
         videoAcademySub: 'Мастер-классы по кабинам синхронного перевода ООН и системе записей Розана.',
+        goOffersHeading: 'Гибкие и Выгодные Пакеты Обучения',
+        goOffersSub: 'Выберите сертифицированную программу обучения, отвечающую вашим карьерным целям',
         authModalHeading: 'Портал Безопасного Входа Polylang Hub',
         authModalSubHeading: 'Выберите вашу профессиональную роль или войдите для открытия изолированного рабочего пространства',
         authSessionIsolationLabel: 'Гарантия Изоляции Данных Сессии:',
@@ -7769,17 +8219,17 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
     const educationalVideos = {
       un: {
         title: 'محاضرة: الترجمة الفورية داخل كبائن الأمم المتحدة (UN Simultaneous Interpretation)',
-        url: 'https://www.youtube-nocookie.com/embed/uT_hFzV1s54',
+        url: 'https://www.youtube.com/embed/g8evH3lQvB0',
         desc: 'محاضرة تطبيقية توضح ديناميكيات العمل في كابينة الأمم المتحدة، وكيفية التعامل مع فارق التوقيت المعرفي (Décalage) وإدارة الحمل الذهني أثناء الخطابات الدولية الحية.'
       },
       rozan: {
         title: 'محاضرة: إدارة لغتين في وقت واحد وتقنيات روزان (How Interpreters Juggle Languages)',
-        url: 'https://www.youtube-nocookie.com/embed/1laThtz19i0',
+        url: 'https://www.youtube.com/embed/1laThtz19i0',
         desc: 'تحليل علمي وعملي لكيفية انقسام الانتباه لدى المترجم الشفوي بين الاستماع والتحليل والترميز وإعادة الصياغة الشفوية السليمة.'
       },
       standards: {
         title: 'محاضرة: معايير الترجمة المرئية ومزامنة التوقيت (Audiovisual Subtitling Guidelines)',
-        url: 'https://www.youtube-nocookie.com/embed/p3oZf-w84nE',
+        url: 'https://www.youtube.com/embed/p3oZf-w84nE',
         desc: 'شرح تطبيقي لقواعد إعداد ملفات SRT، سرعة القراءة المقبولة (17-20 حرف/ثانية)، وتقسيم الأسطر لتفادي التداخل البصري للمشاهد.'
       }
     };
@@ -7826,7 +8276,7 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
         id: 1,
         title: 'كبائن الأمم المتحدة والترجمة الفورية (UN Booths)',
         caption: 'المصدر: الأمم المتحدة - قسم خدمات المؤتمرات والترجمة الشفوية',
-        url: 'https://www.youtube-nocookie.com/embed/uT_hFzV1s54',
+        url: 'https://www.youtube.com/embed/g8evH3lQvB0',
         lessonTitle: 'أهم محاور درس كبائن الأمم المتحدة:',
         points: [
           '<strong>زمن التخلف (Décalage):</strong> الفارق الزمني (من 2 إلى 4 ثوانٍ) بين كلام الخطيب وتوليد الترجمة في الكابينة.',
@@ -7838,7 +8288,7 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
         id: 2,
         title: 'الحمل المعرفي وإدارة لغتين معاً (Cognitive Load)',
         caption: 'المصدر: TED-Ed - Ewandro Magalhaes (مترجم فوري معتمد)',
-        url: 'https://www.youtube-nocookie.com/embed/1laThtz19i0',
+        url: 'https://www.youtube.com/embed/1laThtz19i0',
         lessonTitle: 'أهم محاور إدارة الحمل المعرفي:',
         points: [
           '<strong>المعالجة المزدوجة (Dual-tasking):</strong> تدريب الدماغ على فك تشفير المعنى وتوليد النطق في مسارين متوازيين.',
@@ -7850,7 +8300,7 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
         id: 3,
         title: 'الترجمة التعاقبية وتدوين الرموز (Consecutive Masterclass)',
         caption: 'المصدر: الأكاديمية الدولية للمترجمين الفوريين',
-        url: 'https://www.youtube-nocookie.com/embed/p3oZf-w84nE',
+        url: 'https://www.youtube.com/embed/p3oZf-w84nE',
         lessonTitle: 'أهم محاور الترجمة التعاقبية وتدوين الرموز:',
         points: [
           '<strong>مبادئ جان فرانسوا روزان:</strong> تدوين الأفكار بدلاً من الكلمات، والاعتماد على الرموز والأشكال العمودية.',
@@ -8349,7 +8799,10 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
       { word: 'Indemnify and Hold Harmless', phonetic: '/ɪnˈdɛmnɪfaɪ/', cat: 'عقود دولية', meaning: 'التعويض وإبراء الذمة من المسؤولية', example: 'The contractor agrees to indemnify and hold harmless the client.' },
       { word: 'Ultra Vires', phonetic: '/ˌʌltrə ˈvaɪriːz/', cat: 'تشريعات وشركات', meaning: 'تجاوز حدود الاختصاص القانوني أو الصلاحيات', example: 'Any decision beyond the corporate charter is deemed ultra vires.' },
       { word: 'Subpoena', phonetic: '/səˈpiːnə/', cat: 'إجراءات قضائية', meaning: 'أمر تكليف رسمي بالحضور أو تقديم مستندات', example: 'The court issued a subpoena for the witness to appear in person.' },
-      { word: 'Sine Qua Non', phonetic: '/ˌsɪneɪ kwɑː ˈnəʊn/', cat: 'مصطلحات جوهرية', meaning: 'شرط لا غنى عنه / ركن أساسي', example: 'Mutual consent is the sine qua non of any legally binding contract.' }
+      { word: 'Sine Qua Non', phonetic: '/ˌsɪneɪ kwɑː ˈnəʊn/', cat: 'مصطلحات جوهرية', meaning: 'شرط لا غنى عنه / ركن أساسي', example: 'Mutual consent is the sine qua non of any legally binding contract.' },
+      { word: 'Décalage / Ear-Voice Span', phonetic: '/de.ka.laʒ/', cat: 'ترجمة فورية', meaning: 'الفارق الزمني بين سماع الخطيب ونطق الترجمة', example: 'Maintaining an optimal décalage of 3 seconds prevents cognitive overload.' },
+      { word: 'Mutatis Mutandis', phonetic: '/mjuːˈteɪtɪs mjuːˈtændɪs/', cat: 'صياغة تشريعية', meaning: 'مع إجراء التعديلات اللازمة وفق مقتضى الحال', example: 'The clauses of Schedule A apply mutatis mutandis to Schedule B.' },
+      { word: 'Without Prejudice', phonetic: '/wɪˈðaʊt ˈprɛdʒʊdɪs/', cat: 'منازعات ومراسلات', meaning: 'دون المساس بالحقوق أو التحيز لأي طرف', example: 'All settlement negotiations are conducted strictly without prejudice.' }
     ];
 
     let currentCardIndex = 0;
@@ -8395,12 +8848,44 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
       pushToast(`🔊 الاستماع لنطق: ${c.word}`);
     }
 
+    function copyFlashcardText() {
+      const c = flashcardsData[currentCardIndex];
+      const textToCopy = `${c.word} (${c.phonetic}) [${c.cat}]\nالمعنى: ${c.meaning}\nالسياق: ${c.example}`;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          playAppSound('submit');
+          pushToast(`📋 تم نسخ البطاقة: ${c.word}`);
+        }).catch(() => {
+          fallbackCopyText(textToCopy);
+        });
+      } else {
+        fallbackCopyText(textToCopy);
+      }
+    }
+
+    function fallbackCopyText(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        playAppSound('submit');
+        pushToast('📋 تم نسخ البطاقة بنجاح');
+      } catch (e) {
+        pushToast('⚠️ تعذر النسخ المباشر');
+      }
+      document.body.removeChild(ta);
+    }
+
     // Multi-Question Trivia Game with Instant Scoring & Explanations
     const triviaQuestions = [
       {
-        category: "السياق الدبلوماسي والسياسي",
+        category: "السياق الدبلوماسي والأمم المتحدة",
         q: "The resolution was adopted unanimously by the general assembly.",
-        explanation: "الفعل 'adopted' في سياق الجمعية العامة للأمم المتحدة يُترجم بـ 'أُقرّ' أو 'اعتُمد'، والظرف 'unanimously' يُترجم حصراً بـ 'بالإجماع'.",
+        explanation: "الفعل 'adopted' في سياق الجمعية العامة للأمم المتحدة يُترجم حصراً بـ 'أُقرّ' أو 'اعتُمد'، والظرف 'unanimously' يقابله 'بالإجماع'.",
         options: [
           { text: "أُقرّ القرار بالإجماع من قبل الجمعية العامة.", correct: true },
           { text: "رُفض القرار بأغلبية الأصوات في الجمعية العامة.", correct: false },
@@ -8409,9 +8894,9 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
         ]
       },
       {
-        category: "السياق القانوني والتعاقدي",
+        category: "السياق القانوني والتعاقدي (ISO 17100)",
         q: "The vendor shall indemnify and hold harmless the purchaser against all claims.",
-        explanation: "التعبير المزدوج 'indemnify and hold harmless' هو صيغة تعاقدية قانونية تعني 'يعوّض ويبرئ الذمة من أي مسؤولية'.",
+        explanation: "الصيغة القانونية التعاقدية المزدوجة 'indemnify and hold harmless' تعني اصطلاحاً 'يعوّض ويبرئ الذمة من أي مسؤولية أو مطالبة'.",
         options: [
           { text: "يلتزم البائع بتعويض المشتري وإبراء ذمته من كافة المطالبات.", correct: true },
           { text: "يحق للبائع مقاضاة المشتري وتغريمه عن الأضرار.", correct: false },
@@ -8420,9 +8905,20 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
         ]
       },
       {
-        category: "السياق التقني والصناعي",
+        category: "كابينة المؤتمرات وإدارة الفارق الزمني (Décalage)",
+        q: "In simultaneous interpretation, what is the standard recommended Ear-Voice Span (EVS)?",
+        explanation: "الفارق الزمني النموذجي (Ear-Voice Span) في كابينة الترجمة الفورية وفق معايير AIIC يتراوح بين 2 إلى 4 ثوانٍ للحفاظ على تدفق المعنى دون إجهاد الذاكرة قصيرة المدى.",
+        options: [
+          { text: "بين 2 إلى 4 ثوانٍ للحفاظ على وحدة المعنى وتفادي تراكم الجمل.", correct: true },
+          { text: "أكثر من 15 ثانية لانتظار نهاية الفقرة بالكامل.", correct: false },
+          { text: "أقل من نصف ثانية والتكلم المتزامن حرفياً مع الخطيب.", correct: false },
+          { text: "دقيقة واحدة بعد أن ينتهي الخطيب من كل فكرة رئيسية.", correct: false }
+        ]
+      },
+      {
+        category: "السياق التقني والهندسي",
         q: "The system incorporates fail-safe mechanisms to prevent catastrophic failure.",
-        explanation: "المصطلح التقني 'fail-safe mechanisms' يُترجم في الهندسة بـ 'آليات الأمان من الأعطال / الحماية الذاتية عند العطل'.",
+        explanation: "المصطلح التقني 'fail-safe mechanisms' يُترجم في الهندسة بـ 'آليات الأمان ضد الأعطال / الحماية الذاتية عند الخلل'.",
         options: [
           { text: "يتضمن النظام آليات أمان ضد الأعطال لمنع الانهيار الكارثي.", correct: true },
           { text: "يحتوي النظام على برمجيات تجريبية تؤدي إلى توقف مفاجئ.", correct: false },
@@ -8433,12 +8929,45 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
       {
         category: "السياق الطبي والدوائي",
         q: "The clinical trial demonstrated statistically significant efficacy.",
-        explanation: "في الإحصاء الحيوي والترجمة الطبية، يُقابل 'statistically significant efficacy' بدقة 'فاعلية ذات دلالة إحصائية'.",
+        explanation: "في الإحصاء الحيوي والترجمة الطبية المعتمدة، يُقابل 'statistically significant efficacy' بدقة 'فاعلية ذات دلالة إحصائية'.",
         options: [
           { text: "أظهرت التجربة السريرية فاعلية ذات دلالة إحصائية.", correct: true },
           { text: "بيّنت الدراسة الطبية احتمالات غير مؤكدة للشفاء.", correct: false },
           { text: "أثبتت التحاليل المخبرية فشل العينة الإحصائية.", correct: false },
           { text: "تم إلغاء التجربة لعدم وجود متطوعين كافين.", correct: false }
+        ]
+      },
+      {
+        category: "التوطين السمعي البصري (AVT Standards)",
+        q: "According to international subtitling guidelines, what is the maximum recommended CPS?",
+        explanation: "معدل سرعة القراءة المقبول في الترجمة المرئية (Characters Per Second - CPS) هو 15 إلى 17 حرفاً في الثانية للمشاهدين البالغين لضمان الراحة البصرية.",
+        options: [
+          { text: "15 إلى 17 حرفاً في الثانية (CPS) لضمان استيعاب المشاهد.", correct: true },
+          { text: "35 إلى 40 حرفاً في الثانية لملاحقة سرعة الحوار المرتفعة.", correct: false },
+          { text: "5 أحرف في الثانية فقط لتفادي سرعة التحريك.", correct: false },
+          { text: "لا توجد معايير محددة لسرعة قراءة العبارات المترجمة.", correct: false }
+        ]
+      },
+      {
+        category: "تدوين ملاحظات روزان (Rozan Principles)",
+        q: "In Rozan's 7 principles of consecutive interpreting, what does 'Shift' mean?",
+        explanation: "مبدأ 'Shift' (التفريع / الإزاحة) يعني كتابة العناصر المرتبطة منطقياً تحت بعضها مع إزاحة طفيفة إلى الداخل لعكس التبعية المنطقية والتفريع دون الحاجة لكتابة أدوات العطف.",
+        options: [
+          { text: "إزاحة العناصر التابعة نحو الداخل لتوضيح العلاقة المنطقية بيانياً.", correct: true },
+          { text: "تغيير لغة التدوين من العربية إلى الإنجليزية بشكل عشوائي.", correct: false },
+          { text: "شطب الفقرات غير المهمة أثناء كلام المتحدث.", correct: false },
+          { text: "التبديل بين كتابة الحروف والرموز الرياضية في كل سطر.", correct: false }
+        ]
+      },
+      {
+        category: "التحكيم التجاري الدولي (ICC Arbitration)",
+        q: "The arbitral tribunal rendered an award enforceable under the New York Convention.",
+        explanation: "في صياغة عقود التحكيم الدولي: 'arbitral tribunal' تعني 'هيئة التحكيم'، و'award' تعني 'حكم تحكيمي'، و'enforceable' تعني 'واجب النفاذ / قابل للتنفيذ بموجب اتفاقية نيويورك'.",
+        options: [
+          { text: "أصدرت هيئة التحكيم حكماً قابلاً للنفاذ بموجب اتفاقية نيويورك.", correct: true },
+          { text: "قدّمت المحكمة المحلية مكافأة مالية وفق قانون نيويورك.", correct: false },
+          { text: "رفضت لجنة الوساطة اعتماد القرار المتفق عليه مسبقاً.", correct: false },
+          { text: "تم تأجيل القضية إلى حين انعقاد محكمة الاستئناف.", correct: false }
         ]
       }
     ];
@@ -8452,24 +8981,27 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
       const catTag = document.getElementById('triviaCategoryTag');
       const qText = document.getElementById('triviaQuestionText');
       const expBox = document.getElementById('triviaExplanationBox');
+      const scoreDisp = document.getElementById('gameScoreDisplay');
 
       if (!container || !qText) return;
       if (expBox) expBox.style.display = 'none';
+      if (scoreDisp) scoreDisp.innerText = triviaScore;
 
       const q = triviaQuestions[currentTriviaIndex];
-      if (counter) counter.innerText = `السؤال ${currentTriviaIndex + 1} من ${triviaQuestions.length}`;
+      if (counter) counter.innerText = 'السؤال ' + (currentTriviaIndex + 1) + ' من ' + triviaQuestions.length;
       if (catTag) catTag.innerText = q.category;
-      qText.innerText = `"${q.q}"`;
+      qText.innerText = '"' + q.q + '"';
 
-      container.innerHTML = q.options.map((opt, i) => `
-        <button class="btn btn-outline trivia-option-btn" style="text-align: start; padding: 0.95rem; justify-content: flex-start; line-height: 1.5;" onclick="answerTrivia(${opt.correct}, this)">
-          ${String.fromCharCode(65 + i)}) ${opt.text}
-        </button>
-      `).join('');
+      container.innerHTML = q.options.map((opt, i) => {
+        const letter = String.fromCharCode(65 + i);
+        return '<button class="quiz-card-option trivia-option-btn" onclick="answerTrivia(' + opt.correct + ', this)">' +
+          '<span style="background: var(--bg-surface-secondary); padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 800; font-size: 0.8rem;">' + letter + '</span>' +
+          '<span>' + opt.text + '</span>' +
+        '</button>';
+      }).join('');
     }
 
     function answerTrivia(isCorrect, btn) {
-      // Disable all buttons in container to freeze selection
       const btns = document.querySelectorAll('.trivia-option-btn');
       btns.forEach(b => b.disabled = true);
 
@@ -8480,26 +9012,23 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
 
       if (isCorrect) {
         playAppSound('success');
-        btn.style.background = '#ecfdf5';
-        btn.style.borderColor = '#10b981';
-        btn.style.color = '#065f46';
+        btn.classList.add('correct');
         triviaScore += 25;
-        document.getElementById('gameScoreDisplay').innerText = triviaScore;
+        const scoreDisp = document.getElementById('gameScoreDisplay');
+        if (scoreDisp) scoreDisp.innerText = triviaScore;
         if (resPill) {
           resPill.className = 'status-badge completed';
-          resPill.innerText = '✓ إجابة صحيحة (+25 نقطة)';
+          resPill.innerText = '✓ إجابة نموذجية معتمدة (+25 نقطة)';
         }
-        pushToast('✓ إجابة معتمدة نموذجياً (+25 نقطة)');
+        pushToast('✓ إجابة دقيقة ومعتمدة اصطلاحياً (+25 نقطة)');
       } else {
         playAppSound('mic-stop');
-        btn.style.background = '#fee2e2';
-        btn.style.borderColor = '#ef4444';
-        btn.style.color = '#991b1b';
+        btn.classList.add('wrong');
         if (resPill) {
           resPill.className = 'status-badge disputed';
-          resPill.innerText = '✕ صياغة غير دقيقة';
+          resPill.innerText = '✕ صياغة غير دقيقة سياقياً';
         }
-        pushToast('✕ صياغة غير موفقة، تفقد التحليل اللغوي أدناه');
+        pushToast('✕ صياغة غير موفقة، راجع التحليل الاصطلاحي أدناه');
       }
 
       if (expBox && expText) {
@@ -8511,12 +9040,51 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
     function nextTriviaQuestion() {
       currentTriviaIndex = (currentTriviaIndex + 1) % triviaQuestions.length;
       renderTrivia();
-      pushToast(`انتقال إلى السؤال ${currentTriviaIndex + 1}`);
+      pushToast('انتقال إلى السؤال ' + (currentTriviaIndex + 1));
     }
 
     /* -------------------------------------------------------------
        11. MODAL UTILITIES & EVENT HANDLERS
        ------------------------------------------------------------- */
+    function activateNavTab(tabName) {
+      if (typeof switchPortalTab === 'function') {
+        switchPortalTab(tabName);
+      } else {
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        const targetBtn = document.querySelector(`[data-tab="${tabName}"]`);
+        if (targetBtn) targetBtn.classList.add('active');
+
+        document.querySelectorAll('.tab-content').forEach(pane => pane.classList.remove('active'));
+        const targetPane = document.getElementById(tabName);
+        if (targetPane) targetPane.classList.add('active');
+      }
+    }
+
+    function openSimBoothModal() {
+      const boothModal = document.getElementById('simBoothModalBackdrop') || document.getElementById('boothModal');
+      if (boothModal) {
+        boothModal.classList.add('active');
+        boothModal.style.display = 'flex';
+      } else {
+        // Direct jump to Booth / Live interpretation section
+        activateNavTab('tab-translator');
+        const boothEl = document.getElementById('simultaneousBoothContainer') || document.getElementById('interpretationBoothSection');
+        if (boothEl) {
+          boothEl.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+      playAppSound('click');
+      pushToast('🎙️ تم تفعيل كابينة المحاكاة الفورية المتقدمة');
+    }
+
+    function closeSimBoothModal() {
+      const boothModal = document.getElementById('simBoothModalBackdrop') || document.getElementById('boothModal');
+      if (boothModal) {
+        boothModal.classList.remove('active');
+        boothModal.style.display = 'none';
+      }
+    }
+
     function openAuthModal() {
       updateAuthModalActiveSessionInfo();
       document.getElementById('authModalBackdrop').classList.add('active');
