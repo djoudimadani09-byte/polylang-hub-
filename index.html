@@ -2679,8 +2679,26 @@
       cursor: default;
     }
 
-    /* Strict Mobile & Android Responsiveness */
-    @media (max-width: 900px) {
+    /* -------------------------------------------------------------
+       ENTERPRISE MOBILE & ANDROID RESPONSIVENESS OVERHAUL
+       ------------------------------------------------------------- */
+    @media (max-width: 1024px) {
+      .header-inner {
+        padding: 0.75rem 1rem;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+      .nav-tabs-wrapper {
+        order: 3;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 0.25rem;
+        scrollbar-width: none;
+      }
+      .nav-tabs-wrapper::-webkit-scrollbar {
+        display: none;
+      }
       .video-theatre-grid {
         grid-template-columns: 1fr !important;
       }
@@ -2691,37 +2709,95 @@
         grid-template-columns: 1fr !important;
       }
     }
+
     @media (max-width: 768px) {
-      .table-responsive {
-        width: 100% !important;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch !important;
+      .header-inner {
+        justify-content: space-between;
       }
-      .table-responsive table {
-        min-width: 520px;
+      .brand-title {
+        font-size: 1.1rem;
       }
-      .grid-2, .grid-3, .grid-4 {
-        grid-template-columns: 1fr !important;
+      .brand-subtitle {
+        display: none;
       }
       .header-tools {
         flex-wrap: wrap;
+        gap: 0.4rem;
+        justify-content: flex-end;
+      }
+      .pill-btn, .backend-api-pill {
+        padding: 0.4rem 0.65rem;
+        font-size: 0.78rem;
+      }
+      .role-navigator-bar {
+        padding: 0.75rem 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+      .role-chips-track {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 0.35rem;
+        scrollbar-width: none;
+      }
+      .role-chips-track::-webkit-scrollbar {
+        display: none;
+      }
+      .grid-2, .grid-3, .grid-4 {
+        grid-template-columns: 1fr !important;
       }
       .modal-box {
         max-width: 95vw !important;
         width: 95vw !important;
         margin: auto !important;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+      .table-responsive {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        display: block;
+      }
+      .table-responsive table {
+        min-width: 500px;
+        width: 100%;
       }
     }
-    @media (max-width: 600px) {
+
+    @media (max-width: 480px) {
+      .header-inner {
+        padding: 0.5rem 0.75rem;
+      }
+      .brand-logo {
+        width: 36px;
+        height: 36px;
+        font-size: 1.15rem;
+      }
+      .brand-title {
+        font-size: 1rem;
+      }
+      .pill-btn {
+        padding: 0.35rem 0.55rem;
+        font-size: 0.72rem;
+      }
+      .icon-btn {
+        width: 34px;
+        height: 34px;
+        font-size: 0.85rem;
+      }
       .video-main-wrapper {
         border-radius: var(--radius-sm);
       }
       .go-offer-card {
-        padding: 1.15rem !important;
+        padding: 1rem !important;
       }
       .course-card-thumb {
-        height: 130px !important;
-        font-size: 2.2rem !important;
+        height: 120px !important;
+        font-size: 2rem !important;
       }
       .paywall-actions-row {
         flex-direction: column !important;
@@ -2731,11 +2807,19 @@
         width: 100% !important;
       }
       .table-responsive table {
-        min-width: 480px;
-        font-size: 0.8rem;
+        min-width: 440px;
+        font-size: 0.76rem;
       }
       th, td {
-        padding: 0.55rem 0.65rem !important;
+        padding: 0.45rem 0.55rem !important;
+      }
+      .user-profile-badge {
+        padding: 0.3rem 0.55rem;
+      }
+      .user-avatar-initial {
+        width: 26px;
+        height: 26px;
+        font-size: 0.75rem;
       }
     }
 
