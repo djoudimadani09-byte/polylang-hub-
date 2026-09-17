@@ -10,10 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
 
-  <style>
-    
-
-  /* الهوية البصرية الفاخرة للمنصة: الخلفية الداكنة واللون الأحمر الملكي */
+<style>
   :root {
     --bg-base: #0f172a;
     --bg-surface: #1e293b;
@@ -34,28 +31,38 @@
     overflow-x: hidden;
   }
 
-  /* تنسيق البطاقات الزجاجية الفاخرة */
-  .card, .app-pane, div[style*="background"] {
+  /* ترتيب القوائم والبطاقات بشكل شبكي صحيح يمنع التداخل */
+  .card, .app-pane {
     background-color: var(--bg-surface);
     border: 1px solid var(--border-main);
     border-radius: 14px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    margin-bottom: 15px;
+    padding: 15px;
   }
 
-  /* توحيد أزرار الهوية الحمراء والبيضاء */
+  /* تنظيم أزرار التنقل والقوائم الأفقية */
+  .nav-tabs-wrapper, .role-navigator-bar, .video-mode-switcher-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+
+  /* تنسيق الأزرار الرئيسية والهوية الحمراء */
   .btn-primary, button[style*="background: #e53935"], .btn-red {
     background: var(--primary-gradient) !important;
     color: #ffffff !important;
     border-radius: 10px;
     font-weight: bold;
     border: none;
-    box-shadow: 0 4px 15px rgba(229, 57, 53, 0.4);
-    transition: all 0.2s ease;
+    padding: 10px 20px;
   }
 
-  /* منع أي تداخل على شاشات الأندرويد */
+  /* حماية الشاشة من التداخل على الأندرويد */
   * { box-sizing: border-box; }
-  img, video, iframe { max-width: 100%; height: auto; border-radius: 8px; 
+  img, video, iframe { max-width: 100%; height: auto; border-radius: 8px; }
+</style>
     /* =============================================================
        LUXURIOUS SAAS AESTHETIC & GLASSMORPHISM ENHANCEMENTS
        ============================================================= */
