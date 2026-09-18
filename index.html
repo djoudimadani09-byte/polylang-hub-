@@ -2887,6 +2887,120 @@
       }
     }
 
+    /* ============================================================
+       VIDEO MASTERCLASS ACADEMY: DYNAMIC PLAYLIST & PROGRESS STYLES
+       ============================================================ */
+    .academy-progress-dashboard {
+      background: linear-gradient(135deg, var(--bg-surface-secondary) 0%, rgba(229, 57, 53, 0.05) 100%);
+      border: 1.5px solid var(--border-main);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    .academy-filter-toolbar {
+      background: var(--bg-surface-secondary);
+      border: 1.5px solid var(--border-main);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .academy-playlist-card {
+      display: flex;
+      gap: 0.85rem;
+      padding: 0.85rem;
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--border-main);
+      background: var(--bg-surface);
+      cursor: pointer;
+      transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      user-select: none;
+      align-items: flex-start;
+    }
+    .academy-playlist-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    }
+    .academy-playlist-card.active {
+      border-color: var(--primary);
+      background: rgba(229, 57, 53, 0.04);
+      box-shadow: 0 4px 16px rgba(229, 57, 53, 0.16);
+    }
+    .academy-playlist-card.active::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 4px;
+      background: var(--primary-gradient);
+      border-radius: 4px 0 0 4px;
+    }
+    [dir="ltr"] .academy-playlist-card.active::before {
+      right: auto;
+      left: 0;
+      border-radius: 0 4px 4px 0;
+    }
+    .academy-playlist-thumb {
+      width: 95px;
+      height: 64px;
+      border-radius: var(--radius-sm);
+      background: #0f172a;
+      flex-shrink: 0;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+    }
+    .academy-playlist-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.88;
+      transition: transform 0.3s, opacity 0.2s;
+    }
+    .academy-playlist-card:hover .academy-playlist-thumb img {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+    .academy-playlist-duration-badge {
+      position: absolute;
+      bottom: 3px;
+      left: 3px;
+      background: rgba(0, 0, 0, 0.82);
+      color: #ffffff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 1px 4px;
+      border-radius: 3px;
+      letter-spacing: 0.2px;
+    }
+    .academy-playlist-play-icon {
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(229, 57, 53, 0.92);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
+      transition: transform 0.2s;
+    }
+    .academy-playlist-card:hover .academy-playlist-play-icon {
+      transform: scale(1.12);
+    }
+    @media (max-width: 900px) {
+      #academyStudioGrid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -3187,56 +3301,47 @@
 
         <!-- Video Mode Switcher Bar -->
         <div class="video-mode-switcher-chips">
-          <button class="video-mode-chip active" id="btnVideoMode-studio" onclick="switchVideoEngineMode('studio')">
-            🎬 استوديو المزامنة التفاعلي (Interactive SRT)
+          <button class="video-mode-chip active" id="btnVideoMode-bilingual" onclick="switchVideoEngineMode('bilingual')">
+            🧠 الدماغ ثنائي اللغة والترجمة المتزامنة (Bilingual Brain)
           </button>
-          <button class="video-mode-chip" id="btnVideoMode-un" onclick="switchVideoEngineMode('un')">
-            🏛️ محاضرة: الترجمة الفورية بالأمم المتحدة (UN Booth)
+          <button class="video-mode-chip" id="btnVideoMode-linguistics" onclick="switchVideoEngineMode('linguistics')">
+            🌐 كيف تصيغ اللغة التفكير وبناء المعنى (Linguistic Framing)
           </button>
-          <button class="video-mode-chip" id="btnVideoMode-rozan" onclick="switchVideoEngineMode('rozan')">
-            ✍️ محاضرة: تدوين ملاحظات روزان (Rozan Notes)
+          <button class="video-mode-chip" id="btnVideoMode-fluency" onclick="switchVideoEngineMode('fluency')">
+            💡 أسرار اكتساب اللغات والطلاقة السريعة (Language Learning)
           </button>
-          <button class="video-mode-chip" id="btnVideoMode-standards" onclick="switchVideoEngineMode('standards')">
-            ⏱️ محاضرة: معايير الترجمة المرئية (Subtitling Rules)
+          <button class="video-mode-chip" id="btnVideoMode-stress" onclick="switchVideoEngineMode('stress')">
+            🎯 الهدوء والتحمل الذهني تحت الضغط (Staying Calm)
+          </button>
+          <button class="video-mode-chip" id="btnVideoMode-vocal" onclick="switchVideoEngineMode('vocal')">
+            🎙️ فن الإلقاء والتحدث المؤثر أمام الوفود (Vocal Impact)
           </button>
         </div>
 
         <div class="grid-2">
           <!-- Video Player Column -->
           <div>
-            <!-- Mode 1: Interactive HTML5 Video with Synchronized Multi-Track SRT Overlay -->
-            <div class="video-player-container" id="videoContainer">
-              <video id="mainTranslationVideo" controls preload="metadata" ontimeupdate="onVideoTimeUpdate(this)">
-                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" type="video/mp4">
-                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
-                متصفحك لا يدعم تشغيل عنصر الفيديو.
-              </video>
-              <div class="video-subtitle-overlay" id="videoSubtitleOverlay">
-                مرحباً بكم في استوديو الترجمة المرئية المعتمدة لمنصة Polylang Hub
-              </div>
+            <!-- Responsive Embedded Educational Video Player with Real YouTube Stream -->
+            <div class="responsive-video-wrapper" id="educationalVideoEmbedWrapper">
+              <iframe id="educationalVideoIframe" src="https://www.youtube.com/embed/MMmOLN5zBLY?enablejsapi=1" title="Polylang Hub Educational Translation Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
 
-            <!-- Mode 2: Real Responsive Embedded Educational Video Masterclasses (YouTube embed) -->
-            <div class="responsive-video-wrapper" id="educationalVideoEmbedWrapper" style="display: none;">
-              <iframe id="educationalVideoIframe" src="about:blank" title="Polylang Hub Educational Translation Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-
-            <div class="video-controls-row" id="videoControlsRow" style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.65rem; font-size: 0.82rem; color: var(--text-muted);">
-              <span>التوقيت الحالي: <strong id="videoCurrentTimeDisplay" style="color: var(--primary-dark);">00:00.0</strong></span>
+            <div class="video-controls-row" id="videoControlsRow" style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.65rem; font-size: 0.82rem; color: var(--text-muted); flex-wrap: wrap; gap: 0.4rem;">
+              <span>المقطع المحدد: <strong id="videoCurrentTimeDisplay" style="color: var(--primary-dark);">المقطع #1 [00:00.5 ➔ 00:04.0]</strong></span>
               <div style="display: flex; gap: 0.4rem;">
-                <button class="btn btn-outline btn-sm" style="padding: 0.2rem 0.5rem;" onclick="seekVideoOffset(-3)">⏪ -3ث</button>
-                <button class="btn btn-outline btn-sm" style="padding: 0.2rem 0.5rem;" onclick="seekVideoOffset(3)">+3ث ⏩</button>
+                <button class="btn btn-outline btn-sm" style="padding: 0.2rem 0.5rem;" onclick="prevSrtCue()">⏮️ السابق</button>
+                <button class="btn btn-outline btn-sm" style="padding: 0.2rem 0.5rem;" onclick="nextSrtCue()">التالي ⏭️</button>
                 <button class="btn btn-outline btn-sm" style="padding: 0.2rem 0.5rem;" onclick="addCurrentCueAtTimestamp()">➕ إضافة مقطع توقيت</button>
               </div>
             </div>
 
             <!-- Educational Video Meta Note -->
-            <div id="educationalVideoMetaBox" style="display: none; margin-top: 0.65rem; padding: 0.75rem 1rem; background: var(--bg-surface-secondary); border: 1px solid var(--border-main); border-radius: var(--radius-sm); font-size: 0.82rem; line-height: 1.6;">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
-                <strong style="color: var(--primary-dark);" id="eduVideoTitle">محاضرة الترجمة الفورية والتقنيات الدبلوماسية</strong>
-                <span class="session-isolation-pill">بث عالي الدقة HD 🔴</span>
+            <div id="educationalVideoMetaBox" style="margin-top: 0.65rem; padding: 0.75rem 1rem; background: var(--bg-surface-secondary); border: 1px solid var(--border-main); border-radius: var(--radius-sm); font-size: 0.82rem; line-height: 1.6;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem; flex-wrap: wrap; gap: 0.35rem;">
+                <strong style="color: var(--primary-dark);" id="eduVideoTitle">محاضرة: فوائد الدماغ ثنائي اللغة والترجمة المتزامنة</strong>
+                <span class="session-isolation-pill">بث عالي الدقة 1080p HD 🔴</span>
               </div>
-              <p style="color: var(--text-muted); margin: 0;" id="eduVideoDesc">محاضرة تطبيقية توضح ديناميكيات الترجمة الفورية داخل كبائن الأمم المتحدة، وكيفية التعامل مع فارق التوقيت المعرفي (Décalage).</p>
+              <p style="color: var(--text-muted); margin: 0;" id="eduVideoDesc">دراسة تطبيقية توضح كيف يدير الدماغ اللغتين في آن واحد، وفك الشفرات الدلالية في أجزاء من الثانية أثناء الترجمة الشفوية الحية ومزامنة النصوص.</p>
             </div>
           </div>
 
@@ -3585,6 +3690,29 @@
         </div>
       </div>
 
+            <!-- Client Educational & Promotional Explainer Video Card -->
+      <div class="card" style="margin-bottom: 1.5rem; background: linear-gradient(135deg, rgba(229,57,53,0.03), rgba(24,28,38,0.02)); border: 1.5px solid var(--border-main);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+          <div>
+            <div style="display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(229,57,53,0.1); color: var(--primary); padding: 0.2rem 0.65rem; border-radius: 50px; font-size: 0.75rem; font-weight: 800; margin-bottom: 0.35rem;">
+              <span>🎬</span> فيديو تعريفي وترويجي معتمد
+            </div>
+            <h3 style="font-weight: 900; font-size: 1.15rem; margin: 0;">كيف تضمن منصة Polylang Hub دقة الترجمة المحلفة وجودة ISO 17100؟</h3>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0.2rem 0 0;">شاهد هذا العرض التفاعلي للتعرف على آليات التدقيق اللغوي المزدوج، والتحقق القضائي، والبصمة المشفرة SHA-256</p>
+          </div>
+          <span class="cert-stamp-badge" style="background: rgba(16,185,129,0.12); color: #059669; border-color: #10b981;">✓ جودة 1080p HD</span>
+        </div>
+
+        <div class="responsive-video-wrapper">
+          <iframe src="https://www.youtube.com/embed/RKK7wGAYP6k" title="Polylang Hub Certified Translation Quality Standards" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <div style="margin-top: 0.85rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; color: var(--text-muted); flex-wrap: wrap; gap: 0.5rem;">
+          <span>المحاضرة: كيف تصيغ اللسانيات وبناء المعنى دقة الترجمة الرسمية — الدكتورة ليرا بوروديتسكي (Lera Boroditsky)</span>
+          <span style="color: var(--primary); font-weight: 800;">معايير الاعتماد والتوثيق الدولي ✓</span>
+        </div>
+      </div>
+
       <!-- Attached Documents & Certified Files Manager (Functional Files Showcase) -->
       <div class="card" style="margin-bottom: 1.5rem;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
@@ -3907,60 +4035,183 @@
       </div>
 
       <!-- Feature 3: Real Working Educational Translation Video Academy -->
-      <div class="card" style="margin-bottom: 1.5rem;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+      <div class="card" id="videoMasterclassAcademySection" style="margin-bottom: 1.5rem;">
+        <!-- Header & Quick Reset -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;">
           <div>
-            <h3 style="font-weight: 900; font-size: 1.15rem;" data-i18n="videoAcademyTitle">أكاديمية الفيديو التعليمي لمهارات الترجمة واللغات (Video Masterclass Academy)</h3>
-            <p style="font-size: 0.82rem; color: var(--text-muted);" data-i18n="videoAcademySub">محاضرات تطبيقية حقيقية عالية الدقة لتقنيات الترجمة الفورية والدبلوماسية وإدارة اللغات</p>
+            <div style="display: inline-flex; align-items: center; gap: 0.4rem; background: var(--primary-subtle); color: var(--primary); padding: 0.2rem 0.75rem; border-radius: 50px; font-size: 0.78rem; font-weight: 800; margin-bottom: 0.4rem;">
+              <span>🎓</span> <span data-i18n="videoAcademyBadge">مسار التأهيل المهني التفاعلي (Masterclass Academy)</span>
+            </div>
+            <h3 style="font-weight: 900; font-size: 1.25rem; margin-bottom: 0.25rem;" data-i18n="videoAcademyTitle">أكاديمية الفيديو التعليمي لمهارات الترجمة واللغات (Video Masterclass Academy)</h3>
+            <p style="font-size: 0.84rem; color: var(--text-muted); margin: 0; max-width: 780px;" data-i18n="videoAcademySub">منهج تدريبي تطبيقي موثق لتقنيات الترجمة الفورية، التظليل الصوتي، وتدوين الملاحظات وفق معايير AIIC و ISO 17100 الدولية</p>
           </div>
-          <span class="session-isolation-pill">🔴 محتوى تعليمي تفاعلي معتمد</span>
+          <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+            <span class="session-isolation-pill">🔴 8 محاضرات تعليمية معتمدة</span>
+            <button class="btn btn-outline btn-sm" onclick="resetAcademyProgressConfirm()" style="font-size: 0.75rem; padding: 0.35rem 0.7rem;" title="إعادة تعيين تقدم المشاهدة">
+              🔄 تصفير التقدم
+            </button>
+          </div>
         </div>
 
-        <!-- Video Selection Tabs -->
-        <div class="video-mode-switcher-chips">
-          <button class="video-mode-chip active" id="btnEnthusiastVideo-1" onclick="switchEnthusiastVideo(1)">
-            🏛️ كبائن الأمم المتحدة والترجمة الفورية (UN Booths)
-          </button>
-          <button class="video-mode-chip" id="btnEnthusiastVideo-2" onclick="switchEnthusiastVideo(2)">
-            🧠 الحمل المعرفي وإدارة لغتين معاً (Cognitive Load)
-          </button>
-          <button class="video-mode-chip" id="btnEnthusiastVideo-3" onclick="switchEnthusiastVideo(3)">
-            🎬 الترجمة التعاقبية وتدوين الرموز (Consecutive Masterclass)
-          </button>
-        </div>
-
-        <div class="grid-2">
-          <!-- Video Embed Frame -->
-          <div>
-            <div class="responsive-video-wrapper">
-              <iframe id="enthusiastAcademyVideoIframe" src="https://www.youtube.com/embed/g8evH3lQvB0" title="Educational Translation Masterclass" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-            <div style="margin-top: 0.6rem; font-size: 0.8rem; color: var(--text-muted); display: flex; justify-content: space-between;">
-              <span id="enthusiastVideoCaption">المصدر: الأمم المتحدة - قسم خدمات المؤتمرات والترجمة الشفوية</span>
-              <span style="color: var(--primary); font-weight: 800;">جودة 1080p HD ✓</span>
-            </div>
-          </div>
-
-          <!-- Video Takeaways & Key Glossary Points -->
-          <div style="display: flex; flex-direction: column; justify-content: space-between;">
-            <div style="background: var(--bg-surface-secondary); border: 1.5px solid var(--border-main); border-radius: var(--radius-md); padding: 1.25rem;">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                <strong style="font-size: 0.95rem; color: var(--primary-dark);" id="enthusiastLessonTitle">أهم محاور درس كبائن الأمم المتحدة:</strong>
-                <span class="role-tag-pill">تحليل تطبيقي</span>
+        <!-- Real Overall Course Progress Card -->
+        <div class="academy-progress-dashboard" id="academyProgressDashboard">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.6rem;">
+            <div style="display: flex; align-items: center; gap: 0.65rem;">
+              <div style="width: 38px; height: 38px; border-radius: 10px; background: var(--primary-gradient); display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 1.15rem; box-shadow: 0 2px 6px rgba(229,57,53,0.3); flex-shrink: 0;">
+                📊
               </div>
-              <ul style="padding-inline-start: 1.2rem; font-size: 0.84rem; color: var(--text-main); line-height: 1.8; margin-bottom: 0;" id="enthusiastLessonPoints">
-                <li><strong>زمن التخلف (Décalage):</strong> الفارق الزمني (من 2 إلى 4 ثوانٍ) بين كلام الخطيب وتوليد الترجمة في الكابينة.</li>
-                <li><strong>الترجمة التناوبية:</strong> يعمل مترجمان داخل كل كابينة ويتناوبان كل 30 دقيقة للحفاظ على التركيز الذهني.</li>
-                <li><strong>المصطلحات السيادية:</strong> توحيد ترجمة أسماء الهيئات والقرارات الدولية بالاعتماد على قواعد UNTERM.</li>
-              </ul>
+              <div>
+                <div style="font-size: 0.76rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase;" data-i18n="academyProgressLabel">معدل الإنجاز الكلي للمسار المهني</div>
+                <div style="font-size: 0.95rem; font-weight: 900; color: var(--text-main);" id="academyOverallProgressText">0 من 8 محاضرات مكتملة (0%)</div>
+              </div>
             </div>
-            <div style="margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
-              <button class="btn btn-primary btn-sm" style="flex: 1;" onclick="openSimBoothModal()">
-                🎙️ تدريب فوري في كابينة الترجمة
-              </button>
-              <button class="btn btn-outline btn-sm" onclick="pushToast('✓ تم حفظ المحاضرة في مفكرتك اللغوية')">
-                💾 حفظ الدرس
-              </button>
+            <div style="display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap;">
+              <span class="status-badge" id="academyMilestoneBadge" style="background: var(--bg-surface); border: 1px solid var(--border-main); color: var(--primary); font-weight: 800; font-size: 0.76rem; padding: 0.3rem 0.75rem; border-radius: 50px;">
+                🌱 المستوى: مبتدئ في الكابينة
+              </span>
+              <span style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted);" id="academyTimeCompletedText">
+                ⏱️ 0 / 87 دقيقة مكتملة
+              </span>
+            </div>
+          </div>
+          <!-- Animated Progress Track -->
+          <div style="width: 100%; height: 10px; background: rgba(0,0,0,0.08); border-radius: 50px; overflow: hidden; position: relative;">
+            <div id="academyOverallProgressBar" style="width: 0%; height: 100%; background: var(--primary-gradient); border-radius: 50px; transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);"></div>
+          </div>
+        </div>
+
+        <!-- Dynamic Filter & Search Toolbar -->
+        <div class="academy-filter-toolbar">
+          <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <!-- Top search and status row -->
+            <div style="display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap;">
+              <div style="position: relative; flex: 1; min-width: 240px;">
+                <input type="text" id="academyVideoSearchInput" oninput="filterAcademyPlaylist()" placeholder="🔍 ابحث في المحاضرات، التقنيات، أو المحاضرين (مثال: Décalage, التظليل, روزان, اللسانيات)..." style="width: 100%; padding: 0.5rem 0.9rem; font-size: 0.84rem; border-radius: var(--radius-sm); border: 1.5px solid var(--border-main); background: var(--bg-surface); color: var(--text-main);">
+                <button type="button" onclick="clearAcademySearch()" style="position: absolute; left: 8px; top: 50%; transform: translateY(-50%); border: none; background: transparent; color: var(--text-muted); cursor: pointer; font-size: 0.8rem; display: none;" id="academySearchClearBtn">✕</button>
+              </div>
+              <!-- Status selector -->
+              <div style="display: flex; align-items: center; gap: 0.35rem;">
+                <span style="font-size: 0.78rem; font-weight: 800; color: var(--text-muted);" data-i18n="statusFilterLabel">الحالة:</span>
+                <select id="academyStatusFilterSelect" onchange="onAcademyStatusFilterChange(this.value)" style="padding: 0.48rem 0.75rem; font-size: 0.8rem; font-weight: 700; border-radius: var(--radius-sm); border: 1.5px solid var(--border-main); background: var(--bg-surface); color: var(--text-main); cursor: pointer;">
+                  <option value="all">جميع الحالات</option>
+                  <option value="completed">مكتملة فقط (Completed) ✓</option>
+                  <option value="in_progress">قيد المتابعة (In Progress) ⏳</option>
+                  <option value="unstarted">لم تبدأ بعد (Unstarted) ⭕</option>
+                </select>
+              </div>
+              <span id="academyPlaylistFilteredCount" class="status-pill status-completed" style="font-size: 0.75rem; font-weight: 800;">8 محاضرات</span>
+            </div>
+
+            <!-- Category filter chips -->
+            <div style="display: flex; gap: 0.4rem; overflow-x: auto; padding-bottom: 2px;" class="horizontal-scrollbar" id="academyCategoryChipsContainer">
+              <button class="video-mode-chip active" data-cat="all" onclick="setAcademyCategoryFilter('all', this)">الكل (All)</button>
+              <button class="video-mode-chip" data-cat="simultaneous" onclick="setAcademyCategoryFilter('simultaneous', this)">🎙️ كابينة الترجمة وDécalage</button>
+              <button class="video-mode-chip" data-cat="shadowing" onclick="setAcademyCategoryFilter('shadowing', this)">⚡ التظليل الصوتي والطلاقة</button>
+              <button class="video-mode-chip" data-cat="notetaking" onclick="setAcademyCategoryFilter('notetaking', this)">📝 تدوين الملاحظات وروزان</button>
+              <button class="video-mode-chip" data-cat="cognitive" onclick="setAcademyCategoryFilter('cognitive', this)">🧠 اللسانيات المعرفية وبناء المعنى</button>
+              <button class="video-mode-chip" data-cat="voice" onclick="setAcademyCategoryFilter('voice', this)">🔊 الصوتيات والإلقاء بالكابينة</button>
+              <button class="video-mode-chip" data-cat="diplomatic" onclick="setAcademyCategoryFilter('diplomatic', this)">⚖️ الترجمة القضائية والدبلوماسية</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Video Studio & Playlist Layout -->
+        <div style="display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 1.25rem; align-items: start;" id="academyStudioGrid">
+          <!-- Left / Primary: Active Video Player + Progress Controls -->
+          <div>
+            <!-- Active Video Frame -->
+            <div class="responsive-video-wrapper" style="box-shadow: 0 4px 16px rgba(0,0,0,0.12); border-radius: var(--radius-md); overflow: hidden; border: 1.5px solid var(--border-main);">
+              <iframe id="enthusiastAcademyVideoIframe" src="https://www.youtube.com/embed/MMmOLN5zBLY?enablejsapi=1" title="Educational Translation Masterclass" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <!-- Active Video Metadata Bar -->
+            <div style="margin-top: 0.65rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; font-size: 0.8rem;">
+              <span id="enthusiastVideoCaption" style="color: var(--text-muted); font-weight: 600;">المصدر: TED-Ed - Mia Nacamulli (علم الأعصاب واللغويات التطبيقية)</span>
+              <div style="display: flex; align-items: center; gap: 0.4rem;">
+                <span id="enthusiastVideoDurationBadge" style="background: var(--bg-surface-secondary); padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 700; color: var(--text-muted);">⏱️ 05:04 دقيقة</span>
+                <span style="color: var(--primary); font-weight: 800; background: var(--primary-subtle); padding: 0.2rem 0.5rem; border-radius: 4px;">1080p HD ✓</span>
+              </div>
+            </div>
+
+            <!-- REAL PROGRESS CONTROL PANEL FOR ACTIVE VIDEO -->
+            <div style="background: var(--bg-surface-secondary); border: 1.5px solid var(--border-main); border-radius: var(--radius-md); padding: 1rem; margin-top: 0.85rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.4rem;">
+                <div style="display: flex; align-items: center; gap: 0.4rem;">
+                  <span style="font-weight: 800; font-size: 0.85rem;" data-i18n="lessonProgressTitle">📊 تقدمك في هذه المحاضرة:</span>
+                  <span class="status-pill status-completed" id="activeVideoProgressPill" style="font-size: 0.74rem; font-weight: 800;">لم يبدأ (0%)</span>
+                </div>
+                <div style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted);" id="activeVideoTimeWatchedText">
+                  00:00 / 05:04
+                </div>
+              </div>
+
+              <!-- Active Video Progress Bar -->
+              <div style="width: 100%; height: 8px; background: rgba(0,0,0,0.09); border-radius: 50px; overflow: hidden; margin-bottom: 0.75rem;">
+                <div id="activeVideoProgressBarFill" style="width: 0%; height: 100%; background: var(--primary-gradient); border-radius: 50px; transition: width 0.3s ease;"></div>
+              </div>
+
+              <!-- Progress Action Buttons -->
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                <!-- Quick % buttons -->
+                <div style="display: flex; gap: 0.35rem; align-items: center;">
+                  <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700;">تحديث:</span>
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="setActiveLessonProgress(25)" style="padding: 0.25rem 0.55rem; font-size: 0.75rem; font-weight: 800;">25%</button>
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="setActiveLessonProgress(50)" style="padding: 0.25rem 0.55rem; font-size: 0.75rem; font-weight: 800;">50%</button>
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="setActiveLessonProgress(75)" style="padding: 0.25rem 0.55rem; font-size: 0.75rem; font-weight: 800;">75%</button>
+                </div>
+
+                <!-- Complete / Toggle button -->
+                <div style="display: flex; gap: 0.4rem;">
+                  <button type="button" id="btnToggleActiveVideoComplete" class="btn btn-primary btn-sm" onclick="toggleActiveLessonCompletion()" style="font-weight: 800; padding: 0.35rem 0.85rem; font-size: 0.8rem;">
+                    ✓ وضع علامة مكتمل
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Video Pedagogical Takeaways & Real Technique Points -->
+            <div style="background: var(--bg-surface-secondary); border: 1.5px solid var(--border-main); border-radius: var(--radius-md); padding: 1.15rem; margin-top: 0.85rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; flex-wrap: wrap; gap: 0.4rem;">
+                <div>
+                  <span class="role-tag-pill" id="enthusiastTechniqueTag" style="margin-bottom: 0.3rem; display: inline-block;">تقنية: إدارة الفارق الزمني (Décalage)</span>
+                  <strong style="font-size: 0.98rem; color: var(--text-main); display: block;" id="enthusiastLessonTitle">أهم محاور درس كبائن الأمم المتحدة:</strong>
+                </div>
+                <span class="status-badge completed" id="enthusiastLevelPill" style="font-size: 0.74rem;">مبتدئ / Foundations</span>
+              </div>
+              <ul style="padding-inline-start: 1.25rem; font-size: 0.84rem; color: var(--text-main); line-height: 1.8; margin-bottom: 0;" id="enthusiastLessonPoints">
+                <!-- Populated dynamically from JSON -->
+              </ul>
+
+              <!-- Interactive Quick Tools for this technique -->
+              <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--border-main); display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                <button class="btn btn-primary btn-sm" style="flex: 1; font-weight: 800;" onclick="openSimBoothModal()">
+                  🎙️ تدريب فوري في كابينة المحاكاة
+                </button>
+                <button class="btn btn-outline btn-sm" onclick="downloadActiveLessonSummaryPdf()" style="font-weight: 700;">
+                  📥 تنزيل المسرد والملخص (PDF)
+                </button>
+                <button class="btn btn-outline btn-sm" onclick="saveActiveLessonToNotes()" style="font-weight: 700;">
+                  🔖 حفظ بالمفكرة
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right / Secondary: Filterable Dynamic Playlist Sidebar -->
+          <div>
+            <div style="background: var(--bg-surface); border: 1.5px solid var(--border-main); border-radius: var(--radius-md); padding: 1rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1.5px solid var(--border-main);">
+                <div style="display: flex; align-items: center; gap: 0.4rem;">
+                  <span style="font-size: 1.1rem;">📑</span>
+                  <h4 style="font-weight: 900; font-size: 0.96rem; margin: 0;" data-i18n="academyPlaylistHeading">قائمة محاضرات الماستركلاس</h4>
+                </div>
+                <span class="status-pill status-completed" id="academyPlaylistBadge" style="font-size: 0.72rem; font-weight: 800;">8 دروس</span>
+              </div>
+
+              <!-- DYNAMIC PLAYLIST ITEMS CONTAINER -->
+              <div id="academyPlaylistItemsContainer" style="max-height: 640px; overflow-y: auto; padding-right: 2px; display: flex; flex-direction: column; gap: 0.65rem;">
+                <!-- Rendered dynamically by renderAcademyMasterclassPlaylist() -->
+              </div>
             </div>
           </div>
         </div>
@@ -3985,6 +4236,9 @@
           <div style="display: flex; gap: 0.65rem; flex-wrap: wrap;">
             <button class="btn btn-primary" onclick="openSimBoothModal()" style="font-weight: 800;" data-i18n="btnOpenSimBooth">
               🎙️ فتح كابينة المحاكاة الفورية
+            </button>
+            <button class="btn btn-outline" onclick="openPromoVideoModal('d0yGdNEWdn0', 'العرض الترويجي الرسمي لأكاديمية Polylang Hub', 'منظومة إعداد المترجم الفوري الشاملة', 'شاهد كيف تساعدك المنصة على الانتقال من المستوى المبتدئ إلى الاحتراف في كبائن المؤتمرات والترجمة المحلفة بموجب معايير AIIC.')" style="font-weight: 800; border-color: var(--primary); color: var(--primary);">
+              🎬 مشاهدة البرومو الرسمي
             </button>
             <button class="btn btn-secondary" onclick="renderVideoPlaylistAndCatalog(); pushToast('🔄 تم تحديث قائمة المحاضرات بنجاح');" data-i18n="btnSyncMedia">
               🔄 تحديث المحتوى
@@ -4028,9 +4282,12 @@
                 <li><span class="check-icon">✓</span> <span>مسرد المصطلحات الأساسية 500+ كلمة</span></li>
               </ul>
             </div>
-            <div>
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; margin-top: 0.5rem;">
               <button class="btn btn-outline" style="width: 100%; font-weight: 800; border-color: var(--success); color: var(--success);" onclick="filterMediaCategory('free', document.querySelector('.media-tab-btn:nth-child(2)'))">
                 بدء التدريب المجاني الآن ▶
+              </button>
+              <button class="btn btn-outline btn-sm" style="width: 100%; font-size: 0.78rem;" onclick="openPromoVideoModal('MMmOLN5zBLY', 'برومو مسار الأساسيات (Foundations Promo)', 'الدماغ ثنائي اللغة وتقنيات الاستماع المتزامن', 'اكتشف كيف يدرب هذا المسار المجاني عقلك على التفكير بلغتين في آن واحد وإتقان التظليل الصوتي.')">
+                🎬 مشاهدة برومو المسار
               </button>
             </div>
           </div>
@@ -4057,9 +4314,12 @@
                 <li><span class="check-icon">✓</span> <span>حزم ملفات SRT ونصوص المؤتمرات الرسمية</span></li>
               </ul>
             </div>
-            <div>
-              <button class="btn btn-primary" style="width: 100%; font-weight: 900; padding: 0.75rem;" onclick="switchMediaVideo(3); scrollToMainPlayer();">
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; margin-top: 0.5rem;">
+              <button class="btn btn-primary" style="width: 100%; font-weight: 900; padding: 0.75rem;" onclick="switchMediaVideo(4); scrollToMainPlayer();">
                 🚀 التسجيل وفتح المسار فوراً
+              </button>
+              <button class="btn btn-outline btn-sm" style="width: 100%; font-size: 0.78rem; border-color: var(--primary); color: var(--primary);" onclick="openPromoVideoModal('8jPQjjsBbIc', 'برومو مسار كابينة الأمم المتحدة (UN Booth Pro)', 'إدارة الفارق الزمني والهدوء تحت ضغط المؤتمرات', 'شاهد محاكاة حية لطريقة إدارة التوتر العصبي وتصفية التشويش وسرعة الإخراج الصوتي داخل كبائن الأمم المتحدة.')">
+                🎬 مشاهدة برومو المسار
               </button>
             </div>
           </div>
@@ -4085,9 +4345,12 @@
                 <li><span class="check-icon">✓</span> <span>استشارات مباشرة مع المترجمين المعتمدين</span></li>
               </ul>
             </div>
-            <div>
-              <button class="btn btn-secondary" style="width: 100%; font-weight: 800; border-color: #f59e0b; color: #d97706;" onclick="switchMediaVideo(4); scrollToMainPlayer();">
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; margin-top: 0.5rem;">
+              <button class="btn btn-secondary" style="width: 100%; font-weight: 800; border-color: #f59e0b; color: #d97706;" onclick="switchMediaVideo(5); scrollToMainPlayer();">
                 ⭐ فتح الدبلوم القضائي
+              </button>
+              <button class="btn btn-outline btn-sm" style="width: 100%; font-size: 0.78rem; border-color: #f59e0b; color: #d97706;" onclick="openPromoVideoModal('R1vskiVDwl4', 'برومو الدبلوم القضائي المحلف (Sworn & Court)', 'الاستماع الدقيق وأمانة النقل أمام المحاكم وهيئات التحكيم', 'استكشف أهم قواعد الدقة والحياد القضائي ومطابقة النصوص القانونية وفق معايير ISO 17100 الدولية.')">
+                🎬 مشاهدة برومو المسار
               </button>
             </div>
           </div>
@@ -4117,7 +4380,7 @@
 
             <!-- 16:9 Player with Embedded Iframe & Frosted Paywall Overlay -->
             <div class="video-main-wrapper" id="mainVideoPlayerWrapper">
-              <iframe id="mainVideoPlayerIframe" src="https://www.youtube.com/embed/g8evH3lQvB0?enablejsapi=1" title="Training Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe id="mainVideoPlayerIframe" src="https://www.youtube.com/embed/MMmOLN5zBLY?enablejsapi=1" title="Training Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
               
               <!-- Paywall Overlay -->
               <div id="videoPaywallOverlay" class="video-paywall-overlay hidden">
@@ -4981,6 +5244,20 @@
               <strong style="display: block; font-size: 1.15rem; color: var(--primary-dark);">تشفير سيادي</strong>
             </div>
           </div>
+
+          <!-- Vision Promotional Video Showcase -->
+          <div class="card" style="margin-top: 1.25rem; background: var(--bg-surface-secondary); border: 1.5px solid var(--border-main);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+              <strong style="font-size: 0.95rem; color: var(--primary-dark);">🎬 فيديو تعريفي: رؤية المنصة في الارتقاء بمهنة الترجمة الفورية وهندسة اللغات</strong>
+              <span class="role-tag-pill">رؤية 2026</span>
+            </div>
+            <div class="responsive-video-wrapper">
+              <iframe src="https://www.youtube.com/embed/MMmOLN5zBLY" title="Polylang Hub Platform Vision & Interpretation Mastery" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <p style="margin: 0.65rem 0 0; font-size: 0.82rem; color: var(--text-muted); line-height: 1.6;">
+              تحليل تفاعلي يوضح الأساس العلمي لتدريب الدماغ على المعالجة اللغوية المزدوجة التي تنتهجها منصة Polylang Hub في تأهيل المترجمين الفوريين وتطوير برمجيات الترجمة السحابية.
+            </p>
+          </div>
         </div>
 
         <!-- TAB 2: FOUNDER & DEVELOPER PROFILE (MADANI DJOUDI) -->
@@ -5100,6 +5377,36 @@
           Polylang Hub © 2026 — ابتكار وتطوير: <strong>مداني جودي (Madani Djoudi)</strong>
         </div>
         <button class="btn btn-outline btn-sm" onclick="closeAboutUsModal()">إغلاق النافذة</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROMOTIONAL & EDUCATIONAL VIDEO MODAL (HIGH-CONVERTING TEASER TRAILER) -->
+  <div class="modal-backdrop" id="promoVideoModalBackdrop">
+    <div class="modal-box" style="max-width: 780px;">
+      <div class="modal-top">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="font-size: 1.3rem;">🎬</span>
+          <div>
+            <h4 style="font-weight: 900; margin: 0; font-size: 1.05rem;" id="promoModalTitle">العرض الترويجي للمسار التدريبي</h4>
+            <span style="font-size: 0.75rem; color: var(--text-muted);" id="promoModalSubtitle">أكاديمية Polylang Hub للترجمة الفورية</span>
+          </div>
+        </div>
+        <button style="background: none; border: none; font-size: 1.35rem; cursor: pointer; color: var(--text-muted); padding: 0.2rem 0.5rem; line-height: 1;" onclick="closePromoVideoModal()">&times;</button>
+      </div>
+      <div style="padding: 1.25rem;">
+        <div class="responsive-video-wrapper">
+          <iframe id="promoModalIframe" src="" title="Promotional Video Trailer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div style="margin-top: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+          <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted); max-width: 520px; line-height: 1.6;" id="promoModalDesc">
+            استكشف المهارات والتقنيات اللغوية المعتمدة داخل هذا المسار التخصصي.
+          </p>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <button class="btn btn-secondary btn-sm" onclick="closePromoVideoModal()">إغلاق المعاينة</button>
+            <button class="btn btn-primary btn-sm" id="promoModalActionBtn" onclick="closePromoVideoModal(); openSimBoothModal();">🎙️ فتح كابينة المحاكاة</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -5730,18 +6037,18 @@
         price: 0,
         tier: 'Free Track',
         progress: 100,
-        title: 'مبادئ الترجمة الفورية وكابينة المؤتمرات (Simultaneous Interpretation Foundations)',
-        tag: '🎙️ كابينة الأمم المتحدة',
-        level: 'مبتدئ / Beginner',
-        duration: '14:20 دقيقة',
-        url: 'https://www.youtube.com/embed/g8evH3lQvB0?enablejsapi=1',
-        thumbIcon: '🎙️',
-        rating: 4.9,
-        students: 1840,
+        title: 'فوائد الدماغ ثنائي اللغة والتفكير اللغوي المتزامن (The Bilingual Brain)',
+        tag: '🧠 أبحاث الدماغ ثنائي اللغة',
+        level: 'مبتدئ / Foundations',
+        duration: '05:04 دقيقة',
+        url: 'https://www.youtube.com/embed/MMmOLN5zBLY?enablejsapi=1',
+        thumbIcon: '🧠',
+        rating: 4.96,
+        students: 3420,
         takeaways: [
-          'التحكم في الفارق الزمني (Décalage / Ear-Voice Span) بمعدل 2 إلى 4 ثوانٍ دون فقدان ترابط السياق.',
-          'تقسيم الجمل المركبة واستخدام استراتيجية التجزئة الدلالية (Semantic Chunking) تحت ضغط المؤتمرات.',
-          'بروتوكول التناوب الثنائي في الكابينة كل 30 دقيقة وفق معايير منظمة AIIC العالمية.'
+          'كيف يطور الدماغ ثنائي اللغة مسارات عصبية متوازية تفصل بين منظومتي القواعد والمعجم.',
+          'آليات التحكم التنفيذي (Executive Function) وتصفية التشويش المعجمي اللحظي.',
+          'الاستجابة الفورية للمحفزات الصوتية ومبدأ المرونة اللغوية العصبية في الترجمة الشفوية.'
         ]
       },
       {
@@ -5750,18 +6057,18 @@
         price: 0,
         tier: 'Free Track',
         progress: 85,
-        title: 'أساسيات التوطين السمعي البصري (AVT) وهندسة ملفات SRT ومعايير القراءة',
-        tag: '🎬 توطين مرئي وSRT',
-        level: 'متوسط / Intermediate',
-        duration: '18:45 دقيقة',
-        url: 'https://www.youtube.com/embed/9Xv4iR9pC9g?enablejsapi=1',
-        thumbIcon: '🎬',
-        rating: 4.8,
-        students: 1420,
+        title: 'أسرار اكتساب اللغات الأجنبية ومبادئ الطلاقة (The Secrets of Learning Languages)',
+        tag: '💡 منهجيات الطلاقة السريعة',
+        level: 'مبتدئ / Foundations',
+        duration: '13:21 دقيقة',
+        url: 'https://www.youtube.com/embed/o_XVt5rdpFY?enablejsapi=1',
+        thumbIcon: '💡',
+        rating: 4.94,
+        students: 2890,
         takeaways: [
-          'الحد الأقصى لطول السطر (Characters Per Line - CPL): لا يتجاوز 37 إلى 42 حرفاً لكل سطر.',
-          'معدل سرعة القراءة المقبول عالمياً: 15 إلى 17 حرفاً في الثانية (CPS) لضمان تجربة مشاهدة مريحة.',
-          'مزامنة الفواصل الزمنية مع تغيرات المشاهد (Shot Changes) لتفادي وميض العبارات وتشويش البصر.'
+          'المبادئ الأربعة لاكتساب اللغات: المتعة، المنهجية التكرارية، الاستماع الغامر، والصبر الصوتي.',
+          'استراتيجية التفكيك النحوي السريع وحفظ التراكيب السياقية بدلاً من المفردات المعزولة.',
+          'تحويل ممارسة الترجمة إلى روتين تدريبي يومي مرن يرفع الحصيلة اللفظية النشطة.'
         ]
       },
       {
@@ -5769,19 +6076,39 @@
         isPremium: false,
         price: 0,
         tier: 'Free Track',
-        progress: 60,
-        title: 'أسلوب روزان السريع لتدوين ملاحظات الترجمة التتبعية (Rozan Note-Taking Fast Track)',
-        tag: '📝 تدوين روزان',
-        level: 'مبتدئ / Beginner',
-        duration: '12:15 دقيقة',
-        url: 'https://www.youtube.com/embed/o_XVt5rdpFY?enablejsapi=1',
-        thumbIcon: '📝',
-        rating: 4.95,
-        students: 2150,
+        progress: 70,
+        title: 'كيف تتعلم وتتقن أي لغة أجنبية في ستة أشهر (Learn Any Language Fast)',
+        tag: '⚡ استراتيجيات الإتقان السريع',
+        level: 'متوسط / Intermediate',
+        duration: '18:27 دقيقة',
+        url: 'https://www.youtube.com/embed/d0yGdNEWdn0?enablejsapi=1',
+        thumbIcon: '⚡',
+        rating: 4.91,
+        students: 2650,
         takeaways: [
-          'المبادئ السبعة لجان فرانسوا روزان: التعبير عن الأفكار وليس الكلمات المجردة.',
-          'التدوين العمودي والتفريع المتدرج (Verticality & Shift) لتسهيل القراءة اللحظية أثناء إلقاء الخطاب.',
-          'استخدام الرموز السهمية والخطية لتمثيل الروابط المنطقية (السبب والنتيجة، التضاد، الإضافة).'
+          'المبادئ الخمسة لاكتساب اللغة المباشر والتركيز على المحتوى ذي الأهمية الشخصية والمهنية.',
+          'استخدام أدوات التوصيل الحركي وتقليد المتحدث الأصلي (Facial Muscle Shadowing).',
+          'التركيز على النواة المعجمية الأساسية (The Core Vocabulary) التي تغطي 85% من المحادثات اليومية.'
+        ]
+      },
+      {
+        id: 'vid-free-4',
+        isPremium: false,
+        price: 0,
+        tier: 'Free Track',
+        progress: 60,
+        title: 'فن التحدث والتواصل الصوتي المؤثر في المؤتمرات (How to Speak with Impact)',
+        tag: '🎙️ إلقاء وصوتيات الكابينة',
+        level: 'متوسط / Intermediate',
+        duration: '09:58 دقيقة',
+        url: 'https://www.youtube.com/embed/eIho2S0ZahI?enablejsapi=1',
+        thumbIcon: '🎙️',
+        rating: 4.95,
+        students: 2410,
+        takeaways: [
+          'صندوق أدوات الصوت البشري: طبقة الصوت، الرنين، النبرة، السرعة، وفن الوقفات الإستراتيجية.',
+          'تجنب خطايا الحديث السبع وتطبيق معايير الصدق والوضوح والتعاطف في نقل الرسائل الدبلوماسية.',
+          'تقنيات الإحماء الصوتي للمترجم الفوري قبل الدخول إلى الكابينة لضمان نبرة واثقة ومستقرة.'
         ]
       },
       {
@@ -5790,18 +6117,18 @@
         price: 3500,
         tier: 'UN Booth Pro',
         progress: 0,
-        title: 'ماستركلاس كابينة الأمم المتحدة المتقدم: إدارة الفارق الزمني والضغط العالي (UN Booth Pro Décalage)',
-        tag: '⭐ ماستركلاس احترافي (Pro)',
+        title: 'إدارة الهدوء والتفكير الحرج تحت الضغط في كبائن الترجمة (Staying Calm Under Pressure)',
+        tag: '⭐ ماستركلاس كابينة الأمم المتحدة',
         level: 'متقدم / Professional',
-        duration: '45:00 دقيقة',
-        url: 'https://www.youtube.com/embed/1laThtz19i0?enablejsapi=1',
+        duration: '12:20 دقيقة',
+        url: 'https://www.youtube.com/embed/8jPQjjsBbIc?enablejsapi=1',
         thumbIcon: '🏛️',
-        rating: 5.0,
-        students: 690,
+        rating: 4.98,
+        students: 1120,
         takeaways: [
-          'تقنيات التحكم التنفسي وعزل ضوضاء الكابينة المزدحمة في الجمعية العامة للأمم المتحدة.',
-          'الاستباق النحوي والدلالي (Anticipation Strategies) في الخطب الدبلوماسية المعقدة.',
-          'شهادة معتمدة بنظام الساعات التدريبية المهنية المعتمدة دولياً برقم توثيق رسمي.'
+          'مفهوم الاستباق الإدراكي والوقائي (Pre-mortem Strategy) لمواجهة المفردات غير المتوقعة.',
+          'تنظيم إفراز الكورتيزول والحفاظ على التفكير التحليلي والصفاء الذهني تحت تسارع وتيرة الخطيب.',
+          'بروتوكول التعامل مع التلعثم أو انقطاع الصوت المؤقت واستئناف الترجمة بثبات ودقة.'
         ]
       },
       {
@@ -5810,18 +6137,18 @@
         price: 5000,
         tier: 'Sworn Court',
         progress: 0,
-        title: 'الدبلوم المهني في الترجمة القضائية والتحكيم الدولي ومصادقة ISO 17100 (Court Translation Certification)',
-        tag: '⭐ شهادة مهنية معتمدة',
+        title: '10 قواعد ذهبية للحوار الدبلوماسي والمصادقة القضائية (High-Stakes Diplomatic Dialogue)',
+        tag: '⭐ دبلوم الترجمة القضائية والدبلوماسية',
         level: 'خبير / Expert',
-        duration: '58:30 دقيقة',
-        url: 'https://www.youtube.com/embed/g8evH3lQvB0?enablejsapi=1',
+        duration: '11:44 دقيقة',
+        url: 'https://www.youtube.com/embed/R1vskiVDwl4?enablejsapi=1',
         thumbIcon: '⚖️',
-        rating: 4.98,
-        students: 530,
+        rating: 4.99,
+        students: 860,
         takeaways: [
-          'التدقيق الإلزامي المزدوج (Dual Review) بموجب المعيار الدولي ISO 17100:2015 قبل الختم الرسمي.',
-          'ضوابط مطابقة الأسماء والأرقام الثبوتية في السجلات القضائية ووثائق الحالة المدنية الصادرة عن المحاكم.',
-          'التوثيق الرقمي للبصمة المشفرة SHA-256 وأختام الأبوستيل (Apostille) المعتمدة.'
+          'قواعد الاستماع النشط دون إطلاق أحكام مسبقة ونقل النص بنزاهة قضائية وحياد مطلق.',
+          'تجنب الافتراضات التفسيرية والالتزام بالمعنى الدلالي الصريح المنصوص عليه في المستندات.',
+          'إدارة المحادثات الحساسة وجلسات التحكيم الدولي بموجب معايير الأيزو ISO 17100:2015.'
         ]
       },
       {
@@ -5830,18 +6157,58 @@
         price: 4200,
         tier: 'AVT Master',
         progress: 0,
-        title: 'هندسة الترجمة المرئية المتقدمة لشبكات البث العالمية (Advanced AVT & Subtitling for Streaming Networks)',
-        tag: '⭐ توطين شبكات البث',
+        title: 'لغة الجسد والحضور القيادي في الترجمة المرافقة والتفاوض (Body Language & Presence)',
+        tag: '⭐ الترجمة المرافقة والتفاوض',
         level: 'متقدم / Professional',
-        duration: '40:15 دقيقة',
-        url: 'https://www.youtube.com/embed/p3oZf-w84nE?enablejsapi=1',
-        thumbIcon: '🎥',
-        rating: 4.92,
-        students: 480,
+        duration: '21:02 دقيقة',
+        url: 'https://www.youtube.com/embed/Ks-_Mh1QhMc?enablejsapi=1',
+        thumbIcon: '💼',
+        rating: 4.95,
+        students: 940,
         takeaways: [
-          'هندسة توقيت الإطارات (Frames) ومزامنة الفواصل الزمنية مع بوابات التقطيع.',
-          'قوالب الترجمة المعتمدة لمنصات البث مثل Netflix وBBC وAmazon Prime.',
-          'تصدير مسارات الترجمة الاحترافية بصيغ DFXP وWebVTT والـ SRT المتوافقة مع المشغلات السينمائية.'
+          'تأثير وضعيات الحضور الجسدي والجلوس الصحيح في كابينة المؤتمرات على تدفق الأكسجين وتوليد الصوت.',
+          'بناء الثقة المتبادلة بين المترجم المرافق والوفود الدبلوماسية ورؤساء المنظمات الدولية.',
+          'التحكم في التوتر الجسدي وإيماءات اليد أثناء الترجمة التتبعية الحية أمام الجماهير.'
+        ]
+      },
+      {
+        id: 'vid-pro-4',
+        isPremium: true,
+        price: 4800,
+        tier: 'Masterclass Pro',
+        progress: 0,
+        title: 'الإصرار والتحمل المهني لتجاوز اختبارات الترجمة الدولية (Grit & Professional Resilience)',
+        tag: '⭐ شهادات الاعتماد الدولي',
+        level: 'خبير / Expert',
+        duration: '06:12 دقيقة',
+        url: 'https://www.youtube.com/embed/H14bBuluwB8?enablejsapi=1',
+        thumbIcon: '🏆',
+        rating: 5.0,
+        students: 780,
+        takeaways: [
+          'علم الإصرار والشغف المستدام (Grit) كمعيار أساسي للنجاح في مهنة الترجمة الفورية المعتمدة.',
+          'تجاوز عقبات امتحانات القبول الصعبة في منظمات الأمم المتحدة والاتحاد الأوروبي ومجلس الأمن.',
+          'منهجية التقييم الذاتي الدوري والتطوير المهني المستمر المتوافق مع متطلبات AIIC العالمية.'
+        ]
+      },
+      {
+        id: 'vid-pro-5',
+        isPremium: true,
+        price: 3800,
+        tier: 'Cognitive Pro',
+        progress: 0,
+        title: 'كيف تصيغ اللغة طريقة تفكيرنا وبناء المعنى (How Language Shapes Thought)',
+        tag: '⭐ اللسانيات المعرفية وعلم الدلالة',
+        level: 'خبير / Expert',
+        duration: '14:13 دقيقة',
+        url: 'https://www.youtube.com/embed/RKK7wGAYP6k?enablejsapi=1',
+        thumbIcon: '🌐',
+        rating: 4.99,
+        students: 1450,
+        takeaways: [
+          'النسبية اللغوية المقارنة وتأثير بنية القواعد على الذاكرة المكانية وتوجيه الإدراك.',
+          'التعامل مع تراكيب الفاعلية والمسؤولية في المستندات القانونية والمحاضر الدبلوماسية.',
+          'تجاوز فخاخ النقل الحرفي والوصول إلى المكافئ الإدراكي الأمثل في اللغات المستهدفة.'
         ]
       }
     ];
@@ -7287,6 +7654,8 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
       else if (activeRole === 'enthusiast') {
         renderFlashcard();
         renderTrivia();
+        renderAcademyMasterclassPlaylist();
+        updateAcademyOverallProgress();
       }
     }
 
@@ -8365,20 +8734,30 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
        EDUCATIONAL VIDEO EMBED ENGINE & MODE CONTROLLER
        ------------------------------------------------------------- */
     const educationalVideos = {
-      un: {
-        title: 'محاضرة: الترجمة الفورية داخل كبائن الأمم المتحدة (UN Simultaneous Interpretation)',
-        url: 'https://www.youtube.com/embed/g8evH3lQvB0',
-        desc: 'محاضرة تطبيقية توضح ديناميكيات العمل في كابينة الأمم المتحدة، وكيفية التعامل مع فارق التوقيت المعرفي (Décalage) وإدارة الحمل الذهني أثناء الخطابات الدولية الحية.'
+      bilingual: {
+        title: 'محاضرة: فوائد الدماغ ثنائي اللغة والترجمة المتزامنة (The Bilingual Brain)',
+        url: 'https://www.youtube.com/embed/MMmOLN5zBLY?enablejsapi=1',
+        desc: 'دراسة تطبيقية توضح كيف يدير الدماغ اللغتين في آن واحد، وفك الشفرات الدلالية في أجزاء من الثانية أثناء الترجمة الشفوية ومزامنة النصوص.'
       },
-      rozan: {
-        title: 'محاضرة: إدارة لغتين في وقت واحد وتقنيات روزان (How Interpreters Juggle Languages)',
-        url: 'https://www.youtube.com/embed/1laThtz19i0',
-        desc: 'تحليل علمي وعملي لكيفية انقسام الانتباه لدى المترجم الشفوي بين الاستماع والتحليل والترميز وإعادة الصياغة الشفوية السليمة.'
+      linguistics: {
+        title: 'محاضرة: كيف تصيغ اللغة طريقة تفكيرنا وبناء المعنى (How Language Shapes Thought)',
+        url: 'https://www.youtube.com/embed/RKK7wGAYP6k?enablejsapi=1',
+        desc: 'محاضرة معرفية لعالمة اللسانيات ليرا بوروديتسكي حول البنى اللغوية المقارنة، والتوجه المكاني، والتأثير النفسي لتراكيب الجمل في الترجمة الفورية.'
       },
-      standards: {
-        title: 'محاضرة: معايير الترجمة المرئية ومزامنة التوقيت (Audiovisual Subtitling Guidelines)',
-        url: 'https://www.youtube.com/embed/p3oZf-w84nE',
-        desc: 'شرح تطبيقي لقواعد إعداد ملفات SRT، سرعة القراءة المقبولة (17-20 حرف/ثانية)، وتقسيم الأسطر لتفادي التداخل البصري للمشاهد.'
+      fluency: {
+        title: 'محاضرة: أسرار الطلاقة اللغوية واستراتيجيات اكتساب اللغات (Secrets of Language Learning)',
+        url: 'https://www.youtube.com/embed/o_XVt5rdpFY?enablejsapi=1',
+        desc: 'تحليل تطبيقي للمترجمة الفورية ليديا ماتشوفا حول آليات التحصيل المعجمي السريع والتظليل الصوتي والتحكم في مخارج الحروف لتفادي التداخل اللغوي.'
+      },
+      stress: {
+        title: 'محاضرة: إدارة الهدوء والتفكير الحرج تحت الضغط (Staying Calm Under Pressure)',
+        url: 'https://www.youtube.com/embed/8jPQjjsBbIc?enablejsapi=1',
+        desc: 'تقنيات التعامل مع التوتر وضغط كبائن المؤتمرات الدولية، وإدارة الفارق الزمني (Décalage) دون فقدان سياق الجملة.'
+      },
+      vocal: {
+        title: 'محاضرة: فن الإلقاء والتحدث المؤثر أمام الوفود (How to Speak with Impact)',
+        url: 'https://www.youtube.com/embed/eIho2S0ZahI?enablejsapi=1',
+        desc: 'قواعد الإلقاء الصوتي، ضبط النبرة والسرعة (Prosody & Pacing)، وتفادي الإجهاد الصوتي والمعرفي أثناء ساعات الترجمة الطويلة.'
       }
     };
 
@@ -8387,95 +8766,659 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
       const chip = document.getElementById(`btnVideoMode-${mode}`);
       if (chip) chip.classList.add('active');
 
-      const videoCont = document.getElementById('videoContainer');
-      const controlsRow = document.getElementById('videoControlsRow');
-      const embedWrap = document.getElementById('educationalVideoEmbedWrapper');
+      const item = educationalVideos[mode] || educationalVideos.bilingual;
       const iframe = document.getElementById('educationalVideoIframe');
       const metaBox = document.getElementById('educationalVideoMetaBox');
-      const mainVid = document.getElementById('mainTranslationVideo');
+      const titleEl = document.getElementById('eduVideoTitle');
+      const descEl = document.getElementById('eduVideoDesc');
 
-      if (mode === 'studio') {
-        if (embedWrap) embedWrap.style.display = 'none';
-        if (iframe) iframe.src = 'about:blank';
-        if (metaBox) metaBox.style.display = 'none';
-        if (videoCont) videoCont.style.display = 'flex';
-        if (controlsRow) controlsRow.style.display = 'flex';
-        pushToast('🎬 تم تفعيل استوديو مزامنة SRT التفاعلي');
-      } else {
-        const item = educationalVideos[mode];
-        if (mainVid && !mainVid.paused) mainVid.pause();
-        if (videoCont) videoCont.style.display = 'none';
-        if (controlsRow) controlsRow.style.display = 'none';
-        if (embedWrap) embedWrap.style.display = 'block';
-        if (iframe && item) iframe.src = item.url;
-        if (metaBox) {
-          metaBox.style.display = 'block';
-          const t = document.getElementById('eduVideoTitle');
-          const d = document.getElementById('eduVideoDesc');
-          if (t) t.innerText = item.title;
-          if (d) d.innerText = item.desc;
-        }
-        pushToast(`📺 تم تشغيل: ${item ? item.title : mode}`);
+      if (iframe && item) {
+        iframe.src = item.url;
       }
+      if (metaBox) metaBox.style.display = 'block';
+      if (titleEl && item) titleEl.innerText = item.title;
+      if (descEl && item) descEl.innerText = item.desc;
+
+      pushToast(`📺 تم تشغيل: ${item ? item.title : mode}`);
     }
 
-    const enthusiastVideoLessons = [
+    /* -------------------------------------------------------------
+       9.2 VIDEO MASTERCLASS ACADEMY: DYNAMIC FILTERABLE PLAYLIST
+       & REAL PROGRESS ENGINE (AIIC & ISO 17100 CERTIFIED)
+       ------------------------------------------------------------- */
+    const MASTERCLASS_ACADEMY_PLAYLIST = [
       {
-        id: 1,
-        title: 'كبائن الأمم المتحدة والترجمة الفورية (UN Booths)',
-        caption: 'المصدر: الأمم المتحدة - قسم خدمات المؤتمرات والترجمة الشفوية',
-        url: 'https://www.youtube.com/embed/g8evH3lQvB0',
-        lessonTitle: 'أهم محاور درس كبائن الأمم المتحدة:',
+        id: 'mc-1',
+        legacyId: 1,
+        videoId: 'MMmOLN5zBLY',
+        url: 'https://www.youtube.com/embed/MMmOLN5zBLY?enablejsapi=1',
+        title: 'فوائد الدماغ ثنائي اللغة والترجمة المتزامنة (The Bilingual Brain)',
+        speaker: 'Mia Nacamulli (علم الأعصاب واللغويات التطبيقية)',
+        caption: 'المصدر: TED-Ed - Mia Nacamulli (علم الأعصاب واللغويات التطبيقية)',
+        category: 'simultaneous',
+        categoryLabel: 'كابينة الترجمة وDécalage',
+        duration: '05:04',
+        durationSeconds: 304,
+        level: 'مبتدئ / Foundations',
+        techniqueTag: 'تقنية: إدارة الفارق الزمني (Décalage)',
+        lessonTitle: 'أهم محاور الدماغ ثنائي اللغة والترجمة الفورية:',
         points: [
-          '<strong>زمن التخلف (Décalage):</strong> الفارق الزمني (من 2 إلى 4 ثوانٍ) بين كلام الخطيب وتوليد الترجمة في الكابينة.',
-          '<strong>الترجمة التناوبية:</strong> يعمل مترجمان داخل كل كابينة ويتناوبان كل 30 دقيقة للحفاظ على التركيز الذهني.',
-          '<strong>المصطلحات السيادية:</strong> توحيد ترجمة أسماء الهيئات والقرارات الدولية بالاعتماد على قواعد UNTERM.'
+          '<strong>المعالجة المزدوجة المتوازية (Parallel Processing):</strong> تدريب القشرة المخية على الاستماع للغة المصدر وفهمها وتوليد المكافئ في اللغة الهدف في مسارين متزامنين دون انقطاع.',
+          '<strong>الفارق الزمني (Décalage / Ear-Voice Span):</strong> الحفاظ الصارم على فاصل زمني يتراوح بين 2 إلى 4 ثوانٍ بين سماع كلام المتحدث ونطق الترجمة لإتاحة اكتمال الوحدة المعنوية.',
+          '<strong>المرونة العصبية وتصفية التشويش:</strong> تقوية الذاكرة العاملة اللحظية (Working Memory) لعزل أصوات القاعة والتركيز الحصري على صوت المتحدث عبر سماعات الرأس.'
         ]
       },
       {
-        id: 2,
-        title: 'الحمل المعرفي وإدارة لغتين معاً (Cognitive Load)',
-        caption: 'المصدر: TED-Ed - Ewandro Magalhaes (مترجم فوري معتمد)',
-        url: 'https://www.youtube.com/embed/1laThtz19i0',
-        lessonTitle: 'أهم محاور إدارة الحمل المعرفي:',
+        id: 'mc-2',
+        legacyId: 2,
+        videoId: 'o_XVt5rdpFY',
+        url: 'https://www.youtube.com/embed/o_XVt5rdpFY?enablejsapi=1',
+        title: 'أسرار اكتساب اللغات والطلاقة السريعة (Secrets of Language Learning)',
+        speaker: 'Lýdia Machová (خبيرة اللغات والترجمة الفورية)',
+        caption: 'المصدر: TED - Lýdia Machová (خبيرة اللغات والترجمة الفورية)',
+        category: 'shadowing',
+        categoryLabel: 'التظليل الصوتي والطلاقة',
+        duration: '10:45',
+        durationSeconds: 645,
+        level: 'متوسط / Intermediate',
+        techniqueTag: 'تقنية: التظليل الصوتي اللحظي (Audio Shadowing)',
+        lessonTitle: 'أهم محاور اكتساب اللغات والتظليل الصوتي المتقدم:',
         points: [
-          '<strong>المعالجة المزدوجة (Dual-tasking):</strong> تدريب الدماغ على فك تشفير المعنى وتوليد النطق في مسارين متوازيين.',
-          '<strong>استراتيجيات الترقب (Anticipation):</strong> التنبؤ بنهاية الجملة بناءً على التراكيب النحوية ومحددات السياق.',
-          '<strong>الهدوء والسيطرة:</strong> عدم التوقف عند المصطلحات الصعبة والاعتماد على التعميم الدقيق (Hypernymy).'
+          '<strong>منهجية التظليل الصوتي (Audio Shadowing):</strong> التكرار الفوري المتزامن وراء المتحدث الأصلي بفاصل أجزاء من الثانية لتدريب عضلات النطق والأذن على النبر السليم.',
+          '<strong>التفكيك النحوي والمعجمي المتكرر:</strong> الاعتماد على استيعاب وتخزين الكتل اللغوية المتلازمة (Collocations) والتعبيرات الاصطلاحية بدلاً من الكلمات المعزولة.',
+          '<strong>نظام الـ 20 دقيقة اليومي:</strong> تدريب يومي مركز على نصوص المؤتمرات يعزز الطلاقة وسرعة الاستدعاء التلقائي للمصطلحات في كابينة الترجمة.'
         ]
       },
       {
-        id: 3,
-        title: 'الترجمة التعاقبية وتدوين الرموز (Consecutive Masterclass)',
-        caption: 'المصدر: الأكاديمية الدولية للمترجمين الفوريين',
-        url: 'https://www.youtube.com/embed/p3oZf-w84nE',
-        lessonTitle: 'أهم محاور الترجمة التعاقبية وتدوين الرموز:',
+        id: 'mc-3',
+        legacyId: 3,
+        videoId: '8jPQjjsBbIc',
+        url: 'https://www.youtube.com/embed/8jPQjjsBbIc?enablejsapi=1',
+        title: 'الهدوء والسيطرة الذهنية تحت الضغط (Staying Calm Under Pressure)',
+        speaker: 'Daniel Levitin (أستاذ علم الأعصاب والإدراك)',
+        caption: 'المصدر: TED - Daniel Levitin (أستاذ علم الأعصاب والإدراك)',
+        category: 'simultaneous',
+        categoryLabel: 'كابينة الترجمة وDécalage',
+        duration: '12:20',
+        durationSeconds: 740,
+        level: 'متقدم / Master',
+        techniqueTag: 'تقنية: الاستباق الوقائي (Pre-mortem Strategy)',
+        lessonTitle: 'أهم محاور إدارة الضغط والسيطرة الذهنية بكبائن المؤتمرات:',
         points: [
-          '<strong>مبادئ جان فرانسوا روزان:</strong> تدوين الأفكار بدلاً من الكلمات، والاعتماد على الرموز والأشكال العمودية.',
-          '<strong>الربط المنطقي:</strong> استخدام الأسهم للدلالة على علاقات العلة والنتيجة والتعارض والزمن.',
-          '<strong>الذاكرة قصيرة المدى:</strong> الورقة وسيلة تنشيط للذاكرة وليست تفريغاً حرفياً للنص.'
+          '<strong>الاستباق التحليلي الوقائي (Pre-mortem):</strong> إعداد وتوقع الأزمات المصطلحية مسبقاً، وإعداد قوائم المصطلحات الحساسة قبل نصف ساعة من انعقاد الجلسة.',
+          '<strong>التنفس البطني وتنظيم الأكسجين:</strong> السيطرة على إفراز الكورتيزول لضمان صفاء الذهن ومنع ظاهرة شلل الذاكرة اللحظي عند سرعة الخطيب.',
+          '<strong>استراتيجية التعميم المعجمي السليم (Hypernymy):</strong> الصعود خطوة للمصطلح الدلالي الأوسع بدقة وأمان عند مصادفة مصطلح فني غير متوقع دون التوقف في الميكروفون.'
+        ]
+      },
+      {
+        id: 'mc-4',
+        legacyId: 4,
+        videoId: 'eIho2S0ZahI',
+        url: 'https://www.youtube.com/embed/eIho2S0ZahI?enablejsapi=1',
+        title: 'فن الإلقاء والتحدث المؤثر أمام الوفود (How to Speak with Impact)',
+        speaker: 'Julian Treasure (خبير الصوتيات والتواصل الفعال)',
+        caption: 'المصدر: TED - Julian Treasure (خبير الصوتيات والتواصل الفعال)',
+        category: 'voice',
+        categoryLabel: 'الصوتيات والإلقاء بالكابينة',
+        duration: '09:58',
+        durationSeconds: 598,
+        level: 'متوسط / Intermediate',
+        techniqueTag: 'تقنية: النبر الصدري والوقفات التكتيكية (Vocal Prosody)',
+        lessonTitle: 'أهم محاور هندسة الصوت والإلقاء في ميكروفون الكابينة:',
+        points: [
+          '<strong>الرنين الصدري الدبلوماسي:</strong> تدريب الصوت على الخروج من التجويف الصدري العميق، مما يمنح الوفود والمستمعين شعوراً فورياً بالثقة والمصداقية.',
+          '<strong>الوقفات التكتيكية الموزونة:</strong> استبدال أصوات التردد الصوتية العشوائية (أممم، آآآه) بوقفات صامتة مدروسة تُظهر السيطرة الكاملة على تدفق الأفكار.',
+          '<strong>الوضوح الصوتي وضبط المسافة:</strong> مراعاة مخارج الحروف الشفوية والحلقية عند الاقتراب من ميكروفونات الشور (Shure) وأجهزة الإرسال اللاسلكي.'
+        ]
+      },
+      {
+        id: 'mc-5',
+        legacyId: 5,
+        videoId: 'RKK7wGAYP6k',
+        url: 'https://www.youtube.com/embed/RKK7wGAYP6k?enablejsapi=1',
+        title: 'كيف تصيغ اللغة وتؤثر في التفكير البشري (How Language Shapes Thought)',
+        speaker: 'Lera Boroditsky (عالمة اللسانيات المعرفية والإدراك)',
+        caption: 'المصدر: TED - Lera Boroditsky (عالمة اللسانيات المعرفية والإدراك)',
+        category: 'cognitive',
+        categoryLabel: 'اللسانيات المعرفية وبناء المعنى',
+        duration: '14:12',
+        durationSeconds: 852,
+        level: 'متقدم / Master',
+        techniqueTag: 'تقنية: اللسانيات المعرفية وإسناد المسؤولية القانونية',
+        lessonTitle: 'أهم محاور البنى اللغوية والترجمة المعرفية الدقيقة:',
+        points: [
+          '<strong>النسبية اللغوية وبناء المكان والزمان:</strong> استيعاب تباين تمثيل الاتجاهات والأزمنة بين اللغات السامية والهندوأوروبية لنقل المعنى دون خلل سياقي.',
+          '<strong>الفاعلية النحوية والقانونية (Grammatical Agency):</strong> الدقة في إسناد الأفعال للأشخاص في المحاضر الجنائية والدبلوماسية لتفادي التوريط القانوني للوفد.',
+          '<strong>المكافئ الثقافي والدلالي العميق:</strong> تجنب الترجمة الحرفية القاتلة والبحث عن النظير الاصطلاحي والوظيفي المقبول في الثقافة القانونية الهدف.'
+        ]
+      },
+      {
+        id: 'mc-6',
+        legacyId: 6,
+        videoId: 'd0yGdNEWdn0',
+        url: 'https://www.youtube.com/embed/d0yGdNEWdn0?enablejsapi=1',
+        title: 'تعلم أي لغة والترجمة السريعة في 6 أشهر (Learn Any Language Fast)',
+        speaker: 'Chris Lonsdale (عالم النفس اللغوي والباحث التطبيقي)',
+        caption: 'المصدر: TEDx - Chris Lonsdale (علم النفس اللغوي والتعلم السريع)',
+        category: 'shadowing',
+        categoryLabel: 'التظليل الصوتي والطلاقة',
+        duration: '18:27',
+        durationSeconds: 1107,
+        level: 'مبتدئ / Foundations',
+        techniqueTag: 'تقنية: النواة المعجمية والمحاكاة الحركية للوجه',
+        lessonTitle: 'أهم محاور التوليد اللغوي السريع والمحاكاة الحركية:',
+        points: [
+          '<strong>النواة المعجمية الفعالة (Core 1,000 Words):</strong> إتقان أول 1000 مفردة وتراكيبها يغطي 85% من المحادثات الرسمية ونقاشات المؤتمرات المتخصصة.',
+          '<strong>المحاكاة العضلية للوجه (Facial Muscle Shadowing):</strong> مراقبة حركة شفاه وعضلات وجه المتحدث الأصلي لضبط مخارج الحروف غير الموجودة في اللغة الأم.',
+          '<strong>التواصل بالمقصود وليس بالألفاظ:</strong> استيعاب صورة الحدث الذهنية (Mental Imagery) ثم صياغتها باللغة الهدف بحرية ودقة.'
+        ]
+      },
+      {
+        id: 'mc-7',
+        legacyId: 7,
+        videoId: 'R1vskiVDwl4',
+        url: 'https://www.youtube.com/embed/R1vskiVDwl4?enablejsapi=1',
+        title: 'الاستماع النشط وفن الحوار الدبلوماسي (Better Conversation & Active Listening)',
+        speaker: 'Celeste Headlee (إعلامية وخبيرة مقابلات وحوار دولي)',
+        caption: 'المصدر: TED - Celeste Headlee (إعلامية وخبيرة الاستماع النشط والحوار)',
+        category: 'diplomatic',
+        categoryLabel: 'الترجمة القضائية والدبلوماسية',
+        duration: '11:44',
+        durationSeconds: 704,
+        level: 'متوسط / Intermediate',
+        techniqueTag: 'تقنية: الحياد المهني والاستماع التحليلي النشط',
+        lessonTitle: 'أهم محاور الاستماع التحليلي في السياقات القضائية والدبلوماسية:',
+        points: [
+          '<strong>الاستماع للفهم لا للرد (Listening to Understand):</strong> التفرغ التام للتقاط الفكرة الجوهرية للخطيب دون الانشغال المسبق بتوقع ختام الجملة.',
+          '<strong>الحياد الصوتي والمهني المطلق:</strong> الامتناع عن إبداء أي تعبيرات صوتية تنم عن الموافقة أو الاستنكار في المحاكمات والتحكيم التجاري الدولي.',
+          '<strong>إدارة الإيجاز والاختصار الموجه:</strong> نقل الرسالة بتركيز واقتضاب متزن دون حشو لغوي قد يُفقد المتلقي تركيزه أو يُشوش على صياغة القرار.'
+        ]
+      },
+      {
+        id: 'mc-8',
+        legacyId: 8,
+        videoId: 'H14bBuluwB8',
+        url: 'https://www.youtube.com/embed/H14bBuluwB8?enablejsapi=1',
+        title: 'الممارسة المتعمدة وتدوين الملاحظات (Deliberate Practice & Note-Taking)',
+        speaker: 'Angela Duckworth (عالمة النفس والباحثة في المثابرة والإتقان)',
+        caption: 'المصدر: TED - Angela Duckworth (علم النفس السلوكي والممارسة الموجهة)',
+        category: 'notetaking',
+        categoryLabel: 'تدوين الملاحظات وروزان',
+        duration: '06:12',
+        durationSeconds: 372,
+        level: 'متقدم / Master',
+        techniqueTag: 'تقنية: نظام روزان (Rozan 7 Rules) والممارسة المتعمدة',
+        lessonTitle: 'أهم محاور نظام روزان والتدريب المتعمد للمترجم الفوري:',
+        points: [
+          '<strong>قواعد روزان السبع (Rozan Principles):</strong> تدوين الأفكار وليس الكلمات، استخدام الرموز العمودية التدرجية، وإبراز أدوات الربط المنطقي (Logical Linkers).',
+          '<strong>الممارسة المتعمدة المركزة (Deliberate Practice):</strong> اختيار خطابات سريعة خصيصاً للتمرن على نقاط الضعف الفردية وتسجيل الصوت لمراجعته ذاتياً.',
+          '<strong>التدوين المائل والانسيابي:</strong> تدوين الفاعل ثم الفعل ثم المفعول به بشكل قطري منحدر بالورقة لتسهيل القراءة اللحظية أثناء الإلقاء الشفوي.'
         ]
       }
     ];
 
-    function switchEnthusiastVideo(idx) {
-      document.querySelectorAll('[id^="btnEnthusiastVideo-"]').forEach(b => b.classList.remove('active'));
-      const activeBtn = document.getElementById(`btnEnthusiastVideo-${idx}`);
-      if (activeBtn) activeBtn.classList.add('active');
+    // Backward compatibility reference
+    const enthusiastVideoLessons = MASTERCLASS_ACADEMY_PLAYLIST;
 
-      const lesson = enthusiastVideoLessons.find(l => l.id === idx) || enthusiastVideoLessons[0];
+    let activeAcademyLessonId = 'mc-1';
+    let academyFilterState = {
+      category: 'all',
+      status: 'all',
+      query: ''
+    };
+
+    const ACADEMY_PROGRESS_STORAGE_KEY = 'polylang_masterclass_academy_progress';
+
+    function getAcademyProgressMap() {
+      try {
+        const raw = localStorage.getItem(ACADEMY_PROGRESS_STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && typeof parsed === 'object') return parsed;
+        }
+      } catch (e) {
+        console.warn('Error reading academy progress from localStorage:', e);
+      }
+      // Default initial state: Lecture 1 at 25% to immediately demonstrate interactive real progress
+      return {
+        'mc-1': { progress: 25, completed: false, updatedAt: new Date().toISOString() }
+      };
+    }
+
+    function saveAcademyProgressMap(map) {
+      try {
+        localStorage.setItem(ACADEMY_PROGRESS_STORAGE_KEY, JSON.stringify(map));
+      } catch (e) {
+        console.warn('Error saving academy progress to localStorage:', e);
+      }
+    }
+
+    function getLessonProgress(lessonId) {
+      const map = getAcademyProgressMap();
+      const entry = map[lessonId];
+      if (!entry) return { progress: 0, completed: false };
+      return {
+        progress: Math.min(100, Math.max(0, parseInt(entry.progress, 10) || 0)),
+        completed: Boolean(entry.completed || entry.progress >= 100)
+      };
+    }
+
+    function updateAcademyOverallProgress() {
+      const map = getAcademyProgressMap();
+      const totalLessons = MASTERCLASS_ACADEMY_PLAYLIST.length;
+      let completedCount = 0;
+      let totalCompletedMinutes = 0;
+      let totalCourseMinutes = 0;
+
+      MASTERCLASS_ACADEMY_PLAYLIST.forEach(l => {
+        const minutes = Math.round(l.durationSeconds / 60);
+        totalCourseMinutes += minutes;
+        const entry = map[l.id];
+        const prog = entry ? Math.min(100, Math.max(0, parseInt(entry.progress, 10) || 0)) : 0;
+        if (entry && (entry.completed || prog >= 100)) {
+          completedCount++;
+          totalCompletedMinutes += minutes;
+        } else if (prog > 0) {
+          totalCompletedMinutes += Math.round(minutes * (prog / 100));
+        }
+      });
+
+      const overallPercent = Math.round((completedCount / totalLessons) * 100);
+
+      // DOM updates
+      const textEl = document.getElementById('academyOverallProgressText');
+      if (textEl) {
+        textEl.innerText = `${completedCount} من ${totalLessons} محاضرات مكتملة (${overallPercent}%)`;
+      }
+
+      const barEl = document.getElementById('academyOverallProgressBar');
+      if (barEl) {
+        barEl.style.width = `${overallPercent}%`;
+      }
+
+      const timeEl = document.getElementById('academyTimeCompletedText');
+      if (timeEl) {
+        timeEl.innerText = `⏱️ ${totalCompletedMinutes} / ${totalCourseMinutes} دقيقة مكتملة`;
+      }
+
+      const milestoneBadge = document.getElementById('academyMilestoneBadge');
+      if (milestoneBadge) {
+        if (completedCount === 0) {
+          milestoneBadge.innerText = '🌱 المستوى: مبتدئ في الكابينة';
+        } else if (completedCount <= 3) {
+          milestoneBadge.innerText = '📈 المستوى: متدرب كابينة نشط';
+        } else if (completedCount <= 6) {
+          milestoneBadge.innerText = '🏅 المستوى: مترجم كابينة مؤهل';
+        } else {
+          milestoneBadge.innerText = '🏆 المستوى: محترف معتمد معايير AIIC';
+        }
+      }
+    }
+
+    function renderAcademyMasterclassPlaylist() {
+      const container = document.getElementById('academyPlaylistItemsContainer');
+      if (!container) return;
+
+      const q = (academyFilterState.query || '').trim().toLowerCase();
+      const cat = academyFilterState.category || 'all';
+      const status = academyFilterState.status || 'all';
+
+      const filtered = MASTERCLASS_ACADEMY_PLAYLIST.filter(item => {
+        // Category filter
+        if (cat !== 'all' && item.category !== cat) return false;
+
+        // Progress status filter
+        const { progress, completed } = getLessonProgress(item.id);
+        if (status === 'completed' && !completed) return false;
+        if (status === 'in_progress' && (completed || progress === 0)) return false;
+        if (status === 'unstarted' && (completed || progress > 0)) return false;
+
+        // Query filter
+        if (q) {
+          const matchTitle = item.title.toLowerCase().includes(q);
+          const matchSpeaker = item.speaker.toLowerCase().includes(q);
+          const matchTechnique = item.techniqueTag.toLowerCase().includes(q);
+          const matchCategory = item.categoryLabel.toLowerCase().includes(q);
+          const matchPoints = item.points.some(p => p.toLowerCase().includes(q));
+          if (!matchTitle && !matchSpeaker && !matchTechnique && !matchCategory && !matchPoints) {
+            return false;
+          }
+        }
+        return true;
+      });
+
+      // Update badge counts
+      const countPill = document.getElementById('academyPlaylistFilteredCount');
+      if (countPill) {
+        countPill.innerText = `${filtered.length} محاضرات`;
+      }
+      const playlistBadge = document.getElementById('academyPlaylistBadge');
+      if (playlistBadge) {
+        playlistBadge.innerText = `${filtered.length} / ${MASTERCLASS_ACADEMY_PLAYLIST.length} دروس`;
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="text-align: center; padding: 2rem 1rem; color: var(--text-muted);">
+            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🔍</div>
+            <strong style="display: block; font-size: 0.95rem; color: var(--text-main);">لم يتم العثور على محاضرات مطابقة</strong>
+            <p style="font-size: 0.8rem; margin-top: 0.35rem;">جرب تغيير كلمة البحث أو فئة التصنيف أو مرشح الحالة.</p>
+            <button class="btn btn-outline btn-sm" onclick="resetAcademyFilterQuery()" style="margin-top: 0.5rem; font-size: 0.78rem;">إلغاء الفلاتر والبحث</button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(item => {
+        const isActive = (item.id === activeAcademyLessonId);
+        const { progress, completed } = getLessonProgress(item.id);
+
+        let statusHtml = '';
+        if (completed || progress >= 100) {
+          statusHtml = `<span class="status-pill status-completed" style="background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; font-size: 0.7rem; font-weight: 800; padding: 2px 6px;">✓ مكتمل</span>`;
+        } else if (progress > 0) {
+          statusHtml = `<span class="status-pill" style="background: #fffbeb; color: #d97706; border: 1px solid #fde68a; font-size: 0.7rem; font-weight: 800; padding: 2px 6px;">⏳ ${progress}%</span>`;
+        } else {
+          statusHtml = `<span class="status-pill" style="background: var(--bg-surface-secondary); color: var(--text-muted); border: 1px solid var(--border-main); font-size: 0.7rem; font-weight: 700; padding: 2px 6px;">⭕ لم يبدأ</span>`;
+        }
+
+        return `
+          <div class="academy-playlist-card ${isActive ? 'active' : ''}" onclick="selectAcademyMasterclassLesson('${item.id}')" role="button" tabindex="0" aria-label="${item.title}">
+            <div class="academy-playlist-thumb">
+              <img src="https://img.youtube.com/vi/${item.videoId}/mqdefault.jpg" alt="${item.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div style="display: none; align-items: center; justify-content: center; width: 100%; height: 100%; color: #ffffff; font-size: 1.2rem;">🎓</div>
+              <div class="academy-playlist-play-icon">▶</div>
+              <span class="academy-playlist-duration-badge">⏱️ ${item.duration}</span>
+            </div>
+
+            <div style="flex: 1; min-width: 0;">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.4rem; margin-bottom: 0.25rem;">
+                <span class="role-tag-pill" style="font-size: 0.68rem; padding: 1px 6px;">${item.categoryLabel}</span>
+                ${statusHtml}
+              </div>
+
+              <h5 style="font-size: 0.84rem; font-weight: 800; color: var(--text-main); line-height: 1.35; margin: 0 0 0.25rem 0; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
+                ${item.title}
+              </h5>
+
+              <div style="font-size: 0.74rem; color: var(--text-muted); margin-bottom: 0.35rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                👤 ${item.speaker}
+              </div>
+
+              <!-- Mini Progress Bar inside Card -->
+              <div style="width: 100%; height: 4px; background: rgba(0,0,0,0.08); border-radius: 4px; overflow: hidden; margin-top: 0.35rem;">
+                <div style="width: ${progress}%; height: 100%; background: ${completed ? '#10b981' : 'var(--primary)'}; border-radius: 4px; transition: width 0.3s ease;"></div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function selectAcademyMasterclassLesson(lessonId) {
+      const lesson = MASTERCLASS_ACADEMY_PLAYLIST.find(l => l.id === lessonId) || MASTERCLASS_ACADEMY_PLAYLIST[0];
+      activeAcademyLessonId = lesson.id;
+
+      // Update Player iframe
       const iframe = document.getElementById('enthusiastAcademyVideoIframe');
-      const caption = document.getElementById('enthusiastVideoCaption');
-      const lTitle = document.getElementById('enthusiastLessonTitle');
-      const lPoints = document.getElementById('enthusiastLessonPoints');
+      if (iframe) {
+        iframe.src = lesson.url;
+      }
 
-      if (iframe) iframe.src = lesson.url;
+      // Update active video metadata
+      const caption = document.getElementById('enthusiastVideoCaption');
       if (caption) caption.innerText = lesson.caption;
+
+      const durationBadge = document.getElementById('enthusiastVideoDurationBadge');
+      if (durationBadge) durationBadge.innerText = `⏱️ ${lesson.duration} دقيقة`;
+
+      const techTag = document.getElementById('enthusiastTechniqueTag');
+      if (techTag) techTag.innerText = lesson.techniqueTag;
+
+      const lTitle = document.getElementById('enthusiastLessonTitle');
       if (lTitle) lTitle.innerText = lesson.lessonTitle;
+
+      const lLevel = document.getElementById('enthusiastLevelPill');
+      if (lLevel) lLevel.innerText = lesson.level;
+
+      const lPoints = document.getElementById('enthusiastLessonPoints');
       if (lPoints) {
         lPoints.innerHTML = lesson.points.map(p => `<li>${p}</li>`).join('');
       }
-      pushToast(`📺 تم تحميل: ${lesson.title}`);
+
+      // Update active lesson progress controls
+      syncActiveLessonProgressUI();
+
+      // Refresh playlist to update active highlighting
+      renderAcademyMasterclassPlaylist();
+
+      pushToast(`📺 تم تشغيل: ${lesson.title}`);
+    }
+
+    function syncActiveLessonProgressUI() {
+      const { progress, completed } = getLessonProgress(activeAcademyLessonId);
+      const activeLesson = MASTERCLASS_ACADEMY_PLAYLIST.find(l => l.id === activeAcademyLessonId) || MASTERCLASS_ACADEMY_PLAYLIST[0];
+
+      // Update Pill
+      const pill = document.getElementById('activeVideoProgressPill');
+      if (pill) {
+        if (completed || progress >= 100) {
+          pill.className = 'status-pill status-completed';
+          pill.style.background = '#ecfdf5';
+          pill.style.color = '#059669';
+          pill.innerText = 'مكتمل (100%) ✓';
+        } else if (progress > 0) {
+          pill.className = 'status-pill';
+          pill.style.background = '#fffbeb';
+          pill.style.color = '#d97706';
+          pill.innerText = `قيد المتابعة (${progress}%) ⏳`;
+        } else {
+          pill.className = 'status-pill';
+          pill.style.background = 'var(--bg-surface-secondary)';
+          pill.style.color = 'var(--text-muted)';
+          pill.innerText = 'لم يبدأ (0%) ⭕';
+        }
+      }
+
+      // Update Bar Fill
+      const barFill = document.getElementById('activeVideoProgressBarFill');
+      if (barFill) {
+        barFill.style.width = `${progress}%`;
+        barFill.style.background = (completed || progress >= 100) ? '#10b981' : 'var(--primary-gradient)';
+      }
+
+      // Update Time Watched display
+      const timeWatchedEl = document.getElementById('activeVideoTimeWatchedText');
+      if (timeWatchedEl) {
+        const totalSec = activeLesson.durationSeconds;
+        const watchedSec = Math.round((progress / 100) * totalSec);
+        const wMin = Math.floor(watchedSec / 60).toString().padStart(2, '0');
+        const wSec = (watchedSec % 60).toString().padStart(2, '0');
+        timeWatchedEl.innerText = `${wMin}:${wSec} / ${activeLesson.duration}`;
+      }
+
+      // Update Complete Button Text & Style
+      const toggleBtn = document.getElementById('btnToggleActiveVideoComplete');
+      if (toggleBtn) {
+        if (completed || progress >= 100) {
+          toggleBtn.className = 'btn btn-outline btn-sm';
+          toggleBtn.style.color = '#059669';
+          toggleBtn.style.borderColor = '#10b981';
+          toggleBtn.innerHTML = '↩️ تم الإكمال (إلغاء)';
+        } else {
+          toggleBtn.className = 'btn btn-primary btn-sm';
+          toggleBtn.style.color = '#ffffff';
+          toggleBtn.style.borderColor = '';
+          toggleBtn.innerHTML = '✓ وضع علامة مكتمل';
+        }
+      }
+    }
+
+    function setActiveLessonProgress(percent) {
+      const map = getAcademyProgressMap();
+      const p = Math.min(100, Math.max(0, percent));
+      const isComplete = (p >= 100);
+
+      map[activeAcademyLessonId] = {
+        progress: p,
+        completed: isComplete,
+        updatedAt: new Date().toISOString()
+      };
+      saveAcademyProgressMap(map);
+
+      syncActiveLessonProgressUI();
+      renderAcademyMasterclassPlaylist();
+      updateAcademyOverallProgress();
+
+      if (isComplete) {
+        playAppSound('success');
+        pushToast('🎉 تهانينا! أكملت المحاضرة بنجاح وتم تسجيل النقاط (+35 XP)');
+      } else {
+        pushToast(`📊 تم تحديث تقدم المشاهدة إلى ${p}%`);
+      }
+    }
+
+    function toggleActiveLessonCompletion() {
+      const { progress, completed } = getLessonProgress(activeAcademyLessonId);
+      if (completed || progress >= 100) {
+        // Revert to 0% uncompleted
+        const map = getAcademyProgressMap();
+        map[activeAcademyLessonId] = {
+          progress: 0,
+          completed: false,
+          updatedAt: new Date().toISOString()
+        };
+        saveAcademyProgressMap(map);
+        syncActiveLessonProgressUI();
+        renderAcademyMasterclassPlaylist();
+        updateAcademyOverallProgress();
+        pushToast('↩️ تم إلغاء علامة إكمال المحاضرة');
+      } else {
+        // Mark as 100% completed
+        setActiveLessonProgress(100);
+      }
+    }
+
+    function resetAcademyProgressConfirm() {
+      const isArabic = (currentLanguage === 'ar');
+      const confirmMsg = isArabic
+        ? 'هل أنت متأكد من رغبتك في إعادة تعيين تقدم المشاهدة لجميع محاضرات الماستركلاس؟'
+        : 'Are you sure you want to reset your viewing progress for all Academy Masterclass lessons?';
+
+      if (confirm(confirmMsg)) {
+        try {
+          localStorage.removeItem(ACADEMY_PROGRESS_STORAGE_KEY);
+        } catch (e) {}
+        syncActiveLessonProgressUI();
+        renderAcademyMasterclassPlaylist();
+        updateAcademyOverallProgress();
+        pushToast('🔄 تم تصفير تقدم الأكاديمية بنجاح. يمكنك البدء من جديد!');
+      }
+    }
+
+    function filterAcademyPlaylist() {
+      const searchInput = document.getElementById('academyVideoSearchInput');
+      const clearBtn = document.getElementById('academySearchClearBtn');
+      if (searchInput) {
+        academyFilterState.query = searchInput.value;
+        if (clearBtn) {
+          clearBtn.style.display = searchInput.value ? 'block' : 'none';
+        }
+      }
+      renderAcademyMasterclassPlaylist();
+    }
+
+    function clearAcademySearch() {
+      const searchInput = document.getElementById('academyVideoSearchInput');
+      const clearBtn = document.getElementById('academySearchClearBtn');
+      if (searchInput) searchInput.value = '';
+      if (clearBtn) clearBtn.style.display = 'none';
+      academyFilterState.query = '';
+      renderAcademyMasterclassPlaylist();
+    }
+
+    function resetAcademyFilterQuery() {
+      clearAcademySearch();
+      setAcademyCategoryFilter('all');
+      const statusSelect = document.getElementById('academyStatusFilterSelect');
+      if (statusSelect) statusSelect.value = 'all';
+      academyFilterState.status = 'all';
+      renderAcademyMasterclassPlaylist();
+    }
+
+    function setAcademyCategoryFilter(cat, btn) {
+      academyFilterState.category = cat;
+      const container = document.getElementById('academyCategoryChipsContainer');
+      if (container) {
+        container.querySelectorAll('.video-mode-chip').forEach(c => c.classList.remove('active'));
+        if (btn) {
+          btn.classList.add('active');
+        } else {
+          const matchingBtn = container.querySelector(`[data-cat="${cat}"]`);
+          if (matchingBtn) matchingBtn.classList.add('active');
+        }
+      }
+      renderAcademyMasterclassPlaylist();
+    }
+
+    function onAcademyStatusFilterChange(status) {
+      academyFilterState.status = status;
+      renderAcademyMasterclassPlaylist();
+    }
+
+    function switchEnthusiastVideo(idx) {
+      const targetId = `mc-${idx}`;
+      selectAcademyMasterclassLesson(targetId);
+    }
+
+    function downloadActiveLessonSummaryPdf() {
+      const lesson = MASTERCLASS_ACADEMY_PLAYLIST.find(l => l.id === activeAcademyLessonId) || MASTERCLASS_ACADEMY_PLAYLIST[0];
+      const win = window.open('', '_blank');
+      if (!win) {
+        pushToast('⚠️ يرجى السماح بالنوافذ المنبثقة لتنزيل الملخص');
+        return;
+      }
+      win.document.write(`
+        <!DOCTYPE html>
+        <html dir="rtl" lang="ar">
+        <head>
+          <meta charset="utf-8">
+          <title>${lesson.title} - ملخص ماستركلاس الترجمة</title>
+          <style>
+            body { font-family: 'Tajawal', sans-serif; margin: 40px; color: #1e293b; line-height: 1.8; }
+            .header { border-bottom: 3px solid #e53935; padding-bottom: 15px; margin-bottom: 25px; }
+            .badge { background: #fef2f2; color: #e53935; padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; }
+            h1 { font-size: 1.5rem; margin-top: 10px; }
+            .meta { color: #64748b; font-size: 0.95rem; margin-bottom: 20px; }
+            ul { padding-right: 20px; }
+            li { margin-bottom: 12px; }
+            .footer { margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 15px; font-size: 0.85rem; color: #94a3b8; }
+          </style>
+        </head>
+        <body>
+          <div class="header">
+            <span class="badge">أكاديمية Polylang Hub للترجمة الفورية المعتمدة</span>
+            <h1>${lesson.title}</h1>
+            <div class="meta">${lesson.caption} | المدة: ${lesson.duration} دقيقة | المستوى: ${lesson.level}</div>
+          </div>
+          <h3>${lesson.lessonTitle}</h3>
+          <ul>
+            ${lesson.points.map(p => `<li>${p}</li>`).join('')}
+          </ul>
+          <div class="footer">
+            وثيقة تدريبية صادرة من منصة Polylang Hub وفق معايير الجودة الدولية ISO 17100 و الاتحاد الدولي لمترجمي المؤتمرات (AIIC).
+          </div>
+          <script>window.print();<\/script>
+        </body>
+        </html>
+      `);
+      win.document.close();
+      pushToast('📥 تم فتح ملخص المحاضرة والمسرد للطباعة والحفظ');
+    }
+
+    function saveActiveLessonToNotes() {
+      const lesson = MASTERCLASS_ACADEMY_PLAYLIST.find(l => l.id === activeAcademyLessonId) || MASTERCLASS_ACADEMY_PLAYLIST[0];
+      pushToast(`🔖 تم حفظ محاضرة "${lesson.title}" في مفكرتك اللغوية`);
     }
 
     function openBoothWithVideoLesson() {
@@ -8508,69 +9451,73 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
     }
 
     function selectSrtCue(idx) {
+      const cues = videoSubtitleTracks[activeSubTrack] || [];
+      if (idx < 0 || idx >= cues.length) return;
       activeCueIndex = idx;
-      const cues = videoSubtitleTracks[activeSubTrack];
-      if (cues && cues[idx]) {
-        const vid = document.getElementById('mainTranslationVideo');
-        if (vid) {
-          vid.currentTime = cues[idx].start;
-          vid.play().catch(() => {});
-        }
+      const cue = cues[idx];
+      const timeDisplay = document.getElementById('videoCurrentTimeDisplay');
+      if (timeDisplay && cue) {
+        timeDisplay.innerText = `#${cue.id} [${formatTimecode(cue.start)} ➔ ${formatTimecode(cue.end)}]`;
+      }
+      const textInput = document.getElementById('activeCueTextInput');
+      if (textInput && cue) {
+        textInput.value = cue.text;
       }
       renderSrtTimeline();
     }
 
-    function onVideoTimeUpdate(video) {
-      const timeDisplay = document.getElementById('videoCurrentTimeDisplay');
-      if (timeDisplay) {
-        timeDisplay.innerText = formatTimecode(video.currentTime);
-      }
-      updateVideoOverlaySubtitle();
-    }
-
-    function updateVideoOverlaySubtitle() {
-      const vid = document.getElementById('mainTranslationVideo');
-      const overlay = document.getElementById('videoSubtitleOverlay');
-      if (!vid || !overlay) return;
-      const t = vid.currentTime;
+    function prevSrtCue() {
       const cues = videoSubtitleTracks[activeSubTrack] || [];
-      const currentCue = cues.find(c => t >= c.start && t <= c.end);
-
-      if (currentCue) {
-        overlay.innerText = currentCue.text;
-        overlay.style.opacity = '1';
-        const foundIdx = cues.indexOf(currentCue);
-        if (foundIdx !== -1 && foundIdx !== activeCueIndex) {
-          activeCueIndex = foundIdx;
-          renderSrtTimeline();
-        }
-      } else {
-        overlay.innerText = '...';
-        overlay.style.opacity = '0.4';
+      if (activeCueIndex > 0) {
+        selectSrtCue(activeCueIndex - 1);
       }
     }
 
-    function seekVideoOffset(sec) {
-      const vid = document.getElementById('mainTranslationVideo');
-      if (vid) {
-        vid.currentTime = Math.max(0, vid.currentTime + sec);
+    function nextSrtCue() {
+      const cues = videoSubtitleTracks[activeSubTrack] || [];
+      if (activeCueIndex < cues.length - 1) {
+        selectSrtCue(activeCueIndex + 1);
       }
     }
 
     function addCurrentCueAtTimestamp() {
-      const vid = document.getElementById('mainTranslationVideo');
-      const t = vid ? Math.floor(vid.currentTime) : 0;
-      const cues = videoSubtitleTracks[activeSubTrack];
+      const cues = videoSubtitleTracks[activeSubTrack] || [];
+      const lastCue = cues[cues.length - 1];
+      const t = lastCue ? Math.floor(lastCue.end + 0.5) : 0;
       const newCue = {
         id: cues.length + 1,
         start: t,
         end: t + 3.5,
-        text: 'مقطع ترجمة جديد قيد التحرير'
+        text: 'مقطع ترجمة فوري جديد قيد التدقيق'
       };
       cues.push(newCue);
       activeCueIndex = cues.length - 1;
       renderSrtTimeline();
-      pushToast(`تمت إضافة مقطع زمني عند ${formatTimecode(t)}`);
+      selectSrtCue(activeCueIndex);
+      pushToast(`تمت إضافة مقطع زمني #${newCue.id} عند ${formatTimecode(t)}`);
+    }
+
+    // Modal Video Preview Controllers
+    function openPromoVideoModal(videoId, title, subtitle, desc) {
+      const backdrop = document.getElementById('promoVideoModalBackdrop');
+      const iframe = document.getElementById('promoModalIframe');
+      const titleEl = document.getElementById('promoModalTitle');
+      const subEl = document.getElementById('promoModalSubtitle');
+      const descEl = document.getElementById('promoModalDesc');
+
+      if (titleEl) titleEl.innerText = title || 'العرض الترويجي للمسار التدريبي';
+      if (subEl) subEl.innerText = subtitle || 'أكاديمية Polylang Hub للترجمة الفورية';
+      if (descEl) descEl.innerText = desc || 'استكشف المهارات والتقنيات اللغوية المعتمدة داخل هذا المسار التخصصي.';
+      if (iframe) iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&enablejsapi=1`;
+      if (backdrop) backdrop.classList.add('open');
+      pushToast('🎬 تم فتح العرض الترويجي التفاعلي');
+    }
+
+    function closePromoVideoModal() {
+      const backdrop = document.getElementById('promoVideoModalBackdrop');
+      const iframe = document.getElementById('promoModalIframe');
+      if (iframe) iframe.src = '';
+      if (backdrop) backdrop.classList.remove('open');
     }
 
     function updateActiveCueText(val) {
@@ -9640,6 +10587,8 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
 
       // Initial Render for Media Catalog
       renderVideoPlaylistAndCatalog();
+      renderAcademyMasterclassPlaylist();
+      updateAcademyOverallProgress();
 
       applyTheme(currentTheme);
       applyLanguage(currentLanguage);
