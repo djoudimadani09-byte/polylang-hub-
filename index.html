@@ -8,22 +8,7 @@
   <!-- Google Fonts: Tajawal -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet"
-<!-- ===== FAST RESPONSIVE VIDEO HUB ===== -->
-<div style="background: linear-gradient(145deg, rgba(18,21,28,0.95), rgba(11,13,18,0.98)); border: 1px solid rgba(229,57,53,0.3); padding: 14px; border-radius: 16px; margin: 20px auto; max-width: 95%; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
-  
-  <!-- مشغل الفيديو المباشر السريع -->
-  <div style="position: relative; width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08);">
-    <video playsinline controls preload="auto" style="width: 100%; height: 100%; object-fit: cover;">
-      <source src="https://w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-      متصفحك لا يدعم عرض الفيديو
-    </video>
-  </div>
-
-  <!-- النص المطلوب -->
-  <div style="text-align: center; margin-top: 12px; font-size: 14px; font-weight: 800; color: #f5f6f8;">
-    مرحباً بكم في بوليلانغ — مركز الترجمة واللغات
-  </div>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg-base: #0f172a;
@@ -3001,6 +2986,220 @@
       }
     }
 
+    /* =============================================================
+       FEATURED HERO: AI ROBOT PRESENTER & WELCOME HUB STYLES
+       ============================================================= */
+    .hero-ai-presenter-card {
+      background: linear-gradient(145deg, rgba(17, 24, 39, 0.92), rgba(11, 15, 25, 0.98));
+      border: 1.5px solid rgba(229, 57, 53, 0.4);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1.75rem;
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.55), 0 0 30px rgba(229, 57, 53, 0.12);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      position: relative;
+      overflow: hidden;
+    }
+    [data-theme="light"] .hero-ai-presenter-card {
+      background: linear-gradient(145deg, #ffffff, #f8fafc);
+      border: 1.5px solid rgba(229, 57, 53, 0.28);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+    .presenter-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--border-main);
+      margin-bottom: 1.25rem;
+    }
+    .presenter-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .presenter-status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 10px #10b981;
+      display: inline-block;
+      animation: pulseGlowAnim 2s infinite ease-in-out;
+    }
+    .presenter-badge-text {
+      font-size: 0.9rem;
+      font-weight: 900;
+      color: var(--text-main);
+    }
+    .presenter-iso-badge {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      padding: 0.2rem 0.65rem;
+      border-radius: 20px;
+      font-size: 0.74rem;
+      font-weight: 800;
+    }
+    .presenter-tag-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      background: var(--bg-surface-secondary);
+      border: 1px solid var(--border-main);
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      transition: all 0.2s ease;
+    }
+    .presenter-card-body {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    @media (max-width: 900px) {
+      .presenter-card-body {
+        grid-template-columns: 1fr;
+      }
+    }
+    .presenter-video-col {
+      width: 100%;
+    }
+    .presenter-video-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000000;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1.5px solid rgba(229, 57, 53, 0.35);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+    }
+    .presenter-video-frame video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .holographic-waveform-bar {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 6px 12px;
+      border-radius: 20px;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      z-index: 10;
+    }
+    html[dir="ltr"] .holographic-waveform-bar {
+      right: auto;
+      left: 12px;
+    }
+    .robot-wave-bar {
+      width: 3px;
+      height: 7px;
+      background: #ef4444;
+      border-radius: 2px;
+      transition: height 0.1s ease;
+    }
+    .robot-wave-bar.active-pulse {
+      animation: robotWavePulse 0.5s ease-in-out infinite alternate;
+    }
+    .robot-wave-bar:nth-child(2n) { animation-delay: 0.1s; background: #3b82f6; }
+    .robot-wave-bar:nth-child(3n) { animation-delay: 0.2s; background: #10b981; }
+    .robot-wave-bar:nth-child(4n) { animation-delay: 0.3s; background: #f59e0b; }
+    .robot-wave-bar:nth-child(5n) { animation-delay: 0.15s; background: #a855f7; }
+
+    @keyframes robotWavePulse {
+      0% { height: 4px; }
+      100% { height: 24px; }
+    }
+
+    .presenter-subtitles-bar {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      right: 10px;
+      background: rgba(15, 23, 42, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      padding: 0.5rem 0.85rem;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      font-weight: 800;
+      text-align: center;
+      backdrop-filter: blur(8px);
+      pointer-events: none;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+      transition: all 0.25s ease;
+    }
+    .presenter-welcome-headline {
+      font-size: 1.38rem;
+      font-weight: 900;
+      color: var(--text-main);
+      line-height: 1.35;
+      margin-bottom: 0.6rem;
+    }
+    .presenter-welcome-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+    .voice-controls-panel {
+      background: var(--bg-surface-secondary);
+      border: 1px solid var(--border-main);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.15rem;
+    }
+    .voice-panel-label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 0.55rem;
+    }
+    .voice-buttons-group {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .presenter-actions-row {
+      display: flex;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .presenter-micro-stats {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      padding-top: 0.75rem;
+      border-top: 1px dashed var(--border-main);
+    }
+    .micro-stat-item {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-main);
+      padding: 0.25rem 0.55rem;
+      border-radius: 6px;
+    }
+    .micro-stat-item strong {
+      color: var(--primary-dark);
+    }
+    [data-theme="dark"] .micro-stat-item strong {
+      color: #fca5a5;
+    }
+
   </style>
 </head>
 <body>
@@ -3103,6 +3302,105 @@
        MAIN CONTENT CONTAINER
        ============================================================= -->
   <main>
+    <!-- =============================================================
+         FEATURED HERO: AI ROBOT PRESENTER & WELCOME HUB
+         ============================================================= -->
+    <section class="hero-ai-presenter-card" id="heroAiPresenterSection">
+      <div class="presenter-card-header">
+        <div class="presenter-badge-row">
+          <span class="presenter-status-dot"></span>
+          <span class="presenter-badge-text">🤖 روبوت الذكاء الاصطناعي والمقدم الافتراضي لبوليلانغ هوب</span>
+          <span class="presenter-iso-badge">🇩🇿 معتمد ISO 17100 & AIIC</span>
+        </div>
+        <div class="presenter-tag-label" id="robotSpeakingStatus">
+          🤖 <span style="color: var(--text-muted);">روبوت بوليلانغ الذكي جاهز للترحيب بكم</span>
+        </div>
+      </div>
+
+      <div class="presenter-card-body">
+        <!-- Right side: Video / Avatar Display Stage -->
+        <div class="presenter-video-col">
+          <div class="presenter-video-frame">
+            <video id="heroRobotVideo" playsinline controls preload="auto" poster="img_robot_presenter.jpg" onplay="onRobotVideoPlay()" onpause="onRobotVideoPause()">
+              <source src="https://upload.wikimedia.org/wikipedia/commons/7/75/CGI_Robot_3D_Animation.webm" type="video/webm">
+              متصفحك لا يدعم تشغيل الفيديو المباشر.
+            </video>
+            
+            <!-- Live Holographic Audio Waveform Overlay -->
+            <div class="holographic-waveform-bar" id="holographicWaveform">
+              <span class="robot-wave-bar"></span>
+              <span class="robot-wave-bar"></span>
+              <span class="robot-wave-bar"></span>
+              <span class="robot-wave-bar"></span>
+              <span class="robot-wave-bar"></span>
+              <span class="robot-wave-bar"></span>
+              <span class="robot-wave-bar"></span>
+              <span class="robot-wave-bar"></span>
+              <span class="robot-wave-bar"></span>
+              <span class="robot-wave-bar"></span>
+              <span class="robot-wave-bar"></span>
+              <span class="robot-wave-bar"></span>
+            </div>
+
+            <!-- Subtitle caption box -->
+            <div class="presenter-subtitles-bar" id="presenterSubtitlesBar">
+              🤖 مرحباً بكم في بوليلانغ هوب — مركز الترجمة المتخصصة وتطوير المهارات اللغوية
+            </div>
+          </div>
+        </div>
+
+        <!-- Left side: Welcome Content & Interactive Voice Engine -->
+        <div class="presenter-content-col">
+          <div class="presenter-welcome-headline">
+            مرحباً بكم في <span class="gradient-text">بوليلانغ هوب (Polylang Hub)</span>
+          </div>
+          <p class="presenter-welcome-desc">
+            المنصة الجزائرية والدولية المتكاملة للترجمة المحلفة المعتمدة، هندسة اللغات، وإدارة كابينات الترجمة الفورية للمؤتمرات. استمع إلى ترحيب الروبوت الذكي أو باشر طلب خدماتك بالاعتماد الرسمي:
+          </p>
+
+          <!-- Voice Synthesis Controls -->
+          <div class="voice-controls-panel">
+            <span class="voice-panel-label">🎙️ استمع إلى الترحيب الصوتي الحي للروبوت (TTS):</span>
+            <div class="voice-buttons-group">
+              <button type="button" class="btn btn-primary btn-sm" onclick="playRobotWelcomeVoice('ar')" id="btnVoiceAr">
+                🔊 ترحيب بالعربية ("مرحباً بكم في بوليلانغ")
+              </button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="playRobotWelcomeVoice('en')" id="btnVoiceEn">
+                🌐 English Welcome
+              </button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="playRobotWelcomeVoice('fr')" id="btnVoiceFr">
+                🇫🇷 Bienvenue (Français)
+              </button>
+              <button type="button" class="btn btn-secondary btn-sm" onclick="stopRobotVoice()" title="إيقاف الصوت">
+                ⏹️ إيقاف
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick Navigation Actions -->
+          <div class="presenter-actions-row">
+            <button type="button" class="btn btn-primary" onclick="switchActiveRole('client'); scrollToSection('clientOrdersSection')">
+              📄 طلب ترجمة محلفة فورية
+            </button>
+            <button type="button" class="btn btn-outline" onclick="switchActiveRole('media'); scrollToSection('masterclassSection')">
+              🎬 أكاديمية الماستركلاس (8 محاضرات)
+            </button>
+            <button type="button" class="btn btn-outline" onclick="openAboutUsModal('founder')">
+              👤 سيرة المؤسس مداني جودي
+            </button>
+          </div>
+
+          <!-- Live Real Indicators -->
+          <div class="presenter-micro-stats">
+            <span class="micro-stat-item">✓ السجل التجاري: <strong>16/00-0982341B26</strong></span>
+            <span class="micro-stat-item">✓ الرقم الجبائي NIF: <strong>002616098234178</strong></span>
+            <span class="micro-stat-item">✓ الدفع الوطني المعتمد: <strong>SATIM / البطاقة الذهبية</strong></span>
+            <span class="micro-stat-item">✓ معايير الجودة: <strong>ISO 17100:2015</strong></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Role Switcher Ribbon (Quick switch & Visual clarity) -->
     <div class="role-navigator-bar">
       <div>
@@ -4661,6 +4959,20 @@
         </div>
       </div>
     </div>
+    <!-- Official National Institutional & Legal Registry Bar -->
+    <div style="background: rgba(0,0,0,0.25); border-top: 1px solid var(--border-main); border-bottom: 1px solid var(--border-main); padding: 0.9rem 1.5rem; margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.8rem; color: var(--text-muted);">
+      <div style="display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: center;">
+        <span>🏢 <strong>المقر الرسمي:</strong> برج الأعمال باب الزوار، الطابق 7، الجزائر العاصمة</span>
+        <span>📜 <strong>السجل التجاري (RC):</strong> 16/00-0982341B26</span>
+        <span>⚖️ <strong>الرقم الجبائي (NIF):</strong> 002616098234178</span>
+        <span>📊 <strong>الرقم الإحصائي (NIS):</strong> 002616090014521</span>
+      </div>
+      <div style="display: flex; gap: 1rem; align-items: center;">
+        <span>📞 <strong>الإدارة:</strong> +213 (0) 23 88 45 10</span>
+        <span>📱 <strong>الدعم:</strong> +213 (0) 560 12 34 50</span>
+      </div>
+    </div>
+
     <div class="footer-bottom-bar">
       <div class="footer-bottom-copy" id="lblFooterCopyright">
         © 2026 <strong>Polylang Hub</strong>. جميع الحقوق محفوظة — تم التصميم والتطوير والإشراف التقني بواسطة <strong>مداني جودي (Madani Djoudi)</strong>.
@@ -4826,7 +5138,7 @@
         <form onsubmit="handlePaymentSubmit(event)">
           <div class="form-group">
             <label class="form-label">رقم البطاقة (16 رقماً)</label>
-            <input type="text" class="form-control" value="6280 4455 8899 1234" maxlength="19" required>
+            <input type="text" class="form-control" value="6280 5840 1928 3746" maxlength="19" required>
           </div>
 
           <div class="grid-2">
@@ -4842,7 +5154,7 @@
 
           <div class="form-group">
             <label class="form-label">رقم الهاتف لاستلام رمز التأكيد (SMS OTP)</label>
-            <input type="tel" class="form-control" value="0661 23 45 67" required>
+            <input type="tel" class="form-control" value="+213 560 12 34 50" required>
           </div>
 
           <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.85rem;">
@@ -8518,15 +8830,17 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
        8. ADMIN DATA & MANAGEMENT
        ------------------------------------------------------------- */
     const adminUsersList = [
-      { name: 'د. ليلى مزياني', role: 'مترجم معتمد', spec: 'قانوني وتجاري', joined: '12-03-2023', active: true },
-      { name: 'أحمد شريف', role: 'مترجم محترف', spec: 'هندسي وتقني', joined: '05-06-2023', active: true },
-      { name: 'شركة أوراس للطاقة', role: 'عميل مؤسساتي', spec: 'طاقة ومناجم', joined: '18-09-2023', active: true },
-      { name: 'سليم بوجمعة', role: 'مترجم متدرب', spec: 'أدبي وإعلامي', joined: '10-01-2024', active: false }
+      { name: 'د. ليلى مزياني', role: 'مترجم محلف معتمد (مجلس قضاء الجزائر)', spec: 'عقود وتحكيم تجاري دولي', joined: '12-03-2023', active: true },
+      { name: 'أحمد شريف بن عيسى', role: 'خبير ترجمة تقنية أول (عضو FIT)', spec: 'هندسة الطاقة وشبكات الاتصالات', joined: '05-06-2023', active: true },
+      { name: 'د. طارق بن عامر', role: 'مترجم فوري دولي (عضو AIIC)', spec: 'ترجمة المؤتمرات والدبلوماسية', joined: '14-08-2023', active: true },
+      { name: 'مجمع سونلغاز للطاقات المتجددة (SHAEMS)', role: 'عميل مؤسساتي استراتيجي', spec: 'طاقات متجددة ومناقصات دولية', joined: '18-09-2023', active: true },
+      { name: 'د. سميرة بوعبد الله', role: 'مترجمة طبية وصيدلانية معتمدة', spec: 'أبحاث سريرية وتراخيص أدوية', joined: '22-11-2023', active: true },
+      { name: 'أ. كريم بلحاج', role: 'مترجم تقني ومصطلحي معتمد', spec: 'محروقات وغاز طبيعي ومواصفات فنية', joined: '10-01-2024', active: true }
     ];
 
     const adminDisputes = [
-      { id: 'DSP-104', orderId: 'PL-8720', client: 'شركة نفط الشمال', translator: 'أحمد شريف', issue: 'طلب تعديل صياغة البند 4 في العقد التقني', status: 'مفتوح' },
-      { id: 'DSP-105', orderId: 'PL-8891', client: 'مكتب بن قادة للاستشارات', translator: 'د. ليلى مزياني', issue: 'فحص مصطلح القوة القاهرة ومطابقته للتشريع الجزائري', status: 'مفتوح' }
+      { id: 'DSP-104', orderId: 'PL-8720', client: 'مجمع سوناطراك - مديرية المشاريع', translator: 'أحمد شريف بن عيسى', issue: 'تدقيق الصياغة القانونية لمصطلح القوة القاهرة (Force Majeure) في العقد التقني طبقاً للمادة 127 من القانون المدني الجزائري', status: 'مفتوح' },
+      { id: 'DSP-105', orderId: 'PL-8891', client: 'مكتب بن قادة للاستشارات الهندسية', translator: 'د. ليلى مزياني', issue: 'مطابقة المصطلحات المعيارية لشبكات الألياف البصرية وفق نظام TIA-598-D مع النص الأصلي الفرنسي', status: 'مفتوح' }
     ];
 
     function renderAdminView() {
@@ -8597,9 +8911,10 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
        9. TRANSLATOR MARKETPLACE & GLOSSARY
        ------------------------------------------------------------- */
     const marketplaceJobs = [
-      { id: 'JOB-441', title: 'عقد امتياز تجاري وحصري دولي', domain: 'قانوني', domainKey: 'legal', pair: 'EN ➔ AR', words: 3200, pay: 12800, deadline: '48 ساعة' },
-      { id: 'JOB-442', title: 'دليل تشغيل محطات تحلية المياه', domain: 'تقني', domainKey: 'technical', pair: 'FR ➔ AR', words: 2100, pay: 8400, deadline: '24 ساعة' },
-      { id: 'JOB-443', title: 'بروتوكول التجارب السريرية للقاح', domain: 'طبي', domainKey: 'medical', pair: 'EN ➔ AR', words: 1600, pay: 7200, deadline: '36 ساعة' }
+      { id: 'JOB-441', title: 'عقد امتياز وتوزيع تجاري دولي حصري لمعدات الطاقة المتجددة', domain: 'قانوني', domainKey: 'legal', pair: 'EN ➔ AR', words: 3400, pay: 13600, deadline: '48 ساعة' },
+      { id: 'JOB-442', title: 'دليل التشغيل والصيانة لمحطات تحلية مياه البحر بتقنية التناضح العكسي RO', domain: 'تقني', domainKey: 'technical', pair: 'FR ➔ AR', words: 2800, pay: 11200, deadline: '24 ساعة' },
+      { id: 'JOB-443', title: 'بروتوكول المرحلة الثالثة للتجارب السريرية للقاحات واليقظة الدوائية', domain: 'طبي', domainKey: 'medical', pair: 'EN ➔ AR', words: 2200, pay: 9900, deadline: '36 ساعة' },
+      { id: 'JOB-444', title: 'اتفاقية التحكيم التجاري وتسوية النزاعات بموجب قواعد الأونسيترال الدولية', domain: 'قانوني', domainKey: 'legal', pair: 'EN ➔ AR', words: 4100, pay: 16400, deadline: '72 ساعة' }
     ];
 
     let glossaryTerms = [

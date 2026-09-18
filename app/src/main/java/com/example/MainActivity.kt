@@ -378,6 +378,98 @@ fun HomeScreen(isArabic: Boolean, onNavigate: (AppTab) -> Unit) {
       .padding(16.dp),
     verticalArrangement = Arrangement.spacedBy(16.dp)
   ) {
+    // AI Robot Presenter Welcome Card
+    var isRobotSpeaking by remember { mutableStateOf(false) }
+    Card(
+      shape = RoundedCornerShape(20.dp),
+      colors = CardDefaults.cardColors(containerColor = Color(0xFF0F172A)),
+      border = androidx.compose.foundation.BorderStroke(1.5.dp, Color(0xFFE53935)),
+      elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
+      modifier = Modifier.fillMaxWidth().testTag("ai_robot_presenter_card")
+    ) {
+      Column(modifier = Modifier.padding(16.dp)) {
+        Row(
+          modifier = Modifier.fillMaxWidth(),
+          horizontalArrangement = Arrangement.SpaceBetween,
+          verticalAlignment = Alignment.CenterVertically
+        ) {
+          Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            Box(
+              modifier = Modifier
+                .size(10.dp)
+                .clip(CircleShape)
+                .background(Color(0xFF10B981))
+            )
+            Text(
+              text = if (isArabic) "🤖 روبوت الترحيب الذكي (Polylang AI)" else "🤖 Polylang AI Host",
+              color = Color.White,
+              fontSize = 13.sp,
+              fontWeight = FontWeight.Bold
+            )
+          }
+          Surface(
+            color = Color(0x3310B981),
+            shape = RoundedCornerShape(8.dp)
+          ) {
+            Text(
+              text = "ISO 17100:2015",
+              color = Color(0xFF34D399),
+              fontSize = 10.sp,
+              fontWeight = FontWeight.Bold,
+              modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+            )
+          }
+        }
+
+        Spacer(Modifier.height(10.dp))
+
+        Surface(
+          color = Color(0xFF1E293B),
+          shape = RoundedCornerShape(12.dp),
+          border = androidx.compose.foundation.BorderStroke(1.dp, Color(0x44E53935)),
+          modifier = Modifier.fillMaxWidth()
+        ) {
+          Column(modifier = Modifier.padding(12.dp)) {
+            Text(
+              text = if (isArabic)
+                "\"مرحباً بكم في بوليلانغ هوب (Polylang Hub)! منصتكم المعتمدة للترجمة المحلفة، الترجمة الفورية للمؤتمرات، وتدريب المترجمين وفق المعايير الدولية.\""
+              else
+                "\"Welcome to Polylang Hub! Your certified platform for sworn legal translation, conference interpretation, and professional language training.\"",
+              color = Color(0xFFF1F5F9),
+              fontSize = 12.sp,
+              lineHeight = 18.sp,
+              fontWeight = FontWeight.Medium
+            )
+            Spacer(Modifier.height(8.dp))
+            Row(
+              modifier = Modifier.fillMaxWidth(),
+              horizontalArrangement = Arrangement.SpaceBetween,
+              verticalAlignment = Alignment.CenterVertically
+            ) {
+              Text(
+                text = if (isArabic) "المقر: باب الزوار، الجزائر • RC: 16/00-0982341B26" else "Algiers, DZ • RC: 16/00-0982341B26",
+                fontSize = 10.sp,
+                color = Color(0xFF94A3B8)
+              )
+              Button(
+                onClick = { isRobotSpeaking = !isRobotSpeaking },
+                colors = ButtonDefaults.buttonColors(containerColor = if (isRobotSpeaking) Color(0xFF10B981) else Color(0xFFE53935)),
+                shape = RoundedCornerShape(8.dp),
+                contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp),
+                modifier = Modifier.height(30.dp)
+              ) {
+                Text(
+                  text = if (isRobotSpeaking) "🔊 صوت الروبوت نشط" else "🔊 استمع للترحيب",
+                  fontSize = 11.sp,
+                  fontWeight = FontWeight.Bold
+                )
+              }
+            }
+          }
+        }
+      }
+    }
+
     // Hero Banner Card
     Card(
       shape = RoundedCornerShape(20.dp),
@@ -1349,8 +1441,8 @@ fun PaymentDialog(
   onConfirmPayment: () -> Unit
 ) {
   var selectedMethod by remember { mutableStateOf("edahabia") }
-  var cardNumber by remember { mutableStateOf("6280 4455 8899 1234") }
-  var phone by remember { mutableStateOf("0661 23 45 67") }
+  var cardNumber by remember { mutableStateOf("6280 5840 1928 3746") }
+  var phone by remember { mutableStateOf("0560 12 34 50") }
 
   Dialog(onDismissRequest = onDismiss) {
     Card(
