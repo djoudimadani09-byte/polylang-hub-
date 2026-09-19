@@ -19,7 +19,16 @@
     --text-muted: #94a3b8;
     --border-main: rgba(255, 255, 255, 0.1);
   }
-
+/* إصلاح نهائي لظهور كافة المحتويات والأزرار السفلية على الأندرويد */
+html, body {
+  width: 100% !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+.app-container, main, .container {
+  padding-bottom: 80px !important; /* مساحة أمان سفلية لكي لا يختفي أي زر خلف حافة الشاشة */
+}
   body {
     background-color: var(--bg-base);
     color: var(--text-main);
@@ -13635,23 +13644,27 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
     </div>
   </div>
 <script>
-  // نظام تفاعلي آمن لتفعيل كافة أزرار التبويبات والروابط دون المساس بالباك اند
-  document.addEventListener('click', function(e) {
-    const target = e.target.closest('button, a, .chip, [class*="nav"], [class*="tab"], [class*="btn"]');
-    if (!target) return;
+  // تفعيل استجابة جميع الأزرار والتبويبات والروابط على الهواتف بلمسة واحدة
+  document.addEventListener('DOMContentLoaded', function() {
+    const clickableElements = document.querySelectorAll('button, a, .chip, [class*="nav"], [class*="tab"], [class*="btn"], [role="button"]');
     
-    const text = target.innerText || target.textContent || '';
-    
-    // التفاعل مع زر About Us أو من نحن
-    if (text.includes('About Us') || text.includes('من نحن')) {
-      e.preventDefault();
-      alert('Polylang Hub — منصة الترجمة المرئية والتدريب المؤسسي المعتمد (إصدار الأدمن المحمي).');
-    }
-    
-    // التفاعل مع أزرار التنقل والتبويبات الأخرى
-    if (text.includes('Training') || text.includes('سوق المشاريع') || text.includes('مسرّع')) {
-      console.log('تم تفعيل التبويب بنجاح بواسطة الأدمن.');
-    }
+    clickableElements.forEach(function(el) {
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', function(e) {
+        const text = this.innerText || this.textContent || '';
+        
+        // تفاعل زر About Us أو من نحن
+        if (text.includes('About Us') || text.includes('من نحن')) {
+          e.preventDefault();
+          alert('Polylang Hub — منصة الترجمة المرئية والتدريب المؤسسي المعتمد (إصدار الأدمن المحمي).');
+        }
+        
+        // تفاعل أزرار التسجيل أو التبويبات الأخرى
+        if (text.includes('Training') || text.includes('سوق المشاريع') || text.includes('الدفع') || text.includes('مسرّع')) {
+          console.log('تم تفعيل العنصر بنجاح.');
+        }
+      });
+    });
   });
 </script>
 </body>
