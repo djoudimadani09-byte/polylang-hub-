@@ -13626,32 +13626,19 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
         <div class="form-group">
           <label class="form-label">البطاقة البنكية للدفع</label>
           <select class="form-control" id="walletPaymentCardType">
-            <option value="edahabia">💳 البطاقة الذهبية (بريد الجزائر - Edahabia)</option>
-            <option value="cib">🏦 بطاقة بنكية CIB (البنوك التجارية الجزائرية)</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">رقم البطاقة (16 رقماً)</label>
-          <input type="text" class="form-control" value="•••• •••• •••• 5358" readonly style="letter-spacing: 2px;">
 <script>
-  // تفعيل كافة الأزرار والروابط والنوافذ المنبثقة على الهواتف بذكاء
-  document.addEventListener('click', function(e) {
-    const btn = e.target.closest('button, a, .chip, [class*="nav"], [class*="tab"], [class*="btn"]');
-    if (!btn) return;
+  // تفعيل الاستجابة والفتح الفعلي لكافة الأزرار والتبويبات على الهواتف
+  document.addEventListener('DOMContentLoaded', function() {
+    const allButtons = document.querySelectorAll('button, a, .chip, [class*="nav"], [class*="tab"], [class*="btn"], [role="button"]');
     
-    const text = btn.innerText || btn.textContent || '';
-    
-    // إذا كان الزر خاص بـ About Us أو من نحن، نقوم بإظهار نافذة أو تنبيه تفصيلي
-    if (text.includes('About Us') || text.includes('من نحن')) {
-      e.preventDefault();
-      alert('Polylang Hub — منصة الترجمة المرئية والتدريب المؤسسي (إصدار الأدمن المحمي).');
-    }
-    
-    // دعم أزرار فتح المحافظ أو النوافذ إن وجدت
-    if (btn.getAttribute('onclick')) {
-      return; // ترك الدالة الأصلية تعمل إن وجدت
-    }
+    allButtons.forEach(function(item) {
+      item.style.cursor = 'pointer';
+      
+      // إضافة دعم تفاعلي قوي للـ Touch والـ Click معاً على الأندرويد
+      item.addEventListener('touchend', function(e) {
+        this.click();
+      }, {passive: true});
+    });
   });
 </script>
 </body>
