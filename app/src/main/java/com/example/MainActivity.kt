@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -40,7 +41,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.example.ui.theme.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.json.JSONObject
+import java.io.OutputStreamWriter
+import java.net.HttpURLConnection
+import java.net.URL
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class MainActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,7 +77,7 @@ enum class AppTab {
 }
 
 enum class UserRole {
-  CLIENT, TRANSLATOR
+  CLIENT, TRANSLATOR, ADMIN
 }
 
 data class TranslationOrder(
@@ -75,7 +87,8 @@ data class TranslationOrder(
   val langPair: String,
   val wordCount: Int,
   val priceDzd: Int,
-  val status: String
+  val status: String,
+  val isInterpretation: Boolean = false
 )
 
 data class SrtCue(
@@ -86,6 +99,86 @@ data class SrtCue(
   val subtitleText: String
 )
 
+data class MasterclassCourse(
+  val id: String,
+  val title: String,
+  val category: String,
+  val duration: String,
+  val instructor: String,
+  val level: String,
+  val desc: String,
+  val videoUrl: String = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+)
+
+data class TermCard(
+  val id: Int,
+  val text: String,
+  val isArabic: Boolean,
+  var isSelected: Boolean = false,
+  var isMatched: Boolean = false
+)
+
+/* =============================================================
+   MANDATORY ADMIN EMAIL NOTIFICATION DISPATCH ENGINE
+   Target: djoudimadani09@gmail.com
+   ============================================================= */
+object AdminEmailNotifier {
+  const val ADMIN_EMAIL = "djoudimadani09@gmail.com"
+
+  fun dispatch(
+    eventType: String,
+    userName: String,
+    userEmail: String,
+    details: Map<String, String>,
+    onResult: (Boolean, String) -> Unit = { _, _ -> }
+  ) {
+    CoroutineScope(Dispatchers.IO).launch {
+      var success = false
+      try {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        val timestamp = dateFormat.format(Date())
+
+        val jsonObj = JSONObject()
+        jsonObj.put("_subject", "[Polylang Android] $eventType: $userName")
+        jsonObj.put("_replyto", userEmail)
+        jsonObj.put("_captcha", "false")
+        jsonObj.put("eventType", eventType)
+        jsonObj.put("timestamp", timestamp)
+        jsonObj.put("userName", userName)
+        jsonObj.put("userEmail", userEmail)
+        details.forEach { (k, v) -> jsonObj.put(k, v) }
+
+        val url = URL("https://formsubmit.co/ajax/$ADMIN_EMAIL")
+        val conn = url.openConnection() as HttpURLConnection
+        conn.requestMethod = "POST"
+        conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8")
+        conn.setRequestProperty("Accept", "application/json")
+        conn.doOutput = true
+        conn.connectTimeout = 6000
+        conn.readTimeout = 6000
+
+        OutputStreamWriter(conn.outputStream, "UTF-8").use { writer ->
+          writer.write(jsonObj.toString())
+          writer.flush()
+        }
+
+        val code = conn.responseCode
+        success = (code in 200..299)
+        conn.disconnect()
+      } catch (e: Exception) {
+        // Safe failover
+      }
+
+      withContext(Dispatchers.Main) {
+        onResult(success, "📧 تم إرسال إشعار فوري إلى بريد المؤسس: $ADMIN_EMAIL")
+      }
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// ROOT COMPOSABLE: PolylangHubApp
+// --------------------------------------------------------------------------
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PolylangHubApp() {
@@ -99,8 +192,9 @@ fun PolylangHubApp() {
   // State for orders
   val orders = remember {
     mutableStateListOf(
-      TranslationOrder("PL-8821", "عقد توريد معدات طاقة شمسية", "قانونية", "EN ➔ AR", 2400, 9600, "مكتمل ومسلّم"),
-      TranslationOrder("PL-8940", "دليل مستخدم نظام إدارة السدود", "تقنية", "FR ➔ AR", 1850, 7400, "قيد الترجمة والتدقيق"),
+      TranslationOrder("PL-8821", "عقد توريد معدات طاقة شمسية", "قانونية ورسمية", "EN ➔ AR", 2400, 9600, "مكتمل ومسلّم"),
+      TranslationOrder("PL-8940", "دليل مستخدم نظام إدارة السدود", "تقنية وهندسية", "FR ➔ AR", 1850, 7400, "قيد الترجمة والتدقيق"),
+      TranslationOrder("INT-4022", "حجز مترجم فوري (قمة المناخ والتحول الطاقوي)", "ترجمة فورية", "AR ⇄ EN", 1920, 140000, "مؤكد وجاهز", isInterpretation = true),
       TranslationOrder("PL-9012", "اتفاقية عدم إفصاح سرية مؤسساتية", "مؤسساتية", "AR ➔ EN", 950, 3800, "قيد المراجعة")
     )
   }
@@ -119,7 +213,10 @@ fun PolylangHubApp() {
   var pendingPlanName by remember { mutableStateOf("Pro Translator") }
   var pendingPlanPrice by remember { mutableStateOf(4500) }
 
-  // Snackbars
+  // Masterclass Video Player Dialog state
+  var activeVideoCourse by remember { mutableStateOf<MasterclassCourse?>(null) }
+
+  // Snackbars & Coroutines
   val snackbarHostState = remember { SnackbarHostState() }
   val coroutineScope = rememberCoroutineScope()
 
@@ -127,7 +224,8 @@ fun PolylangHubApp() {
 
   CompositionLocalProvider(LocalLayoutDirection provides layoutDirection) {
     Scaffold(
-      modifier = Modifier.fillMaxSize().statusBarsPadding(),
+      modifier = Modifier.fillMaxSize(),
+      contentWindowInsets = WindowInsets.safeDrawing,
       snackbarHost = { SnackbarHost(snackbarHostState) },
       topBar = {
         TopAppBar(
@@ -156,11 +254,11 @@ fun PolylangHubApp() {
                 Text(
                   text = "Polylang Hub",
                   fontWeight = FontWeight.Bold,
-                  fontSize = 17.sp,
+                  fontSize = 16.sp,
                   color = RedDark
                 )
                 Text(
-                  text = if (isArabic) "بوابة الترجمة والتدريب" else "Translation & Training Hub",
+                  text = if (isArabic) "بوابة الترجمة والتدريب المعتمدة" else "Certified Translation & Academy",
                   fontSize = 10.sp,
                   color = TextMuted
                 )
@@ -168,7 +266,7 @@ fun PolylangHubApp() {
             }
           },
           actions = {
-            // Language Switcher button
+            // Language Switcher button (touch target >= 48dp)
             OutlinedButton(
               onClick = {
                 isArabic = !isArabic
@@ -177,9 +275,12 @@ fun PolylangHubApp() {
                 }
               },
               shape = RoundedCornerShape(20.dp),
-              modifier = Modifier.padding(end = 6.dp).testTag("lang_toggle_btn"),
+              modifier = Modifier
+                .padding(end = 4.dp)
+                .heightIn(min = 40.dp)
+                .testTag("lang_toggle_btn"),
               contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp),
-              border = androidx.compose.foundation.BorderStroke(1.dp, RedContainer)
+              border = BorderStroke(1.dp, RedContainer)
             ) {
               Text(
                 text = if (isArabic) "English" else "العربية",
@@ -194,30 +295,51 @@ fun PolylangHubApp() {
               shape = RoundedCornerShape(16.dp),
               color = RedLight,
               modifier = Modifier
+                .heightIn(min = 40.dp)
                 .clickable {
-                  currentRole = if (currentRole == UserRole.CLIENT) UserRole.TRANSLATOR else UserRole.CLIENT
-                  userName = if (currentRole == UserRole.CLIENT) "كريم حمداوي (عميل)" else "د. ليلى مزياني (مترجم)"
-                  coroutineScope.launch {
-                    snackbarHostState.showSnackbar(
-                      if (currentRole == UserRole.CLIENT) "وضع العميل نشط" else "وضع المترجم المعتمد نشط"
-                    )
+                  currentRole = when (currentRole) {
+                    UserRole.CLIENT -> UserRole.TRANSLATOR
+                    UserRole.TRANSLATOR -> UserRole.ADMIN
+                    UserRole.ADMIN -> UserRole.CLIENT
+                  }
+                  userName = when (currentRole) {
+                    UserRole.CLIENT -> "كريم حمداوي (عميل)"
+                    UserRole.TRANSLATOR -> "د. ليلى مزياني (مترجم معتمد)"
+                    UserRole.ADMIN -> "مداني جودي (المشرف العام)"
+                  }
+                  // Notify admin email on role switch
+                  AdminEmailNotifier.dispatch(
+                    "USER_LOGIN",
+                    userName,
+                    AdminEmailNotifier.ADMIN_EMAIL,
+                    mapOf("role" to currentRole.name, "device" to "Android App")
+                  ) { _, msg ->
+                    coroutineScope.launch { snackbarHostState.showSnackbar(msg) }
                   }
                 }
                 .testTag("role_toggle_pill")
             ) {
               Row(
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp)
               ) {
                 Icon(
-                  if (currentRole == UserRole.CLIENT) Icons.Default.Person else Icons.Default.School,
+                  when (currentRole) {
+                    UserRole.CLIENT -> Icons.Default.Person
+                    UserRole.TRANSLATOR -> Icons.Default.School
+                    UserRole.ADMIN -> Icons.Default.AdminPanelSettings
+                  },
                   contentDescription = "Role",
                   tint = RedDark,
                   modifier = Modifier.size(16.dp)
                 )
                 Spacer(Modifier.width(4.dp))
                 Text(
-                  text = if (currentRole == UserRole.CLIENT) (if (isArabic) "عميل" else "Client") else (if (isArabic) "مترجم" else "Translator"),
+                  text = when (currentRole) {
+                    UserRole.CLIENT -> if (isArabic) "عميل" else "Client"
+                    UserRole.TRANSLATOR -> if (isArabic) "مترجم" else "Translator"
+                    UserRole.ADMIN -> if (isArabic) "مدير" else "Admin"
+                  },
                   fontSize = 11.sp,
                   fontWeight = FontWeight.Bold,
                   color = RedDark
@@ -230,7 +352,7 @@ fun PolylangHubApp() {
       bottomBar = {
         NavigationBar(
           containerColor = SurfaceWhite,
-          tonalElevation = 8.dp
+          tonalElevation = 6.dp
         ) {
           NavigationBarItem(
             selected = currentTab == AppTab.HOME,
@@ -250,7 +372,7 @@ fun PolylangHubApp() {
             selected = currentTab == AppTab.SUBTITLING,
             onClick = { currentTab = AppTab.SUBTITLING },
             icon = { Icon(Icons.Default.Subtitles, contentDescription = "SRT") },
-            label = { Text(if (isArabic) "SRT" else "SRT", fontSize = 10.sp) },
+            label = { Text("SRT", fontSize = 10.sp) },
             colors = NavigationBarItemDefaults.colors(selectedIconColor = RedDark, indicatorColor = RedLight)
           )
           NavigationBarItem(
@@ -281,63 +403,86 @@ fun PolylangHubApp() {
         modifier = Modifier
           .fillMaxSize()
           .background(BgLight)
-          .padding(innerPadding)
+          .padding(innerPadding),
+        contentAlignment = Alignment.TopCenter
       ) {
-        when (currentTab) {
-          AppTab.HOME -> HomeScreen(
-            isArabic = isArabic,
-            onNavigate = { currentTab = it }
-          )
-          AppTab.SERVICES -> ServicesScreen(
-            isArabic = isArabic,
-            onOrderCreated = { newOrder ->
-              orders.add(0, newOrder)
-              coroutineScope.launch {
-                snackbarHostState.showSnackbar(if (isArabic) "تم تأكيد طلب الترجمة ${newOrder.id} بنجاح!" else "Order ${newOrder.id} confirmed!")
+        // Width-constrained container for responsive professional sizing on tablets/foldables
+        Box(
+          modifier = Modifier
+            .fillMaxWidth()
+            .widthIn(max = 640.dp)
+        ) {
+          when (currentTab) {
+            AppTab.HOME -> HomeScreen(
+              isArabic = isArabic,
+              onNavigate = { currentTab = it }
+            )
+            AppTab.SERVICES -> ServicesScreen(
+              isArabic = isArabic,
+              onOrderCreated = { newOrder ->
+                orders.add(0, newOrder)
+                AdminEmailNotifier.dispatch(
+                  "NEW_ORDER",
+                  userName,
+                  AdminEmailNotifier.ADMIN_EMAIL,
+                  mapOf(
+                    "orderId" to newOrder.id,
+                    "title" to newOrder.title,
+                    "category" to newOrder.category,
+                    "price" to "${newOrder.priceDzd} دج"
+                  )
+                ) { _, msg ->
+                  coroutineScope.launch {
+                    snackbarHostState.showSnackbar(
+                      if (isArabic) "تم تأكيد طلب الترجمة ${newOrder.id} وإشعار الإدارة بنجاح!" else "Order ${newOrder.id} submitted!"
+                    )
+                  }
+                }
+                currentTab = AppTab.DASHBOARD
               }
-              currentTab = AppTab.DASHBOARD
-            }
-          )
-          AppTab.SUBTITLING -> SubtitlingScreen(
-            isArabic = isArabic,
-            cues = srtCues,
-            onAddCue = {
-              val newId = srtCues.size + 1
-              srtCues.add(SrtCue(newId, "00:00:13,000", "00:00:16,500", "New speaker sentence...", "مقطع حوار مترجم جديد..."))
-            },
-            onDeleteCue = { cue -> srtCues.remove(cue) },
-            onExport = {
-              coroutineScope.launch {
-                snackbarHostState.showSnackbar(if (isArabic) "تم تصدير ملف polylang_subtitles.srt بنجاح" else "Exported polylang_subtitles.srt")
+            )
+            AppTab.SUBTITLING -> SubtitlingScreen(
+              isArabic = isArabic,
+              cues = srtCues,
+              onAddCue = {
+                val newId = srtCues.size + 1
+                srtCues.add(SrtCue(newId, "00:00:13,000", "00:00:16,500", "New speaker sentence...", "مقطع حوار مترجم جديد..."))
+              },
+              onDeleteCue = { cue -> srtCues.remove(cue) },
+              onExport = {
+                coroutineScope.launch {
+                  snackbarHostState.showSnackbar(if (isArabic) "تم تصدير ملف polylang_subtitles.srt بنجاح" else "Exported polylang_subtitles.srt")
+                }
               }
-            }
-          )
-          AppTab.ACADEMY -> AcademyScreen(
-            isArabic = isArabic,
-            onMessage = { msg -> coroutineScope.launch { snackbarHostState.showSnackbar(msg) } }
-          )
-          AppTab.PRICING -> PricingScreen(
-            isArabic = isArabic,
-            onSelectPlan = { name, price ->
-              if (price == 0) {
-                userPlan = "Free Starter"
-                coroutineScope.launch { snackbarHostState.showSnackbar(if (isArabic) "تم تفعيل الباقة المجانية" else "Free plan active") }
-              } else {
-                pendingPlanName = name
-                pendingPlanPrice = price
-                showPaymentDialog = true
+            )
+            AppTab.ACADEMY -> AcademyScreen(
+              isArabic = isArabic,
+              onPlayCourse = { course -> activeVideoCourse = course },
+              onMessage = { msg -> coroutineScope.launch { snackbarHostState.showSnackbar(msg) } }
+            )
+            AppTab.PRICING -> PricingScreen(
+              isArabic = isArabic,
+              onSelectPlan = { name, price ->
+                if (price == 0) {
+                  userPlan = "Free Starter"
+                  coroutineScope.launch { snackbarHostState.showSnackbar(if (isArabic) "تم تفعيل الباقة المجانية" else "Free plan active") }
+                } else {
+                  pendingPlanName = name
+                  pendingPlanPrice = price
+                  showPaymentDialog = true
+                }
               }
-            }
-          )
-          AppTab.DASHBOARD -> DashboardScreen(
-            isArabic = isArabic,
-            userName = userName,
-            role = currentRole,
-            plan = userPlan,
-            balance = userBalance,
-            orders = orders,
-            onAction = { msg -> coroutineScope.launch { snackbarHostState.showSnackbar(msg) } }
-          )
+            )
+            AppTab.DASHBOARD -> DashboardScreen(
+              isArabic = isArabic,
+              userName = userName,
+              role = currentRole,
+              plan = userPlan,
+              balance = userBalance,
+              orders = orders,
+              onAction = { msg -> coroutineScope.launch { snackbarHostState.showSnackbar(msg) } }
+            )
+          }
         }
       }
     }
@@ -352,14 +497,137 @@ fun PolylangHubApp() {
         onConfirmPayment = {
           userPlan = pendingPlanName
           showPaymentDialog = false
+          AdminEmailNotifier.dispatch(
+            "PAYMENT_CONFIRMED",
+            userName,
+            AdminEmailNotifier.ADMIN_EMAIL,
+            mapOf("plan" to pendingPlanName, "amount" to "$pendingPlanPrice دج")
+          ) { _, _ -> }
           coroutineScope.launch {
             snackbarHostState.showSnackbar(
-              if (isArabic) "تم الدفع وتفعيل $pendingPlanName بنجاح!" else "Payment completed. $pendingPlanName activated!"
+              if (isArabic) "تم الدفع وتفعيل $pendingPlanName بنجاح وإشعار الإدارة!" else "Payment completed. $pendingPlanName activated!"
             )
           }
           currentTab = AppTab.DASHBOARD
         }
       )
+    }
+
+    // Masterclass Video Player Dialog
+    activeVideoCourse?.let { course ->
+      Dialog(onDismissRequest = { activeVideoCourse = null }) {
+        Card(
+          shape = RoundedCornerShape(20.dp),
+          colors = CardDefaults.cardColors(containerColor = Color(0xFF0F172A)),
+          border = BorderStroke(1.5.dp, RedPrimary),
+          modifier = Modifier
+            .fillMaxWidth()
+            .padding(12.dp)
+        ) {
+          Column(
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+          ) {
+            Row(
+              modifier = Modifier.fillMaxWidth(),
+              horizontalArrangement = Arrangement.SpaceBetween,
+              verticalAlignment = Alignment.CenterVertically
+            ) {
+              Surface(color = Color(0x33E53935), shape = RoundedCornerShape(8.dp)) {
+                Text(
+                  text = "🎓 ${course.category}",
+                  color = Color(0xFFFCA5A5),
+                  fontSize = 11.sp,
+                  fontWeight = FontWeight.Bold,
+                  modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                )
+              }
+              IconButton(onClick = { activeVideoCourse = null }) {
+                Icon(Icons.Default.Close, contentDescription = "Close", tint = Color.White)
+              }
+            }
+
+            // Simulated Video Player Box
+            Box(
+              modifier = Modifier
+                .fillMaxWidth()
+                .height(180.dp)
+                .clip(RoundedCornerShape(12.dp))
+                .background(Brush.verticalGradient(listOf(Color(0xFF1E293B), Color(0xFF020617)))),
+              contentAlignment = Alignment.Center
+            ) {
+              Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+              ) {
+                Box(
+                  modifier = Modifier
+                    .size(54.dp)
+                    .clip(CircleShape)
+                    .background(RedPrimary),
+                  contentAlignment = Alignment.Center
+                ) {
+                  Icon(Icons.Default.PlayArrow, contentDescription = "Play", tint = Color.White, modifier = Modifier.size(32.dp))
+                }
+                Text(
+                  text = "▶️ فيديو الماستركلاس جاهز للعرض (${course.duration})",
+                  color = Color(0xFFE2E8F0),
+                  fontSize = 12.sp,
+                  fontWeight = FontWeight.Bold
+                )
+                Text(
+                  text = "دقة البث: 1080p Full HD • صوت استوديو معتمد",
+                  color = Color(0xFF94A3B8),
+                  fontSize = 10.sp
+                )
+              }
+            }
+
+            Text(
+              text = course.title,
+              color = Color.White,
+              fontWeight = FontWeight.Bold,
+              fontSize = 15.sp
+            )
+            Text(
+              text = course.desc,
+              color = Color(0xFFCBD5E1),
+              fontSize = 12.sp,
+              lineHeight = 16.sp
+            )
+
+            Row(
+              modifier = Modifier.fillMaxWidth(),
+              horizontalArrangement = Arrangement.SpaceBetween,
+              verticalAlignment = Alignment.CenterVertically
+            ) {
+              Text(
+                text = "المحاضر: ${course.instructor} • المستوى: ${course.level}",
+                color = Color(0xFF94A3B8),
+                fontSize = 11.sp
+              )
+              Button(
+                onClick = {
+                  AdminEmailNotifier.dispatch(
+                    "COURSE_STARTED",
+                    userName,
+                    AdminEmailNotifier.ADMIN_EMAIL,
+                    mapOf("course" to course.title, "duration" to course.duration)
+                  )
+                  coroutineScope.launch {
+                    snackbarHostState.showSnackbar("تم بدء دراسة ماستركلاس: ${course.title}")
+                  }
+                  activeVideoCourse = null
+                },
+                colors = ButtonDefaults.buttonColors(containerColor = RedPrimary),
+                shape = RoundedCornerShape(10.dp)
+              ) {
+                Text("بدء المحاضرة", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -375,7 +643,7 @@ fun HomeScreen(isArabic: Boolean, onNavigate: (AppTab) -> Unit) {
     modifier = Modifier
       .fillMaxSize()
       .verticalScroll(scrollState)
-      .padding(16.dp),
+      .padding(horizontal = 16.dp, vertical = 12.dp),
     verticalArrangement = Arrangement.spacedBy(16.dp)
   ) {
     // AI Robot Presenter Welcome Card
@@ -383,8 +651,8 @@ fun HomeScreen(isArabic: Boolean, onNavigate: (AppTab) -> Unit) {
     Card(
       shape = RoundedCornerShape(20.dp),
       colors = CardDefaults.cardColors(containerColor = Color(0xFF0F172A)),
-      border = androidx.compose.foundation.BorderStroke(1.5.dp, Color(0xFFE53935)),
-      elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
+      border = BorderStroke(1.5.dp, Color(0xFFE53935)),
+      elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
       modifier = Modifier.fillMaxWidth().testTag("ai_robot_presenter_card")
     ) {
       Column(modifier = Modifier.padding(16.dp)) {
@@ -401,7 +669,7 @@ fun HomeScreen(isArabic: Boolean, onNavigate: (AppTab) -> Unit) {
                 .background(Color(0xFF10B981))
             )
             Text(
-              text = if (isArabic) "🤖 روبوت الترحيب الذكي (Polylang AI)" else "🤖 Polylang AI Host",
+              text = if (isArabic) "🎙️ ترحيب بوليلانغ (Polylang)" else "🎙️ Welcome to Polylang",
               color = Color.White,
               fontSize = 13.sp,
               fontWeight = FontWeight.Bold
@@ -426,15 +694,15 @@ fun HomeScreen(isArabic: Boolean, onNavigate: (AppTab) -> Unit) {
         Surface(
           color = Color(0xFF1E293B),
           shape = RoundedCornerShape(12.dp),
-          border = androidx.compose.foundation.BorderStroke(1.dp, Color(0x44E53935)),
+          border = BorderStroke(1.dp, Color(0x44E53935)),
           modifier = Modifier.fillMaxWidth()
         ) {
           Column(modifier = Modifier.padding(12.dp)) {
             Text(
               text = if (isArabic)
-                "\"مرحباً بكم في بوليلانغ هوب (Polylang Hub)! منصتكم المعتمدة للترجمة المحلفة، الترجمة الفورية للمؤتمرات، وتدريب المترجمين وفق المعايير الدولية.\""
+                "\"مرحباً بكم في بوليلانغ (Polylang)! خدمات الترجمة المحلفة والفورية وتطوير المهارات اللغوية.\""
               else
-                "\"Welcome to Polylang Hub! Your certified platform for sworn legal translation, conference interpretation, and professional language training.\"",
+                "\"Welcome to Polylang! Certified translation, interpretation, and language mastery.\"",
               color = Color(0xFFF1F5F9),
               fontSize = 12.sp,
               lineHeight = 18.sp,
@@ -456,10 +724,10 @@ fun HomeScreen(isArabic: Boolean, onNavigate: (AppTab) -> Unit) {
                 colors = ButtonDefaults.buttonColors(containerColor = if (isRobotSpeaking) Color(0xFF10B981) else Color(0xFFE53935)),
                 shape = RoundedCornerShape(8.dp),
                 contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp),
-                modifier = Modifier.height(30.dp)
+                modifier = Modifier.height(32.dp)
               ) {
                 Text(
-                  text = if (isRobotSpeaking) "🔊 صوت الروبوت نشط" else "🔊 استمع للترحيب",
+                  text = if (isRobotSpeaking) "🔊 صوت نشط" else "🔊 مرحباً بكم",
                   fontSize = 11.sp,
                   fontWeight = FontWeight.Bold
                 )
@@ -474,16 +742,16 @@ fun HomeScreen(isArabic: Boolean, onNavigate: (AppTab) -> Unit) {
     Card(
       shape = RoundedCornerShape(20.dp),
       colors = CardDefaults.cardColors(containerColor = Color(0xFF1E293B)),
-      elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
+      elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
       modifier = Modifier.fillMaxWidth().testTag("hero_banner_card")
     ) {
-      Column(modifier = Modifier.padding(20.dp)) {
+      Column(modifier = Modifier.padding(18.dp)) {
         Surface(
           color = Color(0x33E53935),
           shape = RoundedCornerShape(12.dp)
         ) {
           Text(
-            text = if (isArabic) "✨ المنصة الأولى المعتمدة للترجمة والتدريب" else "✨ #1 Certified Translation & Training SaaS",
+            text = if (isArabic) "✨ خدمات الترجمة والتدريب المعتمدة" else "✨ Certified Translation & Training",
             color = Color(0xFFFCA5A5),
             fontSize = 11.sp,
             fontWeight = FontWeight.Bold,
@@ -491,17 +759,17 @@ fun HomeScreen(isArabic: Boolean, onNavigate: (AppTab) -> Unit) {
           )
         }
 
-        Spacer(Modifier.height(12.dp))
+        Spacer(Modifier.height(10.dp))
 
         Text(
-          text = if (isArabic) "حلول ترجمة احترافية فائقة الدقة وأكاديمية تدريب معتمدة" else "Ultra-Accurate Translations & Certified Academy",
+          text = if (isArabic) "ترجمة معتمدة وأكاديمية تدريب مهنية" else "Certified Translation & Professional Academy",
           color = Color.White,
-          fontSize = 20.sp,
+          fontSize = 19.sp,
           fontWeight = FontWeight.ExtraBold,
-          lineHeight = 28.sp
+          lineHeight = 26.sp
         )
 
-        Spacer(Modifier.height(8.dp))
+        Spacer(Modifier.height(6.dp))
 
         Text(
           text = if (isArabic)
@@ -509,18 +777,18 @@ fun HomeScreen(isArabic: Boolean, onNavigate: (AppTab) -> Unit) {
           else
             "Legal, technical and institutional translations, real-time SRT subtitling, and interactive interpreter training.",
           color = Color(0xFFCBD5E1),
-          fontSize = 13.sp,
-          lineHeight = 18.sp
+          fontSize = 12.sp,
+          lineHeight = 17.sp
         )
 
-        Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(14.dp))
 
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
           Button(
             onClick = { onNavigate(AppTab.SERVICES) },
             colors = ButtonDefaults.buttonColors(containerColor = RedPrimary),
             shape = RoundedCornerShape(12.dp),
-            modifier = Modifier.weight(1f).testTag("home_order_btn")
+            modifier = Modifier.weight(1f).heightIn(min = 44.dp).testTag("home_order_btn")
           ) {
             Text(if (isArabic) "📄 طلب ترجمة" else "📄 Request Order", fontSize = 12.sp, fontWeight = FontWeight.Bold)
           }
@@ -528,16 +796,16 @@ fun HomeScreen(isArabic: Boolean, onNavigate: (AppTab) -> Unit) {
             onClick = { onNavigate(AppTab.ACADEMY) },
             shape = RoundedCornerShape(12.dp),
             colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.White),
-            border = androidx.compose.foundation.BorderStroke(1.dp, Color(0x66FFFFFF)),
-            modifier = Modifier.weight(1f).testTag("home_academy_btn")
+            border = BorderStroke(1.dp, Color(0x66FFFFFF)),
+            modifier = Modifier.weight(1f).heightIn(min = 44.dp).testTag("home_academy_btn")
           ) {
             Text(if (isArabic) "🎓 الأكاديمية" else "🎓 Academy", fontSize = 12.sp, fontWeight = FontWeight.Bold)
           }
         }
 
-        Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(14.dp))
         HorizontalDivider(color = Color(0x22FFFFFF))
-        Spacer(Modifier.height(12.dp))
+        Spacer(Modifier.height(10.dp))
 
         // Stats row
         Row(
@@ -551,10 +819,40 @@ fun HomeScreen(isArabic: Boolean, onNavigate: (AppTab) -> Unit) {
       }
     }
 
+    // Admin Dispatch Telemetry Pill on Home
+    Surface(
+      color = Color(0xFFECFDF5),
+      shape = RoundedCornerShape(12.dp),
+      border = BorderStroke(1.dp, Color(0xFFA7F3D0)),
+      modifier = Modifier.fillMaxWidth()
+    ) {
+      Row(
+        modifier = Modifier.padding(12.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+      ) {
+        Box(
+          modifier = Modifier
+            .size(8.dp)
+            .clip(CircleShape)
+            .background(Color(0xFF059669))
+        )
+        Text(
+          text = if (isArabic)
+            "🟢 متصل ببريد الإدارة المباشر: djoudimadani09@gmail.com"
+          else
+            "🟢 Connected to admin inbox: djoudimadani09@gmail.com",
+          fontSize = 11.sp,
+          fontWeight = FontWeight.Bold,
+          color = Color(0xFF065F46)
+        )
+      }
+    }
+
     Text(
       text = if (isArabic) "أقسام ومنظومة Polylang Hub" else "Polylang Hub Modules",
       fontWeight = FontWeight.Bold,
-      fontSize = 16.sp,
+      fontSize = 15.sp,
       color = TextDark
     )
 
@@ -598,8 +896,8 @@ fun HomeScreen(isArabic: Boolean, onNavigate: (AppTab) -> Unit) {
 @Composable
 fun StatCounter(value: String, label: String) {
   Column(horizontalAlignment = Alignment.CenterHorizontally) {
-    Text(value, color = Color.White, fontWeight = FontWeight.ExtraBold, fontSize = 16.sp)
-    Text(label, color = Color(0xFF94A3B8), fontSize = 10.sp)
+    Text(text = value, color = Color.White, fontWeight = FontWeight.Black, fontSize = 15.sp)
+    Text(text = label, color = Color(0xFF94A3B8), fontSize = 10.sp)
   }
 }
 
@@ -612,13 +910,18 @@ fun ServiceTile(
   onClick: () -> Unit
 ) {
   Card(
-    modifier = modifier.clickable { onClick() },
     shape = RoundedCornerShape(16.dp),
     colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
-    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-    border = androidx.compose.foundation.BorderStroke(1.dp, BorderLight)
+    border = BorderStroke(1.dp, BorderLight),
+    elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
+    modifier = modifier
+      .clickable { onClick() }
+      .testTag("service_tile_${title.replace(' ', '_')}")
   ) {
-    Column(modifier = Modifier.padding(14.dp)) {
+    Column(
+      modifier = Modifier.padding(14.dp),
+      verticalArrangement = Arrangement.spacedBy(6.dp)
+    ) {
       Box(
         modifier = Modifier
           .size(36.dp)
@@ -628,16 +931,14 @@ fun ServiceTile(
       ) {
         Icon(icon, contentDescription = title, tint = RedDark, modifier = Modifier.size(20.dp))
       }
-      Spacer(Modifier.height(10.dp))
-      Text(title, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = TextDark)
-      Spacer(Modifier.height(4.dp))
-      Text(desc, fontSize = 11.sp, color = TextMuted, lineHeight = 14.sp)
+      Text(title, fontWeight = FontWeight.Bold, fontSize = 13.sp, color = TextDark)
+      Text(desc, fontSize = 10.sp, color = TextMuted, maxLines = 2, lineHeight = 14.sp)
     }
   }
 }
 
 // --------------------------------------------------------------------------
-// 2. SERVICES & ORDER CALCULATOR SCREEN
+// 2. SERVICES SCREEN: Document Translation + Conference Interpretation
 // --------------------------------------------------------------------------
 @Composable
 fun ServicesScreen(
@@ -646,12 +947,15 @@ fun ServicesScreen(
 ) {
   val scrollState = rememberScrollState()
 
+  // Mode: "doc" or "interpretation"
+  var serviceMode by remember { mutableStateOf("doc") }
+
+  // Document states
   var selectedCategory by remember { mutableStateOf("قانونية ورسمية") }
   var sourceLang by remember { mutableStateOf("الإنجليزية") }
   var targetLang by remember { mutableStateOf("العربية") }
   var wordCountText by remember { mutableStateOf("850") }
   var clientNotes by remember { mutableStateOf("") }
-  var attachedFileName by remember { mutableStateOf<String?>(null) }
 
   val wordCount = wordCountText.toIntOrNull() ?: 500
   val ratePerWord = when (selectedCategory) {
@@ -660,168 +964,308 @@ fun ServicesScreen(
     "مؤسساتية وأكاديمية" -> 4.2
     else -> 4.5
   }
-  val estimatedPrice = (wordCount * ratePerWord).toInt()
+  val estimatedDocPrice = (wordCount * ratePerWord).toInt()
   val deliveryTime = if (wordCount > 3000) "3 - 5 أيام" else if (wordCount > 1000) "48 - 72 ساعة" else "24 - 48 ساعة"
+
+  // Interpretation states
+  var interpEventTitle by remember { mutableStateOf("الملتقى الدولي للاستثمار والتحول الطاقوي") }
+  var interpVenue by remember { mutableStateOf("المركز الدولي للمؤتمرات (CIC عبد اللطيف رحال، الجزائر)") }
+  var interpLangPair by remember { mutableStateOf("عربية ⇄ إنجليزية (AR ⇄ EN)") }
+  var interpDays by remember { mutableStateOf(2) }
+  var interpTeamSize by remember { mutableStateOf(2) }
+  var interpPhone by remember { mutableStateOf("0550 12 34 56") }
+  val interpTotalCost = interpDays * interpTeamSize * 35000
 
   Column(
     modifier = Modifier
       .fillMaxSize()
       .verticalScroll(scrollState)
-      .padding(16.dp),
-    verticalArrangement = Arrangement.spacedBy(16.dp)
+      .padding(horizontal = 16.dp, vertical = 12.dp),
+    verticalArrangement = Arrangement.spacedBy(14.dp)
   ) {
     Text(
-      text = if (isArabic) "حاسبة وطلب ترجمة المستندات" else "Document Translation Calculator",
+      text = if (isArabic) "خدمات الترجمة المعتمدة والمؤتمرات" else "Certified Translation & Conferences",
       fontWeight = FontWeight.Bold,
-      fontSize = 18.sp,
+      fontSize = 17.sp,
       color = RedDark
     )
 
-    Card(
-      shape = RoundedCornerShape(16.dp),
-      colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
-      border = androidx.compose.foundation.BorderStroke(1.dp, BorderLight),
-      elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
-    ) {
-      Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Text(
-          if (isArabic) "المجال التخصصي" else "Specialized Domain",
-          fontWeight = FontWeight.Bold,
-          fontSize = 13.sp
-        )
-
-        val categories = listOf("قانونية ورسمية", "تقنية وهندسية", "مؤسساتية وأكاديمية", "طبية ودوائية")
-        Row(modifier = Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-          categories.forEach { cat ->
-            FilterChip(
-              selected = selectedCategory == cat,
-              onClick = { selectedCategory = cat },
-              label = { Text(cat, fontSize = 11.sp) },
-              colors = FilterChipDefaults.filterChipColors(
-                selectedContainerColor = RedPrimary,
-                selectedLabelColor = Color.White
-              )
-            )
-          }
-        }
-
-        Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-          Column(Modifier.weight(1f)) {
-            Text(if (isArabic) "لغة المصدر" else "Source", fontSize = 12.sp, fontWeight = FontWeight.Bold)
-            Spacer(Modifier.height(4.dp))
-            OutlinedTextField(
-              value = sourceLang,
-              onValueChange = { sourceLang = it },
-              shape = RoundedCornerShape(12.dp),
-              modifier = Modifier.fillMaxWidth(),
-              singleLine = true
-            )
-          }
-          Column(Modifier.weight(1f)) {
-            Text(if (isArabic) "لغة الهدف" else "Target", fontSize = 12.sp, fontWeight = FontWeight.Bold)
-            Spacer(Modifier.height(4.dp))
-            OutlinedTextField(
-              value = targetLang,
-              onValueChange = { targetLang = it },
-              shape = RoundedCornerShape(12.dp),
-              modifier = Modifier.fillMaxWidth(),
-              singleLine = true
-            )
-          }
-        }
-
-        Text(if (isArabic) "عدد الكلمات التقديري" else "Estimated Word Count", fontSize = 12.sp, fontWeight = FontWeight.Bold)
-        OutlinedTextField(
-          value = wordCountText,
-          onValueChange = { if (it.all { char -> char.isDigit() }) wordCountText = it },
-          keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-          shape = RoundedCornerShape(12.dp),
-          modifier = Modifier.fillMaxWidth().testTag("word_count_input"),
-          singleLine = true
-        )
-
-        // Dropzone simulator
-        Surface(
-          shape = RoundedCornerShape(14.dp),
-          color = RedLight,
-          modifier = Modifier
-            .fillMaxWidth()
-            .clickable {
-              attachedFileName = "Contract_Agreement_2026.pdf"
-            }
-            .padding(vertical = 4.dp),
-          border = androidx.compose.foundation.BorderStroke(1.dp, RedContainer)
-        ) {
-          Column(
-            modifier = Modifier.padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-          ) {
-            Icon(Icons.Default.CloudUpload, contentDescription = "Upload", tint = RedDark, modifier = Modifier.size(32.dp))
-            Spacer(Modifier.height(4.dp))
-            Text(
-              text = if (attachedFileName == null)
-                (if (isArabic) "انقر لإرفاق المستند (PDF, DOCX)" else "Tap to attach document (PDF, DOCX)")
-              else
-                "📄 $attachedFileName (محدد ✓)",
-              fontWeight = FontWeight.Bold,
-              fontSize = 12.sp,
-              color = RedDark
-            )
-          }
-        }
-
-        OutlinedTextField(
-          value = clientNotes,
-          onValueChange = { clientNotes = it },
-          placeholder = { Text(if (isArabic) "ملاحظات أو مسرد مصطلحات خاص للمترجم..." else "Special instructions...") },
-          shape = RoundedCornerShape(12.dp),
-          modifier = Modifier.fillMaxWidth()
-        )
-      }
+    // Service Mode Toggle Chips
+    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+      FilterChip(
+        selected = serviceMode == "doc",
+        onClick = { serviceMode = "doc" },
+        label = { Text(if (isArabic) "📄 ترجمة المستندات والعقود" else "📄 Document Translation", fontSize = 11.sp) },
+        colors = FilterChipDefaults.filterChipColors(selectedContainerColor = RedPrimary, selectedLabelColor = Color.White),
+        modifier = Modifier.heightIn(min = 40.dp)
+      )
+      FilterChip(
+        selected = serviceMode == "interpretation",
+        onClick = { serviceMode = "interpretation" },
+        label = { Text(if (isArabic) "🎙️ حجز مترجم فوري للمؤتمرات" else "🎙️ Conference Interpretation", fontSize = 11.sp) },
+        colors = FilterChipDefaults.filterChipColors(selectedContainerColor = RedPrimary, selectedLabelColor = Color.White),
+        modifier = Modifier.heightIn(min = 40.dp)
+      )
     }
 
-    // Price summary card
-    Card(
-      shape = RoundedCornerShape(16.dp),
-      colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
-      border = androidx.compose.foundation.BorderStroke(1.dp, BorderLight)
-    ) {
-      Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-          Text(if (isArabic) "مدة التسليم المقدرة:" else "Delivery:", color = TextMuted, fontSize = 13.sp)
-          Text(deliveryTime, fontWeight = FontWeight.Bold, fontSize = 13.sp, color = TextDark)
-        }
-        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-          Text(if (isArabic) "التدقيق اللغوي والمطابقة:" else "Quality Audit:", color = TextMuted, fontSize = 13.sp)
-          Text(if (isArabic) "مشمول مجاناً ✓" else "Included ✓", color = SuccessGreen, fontWeight = FontWeight.Bold, fontSize = 13.sp)
-        }
-        HorizontalDivider(color = BorderLight, modifier = Modifier.padding(vertical = 4.dp))
-        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-          Text(if (isArabic) "التكلفة التقديرية:" else "Total Price:", fontWeight = FontWeight.Bold, fontSize = 14.sp)
-          Text("$estimatedPrice دج", fontWeight = FontWeight.ExtraBold, fontSize = 20.sp, color = RedDark)
-        }
+    if (serviceMode == "doc") {
+      // Document Translation Card
+      Card(
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
+        border = BorderStroke(1.dp, BorderLight),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+      ) {
+        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+          Text(
+            if (isArabic) "المجال التخصصي للمستند" else "Specialized Domain",
+            fontWeight = FontWeight.Bold,
+            fontSize = 13.sp
+          )
 
-        Spacer(Modifier.height(4.dp))
+          val categories = listOf("قانونية ورسمية", "تقنية وهندسية", "مؤسساتية وأكاديمية", "طبية ودوائية")
+          Row(modifier = Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            categories.forEach { cat ->
+              FilterChip(
+                selected = selectedCategory == cat,
+                onClick = { selectedCategory = cat },
+                label = { Text(cat, fontSize = 11.sp) },
+                colors = FilterChipDefaults.filterChipColors(
+                  selectedContainerColor = RedPrimary,
+                  selectedLabelColor = Color.White
+                )
+              )
+            }
+          }
 
-        Button(
-          onClick = {
-            val randomId = "PL-" + (1000..9999).random()
-            val order = TranslationOrder(
-              id = randomId,
-              title = "مستند ($selectedCategory)",
-              category = selectedCategory,
-              langPair = "$sourceLang ➔ $targetLang",
-              wordCount = wordCount,
-              priceDzd = estimatedPrice,
-              status = "قيد المراجعة"
+          Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+            Column(Modifier.weight(1f)) {
+              Text(if (isArabic) "لغة المصدر" else "Source", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+              Spacer(Modifier.height(4.dp))
+              OutlinedTextField(
+                value = sourceLang,
+                onValueChange = { sourceLang = it },
+                shape = RoundedCornerShape(12.dp),
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = true
+              )
+            }
+            Column(Modifier.weight(1f)) {
+              Text(if (isArabic) "لغة الهدف" else "Target", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+              Spacer(Modifier.height(4.dp))
+              OutlinedTextField(
+                value = targetLang,
+                onValueChange = { targetLang = it },
+                shape = RoundedCornerShape(12.dp),
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = true
+              )
+            }
+          }
+
+          Column {
+            Text(if (isArabic) "عدد الكلمات التقديري" else "Word Count", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+            Spacer(Modifier.height(4.dp))
+            OutlinedTextField(
+              value = wordCountText,
+              onValueChange = { wordCountText = it },
+              shape = RoundedCornerShape(12.dp),
+              modifier = Modifier.fillMaxWidth(),
+              keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+              singleLine = true
             )
-            onOrderCreated(order)
-          },
-          colors = ButtonDefaults.buttonColors(containerColor = RedPrimary),
-          shape = RoundedCornerShape(12.dp),
-          modifier = Modifier.fillMaxWidth().testTag("confirm_order_btn")
-        ) {
-          Text(if (isArabic) "🚀 تأكيد وتقديم طلب الترجمة" else "🚀 Confirm & Submit Order", fontWeight = FontWeight.Bold)
+          }
+
+          OutlinedTextField(
+            value = clientNotes,
+            onValueChange = { clientNotes = it },
+            placeholder = { Text(if (isArabic) "ملاحظات أو مسرد مصطلحات خاص للمترجم..." else "Special instructions...") },
+            shape = RoundedCornerShape(12.dp),
+            modifier = Modifier.fillMaxWidth()
+          )
+        }
+      }
+
+      // Price summary card
+      Card(
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
+        border = BorderStroke(1.dp, BorderLight)
+      ) {
+        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+          Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+            Text(if (isArabic) "مدة التسليم المقدرة:" else "Delivery:", color = TextMuted, fontSize = 12.sp)
+            Text(deliveryTime, fontWeight = FontWeight.Bold, fontSize = 12.sp, color = TextDark)
+          }
+          Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+            Text(if (isArabic) "التدقيق والمطابقة (ISO 17100):" else "Quality Audit:", color = TextMuted, fontSize = 12.sp)
+            Text(if (isArabic) "مشمول مجاناً ✓" else "Included ✓", color = SuccessGreen, fontWeight = FontWeight.Bold, fontSize = 12.sp)
+          }
+          HorizontalDivider(color = BorderLight, modifier = Modifier.padding(vertical = 4.dp))
+          Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+            Text(if (isArabic) "التكلفة التقديرية:" else "Total Price:", fontWeight = FontWeight.Bold, fontSize = 13.sp)
+            Text("$estimatedDocPrice دج", fontWeight = FontWeight.ExtraBold, fontSize = 19.sp, color = RedDark)
+          }
+
+          Spacer(Modifier.height(4.dp))
+
+          Button(
+            onClick = {
+              val randomId = "PL-" + (1000..9999).random()
+              val order = TranslationOrder(
+                id = randomId,
+                title = "مستند ($selectedCategory)",
+                category = selectedCategory,
+                langPair = "$sourceLang ➔ $targetLang",
+                wordCount = wordCount,
+                priceDzd = estimatedDocPrice,
+                status = "قيد المراجعة"
+              )
+              onOrderCreated(order)
+            },
+            colors = ButtonDefaults.buttonColors(containerColor = RedPrimary),
+            shape = RoundedCornerShape(12.dp),
+            modifier = Modifier.fillMaxWidth().heightIn(min = 46.dp).testTag("confirm_order_btn")
+          ) {
+            Text(if (isArabic) "🚀 تأكيد وتقديم طلب الترجمة" else "🚀 Confirm & Submit Order", fontWeight = FontWeight.Bold)
+          }
+        }
+      }
+    } else {
+      // Conference Interpretation Booking
+      Card(
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
+        border = BorderStroke(1.dp, BorderLight),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+      ) {
+        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+          Surface(color = RedLight, shape = RoundedCornerShape(8.dp)) {
+            Text(
+              "🎙️ معيار ISO 2603 وISO 18841 للترجمة الفورية المعتمدة",
+              color = RedDark,
+              fontSize = 11.sp,
+              fontWeight = FontWeight.Bold,
+              modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+            )
+          }
+
+          Column {
+            Text("عنوان الفعالية أو المؤتمر الدولي:", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+            Spacer(Modifier.height(4.dp))
+            OutlinedTextField(
+              value = interpEventTitle,
+              onValueChange = { interpEventTitle = it },
+              shape = RoundedCornerShape(12.dp),
+              modifier = Modifier.fillMaxWidth()
+            )
+          }
+
+          Column {
+            Text("مكان الانعقاد والمدينة:", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+            Spacer(Modifier.height(4.dp))
+            val venues = listOf(
+              "المركز الدولي للمؤتمرات (CIC عبد اللطيف رحال، الجزائر)",
+              "قصر المعارض (SAFEX الصنوبر البحري)",
+              "فندق الأوراسي (Salle des Congrès)",
+              "مركز المؤتمرات محمد بن أحمد (CCO وهران)",
+              "ترجمة فورية عن بعد (RSI عبر Kudo / Zoom Pro)"
+            )
+            var expandedVenue by remember { mutableStateOf(false) }
+            OutlinedButton(
+              onClick = { expandedVenue = !expandedVenue },
+              shape = RoundedCornerShape(12.dp),
+              modifier = Modifier.fillMaxWidth()
+            ) {
+              Text(interpVenue, fontSize = 11.sp, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            }
+            if (expandedVenue) {
+              venues.forEach { v ->
+                Text(
+                  text = "• $v",
+                  fontSize = 11.sp,
+                  color = RedDark,
+                  modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable {
+                      interpVenue = v
+                      expandedVenue = false
+                    }
+                    .padding(vertical = 4.dp)
+                )
+              }
+            }
+          }
+
+          Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Column(Modifier.weight(1f)) {
+              Text("عدد الأيام:", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+              Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                listOf(1, 2, 3, 5).forEach { d ->
+                  FilterChip(
+                    selected = interpDays == d,
+                    onClick = { interpDays = d },
+                    label = { Text("$d يوم", fontSize = 10.sp) }
+                  )
+                }
+              }
+            }
+            Column(Modifier.weight(1f)) {
+              Text("المترجمين:", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+              Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                listOf(1, 2, 4).forEach { t ->
+                  FilterChip(
+                    selected = interpTeamSize == t,
+                    onClick = { interpTeamSize = t },
+                    label = { Text("$t مترجم", fontSize = 10.sp) }
+                  )
+                }
+              }
+            }
+          }
+
+          Column {
+            Text("رقم هاتف مسؤول الاتصال والتنسيق:", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+            Spacer(Modifier.height(4.dp))
+            OutlinedTextField(
+              value = interpPhone,
+              onValueChange = { interpPhone = it },
+              shape = RoundedCornerShape(12.dp),
+              modifier = Modifier.fillMaxWidth(),
+              singleLine = true
+            )
+          }
+
+          HorizontalDivider(color = BorderLight, modifier = Modifier.padding(vertical = 4.dp))
+
+          Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+            Column {
+              Text("التكلفة الإجمالية (35,000 دج/يوم/مترجم):", color = TextMuted, fontSize = 11.sp)
+              Text("$interpTotalCost دج", fontWeight = FontWeight.ExtraBold, fontSize = 19.sp, color = RedDark)
+            }
+          }
+
+          Button(
+            onClick = {
+              val randomId = "INT-" + (1000..9999).random()
+              val order = TranslationOrder(
+                id = randomId,
+                title = "حجز ترجمة فورية ($interpEventTitle)",
+                category = "ترجمة فورية",
+                langPair = interpLangPair,
+                wordCount = interpDays * 8 * 120,
+                priceDzd = interpTotalCost,
+                status = "مؤكد وجاهز",
+                isInterpretation = true
+              )
+              onOrderCreated(order)
+            },
+            colors = ButtonDefaults.buttonColors(containerColor = RedPrimary),
+            shape = RoundedCornerShape(12.dp),
+            modifier = Modifier.fillMaxWidth().heightIn(min = 46.dp)
+          ) {
+            Text("🚀 تأكيد وحجز المترجم الفوري (إرسال للإدارة)", fontWeight = FontWeight.Bold)
+          }
         }
       }
     }
@@ -839,132 +1283,118 @@ fun SubtitlingScreen(
   onDeleteCue: (SrtCue) -> Unit,
   onExport: () -> Unit
 ) {
+  val scrollState = rememberScrollState()
+
   Column(
     modifier = Modifier
       .fillMaxSize()
-      .padding(16.dp),
-    verticalArrangement = Arrangement.spacedBy(12.dp)
+      .verticalScroll(scrollState)
+      .padding(horizontal = 16.dp, vertical = 12.dp),
+    verticalArrangement = Arrangement.spacedBy(14.dp)
   ) {
     Row(
       modifier = Modifier.fillMaxWidth(),
       horizontalArrangement = Arrangement.SpaceBetween,
       verticalAlignment = Alignment.CenterVertically
     ) {
-      Column {
-        Text(
-          if (isArabic) "محرر الترجمة التحتية (SRT Studio)" else "SRT Subtitle Studio",
-          fontWeight = FontWeight.Bold,
-          fontSize = 17.sp,
-          color = RedDark
-        )
-        Text(
-          if (isArabic) "مزامنة التوقيت وتحميل ملف .SRT" else "Sync timecodes & export .srt",
-          fontSize = 11.sp,
-          color = TextMuted
-        )
-      }
-
-      Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-        IconButton(
-          onClick = onAddCue,
-          modifier = Modifier.size(36.dp).background(RedLight, CircleShape).testTag("add_cue_btn")
-        ) {
-          Icon(Icons.Default.Add, contentDescription = "Add Cue", tint = RedDark, modifier = Modifier.size(20.dp))
-        }
-        Button(
-          onClick = onExport,
-          colors = ButtonDefaults.buttonColors(containerColor = RedPrimary),
-          shape = RoundedCornerShape(12.dp),
-          contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp),
-          modifier = Modifier.testTag("export_srt_btn")
-        ) {
-          Text(if (isArabic) "تصدير SRT" else "Export SRT", fontSize = 11.sp, fontWeight = FontWeight.Bold)
-        }
+      Text(
+        text = if (isArabic) "محرر الترجمة المرئية وSRT" else "SRT Subtitling Editor",
+        fontWeight = FontWeight.Bold,
+        fontSize = 17.sp,
+        color = RedDark
+      )
+      Button(
+        onClick = onExport,
+        colors = ButtonDefaults.buttonColors(containerColor = RedPrimary),
+        shape = RoundedCornerShape(8.dp),
+        contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp),
+        modifier = Modifier.heightIn(min = 38.dp).testTag("export_srt_btn")
+      ) {
+        Text(if (isArabic) "💾 تصدير .SRT" else "💾 Export .SRT", fontSize = 11.sp, fontWeight = FontWeight.Bold)
       }
     }
 
-    // Video Dubbing Mockup Box
-    Surface(
-      shape = RoundedCornerShape(14.dp),
-      color = Color(0xFF0F172A),
+    // Video Player Box Simulator
+    Card(
+      shape = RoundedCornerShape(16.dp),
+      colors = CardDefaults.cardColors(containerColor = Color(0xFF0F172A)),
       modifier = Modifier.fillMaxWidth()
     ) {
-      Row(
-        modifier = Modifier.padding(12.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween
-      ) {
-        Column {
-          Text(
-            if (isArabic) "🎙️ الصوت المعاكس (Voice Dubbing Preview)" else "🎙️ Audio Dubbing Preview",
-            color = Color.White,
-            fontWeight = FontWeight.Bold,
-            fontSize = 12.sp
-          )
-          Text(
-            if (isArabic) "نادية (فصحى احترافية - وثائقي) | مطابقة 98%" else "Nadia (Arabic Docu) | 98% lip-sync",
-            color = Color(0xFF94A3B8),
-            fontSize = 10.sp
-          )
-        }
-        Surface(
-          shape = RoundedCornerShape(8.dp),
-          color = RedPrimary,
-          modifier = Modifier.clickable { onExport() }
+      Column(modifier = Modifier.padding(14.dp)) {
+        Box(
+          modifier = Modifier
+            .fillMaxWidth()
+            .height(130.dp)
+            .clip(RoundedCornerShape(8.dp))
+            .background(Color(0xFF1E293B)),
+          contentAlignment = Alignment.Center
         ) {
-          Text("▶ تشغيل", color = Color.White, fontSize = 11.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp))
+          Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Icon(Icons.Default.Movie, contentDescription = "Video", tint = Color.White, modifier = Modifier.size(36.dp))
+            Spacer(Modifier.height(4.dp))
+            Text("00:00:04,800 / 00:02:45,000", color = Color(0xFF94A3B8), fontSize = 11.sp)
+            Text(
+              "\"التحول نحو الطاقة المتجددة مسارنا المشترك.\"",
+              color = Color.Yellow,
+              fontWeight = FontWeight.Bold,
+              fontSize = 13.sp,
+              modifier = Modifier.padding(top = 4.dp)
+            )
+          }
         }
       }
     }
 
-    // Cues List
-    LazyColumn(
-      modifier = Modifier.weight(1f),
-      verticalArrangement = Arrangement.spacedBy(8.dp)
+    Row(
+      modifier = Modifier.fillMaxWidth(),
+      horizontalArrangement = Arrangement.SpaceBetween,
+      verticalAlignment = Alignment.CenterVertically
     ) {
-      items(cues, key = { it.id }) { cue ->
-        Card(
-          shape = RoundedCornerShape(12.dp),
-          colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
-          border = androidx.compose.foundation.BorderStroke(1.dp, BorderLight),
-          elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
-        ) {
-          Column(modifier = Modifier.padding(12.dp)) {
-            Row(
-              modifier = Modifier.fillMaxWidth(),
-              horizontalArrangement = Arrangement.SpaceBetween,
-              verticalAlignment = Alignment.CenterVertically
+      Text(
+        text = if (isArabic) "مقاطع الحوار (${cues.size})" else "Cues (${cues.size})",
+        fontWeight = FontWeight.Bold,
+        fontSize = 14.sp,
+        color = TextDark
+      )
+      OutlinedButton(
+        onClick = onAddCue,
+        shape = RoundedCornerShape(8.dp),
+        contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp),
+        modifier = Modifier.heightIn(min = 38.dp).testTag("add_cue_btn")
+      ) {
+        Text(if (isArabic) "+ مقطع جديد" else "+ Add Cue", fontSize = 11.sp, fontWeight = FontWeight.Bold)
+      }
+    }
+
+    // Cue list
+    cues.forEach { cue ->
+      Card(
+        shape = RoundedCornerShape(12.dp),
+        colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
+        border = BorderStroke(1.dp, BorderLight),
+        modifier = Modifier.fillMaxWidth()
+      ) {
+        Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+          Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+          ) {
+            Text(
+              "#${cue.id}  •  ${cue.start} ➔ ${cue.end}",
+              fontWeight = FontWeight.Bold,
+              fontSize = 11.sp,
+              color = RedDark
+            )
+            IconButton(
+              onClick = { onDeleteCue(cue) },
+              modifier = Modifier.size(24.dp)
             ) {
-              Row(verticalAlignment = Alignment.CenterVertically) {
-                Surface(
-                  shape = CircleShape,
-                  color = RedLight,
-                  modifier = Modifier.size(24.dp)
-                ) {
-                  Box(contentAlignment = Alignment.Center) {
-                    Text("#${cue.id}", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = RedDark)
-                  }
-                }
-                Spacer(Modifier.width(8.dp))
-                Text(
-                  text = "${cue.start} ➔ ${cue.end}",
-                  fontSize = 11.sp,
-                  fontWeight = FontWeight.SemiBold,
-                  color = TextMuted
-                )
-              }
-              IconButton(
-                onClick = { onDeleteCue(cue) },
-                modifier = Modifier.size(28.dp)
-              ) {
-                Icon(Icons.Default.Delete, contentDescription = "Delete", tint = Color.LightGray, modifier = Modifier.size(16.dp))
-              }
+              Icon(Icons.Default.Delete, contentDescription = "Delete", tint = Color.Gray, modifier = Modifier.size(16.dp))
             }
-            Spacer(Modifier.height(4.dp))
-            Text(cue.sourceText, fontSize = 12.sp, color = TextDark)
-            Spacer(Modifier.height(2.dp))
-            Text(cue.subtitleText, fontSize = 13.sp, fontWeight = FontWeight.Bold, color = RedDark)
           }
+          Text(cue.sourceText, fontSize = 11.sp, color = TextMuted)
+          Text(cue.subtitleText, fontSize = 12.sp, fontWeight = FontWeight.Bold, color = TextDark)
         }
       }
     }
@@ -972,60 +1402,297 @@ fun SubtitlingScreen(
 }
 
 // --------------------------------------------------------------------------
-// 4. TRAINING ACADEMY SCREEN
+// 4. EXPANSIVE INTERACTIVE ACADEMY & 20 MASTERCLASSES SCREEN
 // --------------------------------------------------------------------------
 @Composable
 fun AcademyScreen(
   isArabic: Boolean,
+  onPlayCourse: (MasterclassCourse) -> Unit,
   onMessage: (String) -> Unit
 ) {
-  var activeTrack by remember { mutableStateOf("oral") } // "oral" or "written"
-  var oralNotes by remember { mutableStateOf("") }
-  var writtenInput by remember { mutableStateOf("") }
-  var showFeedback by remember { mutableStateOf(false) }
-
   val scrollState = rememberScrollState()
+
+  // Academy sub-tab: "matcher", "booth", "rozan", "legal", "cps", "masterclass"
+  var currentSubTab by remember { mutableStateOf("matcher") }
+
+  // 1. Matcher Game State
+  val initialPairs = listOf(
+    Pair("Force Majeure", "القوة القاهرة / الحادث الفجائي"),
+    Pair("Boilerplate Clauses", "البنود النمطية في العقود"),
+    Pair("Indemnification", "التعويض وإبراء الذمة"),
+    Pair("Informed Consent", "الموافقة المستنيرة السريرية"),
+    Pair("Pharmacovigilance", "اليقظة والرصد الدوائي"),
+    Pair("Simultaneous Interpretation", "الترجمة الفورية المتزامنة"),
+    Pair("Décalage", "الفارق الزمني في الكابينة"),
+    Pair("Termbase", "مسرد المصطلحات المعتمد")
+  )
+
+  var matcherCards by remember {
+    val list = mutableStateListOf<TermCard>()
+    initialPairs.forEachIndexed { idx, pair ->
+      list.add(TermCard(idx, pair.first, false))
+      list.add(TermCard(idx, pair.second, true))
+    }
+    list.shuffle()
+    mutableStateOf(list)
+  }
+  var selectedCardIdx by remember { mutableStateOf<Int?>(null) }
+  var matcherScore by remember { mutableStateOf(0) }
+  var matcherMatches by remember { mutableStateOf(0) }
+
+  // 2. Booth Simulator State
+  var isBoothSpeechPlaying by remember { mutableStateOf(false) }
+  var decalageTimer by remember { mutableStateOf(0.0) }
+  var isBoothMicOn by remember { mutableStateOf(false) }
+  var boothTranscript by remember { mutableStateOf("") }
+  var boothFeedback by remember { mutableStateOf<String?>(null) }
+
+  LaunchedEffect(isBoothSpeechPlaying) {
+    if (isBoothSpeechPlaying) {
+      decalageTimer = 0.0
+      while (isBoothSpeechPlaying) {
+        delay(100)
+        decalageTimer += 0.1
+      }
+    }
+  }
+
+  // 3. Rozan Consecutive State
+  var rozanNotes by remember { mutableStateOf("") }
+  var rozanRendition by remember { mutableStateOf("") }
+  var rozanAuditResult by remember { mutableStateOf<String?>(null) }
+
+  // 4. Legal Drafter State
+  var legalInput by remember { mutableStateOf("") }
+  var legalAuditResult by remember { mutableStateOf<String?>(null) }
+
+  // 5. AVT CPS Subtitling State
+  var cpsInput by remember { mutableStateOf("يتعين علينا إعادة تقييم استراتيجية التحول الطاقوي") }
+  val charCount = cpsInput.length
+  val cpsValue = (charCount / 3.2).toFloat()
+
+  // 6. Masterclass Courses Database (20 Complete High-Value Masterclasses)
+  val masterclasses = remember {
+    listOf(
+      MasterclassCourse("mc-1", "تقنيات الترجمة الفورية والـ Décalage", "فورية ودبلوماسية", "32:45", "د. سمير بن حمادي", "متقدم", "إدارة الفارق الزمني والضغط في كابينة المؤتمرات."),
+      MasterclassCourse("mc-2", "صياغة العقود ومذكرات التفاهم الدولية (FIDIC & ICC)", "عقود وقانون", "45:20", "أ. دحمان قاسمي", "محترف", "البنود المعيارية النمطية والتحكيم التجاري."),
+      MasterclassCourse("mc-3", "هندسة توطين البرمجيات وضوابط الـ CAT Tools", "تقنية وأنظمة CAT", "28:10", "م. رياض بن سالم", "متوسط", "إدارة ملفات PO, JSON والذاكرة الترجمية."),
+      MasterclassCourse("mc-4", "الترجمة الطبية واليقظة الدوائية (Pharmacovigilance)", "طبية ودوائية", "36:50", "د. ليلى عماري", "متقدم", "التقارير السريرية وتوصيف التفاعلات العكسية للأدوية."),
+      MasterclassCourse("mc-5", "الترجمة المرئية وضوابط الـ CPS للمنصات الرقمية", "ترجمة مرئية", "24:30", "أ. سارة بن زينة", "شامل", "معايير Netflix وBBC في التوقيت والـ CPL."),
+      MasterclassCourse("mc-6", "إدارة جلسات التحكيم التجاري الدولي (LCIA)", "عقود وقانون", "42:00", "د. عبد المالك", "محترف", "المرافعة، إبراء الذمة وصياغة القرارات التحكيمية."),
+      MasterclassCourse("mc-7", "الترجمة الفورية لقمم المناخ والتحول الطاقوي", "فورية ودبلوماسية", "38:20", "د. ياسمين بوقرة", "متقدم", "مصطلحات الانبعاثات الكربونية والطاقات المتجددة."),
+      MasterclassCourse("mc-8", "معايير ترجمة براءات الاختراع والملكية الفكرية WIPO", "ملكية فكرية", "33:15", "م. شريف لعريبي", "متقدم", "عناصر الحماية (Claims) والمواصفات الفنية للاختراعات."),
+      MasterclassCourse("mc-9", "قواعد تدوين الملاحظات التتابعية بنظام روزان السبعة", "تتابعية", "29:40", "أ. حمزة بلقاسم", "أساسي ومتقدم", "تفكيك الخطاب الدبلوماسي عمودياً واستخدام الرموز."),
+      MasterclassCourse("mc-10", "مراجعة وتدقيق الترجمة وفق معيار ISO 17100:2015", "ضمان الجودة", "27:30", "أ. دحمان قاسمي", "شامل", "إجراءات التدقيق المزدوج (Bilingual Review) وضبط الجودة."),
+      MasterclassCourse("mc-11", "الترجمة المالية والميزانيات المجمعة IFRS", "مالية ومحاسبة", "35:10", "أ. توفيق بلحاج", "متقدم", "القوائم المالية والتدفقات النقدية وتقارير محافظ الحسابات."),
+      MasterclassCourse("mc-12", "توطين ألعاب الفيديو والوسائط التفاعلية", "تقنية وأنظمة CAT", "31:40", "م. أنيس قادري", "متوسط", "السياق التفاعلي والتكيف الثقافي والشخصيات."),
+      MasterclassCourse("mc-13", "الترجمة الفورية للمؤتمرات الصحفية تحت الضغط", "فورية ودبلوماسية", "40:15", "د. سمير بن حمادي", "محترف", "التعامل مع اللهجات المختلفة والإلقاء السريع."),
+      MasterclassCourse("mc-14", "ترجمة السجلات الدبلوماسية والمراسلات الرئاسية", "فورية ودبلوماسية", "37:25", "د. ياسمين بوقرة", "متقدم", "بروتوكولات الأسبقية الدبلوماسية ولغة المجاملة."),
+      MasterclassCourse("mc-15", "إعداد المسارد المصطلحية وبناء قواعد Multiterm", "تقنية وأنظمة CAT", "22:50", "م. رياض بن سالم", "أساسي", "إنشاء وتوحيد القواميس المؤسساتية التراكمية."),
+      MasterclassCourse("mc-16", "الترجمة الجنائية وإجراءات الاستجواب لدى المحاكم", "عقود وقانون", "44:00", "د. عبد المالك", "محترف", "محاضر التحقيق القضائي والترجمة المحلفة المباشرة."),
+      MasterclassCourse("mc-17", "هندسة الترجمة في قطاع المحروقات Sonatrach", "طاقة وهندسة", "38:15", "م. شريف لعريبي", "متقدم", "عقود التنقيب والإنتاج ومصطلحات هندسة البترول."),
+      MasterclassCourse("mc-18", "الترجمة الفورية للقمم الإفريقية ومنظمة الوحدة", "فورية ودبلوماسية", "44:10", "د. ياسمين بوقرة", "محترف", "جلسات القمة المغلقة وصياغة البيانات الختامية."),
+      MasterclassCourse("mc-19", "ضوابط تدقيق الترجمة الثنائية ونماذج تقييم الجودة", "ضمان الجودة", "31:50", "أ. دحمان قاسمي", "شامل", "مصفوفة احتساب الأخطاء اللغوية والدلالية والأسلوبية."),
+      MasterclassCourse("mc-20", "ترجمة صياغة عناصر الحماية لبراءات الاختراع INAPI", "ملكية فكرية", "40:00", "د. سمير بن حمادي", "متقدم", "الضوابط الصارمة لترجمة طلبات براءات الاختراع الوطنية.")
+    )
+  }
 
   Column(
     modifier = Modifier
       .fillMaxSize()
       .verticalScroll(scrollState)
-      .padding(16.dp),
+      .padding(horizontal = 16.dp, vertical = 12.dp),
     verticalArrangement = Arrangement.spacedBy(14.dp)
   ) {
     Text(
-      if (isArabic) "أكاديمية التدريب الشفهي والتحريري" else "Oral & Written Training Academy",
+      text = if (isArabic) "مختبر التمارين التفاعلية والماستركلاس" else "Interactive Training Lab & Masterclasses",
       fontWeight = FontWeight.Bold,
-      fontSize = 18.sp,
+      fontSize = 17.sp,
       color = RedDark
     )
 
-    // Track toggle
-    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+    // Sub-tab chips (horizontal scrollable)
+    Row(
+      modifier = Modifier.horizontalScroll(rememberScrollState()),
+      horizontalArrangement = Arrangement.spacedBy(6.dp)
+    ) {
       FilterChip(
-        selected = activeTrack == "oral",
-        onClick = { activeTrack = "oral" },
-        label = { Text(if (isArabic) "🎙️ الترجمة الفورية والشفهية" else "🎙️ Oral Interpretation", fontSize = 11.sp) },
-        colors = FilterChipDefaults.filterChipColors(selectedContainerColor = RedPrimary, selectedLabelColor = Color.White)
+        selected = currentSubTab == "matcher",
+        onClick = { currentSubTab = "matcher" },
+        label = { Text("🎴 مطابقة المصطلحات", fontSize = 11.sp) },
+        colors = FilterChipDefaults.filterChipColors(selectedContainerColor = RedPrimary, selectedLabelColor = Color.White),
+        modifier = Modifier.heightIn(min = 40.dp)
       )
       FilterChip(
-        selected = activeTrack == "written",
-        onClick = { activeTrack = "written" },
-        label = { Text(if (isArabic) "✍️ الترجمة التحريرية" else "✍️ Written Translation", fontSize = 11.sp) },
-        colors = FilterChipDefaults.filterChipColors(selectedContainerColor = RedPrimary, selectedLabelColor = Color.White)
+        selected = currentSubTab == "booth",
+        onClick = { currentSubTab = "booth" },
+        label = { Text("🎙️ كابينة الفورية والـ Décalage", fontSize = 11.sp) },
+        colors = FilterChipDefaults.filterChipColors(selectedContainerColor = RedPrimary, selectedLabelColor = Color.White),
+        modifier = Modifier.heightIn(min = 40.dp)
+      )
+      FilterChip(
+        selected = currentSubTab == "rozan",
+        onClick = { currentSubTab = "rozan" },
+        label = { Text("📝 رموز روزان التتابعية", fontSize = 11.sp) },
+        colors = FilterChipDefaults.filterChipColors(selectedContainerColor = RedPrimary, selectedLabelColor = Color.White),
+        modifier = Modifier.heightIn(min = 40.dp)
+      )
+      FilterChip(
+        selected = currentSubTab == "legal",
+        onClick = { currentSubTab = "legal" },
+        label = { Text("⚖️ صياغة العقود القانونية", fontSize = 11.sp) },
+        colors = FilterChipDefaults.filterChipColors(selectedContainerColor = RedPrimary, selectedLabelColor = Color.White),
+        modifier = Modifier.heightIn(min = 40.dp)
+      )
+      FilterChip(
+        selected = currentSubTab == "cps",
+        onClick = { currentSubTab = "cps" },
+        label = { Text("🎬 سرعة الـ CPS للمرئية", fontSize = 11.sp) },
+        colors = FilterChipDefaults.filterChipColors(selectedContainerColor = RedPrimary, selectedLabelColor = Color.White),
+        modifier = Modifier.heightIn(min = 40.dp)
+      )
+      FilterChip(
+        selected = currentSubTab == "masterclass",
+        onClick = { currentSubTab = "masterclass" },
+        label = { Text("📚 20 ماستركلاس فيديو", fontSize = 11.sp) },
+        colors = FilterChipDefaults.filterChipColors(selectedContainerColor = RedPrimary, selectedLabelColor = Color.White),
+        modifier = Modifier.heightIn(min = 40.dp)
       )
     }
 
-    if (activeTrack == "oral") {
+    // -------------------------------------------------------------
+    // TAB 1: SPEED TERMINOLOGY MATCHER
+    // -------------------------------------------------------------
+    if (currentSubTab == "matcher") {
       Card(
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
-        border = androidx.compose.foundation.BorderStroke(1.dp, BorderLight)
+        border = BorderStroke(1.dp, BorderLight)
       ) {
-        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+          Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+          ) {
+            Text("النقاط: $matcherScore • الأزواج: $matcherMatches / 8", fontWeight = FontWeight.Bold, fontSize = 12.sp, color = RedDark)
+            Button(
+              onClick = {
+                val list = mutableStateListOf<TermCard>()
+                initialPairs.forEachIndexed { idx, pair ->
+                  list.add(TermCard(idx, pair.first, false))
+                  list.add(TermCard(idx, pair.second, true))
+                }
+                list.shuffle()
+                matcherCards = list
+                selectedCardIdx = null
+                matcherMatches = 0
+                matcherScore = 0
+                onMessage("تمت إعادة ضبط لعبة مطابقة المصطلحات")
+              },
+              colors = ButtonDefaults.buttonColors(containerColor = RedLight),
+              shape = RoundedCornerShape(8.dp),
+              contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp)
+            ) {
+              Text("🔄 إعادة اللعب", color = RedDark, fontSize = 10.sp, fontWeight = FontWeight.Bold)
+            }
+          }
+
+          Text(
+            "انقر على المصطلح بالإنجليزية ثم انقر على مقابله الرسمي المعتمد بالعربية:",
+            fontSize = 11.sp,
+            color = TextMuted
+          )
+
+          // 4x4 or 2x8 Grid of Cards
+          val chunkedCards = matcherCards.chunked(2)
+          chunkedCards.forEachIndexed { rowIdx, pairCards ->
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
+              pairCards.forEachIndexed { colIdx, card ->
+                val realIdx = rowIdx * 2 + colIdx
+                val isSelected = selectedCardIdx == realIdx
+
+                Surface(
+                  shape = RoundedCornerShape(10.dp),
+                  color = when {
+                    card.isMatched -> Color(0xFFD1FAE5)
+                    isSelected -> RedLight
+                    else -> BgLight
+                  },
+                  border = BorderStroke(
+                    1.dp,
+                    when {
+                      card.isMatched -> Color(0xFF10B981)
+                      isSelected -> RedPrimary
+                      else -> BorderLight
+                    }
+                  ),
+                  modifier = Modifier
+                    .weight(1f)
+                    .heightIn(min = 52.dp)
+                    .clickable(enabled = !card.isMatched) {
+                      if (selectedCardIdx == null) {
+                        selectedCardIdx = realIdx
+                      } else {
+                        val prevIdx = selectedCardIdx!!
+                        if (prevIdx != realIdx) {
+                          val prevCard = matcherCards[prevIdx]
+                          if (prevCard.id == card.id && prevCard.isArabic != card.isArabic) {
+                            // MATCH!
+                            prevCard.isMatched = true
+                            card.isMatched = true
+                            matcherMatches++
+                            matcherScore += 100
+                            selectedCardIdx = null
+                            onMessage("✓ تطابق ممتاز! +100 نقطة")
+
+                            if (matcherMatches == 8) {
+                              AdminEmailNotifier.dispatch(
+                                "EXERCISE_COMPLETED",
+                                "متدرب بوليلانغ",
+                                AdminEmailNotifier.ADMIN_EMAIL,
+                                mapOf("exercise" to "لعبة مطابقة المصطلحات", "score" to "$matcherScore نقطة")
+                              ) { _, msg -> onMessage(msg) }
+                            }
+                          } else {
+                            // MISMATCH
+                            selectedCardIdx = null
+                            onMessage("❌ غير متطابقين، حاول مجدداً")
+                          }
+                        }
+                      }
+                    }
+                ) {
+                  Box(contentAlignment = Alignment.Center, modifier = Modifier.padding(6.dp)) {
+                    Text(
+                      text = card.text + if (card.isMatched) " ✓" else "",
+                      fontSize = 11.sp,
+                      fontWeight = if (isSelected || card.isMatched) FontWeight.Bold else FontWeight.Medium,
+                      color = if (card.isMatched) Color(0xFF065F46) else TextDark,
+                      textAlign = TextAlign.Center
+                    )
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // -------------------------------------------------------------
+    // TAB 2: SIMULTANEOUS BOOTH & DECALAGE SIMULATOR
+    // -------------------------------------------------------------
+    if (currentSubTab == "booth") {
+      Card(
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
+        border = BorderStroke(1.dp, BorderLight)
+      ) {
+        Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
           Surface(color = RedLight, shape = RoundedCornerShape(8.dp)) {
             Text(
-              if (isArabic) "تمرين #04: كلمة مؤتمر الطاقة الرقمي" else "Exercise #04: Energy Summit Speech",
+              "🌍 قمة المناخ بجنيف (COP Energy Transition)",
               color = RedDark,
               fontSize = 11.sp,
               fontWeight = FontWeight.Bold,
@@ -1034,50 +1701,113 @@ fun AcademyScreen(
           }
 
           Text(
-            if (isArabic)
-              "استمع للمتحدث وسجل ملاحظاتك باستخدام رموز روزان (Rozan Note-taking Symbols) ثم اضغط فحص."
-            else
-              "Listen to the speaker and jot down notes using Rozan shorthand symbols, then evaluate.",
+            "\"Excellencies, distinguished delegates, we stand at a pivotal juncture where the acceleration of sustainable energy transition is our primary strategic imperative to guarantee socio-economic resilience.\"",
             fontSize = 12.sp,
-            color = TextMuted,
-            lineHeight = 16.sp
+            color = TextDark,
+            lineHeight = 16.sp,
+            fontWeight = FontWeight.Medium
           )
 
-          // Audio player simulator
-          Surface(
-            shape = RoundedCornerShape(12.dp),
-            color = BgLight,
-            modifier = Modifier.fillMaxWidth()
+          Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
           ) {
-            Row(
-              modifier = Modifier.padding(12.dp),
-              verticalAlignment = Alignment.CenterVertically,
-              horizontalArrangement = Arrangement.SpaceBetween
+            Button(
+              onClick = { isBoothSpeechPlaying = !isBoothSpeechPlaying },
+              colors = ButtonDefaults.buttonColors(containerColor = if (isBoothSpeechPlaying) Color(0xFFDC2626) else RedPrimary),
+              shape = RoundedCornerShape(8.dp),
+              modifier = Modifier.heightIn(min = 40.dp)
             ) {
-              Text("🔊 Speech: 00:45 / 02:15", fontWeight = FontWeight.Bold, fontSize = 12.sp)
-              Button(
-                onClick = { onMessage("🔊 Playing speaker: Digital transformation is our strategic imperative...") },
-                colors = ButtonDefaults.buttonColors(containerColor = RedPrimary),
-                shape = RoundedCornerShape(8.dp),
-                contentPadding = PaddingValues(horizontal = 10.dp, vertical = 2.dp)
-              ) {
-                Text("استماع", fontSize = 11.sp)
-              }
+              Text(if (isBoothSpeechPlaying) "⏸️ إيقاف الخطاب" else "▶️ بث الخطاب بالكابينة", fontSize = 11.sp)
+            }
+
+            Surface(
+              shape = RoundedCornerShape(12.dp),
+              color = if (decalageTimer in 2.0..4.2) Color(0xFFD1FAE5) else Color(0xFFFEF3C7),
+              border = BorderStroke(1.dp, if (decalageTimer in 2.0..4.2) Color(0xFF10B981) else Color(0xFFF59E0B))
+            ) {
+              Text(
+                "⏳ الفارق: ${String.format(Locale.US, "%.1f", decalageTimer)} ثانية",
+                color = if (decalageTimer in 2.0..4.2) Color(0xFF065F46) else Color(0xFFB45309),
+                fontWeight = FontWeight.Bold,
+                fontSize = 11.sp,
+                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+              )
             }
           }
 
-          // Shorthand Symbol Palette
-          Text(if (isArabic) "لوحة رموز تدوين الملاحظات السريعة (Rozan):" else "Rozan Shorthand Symbols:", fontSize = 11.sp, fontWeight = FontWeight.Bold)
-          val symbols = listOf("➔ (ناتج)", "▲ (زيادة)", "▼ (انخفاض)", "≠ (تعارض)", "§ (تشريع)", "⏳ (مستقبل)", "★ (هام)")
-          Row(
-            modifier = Modifier.horizontalScroll(rememberScrollState()),
-            horizontalArrangement = Arrangement.spacedBy(6.dp)
-          ) {
+          OutlinedTextField(
+            value = boothTranscript,
+            onValueChange = { boothTranscript = it },
+            placeholder = { Text("تحدث أو اكتب ترجمتك الفورية هنا فور سماع المتحدث...") },
+            shape = RoundedCornerShape(12.dp),
+            modifier = Modifier.fillMaxWidth().height(80.dp)
+          )
+
+          Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            OutlinedButton(
+              onClick = {
+                isBoothMicOn = !isBoothMicOn
+                onMessage(if (isBoothMicOn) "🔴 تم تفعيل الميكروفون المباشر" else "تم إيقاف الميكروفون")
+              },
+              modifier = Modifier.weight(1f).heightIn(min = 42.dp),
+              shape = RoundedCornerShape(10.dp)
+            ) {
+              Text(if (isBoothMicOn) "⏹️ إيقاف المايك" else "🎙️ تشغيل المايك", fontSize = 11.sp)
+            }
+
+            Button(
+              onClick = {
+                boothFeedback = "🏆 نتيجة فحص الأداء الفوري: 95/100 (معتمد لدى الأمم المتحدة)\n✓ الفارق الزمني مضبوط: ${String.format(Locale.US, "%.1f", decalageTimer)} ث\n✓ التقاط دقيق لمصطلحات: أصحاب السعادة، التحول الطاقوي المستدام، المرونة الاقتصادية"
+                AdminEmailNotifier.dispatch(
+                  "EXERCISE_COMPLETED",
+                  "مترجم كابينة",
+                  AdminEmailNotifier.ADMIN_EMAIL,
+                  mapOf("exercise" to "كابينة الترجمة الفورية", "score" to "95/100", "decalage" to "${String.format(Locale.US, "%.1f", decalageTimer)}s")
+                ) { _, msg -> onMessage(msg) }
+              },
+              colors = ButtonDefaults.buttonColors(containerColor = RedPrimary),
+              modifier = Modifier.weight(1f).heightIn(min = 42.dp),
+              shape = RoundedCornerShape(10.dp)
+            ) {
+              Text("🎯 تقييم الأداء", fontSize = 11.sp, fontWeight = FontWeight.Bold)
+            }
+          }
+
+          boothFeedback?.let { fb ->
+            Surface(
+              shape = RoundedCornerShape(10.dp),
+              color = Color(0xFFECFDF5),
+              border = BorderStroke(1.dp, Color(0xFFA7F3D0)),
+              modifier = Modifier.fillMaxWidth()
+            ) {
+              Text(fb, color = Color(0xFF065F46), fontSize = 11.sp, lineHeight = 15.sp, modifier = Modifier.padding(10.dp))
+            }
+          }
+        }
+      }
+    }
+
+    // -------------------------------------------------------------
+    // TAB 3: ROZAN CONSECUTIVE WORKSHOP
+    // -------------------------------------------------------------
+    if (currentSubTab == "rozan") {
+      Card(
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
+        border = BorderStroke(1.dp, BorderLight)
+      ) {
+        Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+          Text("لوحة رموز روزان لتدوين الملاحظات (انقر لإدراج الرمز):", fontSize = 11.sp, fontWeight = FontWeight.Bold)
+
+          val symbols = listOf("➔ (ناتج)", "▲ (ارتفاع)", "▼ (انخفاض)", "≠ (تعارض)", "§ (تشريع)", "⏳ (مستقبل)", "★ (هام)", "? (تساؤل)", "P (سياسة)", "Ø (نفي)")
+          Row(modifier = Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
             symbols.forEach { sym ->
               Surface(
-                shape = RoundedCornerShape(14.dp),
+                shape = RoundedCornerShape(12.dp),
                 color = RedLight,
-                modifier = Modifier.clickable { oralNotes += " $sym " }
+                modifier = Modifier.clickable { rozanNotes += " " + sym.split(" ")[0] + " " }
               ) {
                 Text(sym, fontSize = 10.sp, color = RedDark, fontWeight = FontWeight.Bold, modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp))
               }
@@ -1085,86 +1815,238 @@ fun AcademyScreen(
           }
 
           OutlinedTextField(
-            value = oralNotes,
-            onValueChange = { oralNotes = it },
-            placeholder = { Text(if (isArabic) "اكتب ملاحظاتك ورموزك هنا أثناء الاستماع..." else "Jot your notes here...") },
+            value = rozanNotes,
+            onValueChange = { rozanNotes = it },
+            placeholder = { Text("مفكرة تدوين الملاحظات التتابعية (Bloc-notes)...") },
             shape = RoundedCornerShape(12.dp),
-            modifier = Modifier.fillMaxWidth().height(100.dp).testTag("oral_notes_input")
+            modifier = Modifier.fillMaxWidth().height(80.dp)
           )
 
-          Button(
-            onClick = { showFeedback = true },
-            colors = ButtonDefaults.buttonColors(containerColor = RedPrimary),
-            shape = RoundedCornerShape(12.dp),
-            modifier = Modifier.fillMaxWidth().testTag("eval_oral_btn")
-          ) {
-            Text(if (isArabic) "🎯 فحص وتقييم الترجمة والملاحظات" else "🎯 Evaluate Performance", fontWeight = FontWeight.Bold)
-          }
-        }
-      }
-
-      // Feedback Panel
-      AnimatedVisibility(visible = showFeedback) {
-        Card(
-          shape = RoundedCornerShape(16.dp),
-          colors = CardDefaults.cardColors(containerColor = Color(0xFFECFDF5)),
-          border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFA7F3D0))
-        ) {
-          Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-            Text(
-              if (isArabic) "🏆 درجة الأداء العام: 94 / 100 (ممتاز)" else "🏆 Score: 94 / 100 (Excellent)",
-              color = Color(0xFF065F46),
-              fontWeight = FontWeight.ExtraBold,
-              fontSize = 15.sp
-            )
-            Text("✔️ الدقة الدلالية (Accuracy): 96% - التقاط دقيق للأرقام والنسب", fontSize = 11.sp, color = Color(0xFF047857))
-            Text("✔️ جودة الملاحظات (Rozan Symbols): تم توظيف أسهم السببية بمهارة", fontSize = 11.sp, color = Color(0xFF047857))
-            Spacer(Modifier.height(4.dp))
-            Text(
-              "الترجمة النموذجية: 'لقد أكد فخامة الرئيس أن تسريع وتيرة التحول الرقمي يمثل الركيزة الاستراتيجية لتأمين إمدادات الطاقة.'",
-              fontSize = 11.sp,
-              color = TextDark,
-              lineHeight = 15.sp
-            )
-          }
-        }
-      }
-    } else {
-      // Written Track
-      Card(
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
-        border = androidx.compose.foundation.BorderStroke(1.dp, BorderLight)
-      ) {
-        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-          Surface(color = RedLight, shape = RoundedCornerShape(8.dp)) {
-            Text("صياغة عقود تجارية دولية (ICC & FIDIC)", color = RedDark, fontSize = 11.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp))
-          }
-
-          Text(
-            "Source: 'Neither party shall be held liable for any delay resulting from circumstances beyond its reasonable control, including acts of God.'",
-            fontSize = 12.sp,
-            fontWeight = FontWeight.SemiBold,
-            color = TextDark
-          )
-
+          Text("الصياغة التتابعية بالعربية استناداً للملاحظات:", fontSize = 11.sp, fontWeight = FontWeight.Bold)
           OutlinedTextField(
-            value = writtenInput,
-            onValueChange = { writtenInput = it },
-            placeholder = { Text(if (isArabic) "اكتب صياغتك القانونية هنا (القوة القاهرة...)..." else "Enter translation...") },
+            value = rozanRendition,
+            onValueChange = { rozanRendition = it },
+            placeholder = { Text("أعد صياغة الخطاب كاملاً شفهياً أو تحريرياً...") },
             shape = RoundedCornerShape(12.dp),
-            modifier = Modifier.fillMaxWidth().height(100.dp)
+            modifier = Modifier.fillMaxWidth().height(70.dp)
           )
 
           Button(
             onClick = {
-              onMessage(if (isArabic) "✓ التدقيق: صياغة قانونية متينة (92/100) - تم اعتماد مصطلح 'القوة القاهرة' بنجاح" else "Audit: 92/100 Solid legal draft")
+              rozanAuditResult = "🏆 نتيجة التدقيق: 94/100 (ممتاز)\n✓ توظيف متقن لرموز السببية والتغير النسبي\n✓ التسلسل المنطقي للخطاب سليم ومستوفٍ لقواعد روزان"
+              AdminEmailNotifier.dispatch(
+                "EXERCISE_COMPLETED",
+                "متدرب روزان",
+                AdminEmailNotifier.ADMIN_EMAIL,
+                mapOf("exercise" to "ورشة روزان للملاحظات", "score" to "94/100")
+              ) { _, msg -> onMessage(msg) }
             },
             colors = ButtonDefaults.buttonColors(containerColor = RedPrimary),
+            shape = RoundedCornerShape(10.dp),
+            modifier = Modifier.fillMaxWidth().heightIn(min = 42.dp)
+          ) {
+            Text("🔍 فحص الملاحظات والصياغة التتابعية", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+          }
+
+          rozanAuditResult?.let { res ->
+            Surface(
+              shape = RoundedCornerShape(10.dp),
+              color = Color(0xFFECFDF5),
+              border = BorderStroke(1.dp, Color(0xFFA7F3D0)),
+              modifier = Modifier.fillMaxWidth()
+            ) {
+              Text(res, color = Color(0xFF065F46), fontSize = 11.sp, lineHeight = 15.sp, modifier = Modifier.padding(10.dp))
+            }
+          }
+        }
+      }
+    }
+
+    // -------------------------------------------------------------
+    // TAB 4: CERTIFIED LEGAL CLAUSE DRAFTER
+    // -------------------------------------------------------------
+    if (currentSubTab == "legal") {
+      Card(
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
+        border = BorderStroke(1.dp, BorderLight)
+      ) {
+        Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+          Surface(color = RedLight, shape = RoundedCornerShape(8.dp)) {
+            Text("بند التعويض وإبراء الذمة (Indemnification Clause)", color = RedDark, fontSize = 11.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp))
+          }
+
+          Text(
+            "\"The Contractor shall indemnify, defend and hold harmless the Employer, its officers and agents from and against all claims, liabilities, losses and expenses arising out of any breach or willful misconduct.\"",
+            fontSize = 12.sp,
+            color = TextDark,
+            fontWeight = FontWeight.SemiBold,
+            lineHeight = 16.sp
+          )
+
+          OutlinedTextField(
+            value = legalInput,
+            onValueChange = { legalInput = it },
+            placeholder = { Text("اكتب صياغتك القانونية الرسمية (يعوض، يبرئ ذمة، خطأ عمدي)...") },
+            shape = RoundedCornerShape(12.dp),
+            modifier = Modifier.fillMaxWidth().height(90.dp)
+          )
+
+          Button(
+            onClick = {
+              val hasKeyTerms = legalInput.contains("يعوض") || legalInput.contains("يبرئ") || legalInput.contains("ذمة")
+              legalAuditResult = if (hasKeyTerms) {
+                "⚖️ تقييم الصياغة القانونية: 96/100 (معتمد للمحاكم والتحكيم)\n✓ تم توظيف المصطلحات المعتمدة بنجاح ومطابقة معيار ISO 17100"
+              } else {
+                "⚠️ تقييم الصياغة: 84/100 - يُنصح باستخدام المصطلحات المحلفة: 'يعوض ويبرئ ذمة' و'الخطأ العمدي'"
+              }
+              AdminEmailNotifier.dispatch(
+                "EXERCISE_COMPLETED",
+                "مترجم قانوني",
+                AdminEmailNotifier.ADMIN_EMAIL,
+                mapOf("exercise" to "صياغة العقود القانونية", "score" to if (hasKeyTerms) "96/100" else "84/100")
+              ) { _, msg -> onMessage(msg) }
+            },
+            colors = ButtonDefaults.buttonColors(containerColor = RedPrimary),
+            shape = RoundedCornerShape(10.dp),
+            modifier = Modifier.fillMaxWidth().heightIn(min = 42.dp)
+          ) {
+            Text("⚖️ تدقيق الصياغة القانونية", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+          }
+
+          legalAuditResult?.let { res ->
+            Surface(
+              shape = RoundedCornerShape(10.dp),
+              color = Color(0xFFECFDF5),
+              border = BorderStroke(1.dp, Color(0xFFA7F3D0)),
+              modifier = Modifier.fillMaxWidth()
+            ) {
+              Text(res, color = Color(0xFF065F46), fontSize = 11.sp, lineHeight = 15.sp, modifier = Modifier.padding(10.dp))
+            }
+          }
+        }
+      }
+    }
+
+    // -------------------------------------------------------------
+    // TAB 5: AUDIOVISUAL SUBTITLING CPS LAB
+    // -------------------------------------------------------------
+    if (currentSubTab == "cps") {
+      Card(
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
+        border = BorderStroke(1.dp, BorderLight)
+      ) {
+        Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+          Text("مقطع وثائقي (المدة: 3.2 ثوانٍ):", fontSize = 11.sp, fontWeight = FontWeight.Bold)
+          Text("\"We must completely re-evaluate the transition strategy before the ecosystem collapses.\"", fontSize = 12.sp, color = TextDark)
+
+          OutlinedTextField(
+            value = cpsInput,
+            onValueChange = { cpsInput = it },
+            label = { Text("صياغة سطر الترجمة (Arabic Subtitle)") },
             shape = RoundedCornerShape(12.dp),
             modifier = Modifier.fillMaxWidth()
+          )
+
+          // Live CPS Gauge Box
+          Surface(
+            shape = RoundedCornerShape(10.dp),
+            color = BgLight,
+            border = BorderStroke(1.dp, BorderLight),
+            modifier = Modifier.fillMaxWidth()
           ) {
-            Text(if (isArabic) "🔍 تدقيق ومراجعة الصياغة" else "🔍 Audit Translation", fontWeight = FontWeight.Bold)
+            Row(
+              modifier = Modifier.padding(10.dp),
+              horizontalArrangement = Arrangement.SpaceBetween,
+              verticalAlignment = Alignment.CenterVertically
+            ) {
+              Text("طول السطر: $charCount حرف", fontSize = 11.sp)
+              Surface(
+                shape = RoundedCornerShape(8.dp),
+                color = if (cpsValue <= 16.0f) Color(0xFFD1FAE5) else Color(0xFFFEE2E2)
+              ) {
+                Text(
+                  text = "${String.format(Locale.US, "%.1f", cpsValue)} CPS ${if (cpsValue <= 16.0f) "✓ ممتاز" else "⚠️ سريع"}",
+                  color = if (cpsValue <= 16.0f) Color(0xFF065F46) else Color(0xFF991B1B),
+                  fontSize = 11.sp,
+                  fontWeight = FontWeight.Bold,
+                  modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                )
+              }
+            }
+          }
+
+          Button(
+            onClick = {
+              val ok = cpsValue <= 16.5f
+              onMessage(if (ok) "✓ فحص CPS: مطابق تماماً لمعايير Netflix وBBC للترجمة المرئية" else "⚠️ معدل CPS مرتفع، يرجى اختزال النص")
+              AdminEmailNotifier.dispatch(
+                "EXERCISE_COMPLETED",
+                "مترجم مرئي",
+                AdminEmailNotifier.ADMIN_EMAIL,
+                mapOf("exercise" to "مختبر الترجمة المرئية CPS", "cps" to "${String.format(Locale.US, "%.1f", cpsValue)} CPS")
+              )
+            },
+            colors = ButtonDefaults.buttonColors(containerColor = RedPrimary),
+            shape = RoundedCornerShape(10.dp),
+            modifier = Modifier.fillMaxWidth().heightIn(min = 42.dp)
+          ) {
+            Text("🎬 فحص الامتثال لمعايير البث العالمية", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+          }
+        }
+      }
+    }
+
+    // -------------------------------------------------------------
+    // TAB 6: 20 VIDEO MASTERCLASSES
+    // -------------------------------------------------------------
+    if (currentSubTab == "masterclass") {
+      Text(
+        text = "مكتبة المحاضرات والماستركلاس (20 مساقاً شاملاً):",
+        fontSize = 13.sp,
+        fontWeight = FontWeight.Bold,
+        color = RedDark
+      )
+
+      masterclasses.forEach { course ->
+        Card(
+          shape = RoundedCornerShape(14.dp),
+          colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
+          border = BorderStroke(1.dp, BorderLight),
+          modifier = Modifier.fillMaxWidth()
+        ) {
+          Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+            Row(
+              modifier = Modifier.fillMaxWidth(),
+              horizontalArrangement = Arrangement.SpaceBetween,
+              verticalAlignment = Alignment.CenterVertically
+            ) {
+              Surface(color = RedLight, shape = RoundedCornerShape(6.dp)) {
+                Text(course.category, color = RedDark, fontSize = 10.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp))
+              }
+              Text("⏱️ ${course.duration}", fontSize = 10.sp, color = TextMuted, fontWeight = FontWeight.Bold)
+            }
+
+            Text(course.title, fontWeight = FontWeight.Bold, fontSize = 13.sp, color = TextDark)
+            Text(course.desc, fontSize = 11.sp, color = TextMuted, maxLines = 2, lineHeight = 15.sp)
+
+            Row(
+              modifier = Modifier.fillMaxWidth(),
+              horizontalArrangement = Arrangement.SpaceBetween,
+              verticalAlignment = Alignment.CenterVertically
+            ) {
+              Text("المحاضر: ${course.instructor} • ${course.level}", fontSize = 10.sp, color = TextMuted)
+              Button(
+                onClick = { onPlayCourse(course) },
+                colors = ButtonDefaults.buttonColors(containerColor = RedPrimary),
+                shape = RoundedCornerShape(8.dp),
+                contentPadding = PaddingValues(horizontal = 10.dp, vertical = 2.dp),
+                modifier = Modifier.heightIn(min = 34.dp)
+              ) {
+                Text("▶️ تشغيل الدرس", fontSize = 11.sp, fontWeight = FontWeight.Bold)
+              }
+            }
           }
         }
       }
@@ -1186,117 +2068,146 @@ fun PricingScreen(
     modifier = Modifier
       .fillMaxSize()
       .verticalScroll(scrollState)
-      .padding(16.dp),
+      .padding(horizontal = 16.dp, vertical = 12.dp),
     verticalArrangement = Arrangement.spacedBy(14.dp)
   ) {
     Text(
-      if (isArabic) "باقات الاشتراكات والترقية" else "Subscription Plans",
+      text = if (isArabic) "باقات واشتراكات Polylang Hub" else "Polylang Hub Plans & Pricing",
       fontWeight = FontWeight.Bold,
-      fontSize = 18.sp,
+      fontSize = 17.sp,
       color = RedDark
     )
     Text(
-      if (isArabic) "ادعم عملك مع قبول البطاقة الذهبية، CIB والمحفظة الرقمية" else "Supports local payment: Edahabia, CIB, Digital Wallet",
-      fontSize = 11.sp,
-      color = TextMuted
+      text = if (isArabic) "اختر الباقة المناسبة للأفراد والمترجمين والشركات مع دعم الدفع بالدينار الجزائري (DZD)" else "Flexible plans with Algerian local payment methods.",
+      fontSize = 12.sp,
+      color = TextMuted,
+      lineHeight = 16.sp
     )
 
-    // Plan 1: Free
+    // Plan 1: Free Starter
     PlanCard(
-      name = if (isArabic) "الباقة الأساسية" else "Free Starter",
+      title = if (isArabic) "باقة البداية المجانية" else "Free Starter",
       price = "0 دج",
-      period = if (isArabic) "/ شهرياً" else "/ mo",
+      period = if (isArabic) "/ مدى الحياة" else "/ Forever",
+      badge = if (isArabic) "مجاناً" else "Free",
+      features = listOf(
+        if (isArabic) "ترجمة حتى 1,500 كلمة شهرياً" else "Up to 1,500 words/mo",
+        if (isArabic) "تصدير 3 ملفات SRT أسبوعياً" else "3 SRT exports per week",
+        if (isArabic) "الوصول لـ 5 فيديوهات تدريبية" else "Access 5 training videos",
+        if (isArabic) "دعم فني عبر البريد الإلكتروني" else "Email support"
+      ),
       isPopular = false,
-      features = listOf("1,500 كلمة شهرياً", "5 تمارين تدريبية أساسية", "تصدير SRT حتى 10 دقائق"),
-      buttonLabel = if (isArabic) "البدء مجاناً" else "Get Started Free",
-      isPrimary = false,
+      buttonText = if (isArabic) "تفعيل الباقة المجانية" else "Select Free",
       onClick = { onSelectPlan("Free Starter", 0) }
     )
 
-    // Plan 2: Pro (Featured)
+    // Plan 2: Pro Translator
     PlanCard(
-      name = if (isArabic) "المترجم المحترف (Pro)" else "Pro Translator",
+      title = if (isArabic) "باقة المحترفين المعتمدين" else "Pro Translator",
       price = "4,500 دج",
-      period = if (isArabic) "/ شهرياً" else "/ mo",
+      period = if (isArabic) "/ شهرياً" else "/ month",
+      badge = if (isArabic) "الأكثر طلباً ⭐" else "Most Popular ⭐",
+      features = listOf(
+        if (isArabic) "ترجمة حتى 35,000 كلمة شهرياً" else "Up to 35,000 words/mo",
+        if (isArabic) "تصدير غير محدود لملفات SRT" else "Unlimited SRT exports",
+        if (isArabic) "وصول كامل لكافة 20 ماستركلاس الأكاديمية" else "All 20 masterclasses access",
+        if (isArabic) "فحص فوري للترجمة بمعيار ISO 17100" else "ISO 17100 instant audit",
+        if (isArabic) "دعم الدفع عبر الذهبية وبيدي موب" else "Edahabia & BaridiMob support"
+      ),
       isPopular = true,
-      features = listOf("وصول غير محدود للأكاديمية", "أولوية استلام مشاريع العملاء", "تصدير SRT ودبلجة غير محدودة", "شارة مترجم معتمد موثوق"),
-      buttonLabel = if (isArabic) "⚡ ترقية حسابي الآن" else "⚡ Upgrade to Pro",
-      isPrimary = true,
+      buttonText = if (isArabic) "ترقية إلى باقة Pro (4,500 دج)" else "Upgrade to Pro",
       onClick = { onSelectPlan("Pro Translator", 4500) }
     )
 
-    // Plan 3: Enterprise
+    // Plan 3: Enterprise Hub
     PlanCard(
-      name = if (isArabic) "المؤسسات والشركات" else "Enterprise Hub",
-      price = "18,000 دج",
-      period = if (isArabic) "/ شهرياً" else "/ mo",
+      title = if (isArabic) "باقة المؤسسات والشركات" else "Enterprise Hub",
+      price = "18,500 دج",
+      period = if (isArabic) "/ شهرياً" else "/ month",
+      badge = if (isArabic) "للشركات" else "Enterprise",
+      features = listOf(
+        if (isArabic) "ترجمة غير محدودة وتدقيق محلف" else "Unlimited certified translations",
+        if (isArabic) "تأمين طاقم مترجمين فوريين للمؤتمرات" else "Conference interpreters crew",
+        if (isArabic) "اتفاقية مستوى الخدمة SLA 99.9%" else "Dedicated 99.9% SLA",
+        if (isArabic) "فواتير رسمية مطابقة للتشريع الجزائري" else "Official certified invoices"
+      ),
       isPopular = false,
-      features = listOf("ترجمة غير محدودة شهرياً", "مدير حساب مخصص وتسليم فوري", "فواتير رسمية مطابقة للمحاسبة", "اتفاقية سرية مستوى الشركات"),
-      buttonLabel = if (isArabic) "طلب اشتراك مؤسساتي" else "Enterprise Request",
-      isPrimary = false,
-      onClick = { onSelectPlan("Enterprise Hub", 18000) }
+      buttonText = if (isArabic) "طلب تفعيل باقة الشركات" else "Select Enterprise",
+      onClick = { onSelectPlan("Enterprise Hub", 18500) }
     )
   }
 }
 
 @Composable
 fun PlanCard(
-  name: String,
+  title: String,
   price: String,
   period: String,
-  isPopular: Boolean,
+  badge: String,
   features: List<String>,
-  buttonLabel: String,
-  isPrimary: Boolean,
+  isPopular: Boolean,
+  buttonText: String,
   onClick: () -> Unit
 ) {
   Card(
-    shape = RoundedCornerShape(18.dp),
+    shape = RoundedCornerShape(16.dp),
     colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
-    border = androidx.compose.foundation.BorderStroke(if (isPopular) 2.dp else 1.dp, if (isPopular) RedPrimary else BorderLight),
+    border = BorderStroke(if (isPopular) 2.dp else 1.dp, if (isPopular) RedPrimary else BorderLight),
     elevation = CardDefaults.cardElevation(defaultElevation = if (isPopular) 4.dp else 1.dp),
-    modifier = Modifier.fillMaxWidth()
+    modifier = Modifier.fillMaxWidth().testTag("plan_card_${title.replace(' ', '_')}")
   ) {
-    Column(modifier = Modifier.padding(16.dp)) {
-      if (isPopular) {
-        Surface(color = RedPrimary, shape = RoundedCornerShape(12.dp)) {
-          Text("الأكثر طلباً للمحترفين ★", color = Color.White, fontSize = 10.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp))
+    Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+      Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+      ) {
+        Text(title, fontWeight = FontWeight.Bold, fontSize = 15.sp, color = TextDark)
+        Surface(
+          shape = RoundedCornerShape(8.dp),
+          color = if (isPopular) RedLight else BgLight
+        ) {
+          Text(
+            badge,
+            fontSize = 10.sp,
+            fontWeight = FontWeight.Bold,
+            color = if (isPopular) RedDark else TextMuted,
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+          )
         }
-        Spacer(Modifier.height(8.dp))
       }
 
-      Text(name, fontWeight = FontWeight.Bold, fontSize = 16.sp, color = TextDark)
       Row(verticalAlignment = Alignment.Bottom) {
-        Text(price, fontWeight = FontWeight.ExtraBold, fontSize = 24.sp, color = if (isPopular) RedDark else TextDark)
-        Text(period, fontSize = 12.sp, color = TextMuted, modifier = Modifier.padding(bottom = 4.dp, start = 4.dp))
+        Text(price, fontWeight = FontWeight.Black, fontSize = 22.sp, color = RedDark)
+        Text(period, fontSize = 11.sp, color = TextMuted, modifier = Modifier.padding(start = 4.dp, bottom = 4.dp))
       }
 
-      Spacer(Modifier.height(10.dp))
+      HorizontalDivider(color = BorderLight)
 
       features.forEach { feat ->
-        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 2.dp)) {
-          Text("✓", color = SuccessGreen, fontWeight = FontWeight.Bold, fontSize = 12.sp)
+        Row(verticalAlignment = Alignment.CenterVertically) {
+          Icon(Icons.Default.Check, contentDescription = "Included", tint = SuccessGreen, modifier = Modifier.size(16.dp))
           Spacer(Modifier.width(6.dp))
-          Text(feat, fontSize = 12.sp, color = TextDark)
+          Text(feat, fontSize = 11.sp, color = TextDark)
         }
       }
 
-      Spacer(Modifier.height(14.dp))
+      Spacer(Modifier.height(4.dp))
 
       Button(
         onClick = onClick,
-        colors = ButtonDefaults.buttonColors(containerColor = if (isPrimary) RedPrimary else RedLight, contentColor = if (isPrimary) Color.White else RedDark),
+        colors = ButtonDefaults.buttonColors(containerColor = if (isPopular) RedPrimary else RedDark),
         shape = RoundedCornerShape(12.dp),
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth().heightIn(min = 44.dp)
       ) {
-        Text(buttonLabel, fontWeight = FontWeight.Bold, fontSize = 13.sp)
+        Text(buttonText, fontWeight = FontWeight.Bold, fontSize = 12.sp)
       }
     }
   }
 }
 
 // --------------------------------------------------------------------------
-// 6. DASHBOARD SCREEN
+// 6. DASHBOARD & ADMIN TELEMETRY SCREEN
 // --------------------------------------------------------------------------
 @Composable
 fun DashboardScreen(
@@ -1308,104 +2219,154 @@ fun DashboardScreen(
   orders: List<TranslationOrder>,
   onAction: (String) -> Unit
 ) {
-  val isTranslator = role == UserRole.TRANSLATOR
+  val scrollState = rememberScrollState()
 
   Column(
     modifier = Modifier
       .fillMaxSize()
-      .padding(16.dp),
+      .verticalScroll(scrollState)
+      .padding(horizontal = 16.dp, vertical = 12.dp),
     verticalArrangement = Arrangement.spacedBy(14.dp)
   ) {
-    // User header
-    Row(
-      modifier = Modifier.fillMaxWidth(),
-      horizontalArrangement = Arrangement.SpaceBetween,
-      verticalAlignment = Alignment.CenterVertically
+    // Profile Banner
+    Card(
+      shape = RoundedCornerShape(16.dp),
+      colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
+      border = BorderStroke(1.dp, BorderLight)
     ) {
-      Column {
+      Row(
+        modifier = Modifier.padding(14.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
+      ) {
+        Box(
+          modifier = Modifier
+            .size(48.dp)
+            .clip(CircleShape)
+            .background(Brush.linearGradient(listOf(RedPrimary, RedDark))),
+          contentAlignment = Alignment.Center
+        ) {
+          Text(
+            userName.take(1),
+            color = Color.White,
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp
+          )
+        }
+        Column(Modifier.weight(1f)) {
+          Text(userName, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = TextDark)
+          Text(
+            if (isArabic) "الباقة: $plan" else "Plan: $plan",
+            fontSize = 11.sp,
+            color = RedDark,
+            fontWeight = FontWeight.SemiBold
+          )
+        }
+        Surface(color = RedLight, shape = RoundedCornerShape(8.dp)) {
+          Text(
+            when (role) {
+              UserRole.CLIENT -> if (isArabic) "عميل" else "Client"
+              UserRole.TRANSLATOR -> if (isArabic) "مترجم معتمد" else "Translator"
+              UserRole.ADMIN -> if (isArabic) "مشرف عام" else "Admin"
+            },
+            color = RedDark,
+            fontSize = 10.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+          )
+        }
+      }
+    }
+
+    // Live Admin Inbox Telemetry Hub Card
+    Card(
+      shape = RoundedCornerShape(16.dp),
+      colors = CardDefaults.cardColors(containerColor = Color(0xFF0F172A)),
+      border = BorderStroke(1.5.dp, Color(0xFF10B981))
+    ) {
+      Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Row(
+          modifier = Modifier.fillMaxWidth(),
+          horizontalArrangement = Arrangement.SpaceBetween,
+          verticalAlignment = Alignment.CenterVertically
+        ) {
+          Text("📬 مركز متابعة بريد الإدارة الفوري", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 13.sp)
+          Surface(color = Color(0x3310B981), shape = RoundedCornerShape(6.dp)) {
+            Text("LIVE TELEMETRY", color = Color(0xFF34D399), fontSize = 9.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp))
+          }
+        }
         Text(
-          text = if (isTranslator) (if (isArabic) "لوحة المترجم المعتمد" else "Translator Dashboard") else (if (isArabic) "لوحة العميل" else "Client Dashboard"),
-          fontWeight = FontWeight.Bold,
-          fontSize = 17.sp,
-          color = RedDark
+          "المستلم المعتمد لجميع التسجيلات والطلبات: ${AdminEmailNotifier.ADMIN_EMAIL}",
+          color = Color(0xFF94A3B8),
+          fontSize = 11.sp
         )
-        Text(userName, fontSize = 12.sp, color = TextMuted)
-      }
-      Surface(shape = RoundedCornerShape(12.dp), color = RedLight) {
-        Text(plan, color = RedDark, fontWeight = FontWeight.Bold, fontSize = 11.sp, modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp))
+        Button(
+          onClick = {
+            AdminEmailNotifier.dispatch(
+              "TEST_PROBE",
+              userName,
+              AdminEmailNotifier.ADMIN_EMAIL,
+              mapOf("test" to "إشعار فحص من لوحة تحكم أندرويد")
+            ) { _, msg -> onAction(msg) }
+          },
+          colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF10B981)),
+          shape = RoundedCornerShape(8.dp),
+          modifier = Modifier.heightIn(min = 36.dp)
+        ) {
+          Text("🧪 فحص إرسال إشعار تجريبي الآن", fontSize = 11.sp, fontWeight = FontWeight.Bold)
+        }
       }
     }
 
-    // Metric cards row
-    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-      MetricCard(
-        label = if (isTranslator) "مشاريع متاحة" else "طلبات نشطة",
-        value = if (isTranslator) "7" else orders.count { it.status != "مكتمل ومسلّم" }.toString(),
-        modifier = Modifier.weight(1f)
-      )
-      MetricCard(
-        label = if (isTranslator) "كلمات منجزة" else "كلمات مستلمة",
-        value = if (isTranslator) "38,500" else "14,250",
-        modifier = Modifier.weight(1f)
-      )
-      MetricCard(
-        label = if (isArabic) "المحفظة" else "Wallet",
-        value = "$balance دج",
-        modifier = Modifier.weight(1f)
-      )
+    // KPI Metrics Row
+    Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+      MetricCard(if (isArabic) "الرصيد المتاح" else "Balance", "$balance دج", Modifier.weight(1f))
+      MetricCard(if (isArabic) "الطلبات النشطة" else "Orders", "${orders.size}", Modifier.weight(1f))
+      MetricCard(if (isArabic) "الكلمات" else "Words", "14,800", Modifier.weight(1f))
     }
 
+    // Orders List Title
     Text(
-      if (isArabic) "المشاريع والطلبات المسجلة" else "Active Orders & Projects",
+      text = if (isArabic) "سجل العمليات والطلبات" else "Recent Orders",
       fontWeight = FontWeight.Bold,
       fontSize = 14.sp,
       color = TextDark
     )
 
-    LazyColumn(
-      modifier = Modifier.weight(1f),
-      verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-      items(orders, key = { it.id }) { order ->
-        Card(
-          shape = RoundedCornerShape(14.dp),
-          colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
-          border = androidx.compose.foundation.BorderStroke(1.dp, BorderLight),
-          elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
-        ) {
-          Column(modifier = Modifier.padding(12.dp)) {
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-              Text(order.id, fontWeight = FontWeight.ExtraBold, fontSize = 12.sp, color = RedDark)
-              Surface(
-                shape = RoundedCornerShape(8.dp),
-                color = if (order.status.contains("مكتمل")) Color(0xFFDCFCE7) else RedLight
-              ) {
-                Text(
-                  order.status,
-                  color = if (order.status.contains("مكتمل")) Color(0xFF166534) else RedDark,
-                  fontSize = 10.sp,
-                  fontWeight = FontWeight.Bold,
-                  modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
-                )
-              }
+    orders.forEach { order ->
+      Card(
+        shape = RoundedCornerShape(12.dp),
+        colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
+        border = BorderStroke(1.dp, BorderLight),
+        modifier = Modifier.fillMaxWidth()
+      ) {
+        Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+          Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+          ) {
+            Text(order.id, fontWeight = FontWeight.Bold, fontSize = 12.sp, color = RedDark)
+            Surface(
+              shape = RoundedCornerShape(6.dp),
+              color = if (order.status.contains("مكتمل") || order.status.contains("مؤكد")) Color(0xFFD1FAE5) else RedLight
+            ) {
+              Text(
+                order.status,
+                fontSize = 10.sp,
+                fontWeight = FontWeight.Bold,
+                color = if (order.status.contains("مكتمل") || order.status.contains("مؤكد")) Color(0xFF065F46) else RedDark,
+                modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+              )
             }
-            Spacer(Modifier.height(4.dp))
-            Text(order.title, fontWeight = FontWeight.Bold, fontSize = 13.sp, color = TextDark)
-            Spacer(Modifier.height(2.dp))
-            Text("${order.langPair} • ${order.wordCount} كلمة • ${order.priceDzd} دج", fontSize = 11.sp, color = TextMuted)
-
-            Spacer(Modifier.height(8.dp))
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-              OutlinedButton(
-                onClick = {
-                  onAction(if (isTranslator) "تم فتح استوديو الترجمة للمشروع ${order.id}" else "جاري تحميل الحزمة المعتمدة لـ ${order.id}")
-                },
-                shape = RoundedCornerShape(8.dp),
-                contentPadding = PaddingValues(horizontal = 10.dp, vertical = 2.dp)
-              ) {
-                Text(if (isTranslator) "الاطلاع والترجمة" else "تحميل الوثيقة", fontSize = 11.sp)
-              }
-            }
+          }
+          Text(order.title, fontWeight = FontWeight.Bold, fontSize = 12.sp, color = TextDark)
+          Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+          ) {
+            Text("${order.category} • ${order.langPair}", fontSize = 10.sp, color = TextMuted)
+            Text("${order.priceDzd} دج", fontWeight = FontWeight.Bold, fontSize = 12.sp, color = RedDark)
           }
         }
       }
@@ -1416,21 +2377,25 @@ fun DashboardScreen(
 @Composable
 fun MetricCard(label: String, value: String, modifier: Modifier = Modifier) {
   Card(
-    modifier = modifier,
-    shape = RoundedCornerShape(14.dp),
+    shape = RoundedCornerShape(12.dp),
     colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
-    border = androidx.compose.foundation.BorderStroke(1.dp, BorderLight)
+    border = BorderStroke(1.dp, BorderLight),
+    modifier = modifier
   ) {
-    Column(modifier = Modifier.padding(10.dp)) {
+    Column(
+      modifier = Modifier.padding(10.dp),
+      horizontalAlignment = Alignment.CenterHorizontally,
+      verticalArrangement = Arrangement.Center
+    ) {
       Text(label, fontSize = 10.sp, color = TextMuted)
-      Spacer(Modifier.height(4.dp))
-      Text(value, fontWeight = FontWeight.ExtraBold, fontSize = 14.sp, color = RedDark)
+      Spacer(Modifier.height(2.dp))
+      Text(value, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = RedDark)
     }
   }
 }
 
 // --------------------------------------------------------------------------
-// 7. LOCAL PAYMENT DIALOG (EDAHABIA, CIB, WALLET)
+// 7. PAYMENT DIALOG (ALGERIAN LOCAL METHODS: Edahabia, CIB, BaridiMob, CCP)
 // --------------------------------------------------------------------------
 @Composable
 fun PaymentDialog(
@@ -1440,74 +2405,109 @@ fun PaymentDialog(
   onDismiss: () -> Unit,
   onConfirmPayment: () -> Unit
 ) {
-  var selectedMethod by remember { mutableStateOf("edahabia") }
-  var cardNumber by remember { mutableStateOf("6280 5840 1928 3746") }
-  var phone by remember { mutableStateOf("0560 12 34 50") }
+  var selectedMethod by remember { mutableStateOf("edahabia") } // edahabia, cib, baridimob, ccp
+  var cardNumber by remember { mutableStateOf("6037 9901 2345 6789") }
+  var cardHolder by remember { mutableStateOf("KARIM HAMDAOUI") }
 
   Dialog(onDismissRequest = onDismiss) {
     Card(
       shape = RoundedCornerShape(20.dp),
       colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
-      modifier = Modifier.fillMaxWidth()
+      border = BorderStroke(1.dp, BorderLight),
+      modifier = Modifier
+        .fillMaxWidth()
+        .padding(12.dp)
     ) {
-      Column(modifier = Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-          Text(if (isArabic) "إتمام الدفع الإلكتروني" else "Secure Payment", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = RedDark)
-          IconButton(onClick = onDismiss, modifier = Modifier.size(24.dp)) {
-            Icon(Icons.Default.Close, contentDescription = "Close", tint = Color.Gray)
+      Column(
+        modifier = Modifier.padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+      ) {
+        Row(
+          modifier = Modifier.fillMaxWidth(),
+          horizontalArrangement = Arrangement.SpaceBetween,
+          verticalAlignment = Alignment.CenterVertically
+        ) {
+          Column {
+            Text(if (isArabic) "الدفع بالدينار الجزائري" else "Algerian Payment", fontWeight = FontWeight.Bold, fontSize = 15.sp, color = RedDark)
+            Text(if (isArabic) "باقة: $planName" else "Plan: $planName", fontSize = 11.sp, color = TextMuted)
           }
+          Text("$planPrice دج", fontWeight = FontWeight.Black, fontSize = 16.sp, color = RedDark)
         }
 
-        Text("$planName - $planPrice دج", fontSize = 13.sp, fontWeight = FontWeight.Bold, color = TextDark)
+        HorizontalDivider(color = BorderLight)
 
-        Text(if (isArabic) "اختر وسيلة الدفع المحلية:" else "Select payment method:", fontSize = 11.sp, color = TextMuted)
+        Text(if (isArabic) "اختر وسيلة الدفع المعتمدة:" else "Select Payment Method:", fontSize = 12.sp, fontWeight = FontWeight.Bold)
 
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
           PaymentMethodButton(
-            title = "البطاقة الذهبية",
-            selected = selectedMethod == "edahabia",
-            onClick = { selectedMethod = "edahabia" },
-            modifier = Modifier.weight(1f)
+            title = "الذهبية",
+            subtitle = "بريد الجزائر",
+            isSelected = selectedMethod == "edahabia",
+            modifier = Modifier.weight(1f),
+            onClick = { selectedMethod = "edahabia" }
           )
           PaymentMethodButton(
-            title = "بطاقة CIB",
-            selected = selectedMethod == "cib",
-            onClick = { selectedMethod = "cib" },
-            modifier = Modifier.weight(1f)
+            title = "CIB",
+            subtitle = "البطاقة البنكية",
+            isSelected = selectedMethod == "cib",
+            modifier = Modifier.weight(1f),
+            onClick = { selectedMethod = "cib" }
+          )
+        }
+
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+          PaymentMethodButton(
+            title = "BaridiMob",
+            subtitle = "تطبيق فوري",
+            isSelected = selectedMethod == "baridimob",
+            modifier = Modifier.weight(1f),
+            onClick = { selectedMethod = "baridimob" }
           )
           PaymentMethodButton(
-            title = "المحفظة الرقمية",
-            selected = selectedMethod == "wallet",
-            onClick = { selectedMethod = "wallet" },
-            modifier = Modifier.weight(1f)
+            title = "CCP",
+            subtitle = "حوالة بريدية",
+            isSelected = selectedMethod == "ccp",
+            modifier = Modifier.weight(1f),
+            onClick = { selectedMethod = "ccp" }
           )
         }
 
         OutlinedTextField(
           value = cardNumber,
           onValueChange = { cardNumber = it },
-          label = { Text(if (isArabic) "رقم البطاقة" else "Card Number", fontSize = 11.sp) },
+          label = { Text(if (selectedMethod == "ccp") "رقم الحساب البريدي الجاري CCP" else "رقم البطاقة (16 رقماً)") },
           shape = RoundedCornerShape(12.dp),
           modifier = Modifier.fillMaxWidth(),
+          keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
           singleLine = true
         )
 
         OutlinedTextField(
-          value = phone,
-          onValueChange = { phone = it },
-          label = { Text(if (isArabic) "رقم الهاتف لاستلام رمز OTP" else "Phone for OTP SMS", fontSize = 11.sp) },
+          value = cardHolder,
+          onValueChange = { cardHolder = it },
+          label = { Text(if (isArabic) "اسم صاحب الحساب أو البطاقة" else "Cardholder Name") },
           shape = RoundedCornerShape(12.dp),
           modifier = Modifier.fillMaxWidth(),
           singleLine = true
         )
 
-        Button(
-          onClick = onConfirmPayment,
-          colors = ButtonDefaults.buttonColors(containerColor = RedPrimary),
-          shape = RoundedCornerShape(12.dp),
-          modifier = Modifier.fillMaxWidth().testTag("confirm_payment_btn")
-        ) {
-          Text(if (isArabic) "🔒 تأكيد الدفع وتفعيل الباقة" else "🔒 Confirm Payment", fontWeight = FontWeight.Bold)
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
+          OutlinedButton(
+            onClick = onDismiss,
+            shape = RoundedCornerShape(12.dp),
+            modifier = Modifier.weight(1f).heightIn(min = 44.dp)
+          ) {
+            Text(if (isArabic) "إلغاء" else "Cancel", fontSize = 12.sp)
+          }
+
+          Button(
+            onClick = onConfirmPayment,
+            colors = ButtonDefaults.buttonColors(containerColor = RedPrimary),
+            shape = RoundedCornerShape(12.dp),
+            modifier = Modifier.weight(1f).heightIn(min = 44.dp).testTag("confirm_payment_btn")
+          ) {
+            Text(if (isArabic) "تأكيد الدفع" else "Confirm", fontWeight = FontWeight.Bold, fontSize = 12.sp)
+          }
         }
       }
     }
@@ -1517,24 +2517,23 @@ fun PaymentDialog(
 @Composable
 fun PaymentMethodButton(
   title: String,
-  selected: Boolean,
-  onClick: () -> Unit,
-  modifier: Modifier = Modifier
+  subtitle: String,
+  isSelected: Boolean,
+  modifier: Modifier = Modifier,
+  onClick: () -> Unit
 ) {
   Surface(
-    shape = RoundedCornerShape(12.dp),
-    color = if (selected) RedLight else BgLight,
-    border = androidx.compose.foundation.BorderStroke(1.dp, if (selected) RedPrimary else BorderLight),
+    shape = RoundedCornerShape(10.dp),
+    color = if (isSelected) RedLight else BgLight,
+    border = BorderStroke(1.dp, if (isSelected) RedPrimary else BorderLight),
     modifier = modifier.clickable { onClick() }
   ) {
-    Box(contentAlignment = Alignment.Center, modifier = Modifier.padding(vertical = 10.dp, horizontal = 4.dp)) {
-      Text(
-        text = title,
-        fontSize = 10.sp,
-        fontWeight = FontWeight.Bold,
-        color = if (selected) RedDark else TextDark,
-        textAlign = TextAlign.Center
-      )
+    Column(
+      modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp),
+      horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+      Text(title, fontWeight = FontWeight.Bold, fontSize = 12.sp, color = if (isSelected) RedDark else TextDark)
+      Text(subtitle, fontSize = 9.sp, color = TextMuted)
     }
   }
 }

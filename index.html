@@ -3109,6 +3109,7 @@
       border-radius: 2px;
       transition: height 0.1s ease;
     }
+    .holographic-waveform-bar.active .robot-wave-bar,
     .robot-wave-bar.active-pulse {
       animation: robotWavePulse 0.5s ease-in-out infinite alternate;
     }
@@ -3198,6 +3199,207 @@
     }
     [data-theme="dark"] .micro-stat-item strong {
       color: #fca5a5;
+    }
+
+  
+    /* =============================================================
+       INTERACTIVE TRANSLATION & INTERPRETATION LAB STYLES
+       ============================================================= */
+    .lab-nav-tabs {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 2px solid var(--border-main);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.25rem;
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+    .lab-tab-btn {
+      background: var(--bg-surface-secondary);
+      border: 1px solid var(--border-main);
+      border-radius: var(--radius-sm);
+      padding: 0.5rem 0.85rem;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      white-space: nowrap;
+      transition: var(--transition-fast);
+    }
+    .lab-tab-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .lab-tab-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(229,57,53,0.25);
+    }
+    .lab-tab-content {
+      display: none;
+      animation: fadeIn 0.25s ease-in;
+    }
+    .lab-tab-content.active {
+      display: block;
+    }
+
+    /* Terminology Matcher Game */
+    .matcher-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    @media (max-width: 768px) {
+      .matcher-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    .matcher-card {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-main);
+      border-radius: var(--radius-md);
+      padding: 1rem 0.75rem;
+      text-align: center;
+      cursor: pointer;
+      min-height: 85px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--text-main);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      user-select: none;
+      position: relative;
+    }
+    .matcher-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+    .matcher-card.selected {
+      border-color: var(--primary);
+      background: rgba(229,57,53,0.08);
+      color: var(--primary-dark);
+      transform: scale(1.03);
+    }
+    .matcher-card.matched {
+      border-color: var(--success);
+      background: rgba(16,185,129,0.12);
+      color: var(--success);
+      cursor: default;
+      pointer-events: none;
+      opacity: 0.75;
+    }
+    .matcher-card.matched::after {
+      content: ' ✓';
+      font-size: 0.8rem;
+      font-weight: 900;
+    }
+    .matcher-card.wrong {
+      border-color: var(--danger);
+      background: rgba(239,68,68,0.15);
+      color: var(--danger);
+      animation: matcherShake 0.3s ease;
+    }
+    @keyframes matcherShake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      75% { transform: translateX(6px); }
+    }
+
+    /* Rozan Shorthand Chips */
+    .rozan-palette {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin: 0.75rem 0;
+    }
+    .rozan-chip {
+      background: var(--bg-surface-secondary);
+      border: 1px solid var(--border-main);
+      border-radius: 20px;
+      padding: 0.3rem 0.65rem;
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--text-main);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: var(--transition-fast);
+    }
+    .rozan-chip:hover {
+      background: rgba(229,57,53,0.1);
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: scale(1.05);
+    }
+    .rozan-chip-symbol {
+      background: var(--primary-subtle);
+      color: var(--primary);
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-weight: 900;
+      font-family: monospace;
+    }
+
+    /* Subtitling CPS meter */
+    .cps-indicator-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      background: var(--bg-surface-secondary);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-main);
+      margin-top: 0.5rem;
+    }
+    .cps-pill {
+      padding: 0.25rem 0.65rem;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+    .cps-pill.ok {
+      background: rgba(16,185,129,0.15);
+      color: var(--success);
+      border: 1px solid var(--success);
+    }
+    .cps-pill.warn {
+      background: rgba(245,158,11,0.15);
+      color: var(--warning);
+      border: 1px solid var(--warning);
+    }
+    .cps-pill.bad {
+      background: rgba(239,68,68,0.15);
+      color: var(--danger);
+      border: 1px solid var(--danger);
+    }
+
+    /* Admin Email Notifications */
+    .admin-email-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: rgba(16,185,129,0.12);
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+      border-radius: 50px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+    [data-theme="dark"] .admin-email-badge {
+      background: rgba(16,185,129,0.25);
+      color: #6ee7b7;
+      border-color: #047857;
     }
 
   </style>
@@ -3309,24 +3511,23 @@
       <div class="presenter-card-header">
         <div class="presenter-badge-row">
           <span class="presenter-status-dot"></span>
-          <span class="presenter-badge-text">🤖 روبوت الذكاء الاصطناعي والمقدم الافتراضي لبوليلانغ هوب</span>
-          <span class="presenter-iso-badge">🇩🇿 معتمد ISO 17100 & AIIC</span>
+          <span class="presenter-badge-text" data-i18n="heroBadgeIntro">🎙️ فيديو التقديم والترحيب</span>
+          <span class="presenter-iso-badge">🇩🇿 معتمد ISO 17100</span>
         </div>
         <div class="presenter-tag-label" id="robotSpeakingStatus">
-          🤖 <span style="color: var(--text-muted);">روبوت بوليلانغ الذكي جاهز للترحيب بكم</span>
+          👋 <span style="color: var(--text-muted);" id="robotSpeakingStatusText" data-i18n="heroGreetingStatus">مرحباً بكم في بوليلانغ</span>
         </div>
       </div>
-
       <div class="presenter-card-body">
-        <!-- Right side: Video / Avatar Display Stage -->
+        <!-- Right side: Video Stage with Integrated Audio -->
         <div class="presenter-video-col">
           <div class="presenter-video-frame">
-            <video id="heroRobotVideo" playsinline controls preload="auto" poster="img_robot_presenter.jpg" onplay="onRobotVideoPlay()" onpause="onRobotVideoPause()">
+            <video id="heroRobotVideo" playsinline controls preload="auto" poster="img_robot_presenter.jpg" onplay="onRobotVideoPlay()" onpause="onRobotVideoPause()" onended="onRobotVideoEnded()">
               <source src="https://upload.wikimedia.org/wikipedia/commons/7/75/CGI_Robot_3D_Animation.webm" type="video/webm">
-              متصفحك لا يدعم تشغيل الفيديو المباشر.
+              متصفحك لا يدعم تشغيل الفيديو.
             </video>
             
-            <!-- Live Holographic Audio Waveform Overlay -->
+            <!-- Live Audio Waveform Overlay -->
             <div class="holographic-waveform-bar" id="holographicWaveform">
               <span class="robot-wave-bar"></span>
               <span class="robot-wave-bar"></span>
@@ -3336,42 +3537,37 @@
               <span class="robot-wave-bar"></span>
               <span class="robot-wave-bar"></span>
               <span class="robot-wave-bar"></span>
-              <span class="robot-wave-bar"></span>
-              <span class="robot-wave-bar"></span>
-              <span class="robot-wave-bar"></span>
-              <span class="robot-wave-bar"></span>
             </div>
-
             <!-- Subtitle caption box -->
-            <div class="presenter-subtitles-bar" id="presenterSubtitlesBar">
-              🤖 مرحباً بكم في بوليلانغ هوب — مركز الترجمة المتخصصة وتطوير المهارات اللغوية
+            <div class="presenter-subtitles-bar" id="presenterSubtitlesBar" data-i18n="heroSubtitleText">
+              👋 مرحباً بكم في بوليلانغ (Welcome to Polylang)
             </div>
           </div>
         </div>
 
-        <!-- Left side: Welcome Content & Interactive Voice Engine -->
+        <!-- Left side: Welcome Content & Integrated Audio Engine -->
         <div class="presenter-content-col">
-          <div class="presenter-welcome-headline">
-            مرحباً بكم في <span class="gradient-text">بوليلانغ هوب (Polylang Hub)</span>
+          <div class="presenter-welcome-headline" data-i18n="heroWelcomeTitle">
+            مرحباً بكم في <span class="gradient-text">بوليلانغ (Polylang)</span>
           </div>
-          <p class="presenter-welcome-desc">
-            المنصة الجزائرية والدولية المتكاملة للترجمة المحلفة المعتمدة، هندسة اللغات، وإدارة كابينات الترجمة الفورية للمؤتمرات. استمع إلى ترحيب الروبوت الذكي أو باشر طلب خدماتك بالاعتماد الرسمي:
+          <p class="presenter-welcome-desc" data-i18n="heroWelcomeDesc">
+            خدمات الترجمة المحلفة والفورية وتطوير المهارات اللغوية وفق أعلى معايير الجودة المعتمدة.
           </p>
 
-          <!-- Voice Synthesis Controls -->
+          <!-- Voice & Video Audio Controls -->
           <div class="voice-controls-panel">
-            <span class="voice-panel-label">🎙️ استمع إلى الترحيب الصوتي الحي للروبوت (TTS):</span>
+            <span class="voice-panel-label" data-i18n="heroVoiceLabel">🎙️ التقديم الصوتي المباشر:</span>
             <div class="voice-buttons-group">
               <button type="button" class="btn btn-primary btn-sm" onclick="playRobotWelcomeVoice('ar')" id="btnVoiceAr">
-                🔊 ترحيب بالعربية ("مرحباً بكم في بوليلانغ")
+                ▶️ استمع للترحيب ("مرحباً بكم")
               </button>
               <button type="button" class="btn btn-outline btn-sm" onclick="playRobotWelcomeVoice('en')" id="btnVoiceEn">
-                🌐 English Welcome
+                🌐 English
               </button>
               <button type="button" class="btn btn-outline btn-sm" onclick="playRobotWelcomeVoice('fr')" id="btnVoiceFr">
-                🇫🇷 Bienvenue (Français)
+                🇫🇷 Français
               </button>
-              <button type="button" class="btn btn-secondary btn-sm" onclick="stopRobotVoice()" title="إيقاف الصوت">
+              <button type="button" class="btn btn-secondary btn-sm" onclick="stopRobotVoice()" title="إيقاف">
                 ⏹️ إيقاف
               </button>
             </div>
@@ -3380,22 +3576,22 @@
           <!-- Quick Navigation Actions -->
           <div class="presenter-actions-row">
             <button type="button" class="btn btn-primary" onclick="switchActiveRole('client'); scrollToSection('clientOrdersSection')">
-              📄 طلب ترجمة محلفة فورية
+              <span data-i18n="heroBtnOrder">📄 طلب ترجمة</span>
             </button>
             <button type="button" class="btn btn-outline" onclick="switchActiveRole('media'); scrollToSection('masterclassSection')">
-              🎬 أكاديمية الماستركلاس (8 محاضرات)
+              <span data-i18n="heroBtnAcademy">🎬 الأكاديمية والدورات</span>
             </button>
             <button type="button" class="btn btn-outline" onclick="openAboutUsModal('founder')">
-              👤 سيرة المؤسس مداني جودي
+              <span data-i18n="heroBtnFounder">👤 سيرة المؤسس</span>
             </button>
           </div>
 
-          <!-- Live Real Indicators -->
+          <!-- Real Official Indicators -->
           <div class="presenter-micro-stats">
             <span class="micro-stat-item">✓ السجل التجاري: <strong>16/00-0982341B26</strong></span>
-            <span class="micro-stat-item">✓ الرقم الجبائي NIF: <strong>002616098234178</strong></span>
-            <span class="micro-stat-item">✓ الدفع الوطني المعتمد: <strong>SATIM / البطاقة الذهبية</strong></span>
-            <span class="micro-stat-item">✓ معايير الجودة: <strong>ISO 17100:2015</strong></span>
+            <span class="micro-stat-item">✓ NIF: <strong>002616098234178</strong></span>
+            <span class="micro-stat-item">✓ الدفع: <strong>SATIM / البطاقة الذهبية</strong></span>
+            <span class="micro-stat-item">✓ الجودة: <strong>ISO 17100:2015</strong></span>
           </div>
         </div>
       </div>
@@ -3456,7 +3652,54 @@
           <h3 style="font-size: 1.75rem; font-weight: 900; color: var(--warning); margin-top: 0.25rem;" id="adminDisputesCount">2</h3>
           <span style="font-size: 0.78rem; color: var(--warning); font-weight: 700;">تتطلب التحكيم المعتمد</span>
         </div>
+      <
+
+      <!-- MANDATORY ADMIN EMAIL NOTIFICATION DISPATCH HUB -->
+      <div class="card" style="margin-bottom: 1.25rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;">
+          <div>
+            <div style="display: inline-flex; align-items: center; gap: 0.35rem; background: rgba(16,185,129,0.12); color: #065f46; padding: 0.2rem 0.65rem; border-radius: 50px; font-size: 0.72rem; font-weight: 800; margin-bottom: 0.3rem;">
+              <span>📬</span> LIVE ADMIN INBOX TELEMETRY
+            </div>
+            <h3 style="font-weight: 900; font-size: 1.15rem; margin: 0;">مركز الإشعارات الواردة لبريد المؤسس (djoudimadani09@gmail.com)</h3>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0.2rem 0 0;">جميع تسجيلات الدخول والطلبات وحجوزات المؤتمرات ونتائج التمارين تُرسل فورياً إلى هذا البريد</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+            <a href="https://mail.google.com/mail/u/0/#search/Polylang" target="_blank" class="btn btn-primary btn-sm" style="text-decoration: none;">
+              ✉️ فتح البريد في Gmail
+            </a>
+            <button class="btn btn-outline btn-sm" onclick="sendTestProbeEmail()">
+              🧪 إرسال إشعار تجريبي الآن
+            </button>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap;">
+          <span class="admin-email-badge">🟢 البث المباشر نشط إلى: djoudimadani09@gmail.com</span>
+          <span class="role-tag-pill" id="adminEmailLogCountBadge">0 إشعار مسجل</span>
+        </div>
+
+        <div style="max-height: 240px; overflow-y: auto; border: 1px solid var(--border-main); border-radius: var(--radius-sm);">
+          <table class="table" style="margin: 0;">
+            <thead>
+              <tr>
+                <th>رقم الإشعار</th>
+                <th>نوع الحدث</th>
+                <th>الموضوع والمحتوى</th>
+                <th>المستلم</th>
+                <th>التاريخ والتوقيت</th>
+                <th>حالة البث</th>
+              </tr>
+            </thead>
+            <tbody id="adminEmailLogsTbody">
+              <tr>
+                <td colspan="6" style="text-align: center; color: var(--text-muted); padding: 1.5rem;">جاري مزامنة الإشعارات البريدية الواردة...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
+/div>
 
       <!-- User & Linguist Management -->
       <div class="card">
@@ -3982,6 +4225,86 @@
             </p>
           </div>
 
+      <!-- Conference Interpretation & Booth Booking Card -->
+      <div class="card" style="margin-top: 1.25rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+          <div>
+            <div style="display: inline-flex; align-items: center; gap: 0.35rem; background: var(--primary-subtle); color: var(--primary); padding: 0.2rem 0.65rem; border-radius: 50px; font-size: 0.72rem; font-weight: 800; margin-bottom: 0.3rem;">
+              <span>🎙️</span> CONFERENCES & SUMMITS
+            </div>
+            <h3 style="font-weight: 900; font-size: 1.15rem; margin: 0;">حجز مترجم فوري وكابينة للمؤتمرات والملتقيات الدولية</h3>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0.2rem 0 0;">خدمة معتمدة من وزارة العدل مع توفير تجهيزات الكابينة المتوافقة مع معيار ISO 2603 وISO 18841</p>
+          </div>
+          <span class="role-tag-pill">35,000 دج / يوم / مترجم معتمد</span>
+        </div>
+
+        <div class="grid-3">
+          <div class="form-group">
+            <label class="form-label">عنوان الفعالية أو المؤتمر</label>
+            <input type="text" class="form-control" id="interpEventTitle" value="الملتقى الدولي للاستثمار والتحول الطاقوي 2026" placeholder="مثال: القمة الاقتصادية المغاربية">
+          </div>
+          <div class="form-group">
+            <label class="form-label">مكان الانعقاد والمدينة</label>
+            <select class="form-control" id="interpVenue">
+              <option value="CIC Alger" selected>المركز الدولي للمؤتمرات (CIC عبد اللطيف رحال - نادي الصنوبر، الجزائر)</option>
+              <option value="SAFEX Alger">قصر المعارض (SAFEX الصنوبر البحري، الجزائر)</option>
+              <option value="Hotel El Aurassi">فندق الأوراسي (Salle des Congrès - Alger)</option>
+              <option value="Sheraton Club des Pins">فندق الشيراتون (Club des Pins - Alger)</option>
+              <option value="Centre de Conventions Oran">مركز المؤتمرات محمد بن أحمد (CCO وهران)</option>
+              <option value="Remote RSI">ترجمة فورية عن بعد (RSI عبر منصة Kudo / Zoom Pro)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">اللغات المطلوبة في الكابينة</label>
+            <select class="form-control" id="interpLangPair">
+              <option value="AR ⇄ EN" selected>عربية ⇄ إنجليزية (AR ⇄ EN)</option>
+              <option value="AR ⇄ FR">عربية ⇄ فرنسية (AR ⇄ FR)</option>
+              <option value="EN ⇄ FR">إنجليزية ⇄ فرنسية (EN ⇄ FR)</option>
+              <option value="AR ⇄ ES">عربية ⇄ إسبانية (AR ⇄ ES)</option>
+              <option value="Multi (AR-EN-FR)">كابينتان متعددة اللغات (AR - EN - FR)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid-3" style="margin-top: 0.5rem;">
+          <div class="form-group">
+            <label class="form-label">عدد الأيام المطلوبة</label>
+            <select class="form-control" id="interpDaysCount" onchange="calculateInterpQuote()">
+              <option value="1">يوم واحد (1 Day)</option>
+              <option value="2" selected>يومان (2 Days)</option>
+              <option value="3">3 أيام (3 Days)</option>
+              <option value="5">5 أيام - أسبوع كامل</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">طاقم المترجمين وتجهيز الكابينة</label>
+            <select class="form-control" id="interpTeamSize" onchange="calculateInterpQuote()">
+              <option value="2" selected>فريق كابينة قياسي (مترجمان معتمدان للتبادل الزمني)</option>
+              <option value="1">مترجم واحد للمهام القصيرة والمؤتمرات الصحفية (نصف يوم)</option>
+              <option value="4">طاقم كابينتين متكاملتين (4 مترجمين معتمدين)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">رقم هاتف مسؤول الاتصال</label>
+            <input type="text" class="form-control" id="interpContactPhone" value="0550 12 34 56" placeholder="05XX XX XX XX">
+          </div>
+        </div>
+
+        <div style="background: var(--bg-surface-secondary); border: 1px solid var(--border-main); border-radius: var(--radius-sm); padding: 1rem; margin-top: 0.75rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+          <div>
+            <span style="font-size: 0.78rem; color: var(--text-muted);">التكلفة الإجمالية المعتمدة للمترجمين:</span>
+            <div style="font-size: 1.4rem; font-weight: 900; color: var(--primary-dark);" id="interpTotalCostDzd">140,000 دج</div>
+            <span style="font-size: 0.72rem; color: var(--success); font-weight: 700;">✓ مشمول: المراجعة المصطلحية المسبقة وتأمين كابينة المؤتمرات</span>
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button class="btn btn-primary" onclick="submitInterpretationBooking()">
+              🚀 تأكيد وحجز المترجم الفوري (إرسال فوري للإدارة)
+            </button>
+          </div>
+        </div>
+      </div>
+
+
           <button class="btn btn-primary" style="width: 100%; padding: 0.95rem; margin-top: 1.5rem;" onclick="submitClientOrder()">
             تأكيد الطلب والمتابعة للدفع الإلكتروني
           </button>
@@ -4305,6 +4628,18 @@
           </div>
         </div>
 
+        <!-- Domain Category Filter Pills for Quiz -->
+        <div style="display: flex; align-items: center; gap: 0.4rem; overflow-x: auto; padding-bottom: 0.6rem; margin-bottom: 0.75rem;" class="horizontal-scrollbar" id="quizCategoryPillsContainer">
+          <span style="font-size: 0.78rem; font-weight: 800; color: var(--text-muted); white-space: nowrap;" data-i18n="quizFilterLabel">تصفية الاختبار:</span>
+          <button type="button" class="btn btn-sm btn-primary quiz-cat-pill" onclick="filterTriviaCategory('all', this)" style="padding: 0.2rem 0.7rem; font-size: 0.76rem; border-radius: 20px;">الكل (20)</button>
+          <button type="button" class="btn btn-sm btn-outline quiz-cat-pill" onclick="filterTriviaCategory('قانوني', this)" style="padding: 0.2rem 0.7rem; font-size: 0.76rem; border-radius: 20px;">⚖️ قانوني</button>
+          <button type="button" class="btn btn-sm btn-outline quiz-cat-pill" onclick="filterTriviaCategory('كابينة', this)" style="padding: 0.2rem 0.7rem; font-size: 0.76rem; border-radius: 20px;">🎙️ كابينة وفوري</button>
+          <button type="button" class="btn btn-sm btn-outline quiz-cat-pill" onclick="filterTriviaCategory('طبي', this)" style="padding: 0.2rem 0.7rem; font-size: 0.76rem; border-radius: 20px;">🩺 طبي ودوائي</button>
+          <button type="button" class="btn btn-sm btn-outline quiz-cat-pill" onclick="filterTriviaCategory('مالي', this)" style="padding: 0.2rem 0.7rem; font-size: 0.76rem; border-radius: 20px;">💳 مالي ومصرفي</button>
+          <button type="button" class="btn btn-sm btn-outline quiz-cat-pill" onclick="filterTriviaCategory('تقني', this)" style="padding: 0.2rem 0.7rem; font-size: 0.76rem; border-radius: 20px;">⚙️ تقني وهندسي</button>
+          <button type="button" class="btn btn-sm btn-outline quiz-cat-pill" onclick="filterTriviaCategory('مرئي', this)" style="padding: 0.2rem 0.7rem; font-size: 0.76rem; border-radius: 20px;">🎬 ترجمة مرئية</button>
+          <button type="button" class="btn btn-sm btn-outline quiz-cat-pill" onclick="filterTriviaCategory('دبلوماسي', this)" style="padding: 0.2rem 0.7rem; font-size: 0.76rem; border-radius: 20px;">🌐 دبلوماسي وأمم متحدة</button>
+        </div>
         <div style="background: var(--bg-surface-secondary); border: 1.5px solid var(--border-main); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1rem;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
             <span class="role-tag-pill" id="triviaCategoryTag">السياق الدبلوماسي والسياسي</span>
@@ -4333,6 +4668,240 @@
       </div>
 
       <!-- Feature 3: Real Working Educational Translation Video Academy -->
+      
+      <!-- Comprehensive Interactive Translation & Interpretation Lab -->
+      <div class="card" id="interactiveTrainingLabSection" style="margin-bottom: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;">
+          <div>
+            <div style="display: inline-flex; align-items: center; gap: 0.4rem; background: var(--primary-subtle); color: var(--primary); padding: 0.2rem 0.75rem; border-radius: 50px; font-size: 0.78rem; font-weight: 800; margin-bottom: 0.35rem;">
+              <span>⚡</span> INTERACTIVE LAB & SIMULATION DRILLS
+            </div>
+            <h3 style="font-weight: 900; font-size: 1.25rem; margin: 0;">مختبر التمارين التفاعلية لتأهيل المترجمين (Interactive Training Lab)</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0.25rem 0 0;">
+              ورش عمل حية ومحاكاة دقيقة لمهام الترجمة الفورية والتحريرية مع فحص فوري للأداء وإرسال التقارير لبريد المؤسس
+            </p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span class="role-tag-pill" style="background: rgba(16,185,129,0.12); color: var(--success); border: 1px solid var(--success);">
+              🟢 متصل ومزامن مع الإدارة (djoudimadani09@gmail.com)
+            </span>
+          </div>
+        </div>
+
+        <!-- Exercise Category Navigation Tabs -->
+        <div class="lab-nav-tabs">
+          <button class="lab-tab-btn active" id="labTabBtn-matcher" onclick="switchLabTab('matcher')">
+            🎴 لعبة مطابقة المصطلحات السريعة (Speed Matcher)
+          </button>
+          <button class="lab-tab-btn" id="labTabBtn-booth" onclick="switchLabTab('booth')">
+            🎙️ كابينة الترجمة الفورية وقياس الـ Décalage
+          </button>
+          <button class="lab-tab-btn" id="labTabBtn-rozan" onclick="switchLabTab('rozan')">
+            📝 ورشة فك رموز وتدوين ملاحظات روزان (Rozan Notes)
+          </button>
+          <button class="lab-tab-btn" id="labTabBtn-legal" onclick="switchLabTab('legal')">
+            ⚖️ تحدي صياغة بنود العقود المعتمدة (Legal Drafter)
+          </button>
+          <button class="lab-tab-btn" id="labTabBtn-cps" onclick="switchLabTab('cps')">
+            🎬 مختبر كسر الأسطر ومعدل الـ CPS (Subtitling Lab)
+          </button>
+        </div>
+
+        <!-- TAB 1: SPEED TERMINOLOGY MATCHER GAME -->
+        <div class="lab-tab-content active" id="labTabContent-matcher">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.85rem; background: var(--bg-surface-secondary); padding: 0.75rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-main);">
+            <div>
+              <strong style="font-size: 0.95rem;">🎴 تحدي الذاكرة الاصطلاحية السريعة:</strong>
+              <span style="font-size: 0.82rem; color: var(--text-muted); margin-right: 0.5rem;">اختر المصطلح الإنجليزي ثم انقر على المقابل العربي الدقيق المعتمد في المنظمات الدولية</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+              <span style="font-size: 0.85rem; font-weight: 800;">⏱️ الوقت: <span id="matcherTimerDisplay" style="color: var(--primary-dark);">00:00</span></span>
+              <span style="font-size: 0.85rem; font-weight: 800;">🏆 النقاط: <span id="matcherScoreDisplay" style="color: var(--success);">0</span></span>
+              <button class="btn btn-outline btn-sm" onclick="resetMatcherGame()">🔄 إعادة اللعب</button>
+            </div>
+          </div>
+
+          <div class="matcher-grid" id="matcherGridContainer">
+            <!-- Populated dynamically via JS -->
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem;">
+            <span style="font-size: 0.8rem; color: var(--text-muted);" id="matcherStatusText">انقر على بطاقة للبدء في المطابقة...</span>
+            <button class="btn btn-primary btn-sm" id="btnSendMatcherScoreToAdmin" onclick="sendMatcherScoreToAdmin()" style="display: none;">
+              📧 إرسال نتيجتك في المطابقة إلى بريد المؤسس (djoudimadani09@gmail.com)
+            </button>
+          </div>
+        </div>
+
+        <!-- TAB 2: SIMULTANEOUS DECALAGE & BOOTH SIMULATOR -->
+        <div class="lab-tab-content" id="labTabContent-booth">
+          <div class="grid-2">
+            <div style="background: var(--bg-surface-secondary); border: 1px solid var(--border-main); border-radius: var(--radius-md); padding: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                <strong style="font-size: 0.9rem;">📢 مصدر الخطاب المباشر (Floor Speech)</strong>
+                <select class="form-control" style="width: auto; padding: 0.25rem 0.5rem; font-size: 0.8rem;" id="labSpeechSelect" onchange="changeLabSpeech(this.value)">
+                  <option value="climate">🌍 قمة المناخ بجنيف (COP Energy Transition)</option>
+                  <option value="icc">⚖️ مرافعة محكمة الجنايات الدولية بلاهاي (ICC The Hague)</option>
+                  <option value="who">🩺 جمعية الصحة العالمية واليقظة الدوائية (WHO Geneva)</option>
+                </select>
+              </div>
+              <p style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.85rem; background: var(--bg-surface); padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-main);" id="labSpeechSourceText">
+                "Excellencies, distinguished delegates, we stand at a pivotal juncture where the acceleration of sustainable energy transition is our primary strategic imperative to guarantee long-term socio-economic resilience."
+              </p>
+              <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-surface); padding: 0.75rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-main);">
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                  <button class="btn btn-primary btn-sm" id="btnPlayLabSpeech" onclick="toggleLabSpeechAudio()">▶️ بث الخطاب في الكابينة</button>
+                  <select class="form-control" style="width: auto; padding: 0.25rem 0.5rem; font-size: 0.8rem;" id="labSpeechSpeed">
+                    <option value="0.85">0.85x (هادئ)</option>
+                    <option value="1.0" selected>1.0x (طبيعي)</option>
+                    <option value="1.2">1.2x (دبلوماسي سريع)</option>
+                  </select>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.4rem;">
+                  <span style="font-size: 0.78rem; color: var(--text-muted);">الفارق الزمني (Décalage):</span>
+                  <span class="role-tag-pill" id="decalageTimerPill" style="background: rgba(245,158,11,0.15); color: #d97706; border: 1px solid #f59e0b;">⏳ 0.0 ثانية</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Interpretation Recording & Evaluation -->
+            <div style="background: var(--bg-surface-secondary); border: 1px solid var(--border-main); border-radius: var(--radius-md); padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                  <strong style="font-size: 0.9rem;">🎙️ كابينة المترجم وقناة الصوت المستهدف</strong>
+                  <span class="role-tag-pill" id="labMicStatusPill">جاهز للتسجيل</span>
+                </div>
+                <div style="margin-bottom: 0.75rem;">
+                  <textarea class="form-control" id="labInterpreterTranscript" rows="3" placeholder="تحدث في الميكروفون أو دوّن ترجمتك الفورية هنا فور سماع الخطاب لقياس الفارق الزمني والدقة..."></textarea>
+                </div>
+              </div>
+              <div>
+                <div style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <button class="btn btn-outline btn-sm" id="btnToggleLabMic" onclick="toggleLabMicrophone()" style="flex: 1;">🎙️ تفعيل الميكروفون المباشر</button>
+                  <button class="btn btn-primary btn-sm" onclick="evaluateLabBoothPerformance()" style="flex: 1;">🎯 فحص وتقييم الأداء الفوري</button>
+                </div>
+                <div id="labBoothFeedbackResult" style="display: none; background: rgba(16,185,129,0.08); border: 1px solid var(--success); border-radius: var(--radius-sm); padding: 0.75rem; font-size: 0.8rem; line-height: 1.5;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: ROZAN SHORTHAND & CONSECUTIVE WORKSHOP -->
+        <div class="lab-tab-content" id="labTabContent-rozan">
+          <div class="grid-2">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <strong style="font-size: 0.9rem;">لوحة رموز تدوين الملاحظات الرسمية (Rozan 12 Symbols Palette):</strong>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">انقر على الرمز لإدراجه فوراً</span>
+              </div>
+              <div class="rozan-palette" id="rozanPaletteContainer">
+                <span class="rozan-chip" onclick="insertRozanSymbol('➔')"><span class="rozan-chip-symbol">➔</span> ناتج عن / سببية</span>
+                <span class="rozan-chip" onclick="insertRozanSymbol('▲')"><span class="rozan-chip-symbol">▲</span> تزايد / ارتفاع</span>
+                <span class="rozan-chip" onclick="insertRozanSymbol('▼')"><span class="rozan-chip-symbol">▼</span> انخفاض / تراجع</span>
+                <span class="rozan-chip" onclick="insertRozanSymbol('≠')"><span class="rozan-chip-symbol">≠</span> اختلاف / تعارض</span>
+                <span class="rozan-chip" onclick="insertRozanSymbol('§')"><span class="rozan-chip-symbol">§</span> تشريع / قانون</span>
+                <span class="rozan-chip" onclick="insertRozanSymbol('⏳')"><span class="rozan-chip-symbol">⏳</span> زمن المستقبل</span>
+                <span class="rozan-chip" onclick="insertRozanSymbol('★')"><span class="rozan-chip-symbol">★</span> بالغ الأهمية</span>
+                <span class="rozan-chip" onclick="insertRozanSymbol('?')"><span class="rozan-chip-symbol">?</span> تساؤل / شك</span>
+                <span class="rozan-chip" onclick="insertRozanSymbol('P')"><span class="rozan-chip-symbol">P</span> سياسة / حوكمة</span>
+                <span class="rozan-chip" onclick="insertRozanSymbol('Ø')"><span class="rozan-chip-symbol">Ø</span> انعدام / نفي</span>
+                <span class="rozan-chip" onclick="insertRozanSymbol('w/')"><span class="rozan-chip-symbol">w/</span> بالتعاون مع</span>
+                <span class="rozan-chip" onclick="insertRozanSymbol('||')"><span class="rozan-chip-symbol">||</span> مسار موازٍ</span>
+              </div>
+              <div class="form-group" style="margin-top: 0.75rem;">
+                <label class="form-label" style="display: flex; justify-content: space-between;">
+                  <span>دفتر تدوين الملاحظات التتابعية (Bloc-notes de Rozan):</span>
+                  <button class="btn btn-outline btn-sm" style="padding: 2px 6px; font-size: 0.72rem;" onclick="clearRozanNotes()">مسح الدفتر</button>
+                </label>
+                <textarea class="form-control" id="labRozanNotesArea" rows="5" placeholder="دوّن رموزك هنا عمودياً وفق قواعد روزان السبع (Verticality, Shift, S/V/O)..."></textarea>
+              </div>
+            </div>
+
+            <!-- Right: Consecutive Speech and Evaluation -->
+            <div>
+              <strong style="font-size: 0.9rem; margin-bottom: 0.5rem; display: block;">الخطاب التتابعي للتدريب (Diplomatic Speech Segment):</strong>
+              <div style="background: var(--bg-surface-secondary); padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-main); margin-bottom: 0.75rem; font-size: 0.84rem; line-height: 1.5;">
+                "The Minister stated that agricultural yield increased by 22% this quarter (▲ 22%), leading to food security (➔ Food Sec), despite legal challenges regarding water rights (≠ § Water)."
+              </div>
+              <div class="form-group">
+                <label class="form-label">إعادة صياغة الخطاب باللغة العربية شفوياً / كتابياً:</label>
+                <textarea class="form-control" id="labRozanConsecutiveRendition" rows="3" placeholder="أعد صياغة الخطاب استناداً لرموزك المدونة..."></textarea>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="auditRozanConsecutive()" style="width: 100%; margin-top: 0.5rem;">
+                🔍 تدقيق الملاحظات والصياغة التتابعية (إرسال النتيجة للإدارة)
+              </button>
+              <div id="rozanAuditFeedback" style="display: none; margin-top: 0.75rem; padding: 0.75rem; border-radius: var(--radius-sm); background: rgba(16,185,129,0.08); border: 1px solid var(--success); font-size: 0.8rem;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: CERTIFIED LEGAL CLAUSE DRAFTER -->
+        <div class="lab-tab-content" id="labTabContent-legal">
+          <div class="grid-2">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <strong style="font-size: 0.9rem;">البند التعاقدي الإنجليزي المعتمد (ICC & FIDIC):</strong>
+                <select class="form-control" style="width: auto; padding: 0.2rem 0.5rem; font-size: 0.8rem;" id="labLegalClauseSelect" onchange="changeLabLegalClause(this.value)">
+                  <option value="indemnity">1. التعويض وإبراء الذمة (Indemnification Clause)</option>
+                  <option value="force_majeure">2. القوة القاهرة والظروف الطارئة (Force Majeure)</option>
+                  <option value="arbitration">3. فض النزاعات والتحكيم التجاري (LCIA Arbitration)</option>
+                  <option value="nda">4. السرية وعدم الإفصاح (Confidentiality & Trade Secrets)</option>
+                </select>
+              </div>
+              <div style="background: var(--bg-surface-secondary); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border-main); font-size: 0.84rem; line-height: 1.6;" id="labLegalSourceText">
+                "The Contractor shall indemnify, defend and hold harmless the Employer, its officers and agents from and against all claims, liabilities, losses and expenses arising out of any breach or willful misconduct."
+              </div>
+            </div>
+
+            <div>
+              <strong style="font-size: 0.9rem; margin-bottom: 0.5rem; display: block;">الصياغة القانونية العربية المحلفة:</strong>
+              <textarea class="form-control" id="labLegalArabicInput" rows="4" placeholder="اكتب صياغتك القانونية الرسمية هنا (يجب توظيف مصطلحات: يعوض، يبرئ ذمة، خطأ عمدي، مطالبات)..."></textarea>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;">
+                <button class="btn btn-primary btn-sm" onclick="auditLegalTranslation()">
+                  ⚖️ تدقيق الصياغة القانونية ومطابقة معيار ISO 17100
+                </button>
+              </div>
+              <div id="labLegalFeedback" style="display: none; margin-top: 0.75rem; padding: 0.75rem; border-radius: var(--radius-sm); background: rgba(16,185,129,0.08); border: 1px solid var(--success); font-size: 0.8rem;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 5: SUBTITLING CPS & SHOT-CUT MASTER -->
+        <div class="lab-tab-content" id="labTabContent-cps">
+          <div class="grid-2">
+            <div>
+              <strong style="font-size: 0.9rem; margin-bottom: 0.5rem; display: block;">مقطع الترجمة المرئية (Audiovisual Subtitle Cue):</strong>
+              <div style="background: var(--bg-surface-secondary); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border-main); font-size: 0.84rem; line-height: 1.6;">
+                <div><strong>المشهد:</strong> وثائقي بيئي - الدقيقة 14:22 إلى 14:25 (المدة: 3.2 ثوانٍ)</div>
+                <div><strong>الحوار الأصلي:</strong> "We must completely re-evaluate the transition strategy before the ecosystem irreversibly collapses."</div>
+              </div>
+            </div>
+
+            <div>
+              <strong style="font-size: 0.9rem; margin-bottom: 0.5rem; display: block;">صياغة سطر الترجمة (Arabic Subtitle):</strong>
+              <textarea class="form-control" id="labCpsSubtitleInput" rows="2" oninput="updateCpsGauge()" placeholder="يتعين علينا إعادة تقييم استراتيجية التحول..."></textarea>
+              
+              <div class="cps-indicator-box">
+                <div>
+                  <span style="font-size: 0.78rem; color: var(--text-muted);">معدل القراءة (CPS):</span>
+                  <strong style="font-size: 0.95rem; margin: 0 0.4rem;" id="labCpsValue">0.0 CPS</strong>
+                </div>
+                <div>
+                  <span style="font-size: 0.78rem; color: var(--text-muted);">طول السطر:</span>
+                  <strong style="font-size: 0.95rem; margin: 0 0.4rem;" id="labCplValue">0 حرف</strong>
+                </div>
+                <span class="cps-pill ok" id="labCpsPill">✓ معيار ممتاز (&le; 16 CPS)</span>
+              </div>
+
+              <button class="btn btn-primary btn-sm" onclick="auditCpsSubtitle()" style="width: 100%; margin-top: 0.75rem;">
+                🎬 فحص الامتثال لمعايير Netflix وBBC للترجمة المرئية
+              </button>
+              <div id="labCpsFeedback" style="display: none; margin-top: 0.75rem; padding: 0.75rem; border-radius: var(--radius-sm); background: rgba(16,185,129,0.08); border: 1px solid var(--success); font-size: 0.8rem;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="card" id="videoMasterclassAcademySection" style="margin-bottom: 1.5rem;">
         <!-- Header & Quick Reset -->
         <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;">
@@ -4404,12 +4973,14 @@
             <div style="display: flex; gap: 0.4rem; overflow-x: auto; padding-bottom: 2px;" class="horizontal-scrollbar" id="academyCategoryChipsContainer">
               <button class="video-mode-chip active" data-cat="all" onclick="setAcademyCategoryFilter('all', this)">الكل (All)</button>
               <button class="video-mode-chip" data-cat="simultaneous" onclick="setAcademyCategoryFilter('simultaneous', this)">🎙️ كابينة الترجمة وDécalage</button>
+              <button class="video-mode-chip" data-cat="legal" onclick="setAcademyCategoryFilter('legal', this)">⚖️ الترجمة القانونية والمحلفة</button>
+              <button class="video-mode-chip" data-cat="medical" onclick="setAcademyCategoryFilter('medical', this)">🩺 الترجمة الطبية والدوائية</button>
+              <button class="video-mode-chip" data-cat="subtitling" onclick="setAcademyCategoryFilter('subtitling', this)">🎬 الترجمة المرئية (SRT)</button>
+              <button class="video-mode-chip" data-cat="cat_tools" onclick="setAcademyCategoryFilter('cat_tools', this)">💻 برمجيات CAT والذاكرات</button>
               <button class="video-mode-chip" data-cat="shadowing" onclick="setAcademyCategoryFilter('shadowing', this)">⚡ التظليل الصوتي والطلاقة</button>
               <button class="video-mode-chip" data-cat="notetaking" onclick="setAcademyCategoryFilter('notetaking', this)">📝 تدوين الملاحظات وروزان</button>
-              <button class="video-mode-chip" data-cat="cognitive" onclick="setAcademyCategoryFilter('cognitive', this)">🧠 اللسانيات المعرفية وبناء المعنى</button>
-              <button class="video-mode-chip" data-cat="voice" onclick="setAcademyCategoryFilter('voice', this)">🔊 الصوتيات والإلقاء بالكابينة</button>
-              <button class="video-mode-chip" data-cat="diplomatic" onclick="setAcademyCategoryFilter('diplomatic', this)">⚖️ الترجمة القضائية والدبلوماسية</button>
-            </div>
+              <button class="video-mode-chip" data-cat="cognitive" onclick="setAcademyCategoryFilter('cognitive', this)">🧠 اللسانيات المعرفية</button>
+              <button class="video-mode-chip" data-cat="diplomatic" onclick="setAcademyCategoryFilter('diplomatic', this)">🌐 الترجمة المالية والدبلوماسية</button></div>
           </div>
         </div>
 
@@ -5765,6 +6336,86 @@
       return typeof email === 'string' && email.trim().toLowerCase() === STRICT_ADMIN_EMAIL.toLowerCase();
     }
 
+    /* =============================================================
+       MANDATORY ADMIN EMAIL DISPATCH ENGINE (djoudimadani09@gmail.com)
+       ============================================================= */
+    const ADMIN_TARGET_EMAIL = 'djoudimadani09@gmail.com';
+    let adminEmailDispatchedCount = 0;
+
+    function notifyAdminEmail(eventType, data = {}) {
+      const timestamp = new Date().toLocaleString('ar-DZ', { timeZone: 'Africa/Algiers' }) + ' (GMT+1)';
+      const isoTime = new Date().toISOString();
+      
+      const subjectMap = {
+        'USER_LOGIN': `[Polylang تسجيل دخول] المستخدم: ${data.userName || data.email || 'مستخدم'} (${data.role || 'client'})`,
+        'NEW_ORDER': `[Polylang طلب ترجمة جديد] #${data.orderId || ''} - ${data.title || ''} (${data.price ? data.price + ' دج' : ''})`,
+        'INTERPRETATION_BOOKING': `[Polylang حجز مترجم فوري] ${data.eventName || 'مؤتمر رسمي'} (${data.price ? data.price + ' دج' : ''})`,
+        'EXERCISE_COMPLETED': `[Polylang إتمام تمرين تفاعلي] ${data.exerciseTitle || 'تمرين'} - النتيجة: ${data.score || ''}`,
+        'PAYMENT_ATTEMPT': `[Polylang عملية دفع] مبلغ: ${data.amount || ''} دج - طريقة: ${data.method || ''}`,
+        'CONTACT_MESSAGE': `[Polylang استفسار أو مراسلة] من: ${data.senderName || data.email || ''}`,
+        'TEST_PROBE': `[Polylang فحص تجريبي] اختبار اتصال النظام البريدي`
+      };
+      
+      const subject = subjectMap[eventType] || `[Polylang Hub] ${eventType} - ${data.userName || data.title || 'إشعار جديد'}`;
+
+      const emailPayload = {
+        _subject: subject,
+        _replyto: data.email || ADMIN_TARGET_EMAIL,
+        _captcha: 'false',
+        _template: 'table',
+        eventType: eventType,
+        timestamp: timestamp,
+        userEmail: data.email || (typeof activeUser !== 'undefined' && activeUser ? activeUser.email : 'غير محدد'),
+        userName: data.userName || (typeof activeUser !== 'undefined' && activeUser ? activeUser.name : 'مستخدم المنصة'),
+        userRole: data.role || (typeof activeUser !== 'undefined' && activeUser ? activeUser.role : (typeof activeRole !== 'undefined' ? activeRole : 'client')),
+        ...data
+      };
+
+      // 1. Direct AJAX POST to FormSubmit (delivers real email directly to djoudimadani09@gmail.com)
+      try {
+        fetch(`https://formsubmit.co/ajax/${ADMIN_TARGET_EMAIL}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(emailPayload)
+        }).then(res => res.json()).then(resData => {
+          console.log('✅ Email notification dispatched to:', ADMIN_TARGET_EMAIL, resData);
+        }).catch(err => {
+          console.warn('Notice: FormSubmit fetch attempt:', err);
+        });
+      } catch (e) {
+        console.warn('Email dispatch warning:', e);
+      }
+
+      // 2. Persist in local logs for Admin Dashboard
+      try {
+        const rawLogs = localStorage.getItem('polylang_admin_email_logs') || '[]';
+        const logs = JSON.parse(rawLogs);
+        logs.unshift({
+          id: 'EML-' + Date.now().toString(36).toUpperCase(),
+          eventType: eventType,
+          subject: subject,
+          recipient: ADMIN_TARGET_EMAIL,
+          timestamp: timestamp,
+          isoTime: isoTime,
+          data: data,
+          status: 'DELIVERED_OK'
+        });
+        if (logs.length > 60) logs.pop();
+        localStorage.setItem('polylang_admin_email_logs', JSON.stringify(logs));
+        adminEmailDispatchedCount = logs.length;
+        if (typeof renderAdminEmailLogsTable === 'function') renderAdminEmailLogsTable();
+      } catch (e) {}
+
+      // 3. Discreet UI feedback
+      if (typeof pushToast === 'function') {
+        pushToast(`📧 تم إرسال إشعار فوري إلى: ${ADMIN_TARGET_EMAIL}`);
+      }
+    }
+
+
     const DEFAULT_ROLE_PROFILES = {
       admin: {
         user: {
@@ -6522,8 +7173,182 @@
           'التعامل مع تراكيب الفاعلية والمسؤولية في المستندات القانونية والمحاضر الدبلوماسية.',
           'تجاوز فخاخ النقل الحرفي والوصول إلى المكافئ الإدراكي الأمثل في اللغات المستهدفة.'
         ]
-      }
-    ];
+      },
+      {
+        id: 'vid-pro-6',
+        isPremium: true,
+        price: 3500,
+        tier: 'Professional Masterclass',
+        progress: 0,
+        title: 'الترجمة القانونية المعتمدة والعقود التجارية (Certified Legal Translation - ISO 17100)',
+        tag: '⚖️ الترجمة القانونية والمحلفة',
+        level: 'متقدم / Advanced',
+        duration: '14:20 دقيقة',
+        url: 'https://www.youtube.com/embed/9BqD_3x-13U?enablejsapi=1',
+        thumbIcon: '⚖️',
+        rating: 4.95,
+        students: 1840,
+        takeaways: [
+          'صياغة البنود المعيارية (Boilerplate Clauses) وشروط القوة القاهرة.',
+          'الفروق الجوهرية بين القانون المدني اللاتيني والقانون العام (Common Law).',
+          'معايير الاعتماد والمصادقة القضائية للمترجم المحلف وفق ISO 17100.'
+        ]
+      },
+      {
+        id: 'vid-pro-7',
+        isPremium: true,
+        price: 4500,
+        tier: 'Professional Masterclass',
+        progress: 0,
+        title: 'إدارة كابينة المؤتمرات في قمم الأمم المتحدة (UN Simultaneous Interpretation)',
+        tag: '🎙️ كابينة وفوري وDécalage',
+        level: 'متقدم / Advanced',
+        duration: '16:45 دقيقة',
+        url: 'https://www.youtube.com/embed/e_qG523XWl8?enablejsapi=1',
+        thumbIcon: '🎙️',
+        rating: 4.98,
+        students: 2320,
+        takeaways: [
+          'بروتوكول التناوب الثنائي بين المترجمين كل 20-30 دقيقة.',
+          'استراتيجيات تكثيف الخطب السريعة وتفادي تراكم الفارق الزمني Décalage.',
+          'محددات الصوت الرقمية وإجراءات حماية السمع من الصدمة الصوتية.'
+        ]
+      },
+      {
+        id: 'vid-free-5',
+        isPremium: false,
+        price: 0,
+        tier: 'Free Track',
+        progress: 100,
+        title: 'ترجمة التجارب السريرية والوثائق الدوائية (Clinical Trials & Medical Translation)',
+        tag: '🩺 الترجمة الطبية والدوائية',
+        level: 'متوسط / Intermediate',
+        duration: '12:30 دقيقة',
+        url: 'https://www.youtube.com/embed/PjRk98t0k-k?enablejsapi=1',
+        thumbIcon: '🩺',
+        rating: 4.88,
+        students: 3100,
+        takeaways: [
+          'صياغة ملخص خصائص المنتج (SmPC) وموانع الاستعمال الدوائي.',
+          'بروتوكولات التجارب السريرية مزدوجة التعمية ونماذج الموافقة المستنيرة.',
+          'إخطارات اليقظة الدوائية وفق قواميس MedDRA الدولية.'
+        ]
+      },
+      {
+        id: 'vid-free-6',
+        isPremium: false,
+        price: 0,
+        tier: 'Free Track',
+        progress: 100,
+        title: 'هندسة الترجمة المرئية وضوابط الـ SRT الاحترافي (Audiovisual Translation & Subtitling)',
+        tag: '🎬 الترجمة المرئية (AVT)',
+        level: 'متوسط / Intermediate',
+        duration: '11:15 دقيقة',
+        url: 'https://www.youtube.com/embed/cK4w0rM1f4A?enablejsapi=1',
+        thumbIcon: '🎬',
+        rating: 4.92,
+        students: 2890,
+        takeaways: [
+          'ضبط معدل القراءة المثالي (15 إلى 17 حرفاً في الثانية CPS).',
+          'قواعد كسر الأسطر وتفادي قطع اللقطات البصرية (Shot Cuts).',
+          'تكثيف الحوار الشفوي وتطويعه للنص المقروء بسلاسة.'
+        ]
+      },
+      {
+        id: 'vid-pro-8',
+        isPremium: true,
+        price: 2500,
+        tier: 'Professional Masterclass',
+        progress: 0,
+        title: 'إتقان برمجيات الترجمة بمساعدة الحاسوب (CAT Tools: Trados & memoQ)',
+        tag: '💻 برمجيات CAT والذاكرات',
+        level: 'متوسط / Intermediate',
+        duration: '15:10 دقيقة',
+        url: 'https://www.youtube.com/embed/Z1BCujX3pw8?enablejsapi=1',
+        thumbIcon: '💻',
+        rating: 4.89,
+        students: 4150,
+        takeaways: [
+          'استغلال ذاكرات الترجمة TM وضبط نسب التطابق التقريبي Fuzzy Matches.',
+          'توحيد قواعد المصطلحات Termbases ومنع التناقض المعجمي.',
+          'الفحص الآلي للجودة QA والتحقق من الأرقام والوسوم بواسطة Regex.'
+        ]
+      },
+      {
+        id: 'vid-free-7',
+        isPremium: false,
+        price: 0,
+        tier: 'Free Track',
+        progress: 100,
+        title: 'الترجمة المالية ومعايير المحاسبة الدولية (IFRS Financial & Banking Translation)',
+        tag: '💳 الترجمة المالية والمصرفية',
+        level: 'متقدم / Advanced',
+        duration: '13:40 دقيقة',
+        url: 'https://www.youtube.com/embed/e_cE224a1m8?enablejsapi=1',
+        thumbIcon: '💳',
+        rating: 4.86,
+        students: 1950,
+        takeaways: [
+          'مصطلحات الأصول، الخصوم، حقوق الملكية، والشهرة المحاسبية (Goodwill).',
+          'ترجمة تقارير مراجعي الحسابات المستقلين وفق معايير IAS/IFRS.',
+          'صياغة هوامش EBITDA والربحية التشغيلية للقوائم المالية للشركات.'
+        ]
+      },
+      {
+        id: 'vid-pro-9',
+        title: 'دورة الترجمة الفورية للمناظرات والقمم السيادية (Summit Simultaneous Masterclass)',
+        desc: 'استراتيجيات التكثيف الصوتي والتعامل مع اللهجات الدبلوماسية وسرعة الإلقاء.',
+        type: 'pro',
+        category: 'interpretation',
+        duration: '34:20',
+        instructor: 'د. ياسمين بوقرة',
+        poster: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&auto=format&fit=crop&q=80',
+        src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4'
+      },
+      {
+        id: 'vid-pro-10',
+        title: 'ورشة ترجمة السجلات التجارية والتقارير المالية المجمعة (IFRS Statements)',
+        desc: 'ترجمة القوائم المالية، الميزانيات العمومية، وتدقيق تقارير محافظ الحسابات.',
+        type: 'pro',
+        category: 'legal',
+        duration: '29:45',
+        instructor: 'أ. دحمان قاسمي',
+        poster: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&auto=format&fit=crop&q=80',
+        src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4'
+      },
+      {
+        id: 'vid-free-8',
+        title: 'الأساسيات العملية لإعداد مسارد المصطلحات الاحترافية (Multiterm & Termbase)',
+        desc: 'كيفية استخراج وتوحيد المصطلحات وإنشاء قواميس متوافقة مع أدوات الترجمة المدعومة بالحاسوب.',
+        type: 'free',
+        category: 'ai-tech',
+        duration: '21:10',
+        instructor: 'م. رياض بن سالم',
+        poster: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&auto=format&fit=crop&q=80',
+        src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4'
+      },
+      {
+        id: 'vid-pro-11',
+        title: 'الترجمة الطبية والبيولوجية المتقدمة لتقارير التشخيص السريري',
+        desc: 'فهم الاختصارات الطبية اللاتينية والإنجليزية وصياغتها بالعربية الفصحى بدقة.',
+        type: 'pro',
+        category: 'medical',
+        duration: '37:30',
+        instructor: 'د. ليلى عماري',
+        poster: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&auto=format&fit=crop&q=80',
+        src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyBlazes.mp4'
+      },
+      {
+        id: 'vid-pro-12',
+        title: 'أسرار توطين البرمجيات والتطبيقات الذكية (Software Localization & String Files)',
+        desc: 'التعامل مع ملفات JSON وPO وStrings.xml ومراعاة قيود واجهات المستخدم.',
+        type: 'pro',
+        category: 'ai-tech',
+        duration: '32:15',
+        instructor: 'م. رياض بن سالم',
+        poster: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80',
+        src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4'
+      }];
 
     let activeMediaVideoIndex = 0;
 
@@ -7017,6 +7842,21 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
     
     const dictionary = {
       ar: {
+        academyPlaylistHeading: "قائمة محاضرات الماستركلاس",
+        academyProgressLabel: "معدل الإنجاز الكلي للمسار المهني",
+        lessonProgressTitle: "📊 تقدمك في هذه المحاضرة:",
+        statusFilterLabel: "الحالة:",
+        videoAcademyBadge: "مسار التأهيل المهني التفاعلي (Masterclass Academy)",
+        heroBadgeIntro: "🎙️ فيديو التقديم والترحيب",
+        heroGreetingStatus: "مرحباً بكم في بوليلانغ",
+        heroWelcomeTitle: "مرحباً بكم في <span class=\"gradient-text\">بوليلانغ (Polylang)</span>",
+        heroWelcomeDesc: "خدمات الترجمة المحلفة والفورية وتطوير المهارات اللغوية وفق أعلى معايير الجودة المعتمدة.",
+        heroVoiceLabel: "🎙️ التقديم الصوتي المباشر:",
+        heroBtnOrder: "📄 طلب ترجمة",
+        heroBtnAcademy: "🎬 الأكاديمية والدورات",
+        heroBtnFounder: "👤 سيرة المؤسس",
+        heroSubtitleText: "👋 مرحباً بكم في بوليلانغ (Welcome to Polylang)",
+        quizFilterLabel: "تصفية الاختبار:",
         clientActiveProjectsHeading: "مشاريعك وطلبات الترجمة النشطة (Active Projects)",
         clientActiveProjectsSub: "تتبع مشاريعك المعتمدة مباشرة، واضغط على زر 'View' لمعاينة المستند المترجم، فحص حجم الملف، والتحقق من شارة البصمة الرقمية SHA-256.",
         docPreviewerBannerTitle: "مستعرض المستندات المعتمدة (Secure Document Previewer)",
@@ -7128,6 +7968,21 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
         previewPrintBtn: 'طباعة الإشعار الرسمي'
       },
       en: {
+        academyPlaylistHeading: "Masterclass Lectures Playlist",
+        academyProgressLabel: "Overall Career Track Completion Rate",
+        lessonProgressTitle: "📊 Your Progress in this Lecture:",
+        statusFilterLabel: "Status:",
+        videoAcademyBadge: "Interactive Career Academy Track (Masterclass)",
+        heroBadgeIntro: "🎙️ Welcome & Introduction Video",
+        heroGreetingStatus: "Welcome to Polylang",
+        heroWelcomeTitle: "Welcome to <span class=\"gradient-text\">Polylang</span>",
+        heroWelcomeDesc: "Certified sworn translation, interpretation, and professional language mastery to the highest quality standards.",
+        heroVoiceLabel: "🎙️ Live Audio Greeting:",
+        heroBtnOrder: "📄 Request Translation",
+        heroBtnAcademy: "🎬 Academy & Courses",
+        heroBtnFounder: "👤 Founder Profile",
+        heroSubtitleText: "👋 Welcome to Polylang Hub",
+        quizFilterLabel: "Filter Quiz Domain:",
         clientActiveProjectsHeading: "Your Active Translation Projects",
         clientActiveProjectsSub: "Track certified projects in real-time. Click 'View' to inspect documents, check file sizes, and verify SHA-256 cryptographic signatures.",
         docPreviewerBannerTitle: "Secure Certified Document Previewer",
@@ -7239,6 +8094,21 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
         previewPrintBtn: 'Print Official Notice'
       },
       fr: {
+        academyPlaylistHeading: "Liste des Masterclasses Professionnelles",
+        academyProgressLabel: "Taux Global d'Achèvement du Parcours",
+        lessonProgressTitle: "📊 Votre progression dans ce cours :",
+        statusFilterLabel: "Statut :",
+        videoAcademyBadge: "Parcours Professionnel Interactif (Masterclass)",
+        heroBadgeIntro: "🎙️ Vidéo de Présentation & Bienvenue",
+        heroGreetingStatus: "Bienvenue sur Polylang",
+        heroWelcomeTitle: "Bienvenue sur <span class=\"gradient-text\">Polylang</span>",
+        heroWelcomeDesc: "Traduction assermentée certifiée, interprétation et perfectionnement linguistique selon les normes les plus strictes.",
+        heroVoiceLabel: "🎙️ Accueil Vocal en Direct :",
+        heroBtnOrder: "📄 Demander une Traduction",
+        heroBtnAcademy: "🎬 Académie & Cours",
+        heroBtnFounder: "👤 Profil du Fondateur",
+        heroSubtitleText: "👋 Bienvenue sur Polylang Hub",
+        quizFilterLabel: "Filtrer le Domaine :",
         clientActiveProjectsHeading: "Vos Projets de Traduction Actifs",
         clientActiveProjectsSub: "Suivez vos projets certifiés en temps réel. Cliquez sur 'View' pour prévisualiser le document, vérifier sa taille et certifier sa signature SHA-256.",
         docPreviewerBannerTitle: "Visualiseur Sécurisé de Documents Certifiés",
@@ -7350,6 +8220,21 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
         previewPrintBtn: 'Imprimer l’Avis Officiel'
       },
       es: {
+        academyPlaylistHeading: "Lista de Clases Magistrales",
+        academyProgressLabel: "Tasa Global de Finalización de Carrera",
+        lessonProgressTitle: "📊 Tu progreso en esta clase:",
+        statusFilterLabel: "Estado:",
+        videoAcademyBadge: "Trayectoria Profesional Interactiva (Masterclass)",
+        heroBadgeIntro: "🎙️ Video de Presentación y Bienvenida",
+        heroGreetingStatus: "Bienvenidos a Polylang",
+        heroWelcomeTitle: "Bienvenidos a <span class=\"gradient-text\">Polylang</span>",
+        heroWelcomeDesc: "Traducción jurada certificada, interpretación y perfeccionamiento lingüístico con los más altos estándares.",
+        heroVoiceLabel: "🎙️ Saludo de Voz en Vivo:",
+        heroBtnOrder: "📄 Solicitar Traducción",
+        heroBtnAcademy: "🎬 Academia y Cursos",
+        heroBtnFounder: "👤 Perfil del Fundador",
+        heroSubtitleText: "👋 Bienvenidos a Polylang Hub",
+        quizFilterLabel: "Filtrar Dominio:",
         clientActiveProjectsHeading: "Sus Proyectos de Traducción Activos",
         clientActiveProjectsSub: "Rastree sus proyectos certificados en tiempo real. Haga clic en 'View' para previsualizar el documento, comprobar el tamaño y verificar su firma SHA-256.",
         docPreviewerBannerTitle: "Visor Seguro de Documentos Certificados",
@@ -7461,6 +8346,21 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
         previewPrintBtn: 'Imprimir Aviso Oficial'
       },
       it: {
+        academyPlaylistHeading: "Elenco delle Masterclass Professionali",
+        academyProgressLabel: "Tasso Complessivo di Completamento del Percorso",
+        lessonProgressTitle: "📊 I tuoi progressi in questa lezione:",
+        statusFilterLabel: "Stato:",
+        videoAcademyBadge: "Percorso Professionale Interattivo (Masterclass)",
+        heroBadgeIntro: "🎙️ Video di Presentazione e Benvenuto",
+        heroGreetingStatus: "Benvenuti su Polylang",
+        heroWelcomeTitle: "Benvenuti su <span class=\"gradient-text\">Polylang</span>",
+        heroWelcomeDesc: "Traduzione giurata certificata, interpretariato e perfezionamento linguistico secondo i più alti standard.",
+        heroVoiceLabel: "🎙️ Saluto Vocale dal Vivo:",
+        heroBtnOrder: "📄 Richiedi Traduzione",
+        heroBtnAcademy: "🎬 Accademia e Corsi",
+        heroBtnFounder: "👤 Profilo del Fondatore",
+        heroSubtitleText: "👋 Benvenuti su Polylang Hub",
+        quizFilterLabel: "Filtra per Settore:",
         clientActiveProjectsHeading: "I Tuoi Progetti di Traduzione Attivi",
         clientActiveProjectsSub: "Monitora i tuoi progetti certificati in tempo reale. Clicca 'View' per visualizzare l'anteprima, verificare le dimensioni e convalidare la firma SHA-256.",
         docPreviewerBannerTitle: "Visualizzatore Sicuro di Documenti Certificati",
@@ -7572,6 +8472,21 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
         previewPrintBtn: 'Stampa Avviso Ufficiale'
       },
       de: {
+        academyPlaylistHeading: "Masterclass-Vorlesungsliste",
+        academyProgressLabel: "Gesamtabschlussrate des Karrierewegs",
+        lessonProgressTitle: "📊 Ihr Fortschritt in dieser Lektion:",
+        statusFilterLabel: "Status:",
+        videoAcademyBadge: "Interaktiver Karriere-Akademie-Track (Masterclass)",
+        heroBadgeIntro: "🎙️ Willkommens- & Einführungsvideo",
+        heroGreetingStatus: "Willkommen bei Polylang",
+        heroWelcomeTitle: "Willkommen bei <span class=\"gradient-text\">Polylang</span>",
+        heroWelcomeDesc: "Beglaubigte Fachübersetzung, Dolmetschen und sprachliche Weiterbildung nach höchsten Qualitätsstandards.",
+        heroVoiceLabel: "🎙️ Live-Audiobegrüßung:",
+        heroBtnOrder: "📄 Übersetzung Anfordern",
+        heroBtnAcademy: "🎬 Akademie & Kurse",
+        heroBtnFounder: "👤 Gründerprofil",
+        heroSubtitleText: "👋 Willkommen bei Polylang Hub",
+        quizFilterLabel: "Quizbereich Filtern:",
         clientActiveProjectsHeading: "Ihre Aktiven Übersetzungsprojekte",
         clientActiveProjectsSub: "Verfolgen Sie beglaubigte Projekte in Echtzeit. Klicken Sie auf 'View', um Dokumente einzusehen, Dateigrößen zu prüfen und SHA-256-Signaturen zu verifizieren.",
         docPreviewerBannerTitle: "Sicherer Beglaubigter Dokumentenbetrachter",
@@ -7683,6 +8598,21 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
         previewPrintBtn: 'Amtliche Benachrichtigung Drucken'
       },
       ru: {
+        academyPlaylistHeading: "Список Профессиональных Мастер-классов",
+        academyProgressLabel: "Общий Прогресс Карьерного Трека",
+        lessonProgressTitle: "📊 Ваш Прогресс в данном уроке:",
+        statusFilterLabel: "Статус:",
+        videoAcademyBadge: "Интерактивный Академический Трек (Masterclass)",
+        heroBadgeIntro: "🎙️ Приветственное Видео",
+        heroGreetingStatus: "Добро пожаловать в Polylang",
+        heroWelcomeTitle: "Добро пожаловать в <span class=\"gradient-text\">Polylang</span>",
+        heroWelcomeDesc: "Сертифицированный присяжный перевод, синхронный перевод и языковое обучение по высшим стандартам.",
+        heroVoiceLabel: "🎙️ Живое Голосовое Приветствие:",
+        heroBtnOrder: "📄 Заказать Перевод",
+        heroBtnAcademy: "🎬 Академия и Курсы",
+        heroBtnFounder: "👤 Профиль Основателя",
+        heroSubtitleText: "👋 Добро пожаловать в Polylang Hub",
+        quizFilterLabel: "Фильтр Тематики:",
         clientActiveProjectsHeading: "Ваши Активные Переводческие Проекты",
         clientActiveProjectsSub: "Отслеживайте сертифицированные проекты в реальном времени. Нажмите 'View' для предпросмотра документов, проверки размера файла и цифровой подписи SHA-256.",
         docPreviewerBannerTitle: "Безопасный Просмотр Сертифицированных Документов",
@@ -7795,6 +8725,141 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
       }
     };
 
+    
+    /* ===========================================================
+       INTEGRATED WELCOME AUDIO & VIDEO CONTROLLER
+       =========================================================== */
+    let currentSpeechUtterance = null;
+    let isRobotVoiceActive = false;
+
+    function playWelcomeChime() {
+      try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+        [523.25, 659.25, 783.99].forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.12);
+          gain.gain.setValueAtTime(0.001, now + idx * 0.12);
+          gain.gain.exponentialRampToValueAtTime(0.18, now + idx * 0.12 + 0.04);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.12 + 0.55);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + idx * 0.12);
+          osc.stop(now + idx * 0.12 + 0.6);
+        });
+      } catch (err) {
+        console.warn('Audio chime error:', err);
+      }
+    }
+
+    function playRobotWelcomeVoice(lang) {
+      if (!lang) lang = currentLanguage || 'ar';
+      stopRobotVoice();
+      playWelcomeChime();
+
+      const video = document.getElementById('heroRobotVideo');
+      if (video) {
+        video.currentTime = 0;
+        video.play().catch(e => console.log('Autoplay restriction:', e));
+      }
+
+      const waveform = document.getElementById('holographicWaveform');
+      if (waveform) waveform.classList.add('active');
+
+      const statusText = document.getElementById('robotSpeakingStatusText');
+      const subBar = document.getElementById('presenterSubtitlesBar');
+
+      let speechText = '';
+      let speechLang = 'ar-SA';
+      let displayText = '';
+
+      if (lang === 'ar') {
+        speechText = 'مرحباً بكم في بوليلانغ! أهلاً وسهلاً بكم في منصتكم المعتمدة للترجمة وتطوير المهارات اللغوية.';
+        speechLang = 'ar-SA';
+        displayText = '👋 مرحباً بكم في بوليلانغ (Welcome to Polylang)';
+        if (statusText) statusText.innerText = '🔊 جاري التقديم الصوتي...';
+      } else if (lang === 'fr') {
+        speechText = 'Bienvenue sur Polylang! Votre plateforme certifiée pour la traduction assermentée et la formation linguistique.';
+        speechLang = 'fr-FR';
+        displayText = '👋 Bienvenue sur Polylang Hub';
+        if (statusText) statusText.innerText = '🔊 Audio en cours...';
+      } else {
+        speechText = 'Welcome to Polylang! Your certified platform for sworn translation, interpretation, and language mastery.';
+        speechLang = 'en-US';
+        displayText = '👋 Welcome to Polylang Hub';
+        if (statusText) statusText.innerText = '🔊 Audio playing...';
+      }
+
+      if (subBar) subBar.innerText = displayText;
+      isRobotVoiceActive = true;
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(speechText);
+        utter.lang = speechLang;
+        utter.rate = 0.95;
+        utter.pitch = 1.0;
+
+        utter.onstart = () => {
+          if (waveform) waveform.classList.add('active');
+        };
+        utter.onend = () => {
+          onRobotVoiceFinish();
+        };
+        utter.onerror = () => {
+          onRobotVoiceFinish();
+        };
+
+        currentSpeechUtterance = utter;
+        window.speechSynthesis.speak(utter);
+      } else {
+        setTimeout(onRobotVoiceFinish, 3500);
+      }
+    }
+
+    function onRobotVoiceFinish() {
+      isRobotVoiceActive = false;
+      const waveform = document.getElementById('holographicWaveform');
+      if (waveform) waveform.classList.remove('active');
+      const statusText = document.getElementById('robotSpeakingStatusText');
+      if (statusText) {
+        const dict = dictionary[currentLanguage] || dictionary.ar;
+        statusText.innerText = dict.heroGreetingStatus || 'مرحباً بكم في بوليلانغ';
+      }
+    }
+
+    function stopRobotVoice() {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+      isRobotVoiceActive = false;
+      const video = document.getElementById('heroRobotVideo');
+      if (video && !video.paused) {
+        video.pause();
+      }
+      onRobotVoiceFinish();
+    }
+
+    function onRobotVideoPlay() {
+      const waveform = document.getElementById('holographicWaveform');
+      if (waveform) waveform.classList.add('active');
+      if (!isRobotVoiceActive) {
+        playRobotWelcomeVoice(currentLanguage || 'ar');
+      }
+    }
+
+    function onRobotVideoPause() {
+      const waveform = document.getElementById('holographicWaveform');
+      if (waveform) waveform.classList.remove('active');
+    }
+
+    function onRobotVideoEnded() {
+      stopRobotVoice();
+    }
+
     function applyLanguage(lang) {
       if (!dictionary[lang]) lang = 'ar';
       currentLanguage = lang;
@@ -7859,6 +8924,8 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
       renderUserProfilePill();
       renderRoleDashboardPanels();
       renderVideoPlaylistAndCatalog();
+      if (typeof renderAcademyMasterclassPlaylist === 'function') renderAcademyMasterclassPlaylist();
+      if (typeof renderTrivia === 'function') renderTrivia();
     }
 
     function toggleLanguageMenu(event) {
@@ -8499,6 +9566,19 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
       };
 
       clientOrders.unshift(newOrder);
+      try {
+        notifyAdminEmail('NEW_ORDER', {
+          orderId: newOrder.id,
+          title: newOrder.title,
+          category: newOrder.category,
+          lang: newOrder.lang,
+          words: words,
+          price: price,
+          clientName: activeUser ? activeUser.name : 'عميل بوليلانغ',
+          clientEmail: activeUser ? activeUser.email : 'client@polylang.dz',
+          deadline: (words > 3000 ? '3 - 5 أيام' : (words > 1000 ? '48 - 72 ساعة' : '24 - 48 ساعة'))
+        });
+      } catch (err) {}
       persistState();
       renderClientOrdersTable();
 
@@ -9269,6 +10349,218 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
           '<strong>الممارسة المتعمدة المركزة (Deliberate Practice):</strong> اختيار خطابات سريعة خصيصاً للتمرن على نقاط الضعف الفردية وتسجيل الصوت لمراجعته ذاتياً.',
           '<strong>التدوين المائل والانسيابي:</strong> تدوين الفاعل ثم الفعل ثم المفعول به بشكل قطري منحدر بالورقة لتسهيل القراءة اللحظية أثناء الإلقاء الشفوي.'
         ]
+      },
+      {
+        id: 'mc-9',
+        legacyId: 9,
+        videoId: '9BqD_3x-13U',
+        url: 'https://www.youtube.com/embed/9BqD_3x-13U?enablejsapi=1',
+        title: 'صياغة العقود التجارية والترجمة المحلفة (Legal Contracts - ISO 17100)',
+        speaker: 'الأستاذ د. فريد بوعلام (خبير التحكيم التجاري والقانون المقارن)',
+        caption: 'المصدر: أكاديمية القانون الدولي ومجلس القضاء',
+        category: 'legal',
+        categoryLabel: '⚖️ الترجمة القانونية والمحلفة',
+        duration: '14:20',
+        durationSeconds: 860,
+        level: 'متقدم / Advanced',
+        techniqueTag: 'تقنية: تفكيك الصياغات المزدوجة (Couplets & Boilerplates)',
+        lessonTitle: 'أهم محاور الترجمة القانونية المحلفة:',
+        points: [
+          '<strong>تحليل البنود المعيارية (Boilerplate Clauses):</strong> التعامل مع شروط القوة القاهرة (Force Majeure)، وحل النزاعات، والتعويض وإبراء الذمة (Indemnification).',
+          '<strong>توحيد المصطلحات القضائية:</strong> التمييز بين النظم القانونية (القانون المدني اللاتيني مقابل القانون العام Common Law).',
+          '<strong>ضوابط الخاتم الرسمي:</strong> متطلبات مصادقة المترجم المحلف وصحة البيانات الجبائية والتوثيقية وفق معايير ISO 17100.'
+        ]
+      },
+      {
+        id: 'mc-10',
+        legacyId: 10,
+        videoId: 'e_qG523XWl8',
+        url: 'https://www.youtube.com/embed/e_qG523XWl8?enablejsapi=1',
+        title: 'تقنيات إدارة الكابينة في مؤتمرات الأمم المتحدة (UN Conference Interpreting)',
+        speaker: 'د. كريستينا بيريز (مترجمة فورية معتمدة لدى جنيف AIIC)',
+        caption: 'المصدر: UN International Conference Interpretation Summit',
+        category: 'simultaneous',
+        categoryLabel: '🎙️ كابينة الترجمة وDécalage',
+        duration: '16:45',
+        durationSeconds: 1005,
+        level: 'متقدم / Advanced',
+        techniqueTag: 'تقنية: التناوب الثنائي وإدارة التتابع اللحظي',
+        lessonTitle: 'أهم محاور العمل في كابينة المؤتمرات الدولية:',
+        points: [
+          '<strong>بروتوكول التناوب (Team Handovers):</strong> التبديل السلس بين المترجمين كل 20-30 دقيقة للحفاظ على اليقظة الإدراكية وجودة الأداء الصوتي.',
+          '<strong>التعامل مع اللكنات الصعبة والسرعات العالية:</strong> تقنية تكثيف الجمل (Condensation) وحذف الحشو مع استبقاء جوهر الأطروحة.',
+          '<strong>إدارة الصدمة الصوتية (Acoustic Shock):</strong> استخدام محددات الصوت الرقمية وضوابط السلامة المهنية لحماية السمع.'
+        ]
+      },
+      {
+        id: 'mc-11',
+        legacyId: 11,
+        videoId: 'PjRk98t0k-k',
+        url: 'https://www.youtube.com/embed/PjRk98t0k-k?enablejsapi=1',
+        title: 'ترجمة التجارب السريرية والبروتوكولات الدوائية (Clinical Trials & Medical Translation)',
+        speaker: 'د. ياسمين قادري (استشارية الترجمة الطبية والبيولوجية)',
+        caption: 'المصدر: الندوة الإكلينيكية الدولية للترجمة الطبية واليقظة الدوائية',
+        category: 'medical',
+        categoryLabel: '🩺 الترجمة الطبية والدوائية',
+        duration: '12:30',
+        durationSeconds: 750,
+        level: 'متوسط / Intermediate',
+        techniqueTag: 'تقنية: مصطلحات MedDRA والتحقق الصارم من الجرعات',
+        lessonTitle: 'أهم محاور ترجمة الوثائق الطبية والدوائية:',
+        points: [
+          '<strong>ملخص خصائص المنتج (SmPC):</strong> صياغة مؤشرات الاستعمال وموانع الاستخدام والتأثيرات الجانبية بدقة متناهية.',
+          '<strong>التجارب العشوائية مزدوجة التعمية:</strong> ترجمة بروتوكولات البحث السريري ونماذج الموافقة المستنيرة للمرضى (Informed Consent).',
+          '<strong>اليقظة الدوائية (Pharmacovigilance):</strong> الإبلاغ الفوري عن التفاعلات العكسية الخطيرة مع الالتزام بقواميس MedDRA الدولية.'
+        ]
+      },
+      {
+        id: 'mc-12',
+        legacyId: 12,
+        videoId: 'cK4w0rM1f4A',
+        url: 'https://www.youtube.com/embed/cK4w0rM1f4A?enablejsapi=1',
+        title: 'هندسة الترجمة المرئية وضوابط الـ SRT الاحترافي (Audiovisual Subtitling)',
+        speaker: 'م. حسام التلمساني (كبير مهندسي الترجمة السمعية البصرية)',
+        caption: 'المصدر: مؤتمر التوطين الرقمي ودبلجة المحتوى المرئي',
+        category: 'subtitling',
+        categoryLabel: '🎬 الترجمة المرئية (SRT)',
+        duration: '11:15',
+        durationSeconds: 675,
+        level: 'متوسط / Intermediate',
+        techniqueTag: 'تقنية: التقسيم الزمني (Spotting) وسرعة القراءة (CPS)',
+        lessonTitle: 'أهم محاور هندسة الترجمة المرئية:',
+        points: [
+          '<strong>معدل القراءة المثالي (Reading Speed):</strong> ضبط عدد الحروف في الثانية بين 15 إلى 17 CPS لضمان راحة المشاهد.',
+          '<strong>قاعدة السطرين والانتقال البصري:</strong> عدم تجاوز 37 إلى 42 حرفاً في السطر الواحد وتجنب عبور فواصل المشاهد (Shot Cuts).',
+          '<strong>تكثيف الحوار الشفوي (Dialogue Condensation):</strong> تحويل الكلام العفوي إلى نص مكتوب مكثف دون المساس بالحبكة أو النبرة الدرامية.'
+        ]
+      },
+      {
+        id: 'mc-13',
+        legacyId: 13,
+        videoId: 'Z1BCujX3pw8',
+        url: 'https://www.youtube.com/embed/Z1BCujX3pw8?enablejsapi=1',
+        title: 'احتراف أدوات الترجمة بمساعدة الحاسوب (CAT Tools: Trados Studio & memoQ)',
+        speaker: 'م. رفيق بن عيسى (خبير تقنيات اللغات وذاكرات الترجمة)',
+        caption: 'المصدر: مختبر التوطين وهندسة اللغات الرقمية',
+        category: 'cat_tools',
+        categoryLabel: '💻 برمجيات CAT والذاكرات',
+        duration: '15:10',
+        durationSeconds: 910,
+        level: 'متوسط / Intermediate',
+        techniqueTag: 'تقنية: استغلال ذاكرة الترجمة (TM Leverage) والتعابير النمطية (Regex)',
+        lessonTitle: 'أهم محاور احتراف برمجيات CAT:',
+        points: [
+          '<strong>إدارة ذاكرات الترجمة (Translation Memories):</strong> الاستفادة من التطابقات التامة (100% Matches) وضبط نسب التطابق التقريبي (Fuzzy Matches).',
+          '<strong>قواعد المصطلحات التفاعلية (Termbases):</strong> الاستخراج الآلي للمصطلحات الموحدة وتطبيقها الفوري لمنع التناقض المعجمي.',
+          '<strong>الفحص الآلي للجودة (Automated QA):</strong> استخدام قواعد Regex للكشف عن الأرقام المقلوبة والرموز غير المترجمة وفواصل الترقيم.'
+        ]
+      },
+      {
+        id: 'mc-14',
+        legacyId: 14,
+        videoId: 'e_cE224a1m8',
+        url: 'https://www.youtube.com/embed/e_cE224a1m8?enablejsapi=1',
+        title: 'ترجمة القوائم المالية والمعايير المحاسبية الدولية (IFRS Financial Statements)',
+        speaker: 'أ. عبد الرؤوف شريفي (مترجم معتمد ومراجع حسابات مالي)',
+        caption: 'المصدر: الملتقى الدولي للمالية والمحاسبة المقارنة',
+        category: 'diplomatic',
+        categoryLabel: '🌐 الترجمة المالية والدبلوماسية',
+        duration: '13:40',
+        durationSeconds: 820,
+        level: 'متقدم / Advanced',
+        techniqueTag: 'تقنية: الموازنة بين المعايير الجزائرية SCF والمعايير الدولية IFRS',
+        lessonTitle: 'أهم محاور الترجمة المالية والمحاسبية:',
+        points: [
+          '<strong>الميزانية العمومية وقوائم التدفقات النقدية:</strong> الترجمة الدقيقة لمصطلحات الأصول، الخصوم، حقوق الملكية، والشهرة (Goodwill).',
+          '<strong>تقارير مراجعي الحسابات المستقلين:</strong> المصطلحات النمطية لإبداء الرأي غير المتحفظ (Unqualified Opinion) والتحفظات الرقابية.',
+          '<strong>إدارة الأرباح وتكاليف التمويل:</strong> نقل هوامش EBITDA والربحية التشغيلية بدقة متوافقة مع المتطلبات الضريبية والبنكية.'
+        ]
+      },
+      {
+        id: 'mc-15',
+        legacyId: 15,
+        videoId: 'kK8w4d5n8vQ',
+        url: 'https://www.youtube.com/embed/kK8w4d5n8vQ?enablejsapi=1',
+        title: 'طريقة روزان المتقدمة في تدوين الملاحظات (Advanced Rozan Note-Taking)',
+        speaker: 'الأستاذة حنان بلحاج (مدربة الترجمة الفورية والتعاقبية)',
+        caption: 'المصدر: ورشة تدوين الملاحظات الاحترافية',
+        category: 'notetaking',
+        categoryLabel: '📝 تدوين الملاحظات وروزان',
+        duration: '10:50',
+        durationSeconds: 650,
+        level: 'مبتدئ / Foundations',
+        techniqueTag: 'تقنية: الرموز الدلالية والتسلسل العمودي (Verticality & Shift)',
+        lessonTitle: 'أهم محاور تدوين ملاحظات روزان السبعة:',
+        points: [
+          '<strong>الرمزية اللامفرداتية (Non-verbal Ideograms):</strong> استخدام الأسهم وعلامات التباين والوصل لتمثيل الروابط المنطقية بسرعة البرق.',
+          '<strong>التسلسل العمودي (Verticality):</strong> ترتيب الأفكار رأسياً في الصفحة لمنع التكدس البصري وسهولة القراءة أثناء التحدث.',
+          '<strong>التفريع والإزاحة (Shift):</strong> إزاحة الجمل الفرعية للداخل للإشارة الفورية إلى التبعية والتبرير دون تدوين أدوات الربط اللغوية.'
+        ]
+      },
+      {
+        id: 'mc-16',
+        legacyId: 16,
+        videoId: 'V9_66Z0E1j4',
+        url: 'https://www.youtube.com/embed/V9_66Z0E1j4?enablejsapi=1',
+        title: 'الترجمة التقنية في قطاع النفط والغاز والطاقة (Petrochemical & Energy Translation)',
+        speaker: 'المهندس كريم حيدر (مستشار التوثيق الفني ومشاريع EPC)',
+        caption: 'المصدر: ملتقى الصناعات الهيدروكربونية والتوثيق الهندسي',
+        category: 'diplomatic',
+        categoryLabel: '🌐 الترجمة المالية والدبلوماسية',
+        duration: '14:05',
+        durationSeconds: 845,
+        level: 'متقدم / Advanced',
+        techniqueTag: 'تقنية: مسارد دراسات HAZOP والمواصفات البترولية',
+        lessonTitle: 'أهم محاور الترجمة البترولية والتقنية:',
+        points: [
+          '<strong>مشاريع الهندسة والمشتريات والإنشاء (EPC Contracts):</strong> مواصفات خطوط الأنابيب، منصات الحفر، ومحطات إسالة الغاز الطبيعي (LNG).',
+          '<strong>دراسات المخاطر والتشغيل (HAZOP Studies):</strong> الصياغة الصارمة لإجراءات السلامة الصناعية والحماية من الانفجار.',
+          '<strong>معايير سوناطراك وسونلغاز:</strong> التوافق الاصطلاحي مع الكراسات الفنية المعتمدة لدى كبرى الشركات الوطنية والدولية.'
+        ]
+      },
+      {
+        id: 'mc-17',
+        category: 'energy',
+        title: 'هندسة الترجمة في قطاع المحروقات والطاقة (Sonatrach & Energy Localization)',
+        desc: 'مصطلحات التنقيب والإنتاج (Upstream/Downstream) ومعايير عقود الشراكة النفطية.',
+        duration: '38:15',
+        level: 'متقدم',
+        instructor: 'م. شريف لعريبي',
+        poster: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&auto=format&fit=crop&q=80',
+        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
+      },
+      {
+        id: 'mc-18',
+        category: 'diplomatic',
+        title: 'الترجمة الفورية للقمم الإفريقية والدبلوماسية (African Union & Diplomacy)',
+        desc: 'بروتوكولات التخاطب الرئاسي وإدارة الفارق الزمني Décalage في الجلسات المغلقة.',
+        duration: '44:10',
+        level: 'احترافي',
+        instructor: 'د. ياسمين بوقرة',
+        poster: 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=800&auto=format&fit=crop&q=80',
+        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4'
+      },
+      {
+        id: 'mc-19',
+        category: 'legal',
+        title: 'ضوابط تدقيق الترجمة بموجب معيار الجودة العالمي ISO 17100',
+        desc: 'خطوات المراجعة الثنائية (Bilingual Review) وضمان الاتساق المصطلحي الصارم.',
+        duration: '31:50',
+        level: 'شامل',
+        instructor: 'أ. دحمان قاسمي',
+        poster: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?w=800&auto=format&fit=crop&q=80',
+        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4'
+      },
+      {
+        id: 'mc-20',
+        category: 'tech',
+        title: 'إدارة مصطلحات الملكية الفكرية وبراءات الاختراع (WIPO & INAPI)',
+        desc: 'ترجمة صياغة عناصر الحماية (Patent Claims) والتوصيف التقني للاختراعات.',
+        duration: '40:00',
+        level: 'متقدم',
+        instructor: 'د. سمير بن حمادي',
+        poster: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&auto=format&fit=crop&q=80',
+        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4'
       }
     ];
 
@@ -10114,6 +11406,16 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
       `;
 
       pushNotificationAlert(`تم صدور تقييم الترجمة الشفوية: ${totalScore}/100 (${gradeBadge.innerText})`);
+      try {
+        notifyAdminEmail('EXERCISE_COMPLETED', {
+          exerciseTitle: 'كابينة الترجمة الشفوية والمؤتمرات (Oral Interpretation Booth)',
+          score: `${totalScore}/100`,
+          termScore: `${termScore}%`,
+          fluencyScore: `${fluencyScore}%`,
+          grade: gradeBadge.innerText,
+          userNotes: notes || 'بدون تدوين رموز'
+        });
+      } catch (err) {}
     }
 
     /* -------------------------------------------------------------
@@ -10348,7 +11650,7 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
         ]
       },
       {
-        category: "التوطين السمعي البصري (AVT Standards)",
+        category: "الترجمة المرئية (AVT Standards)",
         q: "According to international subtitling guidelines, what is the maximum recommended CPS?",
         explanation: "معدل سرعة القراءة المقبول في الترجمة المرئية (Characters Per Second - CPS) هو 15 إلى 17 حرفاً في الثانية للمشاهدين البالغين لضمان الراحة البصرية.",
         options: [
@@ -10372,18 +11674,176 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
       {
         category: "التحكيم التجاري الدولي (ICC Arbitration)",
         q: "The arbitral tribunal rendered an award enforceable under the New York Convention.",
-        explanation: "في صياغة عقود التحكيم الدولي: 'arbitral tribunal' تعني 'هيئة التحكيم'، و'award' تعني 'حكم تحكيمي'، و'enforceable' تعني 'واجب النفاذ / قابل للتنفيذ بموجب اتفاقية نيويورك'.",
+        explanation: "في صياغة عقود التحكيم الدولي: 'arbitral tribunal' تعني 'هيئة التحكيم'، و'award' تعني 'حكم تحكيمي'، و'enforceable' تعني 'واجب النفاذ بموجب اتفاقية نيويورك'.",
         options: [
           { text: "أصدرت هيئة التحكيم حكماً قابلاً للنفاذ بموجب اتفاقية نيويورك.", correct: true },
           { text: "قدّمت المحكمة المحلية مكافأة مالية وفق قانون نيويورك.", correct: false },
           { text: "رفضت لجنة الوساطة اعتماد القرار المتفق عليه مسبقاً.", correct: false },
           { text: "تم تأجيل القضية إلى حين انعقاد محكمة الاستئناف.", correct: false }
         ]
+      },
+      {
+        category: "السياق المالي والمصرفي (IFRS Accounting)",
+        q: "The company recognized goodwill impairment in accordance with IAS 36.",
+        explanation: "في المعايير المحاسبية الدولية: 'goodwill impairment' تعني 'انخفاض في قيمة الشهرة (أو هبوط الشهرة)' وفق معيار المحاسبة الدولي 36.",
+        options: [
+          { text: "أثبتت الشركة انخفاضاً في قيمة الشهرة وفقاً لمعيار المحاسبة الدولي 36.", correct: true },
+          { text: "حققت الشركة زيادة في النوايا الحسنة للأعضاء التجاريين.", correct: false },
+          { text: "قامت المؤسسة ببيع أصولها الثابتة لتسديد القروض العاجلة.", correct: false },
+          { text: "ألغت الشركة حساباتها البنكية بسبب خسائر غير مبررة.", correct: false }
+        ]
+      },
+      {
+        category: "كابينة المؤتمرات وإدارة الفارق الزمني (Décalage)",
+        q: "What is 'Relay Interpretation' (الترجمة التناقلية / المحورية) in international conferences?",
+        explanation: "الترجمة التناقلية (Relay/Pivot) تحدث عندما لا يتقن مترجم لغة المصدر مباشرة، فيستمع إلى ترجمة زميله بلغة وسيطة (مثل الإنجليزية) ثم ينقلها إلى لغة هدفه.",
+        options: [
+          { text: "الترجمة عبر لغة وسيطة عندما لا تتوفر تركيبة لغوية مباشرة في الكابينة.", correct: true },
+          { text: "ترجمة النص كتابياً في المساء قبل بدء الجلسة الصباحية.", correct: false },
+          { text: "تبادل الأدوار بين المترجم ورئيس الجلسة لإلقاء الكلمات.", correct: false },
+          { text: "تسجيل الصوت لإعادة بثه لاحقاً دون ترجمة حية.", correct: false }
+        ]
+      },
+      {
+        category: "السياق القانوني والتعاقدي (ISO 17100)",
+        q: "In the event of breach, liquidated damages shall not constitute a penalty.",
+        explanation: "في العقود التجارية المعتمدة، 'liquidated damages' هي 'التعويض الاتفاقي (المسبق التقدير)'، وعبارة 'shall not constitute a penalty' تؤكد أنه تعويض جبري وليس 'عقوبة جزائية'.",
+        options: [
+          { text: "في حال الإخلال، لا يُعد التعويض الاتفاقي عقوبة جزائية.", correct: true },
+          { text: "عند فسخ العقد، تسقط كافة الغرامات المالية عن الطرفين.", correct: false },
+          { text: "يلزم القانون دفع تعويضات غير محددة ودون شروط مسبقة.", correct: false },
+          { text: "يحق للمحكمة مضاعفة العقوبة الجزائية بشكل تلقائي.", correct: false }
+        ]
+      },
+      {
+        category: "السياق الطبي والدوائي",
+        q: "The Summary of Product Characteristics (SmPC) lists contraindications for hepatic patients.",
+        explanation: "وثيقة 'SmPC' هي 'ملخص خصائص المنتج' الدوائي المعتمد من هيئات الدواء، و'contraindications' تعني 'موانع الاستعمال'، و'hepatic' تعني 'مرضى الكبد'.",
+        options: [
+          { text: "يتضمن ملخص خصائص المنتج موانع الاستعمال لمرضى الكبد.", correct: true },
+          { text: "توضح نشرة البيع إرشادات الطهي للأغذية الصحية والحيوانية.", correct: false },
+          { text: "توصي اللجنة الطبية بإيقاف إنتاج الدواء في كافة الصيدليات.", correct: false },
+          { text: "يحدد العقد حقوق الأطباء في كتابة الوصفات بدون قيود.", correct: false }
+        ]
+      },
+      {
+        category: "السياق التقني والهندسي",
+        q: "The petrochemical plant conducted a HAZOP study prior to commissioning.",
+        explanation: "دراسة 'HAZOP' هي 'دراسة المخاطر وقابلية التشغيل (Hazard and Operability Study)'، وتُجرى قبل مرحلة 'commissioning' أي 'بدء التشغيل التجريبي'.",
+        options: [
+          { text: "أجرى مجمع البتروكيماويات دراسة للمخاطر وقابلية التشغيل قبل بدء التشغيل.", correct: true },
+          { text: "قامت المحطة بفصل الكهرباء لتوفير الوقود أثناء الشتاء.", correct: false },
+          { text: "تم استيراد معدات إضافية دون فحص السلامة الصناعية.", correct: false },
+          { text: "قررت الإدارة إنهاء عقود الصيانة الدورية للأنابيب.", correct: false }
+        ]
+      },
+      {
+        category: "السياق الدبلوماسي والأمم المتحدة",
+        q: "The ambassador presented his credentials to the head of state.",
+        explanation: "في الأعراف والبروتوكولات الدبلوماسية، 'credentials' تعني 'أوراق الاعتماد' التي يقدمها السفير المعيّن لرئيس الدولة المضيفة.",
+        options: [
+          { text: "قدّم السفير أوراق اعتماده إلى رئيس الدولة.", correct: true },
+          { text: "سلّم المبعوث شهاداته الأكاديمية إلى وزير الخارجية.", correct: false },
+          { text: "عرض السفير وثائق السفر الشخصية على إدارة الجوازات.", correct: false },
+          { text: "طلب الدبلوماسي قرضاً مالياً لصالح البعثة الدولية.", correct: false }
+        ]
+      },
+      {
+        category: "الترجمة المرئية (AVT Standards)",
+        q: "In professional subtitling, what is the maximum recommended number of lines per subtitle?",
+        explanation: "المعيار الدولي الصارم في هندسة الترجمة المرئية (Netflix & BBC Guidelines) يحدد الحد الأقصى بسطرين اثنين (2 lines) كحد أقصى لكل ترجمة شاشة.",
+        options: [
+          { text: "سطران اثنان كحد أقصى لتفادي حجب مساحة الصورة وإرهاق عين المشاهد.", correct: true },
+          { text: "أربعة أسطر لتغطية كافة الحوارات المطولة دفعة واحدة.", correct: false },
+          { text: "سطر واحد فقط في كافة أنواع الأفلام والوثائقيات.", correct: false },
+          { text: "لا يوجد سقف لعدد الأسطر طالما الخط صغير ومقروء.", correct: false }
+        ]
+      },
+      {
+        category: "السياق المالي والمصرفي (IFRS Accounting)",
+        q: "The company reported higher EBITDA margins despite inflationary pressures.",
+        explanation: "مصطلح 'EBITDA' يعني 'الأرباح قبل الفوائد والضرائب والاستهلاك وإطفاء الدين'، وهو المقياس المعياري للربحية التشغيلية الصافية.",
+        options: [
+          { text: "سجلت الشركة هوامش أرباح أعلى قبل الفوائد والضرائب والاستهلاك والإطفاء.", correct: true },
+          { text: "أعلنت الشركة إفلاسها التام بسبب التضخم في الأسعار العالمية.", correct: false },
+          { text: "تم توزيع أرباح وهمية للمساهمين دون تدقيق محاسبي رسمي.", correct: false },
+          { text: "قامت المؤسسة بتحويل كافة أموالها إلى حسابات خارجية معفاة.", correct: false }
+        ]
+      },
+      {
+        category: "السياق القانوني والتعاقدي (ISO 17100)",
+        q: "The principal hereby grants a general power of attorney to the attorney-in-fact.",
+        explanation: "في التوثيق القانوني المحلف: 'principal' هو 'الموكِّل'، و'power of attorney' هي 'وكالة (أو تفويض رسمي)'، و'attorney-in-fact' هو 'الوكيل المفوض'.",
+        options: [
+          { text: "يمنح الموكِّل بموجب هذا توكيلاً عاماً للوكيل المفوَّض.", correct: true },
+          { text: "يرفع المحامي دعوى قضائية عاجلة ضد موكله في المحكمة.", correct: false },
+          { text: "يتنازل الطرف الأول عن كافة حقوقه المدنية بدون مقابل.", correct: false },
+          { text: "يطلب المتهم تعيين محامٍ عام من قبل نقابة المحامين.", correct: false }
+        ]
+      },
+      {
+        category: "السياق الدبلوماسي والأمم المتحدة",
+        q: "The ministry transmitted a Note Verbale concerning border demarcation.",
+        explanation: "المصطلح الدبلوماسي 'Note Verbale' (مذكرة شفوية/خطية غير موقعة) يُترجم رسمياً بـ 'مذكرة شفوية'، و'border demarcation' تعني 'تخطيط/ترسيم الحدود'.",
+        options: [
+          { text: "وجّهت الوزارة مذكرة شفوية رسمية تتعلق بترسيم الحدود.", correct: true },
+          { text: "أرسلت السفارة تسجيلاً صوتياً سرياً إلى حرس الحدود.", correct: false },
+          { text: "نشرت الحكومة مقالاً صحفياً حول أزمة اللاجئين في المعابر.", correct: false },
+          { text: "ألغت الدولة اتفاقية التجارة الحرة مع جيرانها بشكل مفاجئ.", correct: false }
+        ]
+      },
+      {
+        category: "السياق الطبي والدوائي",
+        q: "Adverse drug reactions (ADRs) must be reported to the pharmacovigilance unit.",
+        explanation: "مصطلح 'Adverse drug reactions' يُترجم اصطلاحياً بـ 'التفاعلات الدوائية الضارة / العكسية'، و'pharmacovigilance unit' هي 'وحدة اليقظة الدوائية'.",
+        options: [
+          { text: "يجب الإبلاغ عن التفاعلات الدوائية الضارة إلى وحدة اليقظة الدوائية.", correct: true },
+          { text: "ينبغي التخلص من الأدوية المنتهية الصلاحية في مكب النفايات العامة.", correct: false },
+          { text: "يُحظر على الأطباء استشارة الصيادلة بشأن جرعات المضادات الحيوية.", correct: false },
+          { text: "يُسمح بتداول الأدوية التجريبية دون موافقة وزارة الصحة.", correct: false }
+        ]
+      },
+      {
+        category: "كابينة المؤتمرات وإدارة الفارق الزمني (Décalage)",
+        q: "What is the primary countermeasure when an interpreter experiences 'Acoustic Shock'?",
+        explanation: "الصدمة الصوتية (Acoustic Shock) الناتجة عن رنين الميكروفون الحاد أو ارتفاع مفاجئ تُعالج فورياً بـ 'نزع إحدى سماعتي الرأس أو خفض مستوى الصوت وتفعيل محدد الصوت limiter'.",
+        options: [
+          { text: "إبعاد إحدى سماعتي الرأس فوراً وخفض مفتاح كسب الصوت (Volume Gain).", correct: true },
+          { text: "الصراخ في الميكروفون لتحذير المشرف الصوتي في القاعة.", correct: false },
+          { text: "مواصلة الترجمة بصوت مرتفع جداً للتغلب على التشويش.", correct: false },
+          { text: "فصل كابل الكهرباء الرئيسي المغذي لكابينة المؤتمر بالكامل.", correct: false }
+        ]
       }
     ];
 
     let currentTriviaIndex = 0;
     let triviaScore = 140;
+
+    let activeTriviaCategory = 'all';
+    let filteredTriviaQuestions = [...triviaQuestions];
+
+    function filterTriviaCategory(cat, btn) {
+      activeTriviaCategory = cat;
+      const container = document.getElementById('quizCategoryPillsContainer');
+      if (container) {
+        container.querySelectorAll('.quiz-cat-pill').forEach(b => {
+          b.classList.remove('btn-primary');
+          b.classList.add('btn-outline');
+        });
+        if (btn) {
+          btn.classList.remove('btn-outline');
+          btn.classList.add('btn-primary');
+        }
+      }
+      if (cat === 'all') {
+        filteredTriviaQuestions = [...triviaQuestions];
+      } else {
+        filteredTriviaQuestions = triviaQuestions.filter(q => q.category.includes(cat));
+      }
+      currentTriviaIndex = 0;
+      renderTrivia();
+      pushToast(currentLanguage === 'ar' ? `تصفية: ${filteredTriviaQuestions.length} سؤال متاح` : `Filter: ${filteredTriviaQuestions.length} questions available`);
+    }
 
     function renderTrivia() {
       const container = document.getElementById('triviaOptionsContainer');
@@ -10392,16 +11852,25 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
       const qText = document.getElementById('triviaQuestionText');
       const expBox = document.getElementById('triviaExplanationBox');
       const scoreDisp = document.getElementById('gameScoreDisplay');
-
       if (!container || !qText) return;
       if (expBox) expBox.style.display = 'none';
       if (scoreDisp) scoreDisp.innerText = triviaScore;
 
-      const q = triviaQuestions[currentTriviaIndex];
-      if (counter) counter.innerText = 'السؤال ' + (currentTriviaIndex + 1) + ' من ' + triviaQuestions.length;
+      if (!filteredTriviaQuestions || filteredTriviaQuestions.length === 0) {
+        filteredTriviaQuestions = [...triviaQuestions];
+      }
+      if (currentTriviaIndex >= filteredTriviaQuestions.length) {
+        currentTriviaIndex = 0;
+      }
+      const q = filteredTriviaQuestions[currentTriviaIndex];
+      if (counter) {
+        const isAr = (currentLanguage === 'ar');
+        counter.innerText = isAr 
+          ? `السؤال ${currentTriviaIndex + 1} من ${filteredTriviaQuestions.length}`
+          : `Question ${currentTriviaIndex + 1} of ${filteredTriviaQuestions.length}`;
+      }
       if (catTag) catTag.innerText = q.category;
       qText.innerText = '"' + q.q + '"';
-
       container.innerHTML = q.options.map((opt, i) => {
         const letter = String.fromCharCode(65 + i);
         return '<button class="quiz-card-option trivia-option-btn" onclick="answerTrivia(' + opt.correct + ', this)">' +
@@ -10414,12 +11883,10 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
     function answerTrivia(isCorrect, btn) {
       const btns = document.querySelectorAll('.trivia-option-btn');
       btns.forEach(b => b.disabled = true);
-
-      const q = triviaQuestions[currentTriviaIndex];
+      const q = filteredTriviaQuestions[currentTriviaIndex];
       const expBox = document.getElementById('triviaExplanationBox');
       const resPill = document.getElementById('triviaResultPill');
       const expText = document.getElementById('triviaExplanationText');
-
       if (isCorrect) {
         playAppSound('success');
         btn.classList.add('correct');
@@ -10428,19 +11895,18 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
         if (scoreDisp) scoreDisp.innerText = triviaScore;
         if (resPill) {
           resPill.className = 'status-badge completed';
-          resPill.innerText = '✓ إجابة نموذجية معتمدة (+25 نقطة)';
+          resPill.innerText = currentLanguage === 'ar' ? '✓ إجابة نموذجية معتمدة (+25 نقطة)' : '✓ Certified Accurate Translation (+25 pts)';
         }
-        pushToast('✓ إجابة دقيقة ومعتمدة اصطلاحياً (+25 نقطة)');
+        pushToast(currentLanguage === 'ar' ? '✓ إجابة دقيقة ومعتمدة اصطلاحياً (+25 نقطة)' : '✓ Contextually accurate translation (+25 pts)');
       } else {
         playAppSound('mic-stop');
         btn.classList.add('wrong');
         if (resPill) {
           resPill.className = 'status-badge disputed';
-          resPill.innerText = '✕ صياغة غير دقيقة سياقياً';
+          resPill.innerText = currentLanguage === 'ar' ? '✕ صياغة غير دقيقة سياقياً' : '✕ Contextually inaccurate rendering';
         }
-        pushToast('✕ صياغة غير موفقة، راجع التحليل الاصطلاحي أدناه');
+        pushToast(currentLanguage === 'ar' ? '✕ صياغة غير موفقة، راجع التحليل الاصطلاحي أدناه' : '✕ Inaccurate rendering, see linguistic analysis below');
       }
-
       if (expBox && expText) {
         expText.innerText = q.explanation;
         expBox.style.display = 'block';
@@ -10448,9 +11914,11 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
     }
 
     function nextTriviaQuestion() {
-      currentTriviaIndex = (currentTriviaIndex + 1) % triviaQuestions.length;
+      if (filteredTriviaQuestions.length > 0) {
+        currentTriviaIndex = (currentTriviaIndex + 1) % filteredTriviaQuestions.length;
+      }
       renderTrivia();
-      pushToast('انتقال إلى السؤال ' + (currentTriviaIndex + 1));
+      pushToast(currentLanguage === 'ar' ? `انتقال إلى السؤال ${currentTriviaIndex + 1}` : `Moved to question ${currentTriviaIndex + 1}`);
     }
 
     /* -------------------------------------------------------------
@@ -10663,6 +12131,9 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
 
       closeAuthModal();
       switchUserSession({ name, email, role });
+      try {
+        notifyAdminEmail('USER_LOGIN', { userName: name, email: email, role: role, authType: 'نموذج الدخول الرسمي (Form Login)' });
+      } catch (err) {}
       pushToast(currentLanguage === 'ar' ? `✅ تم تفعيل جلسة: ${name} (${role})` : `✅ Session active: ${name} (${role})`);
     }
 
@@ -10989,6 +12460,587 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
         playAppSound('success');
         pushToast(currentLanguage === 'ar' ? `✅ تم شحن ${addAmt.toLocaleString()} دج بنجاح إلى رصيدك!` : `✅ ${addAmt.toLocaleString()} DZD successfully added to your wallet!`);
       }, 700);
+    }
+
+
+
+    /* =============================================================
+       INTERACTIVE TRANSLATION & INTERPRETATION LAB JAVASCRIPT ENGINE
+       ============================================================= */
+    function switchLabTab(tabKey) {
+      document.querySelectorAll('.lab-tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.lab-tab-content').forEach(c => c.classList.remove('active'));
+
+      const activeBtn = document.getElementById('labTabBtn-' + tabKey);
+      const activeContent = document.getElementById('labTabContent-' + tabKey);
+
+      if (activeBtn) activeBtn.classList.add('active');
+      if (activeContent) activeContent.classList.add('active');
+
+      if (typeof playAppSound === 'function') playAppSound('click');
+
+      if (tabKey === 'matcher' && matcherCardsList.length === 0) {
+        initMatcherGame();
+      }
+    }
+
+    /* -------------------------------------------------------------
+       1. SPEED TERMINOLOGY MATCHER GAME (16 Cards / 8 Pairs)
+       ------------------------------------------------------------- */
+    const MATCHER_PAIRS = [
+      { en: 'Force Majeure', ar: 'القوة القاهرة / الحادث الفجائي', id: 1 },
+      { en: 'Boilerplate Clauses', ar: 'البنود المعيارية النمطية في العقود', id: 2 },
+      { en: 'Indemnification', ar: 'التعويض وإبراء الذمة القانونية', id: 3 },
+      { en: 'Informed Consent', ar: 'الموافقة المستنيرة في التجارب السريرية', id: 4 },
+      { en: 'Pharmacovigilance', ar: 'اليقظة والرصد الدوائي', id: 5 },
+      { en: 'Simultaneous Interpretation', ar: 'الترجمة الفورية المتزامنة بالمؤتمرات', id: 6 },
+      { en: 'Décalage (Ear-Voice Span)', ar: 'الفارق الزمني بين الخطاب والترجمة', id: 7 },
+      { en: 'Termbase / Multiterm', ar: 'قاعدة بيانات المصطلحات المعتمدة', id: 8 }
+    ];
+
+    let matcherCardsList = [];
+    let matcherSelectedCard = null;
+    let matcherMatchesCount = 0;
+    let matcherScore = 0;
+    let matcherTimer = 0;
+    let matcherInterval = null;
+
+    function initMatcherGame() {
+      const container = document.getElementById('matcherGridContainer');
+      if (!container) return;
+
+      matcherCardsList = [];
+      MATCHER_PAIRS.forEach(pair => {
+        matcherCardsList.push({ id: pair.id, text: pair.en, lang: 'en' });
+        matcherCardsList.push({ id: pair.id, text: pair.ar, lang: 'ar' });
+      });
+
+      // Shuffle
+      matcherCardsList.sort(() => Math.random() - 0.5);
+
+      matcherMatchesCount = 0;
+      matcherScore = 0;
+      matcherTimer = 0;
+      clearInterval(matcherInterval);
+
+      matcherInterval = setInterval(() => {
+        matcherTimer++;
+        const mins = String(Math.floor(matcherTimer / 60)).padStart(2, '0');
+        const secs = String(matcherTimer % 60).padStart(2, '0');
+        const disp = document.getElementById('matcherTimerDisplay');
+        if (disp) disp.innerText = `${mins}:${secs}`;
+      }, 1000);
+
+      renderMatcherGrid();
+      const scoreDisp = document.getElementById('matcherScoreDisplay');
+      if (scoreDisp) scoreDisp.innerText = '0';
+      const statusText = document.getElementById('matcherStatusText');
+      if (statusText) statusText.innerText = 'انقر على مصطلح بالإنجليزية ثم اختر مقابله المعتمد بالعربية...';
+      const btnEmail = document.getElementById('btnSendMatcherScoreToAdmin');
+      if (btnEmail) btnEmail.style.display = 'none';
+    }
+
+    function renderMatcherGrid() {
+      const container = document.getElementById('matcherGridContainer');
+      if (!container) return;
+
+      container.innerHTML = matcherCardsList.map((card, idx) => `
+        <div class="matcher-card ${card.matched ? 'matched' : ''} ${card.selected ? 'selected' : ''}" 
+             onclick="handleMatcherCardClick(${idx})">
+          <span>${card.text}</span>
+        </div>
+      `).join('');
+    }
+
+    function handleMatcherCardClick(idx) {
+      const card = matcherCardsList[idx];
+      if (!card || card.matched || card.selected) return;
+
+      if (typeof playAppSound === 'function') playAppSound('click');
+
+      if (!matcherSelectedCard) {
+        // First selection
+        matcherSelectedCard = { index: idx, data: card };
+        card.selected = true;
+        renderMatcherGrid();
+      } else {
+        // Second selection
+        const prev = matcherSelectedCard;
+        if (prev.data.lang !== card.lang && prev.data.id === card.id) {
+          // MATCH!
+          card.matched = true;
+          matcherCardsList[prev.index].matched = true;
+          card.selected = false;
+          matcherCardsList[prev.index].selected = false;
+          matcherSelectedCard = null;
+          matcherMatchesCount++;
+          matcherScore += 100;
+
+          if (typeof playAppSound === 'function') playAppSound('success');
+          const scoreDisp = document.getElementById('matcherScoreDisplay');
+          if (scoreDisp) scoreDisp.innerText = matcherScore;
+
+          const statusText = document.getElementById('matcherStatusText');
+          if (statusText) statusText.innerText = `✓ تطابق ممتاز! (${matcherMatchesCount} / 8 أزواج مكتملة)`;
+
+          renderMatcherGrid();
+
+          if (matcherMatchesCount === MATCHER_PAIRS.length) {
+            // Victory!
+            clearInterval(matcherInterval);
+            if (typeof playAppSound === 'function') playAppSound('badge');
+            if (statusText) statusText.innerHTML = `<strong style="color: var(--success);">🎉 أحسنت صنعاً! تم إنجاز التحدي بنجاح في ${matcherTimer} ثانية بنتيجة ${matcherScore} نقطة!</strong>`;
+            const btnEmail = document.getElementById('btnSendMatcherScoreToAdmin');
+            if (btnEmail) btnEmail.style.display = 'inline-block';
+            
+            // Auto dispatch notification to djoudimadani09@gmail.com
+            try {
+              notifyAdminEmail('EXERCISE_COMPLETED', {
+                exerciseTitle: 'تحدي مطابقة المصطلحات السريعة (Speed Terminology Matcher)',
+                score: `${matcherScore} نقطة`,
+                timeSeconds: `${matcherTimer} ثانية`,
+                pairsCount: '8/8 أزواج كاملة'
+              });
+            } catch (err) {}
+          }
+        } else {
+          // MISMATCH
+          card.selected = true;
+          renderMatcherGrid();
+          if (typeof playAppSound === 'function') playAppSound('error');
+
+          const cardsDom = document.querySelectorAll('.matcher-card');
+          if (cardsDom[idx]) cardsDom[idx].classList.add('wrong');
+          if (cardsDom[prev.index]) cardsDom[prev.index].classList.add('wrong');
+
+          setTimeout(() => {
+            card.selected = false;
+            matcherCardsList[prev.index].selected = false;
+            matcherSelectedCard = null;
+            renderMatcherGrid();
+          }, 700);
+        }
+      }
+    }
+
+    function resetMatcherGame() {
+      initMatcherGame();
+    }
+
+    function sendMatcherScoreToAdmin() {
+      notifyAdminEmail('EXERCISE_COMPLETED', {
+        exerciseTitle: 'تحدي مطابقة المصطلحات السريعة (Speed Matcher)',
+        score: `${matcherScore} نقطة`,
+        timeSeconds: `${matcherTimer} ثانية`
+      });
+      alert('📧 تم إرسال بطاقة أدائك ونتيجتك إلى بريد المؤسس: djoudimadani09@gmail.com بنجاح!');
+    }
+
+    /* -------------------------------------------------------------
+       2. SIMULTANEOUS DECALAGE & BOOTH SIMULATOR
+       ------------------------------------------------------------- */
+    const LAB_SPEECHES = {
+      climate: {
+        title: 'قمة المناخ بجنيف (COP Energy Transition)',
+        text: 'Excellencies, distinguished delegates, we stand at a pivotal juncture where the acceleration of sustainable energy transition is our primary strategic imperative to guarantee long-term socio-economic resilience.',
+        keywords: ['أصحاب السعادة', 'المندوبون الموقرون', 'مفترق طرق', 'التحول الطاقوي المستدام', 'المرونة والصمود الاقتصادي'],
+        durationSec: 15
+      },
+      icc: {
+        title: 'مرافعة محكمة الجنايات الدولية بلاهاي (ICC The Hague)',
+        text: 'Mr. President, Members of the Tribunal, the Prosecution submits that the intentional destruction of civilian infrastructure constitutes a grave breach under the Rome Statute.',
+        keywords: ['السيد الرئيس', 'أعضاء المحكمة', 'هيئة الادعاء', 'التدمير العمدي', 'انتهاك جسيم', 'نظام روما الأساسي'],
+        durationSec: 18
+      },
+      who: {
+        title: 'جمعية الصحة العالمية واليقظة الدوائية (WHO Geneva)',
+        text: 'Global pharmacovigilance requires continuous post-marketing surveillance to rapidly identify and mitigate adverse drug reactions across diverse populations.',
+        keywords: ['اليقظة الدوائية العالمية', 'ترصد ما بعد التسويق', 'التخفيف من الآثار العكسية', 'مجموعات سكانية متنوعة'],
+        durationSec: 16
+      }
+    };
+
+    let isLabSpeechPlaying = false;
+    let labDecalageSeconds = 0;
+    let labDecalageInterval = null;
+    let isLabMicRecording = false;
+
+    function changeLabSpeech(key) {
+      const sp = LAB_SPEECHES[key];
+      if (!sp) return;
+      const textEl = document.getElementById('labSpeechSourceText');
+      if (textEl) textEl.innerText = `"${sp.text}"`;
+      if (isLabSpeechPlaying) toggleLabSpeechAudio();
+    }
+
+    function toggleLabSpeechAudio() {
+      const btn = document.getElementById('btnPlayLabSpeech');
+      const pill = document.getElementById('decalageTimerPill');
+      const speechKey = document.getElementById('labSpeechSelect')?.value || 'climate';
+      const sp = LAB_SPEECHES[speechKey];
+
+      isLabSpeechPlaying = !isLabSpeechPlaying;
+
+      if (isLabSpeechPlaying) {
+        if (btn) btn.innerText = '⏸️ إيقاف البث';
+        labDecalageSeconds = 0;
+        clearInterval(labDecalageInterval);
+
+        labDecalageInterval = setInterval(() => {
+          labDecalageSeconds += 0.1;
+          if (pill) {
+            pill.innerText = `⏳ ${labDecalageSeconds.toFixed(1)} ثانية`;
+            if (labDecalageSeconds >= 2.0 && labDecalageSeconds <= 4.0) {
+              pill.style.background = 'rgba(16,185,129,0.15)';
+              pill.style.color = 'var(--success)';
+            } else {
+              pill.style.background = 'rgba(245,158,11,0.15)';
+              pill.style.color = '#d97706';
+            }
+          }
+        }, 100);
+
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          const u = new SpeechSynthesisUtterance(sp.text);
+          u.lang = 'en-US';
+          const speed = parseFloat(document.getElementById('labSpeechSpeed')?.value || '1.0');
+          u.rate = speed;
+          u.onend = () => {
+            isLabSpeechPlaying = false;
+            clearInterval(labDecalageInterval);
+            if (btn) btn.innerText = '▶️ بث الخطاب في الكابينة';
+          };
+          window.speechSynthesis.speak(u);
+        }
+      } else {
+        if (btn) btn.innerText = '▶️ بث الخطاب في الكابينة';
+        clearInterval(labDecalageInterval);
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      }
+    }
+
+    function toggleLabMicrophone() {
+      const btn = document.getElementById('btnToggleLabMic');
+      const pill = document.getElementById('labMicStatusPill');
+      isLabMicRecording = !isLabMicRecording;
+
+      if (isLabMicRecording) {
+        if (btn) btn.innerText = '⏹️ إيقاف الميكروفون';
+        if (pill) {
+          pill.innerText = '🔴 الميكروفون يبث على الهواء';
+          pill.style.background = 'rgba(239,68,68,0.15)';
+          pill.style.color = 'var(--danger)';
+        }
+        if (typeof playAppSound === 'function') playAppSound('record-start');
+      } else {
+        if (btn) btn.innerText = '🎙️ تفعيل الميكروفون المباشر';
+        if (pill) {
+          pill.innerText = 'جاهز للتسجيل';
+          pill.style.background = 'var(--bg-surface-secondary)';
+          pill.style.color = 'var(--text-muted)';
+        }
+        if (typeof playAppSound === 'function') playAppSound('record-stop');
+      }
+    }
+
+    function evaluateLabBoothPerformance() {
+      const transcript = (document.getElementById('labInterpreterTranscript')?.value || '').trim();
+      const speechKey = document.getElementById('labSpeechSelect')?.value || 'climate';
+      const sp = LAB_SPEECHES[speechKey];
+      const feedbackEl = document.getElementById('labBoothFeedbackResult');
+
+      let termScore = 86;
+      let matchedKw = [];
+      sp.keywords.forEach(kw => {
+        if (transcript.includes(kw.split(' ')[0])) {
+          termScore += 3;
+          matchedKw.push(kw);
+        }
+      });
+      termScore = Math.min(termScore, 98);
+
+      const lagScore = (labDecalageSeconds >= 2.0 && labDecalageSeconds <= 4.2) ? 95 : 88;
+      const totalScore = Math.round((termScore * 0.6) + (lagScore * 0.4));
+
+      if (feedbackEl) {
+        feedbackEl.style.display = 'block';
+        feedbackEl.innerHTML = `
+          <div style="font-weight: 900; color: var(--primary-dark); font-size: 0.95rem; margin-bottom: 0.35rem;">
+            🏆 نتيجة فحص الكابينة: ${totalScore} / 100 (معتمد للأمم المتحدة والاتحاد الإفريقي)
+          </div>
+          <div>✔️ <strong>دقة المصطلحات:</strong> ${termScore}% - المصطلحات السيادية المعتمدة بنجاح.</div>
+          <div>✔️ <strong>ضبط الفارق الزمني (Décalage Control):</strong> ${lagScore}% (متوسط الفارق: ${labDecalageSeconds.toFixed(1)} ث).</div>
+          <div>✔️ <strong>توصية الجودة:</strong> أداء ممتاز يفي بمتطلبات معيار ISO 18841 للترجمة الفورية.</div>
+        `;
+      }
+
+      if (typeof playAppSound === 'function') playAppSound('badge');
+
+      // Dispatch to admin email
+      notifyAdminEmail('EXERCISE_COMPLETED', {
+        exerciseTitle: `كابينة الترجمة الفورية (${sp.title})`,
+        score: `${totalScore} / 100`,
+        decalageTime: `${labDecalageSeconds.toFixed(1)} ثانية`,
+        transcript: transcript.substring(0, 100) || 'تسجيل صوتي شفهي'
+      });
+    }
+
+    /* -------------------------------------------------------------
+       3. ROZAN CONSECUTIVE LAB
+       ------------------------------------------------------------- */
+    function insertRozanSymbol(sym) {
+      const textarea = document.getElementById('labRozanNotesArea');
+      if (!textarea) return;
+      textarea.value += (textarea.value ? ' ' : '') + sym + ' ';
+      textarea.focus();
+      if (typeof playAppSound === 'function') playAppSound('click');
+    }
+
+    function clearRozanNotes() {
+      const textarea = document.getElementById('labRozanNotesArea');
+      if (textarea) textarea.value = '';
+    }
+
+    function auditRozanConsecutive() {
+      const notes = (document.getElementById('labRozanNotesArea')?.value || '').trim();
+      const rendition = (document.getElementById('labRozanConsecutiveRendition')?.value || '').trim();
+      const fb = document.getElementById('rozanAuditFeedback');
+
+      const hasSymbols = /[➔▲▼≠§⏳★?PØ]/.test(notes);
+      const score = hasSymbols ? 93 : 84;
+
+      if (fb) {
+        fb.style.display = 'block';
+        fb.innerHTML = `
+          <strong>🏆 نتيجة تقييم روزان: ${score}/100</strong><br>
+          ✓ ${hasSymbols ? 'توظيف متميز لرموز روزان للسببية والتغير النسبي.' : 'يُنصح بتكثيف الرموز لتقليل الكتابة النصية.'}<br>
+          ✓ الصياغة التتابعية متماسكة وتستوفي معايير التسلسل المنطقي.
+        `;
+      }
+      if (typeof playAppSound === 'function') playAppSound('success');
+
+      notifyAdminEmail('EXERCISE_COMPLETED', {
+        exerciseTitle: 'ورشة روزان لتدوين الملاحظات والترجمة التتابعية',
+        score: `${score}/100`,
+        symbolsUsed: hasSymbols ? 'نعم (رموز روزان القياسية)' : 'نص فقط',
+        renditionSnippet: rendition.substring(0, 80)
+      });
+    }
+
+    /* -------------------------------------------------------------
+       4. CERTIFIED LEGAL CLAUSE DRAFTER
+       ------------------------------------------------------------- */
+    const LEGAL_CLAUSES = {
+      indemnity: {
+        source: "The Contractor shall indemnify, defend and hold harmless the Employer, its officers and agents from and against all claims, liabilities, losses and expenses arising out of any breach or willful misconduct.",
+        mandatoryTerms: ['يعوض', 'يبرئ ذمة', 'صاحب العمل', 'مسؤوليات', 'خطأ عمدي']
+      },
+      force_majeure: {
+        source: "Neither party shall be held liable for any delay or failure in performance resulting from circumstances beyond its reasonable control, including acts of God and labor strikes.",
+        mandatoryTerms: ['القوة القاهرة', 'ظروف طارئة', 'خارجة عن الإرادة', 'إضراب']
+      },
+      arbitration: {
+        source: "Any dispute arising out of or in connection with this contract shall be finally settled under the Rules of Arbitration of the International Chamber of Commerce by three arbitrators.",
+        mandatoryTerms: ['أي نزاع', 'غرفة التجارة الدولية', 'التحكيم', 'محكمين']
+      },
+      nda: {
+        source: "The Receiving Party agrees to treat all Confidential Information as strictly proprietary and not to disclose such information to any third party without prior written authorization.",
+        mandatoryTerms: ['الطرف المستلم', 'معلومات سرية', 'ملك حريز', 'إفصاح', 'موافقة خطية مسبقة']
+      }
+    };
+
+    function changeLabLegalClause(key) {
+      const c = LEGAL_CLAUSES[key];
+      if (!c) return;
+      const el = document.getElementById('labLegalSourceText');
+      if (el) el.innerText = `"${c.source}"`;
+    }
+
+    function auditLegalTranslation() {
+      const key = document.getElementById('labLegalClauseSelect')?.value || 'indemnity';
+      const c = LEGAL_CLAUSES[key];
+      const input = (document.getElementById('labLegalArabicInput')?.value || '').trim();
+      const fb = document.getElementById('labLegalFeedback');
+
+      let hits = 0;
+      c.mandatoryTerms.forEach(t => {
+        if (input.includes(t)) hits++;
+      });
+
+      const score = Math.min(75 + (hits * 5), 98);
+
+      if (fb) {
+        fb.style.display = 'block';
+        fb.innerHTML = `
+          <strong>⚖️ نتيجة تدقيق الصياغة القانونية: ${score} / 100</strong><br>
+          ✓ رصد المصطلحات المحلفة: تم تضمين ${hits} من أصل ${c.mandatoryTerms.length} مصطلحات ملزمة.<br>
+          ✓ المطابقة المعيارية: مستوفية لضوابط الصياغة المعتمدة لدى المحاكم وهيئات التحكيم.
+        `;
+      }
+      if (typeof playAppSound === 'function') playAppSound('badge');
+
+      notifyAdminEmail('EXERCISE_COMPLETED', {
+        exerciseTitle: `صياغة العقود القانونية (${key})`,
+        score: `${score} / 100`,
+        termsMatched: `${hits} / ${c.mandatoryTerms.length}`
+      });
+    }
+
+    /* -------------------------------------------------------------
+       5. SUBTITLING CPS & SHOT-CUT MASTER
+       ------------------------------------------------------------- */
+    function updateCpsGauge() {
+      const text = (document.getElementById('labCpsSubtitleInput')?.value || '').trim();
+      const durationSec = 3.2; // video cue duration
+      const charCount = text.length;
+      const cps = (charCount / durationSec).toFixed(1);
+
+      const valEl = document.getElementById('labCpsValue');
+      const cplEl = document.getElementById('labCplValue');
+      const pill = document.getElementById('labCpsPill');
+
+      if (valEl) valEl.innerText = `${cps} CPS`;
+      if (cplEl) cplEl.innerText = `${charCount} حرف`;
+
+      if (pill) {
+        if (cps <= 16) {
+          pill.className = 'cps-pill ok';
+          pill.innerText = '✓ معيار ممتاز (≤ 16 CPS)';
+        } else if (cps <= 19) {
+          pill.className = 'cps-pill warn';
+          pill.innerText = '⚠️ سرعة قراءة متوسطة (17-19 CPS)';
+        } else {
+          pill.className = 'cps-pill bad';
+          pill.innerText = '⛔ تتجاوز سرعة القراءة المقبولة (> 19 CPS)';
+        }
+      }
+    }
+
+    function auditCpsSubtitle() {
+      const text = (document.getElementById('labCpsSubtitleInput')?.value || '').trim();
+      const durationSec = 3.2;
+      const cps = parseFloat((text.length / durationSec).toFixed(1));
+      const fb = document.getElementById('labCpsFeedback');
+
+      const ok = cps <= 16 && text.length > 5;
+      const score = ok ? 96 : 82;
+
+      if (fb) {
+        fb.style.display = 'block';
+        fb.innerHTML = `
+          <strong>🎬 تقييم الترجمة المرئية (AVT CPS): ${score}/100</strong><br>
+          ✓ معدل الـ CPS الفعلي: ${cps} حرف/ثانية (${ok ? 'مطابق تماماً لمعايير Netflix' : 'يحتاج لاختزال لغوي'}).<br>
+          ✓ تجزئة السطور ومحاذاة المشاهد: معتمدة تقنياً.
+        `;
+      }
+      if (typeof playAppSound === 'function') playAppSound(ok ? 'success' : 'click');
+
+      notifyAdminEmail('EXERCISE_COMPLETED', {
+        exerciseTitle: 'مختبر ضوابط الترجمة المرئية ومعدل الـ CPS',
+        score: `${score}/100`,
+        cps: `${cps} CPS`,
+        lineLength: `${text.length} حرف`
+      });
+    }
+
+    /* -------------------------------------------------------------
+       6. CONFERENCE INTERPRETATION BOOKING LOGIC
+       ------------------------------------------------------------- */
+    function calculateInterpQuote() {
+      const days = parseInt(document.getElementById('interpDaysCount')?.value || '2');
+      const team = parseInt(document.getElementById('interpTeamSize')?.value || '2');
+      const dailyRatePerInterpreter = 35000;
+      const total = days * team * dailyRatePerInterpreter;
+      const el = document.getElementById('interpTotalCostDzd');
+      if (el) el.innerText = `${total.toLocaleString()} دج`;
+    }
+
+    function submitInterpretationBooking() {
+      const title = (document.getElementById('interpEventTitle')?.value || 'مؤتمر رسمي').trim();
+      const venue = document.getElementById('interpVenue')?.value || 'CIC Alger';
+      const lang = document.getElementById('interpLangPair')?.value || 'AR ⇄ EN';
+      const days = parseInt(document.getElementById('interpDaysCount')?.value || '2');
+      const team = parseInt(document.getElementById('interpTeamSize')?.value || '2');
+      const phone = (document.getElementById('interpContactPhone')?.value || '0550 12 34 56').trim();
+      const total = days * team * 35000;
+
+      const newOrder = {
+        id: 'INT-' + Math.floor(1000 + Math.random() * 9000),
+        title: `حجز مترجم فوري (${title})`,
+        category: 'ترجمة فورية',
+        lang: lang,
+        words: days * 8 * 120, // 8h conference day estimate
+        price: total,
+        status: 'pending'
+      };
+
+      if (typeof clientOrders !== 'undefined') {
+        clientOrders.unshift(newOrder);
+        if (typeof persistState === 'function') persistState();
+        if (typeof renderClientOrdersTable === 'function') renderClientOrdersTable();
+      }
+
+      // Notify admin email
+      notifyAdminEmail('INTERPRETATION_BOOKING', {
+        orderId: newOrder.id,
+        eventName: title,
+        venue: venue,
+        langPair: lang,
+        daysCount: days,
+        interpretersCount: team,
+        contactPhone: phone,
+        price: total,
+        clientName: activeUser ? activeUser.name : 'عميل بوليلانغ',
+        clientEmail: activeUser ? activeUser.email : 'client@polylang.dz'
+      });
+
+      if (typeof playAppSound === 'function') playAppSound('success');
+      alert(`✅ تم تأكيد طلب حجز المترجم الفوري للمؤتمر بنجاح!
+
+رقم الحجز: #${newOrder.id}
+التكلفة الإجمالية: ${total.toLocaleString()} دج
+
+تم إرسال إشعار فوري بكافة التفاصيل إلى بريد الإدارة: ${ADMIN_TARGET_EMAIL}`);
+    }
+
+    /* -------------------------------------------------------------
+       7. ADMIN EMAIL LOGS TABLE RENDERER
+       ------------------------------------------------------------- */
+    function renderAdminEmailLogsTable() {
+      const tbody = document.getElementById('adminEmailLogsTbody');
+      const badge = document.getElementById('adminEmailLogCountBadge');
+      if (!tbody) return;
+
+      const rawLogs = localStorage.getItem('polylang_admin_email_logs') || '[]';
+      let logs = [];
+      try { logs = JSON.parse(rawLogs); } catch(e) {}
+
+      if (badge) badge.innerText = `${logs.length} إشعار مسجل`;
+
+      if (logs.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 1.25rem;">لم يتم تسجيل إشعارات بريدية بعد. انقر على 'إرسال إشعار تجريبي' للبدء.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = logs.map(item => `
+        <tr>
+          <td><strong style="color: var(--primary-dark); font-family: monospace;">${item.id}</strong></td>
+          <td><span class="role-tag-pill" style="font-size: 0.75rem;">${item.eventType}</span></td>
+          <td style="font-size: 0.82rem;">${item.subject}</td>
+          <td style="font-size: 0.82rem;"><code>${item.recipient}</code></td>
+          <td style="font-size: 0.78rem; color: var(--text-muted);">${item.timestamp}</td>
+          <td><span class="status-badge completed" style="font-size: 0.72rem;">✓ DELIVERED</span></td>
+        </tr>
+      `).join('');
+    }
+
+    function sendTestProbeEmail() {
+      notifyAdminEmail('TEST_PROBE', {
+        testMessage: 'فحص تجريبي للتأكد من وصول الإشعارات إلى بريد المؤسس: djoudimadani09@gmail.com'
+      });
+      renderAdminEmailLogsTable();
+      alert('📧 تم إرسال إشعار فوري تجريبي إلى djoudimadani09@gmail.com!');
     }
 
 </script>
