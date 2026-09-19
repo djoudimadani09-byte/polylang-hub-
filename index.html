@@ -3402,7 +3402,70 @@
       border-color: #047857;
     }
 
-  </style>
+  
+  /* Floating AI Assistant Widget Styles */
+  .floating-ai-assistant-btn {
+    position: fixed;
+    bottom: 24px;
+    inset-inline-start: 24px;
+    z-index: 998;
+    background: linear-gradient(135deg, var(--primary) 0%, #b71c1c 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 0.65rem 1.15rem;
+    font-size: 0.85rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 8px 24px rgba(229, 57, 53, 0.4);
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .floating-ai-assistant-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 30px rgba(229, 57, 53, 0.5);
+  }
+  .ai-assistant-drawer {
+    position: fixed;
+    bottom: 80px;
+    inset-inline-start: 24px;
+    width: 360px;
+    max-width: calc(100vw - 48px);
+    background: var(--bg-surface);
+    border: 1.5px solid var(--border-main);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    animation: fadeInSlideUp 0.3s ease;
+  }
+  .ai-assistant-drawer.active {
+    display: flex;
+  }
+  .ai-drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.9rem 1rem;
+    background: var(--bg-surface-secondary);
+    border-bottom: 1px solid var(--border-main);
+  }
+  .ai-drawer-body {
+    padding: 1rem;
+    max-height: 420px;
+    overflow-y: auto;
+  }
+  @media print {
+    body * { visibility: hidden; }
+    #printableCertificateArea, #printableCertificateArea * { visibility: visible; }
+    #printableCertificateArea { position: absolute; left: 0; top: 0; width: 100%; border: 3px solid #d97706 !important; }
+  }
+
+</style>
 </head>
 <body>
 
@@ -3438,6 +3501,25 @@
           <span class="backend-pulse-dot" id="backendStatusDot"></span>
           <span id="backendStatusText" data-i18n="backendStatusLive">NestJS API Online</span>
         </button>
+
+        
+        <!-- Global Multi-Currency Dropdown (DZD / USD / EUR) -->
+        <div class="lang-dropdown-wrapper" id="currencyDropdownWrapper">
+          <button class="pill-btn" onclick="toggleCurrencyMenu(event)" id="btnCurrencyToggle" title="اختر العملة / Select Currency">
+            💰 <span id="lblCurrencyText">🇩🇿 DZD (دج)</span> <span style="font-size: 0.72rem; margin-inline-start: 0.25rem;">▾</span>
+          </button>
+          <div class="lang-dropdown-menu" id="currencyDropdownMenu" style="min-width: 145px;">
+            <button class="lang-option-btn" onclick="selectCurrency('DZD')">
+              <span>🇩🇿 DZD (دج الجزائري)</span>
+            </button>
+            <button class="lang-option-btn" onclick="selectCurrency('USD')">
+              <span>🇺🇸 USD ($ دولار)</span>
+            </button>
+            <button class="lang-option-btn" onclick="selectCurrency('EUR')">
+              <span>🇪🇺 EUR (€ يورو)</span>
+            </button>
+          </div>
+        </div>
 
         <div class="lang-dropdown-wrapper" id="langDropdownWrapper">
           <button class="pill-btn" onclick="toggleLanguageMenu(event)" id="btnLangToggle" title="اختر اللغة / Select Language">
@@ -9526,9 +9608,11 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
     /* -------------------------------------------------------------
        7. CLIENT ORDERS & CALCULATOR
        ------------------------------------------------------------- */
-    function calculateClientQuote() {
-      const domain = document.getElementById('clientDocDomain').value;
-      const count = parseInt(document.getElementById('clientWordsCount').value) || 0;
+        function calculateClientQuote() {
+      const domainSelect = document.getElementById('clientDocDomain');
+      const domain = domainSelect ? domainSelect.value : 'legal';
+      const countInput = document.getElementById('clientWordsCount');
+      const count = parseInt(countInput ? countInput.value : '750') || 0;
       let rate = 4.0;
       let label = 'ترجمة قانونية ورسمية';
       let delivery = '24 - 48 ساعة';
@@ -9540,11 +9624,23 @@ Official Hub Stamp: [APPROVED - POLYLANG HUB ACADEMY]
       if (count > 3000) delivery = '3 - 5 أيام عمل';
       else if (count > 1000) delivery = '48 - 72 ساعة';
 
-      const total = Math.round(count * rate);
-      document.getElementById('quoteDomainLabel').innerText = label;
-      document.getElementById('quoteWordsCount').innerText = count.toLocaleString();
-      document.getElementById('quoteDeliveryTime').innerText = delivery;
-      document.getElementById('quoteTotalCostDzd').innerText = total.toLocaleString();
+      const totalDzd = Math.round(count * rate);
+      const domainEl = document.getElementById('quoteDomainLabel');
+      const countEl = document.getElementById('quoteWordsCount');
+      const deliveryEl = document.getElementById('quoteDeliveryTime');
+      const totalCostEl = document.getElementById('quoteTotalCostDzd');
+
+      if (domainEl) domainEl.innerText = label;
+      if (countEl) countEl.innerText = count.toLocaleString();
+      if (deliveryEl) deliveryEl.innerText = delivery;
+      if (totalCostEl) {
+        if (currentCurrency === 'DZD') {
+          totalCostEl.innerText = totalDzd.toLocaleString() + ' دج';
+        } else {
+          const converted = formatCurrencyGlobal(totalDzd);
+          totalCostEl.innerHTML = `${converted} <span style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted); display: block;">(${totalDzd.toLocaleString()} دج)</span>`;
+        }
+      }
     }
 
     function submitClientOrder() {
@@ -9969,6 +10065,38 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
           <li>⚖️ <strong>09:30</strong> - توثيق شهادة المطابقة الرسمية للطلب #PL-8821</li>
         `;
       }
+    }
+
+    
+    function filterAdminUsersTable(query) {
+      const tbody = document.getElementById('adminUsersTbody');
+      if (!tbody) return;
+      const q = (query || '').toLowerCase().trim();
+      const filtered = adminUsersList.filter(u => 
+        (u.name && u.name.toLowerCase().includes(q)) ||
+        (u.role && u.role.toLowerCase().includes(q)) ||
+        (u.spec && u.spec.toLowerCase().includes(q)) ||
+        (u.joined && u.joined.toLowerCase().includes(q))
+      );
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 1.5rem;">لا توجد نتائج مطابقة لبحثك: "${query}"</td></tr>`;
+        return;
+      }
+      tbody.innerHTML = filtered.map((u) => {
+        const origIndex = adminUsersList.indexOf(u);
+        return `
+          <tr>
+            <td><strong>${u.name}</strong></td>
+            <td>${u.role}</td>
+            <td>${u.spec}</td>
+            <td>${u.joined}</td>
+            <td><span class="status-badge ${u.active ? 'completed' : 'pending'}">${u.active ? 'نشط ومفعل' : 'بانتظار التحقق'}</span></td>
+            <td>
+              <button class="btn btn-outline btn-sm" onclick="toggleUserStatus(${origIndex})">${u.active ? 'تجميد الحساب' : 'تفعيل الحساب'}</button>
+            </td>
+          </tr>
+        `;
+      }).join('');
     }
 
     function toggleUserStatus(index) {
@@ -11016,7 +11144,160 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
             وثيقة تدريبية صادرة من منصة Polylang Hub وفق معايير الجودة الدولية ISO 17100 و الاتحاد الدولي لمترجمي المؤتمرات (AIIC).
           </div>
           <script>window.print();<\/script>
-        </body>
+        
+  <!-- ===========================================================
+       MODAL: BACKEND API & CLOUD GATEWAY CONFIGURATION
+       =========================================================== -->
+  <div class="modal-backdrop" id="backendConfigModalBackdrop" style="display: none;">
+    <div class="modal-box" style="max-width: 580px;">
+      <div class="modal-top">
+        <div>
+          <div style="display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(59,130,246,0.12); color: #3b82f6; padding: 0.2rem 0.65rem; border-radius: 50px; font-size: 0.74rem; font-weight: 800; margin-bottom: 0.35rem;">
+            <span>🌐</span> NestJS Cloud API Gateway
+          </div>
+          <h4 style="font-weight: 900; margin: 0; font-size: 1.15rem;">إعدادات الاتصال بالخادم والـ API</h4>
+        </div>
+        <button style="background: none; border: none; font-size: 1.35rem; cursor: pointer; color: var(--text-muted);" onclick="closeBackendConfigModal()" aria-label="Close">✕</button>
+      </div>
+
+      <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.6rem 0 1rem 0; line-height: 1.5;">
+        إدارة وتكوين نقطة النهاية (API Endpoint) لخادم Render السحابي مع فحص الاستجابة (Latency) ونسخ رمز الجلسة المشفر (JWT).
+      </p>
+
+      <div style="background: var(--bg-surface-secondary); border: 1.5px solid var(--border-main); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; font-size: 0.82rem;">
+          <span style="color: var(--text-muted);">نقطة النهاية النشطة:</span>
+          <span class="status-badge completed" id="backendModalLiveBadge">200 OK (Render Cloud)</span>
+        </div>
+        <code style="display: block; background: var(--bg-main); padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); font-size: 0.8rem; word-break: break-all;" id="currentApiEndpointLabel">https://polylang-api.onrender.com</code>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">رابط الخادم المخصص (Custom API URL)</label>
+        <input type="url" class="form-control" id="customBackendUrlInput" placeholder="https://polylang-api.onrender.com" value="https://polylang-api.onrender.com">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">رمز جلسة المصادقة الموحدة (JWT Bearer Token)</label>
+        <textarea class="form-control" id="jwtTokenDisplayArea" rows="3" readonly style="font-family: monospace; font-size: 0.74rem; opacity: 0.85;"></textarea>
+      </div>
+
+      <div style="display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: 1.25rem;">
+        <div style="display: flex; gap: 0.5rem;">
+          <button type="button" class="btn btn-outline btn-sm" onclick="testBackendApiPing()">⚡ فحص الاتصال (Ping)</button>
+          <button type="button" class="btn btn-outline btn-sm" onclick="copyJwtTokenToClipboard()">📋 نسخ رمز JWT</button>
+        </div>
+        <div style="display: flex; gap: 0.5rem;">
+          <button type="button" class="btn btn-secondary btn-sm" onclick="closeBackendConfigModal()">إغلاق</button>
+          <button type="button" class="btn btn-primary btn-sm" onclick="saveBackendApiUrl()">حفظ التغييرات</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===========================================================
+       MODAL: CERTIFIED PROFESSIONAL COMPLETION CERTIFICATE
+       =========================================================== -->
+  <div class="modal-backdrop" id="certificateModalBackdrop" style="display: none;">
+    <div class="modal-box" style="max-width: 720px; padding: 1.5rem; background: var(--bg-surface);">
+      <div style="display: flex; justify-content: flex-end;">
+        <button style="background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--text-muted);" onclick="closeCertificateModal()">✕</button>
+      </div>
+      
+      <div id="printableCertificateArea" style="border: 5px double #d97706; padding: 2rem 1.5rem; border-radius: var(--radius-md); background: linear-gradient(145deg, rgba(245,158,11,0.03) 0%, rgba(229,57,53,0.03) 100%); text-align: center; position: relative;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <span style="font-size: 1.8rem;">🇩🇿</span>
+          <div style="font-size: 0.8rem; color: #b45309; font-weight: 800; letter-spacing: 1px;">POLYLANG HUB ACADEMY • ISO 17100:2015</div>
+          <span style="font-size: 1.8rem;">📜</span>
+        </div>
+        
+        <h2 style="font-weight: 900; font-size: 1.7rem; color: #b71c1c; margin: 0.5rem 0 0.2rem 0;">شهادة تأهيل وتفوق مهني معتمدة</h2>
+        <div style="font-size: 0.82rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px;">Certificate of Professional Competence</div>
+        
+        <div style="margin: 1.5rem 0 0.75rem 0; font-size: 0.95rem; color: var(--text-main);">
+          يشهد المجلس الأكاديمي لمنصة بوليلانغ للترجمة المعتمدة بأن الأستاذ(ة):
+        </div>
+        
+        <div style="font-size: 1.55rem; font-weight: 900; color: #1e293b; border-bottom: 2px solid #f59e0b; display: inline-block; padding: 0.2rem 2rem; margin: 0.5rem 0 1rem 0;" id="certificateStudentName">
+          كريم حمداوي
+        </div>
+        
+        <div style="font-size: 0.9rem; color: var(--text-main); max-width: 540px; margin: 0 auto; line-height: 1.7;">
+          قد أتم بنجاح متطلبات المسار التخصصي والتدريب العملي في:
+          <br>
+          <strong style="color: #b71c1c; font-size: 1.05rem;" id="certificateCourseTitle">الترجمة القانونية وصياغة العقود الدولية (Legal Drafter)</strong>
+        </div>
+        
+        <div style="display: flex; justify-content: space-around; align-items: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px dashed rgba(245,158,11,0.4); flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <div style="font-size: 0.74rem; color: var(--text-muted);">رئيس لجنة التحكيم الأكاديمي</div>
+            <div style="font-weight: 800; font-size: 0.88rem; color: var(--text-main);">د. ليلى مزياني</div>
+            <div style="font-size: 0.7rem; color: #10b981;">مترجم محلف (مجلس قضاء الجزائر)</div>
+          </div>
+          
+          <div style="border: 2px solid #f59e0b; border-radius: 50%; width: 68px; height: 68px; display: flex; align-items: center; justify-content: center; flex-direction: column; background: rgba(245,158,11,0.1);">
+            <span style="font-size: 1.2rem;">🏅</span>
+            <span style="font-size: 0.58rem; font-weight: 900; color: #d97706;">VERIFIED</span>
+          </div>
+
+          <div>
+            <div style="font-size: 0.74rem; color: var(--text-muted);">المشرف العام لمنصة Polylang</div>
+            <div style="font-weight: 800; font-size: 0.88rem; color: var(--text-main);">أ. مداني جودي</div>
+            <div style="font-size: 0.7rem; color: var(--text-muted);" id="certificateIssueDate">سبتمبر 2026</div>
+          </div>
+        </div>
+        
+        <div style="margin-top: 1.25rem; font-size: 0.72rem; color: var(--text-muted); font-family: monospace;" id="certificateHashId">
+          ID: CERT-PLY-2026-9812 • SHA-256: 8a4f...29e1
+        </div>
+      </div>
+      
+      <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.25rem;">
+        <button class="btn btn-secondary" onclick="closeCertificateModal()">إلغاء</button>
+        <button class="btn btn-primary" onclick="printCertificate()" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;">🖨️ طباعة الشهادة / حفظ كـ PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===========================================================
+       FLOATING AI ASSISTANT TRIGGER & SLIDE DRAWER
+       =========================================================== -->
+  <button class="floating-ai-assistant-btn" id="floatingAiBtn" onclick="toggleAiAssistantDrawer()" title="مساعد بوليلانغ الذكي للمصطلحات">
+    <span>🤖</span> <span>مساعد الذكاء الاصطناعي</span>
+  </button>
+
+  <div class="ai-assistant-drawer" id="aiAssistantDrawer">
+    <div class="ai-drawer-header">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span style="font-size: 1.3rem;">🤖</span>
+        <div>
+          <strong style="font-size: 0.95rem;">مساعد الترجمة الذكي (Polylang AI)</strong>
+          <p style="font-size: 0.72rem; color: var(--text-muted); margin: 0;">مطابقة المصطلحات وفق معايير ISO 17100</p>
+        </div>
+      </div>
+      <button style="background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-muted);" onclick="toggleAiAssistantDrawer()">✕</button>
+    </div>
+
+    <div class="ai-drawer-body">
+      <div class="form-group" style="margin-bottom: 0.75rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+          <label style="font-size: 0.78rem; font-weight: 700;">ابحث عن مصطلح تخصصي:</label>
+        </div>
+        <div style="display: flex; gap: 0.4rem;">
+          <input type="text" class="form-control" id="aiAssistantQuery" placeholder="مثال: Indemnification, Force Majeure, Ultra Vires..." onkeydown="if(event.key==='Enter') queryAiAssistant()">
+          <button class="btn btn-primary btn-sm" onclick="queryAiAssistant()">بحث ⚡</button>
+        </div>
+      </div>
+
+      <div id="aiAssistantResultArea" style="min-height: 120px; background: var(--bg-surface-secondary); border: 1px solid var(--border-main); border-radius: var(--radius-sm); padding: 0.75rem; font-size: 0.82rem;">
+        <div style="text-align: center; color: var(--text-muted); padding: 1.5rem 0;">
+          💡 اكتب أي مصطلح بالإنجليزية أو العربية للحصول على المقابل المعتمد والشرح والسياق القانوني.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
         </html>
       `);
       win.document.close();
@@ -12356,6 +12637,206 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
         closeLanguageMenu();
       }
     });
+
+    
+    // =============================================================
+    // GLOBAL MULTI-CURRENCY ENGINE (DZD, USD, EUR)
+    // =============================================================
+    let currentCurrency = localStorage.getItem('POLYLANG_CURRENCY') || 'DZD';
+    const CURRENCY_RATES = {
+      DZD: { rate: 1.0, symbol: 'دج', code: 'DZD', prefix: false, flag: '🇩🇿' },
+      USD: { rate: 0.0075, symbol: '$', code: 'USD', prefix: true, flag: '🇺🇸' },
+      EUR: { rate: 0.0068, symbol: '€', code: 'EUR', prefix: true, flag: '🇪🇺' }
+    };
+
+    function toggleCurrencyMenu(e) {
+      if (e) e.stopPropagation();
+      const menu = document.getElementById('currencyDropdownMenu');
+      if (menu) menu.classList.toggle('show');
+    }
+
+    function selectCurrency(curr) {
+      if (!CURRENCY_RATES[curr]) curr = 'DZD';
+      currentCurrency = curr;
+      localStorage.setItem('POLYLANG_CURRENCY', curr);
+      const lbl = document.getElementById('lblCurrencyText');
+      if (lbl) {
+        const info = CURRENCY_RATES[curr];
+        lbl.innerText = `${info.flag} ${curr} (${info.symbol})`;
+      }
+      const menu = document.getElementById('currencyDropdownMenu');
+      if (menu) menu.classList.remove('show');
+      calculateClientQuote();
+      updateAllCurrencyDisplays();
+      playAppSound('click');
+      pushToast(currentLanguage === 'ar' ? `✓ تم تغيير العملة إلى: ${curr}` : `✓ Currency set to: ${curr}`);
+    }
+
+    function formatCurrencyGlobal(dzdAmount, targetCurrency = currentCurrency) {
+      const info = CURRENCY_RATES[targetCurrency] || CURRENCY_RATES.DZD;
+      const converted = dzdAmount * info.rate;
+      if (info.prefix) {
+        return `${info.symbol}${converted.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+      } else {
+        return `${Math.round(converted).toLocaleString()} ${info.symbol}`;
+      }
+    }
+
+    function updateAllCurrencyDisplays() {
+      const walletDisplay = document.getElementById('walletModalBalanceDisplay');
+      if (walletDisplay && activeUser) {
+        const num = parseInt(String(activeUser.balance).replace(/[^0-9]/g, '')) || 0;
+        walletDisplay.innerText = formatCurrencyGlobal(num);
+      }
+      document.querySelectorAll('[data-price-dzd]').forEach(el => {
+        const dzd = parseInt(el.getAttribute('data-price-dzd')) || 0;
+        el.innerText = formatCurrencyGlobal(dzd);
+      });
+    }
+
+    // =============================================================
+    // PROFESSIONAL CERTIFICATE GENERATOR
+    // =============================================================
+    function openCertificateModal(courseTitle) {
+      const modal = document.getElementById('certificateModalBackdrop');
+      const titleEl = document.getElementById('certificateCourseTitle');
+      const nameEl = document.getElementById('certificateStudentName');
+      const dateEl = document.getElementById('certificateIssueDate');
+      const hashEl = document.getElementById('certificateHashId');
+
+      if (titleEl && courseTitle) titleEl.innerText = courseTitle;
+      if (nameEl && activeUser) nameEl.innerText = activeUser.name;
+      if (dateEl) {
+        const d = new Date();
+        dateEl.innerText = d.toLocaleDateString(currentLanguage === 'ar' ? 'ar-DZ' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      }
+      if (hashEl) {
+        const randHex = Math.random().toString(16).substring(2, 10).toUpperCase();
+        hashEl.innerText = `CERT-PLY-2026-${randHex} • ISO 17100:2015 AUDITED • SHA-256: 7e9f...${randHex}`;
+      }
+      if (modal) modal.style.display = 'flex';
+      playAppSound('success');
+      pushToast(currentLanguage === 'ar' ? '🎓 تم إصدار الشهادة المهنية بنجاح' : '🎓 Certificate generated');
+    }
+
+    function closeCertificateModal() {
+      const modal = document.getElementById('certificateModalBackdrop');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function printCertificate() {
+      window.print();
+    }
+
+    // =============================================================
+    // EXPORT TOOLS (SRT & GLOSSARY)
+    // =============================================================
+    function exportSrtFile() {
+      if (!srtCues || srtCues.length === 0) {
+        pushToast('⚠️ لا توجد مقاطع ترجمة حالية لتصديرها');
+        return;
+      }
+      let content = '';
+      srtCues.forEach((cue, index) => {
+        content += `${index + 1}\n${cue.start} --> ${cue.end}\n${cue.ar || cue.text}\n\n`;
+      });
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `polylang_subtitles_${Date.now()}.srt`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+      playAppSound('success');
+      pushToast(currentLanguage === 'ar' ? '💾 تم تنزيل ملف .SRT بنجاح' : '💾 Subtitle file exported');
+    }
+
+    function exportGlossaryJson() {
+      if (!glossaryTerms || glossaryTerms.length === 0) {
+        pushToast('⚠️ المسرد فارغ حالياً');
+        return;
+      }
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(glossaryTerms, null, 2));
+      const a = document.createElement('a');
+      a.href = dataStr;
+      a.download = `polylang_termbase_${Date.now()}.json`;
+      a.click();
+      playAppSound('success');
+      pushToast(currentLanguage === 'ar' ? '📥 تم تصدير مسرد المصطلحات بصيغة JSON' : '📥 Glossary exported to JSON');
+    }
+
+    // =============================================================
+    // FLOATING AI ASSISTANT & TERMINOLOGY SEARCH
+    // =============================================================
+    function toggleAiAssistantDrawer() {
+      const drawer = document.getElementById('aiAssistantDrawer');
+      if (drawer) drawer.classList.toggle('active');
+    }
+
+    const ISO_TERMS_BASE = {
+      'force majeure': { ar: 'القوة القاهرة / الحادث الفجائي', cat: 'قانوني (عقود)', iso: 'ISO 17100 Verified', context: 'المادة 127 من القانون المدني الجزائري: شرط يعفي المتعاقد عند استحالة التنفيذ لسبب أجنبي.' },
+      'liquidated damages': { ar: 'التعويض الاتفاقي / الشرط الجزائي', cat: 'قانوني (عقود دولية)', iso: 'ISO 17100 Verified', context: 'مبلغ محدد مسبقاً في العقد يلتزم الطرف المخل بدفعه كتعويض.' },
+      'indemnification': { ar: 'التعويض وإبراء الذمة والحماية من المسؤولية', cat: 'قانوني وتأميني', iso: 'FIDIC Standard', context: 'بند يلتزم فيه طرف بحماية الطرف الآخر من أي مطالبات قضائية من الغير.' },
+      'ultra vires': { ar: 'تجاوز الصلاحيات / مجاوزة حدود الاختصاص', cat: 'قانون شركات وإداري', iso: 'Legal Precedent', context: 'تصرف صادر عن ممثل الشركة خارج النطاق المحدد في قانونها الأساسي.' },
+      'informed consent': { ar: 'الموافقة المستنيرة السريرية', cat: 'طبي وسريري', iso: 'WHO & EMA Standard', context: 'موافقة المريض الخطية المبنية على الفهم الكامل للمخاطر والمنافع.' },
+      'pharmacovigilance': { ar: 'اليقظة والرصد الدوائي ومأمونية العلاج', cat: 'طبي وصيدلاني', iso: 'FDA/EMA Guidance', context: 'مراقبة الآثار الجانبية ورصد سلامة المستحضرات بعد تسويقها.' },
+      'simultaneous interpretation': { ar: 'الترجمة الفورية المتزامنة (في الكابينة)', cat: 'مؤتمرات ودبلوماسية', iso: 'AIIC / ISO 2603', context: 'الترجمة المتزامنة مع المتحدث بفارق زمني لا يتعدى 3 ثوانٍ.' },
+      'decalage': { ar: 'الفارق الزمني الصوتي (Ear-Voice Span)', cat: 'ترجمة فورية', iso: 'AIIC Booth Standard', context: 'المسافة الزمنية الضرورية لفهم المعنى قبل بدء الصياغة الشفوية.' }
+    };
+
+    function queryAiAssistant() {
+      const input = document.getElementById('aiAssistantQuery');
+      const res = document.getElementById('aiAssistantResultArea');
+      if (!input || !res) return;
+      const q = input.value.trim().toLowerCase();
+      if (!q) {
+        res.innerHTML = '<p style="color: #ef4444;">يرجى كتابة مصطلح للبحث عنه...</p>';
+        return;
+      }
+      playAppSound('click');
+      let found = null;
+      for (const [key, val] of Object.entries(ISO_TERMS_BASE)) {
+        if (key.includes(q) || val.ar.includes(q) || q.includes(key)) {
+          found = { key, ...val };
+          break;
+        }
+      }
+      if (found) {
+        res.innerHTML = `
+          <div style="background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.3); border-radius: var(--radius-sm); padding: 0.75rem; margin-bottom: 0.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <strong style="color: #10b981; font-size: 0.95rem;">${found.ar}</strong>
+              <span class="status-pill status-completed" style="font-size: 0.7rem;">${found.iso}</span>
+            </div>
+            <div style="font-size: 0.78rem; color: var(--text-muted); margin: 0.25rem 0;">المصطلح الإنجليزي: <em>${found.key.toUpperCase()}</em> | المجال: ${found.cat}</div>
+            <p style="font-size: 0.8rem; margin: 0.5rem 0 0 0; line-height: 1.4; color: var(--text-main);">${found.context}</p>
+          </div>
+          <div style="display: flex; gap: 0.4rem; justify-content: flex-end;">
+            <button class="btn btn-outline btn-sm" onclick="speakTermText('${found.ar}', 'ar-SA')">🔊 نطق بالعربية</button>
+            <button class="btn btn-outline btn-sm" onclick="speakTermText('${found.key}', 'en-US')">🔊 نطق بالإنجليزية</button>
+            <button class="btn btn-primary btn-sm" onclick="navigator.clipboard.writeText('${found.ar}'); pushToast('✓ تم نسخ المصطلح');">📋 نسخ</button>
+          </div>
+        `;
+      } else {
+        res.innerHTML = `
+          <div style="padding: 0.75rem; text-align: center;">
+            <p style="margin: 0 0 0.5rem 0; font-weight: 700;">المصطلح: "${input.value}"</p>
+            <p style="color: var(--text-muted); font-size: 0.78rem;">الصياغة المعتمدة المقترحة بواسطة محرك بوليلانغ:</p>
+            <div style="font-size: 1rem; font-weight: 800; color: var(--primary); margin: 0.4rem 0;">المقابل المعتمد: ${input.value} (قيد التدقيق التخصصي)</div>
+            <button class="btn btn-outline btn-sm" onclick="openAddTermModal()">➕ إضافة هذا المصطلح للمسرد الموحد</button>
+          </div>
+        `;
+      }
+    }
+
+    function speakTermText(text, lang) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = lang || 'ar-SA';
+        utter.rate = 0.95;
+        window.speechSynthesis.speak(utter);
+      }
+    }
 
     /* -------------------------------------------------------------
        12. APPLICATION BOOTSTRAP

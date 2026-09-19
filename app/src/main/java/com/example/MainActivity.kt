@@ -59,8 +59,12 @@ class MainActivity : ComponentActivity() {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
     setContent {
-      MyApplicationTheme(dynamicColor = false) {
-        PolylangHubApp()
+      var isDarkTheme by remember { mutableStateOf(false) }
+      MyApplicationTheme(darkTheme = isDarkTheme, dynamicColor = false) {
+        PolylangHubApp(
+          isDarkTheme = isDarkTheme,
+          onToggleTheme = { isDarkTheme = !isDarkTheme }
+        )
       }
     }
   }
@@ -70,6 +74,30 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
   Text(text = "Hello $name!", modifier = modifier)
+}
+
+enum class AppCurrency(val symbolAr: String, val symbolEn: String, val rate: Double, val flag: String) {
+  DZD("دج", "DZD", 1.0, "🇩🇿"),
+  USD("$", "USD", 0.0075, "🇺🇸"),
+  EUR("€", "EUR", 0.0068, "🇪🇺")
+}
+
+fun Int.toLocaleString(): String {
+  return java.text.NumberFormat.getNumberInstance(Locale.US).format(this)
+}
+
+fun formatPrice(amountDzd: Int, currency: AppCurrency, isArabic: Boolean): String {
+  return when (currency) {
+    AppCurrency.DZD -> if (isArabic) "${amountDzd.toLocaleString()} دج" else "${amountDzd.toLocaleString()} DZD"
+    AppCurrency.USD -> {
+      val converted = amountDzd * currency.rate
+      String.format(Locale.US, "$%.2f", converted)
+    }
+    AppCurrency.EUR -> {
+      val converted = amountDzd * currency.rate
+      String.format(Locale.US, "€%.2f", converted)
+    }
+  }
 }
 
 enum class AppTab {
@@ -181,13 +209,20 @@ object AdminEmailNotifier {
 // --------------------------------------------------------------------------
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PolylangHubApp() {
+fun PolylangHubApp(
+  isDarkTheme: Boolean = false,
+  onToggleTheme: () -> Unit = {}
+) {
   var isArabic by remember { mutableStateOf(true) }
   var currentTab by remember { mutableStateOf(AppTab.HOME) }
   var currentRole by remember { mutableStateOf(UserRole.CLIENT) }
   var userName by remember { mutableStateOf("كريم حمداوي") }
   var userPlan by remember { mutableStateOf("Pro Translator") }
   var userBalance by remember { mutableStateOf(8500) }
+  var currentCurrency by remember { mutableStateOf(AppCurrency.DZD) }
+  var showAiTermDialog by remember { mutableStateOf(false) }
+  var showCertDialog by remember { mutableStateOf(false) }
+  var certCourseTitle by remember { mutableStateOf("الترجمة القانونية وصياغة العقود الدولية") }
 
   // State for orders
   val orders = remember {
@@ -266,6 +301,50 @@ fun PolylangHubApp() {
             }
           },
           actions = {
+            // Global Currency Switcher (DZD / USD / EUR)
+            OutlinedButton(
+              onClick = {
+                currentCurrency = when (currentCurrency) {
+                  AppCurrency.DZD -> AppCurrency.USD
+                  AppCurrency.USD -> AppCurrency.EUR
+                  AppCurrency.EUR -> AppCurrency.DZD
+                }
+                coroutineScope.launch {
+                  snackbarHostState.showSnackbar("العملة: ${currentCurrency.flag} ${currentCurrency.name} (${currentCurrency.symbolAr})")
+                }
+              },
+              shape = RoundedCornerShape(20.dp),
+              modifier = Modifier
+                .padding(end = 4.dp)
+                .heightIn(min = 40.dp)
+                .testTag("currency_toggle_btn"),
+              contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp),
+              border = BorderStroke(1.dp, RedContainer)
+            ) {
+              Text(
+                text = "${currentCurrency.flag} ${currentCurrency.name}",
+                fontSize = 11.sp,
+                fontWeight = FontWeight.Bold,
+                color = RedPrimary
+              )
+            }
+
+            // AI Termbase Instant Dialog
+            IconButton(
+              onClick = { showAiTermDialog = true },
+              modifier = Modifier.size(40.dp).testTag("ai_term_btn")
+            ) {
+              Text("🤖", fontSize = 16.sp)
+            }
+
+            // Dark / Light Theme Toggle
+            IconButton(
+              onClick = { onToggleTheme() },
+              modifier = Modifier.size(40.dp).testTag("theme_toggle_btn")
+            ) {
+              Text(if (isDarkTheme) "☀️" else "🌙", fontSize = 16.sp)
+            }
+
             // Language Switcher button (touch target >= 48dp)
             OutlinedButton(
               onClick = {
@@ -419,6 +498,7 @@ fun PolylangHubApp() {
             )
             AppTab.SERVICES -> ServicesScreen(
               isArabic = isArabic,
+              currency = currentCurrency,
               onOrderCreated = { newOrder ->
                 orders.add(0, newOrder)
                 AdminEmailNotifier.dispatch(
@@ -458,10 +538,15 @@ fun PolylangHubApp() {
             AppTab.ACADEMY -> AcademyScreen(
               isArabic = isArabic,
               onPlayCourse = { course -> activeVideoCourse = course },
+              onShowCertificate = { course ->
+                certCourseTitle = course
+                showCertDialog = true
+              },
               onMessage = { msg -> coroutineScope.launch { snackbarHostState.showSnackbar(msg) } }
             )
             AppTab.PRICING -> PricingScreen(
               isArabic = isArabic,
+              currency = currentCurrency,
               onSelectPlan = { name, price ->
                 if (price == 0) {
                   userPlan = "Free Starter"
@@ -475,6 +560,7 @@ fun PolylangHubApp() {
             )
             AppTab.DASHBOARD -> DashboardScreen(
               isArabic = isArabic,
+              currency = currentCurrency,
               userName = userName,
               role = currentRole,
               plan = userPlan,
@@ -491,6 +577,7 @@ fun PolylangHubApp() {
     if (showPaymentDialog) {
       PaymentDialog(
         isArabic = isArabic,
+        currency = currentCurrency,
         planName = pendingPlanName,
         planPrice = pendingPlanPrice,
         onDismiss = { showPaymentDialog = false },
@@ -509,6 +596,46 @@ fun PolylangHubApp() {
             )
           }
           currentTab = AppTab.DASHBOARD
+        }
+      )
+    }
+
+    // Certificate Dialog
+    if (showCertDialog) {
+      CertificateDialog(
+        isArabic = isArabic,
+        studentName = userName,
+        courseTitle = certCourseTitle,
+        onDismiss = { showCertDialog = false },
+        onShare = {
+          coroutineScope.launch { snackbarHostState.showSnackbar("تم نسخ بيانات شهادة التأهيل بنجاح ✓") }
+          AdminEmailNotifier.dispatch(
+            "CERTIFICATE_ISSUED",
+            userName,
+            AdminEmailNotifier.ADMIN_EMAIL,
+            mapOf("course" to certCourseTitle, "hash" to "CERT-PLY-2026-9812")
+          ) { _, msg ->
+            coroutineScope.launch { snackbarHostState.showSnackbar(msg) }
+          }
+        }
+      )
+    }
+
+    // AI Termbase Dialog
+    if (showAiTermDialog) {
+      AiTermbaseDialog(
+        isArabic = isArabic,
+        onDismiss = { showAiTermDialog = false },
+        onNotifyAdmin = { term ->
+          coroutineScope.launch { snackbarHostState.showSnackbar("تم إرسال المصطلح للإدارة للتحقق") }
+          AdminEmailNotifier.dispatch(
+            "TERM_INQUIRY",
+            userName,
+            AdminEmailNotifier.ADMIN_EMAIL,
+            mapOf("term" to term)
+          ) { _, msg ->
+            coroutineScope.launch { snackbarHostState.showSnackbar(msg) }
+          }
         }
       )
     }
@@ -943,6 +1070,7 @@ fun ServiceTile(
 @Composable
 fun ServicesScreen(
   isArabic: Boolean,
+  currency: AppCurrency = AppCurrency.DZD,
   onOrderCreated: (TranslationOrder) -> Unit
 ) {
   val scrollState = rememberScrollState()
@@ -1104,7 +1232,7 @@ fun ServicesScreen(
           HorizontalDivider(color = BorderLight, modifier = Modifier.padding(vertical = 4.dp))
           Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
             Text(if (isArabic) "التكلفة التقديرية:" else "Total Price:", fontWeight = FontWeight.Bold, fontSize = 13.sp)
-            Text("$estimatedDocPrice دج", fontWeight = FontWeight.ExtraBold, fontSize = 19.sp, color = RedDark)
+            Text(formatPrice(estimatedDocPrice, currency, isArabic), fontWeight = FontWeight.ExtraBold, fontSize = 19.sp, color = RedDark)
           }
 
           Spacer(Modifier.height(4.dp))
@@ -1241,7 +1369,7 @@ fun ServicesScreen(
           Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
             Column {
               Text("التكلفة الإجمالية (35,000 دج/يوم/مترجم):", color = TextMuted, fontSize = 11.sp)
-              Text("$interpTotalCost دج", fontWeight = FontWeight.ExtraBold, fontSize = 19.sp, color = RedDark)
+              Text(formatPrice(interpTotalCost, currency, isArabic), fontWeight = FontWeight.ExtraBold, fontSize = 19.sp, color = RedDark)
             }
           }
 
@@ -1408,6 +1536,7 @@ fun SubtitlingScreen(
 fun AcademyScreen(
   isArabic: Boolean,
   onPlayCourse: (MasterclassCourse) -> Unit,
+  onShowCertificate: (String) -> Unit = {},
   onMessage: (String) -> Unit
 ) {
   val scrollState = rememberScrollState()
@@ -1558,6 +1687,59 @@ fun AcademyScreen(
         colors = FilterChipDefaults.filterChipColors(selectedContainerColor = RedPrimary, selectedLabelColor = Color.White),
         modifier = Modifier.heightIn(min = 40.dp)
       )
+      FilterChip(
+        selected = currentSubTab == "cert",
+        onClick = { currentSubTab = "cert" },
+        label = { Text("📜 شهادة التأهيل", fontSize = 11.sp) },
+        colors = FilterChipDefaults.filterChipColors(selectedContainerColor = RedPrimary, selectedLabelColor = Color.White),
+        modifier = Modifier.heightIn(min = 40.dp)
+      )
+    }
+
+    // -------------------------------------------------------------
+    // TAB 7: PROFESSIONAL CERTIFICATE VIEW
+    // -------------------------------------------------------------
+    if (currentSubTab == "cert") {
+      Card(
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
+        border = BorderStroke(2.dp, GoldYellow)
+      ) {
+        Column(
+          modifier = Modifier.padding(16.dp),
+          horizontalAlignment = Alignment.CenterHorizontally,
+          verticalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
+          Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+          ) {
+            Text("🇩🇿 POLYLANG HUB ACADEMY", fontWeight = FontWeight.Black, fontSize = 11.sp, color = GoldYellow)
+            Text("ISO 17100:2015", fontWeight = FontWeight.Bold, fontSize = 10.sp, color = TextMuted)
+          }
+          Text(
+            text = "شهادة تأهيل وتفوق مهني معتمدة",
+            fontWeight = FontWeight.ExtraBold,
+            fontSize = 16.sp,
+            color = RedDark,
+            textAlign = TextAlign.Center
+          )
+          Text(
+            text = "تمنح للمترجمين الذين أتموا كافة متطلبات الكابينة والتدقيق والمطابقة التخصصية.",
+            fontSize = 11.sp,
+            color = TextMuted,
+            textAlign = TextAlign.Center
+          )
+          Button(
+            onClick = { onShowCertificate("الترجمة القانونية وصياغة العقود الدولية") },
+            colors = ButtonDefaults.buttonColors(containerColor = GoldYellow),
+            modifier = Modifier.fillMaxWidth().heightIn(min = 44.dp)
+          ) {
+            Text("🎓 استعراض وإصدار الشهادة الرسمية", fontWeight = FontWeight.Bold, color = Color.White)
+          }
+        }
+      }
     }
 
     // -------------------------------------------------------------
@@ -2060,6 +2242,7 @@ fun AcademyScreen(
 @Composable
 fun PricingScreen(
   isArabic: Boolean,
+  currency: AppCurrency = AppCurrency.DZD,
   onSelectPlan: (String, Int) -> Unit
 ) {
   val scrollState = rememberScrollState()
@@ -2087,7 +2270,7 @@ fun PricingScreen(
     // Plan 1: Free Starter
     PlanCard(
       title = if (isArabic) "باقة البداية المجانية" else "Free Starter",
-      price = "0 دج",
+      price = formatPrice(0, currency, isArabic),
       period = if (isArabic) "/ مدى الحياة" else "/ Forever",
       badge = if (isArabic) "مجاناً" else "Free",
       features = listOf(
@@ -2104,7 +2287,7 @@ fun PricingScreen(
     // Plan 2: Pro Translator
     PlanCard(
       title = if (isArabic) "باقة المحترفين المعتمدين" else "Pro Translator",
-      price = "4,500 دج",
+      price = formatPrice(4500, currency, isArabic),
       period = if (isArabic) "/ شهرياً" else "/ month",
       badge = if (isArabic) "الأكثر طلباً ⭐" else "Most Popular ⭐",
       features = listOf(
@@ -2115,14 +2298,14 @@ fun PricingScreen(
         if (isArabic) "دعم الدفع عبر الذهبية وبيدي موب" else "Edahabia & BaridiMob support"
       ),
       isPopular = true,
-      buttonText = if (isArabic) "ترقية إلى باقة Pro (4,500 دج)" else "Upgrade to Pro",
+      buttonText = if (isArabic) "ترقية إلى باقة Pro (${formatPrice(4500, currency, isArabic)})" else "Upgrade to Pro",
       onClick = { onSelectPlan("Pro Translator", 4500) }
     )
 
     // Plan 3: Enterprise Hub
     PlanCard(
       title = if (isArabic) "باقة المؤسسات والشركات" else "Enterprise Hub",
-      price = "18,500 دج",
+      price = formatPrice(18500, currency, isArabic),
       period = if (isArabic) "/ شهرياً" else "/ month",
       badge = if (isArabic) "للشركات" else "Enterprise",
       features = listOf(
@@ -2212,6 +2395,7 @@ fun PlanCard(
 @Composable
 fun DashboardScreen(
   isArabic: Boolean,
+  currency: AppCurrency = AppCurrency.DZD,
   userName: String,
   role: UserRole,
   plan: String,
@@ -2320,7 +2504,7 @@ fun DashboardScreen(
 
     // KPI Metrics Row
     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-      MetricCard(if (isArabic) "الرصيد المتاح" else "Balance", "$balance دج", Modifier.weight(1f))
+      MetricCard(if (isArabic) "الرصيد المتاح" else "Balance", formatPrice(balance, currency, isArabic), Modifier.weight(1f))
       MetricCard(if (isArabic) "الطلبات النشطة" else "Orders", "${orders.size}", Modifier.weight(1f))
       MetricCard(if (isArabic) "الكلمات" else "Words", "14,800", Modifier.weight(1f))
     }
@@ -2366,7 +2550,7 @@ fun DashboardScreen(
             horizontalArrangement = Arrangement.SpaceBetween
           ) {
             Text("${order.category} • ${order.langPair}", fontSize = 10.sp, color = TextMuted)
-            Text("${order.priceDzd} دج", fontWeight = FontWeight.Bold, fontSize = 12.sp, color = RedDark)
+            Text(formatPrice(order.priceDzd, currency, isArabic), fontWeight = FontWeight.Bold, fontSize = 12.sp, color = RedDark)
           }
         }
       }
@@ -2400,6 +2584,7 @@ fun MetricCard(label: String, value: String, modifier: Modifier = Modifier) {
 @Composable
 fun PaymentDialog(
   isArabic: Boolean,
+  currency: AppCurrency = AppCurrency.DZD,
   planName: String,
   planPrice: Int,
   onDismiss: () -> Unit,
@@ -2431,7 +2616,7 @@ fun PaymentDialog(
             Text(if (isArabic) "الدفع بالدينار الجزائري" else "Algerian Payment", fontWeight = FontWeight.Bold, fontSize = 15.sp, color = RedDark)
             Text(if (isArabic) "باقة: $planName" else "Plan: $planName", fontSize = 11.sp, color = TextMuted)
           }
-          Text("$planPrice دج", fontWeight = FontWeight.Black, fontSize = 16.sp, color = RedDark)
+          Text(formatPrice(planPrice, currency, isArabic), fontWeight = FontWeight.Black, fontSize = 16.sp, color = RedDark)
         }
 
         HorizontalDivider(color = BorderLight)
@@ -2534,6 +2719,230 @@ fun PaymentMethodButton(
     ) {
       Text(title, fontWeight = FontWeight.Bold, fontSize = 12.sp, color = if (isSelected) RedDark else TextDark)
       Text(subtitle, fontSize = 9.sp, color = TextMuted)
+    }
+  }
+}
+
+// =============================================================
+// CERTIFICATE OF COMPETENCE DIALOG (ISO 17100)
+// =============================================================
+@Composable
+fun CertificateDialog(
+  isArabic: Boolean,
+  studentName: String,
+  courseTitle: String,
+  onDismiss: () -> Unit,
+  onShare: () -> Unit
+) {
+  Dialog(onDismissRequest = onDismiss) {
+    Card(
+      shape = RoundedCornerShape(18.dp),
+      colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
+      border = BorderStroke(2.dp, GoldYellow),
+      modifier = Modifier
+        .fillMaxWidth()
+        .padding(8.dp)
+    ) {
+      Column(
+        modifier = Modifier
+          .padding(16.dp)
+          .verticalScroll(rememberScrollState()),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(10.dp)
+      ) {
+        Row(
+          modifier = Modifier.fillMaxWidth(),
+          horizontalArrangement = Arrangement.SpaceBetween,
+          verticalAlignment = Alignment.CenterVertically
+        ) {
+          Text("🇩🇿 POLYLANG HUB", fontWeight = FontWeight.Black, fontSize = 11.sp, color = RedDark)
+          Text("ISO 17100:2015", fontSize = 10.sp, color = TextMuted)
+          IconButton(onClick = onDismiss, modifier = Modifier.size(24.dp)) {
+            Icon(Icons.Default.Close, contentDescription = "Close", tint = TextMuted)
+          }
+        }
+
+        Box(
+          modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(12.dp))
+            .border(2.dp, GoldYellow, RoundedCornerShape(12.dp))
+            .background(Color(0xFFFFFBEB))
+            .padding(14.dp),
+          contentAlignment = Alignment.Center
+        ) {
+          Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(6.dp)) {
+            Text("📜 شهادة تأهيل وتفوق مهني معتمدة", fontWeight = FontWeight.Black, fontSize = 14.sp, color = RedDark, textAlign = TextAlign.Center)
+            Text("Certificate of Professional Competence", fontSize = 10.sp, color = TextMuted, letterSpacing = 1.sp)
+            HorizontalDivider(color = GoldYellow.copy(alpha = 0.4f), modifier = Modifier.padding(vertical = 4.dp))
+            Text("يشهد المجلس الأكاديمي لمنصة بوليلانغ بأن الأستاذ(ة):", fontSize = 11.sp, color = TextDark)
+            Text(studentName, fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = TextDark)
+            Text("قد أتم بنجاح متطلبات المسار التخصصي والتدريب العملي في:", fontSize = 10.sp, color = TextMuted, textAlign = TextAlign.Center)
+            Text(courseTitle, fontWeight = FontWeight.Bold, fontSize = 12.sp, color = RedDark, textAlign = TextAlign.Center)
+
+            Row(
+              modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+              horizontalArrangement = Arrangement.SpaceAround
+            ) {
+              Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Text("د. ليلى مزياني", fontWeight = FontWeight.Bold, fontSize = 10.sp)
+                Text("مترجم محلف", fontSize = 8.sp, color = TextMuted)
+              }
+              Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Text("أ. مداني جودي", fontWeight = FontWeight.Bold, fontSize = 10.sp)
+                Text("المشرف العام", fontSize = 8.sp, color = TextMuted)
+              }
+            }
+            Text("ID: CERT-PLY-2026-9812 • SHA-256 Verified ✓", fontSize = 8.sp, color = TextMuted)
+          }
+        }
+
+        Row(
+          modifier = Modifier.fillMaxWidth(),
+          horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+          OutlinedButton(
+            onClick = onDismiss,
+            modifier = Modifier.weight(1f).heightIn(min = 40.dp)
+          ) {
+            Text("إغلاق", fontSize = 12.sp)
+          }
+          Button(
+            onClick = onShare,
+            colors = ButtonDefaults.buttonColors(containerColor = GoldYellow),
+            modifier = Modifier.weight(1.5f).heightIn(min = 40.dp)
+          ) {
+            Text("📋 مشاركة / إرسال", fontSize = 12.sp, color = Color.White, fontWeight = FontWeight.Bold)
+          }
+        }
+      }
+    }
+  }
+}
+
+// =============================================================
+// AI TERMINOLOGY SEARCH DIALOG (ISO 17100)
+// =============================================================
+@Composable
+fun AiTermbaseDialog(
+  isArabic: Boolean,
+  onDismiss: () -> Unit,
+  onNotifyAdmin: (String) -> Unit
+) {
+  var searchQuery by remember { mutableStateOf("") }
+  var searchedTerm by remember { mutableStateOf<Pair<String, String>?>(null) }
+
+  val isoTerms = listOf(
+    Pair("Force Majeure", "القوة القاهرة / الحادث الفجائي (إعفاء تعاقدي وفق المادة 127 مدني)"),
+    Pair("Indemnification", "التعويض وإبراء الذمة وحماية المتعاقد من مطالبات الغير"),
+    Pair("Liquidated Damages", "التعويض الاتفاقي والشرط الجزائي محدد القيمة مسبقاً"),
+    Pair("Ultra Vires", "تجاوز الصلاحيات القانونية والتصرف خارج نطاق الاختصاص"),
+    Pair("Informed Consent", "الموافقة المستنيرة السريرية المكتوبة للمريض"),
+    Pair("Pharmacovigilance", "اليقظة والرصد الدوائي ومأمونية المستحضرات السريرية")
+  )
+
+  Dialog(onDismissRequest = onDismiss) {
+    Card(
+      shape = RoundedCornerShape(18.dp),
+      colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
+      border = BorderStroke(1.dp, BorderLight),
+      modifier = Modifier.fillMaxWidth().padding(8.dp)
+    ) {
+      Column(
+        modifier = Modifier.padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(10.dp)
+      ) {
+        Row(
+          modifier = Modifier.fillMaxWidth(),
+          horizontalArrangement = Arrangement.SpaceBetween,
+          verticalAlignment = Alignment.CenterVertically
+        ) {
+          Row(verticalAlignment = Alignment.CenterVertically) {
+            Text("🤖", fontSize = 18.sp)
+            Spacer(Modifier.width(6.dp))
+            Column {
+              Text("مساعد الترجمة الذكي (Polylang AI)", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = RedDark)
+              Text("مطابقة المصطلحات وفق ISO 17100", fontSize = 10.sp, color = TextMuted)
+            }
+          }
+          IconButton(onClick = onDismiss, modifier = Modifier.size(24.dp)) {
+            Icon(Icons.Default.Close, contentDescription = "Close", tint = TextMuted)
+          }
+        }
+
+        OutlinedTextField(
+          value = searchQuery,
+          onValueChange = {
+            searchQuery = it
+            searchedTerm = isoTerms.firstOrNull { pair ->
+              pair.first.contains(it, ignoreCase = true) || pair.second.contains(it, ignoreCase = true)
+            }
+          },
+          label = { Text("اكتب مصطلحاً (مثال: Force Majeure)", fontSize = 11.sp) },
+          singleLine = true,
+          modifier = Modifier.fillMaxWidth()
+        )
+
+        // Quick Suggestion Chips
+        Row(
+          modifier = Modifier.horizontalScroll(rememberScrollState()),
+          horizontalArrangement = Arrangement.spacedBy(6.dp)
+        ) {
+          listOf("Force Majeure", "Indemnification", "Pharmacovigilance").forEach { sample ->
+            SuggestionChip(
+              onClick = {
+                searchQuery = sample
+                searchedTerm = isoTerms.firstOrNull { it.first.equals(sample, ignoreCase = true) }
+              },
+              label = { Text(sample, fontSize = 10.sp) }
+            )
+          }
+        }
+
+        // Result Card
+        Card(
+          shape = RoundedCornerShape(10.dp),
+          colors = CardDefaults.cardColors(containerColor = Color(0xFFF0FDF4)),
+          border = BorderStroke(1.dp, SuccessGreen.copy(alpha = 0.4f)),
+          modifier = Modifier.fillMaxWidth()
+        ) {
+          Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            if (searchedTerm != null) {
+              Text(searchedTerm!!.first, fontWeight = FontWeight.Bold, fontSize = 12.sp, color = TextDark)
+              Text(searchedTerm!!.second, fontWeight = FontWeight.Bold, fontSize = 12.sp, color = SuccessGreen)
+              Text("معتمد وفق معيار ISO 17100:2015 ✓", fontSize = 9.sp, color = TextMuted)
+            } else {
+              Text(
+                if (searchQuery.isBlank()) "اختر أو ابحث عن مصطلح لعرض الصياغة القانونية المعتمدة."
+                else "الصياغة المقترحة: $searchQuery (قيد المراجعة التخصصية)",
+                fontSize = 11.sp,
+                color = TextMuted
+              )
+            }
+          }
+        }
+
+        Row(
+          modifier = Modifier.fillMaxWidth(),
+          horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+          OutlinedButton(
+            onClick = onDismiss,
+            modifier = Modifier.weight(1f).heightIn(min = 40.dp)
+          ) {
+            Text("إغلاق", fontSize = 11.sp)
+          }
+          Button(
+            onClick = {
+              onNotifyAdmin(searchQuery.ifBlank { "Force Majeure" })
+            },
+            colors = ButtonDefaults.buttonColors(containerColor = RedPrimary),
+            modifier = Modifier.weight(1.5f).heightIn(min = 40.dp)
+          ) {
+            Text("➕ طلب اعتماد مصطلح", fontSize = 11.sp, color = Color.White)
+          }
+        }
+      }
     }
   }
 }
