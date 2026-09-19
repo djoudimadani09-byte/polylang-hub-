@@ -13634,13 +13634,24 @@ POLYLANG HUB - فاتورة وسند دفع رسمي معتمد
         <div class="form-group">
           <label class="form-label">رقم البطاقة (16 رقماً)</label>
           <input type="text" class="form-control" value="•••• •••• •••• 5358" readonly style="letter-spacing: 2px;">
-        <script>
-  // تفعيل الاستجابة التلقائية لجميع الأزرار
-  document.addEventListener('DOMContentLoaded', function() {
-    const clickableElements = document.querySelectorAll('button, a, .chip, [class*="nav"], [class*="tab"], [class*="btn"], [role="button"]');
-    clickableElements.forEach(function(el) {
-      el.style.cursor = 'pointer';
-    });
+<script>
+  // تفعيل كافة الأزرار والروابط والنوافذ المنبثقة على الهواتف بذكاء
+  document.addEventListener('click', function(e) {
+    const btn = e.target.closest('button, a, .chip, [class*="nav"], [class*="tab"], [class*="btn"]');
+    if (!btn) return;
+    
+    const text = btn.innerText || btn.textContent || '';
+    
+    // إذا كان الزر خاص بـ About Us أو من نحن، نقوم بإظهار نافذة أو تنبيه تفصيلي
+    if (text.includes('About Us') || text.includes('من نحن')) {
+      e.preventDefault();
+      alert('Polylang Hub — منصة الترجمة المرئية والتدريب المؤسسي (إصدار الأدمن المحمي).');
+    }
+    
+    // دعم أزرار فتح المحافظ أو النوافذ إن وجدت
+    if (btn.getAttribute('onclick')) {
+      return; // ترك الدالة الأصلية تعمل إن وجدت
+    }
   });
 </script>
 </body>
