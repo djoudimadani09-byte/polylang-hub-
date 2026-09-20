@@ -11,47 +11,58 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
-private val DarkColorScheme =
-  darkColorScheme(
+private val DarkColorScheme = darkColorScheme(
     primary = RedPrimary,
-    secondary = RedDark,
-    tertiary = GoldYellow,
-    background = Color(0xFF121212),
-    surface = Color(0xFF1E1E1E),
     onPrimary = Color.White,
-    onSecondary = Color.White,
-  )
+    primaryContainer = RedDark,
+    onPrimaryContainer = Color.White,
+    secondary = GoldYellow,
+    background = Color(0xFF0F172A),
+    surface = Color(0xFF1E293B),
+    onBackground = Color.White,
+    onSurface = Color.White
+)
 
-private val LightColorScheme =
-  lightColorScheme(
+private val LightColorScheme = lightColorScheme(
     primary = RedPrimary,
-    secondary = RedDark,
-    tertiary = GoldYellow,
-    background = BgLight,
-    surface = SurfaceWhite,
     onPrimary = Color.White,
-    onSecondary = Color.White,
+    primaryContainer = RedDark,
+    onPrimaryContainer = Color.White,
+    secondary = GoldYellow,
+    background = BgLight,
     onBackground = TextDark,
-    onSurface = TextDark,
-  )
+    surface = SurfaceWhite,
+    onSurface = TextDark
+)
 
 @Composable
 fun MyApplicationTheme(
-  darkTheme: Boolean = isSystemInDarkTheme(),
-  // Dynamic color is available on Android 12+
-  dynamicColor: Boolean = true,
-  content: @Composable () -> Unit,
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    dynamicColor: Boolean = true,
+    content: @Composable () -> Unit
 ) {
-  val colorScheme =
-    when {
-      dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-        val context = LocalContext.current
-        if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-      }
-
-      darkTheme -> DarkColorScheme
-      else -> LightColorScheme
+    val colorScheme = when {
+        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+            val context = LocalContext.current
+            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+        }
+        darkTheme -> DarkColorScheme
+        else -> LightColorScheme
     }
 
-  MaterialTheme(colorScheme = colorScheme, typography = Typography, content = content)
+    MaterialTheme(
+        colorScheme = colorScheme,
+        typography = Typography,
+        content = content
+    )
 }
+
+@Composable
+fun PolylangTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    dynamicColor: Boolean = false,
+    content: @Composable () -> Unit
+) {
+    MyApplicationTheme(darkTheme = darkTheme, dynamicColor = dynamicColor, content = content)
+}
+
