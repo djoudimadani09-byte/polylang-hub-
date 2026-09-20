@@ -11,8 +11,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.ui.*
@@ -82,7 +84,8 @@ fun PolylangHubApp() {
     // Currency Menu
     var showCurrencyMenu by remember { mutableStateOf(false) }
 
-    Scaffold(
+    CompositionLocalProvider(LocalLayoutDirection provides (if (isArabic) LayoutDirection.Rtl else LayoutDirection.Ltr)) {
+        Scaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = {
             TopAppBar(
@@ -382,5 +385,6 @@ fun PolylangHubApp() {
             isArabic = isArabic,
             onDismiss = { showTermbaseDialog = false }
         )
+    }
     }
 }
