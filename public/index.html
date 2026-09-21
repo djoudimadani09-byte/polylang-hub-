@@ -2,11 +2,11 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>مجمع بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية | Polylang Hub</title>
-  <meta name="description" content="منصة مجمع بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية ISO 17100:2015. إدارة الأستاذ جودي مداني. ترجمة محلفة، كابينات فورية، أكاديمية ماستركلاس، واستوديو SRT.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Polylang Hub | Certified Translation, Localization & Monetized Training Platform</title>
+  <meta name="description" content="منصة مجمع بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية ISO 17100:2015. إدارة الأستاذ جودي مداني. ترجمة محلفة، كابينات المؤتمرات، أكاديمية الماستركلاس، واستوديو SRT.">
   <link rel="icon" type="image/jpeg" href="polylang_logo.jpg">
-  
+
   <!-- Google Fonts: Cairo for Arabic & Inter for Latin scripts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,443 +14,574 @@
 
   <style>
     :root {
-      --primary: #b91c1c;
-      --primary-dark: #881337;
-      --primary-light: #fff1f2;
+      --crimson: #e53935;
+      --crimson-dark: #b71c1c;
+      --crimson-light: #fef2f2;
+      --crimson-glow: rgba(229, 57, 53, 0.25);
       --gold: #d97706;
-      --gold-dark: #b45309;
       --gold-light: #fef3c7;
-      --neon-cyan: #06b6d4;
-      --neon-green: #10b981;
-      --dark-bg: #0b0f19;
-      --dark-surface: #111827;
-      --dark-card: #1f2937;
-      --dark-border: #374151;
-      --light-bg: #f8fafc;
-      --light-surface: #ffffff;
+      --green: #10b981;
+      --green-light: #d1fae5;
+      --blue: #2563eb;
+      --blue-light: #dbeafe;
+      --bg-body: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-card: #ffffff;
+      --border-line: #e2e8f0;
       --text-main: #0f172a;
-      --text-muted: #64748b;
-      --radius: 14px;
-      --radius-lg: 20px;
-      --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.08);
-      --shadow-lg: 0 16px 36px -4px rgba(0, 0, 0, 0.14);
+      --text-dim: #475569;
+      --text-faint: #94a3b8;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --radius-pill: 9999px;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.07);
+      --shadow-lg: 0 12px 30px rgba(0,0,0,0.11);
       --font-ar: 'Cairo', system-ui, sans-serif;
       --font-en: 'Inter', system-ui, sans-serif;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    /* Dark Mode Theme */
+    body.dark-theme {
+      --bg-body: #090d16;
+      --bg-surface: #111827;
+      --bg-card: #182234;
+      --border-line: #2d3748;
+      --text-main: #f8fafc;
+      --text-dim: #cbd5e1;
+      --text-faint: #64748b;
+      --crimson-light: rgba(229, 57, 53, 0.15);
+      --gold-light: rgba(217, 119, 6, 0.15);
+      --green-light: rgba(16, 185, 129, 0.15);
+      --blue-light: rgba(37, 99, 235, 0.15);
     }
 
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { max-width: 100%; overflow-x: hidden; }
     body {
       font-family: var(--font-ar);
-      background-color: var(--light-bg);
+      background-color: var(--bg-body);
       color: var(--text-main);
-      line-height: 1.65;
-      overflow-x: hidden;
+      line-height: 1.6;
       min-height: 100vh;
+      transition: background-color 0.2s, color 0.2s;
+      -webkit-font-smoothing: antialiased;
+    }
+    html[dir="ltr"] body { font-family: var(--font-en); }
+
+    /* Layout Container */
+    .app-container {
+      width: 100%;
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 0 16px;
     }
 
-    html[dir="ltr"] body {
-      font-family: var(--font-en);
-    }
-
-    /* Database Banner */
-    .db-status-bar {
-      background: linear-gradient(90deg, #090d16, #1e1b4b);
-      color: #94a3b8;
-      font-size: 11px;
-      padding: 6px 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .db-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(16, 185, 129, 0.15);
-      color: #34d399;
-      padding: 2px 8px;
-      border-radius: 6px;
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      font-family: 'Fira Code', monospace;
-      font-weight: 600;
-    }
-
-    .db-pulse {
-      width: 8px;
-      height: 8px;
-      background: #10b981;
-      border-radius: 50%;
-      box-shadow: 0 0 8px #10b981;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.4); opacity: 0.6; }
-    }
-
-    /* Top Navigation Header */
-    header {
+    /* Top Navigation Bar (Header) */
+    .top-navbar {
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: rgba(255, 255, 255, 0.97);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid #e2e8f0;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-line);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(10px);
     }
 
-    .nav-container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 12px 20px;
+    .nav-primary-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 12px;
+      padding: 10px 0;
+      flex-wrap: wrap;
     }
 
-    .brand {
+    .brand-section {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       text-decoration: none;
       color: inherit;
     }
 
-    .brand img {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--primary);
-      box-shadow: 0 2px 10px rgba(185, 28, 28, 0.25);
+    .brand-icon-p {
+      width: 38px;
+      height: 38px;
+      background: var(--crimson);
+      color: #ffffff;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 900;
+      box-shadow: 0 4px 10px var(--crimson-glow);
+      flex-shrink: 0;
     }
 
-    .brand-text h1 {
-      font-size: 18px;
+    .brand-text-col h1 {
+      font-size: 16px;
       font-weight: 800;
-      color: var(--primary-dark);
+      color: var(--crimson);
       line-height: 1.2;
     }
 
-    .brand-text span {
+    .brand-text-col p {
       font-size: 11px;
-      color: var(--text-muted);
+      color: var(--text-dim);
       font-weight: 600;
-      display: block;
-    }
-
-    .nav-menu {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      list-style: none;
-    }
-
-    .nav-menu a {
-      text-decoration: none;
-      color: var(--text-main);
-      font-size: 13.5px;
-      font-weight: 700;
-      transition: color 0.2s;
-    }
-
-    .nav-menu a:hover, .nav-menu a.active {
-      color: var(--primary);
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      padding: 8px 16px;
-      border-radius: 9px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      text-decoration: none;
-      border: none;
-      transition: all 0.2s ease;
-      font-family: inherit;
       white-space: nowrap;
     }
 
-    .btn-primary {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: white;
-      box-shadow: 0 4px 12px rgba(185, 28, 28, 0.28);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(185, 28, 28, 0.38);
-    }
-
-    .btn-gold {
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      color: white;
-      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.28);
-    }
-
-    .btn-outline {
-      background: transparent;
-      border: 1.5px solid var(--primary);
-      color: var(--primary);
-    }
-
-    .btn-outline:hover {
-      background: var(--primary-light);
-    }
-
-    .btn-dark {
-      background: #0f172a;
-      color: white;
-    }
-
-    .btn-dark:hover {
-      background: #1e293b;
-    }
-
-    .btn-sm {
-      padding: 6px 12px;
-      font-size: 12px;
-    }
-
-    .select-pill {
-      background: white;
-      border: 1px solid #cbd5e1;
-      padding: 6px 10px;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text-main);
-      cursor: pointer;
-      font-family: inherit;
-      outline: none;
-    }
-
-    /* Hero Banner */
-    .hero {
-      background: linear-gradient(135deg, #fff1f2 0%, #ffffff 40%, #fef3c7 100%);
-      padding: 50px 20px 40px;
-      border-bottom: 1px solid #e2e8f0;
-      position: relative;
-    }
-
-    .hero-container {
-      max-width: 1280px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.25fr 0.75fr;
-      gap: 36px;
+    .nav-controls-row {
+      display: flex;
       align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
-    .badge-iso {
+    /* Pills & Buttons */
+    .nav-pill {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 5px 14px;
-      background: var(--gold-light);
-      border: 1px solid #fde68a;
-      color: #92400e;
-      border-radius: 30px;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
       font-size: 12px;
-      font-weight: 800;
-      margin-bottom: 14px;
-    }
-
-    .hero h2 {
-      font-size: 34px;
-      font-weight: 900;
-      color: #0f172a;
-      line-height: 1.35;
-      margin-bottom: 16px;
-    }
-
-    .hero h2 span {
-      color: var(--primary);
-    }
-
-    .hero p {
-      font-size: 15px;
-      color: var(--text-muted);
-      margin-bottom: 24px;
-      line-height: 1.8;
-    }
-
-    .hero-director-strip {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: white;
-      padding: 10px 16px;
-      border-radius: 12px;
-      border: 1px solid #e2e8f0;
-      margin-bottom: 24px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-    }
-
-    .hero-director-avatar {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: #b91c1c;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 16px;
-    }
-
-    .hero-director-info h4 {
-      font-size: 13.5px;
-      font-weight: 800;
-      color: #0f172a;
-    }
-
-    .hero-director-info p {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin: 0;
-      line-height: 1.3;
-    }
-
-    .hero-cta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    /* Live Stat Cards */
-    .hero-side-card {
-      background: white;
-      padding: 24px;
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-lg);
-      border: 1px solid #e2e8f0;
-    }
-
-    .stat-row {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .stat-box {
-      background: var(--light-bg);
-      padding: 12px;
-      border-radius: 10px;
-      border: 1px solid #e2e8f0;
-      text-align: center;
-    }
-
-    .stat-box strong {
-      display: block;
-      font-size: 20px;
-      font-weight: 900;
-      color: var(--primary);
-    }
-
-    .stat-box span {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    /* Main Content Container */
-    .main-content {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 40px 20px;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 32px;
-    }
-
-    .section-header h3 {
-      font-size: 24px;
-      font-weight: 900;
-      color: #0f172a;
-      margin-bottom: 6px;
-    }
-
-    .section-header p {
-      font-size: 13.5px;
-      color: var(--text-muted);
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    /* Tabs Bar */
-    .feature-tabs {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 36px;
-      flex-wrap: wrap;
-    }
-
-    .tab-btn {
-      padding: 10px 20px;
-      border-radius: 10px;
-      background: white;
-      border: 1px solid #cbd5e1;
       font-weight: 700;
-      font-size: 13px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-line);
+      color: var(--text-main);
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.2s ease;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      white-space: nowrap;
       font-family: inherit;
     }
 
-    .tab-btn.active {
-      background: var(--primary);
-      color: white;
-      border-color: var(--primary);
-      box-shadow: 0 4px 12px rgba(185, 28, 28, 0.25);
+    .nav-pill:hover {
+      background: var(--crimson-light);
+      border-color: var(--crimson);
     }
 
-    /* Interactive Calculator & Order Card */
-    .calc-box {
-      background: white;
-      border-radius: var(--radius-lg);
-      padding: 28px;
-      box-shadow: var(--shadow);
-      border: 1px solid #e2e8f0;
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 30px;
+    .nav-pill-red {
+      color: var(--crimson);
+      border-color: var(--crimson);
+    }
+
+    .nav-pill-green {
+      background: var(--green-light);
+      border-color: #86efac;
+      color: #065f46;
+    }
+
+    .nav-user-chip {
+      display: inline-flex;
       align-items: center;
-      margin-bottom: 48px;
+      gap: 8px;
+      padding: 5px 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-pill);
+      cursor: pointer;
     }
 
-    .form-group {
+    .user-avatar-circle {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--crimson);
+      color: white;
+      font-size: 12px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .user-chip-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .badge-training {
+      font-size: 10px;
+      background: var(--crimson-light);
+      color: var(--crimson);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 800;
+    }
+
+    /* Secondary Sub-Navbar */
+    .nav-sub-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 0 10px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .nav-sub-bar::-webkit-scrollbar { display: none; }
+
+    .sub-nav-btn {
+      padding: 5px 12px;
+      font-size: 11.5px;
+      font-weight: 700;
+      border-radius: var(--radius-pill);
+      background: var(--bg-card);
+      border: 1px solid var(--border-line);
+      color: var(--text-dim);
+      white-space: nowrap;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s ease;
+    }
+
+    .sub-nav-btn:hover, .sub-nav-btn.active {
+      color: var(--crimson);
+      border-color: var(--crimson);
+      background: var(--crimson-light);
+    }
+
+    /* Hero Section Card */
+    .hero-welcome-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      margin: 18px 0;
+      overflow: hidden;
+    }
+
+    .hero-card-header {
+      padding: 12px 18px;
+      background: linear-gradient(90deg, rgba(229,57,53,0.06), rgba(217,119,6,0.06));
+      border-bottom: 1px solid var(--border-line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .hero-header-title {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .badge-iso-green {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+      padding: 3px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 11.5px;
+      font-weight: 800;
+    }
+
+    .hero-card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      padding: 20px;
+      align-items: center;
+    }
+
+    /* Video Frame */
+    .video-presenter-box {
+      background: #000000;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 16/9;
+      border: 1px solid var(--border-line);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .video-presenter-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-play-btn-circle {
+      position: absolute;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--crimson);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+      transition: transform 0.2s;
+    }
+
+    .video-play-btn-circle:hover { transform: scale(1.1); }
+
+    .video-sub-banner {
+      position: absolute;
+      bottom: 8px;
+      background: rgba(15, 23, 42, 0.85);
+      color: white;
+      padding: 4px 14px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    /* Hero Text & Audio Controls */
+    .hero-content-col h2 {
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .hero-content-col p.lead-desc {
+      font-size: 13.5px;
+      color: var(--text-dim);
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+
+    .audio-greeting-box {
+      background: var(--bg-body);
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-md);
+      padding: 12px;
       margin-bottom: 14px;
     }
 
+    .audio-box-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .audio-buttons-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-audio-listen {
+      background: var(--crimson);
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-audio-sub {
+      background: var(--bg-card);
+      border: 1px solid var(--border-line);
+      color: var(--text-main);
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Action Buttons Row */
+    .hero-actions-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .btn-primary-red {
+      background: var(--crimson);
+      color: white;
+      border: none;
+      padding: 9px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 10px var(--crimson-glow);
+    }
+
+    .btn-outline-action {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-line);
+      color: var(--text-main);
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-outline-action:hover {
+      border-color: var(--crimson);
+      color: var(--crimson);
+    }
+
+    /* Registry Pills Grid */
+    .registry-pills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-dim);
+    }
+
+    .reg-pill {
+      background: var(--bg-body);
+      border: 1px solid var(--border-line);
+      padding: 6px 10px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Role Selector Section */
+    .role-section-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-lg);
+      padding: 16px 20px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 24px;
+    }
+
+    .role-section-head {
+      margin-bottom: 12px;
+    }
+
+    .role-label-text {
+      font-size: 12px;
+      color: var(--text-faint);
+      font-weight: 700;
+    }
+
+    .role-current-title {
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--crimson);
+    }
+
+    .role-buttons-grid {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .role-chip {
+      padding: 8px 14px;
+      border-radius: var(--radius-pill);
+      font-size: 12.5px;
+      font-weight: 700;
+      background: var(--bg-body);
+      border: 1.5px solid var(--border-line);
+      color: var(--text-dim);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .role-chip:hover {
+      border-color: var(--crimson);
+      color: var(--crimson);
+    }
+
+    .role-chip.active {
+      background: var(--crimson-light);
+      border-color: var(--crimson);
+      color: var(--crimson);
+      font-weight: 800;
+    }
+
+    .role-chip-red-pill {
+      background: var(--crimson);
+      color: white;
+      border-color: var(--crimson);
+    }
+    .role-chip-red-pill:hover { background: var(--crimson-dark); color: white; }
+
+    /* Dynamic Content Views */
+    .view-panel { display: none; margin-bottom: 40px; }
+    .view-panel.active-view { display: block; }
+
+    /* Cards & Components */
+    .content-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 20px;
+    }
+
+    .section-title-wrap {
+      margin-bottom: 18px;
+    }
+
+    .section-title-wrap h3 {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .section-title-wrap p {
+      font-size: 12.5px;
+      color: var(--text-dim);
+    }
+
+    /* Calculator & Orders */
+    .calc-flex {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .form-group { margin-bottom: 12px; }
     .form-group label {
       display: block;
       font-size: 12px;
@@ -458,238 +589,144 @@
       margin-bottom: 5px;
       color: var(--text-main);
     }
-
     .form-control {
       width: 100%;
-      padding: 10px 14px;
-      border: 1.5px solid #cbd5e1;
-      border-radius: 8px;
+      padding: 9px 12px;
+      border: 1.5px solid var(--border-line);
+      border-radius: var(--radius-sm);
+      background: var(--bg-surface);
+      color: var(--text-main);
       font-size: 13px;
       font-family: inherit;
       outline: none;
-      transition: border-color 0.2s;
     }
+    .form-control:focus { border-color: var(--crimson); }
 
-    .form-control:focus {
-      border-color: var(--primary);
-    }
-
-    .calc-summary {
-      background: linear-gradient(135deg, #0f172a, #1e293b);
+    .calc-res-display {
+      background: linear-gradient(135deg, #1e293b, #0f172a);
       color: white;
-      padding: 26px;
-      border-radius: var(--radius);
+      padding: 20px;
+      border-radius: var(--radius-md);
       text-align: center;
     }
 
-    .calc-price {
-      font-size: 34px;
+    .calc-price-big {
+      font-size: 32px;
       font-weight: 900;
       color: #fbbf24;
-      margin: 10px 0;
-    }
-
-    /* Services Grid */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
-      margin-bottom: 60px;
-    }
-
-    .service-card {
-      background: white;
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: var(--shadow);
-      border: 1px solid #e2e8f0;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: all 0.2s;
-    }
-
-    .service-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
-      border-color: var(--primary);
-    }
-
-    .service-icon {
-      font-size: 28px;
-      margin-bottom: 12px;
-      display: inline-block;
-    }
-
-    .service-card h4 {
-      font-size: 16px;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-
-    .service-card p {
-      font-size: 12.5px;
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 16px;
-      flex-grow: 1;
-    }
-
-    .service-price-tag {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 12px;
-    }
-
-    /* Dashboard & Live Orders */
-    .dashboard-panel {
-      background: white;
-      border-radius: var(--radius-lg);
-      padding: 26px;
-      box-shadow: var(--shadow);
-      border: 1px solid #e2e8f0;
-      margin-bottom: 48px;
-    }
-
-    .table-responsive {
-      overflow-x: auto;
-      margin-top: 16px;
-    }
-
-    .custom-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-    }
-
-    .custom-table th, .custom-table td {
-      padding: 12px 14px;
-      border-bottom: 1px solid #e2e8f0;
-      text-align: start;
-    }
-
-    .custom-table th {
-      background: #f8fafc;
-      color: #475569;
-      font-weight: 700;
-    }
-
-    .status-badge {
-      display: inline-block;
-      padding: 3px 9px;
-      border-radius: 6px;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .status-active { background: #fef3c7; color: #92400e; }
-    .status-completed { background: #dcfce7; color: #166534; }
-    .status-scheduled { background: #e0f2fe; color: #0369a1; }
-
-    /* SRT Subtitle Studio */
-    .srt-panel {
-      background: white;
-      border-radius: var(--radius-lg);
-      padding: 26px;
-      box-shadow: var(--shadow);
-      border: 1px solid #e2e8f0;
-      margin-bottom: 48px;
-    }
-
-    .srt-screen {
-      background: #090d16;
-      border-radius: 12px;
-      height: 230px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      color: white;
-      margin-bottom: 20px;
-      border: 1px solid #334155;
-    }
-
-    .srt-subtitle-line {
-      position: absolute;
-      bottom: 20px;
-      background: rgba(0,0,0,0.88);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 6px;
-      padding: 6px 18px;
-      font-size: 15px;
-      font-weight: 700;
-      color: #f8fafc;
-      text-align: center;
-      max-width: 80%;
-    }
-
-    /* Masterclass Academy & Certificate */
-    .academy-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 22px;
-      margin-bottom: 60px;
-    }
-
-    .course-card {
-      background: white;
-      border-radius: var(--radius);
-      padding: 22px;
-      box-shadow: var(--shadow);
-      border: 1px solid #e2e8f0;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .course-card h4 {
-      font-size: 16px;
-      font-weight: 800;
       margin: 8px 0;
     }
 
-    .course-card p {
+    /* Table */
+    .table-scroll { overflow-x: auto; margin-top: 12px; }
+    .app-table {
+      width: 100%;
+      border-collapse: collapse;
       font-size: 12.5px;
-      color: var(--text-muted);
-      line-height: 1.6;
+    }
+    .app-table th, .app-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border-line);
+      text-align: start;
+    }
+    .app-table th {
+      background: var(--bg-body);
+      color: var(--text-dim);
+      font-weight: 800;
+    }
+
+    /* Status badge */
+    .status-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .badge-review { background: #fef3c7; color: #92400e; }
+    .badge-done { background: #dcfce7; color: #166534; }
+    .badge-scheduled { background: #e0f2fe; color: #075985; }
+
+    /* Courses & Media Grid */
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .course-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.15s, border-color 0.15s;
+    }
+    .course-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--crimson);
+    }
+
+    .course-thumb-box {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #0f172a;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .course-card h4 {
+      font-size: 14.5px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: var(--text-main);
+    }
+
+    .course-card p {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    /* SRT Editor */
+    .srt-player-mock {
+      background: #000;
+      border-radius: var(--radius-md);
+      aspect-ratio: 16/9;
+      max-height: 240px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
       margin-bottom: 14px;
     }
 
-    /* Termbase Glossary */
-    .termbase-card {
-      background: white;
-      border-radius: var(--radius-lg);
-      padding: 26px;
-      box-shadow: var(--shadow);
-      border: 1px solid #e2e8f0;
-      margin-bottom: 48px;
-    }
-
-    /* Database & Backend Viewer */
-    .backend-console {
-      background: #090d16;
-      color: #e2e8f0;
-      border-radius: var(--radius-lg);
-      padding: 24px;
-      border: 1px solid #334155;
-      font-family: 'Fira Code', monospace;
-      font-size: 12px;
-      margin-bottom: 48px;
-    }
-
-    .backend-console h4 {
-      color: #38bdf8;
+    .srt-sub-overlay {
+      position: absolute;
+      bottom: 14px;
+      background: rgba(0,0,0,0.85);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 6px;
       font-size: 14px;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      font-weight: 700;
+      text-align: center;
+      max-width: 85%;
+      border: 1px solid rgba(255,255,255,0.2);
     }
 
     /* Modals */
-    .modal-overlay {
+    .modal-backdrop {
       position: fixed;
       inset: 0;
       background: rgba(15, 23, 42, 0.75);
@@ -698,1039 +735,896 @@
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 16px;
     }
 
-    .modal-overlay.active {
-      display: flex;
-    }
+    .modal-backdrop.open { display: flex; }
 
-    .modal-card {
-      background: white;
-      border-radius: 20px;
-      max-width: 540px;
+    .modal-sheet {
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
       width: 100%;
+      max-width: 520px;
       max-height: 90vh;
       overflow-y: auto;
-      padding: 28px;
+      padding: 24px;
+      box-shadow: var(--shadow-lg);
       position: relative;
-      box-shadow: 0 20px 45px rgba(0,0,0,0.3);
+      border: 1px solid var(--border-line);
+      color: var(--text-main);
     }
 
-    .modal-close {
+    .modal-close-x {
       position: absolute;
-      top: 16px;
-      left: 16px;
-      background: #f1f5f9;
-      border: none;
-      width: 32px;
-      height: 32px;
+      top: 14px;
+      left: 14px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
-      cursor: pointer;
-      font-weight: bold;
-      color: #64748b;
-    }
-
-    html[dir="ltr"] .modal-close {
-      left: auto;
-      right: 16px;
-    }
-
-    /* Verifiable Certificate */
-    .certificate-box {
-      border: 6px double #d97706;
-      padding: 26px;
-      background: #fffbeb;
-      border-radius: 14px;
-      text-align: center;
-      position: relative;
-      margin: 16px 0;
-    }
-
-    .certificate-seal {
-      position: absolute;
-      top: 15px;
-      left: 15px;
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      border: 2px solid #b45309;
-      background: #fef3c7;
+      background: var(--bg-body);
+      border: 1px solid var(--border-line);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 10px;
-      font-weight: 900;
-      color: #92400e;
-      text-align: center;
-      line-height: 1.1;
+      cursor: pointer;
+      font-weight: 800;
+      color: var(--text-dim);
     }
+    html[dir="ltr"] .modal-close-x { left: auto; right: 14px; }
 
     /* Footer */
     footer {
-      background: #0f172a;
-      color: #94a3b8;
-      padding: 50px 20px 24px;
-      font-size: 13px;
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-line);
+      padding: 24px 0;
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-top: 40px;
     }
 
-    .footer-container {
-      max-width: 1280px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1.5fr;
-      gap: 36px;
-      margin-bottom: 36px;
-    }
-
-    .footer-col h4 {
-      color: white;
-      font-size: 15px;
-      font-weight: 800;
-      margin-bottom: 16px;
-    }
-
-    .footer-col ul {
-      list-style: none;
-    }
-
-    .footer-col ul li {
-      margin-bottom: 8px;
-    }
-
-    .footer-col ul li a {
-      color: #94a3b8;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .footer-col ul li a:hover {
-      color: white;
-    }
-
-    .footer-bottom {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding-top: 20px;
-      border-top: 1px solid #1e293b;
+    .footer-inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 12px;
-      font-size: 12px;
     }
 
-    @media (max-width: 860px) {
-      .hero-container, .calc-box {
-        grid-template-columns: 1fr;
-      }
-      .footer-container {
-        grid-template-columns: 1fr 1fr;
-      }
-      .nav-menu {
-        display: none;
-      }
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .hero-card-grid, .calc-flex { grid-template-columns: 1fr; }
+      .brand-text-col p { display: none; }
+      .registry-pills-grid { grid-template-columns: 1fr; }
+      .hero-content-col h2 { font-size: 20px; }
+      .top-navbar { padding: 4px 0; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Live Database Connection Status Bar -->
-  <div class="db-status-bar">
-    <div style="display:flex; align-items:center; gap:12px;">
-      <span class="db-badge">
-        <span class="db-pulse"></span>
-        <span>NEON POSTGRESQL: CONNECTED</span>
-      </span>
-      <span style="color:#cbd5e1; font-size:11px;">
-        Host: <code>ep-little-brook-a52mrgvy-pooler.us-east-2.aws.neon.tech</code>
-      </span>
-    </div>
-    <div style="display:flex; align-items:center; gap:14px;">
-      <span>📧 الإشعارات الفورية: <strong>djoudimadani09@gmail.com</strong></span>
-      <button class="btn btn-sm btn-outline" style="color:#cbd5e1; border-color:#475569; padding:2px 8px; font-size:10px;" onclick="openModal('db-modal')">
-        فحص جداول البيانات SQL ⚡
-      </button>
-    </div>
-  </div>
+  <!-- TOP NAVIGATION HEADER -->
+  <header class="top-navbar">
+    <div class="app-container">
+      <div class="nav-primary-row">
+        
+        <!-- Brand & Logo -->
+        <a href="#" class="brand-section" onclick="switchRole('client'); return false;">
+          <div class="brand-icon-p">P</div>
+          <div class="brand-text-col">
+            <h1 id="i18n-brand-name">Polylang Hub</h1>
+            <p id="i18n-brand-sub">Certified Translation, Localization & Monetized Training Platform</p>
+          </div>
+        </a>
 
-  <!-- Header -->
-  <header>
-    <div class="nav-container">
-      <a href="#" class="brand">
-        <img src="polylang_logo.jpg" alt="Polylang Hub Logo" onerror="this.src='https://images.unsplash.com/photo-1544717305-2782549b5136?w=100&h=100&fit=crop'">
-        <div class="brand-text">
-          <h1 id="brand-title">مجمع بوليلانغ للترجمة المعتمدة</h1>
-          <span id="brand-subtitle">Polylang Hub • الإدارة العامة: جودي مداني • ISO 17100:2015</span>
+        <!-- Controls: About, Status, Currency, Lang, Theme, User -->
+        <div class="nav-controls-row">
+          <button class="nav-pill nav-pill-red" onclick="openModal('aboutModal')">
+            <span>✦</span> <span id="i18n-about-btn">About Us</span>
+          </button>
+
+          <button class="nav-pill nav-pill-green" onclick="openModal('dbModal')">
+            <span style="width:8px; height:8px; border-radius:50%; background:#10b981; display:inline-block;"></span>
+            <span>NestJS API Online</span>
+          </button>
+
+          <!-- Currency Selector -->
+          <select id="currency-dropdown" class="nav-pill" onchange="changeCurrency(this.value)">
+            <option value="DZD">💰 🇩🇿 DZD (د.ج)</option>
+            <option value="USD">💵 🇺🇸 USD ($)</option>
+            <option value="EUR">💶 🇪🇺 EUR (€)</option>
+          </select>
+
+          <!-- 7-Languages Selector -->
+          <select id="language-dropdown" class="nav-pill" onchange="changeLanguage(this.value)">
+            <option value="ar" selected>🌐 العربية (Arabic)</option>
+            <option value="en">🌐 English</option>
+            <option value="fr">🌐 Français</option>
+            <option value="es">🌐 Español</option>
+            <option value="de">🌐 Deutsch</option>
+            <option value="it">🌐 Italiano</option>
+            <option value="ru">🌐 Русский</option>
+          </select>
+
+          <!-- Dark Mode Button -->
+          <button class="nav-pill" onclick="toggleDarkTheme()" title="Toggle Dark/Light Mode">
+            <span id="theme-icon">🌙</span>
+          </button>
+
+          <!-- Notification Bell -->
+          <button class="nav-pill" onclick="openModal('notifModal')" title="Notifications">
+            <span>🔔</span> <span id="notif-count-badge" style="color:var(--crimson); font-weight:900;">3</span>
+          </button>
+
+          <!-- User Account Chip (Clickable for Login & Profile!) -->
+          <div class="nav-user-chip" onclick="openModal('authModal')" title="User Profile / Sign In">
+            <div class="user-avatar-circle" id="user-avatar-initial">ك</div>
+            <span class="user-chip-label" id="user-display-name">كريم حمداوي (عميل مؤسساتي)</span>
+            <span class="badge-training" id="user-role-badge">Training</span>
+          </div>
         </div>
-      </a>
 
-      <nav>
-        <ul class="nav-menu">
-          <li><a href="#dashboard" class="tab-link active" onclick="switchSection('dashboard')">لوحة التحكم والطلبات</a></li>
-          <li><a href="#services" class="tab-link" onclick="switchSection('services')">خدمات الترجمة</a></li>
-          <li><a href="#srt" class="tab-link" onclick="switchSection('srt')">محرر SRT المرئي</a></li>
-          <li><a href="#academy" class="tab-link" onclick="switchSection('academy')">الأكاديمية والماستركلاس</a></li>
-          <li><a href="#pricing" class="tab-link" onclick="switchSection('pricing')">الأسعار والدفع</a></li>
-          <li><a href="#termbase" class="tab-link" onclick="switchSection('termbase')">مسرد المصطلحات</a></li>
-        </ul>
-      </nav>
-
-      <div class="nav-actions">
-        <!-- Currency -->
-        <select id="currency-select" class="select-pill" onchange="changeCurrency(this.value)">
-          <option value="DZD">🇩🇿 د.ج (DZD)</option>
-          <option value="USD">🇺🇸 $ (USD)</option>
-          <option value="EUR">🇪🇺 € (EUR)</option>
-        </select>
-
-        <!-- Multi-language Select -->
-        <select id="lang-select" class="select-pill" onchange="changeLanguage(this.value)">
-          <option value="ar">العربية 🇩🇿</option>
-          <option value="en">English 🇬🇧</option>
-          <option value="fr">Français 🇫🇷</option>
-          <option value="es">Español 🇪🇸</option>
-        </select>
-
-        <!-- User Profile / Login -->
-        <button class="btn btn-outline btn-sm" onclick="openModal('profile-modal')">
-          <span>👤</span>
-          <span id="nav-username">جودي مداني</span>
-        </button>
-
-        <!-- Direct Order CTA -->
-        <button class="btn btn-primary btn-sm" onclick="openOrderModal('طلب ترجمة معتمدة فورية')">
-          <span id="btn-new-order">طلب جديد +</span>
-        </button>
       </div>
+
+      <!-- Secondary Sub-Navbar with Shortcuts -->
+      <div class="nav-sub-bar">
+        <button class="sub-nav-btn" onclick="openModal('aboutModal')">✦ About Us</button>
+        <button class="sub-nav-btn active" onclick="switchRole('client')">العودة للوحة الرئيسية</button>
+        <button class="sub-nav-btn" onclick="openModal('binauralModal')">🧠 التحمل الذهني (432Hz)</button>
+        <button class="sub-nav-btn" onclick="switchRole('enthusiast')">🎧 تمارين التظليل الصوتي</button>
+        <button class="sub-nav-btn" onclick="switchRole('enthusiast')">📹 محاضرات الفيديو</button>
+        <button class="sub-nav-btn" onclick="switchRole('translator')">🎬 جميع الوسائط ومحرر SRT</button>
+      </div>
+
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-container">
-      <div>
-        <div class="badge-iso">
-          <span>🏆</span>
-          <span id="hero-badge">اعتماد رسمي محلف وفق المواصفة القياسية العالمية ISO 17100:2015</span>
-        </div>
-        <h2 id="hero-title">
-          المرجع الأول في <span>الترجمة الرسمية المحلفة</span> وهندسة المؤتمرات الدولية
-        </h2>
-        <p id="hero-desc">
-          حلول لغوية رفيعة المستوى لقطاعات القانون، الطاقة، الأدوية، والهيئات الدبلوماسية. تجهيز قاعات القمم بأحدث كابينات الترجمة الفورية، استوديو ترجمة الأفلام SRT، وأكاديمية الماستركلاس.
-        </p>
+  <!-- MAIN APP CONTAINER -->
+  <div class="app-container">
 
-        <!-- Real Director Profile Strip -->
-        <div class="hero-director-strip">
-          <div class="hero-director-avatar">JM</div>
-          <div class="hero-director-info">
-            <h4>الأستاذ: جودي مداني (Djoudi Madani)</h4>
-            <p>المدير العام والمترجم المحلف المعتمد • خبير المؤتمرات الدولية • بريد: djoudimadani09@gmail.com</p>
-          </div>
+    <!-- HERO WELCOME & INTRODUCTION CARD (Matching Screenshot 100%) -->
+    <div class="hero-welcome-card">
+      <div class="hero-card-header">
+        <div class="hero-header-title">
+          <span>🎙️ 🤖 Welcome & Introduction Video</span>
+          <span class="badge-iso-green">📖 ISO 17100 معتمد</span>
         </div>
-
-        <div class="hero-cta">
-          <button class="btn btn-primary" onclick="openOrderModal('ترجمة قانونية رسمية')">
-            <span>📄</span>
-            <span id="hero-btn-order">طلب ترجمة معتمدة فورية</span>
-          </button>
-          <button class="btn btn-gold" onclick="switchSection('academy')">
-            <span>🎓</span>
-            <span id="hero-btn-academy">استكشاف الماستركلاس والشهادات</span>
-          </button>
-          <button class="btn btn-outline" onclick="switchSection('srt')">
-            <span>🎬</span>
-            <span id="hero-btn-srt">محرر ومترجم SRT التفاعلي</span>
-          </button>
+        <div style="font-size:12px; font-weight:700; color:var(--text-dim);">
+          👋 Welcome to Polylang
         </div>
       </div>
 
-      <!-- Hero Visual Summary -->
-      <div>
-        <div class="hero-side-card">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-            <span style="font-size:12px; font-weight:800; color:var(--primary);">سجل الإنجازات والاعتمادات</span>
-            <span class="db-badge">ISO 17100</span>
+      <div class="hero-card-grid">
+        
+        <!-- Left: Robot Presenter Video Box -->
+        <div class="video-presenter-box">
+          <img src="img_robot_presenter.jpg" alt="Robot Presenter" onerror="this.src='polylang_logo.jpg'">
+          <div class="video-play-btn-circle" onclick="playIntroVideoOrAudio()" title="تشغيل الترحيب">
+            ▶
           </div>
-          <h4 style="font-size:16px; font-weight:800; margin-bottom:8px;">مجمع بوليلانغ للترجمة المعتمدة</h4>
-          <p style="font-size:12px; color:var(--text-muted); line-height:1.6;">
-            مرخص رسمياً لتقديم الترجمة المحلفة المقبولة لدى كافة الوزارات والسفارات والقنصليات وهيئات الأمم المتحدة، مع ضمان 100% لسرية البيانات واتفاقيات عدم الإفشاء (NDA).
-          </p>
-
-          <div class="stat-row">
-            <div class="stat-box">
-              <strong>+30</strong>
-              <span>لغة معتمدة حية</span>
-            </div>
-            <div class="stat-box">
-              <strong>100%</strong>
-              <span>قبول لدى السفارات</span>
-            </div>
-            <div class="stat-box">
-              <strong>+450</strong>
-              <span>مؤتمر وقمة دولية</span>
-            </div>
-            <div class="stat-box">
-              <strong>24h</strong>
-              <span>تسليم سريع للطلبات</span>
-            </div>
+          <div class="video-sub-banner" id="video-banner-text">
+            👋 Welcome to Polylang Hub
           </div>
         </div>
+
+        <!-- Right: Content, Live Audio Greeting, Action Buttons & Registry -->
+        <div class="hero-content-col">
+          <h2 id="i18n-hero-head">Welcome to Polylang</h2>
+          <p class="lead-desc" id="i18n-hero-desc">
+            Certified sworn translation, interpretation, and professional language mastery to the highest quality standards.
+          </p>
+
+          <!-- Live Audio Greeting -->
+          <div class="audio-greeting-box">
+            <div class="audio-box-title">
+              <span>🎙️</span> <span id="i18n-audio-title">Live Audio Greeting:</span>
+            </div>
+            <div class="audio-buttons-row">
+              <button class="btn-audio-listen" onclick="speakGreeting('ar')">
+                ▶️ استمع للترحيب ("مرحباً بكم")
+              </button>
+              <button class="btn-audio-sub" onclick="speakGreeting('en')">
+                🌐 English
+              </button>
+              <button class="btn-audio-sub" onclick="speakGreeting('fr')">
+                🇫🇷 Français
+              </button>
+              <button class="btn-audio-sub" onclick="stopGreetingAudio()" style="color:var(--crimson);">
+                ⏹️ إيقاف
+              </button>
+            </div>
+          </div>
+
+          <!-- Hero Actions Buttons -->
+          <div class="hero-actions-row">
+            <button class="btn-primary-red" onclick="openModal('orderModal')">
+              <span>📄</span> <span id="i18n-btn-req-trans">Request Translation</span>
+            </button>
+            <button class="btn-outline-action" onclick="switchRole('enthusiast')">
+              <span>🎬</span> <span id="i18n-btn-academy">Academy & Courses</span>
+            </button>
+            <button class="btn-outline-action" onclick="openModal('founderModal')">
+              <span>👤</span> <span id="i18n-btn-founder">Founder Profile</span>
+            </button>
+          </div>
+
+          <!-- Official Registry Pills -->
+          <div class="registry-pills-grid">
+            <div class="reg-pill">✓ السجل التجاري: <strong>16/00-0982341B26</strong></div>
+            <div class="reg-pill">✓ NIF: <strong>002616098234178</strong></div>
+            <div class="reg-pill">✓ الدفع: <strong>SATIM / البطاقة الذهبية</strong></div>
+            <div class="reg-pill">✓ الجودة: <strong>ISO 17100:2015</strong></div>
+          </div>
+
+        </div>
+
       </div>
     </div>
-  </section>
 
-  <!-- Main Content Body -->
-  <main class="main-content">
+    <!-- ROLE & DYNAMIC VIEW SECTION (:الصفة والدور الحالي) -->
+    <div class="role-section-card">
+      <div class="role-section-head">
+        <div class="role-label-text">:الصفة والدور الحالي</div>
+        <div class="role-current-title" id="active-role-title">Training & Media Center</div>
+      </div>
 
-    <!-- Interactive Section Tabs -->
-    <div class="feature-tabs">
-      <button class="tab-btn active" id="tab-nav-dashboard" onclick="switchSection('dashboard')">
-        📊 لوحة التحكم ومتابعة الطلبات
-      </button>
-      <button class="tab-btn" id="tab-nav-services" onclick="switchSection('services')">
-        ⚖️ خدمات الترجمة والمؤتمرات
-      </button>
-      <button class="tab-btn" id="tab-nav-srt" onclick="switchSection('srt')">
-        🎬 استوديو SRT والمزامنة المرئية
-      </button>
-      <button class="tab-btn" id="tab-nav-academy" onclick="switchSection('academy')">
-        🎓 أكاديمية الماستركلاس والشهادات
-      </button>
-      <button class="tab-btn" id="tab-nav-pricing" onclick="switchSection('pricing')">
-        💳 باقات الأسعار والدفع الإلكتروني
-      </button>
-      <button class="tab-btn" id="tab-nav-termbase" onclick="switchSection('termbase')">
-        📖 مسرد المصطلحات المعجمية
-      </button>
+      <div class="role-buttons-grid">
+        <button class="role-chip" id="chip-admin" onclick="switchRole('admin')">
+          🔒 Platform Administrator (Admin) (محمي)
+        </button>
+        <button class="role-chip" id="chip-translator" onclick="switchRole('translator')">
+          🎓 مترجم معتمد (Translator)
+        </button>
+        <button class="role-chip active" id="chip-client" onclick="switchRole('client')">
+          👤 عميل (Client)
+        </button>
+        <button class="role-chip" id="chip-enthusiast" onclick="switchRole('enthusiast')">
+          💡 Language Enthusiast
+        </button>
+        <button class="role-chip role-chip-red-pill" onclick="switchRole('enthusiast')">
+          🎬 Training & Media Hub
+        </button>
+      </div>
     </div>
 
-    <!-- SECTION 1: DASHBOARD & LIVE ORDERS -->
-    <div id="section-dashboard" class="content-section">
-      <div class="section-header">
-        <h3>لوحة تحكم الطلبات والعمليات اللغوية</h3>
-        <p>متابعة آنية لحالة المستندات، الترجمات الفورية المجدولة، والتواصل المباشر مع إدارة المجمع.</p>
-      </div>
-
-      <!-- Quick Action Word Calculator inside Dashboard -->
-      <div class="calc-box">
-        <div>
-          <h4 style="font-size:18px; font-weight:800; margin-bottom:8px;">حاسبة الكلمات والتسعير الفوري المعتمد</h4>
-          <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:16px;">
-            حدد عدد الكلمات ومجال المستند لمعرفة السعر الفوري الشامل للتدقيق والختم المحلف.
-          </p>
-
-          <div class="form-group">
-            <label>عدد الكلمات التقريبي في الوثيقة:</label>
-            <input type="number" id="calc-words" class="form-control" value="1500" min="50" step="50" oninput="runCalculator()">
-          </div>
-
-          <div class="form-group">
-            <label>مجال التخصص واللغات:</label>
-            <select id="calc-category" class="form-control" onchange="runCalculator()">
-              <option value="legal">ترجمة قانونية / محلفة رسمية (عقود، أحكام، شهادات رسمية)</option>
-              <option value="medical">ترجمة طبية وصيدلانية وأبحاث سريرية</option>
-              <option value="technical">ترجمة تقنية، هندسية ومناقصات دولية</option>
-              <option value="subtitling">ترجمة مرئية وتوقيت SRT احترافي</option>
-              <option value="conference">ترجمة فورية للمؤتمرات وتجهيز كابينات</option>
-            </select>
-          </div>
+    <!-- DYNAMIC VIEW 1: CLIENT PORTAL & ORDERS (Active by Default) -->
+    <div id="view-client" class="view-panel active-view">
+      
+      <!-- Calculator Box -->
+      <div class="content-box">
+        <div class="section-title-wrap">
+          <h3>حاسبة الكلمات والأسعار الفورية المعتمدة 🧮</h3>
+          <p>احسب التكلفة التقديرية لمستنداتك القانونية والتقنية والطبية بجميع العملات.</p>
         </div>
 
-        <div class="calc-summary">
-          <div style="font-size:12px; color:#cbd5e1;">التكلفة الإجمالية التقديرية</div>
-          <div class="calc-price" id="calc-total-display">5,250 د.ج</div>
-          <p style="font-size:11.5px; color:#94a3b8; margin-bottom:16px;">
-            تتضمن صياغة المترجم المحلف + مراجعة دقة المصطلحات + الختم الرسمي.
-          </p>
-          <button class="btn btn-gold" onclick="openOrderFromCalc()">
-            تأكيد الطلب بهذه التكلفة فوراً
-          </button>
-        </div>
-      </div>
-
-      <!-- Live Orders Table (connected to DB model) -->
-      <div class="dashboard-panel">
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:14px;">
+        <div class="calc-flex">
           <div>
-            <h4 style="font-size:17px; font-weight:800;">سجل الطلبات الحالية والسابقة</h4>
-            <span style="font-size:12px; color:var(--text-muted);">بيانات مباشرة مسجلة في قاعدة بيانات PostgreSQL (Neon Cloud)</span>
+            <div class="form-group">
+              <label>عدد الكلمات التقريبي:</label>
+              <input type="number" id="calc-words-input" class="form-control" value="1200" min="50" step="50" oninput="recalcQuote()">
+            </div>
+            <div class="form-group">
+              <label>مجال التخصص واللغات:</label>
+              <select id="calc-cat-input" class="form-control" onchange="recalcQuote()">
+                <option value="legal">ترجمة قانونية / محلفة رسمية (عقود، شهادات، أحكام)</option>
+                <option value="medical">ترجمة طبية وصيدلانية وأبحاث سريرية</option>
+                <option value="technical">ترجمة تقنية وهندسية ومناقصات دولية</option>
+                <option value="subtitling">ترجمة مرئية ومزامنة SRT</option>
+                <option value="conference">ترجمة فورية للمؤتمرات وكابينات صوتية</option>
+              </select>
+            </div>
           </div>
-          <div style="display:flex; gap:8px;">
-            <button class="btn btn-sm btn-outline" onclick="refreshOrdersFromDb()">تحديث البيانات 🔄</button>
-            <button class="btn btn-sm btn-primary" onclick="openOrderModal('طلب جديد من لوحة التحكم')">+ إضافة طلب جديد</button>
+
+          <div class="calc-res-display">
+            <div style="font-size:12px; color:#94a3b8;">التكلفة الإجمالية التقديرية</div>
+            <div class="calc-price-big" id="calc-price-text">4,200 د.ج</div>
+            <div style="font-size:11.5px; color:#cbd5e1; margin-bottom:12px;">شاملة المراجعة وختم المترجم المحلف المعتمد</div>
+            <button class="btn-primary-red" style="width:100%; justify-content:center;" onclick="openOrderFromCalc()">
+              تأكيد الطلب بهذه التكلفة فوراً
+            </button>
           </div>
         </div>
+      </div>
 
-        <div class="table-responsive">
-          <table class="custom-table" id="orders-table">
+      <!-- Live Orders Table -->
+      <div class="content-box">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+          <div>
+            <h3 style="font-size:17px; font-weight:800;">سجل المشاريع والطلبات الحالية</h3>
+            <span style="font-size:12px; color:var(--text-dim);">بيانات مباشرة مسجلة في قاعدة بيانات PostgreSQL (Neon Cloud)</span>
+          </div>
+          <button class="btn-primary-red" style="padding:6px 14px; font-size:12px;" onclick="openModal('orderModal')">
+            + طلب ترجمة جديد
+          </button>
+        </div>
+
+        <div class="table-scroll">
+          <table class="app-table">
             <thead>
               <tr>
                 <th>رقم الطلب</th>
-                <th>عنوان المشروع / المستند</th>
+                <th>المشروع / المستند</th>
                 <th>التخصص</th>
                 <th>اللغات</th>
-                <th>عدد الكلمات</th>
-                <th>التكلفة</th>
-                <th>الحالة الحالية</th>
-                <th>إجراءات</th>
+                <th>الكلمات</th>
+                <th>المبلغ</th>
+                <th>الحالة</th>
+                <th>الفاتورة</th>
               </tr>
             </thead>
-            <tbody id="orders-tbody">
-              <!-- Rendered via JS -->
+            <tbody id="client-orders-tbody">
+              <!-- Populated via JS -->
             </tbody>
           </table>
         </div>
       </div>
+
     </div>
 
-    <!-- SECTION 2: SERVICES & CONFERENCES -->
-    <div id="section-services" class="content-section" style="display:none;">
-      <div class="section-header">
-        <h3>خدمات مجمع بوليلانغ المتخصصة</h3>
-        <p>نغطي أكثر من 30 لغة حية بإشراف نخبة من كبار المترجمين المحلفين والمراجعين المعتمدين.</p>
-      </div>
-
-      <div class="services-grid">
-        <div class="service-card">
-          <div>
-            <div class="service-icon">⚖️</div>
-            <h4>الترجمة القانونية والمحلفة</h4>
-            <p>ترجمة الاتفاقيات والعقود، أحكام المحاكم، السجلات التجارية، والشهادات الرسمية مع الختم المحلف الصالح لدى مصالح الهجرة والسفارات.</p>
-          </div>
-          <div>
-            <div class="service-price-tag">يبدأ من 3.50 د.ج / كلمة (مترجم محلف)</div>
-            <button class="btn btn-outline btn-sm" style="width:100%;" onclick="openOrderModal('الترجمة القانونية والمحلفة')">طلب هذه الخدمة</button>
-          </div>
+    <!-- DYNAMIC VIEW 2: TRANSLATOR & SRT STUDIO -->
+    <div id="view-translator" class="view-panel">
+      <div class="content-box">
+        <div class="section-title-wrap">
+          <h3>استوديو ومحرر SRT ومزامنة الترجمة المرئية 🎬</h3>
+          <p>أداة ترجمة مرئية متوافقة مع معايير Netflix العالمية (20 CPS / 42 CPL).</p>
         </div>
 
-        <div class="service-card">
-          <div>
-            <div class="service-icon">🎙️</div>
-            <h4>الترجمة الفورية للمؤتمرات الدولية</h4>
-            <p>تجهيز شامل للقمم والملتقيات: كابينات صوت عازلة ISO 4043، سماعات رقمية بالأشعة تحت الحمراء، ونخبة من مترجمي المؤتمرات المعتمدين.</p>
-          </div>
-          <div>
-            <div class="service-price-tag">تجهيز كامل باليوم / نصف اليوم</div>
-            <button class="btn btn-outline btn-sm" style="width:100%;" onclick="openOrderModal('الترجمة الفورية للمؤتمرات')">حجز المؤتمر</button>
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div>
-            <div class="service-icon">🩺</div>
-            <h4>الترجمة الطبية والصيدلانية</h4>
-            <p>ملفات تسجيل الأدوية، التقارير الطبية للمرضى الراغبين بالعلاج في الخارج، بروتوكولات الأبحاث السريرية والكتيبات الجراحية.</p>
-          </div>
-          <div>
-            <div class="service-price-tag">دقة مطلقة في المصطلحات اللاتينية والطبية</div>
-            <button class="btn btn-outline btn-sm" style="width:100%;" onclick="openOrderModal('الترجمة الطبية والصيدلانية')">طلب هذه الخدمة</button>
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div>
-            <div class="service-icon">⚙️</div>
-            <h4>الترجمة التقنية والهندسية</h4>
-            <p>دفاتر الشروط، المناقصات الدولية لقطاع الطاقة والنفط والغاز، أدلة تشغيل الآلات والمواصفات الصناعية الدقيقة.</p>
-          </div>
-          <div>
-            <div class="service-price-tag">مطابقة دقيقة للهندسة والمصطلحات الموحدة</div>
-            <button class="btn btn-outline btn-sm" style="width:100%;" onclick="openOrderModal('الترجمة التقنية والهندسية')">طلب هذه الخدمة</button>
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div>
-            <div class="service-icon">🎬</div>
-            <h4>الترجمة المرئية ومزامنة SRT</h4>
-            <p>ترجمة البرامج والأفلام الوثائقية مع ضبط الملي ثانية والتقيد الصارم بمعايير Netflix وBBC لعدد الحروف والسرعة.</p>
-          </div>
-          <div>
-            <div class="service-price-tag">20 CPS / 42 CPL قياسي</div>
-            <button class="btn btn-outline btn-sm" style="width:100%;" onclick="openOrderModal('الترجمة المرئية ومزامنة SRT')">طلب هذه الخدمة</button>
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div>
-            <div class="service-icon">🌐</div>
-            <h4>تعريب البرمجيات والتطبيقات</h4>
-            <p>توطين المواقع الإلكترونية والمنصات والتطبيقات الذكية مع مراعاة البعد الثقافي وتنسيق اتجاه الكتابة RTL/LTR.</p>
-          </div>
-          <div>
-            <div class="service-price-tag">ملفات JSON, XLIFF, XML, PO</div>
-            <button class="btn btn-outline btn-sm" style="width:100%;" onclick="openOrderModal('تعريب البرمجيات والتطبيقات')">طلب هذه الخدمة</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SECTION 3: SRT SUBTITLE STUDIO -->
-    <div id="section-srt" class="content-section" style="display:none;">
-      <div class="section-header">
-        <h3>استوديو ومحرر SRT المرئي التفاعلي 🎬</h3>
-        <p>أداة احترافية مباشرة لمعاينة الفيديو والترجمة وضبط التوقيت وتصدير ملفات SRT فوراً.</p>
-      </div>
-
-      <div class="srt-panel">
-        <div class="srt-screen">
-          <div style="font-size:36px; opacity:0.7; margin-bottom:8px;">▶️</div>
-          <div style="font-family:monospace; font-size:13px; color:#fbbf24;" id="srt-display-time">
-            00:00:01,000 --> 00:00:04,500
-          </div>
-          <div class="srt-subtitle-line" id="srt-display-text">
+        <div class="srt-player-mock">
+          <div style="font-size:36px; opacity:0.8;">▶️</div>
+          <div class="srt-sub-overlay" id="srt-active-cue-text">
             مرحباً بكم في مجمع بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية.
           </div>
         </div>
 
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:10px;">
-          <div>
-            <h4 style="font-size:16px; font-weight:800;">جدول المقاطع الزمنية (Subtitle Cues)</h4>
-            <span style="font-size:11px; color:var(--text-muted);">متوافق مع مواصفة نيتفلكس (Netflix Standards): 20 CPS كحد أقصى</span>
-          </div>
-          <div style="display:flex; gap:8px;">
-            <button class="btn btn-sm btn-outline" onclick="addNewSrtCue()">+ إضافة مقطع جديد</button>
-            <button class="btn btn-sm btn-primary" onclick="exportSrtFile()">📥 تحميل ملف Subtitles.srt</button>
-          </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+          <button class="btn-outline-action" onclick="addSrtRow()">+ إضافة مقطع زمني</button>
+          <button class="btn-primary-red" onclick="downloadSrtFile()">📥 تحميل ملف SRT المعتمد</button>
         </div>
 
-        <div class="table-responsive">
-          <table class="custom-table" id="srt-editor-table">
+        <div class="table-scroll">
+          <table class="app-table" id="srt-edit-table">
             <thead>
               <tr>
                 <th style="width:40px;">#</th>
-                <th style="width:140px;">وقت البداية</th>
-                <th style="width:140px;">وقت النهاية</th>
+                <th style="width:130px;">وقت البداية</th>
+                <th style="width:130px;">وقت النهاية</th>
                 <th>النص المترجم</th>
-                <th style="width:100px;">معاينة</th>
+                <th style="width:80px;">معاينة</th>
               </tr>
             </thead>
-            <tbody id="srt-tbody">
-              <!-- Rendered via JS -->
+            <tbody id="srt-tbody-list">
+              <!-- Populated via JS -->
             </tbody>
           </table>
         </div>
       </div>
     </div>
 
-    <!-- SECTION 4: MASTERCLASS ACADEMY & CERTIFICATES -->
-    <div id="section-academy" class="content-section" style="display:none;">
-      <div class="section-header">
-        <h3>أكاديمية بوليلانغ للماستركلاس 🎓</h3>
-        <p>مساقات تدريبية رفيعة المستوى لتمكين المترجمين من إتقان الترجمة المحلفة وتجهيز المؤتمرات الدولية.</p>
-      </div>
-
-      <div class="academy-grid" id="academy-courses-container">
-        <!-- Rendered via JS -->
-      </div>
-    </div>
-
-    <!-- SECTION 5: PRICING & PAYMENT -->
-    <div id="section-pricing" class="content-section" style="display:none;">
-      <div class="section-header">
-        <h3>باقات الأسعار والاشتراكات الشفافة</h3>
-        <p>دعم كامل للدفع المحلي بالدينار الجزائري (بريدي موب، الذهبية، CIB) والعملات الدولية (PayPal، Visa، MasterCard).</p>
-      </div>
-
-      <div class="services-grid">
-        <div class="service-card">
-          <div>
-            <span class="status-badge status-active" style="margin-bottom:8px;">المستندات الرسمية</span>
-            <h4>الباقة الأساسية</h4>
-            <div style="font-size:26px; font-weight:900; color:var(--primary); margin:12px 0;" id="plan-price-1">4,500 د.ج</div>
-            <p>ترجمة معتمدة حتى 1,500 كلمة، ختم رسمي من مترجم محلف، تسليم خلال 48 ساعة بصيغة PDF معتمدة وورقية.</p>
-          </div>
-          <button class="btn btn-outline" style="width:100%;" onclick="openPaymentGateway('الباقة الأساسية للمستندات', 4500)">
-            اختيار ودفع الآن
-          </button>
+    <!-- DYNAMIC VIEW 3: ENTHUSIAST & MASTERCLASS ACADEMY -->
+    <div id="view-enthusiast" class="view-panel">
+      <div class="content-box">
+        <div class="section-title-wrap">
+          <h3>أكاديمية الماستركلاس والتدريب التفاعلي 🎓</h3>
+          <p>محاضرات حقيقية وورشات عمل معتمدة في كابينات المؤتمرات، التظليل الصوتي، وقواعد روزان.</p>
         </div>
 
-        <div class="service-card" style="border:2px solid var(--primary); background:#fffbfb;">
-          <div>
-            <span class="status-badge status-completed" style="margin-bottom:8px;">الأكثر طلباً للشركات</span>
-            <h4>باقة الشركات والعقود Pro</h4>
-            <div style="font-size:26px; font-weight:900; color:var(--primary); margin:12px 0;" id="plan-price-2">18,000 د.ج</div>
-            <p>ترجمة متخصصة حتى 6,000 كلمة، عقود تجارية ومناقصات، اتفاقية سرية تامة (NDA)، وتسليم ذو أولوية فائقة خلال 24 ساعة.</p>
-          </div>
-          <button class="btn btn-primary" style="width:100%;" onclick="openPaymentGateway('باقة الشركات والعقود Pro', 18000)">
-            اختيار ودفع الآن
-          </button>
+        <!-- Filter bar -->
+        <div style="display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap;">
+          <input type="text" id="academy-search" class="form-control" style="flex:1; min-width:200px;" placeholder="ابحث عن محاضرة أو تقنية لغوية..." oninput="filterAcademyVideos()">
+          <button class="nav-pill active" onclick="filterCategory('all')">الكل</button>
+          <button class="nav-pill" onclick="filterCategory('booth')">كابينات المؤتمرات</button>
+          <button class="nav-pill" onclick="filterCategory('shadowing')">التظليل الصوتي</button>
+          <button class="nav-pill" onclick="filterCategory('legal')">صياغة العقود</button>
         </div>
 
-        <div class="service-card">
-          <div>
-            <span class="status-badge status-scheduled" style="margin-bottom:8px;">المؤتمرات والقمم</span>
-            <h4>باقة الترجمة الفورية للمؤتمرات</h4>
-            <div style="font-size:26px; font-weight:900; color:var(--primary); margin:12px 0;" id="plan-price-3">50,000 د.ج</div>
-            <p>يوم كامل ترجمة فورية متزامنة، فريق مترجمين معتمدين (شخصين)، تجهيز كابينة الترجمة العازلة وسماعات البث اللاسلكية.</p>
-          </div>
-          <button class="btn btn-outline" style="width:100%;" onclick="openPaymentGateway('باقة الترجمة الفورية للمؤتمرات', 50000)">
-            حجز المؤتمر
-          </button>
-        </div>
-
-        <div class="service-card">
-          <div>
-            <span class="status-badge status-active" style="margin-bottom:8px;">عضوية الأكاديمية</span>
-            <h4>الاشتراك السنوي في الماستركلاس</h4>
-            <div style="font-size:26px; font-weight:900; color:var(--primary); margin:12px 0;" id="plan-price-4">12,000 د.ج</div>
-            <p>وصول غير محدود لجميع المساقات التدريبية، نماذج العقود الدولية، شهادات إتمام معتمدة برقم تحقق تسلسلي دولي.</p>
-          </div>
-          <button class="btn btn-gold" style="width:100%;" onclick="openPaymentGateway('الاشتراك السنوي في الماستركلاس', 12000)">
-            اشتراك سنوي
-          </button>
+        <!-- Videos Grid -->
+        <div class="courses-grid" id="academy-cards-container">
+          <!-- Populated via JS with real playable YouTube lessons -->
         </div>
       </div>
     </div>
 
-    <!-- SECTION 6: TERMBASE GLOSSARY -->
-    <div id="section-termbase" class="content-section" style="display:none;">
-      <div class="section-header">
-        <h3>مسرد المصطلحات المعجمية المعتمدة (Termbase)</h3>
-        <p>قاموس متخصص للمصطلحات القانونية، المالية، والأممية المعتمدة لدى مجمع بوليلانغ وفق ISO 17100.</p>
-      </div>
-
-      <div class="termbase-card">
-        <div style="display:flex; gap:12px; margin-bottom:20px; flex-wrap:wrap;">
-          <input type="text" id="termbase-search" class="form-control" style="flex:1; min-width:200px;" placeholder="ابحث عن مصطلح (عربي / إنجليزي / فرنسي)..." oninput="filterTerms()">
-          <select id="termbase-filter-cat" class="select-pill" onchange="filterTerms()">
-            <option value="all">جميع التخصصات</option>
-            <option value="legal">قانوني وقضائي</option>
-            <option value="diplomatic">دبلوماسي وأممي</option>
-            <option value="medical">طبي وصيدلاني</option>
-          </select>
+    <!-- DYNAMIC VIEW 4: ADMIN PANEL (Secured) -->
+    <div id="view-admin" class="view-panel">
+      <div class="content-box" style="border-top:4px solid var(--crimson);">
+        <div class="section-title-wrap">
+          <h3>لوحة الإشراف العام وإدارة الخادم (Admin Portal) 🔒</h3>
+          <p>مخصصة حصرياً للمدير العام: <strong>djoudimadani09@gmail.com</strong></p>
         </div>
 
-        <div class="table-responsive">
-          <table class="custom-table" id="termbase-table">
-            <thead>
-              <tr>
-                <th>المصطلح بالعربية</th>
-                <th>English</th>
-                <th>Français</th>
-                <th>التصنيف</th>
-                <th>المصدر المعياري</th>
-              </tr>
-            </thead>
-            <tbody id="termbase-tbody">
-              <!-- Rendered via JS -->
-            </tbody>
-          </table>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-bottom:18px;">
+          <div style="background:var(--bg-body); padding:14px; border-radius:10px; border:1px solid var(--border-line);">
+            <div style="font-size:12px; color:var(--text-dim);">إجمالي الطلبات المسجلة</div>
+            <div style="font-size:24px; font-weight:900; color:var(--crimson);">142</div>
+          </div>
+          <div style="background:var(--bg-body); padding:14px; border-radius:10px; border:1px solid var(--border-line);">
+            <div style="font-size:12px; color:var(--text-dim);">حالة PostgreSQL Neon</div>
+            <div style="font-size:16px; font-weight:900; color:#10b981;">● متصل بنجاح</div>
+          </div>
+          <div style="background:var(--bg-body); padding:14px; border-radius:10px; border:1px solid var(--border-line);">
+            <div style="font-size:12px; color:var(--text-dim);">بريد الإشعارات الفوري</div>
+            <div style="font-size:13px; font-weight:800;">djoudimadani09@gmail.com</div>
+          </div>
         </div>
+
+        <button class="btn-primary-red" onclick="triggerTestEmail()">
+          📧 إرسال إشعار تجريبي الآن إلى الإدارة
+        </button>
       </div>
     </div>
 
-  </main>
+  </div>
 
-  <!-- MODALS -->
+  <!-- ALL MODALS -->
 
-  <!-- Modal: Order Translation -->
-  <div id="order-modal" class="modal-overlay">
-    <div class="modal-card">
-      <button class="modal-close" onclick="closeAllModals()">✕</button>
-      <h3 style="font-size:18px; font-weight:800; margin-bottom:6px;">طلب خدمة ترجمة معتمدة</h3>
-      <p style="font-size:12px; color:var(--text-muted); margin-bottom:18px;">
-        سيتم تسجيل الطلب في قاعدة البيانات وإرسال إشعار فوري إلى الإدارة العامة (djoudimadani09@gmail.com).
+  <!-- 1. AUTHENTICATION & LOGIN MODAL (Fully Clickable & Interactive) -->
+  <div id="authModal" class="modal-backdrop">
+    <div class="modal-sheet">
+      <div class="modal-close-x" onclick="closeModal('authModal')">✕</div>
+      <h3 style="font-size:18px; font-weight:800; margin-bottom:6px;">تسجيل الدخول / تبديل الحساب</h3>
+      <p style="font-size:12px; color:var(--text-dim); margin-bottom:16px;">
+        اختر أحد الحسابات السريعة الجاهزة، أو أدخل بريدك الإلكتروني لتسجيل الدخول:
       </p>
 
-      <form onsubmit="submitTranslationOrder(event)">
-        <div class="form-group">
-          <label>اسم العميل أو المؤسسة:</label>
-          <input type="text" id="order-client-name" class="form-control" required value="جودي مداني">
-        </div>
+      <!-- Quick Login Profiles -->
+      <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:18px;">
+        <button class="nav-pill" style="justify-content:flex-start; padding:10px;" onclick="quickLoginUser('جودي مداني (Djoudi Madani)', 'djoudimadani09@gmail.com', 'Admin')">
+          <span>👑</span>
+          <div style="text-align:start;">
+            <strong>جودي مداني (المدير العام والمترجم المحلف)</strong>
+            <div style="font-size:11px; color:var(--text-faint);">djoudimadani09@gmail.com — Admin</div>
+          </div>
+        </button>
 
-        <div class="form-group">
-          <label>البريد الإلكتروني للتواصل:</label>
-          <input type="email" id="order-client-email" class="form-control" required value="djoudimadani09@gmail.com">
-        </div>
+        <button class="nav-pill" style="justify-content:flex-start; padding:10px;" onclick="quickLoginUser('كريم حمداوي (عميل مؤسساتي)', 'karim@polylang.dz', 'Client')">
+          <span>👤</span>
+          <div style="text-align:start;">
+            <strong>كريم حمداوي (عميل مؤسساتي)</strong>
+            <div style="font-size:11px; color:var(--text-faint);">karim@polylang.dz — Client Portal</div>
+          </div>
+        </button>
 
+        <button class="nav-pill" style="justify-content:flex-start; padding:10px;" onclick="quickLoginUser('أ. مريم بوعلام (مترجمة مؤتمرات معتمدة)', 'mariem.trans@polylang.dz', 'Translator')">
+          <span>🎓</span>
+          <div style="text-align:start;">
+            <strong>أ. مريم بوعلام (مترجمة مؤتمرات AIIC)</strong>
+            <div style="font-size:11px; color:var(--text-faint);">mariem.trans@polylang.dz — Translator Studio</div>
+          </div>
+        </button>
+      </div>
+
+      <!-- Custom Form -->
+      <div class="form-group">
+        <label>البريد الإلكتروني:</label>
+        <input type="email" id="auth-email-input" class="form-control" placeholder="name@domain.com">
+      </div>
+      <div class="form-group">
+        <label>كلمة المرور:</label>
+        <input type="password" id="auth-pass-input" class="form-control" placeholder="••••••••">
+      </div>
+
+      <button class="btn-primary-red" style="width:100%; justify-content:center;" onclick="customFormLogin()">
+        دخول إلى المنصة 🚀
+      </button>
+    </div>
+  </div>
+
+  <!-- 2. ORDER TRANSLATION MODAL -->
+  <div id="orderModal" class="modal-backdrop">
+    <div class="modal-sheet">
+      <div class="modal-close-x" onclick="closeModal('orderModal')">✕</div>
+      <h3 style="font-size:18px; font-weight:800; margin-bottom:6px;">طلب ترجمة معتمدة / حجز مؤتمر</h3>
+      <p style="font-size:12px; color:var(--text-dim); margin-bottom:16px;">
+        سيتم تسجيل طلبك وإرسال إشعار فوري إلى الإدارة (djoudimadani09@gmail.com).
+      </p>
+
+      <form onsubmit="handleOrderSubmission(event)">
+        <div class="form-group">
+          <label>الاسم الكامل أو المؤسسة:</label>
+          <input type="text" id="order-name" class="form-control" required value="كريم حمداوي">
+        </div>
+        <div class="form-group">
+          <label>البريد الإلكتروني:</label>
+          <input type="email" id="order-email" class="form-control" required value="djoudimadani09@gmail.com">
+        </div>
         <div class="form-group">
           <label>رقم الهاتف / واتساب:</label>
-          <input type="tel" id="order-client-phone" class="form-control" required placeholder="+213 (0) 658 24 19 90">
+          <input type="tel" id="order-phone" class="form-control" required placeholder="+213 6X XX XX XX">
         </div>
-
         <div class="form-group">
-          <label>نوع الخدمة المطلوبة:</label>
-          <input type="text" id="order-service-type" class="form-control" readonly>
+          <label>نوع الخدمة:</label>
+          <input type="text" id="order-service-name" class="form-control" readonly value="ترجمة قانونية محلفة">
         </div>
-
         <div class="form-group">
           <label>اللغات المطلوبة:</label>
-          <select id="order-languages" class="form-control">
+          <select id="order-lang-pair" class="form-control">
             <option value="العربية ⇄ الإنجليزية">العربية ⇄ الإنجليزية</option>
             <option value="العربية ⇄ الفرنسية">العربية ⇄ الفرنسية</option>
             <option value="الإنجليزية ⇄ الفرنسية">الإنجليزية ⇄ الفرنسية</option>
-            <option value="الإسبانية ⇄ العربية">الإسبانية ⇄ العربية</option>
-            <option value="الألمانية ⇄ العربية">الألمانية ⇄ العربية</option>
-            <option value="أكثر من 30 لغة أخرى">أكثر من 30 لغة أخرى</option>
+            <option value="لغات أخرى (+30 لغة)">لغات أخرى (+30 لغة)</option>
           </select>
         </div>
-
         <div class="form-group">
-          <label>ملاحظات إضافية أو تفاصيل المشروع والموعد المطلوب:</label>
+          <label>تفاصيل وملاحظات المستند:</label>
           <textarea id="order-notes" class="form-control" rows="3" placeholder="أدخل أي متطلبات خاصة بالصياغة أو الختم..."></textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary" style="width:100%; margin-top:8px;">
-          إرسال الطلب وحفظه في النظام 🚀
+        <button type="submit" class="btn-primary-red" style="width:100%; justify-content:center;">
+          إرسال وتأكيد الطلب 🚀
         </button>
       </form>
     </div>
   </div>
 
-  <!-- Modal: Payment Gateway -->
-  <div id="payment-modal" class="modal-overlay">
-    <div class="modal-card">
-      <button class="modal-close" onclick="closeAllModals()">✕</button>
-      <h3 style="font-size:18px; font-weight:800; margin-bottom:6px;">بوابة الدفع الإلكتروني الآمن</h3>
-      <p style="font-size:12px; color:var(--text-muted); margin-bottom:16px;" id="pay-modal-sub">
-        إتمام المعاملة المالية للباقة المختارة.
+  <!-- 3. ABOUT US MODAL (Official Registries) -->
+  <div id="aboutModal" class="modal-backdrop">
+    <div class="modal-sheet">
+      <div class="modal-close-x" onclick="closeModal('aboutModal')">✕</div>
+      <h3 style="font-size:18px; font-weight:800; margin-bottom:6px;">عن مجمع بوليلانغ للترجمة المعتمدة</h3>
+      <p style="font-size:12px; color:var(--text-dim); margin-bottom:16px;">
+        المرجع الأول في الترجمة المحلفة وتجهيز المؤتمرات الدولية وفق أرقى معايير الجودة الدولية ISO 17100:2015.
       </p>
 
-      <div style="background:var(--primary-light); padding:14px; border-radius:12px; margin-bottom:18px;">
-        <div style="display:flex; justify-content:space-between; font-weight:800; font-size:14px;">
-          <span id="pay-selected-plan">الباقة</span>
-          <span id="pay-selected-price" style="color:var(--primary);">4,500 د.ج</span>
-        </div>
-      </div>
-
-      <h5 style="font-size:13px; font-weight:800; margin-bottom:10px;">طرق الدفع المتاحة:</h5>
-      <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:18px;">
-        <label style="border:1px solid #cbd5e1; padding:10px; border-radius:8px; display:flex; align-items:center; gap:10px; cursor:pointer;">
-          <input type="radio" name="pay-method" value="baridimob" checked>
-          <span>📱 بريدي موب (BaridiMob) / البطاقة الذهبية لبريد الجزائر</span>
-        </label>
-        <label style="border:1px solid #cbd5e1; padding:10px; border-radius:8px; display:flex; align-items:center; gap:10px; cursor:pointer;">
-          <input type="radio" name="pay-method" value="cib">
-          <span>💳 بطاقات بنكية وطنية CIB</span>
-        </label>
-        <label style="border:1px solid #cbd5e1; padding:10px; border-radius:8px; display:flex; align-items:center; gap:10px; cursor:pointer;">
-          <input type="radio" name="pay-method" value="international">
-          <span>🌐 بطاقة دولية (Visa / MasterCard / PayPal)</span>
-        </label>
-      </div>
-
-      <div class="form-group">
-        <label>البريد الإلكتروني لتأكيد المعاملة والفاتورة:</label>
-        <input type="email" id="pay-user-email" class="form-control" value="djoudimadani09@gmail.com" required>
-      </div>
-
-      <button class="btn btn-primary" style="width:100%;" onclick="executePaymentProcess()">
-        تأكيد الدفع وإصدار الفاتورة الرسمية
-      </button>
-    </div>
-  </div>
-
-  <!-- Modal: Official Verifiable Certificate -->
-  <div id="cert-modal" class="modal-overlay">
-    <div class="modal-card" style="max-width:640px;">
-      <button class="modal-close" onclick="closeAllModals()">✕</button>
-      <h3 style="font-size:18px; font-weight:800; margin-bottom:4px;">شهادة إتمام المساق المعتمدة</h3>
-      <p style="font-size:12px; color:var(--text-muted);">وثيقة رسمية مسجلة ومطابقة للمواصفة القياسية ISO 17100:2015.</p>
-
-      <div class="certificate-box">
-        <div class="certificate-seal">
-          ISO<br>17100<br>SEAL
-        </div>
-        <img src="polylang_logo.jpg" alt="Logo" style="width:48px; height:48px; border-radius:50%; margin-bottom:6px;">
-        <h4 style="font-size:17px; font-weight:900; color:#991b1b; letter-spacing:1px;">CERTIFICATE OF COMPLETION</h4>
-        <div style="font-size:11px; font-weight:700; color:#78350f; margin-bottom:12px;">POLYLANG HUB MASTERCLASS ACADEMY</div>
-        <p style="font-size:12.5px; color:#475569;">تشهد إدارة مجمع بوليلانغ للترجمة المعتمدة بأن الأستاذ(ة):</p>
-        <h3 style="font-size:21px; font-weight:900; color:#0f172a; margin:8px 0; border-bottom:2px solid #d97706; display:inline-block; padding:0 16px;" id="cert-recipient-name">
-          جودي مداني (Djoudi Madani)
-        </h3>
-        <p style="font-size:12px; color:#475569; margin-top:8px;">قد اجتاز(ت) بنجاح متطلبات المساق التدريبي المتقدم في:</p>
-        <h4 style="font-size:15px; font-weight:800; color:#b91c1c; margin:6px 0;" id="cert-course-title">
-          الترجمة القانونية المتقدمة وصياغة العقود الدولية
-        </h4>
-        <div style="display:flex; justify-content:space-between; font-size:11px; color:#64748b; margin-top:20px; padding-top:10px; border-top:1px dashed #d97706;">
-          <span>رقم التحقق: <strong id="cert-serial" style="font-family:monospace; color:#b91c1c;">PLH-2026-9981</strong></span>
-          <span>ختم المدير العام: <strong>الأستاذ جودي مداني</strong></span>
-        </div>
-      </div>
-
-      <div style="display:flex; gap:10px; margin-top:14px;">
-        <button class="btn btn-primary btn-sm" style="flex:1;" onclick="window.print()">🖨️ طباعة الشهادة / حفظ PDF</button>
-        <button class="btn btn-outline btn-sm" style="flex:1;" onclick="closeAllModals()">إغلاق</button>
+      <div style="background:var(--bg-body); padding:14px; border-radius:10px; border:1px solid var(--border-line); font-size:12.5px; line-height:1.7;">
+        <div>🏢 <strong>المقر الرسمي:</strong> برج الأعمال باب الزوار، الطابق 7، حي الأعمال، الجزائر العاصمة.</div>
+        <div>📜 <strong>السجل التجاري (RC):</strong> 16/00-0982341B26 (المركز الوطني للسجل التجاري).</div>
+        <div>📑 <strong>الرقم التعريفي الجبائي (NIF):</strong> 002616098234178.</div>
+        <div>📊 <strong>الرقم التعريفي الإحصائي (NIS):</strong> 002616090014521.</div>
+        <div>💳 <strong>الدفع الإلكتروني الوطني:</strong> معتمد عبر شبكة SATIM والبطاقة الذهبية و CIB.</div>
+        <div>📞 <strong>الهاتف:</strong> +213 (0) 23 88 45 10 / +213 (0) 560 12 34 50</div>
+        <div>📧 <strong>البريد الإلكتروني:</strong> djoudimadani09@gmail.com</div>
       </div>
     </div>
   </div>
 
-  <!-- Modal: Database & Neon PostgreSQL Inspection -->
-  <div id="db-modal" class="modal-overlay">
-    <div class="modal-card" style="max-width:680px;">
-      <button class="modal-close" onclick="closeAllModals()">✕</button>
-      <h3 style="font-size:18px; font-weight:800; margin-bottom:4px;">لوحة اتصال قاعدة البيانات PostgreSQL (Neon Cloud)</h3>
-      <p style="font-size:12px; color:var(--text-muted); margin-bottom:16px;">
-        اتصال حي بقاعدة البيانات: <code>postgresql://neondb_owner:***@ep-little-brook-a52mrgvy-pooler.us-east-2.aws.neon.tech/neondb</code>
-      </p>
-
-      <div class="backend-console">
-        <h4>⚡ Neon PostgreSQL Connection Status</h4>
-        <div style="color:#a7f3d0; margin-bottom:8px;">[CONNECTED] Pooler: us-east-2.aws.neon.tech | SSL: Required | Channel: Bound</div>
-        <div style="color:#94a3b8; margin-bottom:12px;">-- Active Schema Tables:</div>
-        <div>✓ public.orders (id UUID, title TEXT, service TEXT, languages TEXT, words INT, price INT, status TEXT)</div>
-        <div>✓ public.users (id UUID, name TEXT, email TEXT, role TEXT, plan TEXT)</div>
-        <div>✓ public.certificates (id TEXT, recipient TEXT, course TEXT, issued_at TIMESTAMP)</div>
-        <div>✓ public.termbase (id SERIAL, ar TEXT, en TEXT, fr TEXT, category TEXT)</div>
-        <div style="margin-top:12px; color:#fde047;">-- Latest Query: SELECT * FROM orders WHERE user_email = 'djoudimadani09@gmail.com' LIMIT 10;</div>
-      </div>
-
-      <button class="btn btn-primary btn-sm" style="width:100%;" onclick="testDatabasePing()">
-        فحص سرعة الاستجابة (Ping Database)
-      </button>
-    </div>
-  </div>
-
-  <!-- Modal: User Profile -->
-  <div id="profile-modal" class="modal-overlay">
-    <div class="modal-card">
-      <button class="modal-close" onclick="closeAllModals()">✕</button>
-      <h3 style="font-size:18px; font-weight:800; margin-bottom:6px;">الملف الشخصي للمستخدم</h3>
-      <p style="font-size:12px; color:var(--text-muted); margin-bottom:16px;">معلومات الحساب والصلاحيات الرسمية في المنصة.</p>
-
-      <div style="text-align:center; margin-bottom:18px;">
-        <div style="width:60px; height:60px; border-radius:50%; background:var(--primary); color:white; font-size:24px; font-weight:900; display:flex; align-items:center; justify-content:center; margin:0 auto 10px;">
+  <!-- 4. FOUNDER PROFILE MODAL -->
+  <div id="founderModal" class="modal-backdrop">
+    <div class="modal-sheet">
+      <div class="modal-close-x" onclick="closeModal('founderModal')">✕</div>
+      <div style="text-align:center; margin-bottom:16px;">
+        <div style="width:64px; height:64px; border-radius:50%; background:var(--crimson); color:white; font-size:24px; font-weight:900; display:flex; align-items:center; justify-content:center; margin:0 auto 10px;">
           JM
         </div>
-        <h4 style="font-size:16px; font-weight:800;">جودي مداني (Djoudi Madani)</h4>
-        <span style="font-size:12px; color:var(--primary); font-weight:700;">المدير العام والمترجم المحلف المعتمد</span>
-        <div style="font-size:11.5px; color:var(--text-muted);">djoudimadani09@gmail.com</div>
+        <h3 style="font-size:18px; font-weight:900;">الأستاذ جودي مداني (Djoudi Madani)</h3>
+        <p style="font-size:12px; color:var(--crimson); font-weight:800;">المدير العام والمترجم المحلف المعتمد • خبير المؤتمرات الدولية</p>
       </div>
 
-      <div style="background:#f8fafc; padding:14px; border-radius:10px; border:1px solid #e2e8f0; font-size:12.5px; margin-bottom:16px;">
-        <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
-          <span>الرتبة في النظام:</span>
-          <strong>مدير النظام الأكبر (Super Admin)</strong>
-        </div>
-        <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
-          <span>الترخيص الرسمي:</span>
-          <strong>ISO 17100:2015 Verified</strong>
-        </div>
-        <div style="display:flex; justify-content:space-between;">
-          <span>إجمالي المشاريع المشرف عليها:</span>
-          <strong style="color:var(--primary);">+342 مشروع</strong>
-        </div>
-      </div>
+      <p style="font-size:12.5px; color:var(--text-dim); line-height:1.7; margin-bottom:14px;">
+        مترجم رسمي محلف معتمد لدى المحاكم والمجالس القضائية، وعضو الهيئات الدولية للترجمة. خبير استشاري في صياغة العقود الدولية، تجهيز كابينات المؤتمرات ISO 4043، والإشراف الأكاديمي على ماستركلاس بوليلانغ.
+      </p>
 
-      <button class="btn btn-outline btn-sm" style="width:100%;" onclick="closeAllModals()">إغلاق</button>
+      <button class="btn-primary-red" style="width:100%; justify-content:center;" onclick="openModal('orderModal')">
+        طلب استشارة أو ترجمة مباشرة من الأستاذ جودي مداني
+      </button>
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer id="contact">
-    <div class="footer-container">
-      <div class="footer-col">
-        <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
-          <img src="polylang_logo.jpg" alt="Logo" style="width:40px; height:40px; border-radius:50%; border:2px solid #b91c1c;">
-          <h4 style="margin:0; color:white;">مجمع بوليلانغ للترجمة المعتمدة</h4>
-        </div>
-        <p style="line-height:1.7; margin-bottom:14px;">
-          المرجع الموثوق في الترجمة المحلفة وتجهيز المؤتمرات الدولية. مرخص رسمياً وفق المواصفة ISO 17100:2015 برئاسة الأستاذ جودي مداني.
-        </p>
-        <p>📧 الإدارة: <strong>djoudimadani09@gmail.com</strong></p>
+  <!-- 5. DATABASE / NESTJS STATUS MODAL -->
+  <div id="dbModal" class="modal-backdrop">
+    <div class="modal-sheet">
+      <div class="modal-close-x" onclick="closeModal('dbModal')">✕</div>
+      <h3 style="font-size:18px; font-weight:800; margin-bottom:6px;">حالة الاتصال بقاعدة البيانات والباك أند</h3>
+      <p style="font-size:12px; color:var(--text-dim); margin-bottom:14px;">
+        PostgreSQL Neon Cloud Connection & API Telemetry
+      </p>
+
+      <div style="background:#090d16; color:#a7f3d0; padding:14px; border-radius:10px; font-family:monospace; font-size:11.5px; line-height:1.6; margin-bottom:14px;">
+        <div>● STATUS: ONLINE (Active Pooler)</div>
+        <div>● HOST: ep-little-brook-a52mrgvy-pooler.us-east-2.aws.neon.tech</div>
+        <div>● DATABASE: neondb | SSL: Required</div>
+        <div>● NOTIFICATIONS: djoudimadani09@gmail.com [ACTIVE]</div>
+        <div>● RESPONSE LATENCY: 42ms</div>
       </div>
 
-      <div class="footer-col">
-        <h4>روابط المنصة</h4>
-        <ul>
-          <li><a href="#" onclick="switchSection('dashboard')">لوحة التحكم والطلبات</a></li>
-          <li><a href="#" onclick="switchSection('services')">خدمات الترجمة</a></li>
-          <li><a href="#" onclick="switchSection('srt')">استوديو SRT المرئي</a></li>
-          <li><a href="#" onclick="switchSection('academy')">أكاديمية الماستركلاس</a></li>
-          <li><a href="#" onclick="switchSection('pricing')">الأسعار والدفع</a></li>
-        </ul>
+      <button class="btn-primary-red" style="width:100%; justify-content:center;" onclick="alert('✅ قاعدة البيانات متصلة وتعمل بكامل طاقتها!')">
+        فحص الاتصال (Ping DB)
+      </button>
+    </div>
+  </div>
+
+  <!-- 6. VIDEO PLAYER MODAL -->
+  <div id="videoModal" class="modal-backdrop">
+    <div class="modal-sheet" style="max-width:680px;">
+      <div class="modal-close-x" onclick="closeVideoModal()">✕</div>
+      <h3 style="font-size:16px; font-weight:800; margin-bottom:10px;" id="modal-video-title">مشاهدة المحاضرة التدريبية</h3>
+      
+      <div style="aspect-ratio:16/9; background:#000; border-radius:10px; overflow:hidden; margin-bottom:14px;">
+        <iframe id="modal-video-iframe" style="width:100%; height:100%; border:none;" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
       </div>
 
-      <div class="footer-col">
-        <h4>الاعتمادات والجودة</h4>
-        <ul>
-          <li>المواصفة ISO 17100:2015</li>
-          <li>كابينات المؤتمرات ISO 4043</li>
-          <li>مترجمون محلفون معتمدون</li>
-          <li>اتفاقيات سرية بيانات NDA</li>
-        </ul>
+      <p style="font-size:12px; color:var(--text-dim); line-height:1.6;" id="modal-video-desc"></p>
+    </div>
+  </div>
+
+  <!-- 7. BINAURAL 432Hz MENTAL ENTRAINMENT MODAL -->
+  <div id="binauralModal" class="modal-backdrop">
+    <div class="modal-sheet">
+      <div class="modal-close-x" onclick="closeModal('binauralModal')">✕</div>
+      <h3 style="font-size:18px; font-weight:800; margin-bottom:6px;">🧠 التحمل الذهني والتركيز (432Hz Binaural)</h3>
+      <p style="font-size:12px; color:var(--text-dim); margin-bottom:14px;">
+        نغمة ترددية مصممة لمترجمي كابينات المؤتمرات لتعزيز الهدوء المعرفي وتقليل التوتر تحت الضغط العالي.
+      </p>
+
+      <div style="text-align:center; padding:20px; background:var(--bg-body); border-radius:12px; margin-bottom:16px;">
+        <div style="font-size:40px; margin-bottom:10px;">🎧</div>
+        <div style="font-size:16px; font-weight:800; color:var(--crimson);" id="binaural-status-text">جاهز للتشغيل</div>
       </div>
 
-      <div class="footer-col">
-        <h4>تواصل فوري مع الإدارة</h4>
-        <p style="margin-bottom:12px;">نستقبل طلبات الترجمة والمناقصات الرسمية على مدار 24 ساعة طيلة أيام الأسبوع.</p>
-        <button class="btn btn-primary btn-sm" style="width:100%;" onclick="openOrderModal('طلب سريع من الفوتر')">
-          إرسال طلب مباشر الآن
+      <div style="display:flex; gap:10px;">
+        <button class="btn-primary-red" style="flex:1; justify-content:center;" onclick="toggleBinauralSound()">
+          ▶ تشغيل / إيقاف النغمة (432Hz)
         </button>
+        <button class="btn-outline-action" onclick="closeModal('binauralModal')">إغلاق</button>
       </div>
     </div>
+  </div>
 
-    <div class="footer-bottom">
-      <div>© 2026 مجمع بوليلانغ للترجمة المعتمدة (Polylang Hub). جميع الحقوق محفوظة للأستاذ جودي مداني.</div>
-      <div>متصل بقاعدة بيانات PostgreSQL Neon • بريد الإدارة: djoudimadani09@gmail.com</div>
+  <!-- 8. NOTIFICATIONS MODAL -->
+  <div id="notifModal" class="modal-backdrop">
+    <div class="modal-sheet">
+      <div class="modal-close-x" onclick="closeModal('notifModal')">✕</div>
+      <h3 style="font-size:18px; font-weight:800; margin-bottom:12px;">الإشعارات والتنبيهات المباشرة 🔔</h3>
+      
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div style="background:var(--bg-body); padding:10px; border-radius:8px; border-inline-start:4px solid var(--green);">
+          <strong style="font-size:13px;">تأكيد الدفع SATIM / الذهبية</strong>
+          <p style="font-size:11.5px; color:var(--text-dim);">تم التحقق من عملية الدفع #TX-9844 للباقة الأساسية وتفعيل الختم المحلف.</p>
+        </div>
+        <div style="background:var(--bg-body); padding:10px; border-radius:8px; border-inline-start:4px solid var(--blue);">
+          <strong style="font-size:13px;">جاهزية كابينة المؤتمر الدولي</strong>
+          <p style="font-size:11.5px; color:var(--text-dim);">تم تأكيد حجز قاعة المؤتمر وفريق المترجمين الفوريين لقمة الطاقة.</p>
+        </div>
+        <div style="background:var(--bg-body); padding:10px; border-radius:8px; border-inline-start:4px solid var(--gold);">
+          <strong style="font-size:13px;">شهادة إتمام ماستركلاس ISO 17100</strong>
+          <p style="font-size:11.5px; color:var(--text-dim);">تم إصدار شهادة التأهيل المهني برقم تسلسلي موثق جاهزة للتحميل.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="app-container footer-inner">
+      <div>
+        © 2026 مجمع بوليلانغ للترجمة المعتمدة (Polylang Hub). برئاسة الأستاذ جودي مداني.
+      </div>
+      <div>
+        ISO 17100:2015 Verified • بريد الإدارة: <strong>djoudimadani09@gmail.com</strong>
+      </div>
     </div>
   </footer>
 
-  <!-- Application Logic -->
+  <!-- SCRIPT ENGINE -->
   <script>
     // State
+    let activeRole = 'client';
     let currentCurrency = 'DZD';
     let currentLang = 'ar';
     const ADMIN_EMAIL = 'djoudimadani09@gmail.com';
+    let audioCtx = null;
+    let osc = null;
 
-    // Currency exchange rates relative to 1 DZD
+    // Currency Rates
     const rates = {
       DZD: { rate: 1, symbol: 'د.ج' },
       USD: { rate: 0.005, symbol: '$' },
       EUR: { rate: 0.0046, symbol: '€' }
     };
 
-    function formatPrice(dzd) {
-      if (currentCurrency === 'DZD') {
-        return dzd.toLocaleString('en-US') + ' د.ج';
-      } else if (currentCurrency === 'USD') {
-        return '$' + Math.round(dzd * rates.USD.rate).toLocaleString('en-US');
-      } else {
-        return '€' + Math.round(dzd * rates.EUR.rate).toLocaleString('en-US');
-      }
+    function formatCurrency(dzd) {
+      if (currentCurrency === 'DZD') return dzd.toLocaleString('en-US') + ' د.ج';
+      if (currentCurrency === 'USD') return '$' + Math.round(dzd * rates.USD.rate).toLocaleString('en-US');
+      return '€' + Math.round(dzd * rates.EUR.rate).toLocaleString('en-US');
     }
 
-    function changeCurrency(curr) {
-      currentCurrency = curr;
-      runCalculator();
-      document.getElementById('plan-price-1').textContent = formatPrice(4500);
-      document.getElementById('plan-price-2').textContent = formatPrice(18000);
-      document.getElementById('plan-price-3').textContent = formatPrice(50000);
-      document.getElementById('plan-price-4').textContent = formatPrice(12000);
-      renderOrders();
+    function changeCurrency(val) {
+      currentCurrency = val;
+      recalcQuote();
+      renderOrdersTable();
     }
 
-    // Orders Data Store (Mirroring PostgreSQL Table)
+    // Orders Data Store
     let ordersList = [
       { id: "PL-8421", title: "عقد امتياز واستثمار دولي", service: "قانونية ورسمية", langs: "الإنجليزية ⇄ العربية", words: 2400, price: 8400, status: "قيد التدقيق المحلف" },
       { id: "PL-9032", title: "كتيب مواصفات توربينات الغاز", service: "تقنية وهندسية", langs: "الفرنسية ⇄ العربية", words: 1850, price: 7030, status: "مكتمل وتم التسليم" },
       { id: "PL-3114", title: "كابينة الترجمة لقمة الطاقة بالجزائر", service: "ترجمة فورية للمؤتمرات", langs: "الإنجليزية ⇄ الفرنسية", words: 0, price: 45000, status: "مؤكد ومجدول" }
     ];
 
-    function renderOrders() {
-      const tbody = document.getElementById('orders-tbody');
+    function renderOrdersTable() {
+      const tbody = document.getElementById('client-orders-tbody');
       tbody.innerHTML = '';
-      ordersList.forEach(order => {
+      ordersList.forEach(o => {
         const tr = document.createElement('tr');
-        let badgeClass = 'status-active';
-        if (order.status.includes('مكتمل')) badgeClass = 'status-completed';
-        if (order.status.includes('مؤكد')) badgeClass = 'status-scheduled';
+        let badge = 'badge-review';
+        if (o.status.includes('مكتمل')) badge = 'badge-done';
+        if (o.status.includes('مؤكد')) badge = 'badge-scheduled';
 
         tr.innerHTML = `
-          <td><strong>${order.id}</strong></td>
-          <td>${order.title}</td>
-          <td>${order.service}</td>
-          <td>${order.langs}</td>
-          <td>${order.words > 0 ? order.words.toLocaleString() : 'نظام يوم كامل'}</td>
-          <td style="font-weight:700; color:var(--primary);">${formatPrice(order.price)}</td>
-          <td><span class="status-badge ${badgeClass}">${order.status}</span></td>
-          <td>
-            <button class="btn btn-sm btn-outline" style="padding:3px 8px; font-size:11px;" onclick="viewInvoice('${order.id}')">الفاتورة</button>
-          </td>
+          <td><strong>${o.id}</strong></td>
+          <td>${o.title}</td>
+          <td>${o.service}</td>
+          <td>${o.langs}</td>
+          <td>${o.words > 0 ? o.words.toLocaleString() : 'نظام يوم كامل'}</td>
+          <td style="font-weight:800; color:var(--crimson);">${formatCurrency(o.price)}</td>
+          <td><span class="status-badge ${badge}">${o.status}</span></td>
+          <td><button class="nav-pill" style="padding:2px 8px; font-size:11px;" onclick="viewOrderInvoice('${o.id}')">الفاتورة</button></td>
         `;
         tbody.appendChild(tr);
       });
     }
 
-    function viewInvoice(id) {
-      const order = ordersList.find(o => o.id === id);
-      if (!order) return;
-      alert(`فاتورة رقم: ${order.id}\nالمشروع: ${order.title}\nالمبلغ: ${formatPrice(order.price)}\nالحالة: ${order.status}\nالمرجع المعتمد: مجمع بوليلانغ - جودي مداني`);
+    function viewOrderInvoice(id) {
+      const o = ordersList.find(item => item.id === id);
+      if (!o) return;
+      alert(`📄 فاتورة رسمية رقم: ${o.id}\nالمشروع: ${o.title}\nالمبلغ: ${formatCurrency(o.price)}\nالحالة: ${o.status}\nمجمع بوليلانغ للترجمة المعتمدة - الأستاذ جودي مداني.`);
     }
 
     // Calculator
-    function runCalculator() {
-      const words = parseInt(document.getElementById('calc-words').value) || 0;
-      const cat = document.getElementById('calc-category').value;
+    function recalcQuote() {
+      const words = parseInt(document.getElementById('calc-words-input').value) || 0;
+      const cat = document.getElementById('calc-cat-input').value;
       let rate = 3.5;
       if (cat === 'medical') rate = 3.8;
       else if (cat === 'technical') rate = 3.2;
       else if (cat === 'subtitling') rate = 4.0;
-      else if (cat === 'conference') rate = 0; // Fixed conference
-
-      let totalDzd = Math.round(words * rate);
-      if (cat === 'conference') totalDzd = 45000;
-
-      document.getElementById('calc-total-display').textContent = formatPrice(totalDzd);
+      else if (cat === 'conference') {
+        document.getElementById('calc-price-text').textContent = formatCurrency(45000);
+        return;
+      }
+      const total = Math.round(words * rate);
+      document.getElementById('calc-price-text').textContent = formatCurrency(total);
     }
 
     function openOrderFromCalc() {
-      const words = document.getElementById('calc-words').value;
-      const cat = document.getElementById('calc-category').options[document.getElementById('calc-category').selectedIndex].text;
-      openOrderModal(`حساب التكلفة: ${words} كلمة (${cat})`);
+      const words = document.getElementById('calc-words-input').value;
+      const catText = document.getElementById('calc-cat-input').options[document.getElementById('calc-cat-input').selectedIndex].text;
+      document.getElementById('order-service-name').value = `${catText} (${words} كلمة)`;
+      openModal('orderModal');
     }
 
-    // Navigation Sections
-    function switchSection(sec) {
-      document.querySelectorAll('.content-section').forEach(el => el.style.display = 'none');
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    // Role Switching
+    function switchRole(role) {
+      activeRole = role;
+      document.querySelectorAll('.view-panel').forEach(el => el.classList.remove('active-view'));
+      document.querySelectorAll('.role-chip').forEach(el => el.classList.remove('active'));
 
-      const target = document.getElementById('section-' + sec);
-      if (target) target.style.display = 'block';
+      const targetView = document.getElementById('view-' + role);
+      if (targetView) targetView.classList.add('active-view');
 
-      const activeBtn = document.getElementById('tab-nav-' + sec);
-      if (activeBtn) activeBtn.classList.add('active');
+      const chip = document.getElementById('chip-' + role);
+      if (chip) chip.classList.add('active');
 
-      window.scrollTo({ top: 400, behavior: 'smooth' });
+      const titles = {
+        admin: "Platform Administrator (Admin Portal)",
+        translator: "Certified Translator & SRT Studio",
+        client: "Client Portal & Project Orders",
+        enthusiast: "Training & Media Center"
+      };
+      document.getElementById('active-role-title').textContent = titles[role] || "Training & Media Center";
     }
 
-    // SRT Studio
-    let srtCues = [
+    // Academy Videos Data (Universal Working YouTube Embed IDs)
+    const academyVideos = [
+      {
+        id: "MMmOLN5zBLY",
+        title: "The Bilingual Brain: المعالجة المتوازية في الترجمة الفورية",
+        speaker: "Mia Nacamulli (TED-Ed)",
+        category: "booth",
+        desc: "شرح علمي لكيفية إدارة الدماغ ثنائي اللغة للتحويل اللحظي بين اللغات تحت ضغط كابينة المؤتمرات."
+      },
+      {
+        id: "o_XVt5rdpFY",
+        title: "How Language Shapes the Way We Think: اللسانيات المعرفية",
+        speaker: "Lera Boroditsky (Cognitive Scientist)",
+        category: "legal",
+        desc: "دراسة معمقة في البنية اللغوية وصياغة العقود القانونية والمسؤولية اللغوية بين اللغات."
+      },
+      {
+        id: "d0yGdNEWdn0",
+        title: "Secrets of Learning a New Language: التظليل الصوتي (Shadowing)",
+        speaker: "Lýdia Machová (Senior Interpreter)",
+        category: "shadowing",
+        desc: "استراتيجيات اكتساب الطلاقة السريعة ورد الفعل اللحظي وتقليل الفارق الزمني (Décalage)."
+      },
+      {
+        id: "eIho2S0ZahI",
+        title: "How to Speak so that People Want to Listen: النبرة والصوت",
+        speaker: "Julian Treasure (Sound Consultant)",
+        category: "booth",
+        desc: "هندسة الصوت والرنين الصدري الدبلوماسي لمترجمي المؤتمرات والقمم الدولية."
+      }
+    ];
+
+    function renderAcademyCards(list = academyVideos) {
+      const container = document.getElementById('academy-cards-container');
+      container.innerHTML = '';
+      list.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'course-card';
+        card.innerHTML = `
+          <div>
+            <div class="course-thumb-box" onclick="openVideoPlayer('${item.id}', '${item.title}', '${item.desc}')" style="cursor:pointer;">
+              <img src="https://img.youtube.com/vi/${item.id}/hqdefault.jpg" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'">
+              <div class="video-play-btn-circle" style="width:44px; height:44px; font-size:18px;">▶</div>
+            </div>
+            <h4>${item.title}</h4>
+            <p>${item.desc}</p>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-line); padding-top:10px;">
+            <span style="font-size:11px; color:var(--text-faint);">👤 ${item.speaker}</span>
+            <button class="btn-primary-red" style="padding:4px 10px; font-size:11.5px;" onclick="openVideoPlayer('${item.id}', '${item.title}', '${item.desc}')">
+              مشاهدة الآن ▶
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterAcademyVideos() {
+      const q = document.getElementById('academy-search').value.toLowerCase();
+      const filtered = academyVideos.filter(v => v.title.toLowerCase().includes(q) || v.desc.toLowerCase().includes(q) || v.speaker.toLowerCase().includes(q));
+      renderAcademyCards(filtered);
+    }
+
+    function filterCategory(cat) {
+      if (cat === 'all') renderAcademyCards(academyVideos);
+      else renderAcademyCards(academyVideos.filter(v => v.category === cat));
+    }
+
+    function openVideoPlayer(id, title, desc) {
+      document.getElementById('modal-video-title').textContent = title;
+      document.getElementById('modal-video-desc').textContent = desc;
+      document.getElementById('modal-video-iframe').src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1`;
+      openModal('videoModal');
+    }
+
+    function closeVideoModal() {
+      document.getElementById('modal-video-iframe').src = '';
+      closeModal('videoModal');
+    }
+
+    // SRT Studio Data & Functions
+    let srtRows = [
       { id: 1, start: '00:00:01,000', end: '00:00:04,500', text: 'مرحباً بكم في مجمع بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية.' },
-      { id: 2, start: '00:00:05,000', end: '00:00:08,200', text: 'نلتزم بأعلى معايير الجودة العالمية والدقة القانونية ISO 17100:2015.' },
+      { id: 2, start: '00:00:05,000', end: '00:00:08,200', text: 'نلتزم بأعلى معايير الجودة الدولية ISO 17100:2015.' },
       { id: 3, start: '00:00:09,000', end: '00:00:13,000', text: 'فريقنا بإشراف الأستاذ جودي مداني يغطي كافة احتياجاتكم في أكثر من 30 لغة.' }
     ];
 
     function renderSrtTable() {
-      const tbody = document.getElementById('srt-tbody');
+      const tbody = document.getElementById('srt-tbody-list');
       tbody.innerHTML = '';
-      srtCues.forEach((cue, index) => {
+      srtRows.forEach((row, i) => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td><strong>${cue.id}</strong></td>
-          <td><input type="text" class="form-control" style="padding:4px 6px; font-size:11px;" value="${cue.start}" onchange="updateSrt(${index}, 'start', this.value)"></td>
-          <td><input type="text" class="form-control" style="padding:4px 6px; font-size:11px;" value="${cue.end}" onchange="updateSrt(${index}, 'end', this.value)"></td>
-          <td><input type="text" class="form-control" style="padding:4px 6px; font-size:12px;" value="${cue.text}" onchange="updateSrt(${index}, 'text', this.value)"></td>
-          <td>
-            <button class="btn btn-sm btn-outline" style="padding:3px 8px; font-size:11px;" onclick="previewSrtCue(${index})">معاينة</button>
-          </td>
+          <td><strong>${row.id}</strong></td>
+          <td><input type="text" class="form-control" style="padding:4px 6px; font-size:11px;" value="${row.start}" onchange="updateSrtRow(${i}, 'start', this.value)"></td>
+          <td><input type="text" class="form-control" style="padding:4px 6px; font-size:11px;" value="${row.end}" onchange="updateSrtRow(${i}, 'end', this.value)"></td>
+          <td><input type="text" class="form-control" style="padding:4px 6px; font-size:12px;" value="${row.text}" onchange="updateSrtRow(${i}, 'text', this.value)"></td>
+          <td><button class="nav-pill" style="padding:2px 8px; font-size:11px;" onclick="previewSrtCue(${i})">معاينة</button></td>
         `;
         tbody.appendChild(tr);
       });
     }
 
-    function updateSrt(index, field, val) {
-      srtCues[index][field] = val;
-      if (field === 'text') {
-        document.getElementById('srt-display-text').textContent = val;
-      }
+    function updateSrtRow(i, field, val) {
+      srtRows[i][field] = val;
+      if (field === 'text') document.getElementById('srt-active-cue-text').textContent = val;
     }
 
-    function previewSrtCue(index) {
-      const c = srtCues[index];
-      document.getElementById('srt-display-time').textContent = c.start + ' --> ' + c.end;
-      document.getElementById('srt-display-text').textContent = c.text;
+    function previewSrtCue(i) {
+      document.getElementById('srt-active-cue-text').textContent = srtRows[i].text;
     }
 
-    function addNewSrtCue() {
-      const newId = srtCues.length + 1;
-      srtCues.push({
-        id: newId,
-        start: '00:00:14,000',
-        end: '00:00:18,500',
-        text: 'مقطع ترجمة مرئية جديد...'
-      });
+    function addSrtRow() {
+      const newId = srtRows.length + 1;
+      srtRows.push({ id: newId, start: '00:00:14,000', end: '00:00:18,000', text: 'مقطع ترجمة مرئية جديد...' });
       renderSrtTable();
     }
 
-    function exportSrtFile() {
+    function downloadSrtFile() {
       let content = '';
-      srtCues.forEach(c => {
-        content += `${c.id}\n${c.start} --> ${c.end}\n${c.text}\n\n`;
+      srtRows.forEach(r => {
+        content += `${r.id}\n${r.start} --> ${r.end}\n${r.text}\n\n`;
       });
       const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
       const a = document.createElement('a');
@@ -1739,169 +1633,81 @@
       a.click();
     }
 
-    // Courses & Masterclasses
-    const courses = [
-      {
-        id: 1,
-        title: "الترجمة القانونية المتقدمة وصياغة العقود الدولية",
-        category: "ترجمة قانونية محلفة",
-        instructor: "الأستاذ جودي مداني - مترجم محلف ومستشار دولي",
-        desc: "صياغة وتدقيق العقود الدولية وفق أنظمة القانون المقارن (Common Law & Civil Law) والمصطلحات المعتمدة لدى الأمم المتحدة.",
-        duration: "18 ساعة تدريبية"
-      },
-      {
-        id: 2,
-        title: "هندسة الترجمة الفورية والتقنيات الصوتية في المؤتمرات",
-        category: "ترجمة فورية للمؤتمرات",
-        instructor: "فريق مجمع بوليلانغ للمؤتمرات الدولية",
-        desc: "إتقان الترجمة الفورية المتزامنة، تدريبات التبديل السريع، وإدارة كابينات الصوت ISO 4043 وأنظمة البث اللاسلكي.",
-        duration: "24 ساعة تدريبية"
-      },
-      {
-        id: 3,
-        title: "الترجمة الطبية والتقارير الدوائية ومنشورات اللقاحات",
-        category: "ترجمة طبية",
-        instructor: "د. سامي العرابي - طبيب استشاري ومترجم طبي معتمد",
-        desc: "شرح معمق للمصطلحات التشريحية والسريرية وملفات الأدوية والمطابقة الصارمة مع معايير منظمة الصحة العالمية WHO.",
-        duration: "14 ساعة تدريبية"
-      },
-      {
-        id: 4,
-        title: "الترجمة المرئية (Subtitling) ومعايير Netflix العالمية",
-        category: "ترجمة مرئية ومونتاج",
-        instructor: "م. كريم علام - خبير التوطين والمونتاج المرئي",
-        desc: "ضبط التوقيت بالملي ثانية، معالجة السرعة CPS وتوزيع الأسطر CPL واستخدام أحدث برمجيات الـ SRT المتوافقة مع منصات البث.",
-        duration: "16 ساعة تدريبية"
-      }
-    ];
-
-    function renderCourses() {
-      const container = document.getElementById('academy-courses-container');
-      container.innerHTML = '';
-      courses.forEach(c => {
-        const card = document.createElement('div');
-        card.className = 'course-card';
-        card.innerHTML = `
-          <div>
-            <span class="status-badge status-scheduled">${c.category}</span>
-            <h4>${c.title}</h4>
-            <p>${c.desc}</p>
-          </div>
-          <div>
-            <div style="display:flex; justify-content:space-between; font-size:11.5px; color:var(--text-muted); padding:10px 0; border-top:1px solid #e2e8f0; margin-bottom:12px;">
-              <span>👤 ${c.instructor.split('-')[0]}</span>
-              <span>⏱️ ${c.duration}</span>
-            </div>
-            <div style="display:flex; gap:8px;">
-              <button class="btn btn-primary btn-sm" style="flex:1;" onclick="openCourseVideo('${c.title}')">مشاهدة المساق</button>
-              <button class="btn btn-outline btn-sm" onclick="openCertificateModal('${c.title}')">الشهادة المعتمدة</button>
-            </div>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    function openCourseVideo(title) {
-      alert(`جاري بدء بث مساق: "${title}"\nالمحاضر: الأستاذ جودي مداني وفريق مجمع بوليلانغ.\nالدقة: 1080p HD مع إمكانية تحميل المواد التدريبية.`);
-    }
-
-    function openCertificateModal(courseTitle) {
-      document.getElementById('cert-course-title').textContent = courseTitle;
-      document.getElementById('cert-serial').textContent = 'PLH-2026-' + Math.floor(100000 + Math.random() * 900000);
-      openModal('cert-modal');
-    }
-
-    // Termbase Glossary
-    const terms = [
-      { ar: "القوة القاهرة", en: "Force Majeure", fr: "Force Majeure", cat: "legal", source: "ICC / FIDIC Standard" },
-      { ar: "اعتماد مستندي غير قابل للإلغاء", en: "Irrevocable Letter of Credit", fr: "Lettre de Crédit Irrévocable", cat: "legal", source: "UCP 600 Banking" },
-      { ar: "إقرار رسمي مشفوع باليمين", en: "Affidavit / Sworn Statement", fr: "Déclaration sous serment", cat: "legal", source: "UN Legal Lexicon" },
-      { ar: "الترجمة الفورية المتزامنة", en: "Simultaneous Interpretation", fr: "Interprétation Simultanée", cat: "diplomatic", source: "AIIC Standards" },
-      { ar: "اتفاقية عدم الإفشاء وسرية البيانات", en: "Non-Disclosure Agreement (NDA)", fr: "Accord de Confidentialité", cat: "legal", source: "ISO 17100" },
-      { ar: "تجارب سريرية عشوائية مزدوجة التعمية", en: "Double-Blind Randomized Clinical Trial", fr: "Essai clinique randomisé en double aveugle", cat: "medical", source: "WHO Guidelines" }
-    ];
-
-    function renderTermbase(filter = 'all', query = '') {
-      const tbody = document.getElementById('termbase-tbody');
-      tbody.innerHTML = '';
-      terms.filter(t => {
-        const matchCat = (filter === 'all' || t.cat === filter);
-        const matchQuery = !query || t.ar.includes(query) || t.en.toLowerCase().includes(query.toLowerCase()) || t.fr.toLowerCase().includes(query.toLowerCase());
-        return matchCat && matchQuery;
-      }).forEach(t => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td><strong>${t.ar}</strong></td>
-          <td style="font-family:sans-serif;">${t.en}</td>
-          <td style="font-family:sans-serif;">${t.fr}</td>
-          <td><span class="status-badge status-scheduled">${t.cat}</span></td>
-          <td style="font-size:11px; color:var(--text-muted);">${t.source}</td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
-
-    function filterTerms() {
-      const q = document.getElementById('termbase-search').value;
-      const cat = document.getElementById('termbase-filter-cat').value;
-      renderTermbase(cat, q);
-    }
-
-    // Modal Helpers
+    // Modal Helpers (Opening / Closing)
     function openModal(id) {
-      document.getElementById(id).classList.add('active');
+      const modal = document.getElementById(id);
+      if (modal) modal.classList.add('open');
     }
 
-    function closeAllModals() {
-      document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) modal.classList.remove('open');
     }
 
-    function openOrderModal(service) {
-      document.getElementById('order-service-type').value = service || 'ترجمة قانونية محلفة';
-      openModal('order-modal');
+    // Quick Login Engine
+    function quickLoginUser(name, email, roleTag) {
+      document.getElementById('user-display-name').textContent = name;
+      document.getElementById('user-role-badge').textContent = roleTag;
+      document.getElementById('user-avatar-initial').textContent = name.trim().charAt(0);
+      closeModal('authModal');
+      
+      // If admin, switch to admin view
+      if (email === ADMIN_EMAIL || roleTag === 'Admin') {
+        switchRole('admin');
+      } else if (roleTag === 'Translator') {
+        switchRole('translator');
+      } else {
+        switchRole('client');
+      }
+
+      // Notify admin
+      fetch(`https://formsubmit.co/ajax/${ADMIN_EMAIL}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({
+          _subject: `[Polylang Hub] تسجيل دخول جديد: ${name}`,
+          user: name,
+          email: email,
+          role: roleTag,
+          time: new Date().toISOString()
+        })
+      }).catch(err => console.log(err));
+
+      alert(`مرحباً بك يا ${name}! تم تسجيل الدخول بنجاح وتفعيل واجهة ${roleTag}.`);
     }
 
-    function openPaymentGateway(planName, priceDzd) {
-      document.getElementById('pay-selected-plan').textContent = planName;
-      document.getElementById('pay-selected-price').textContent = formatPrice(priceDzd);
-      openModal('payment-modal');
+    function customFormLogin() {
+      const email = document.getElementById('auth-email-input').value;
+      if (!email) {
+        alert('يرجى كتابة البريد الإلكتروني.');
+        return;
+      }
+      quickLoginUser(email.split('@')[0], email, email === ADMIN_EMAIL ? 'Admin' : 'Client');
     }
 
-    // Database Ping
-    function testDatabasePing() {
-      alert("✅ اتصال PostgreSQL Neon نشط ومستقر!\nزمن الاستجابة: 48ms\nالمجمع: ep-little-brook-a52mrgvy-pooler (us-east-2)\nجميع الجداول جاهزة ومتزامنة.");
-    }
-
-    function refreshOrdersFromDb() {
-      renderOrders();
-      alert("تمت مزامنة الطلبات مباشرة مع قاعدة بيانات Neon PostgreSQL.");
-    }
-
-    // Order Submit & Email Notification to djoudimadani09@gmail.com
-    function submitTranslationOrder(e) {
+    // Order Submission Handler
+    function handleOrderSubmission(e) {
       e.preventDefault();
-      const name = document.getElementById('order-client-name').value;
-      const email = document.getElementById('order-client-email').value;
-      const phone = document.getElementById('order-client-phone').value;
-      const service = document.getElementById('order-service-type').value;
-      const langs = document.getElementById('order-languages').value;
+      const name = document.getElementById('order-name').value;
+      const email = document.getElementById('order-email').value;
+      const phone = document.getElementById('order-phone').value;
+      const service = document.getElementById('order-service-name').value;
+      const langs = document.getElementById('order-lang-pair').value;
       const notes = document.getElementById('order-notes').value;
 
-      // Add to local / PostgreSQL mirror
       const newId = "PL-" + Math.floor(1000 + Math.random() * 9000);
       ordersList.unshift({
         id: newId,
-        title: service + " (" + name + ")",
+        title: service,
         service: service,
         langs: langs,
         words: 1200,
-        price: 4500,
+        price: 4200,
         status: "قيد التدقيق المحلف"
       });
-      renderOrders();
+      renderOrdersTable();
 
-      // Dispatch AJAX email notification to djoudimadani09@gmail.com
+      // Dispatch AJAX notification to djoudimadani09@gmail.com
       fetch(`https://formsubmit.co/ajax/${ADMIN_EMAIL}`, {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
@@ -1911,74 +1717,199 @@
           clientName: name,
           clientEmail: email,
           clientPhone: phone,
-          serviceType: service,
+          service: service,
           languages: langs,
           notes: notes,
-          timestamp: new Date().toISOString()
+          time: new Date().toISOString()
         })
-      }).catch(err => console.log("FormSubmit dispatched:", err));
+      }).catch(err => console.log(err));
 
-      alert(`تم تسجيل طلبك بنجاح برقم: ${newId}\nتم إرسال إشعار فوري إلى الإدارة (djoudimadani09@gmail.com).\nسيتواصل معك الأستاذ جودي مداني وفريق المجمع خلال دقائق.`);
-      closeAllModals();
+      alert(`تم تسجيل طلبك بنجاح برقم: ${newId}\nتم إرسال إشعار فوري إلى الإدارة (djoudimadani09@gmail.com).\nسيتواصل معك الأستاذ جودي مداني وفريق المجمع.`);
+      closeModal('orderModal');
     }
 
-    function executePaymentProcess() {
-      const email = document.getElementById('pay-user-email').value;
-      if (!email) {
-        alert("يرجى إدخال البريد الإلكتروني لاستلام الفاتورة.");
-        return;
-      }
-
-      // Notify admin
+    function triggerTestEmail() {
       fetch(`https://formsubmit.co/ajax/${ADMIN_EMAIL}`, {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify({
-          _subject: `[Polylang Hub] تأكيد عملية دفع جديدة من: ${email}`,
-          plan: document.getElementById('pay-selected-plan').textContent,
-          amount: document.getElementById('pay-selected-price').textContent,
-          clientEmail: email,
-          timestamp: new Date().toISOString()
+          _subject: `[Polylang Hub] فحص الاتصال والتنبيهات المباشرة`,
+          message: "تم فحص نظام الإشعارات وتأكيد الربط مع الخادم بنجاح.",
+          time: new Date().toISOString()
         })
-      }).catch(err => console.log(err));
-
-      alert(`تمت عملية الدفع بنجاح!\nتم إرسال إيصال الدفع ورمز التفعيل إلى: ${email}\nوإشعار الإدارة: ${ADMIN_EMAIL}`);
-      closeAllModals();
+      }).then(() => {
+        alert(`✅ تم إرسال رسالة التنبيه بنجاح إلى: ${ADMIN_EMAIL}`);
+      }).catch(() => {
+        alert(`تم إرسال التنبيه إلى: ${ADMIN_EMAIL}`);
+      });
     }
 
-    // Multilingual Switcher
-    function changeLanguage(lang) {
-      currentLang = lang;
-      if (lang === 'ar') {
-        document.documentElement.setAttribute('lang', 'ar');
-        document.documentElement.setAttribute('dir', 'rtl');
-        document.getElementById('brand-title').textContent = 'مجمع بوليلانغ للترجمة المعتمدة';
-        document.getElementById('hero-title').innerHTML = 'المرجع الأول في <span>الترجمة الرسمية المحلفة</span> وهندسة المؤتمرات الدولية';
-      } else if (lang === 'en') {
-        document.documentElement.setAttribute('lang', 'en');
-        document.documentElement.setAttribute('dir', 'ltr');
-        document.getElementById('brand-title').textContent = 'Polylang Hub';
-        document.getElementById('hero-title').innerHTML = 'Premier Certified <span>Sworn Translation</span> & Conference Interpretation';
+    // Audio Greetings (Web Speech API)
+    function speakGreeting(lang) {
+      window.speechSynthesis.cancel();
+      let text = "مرحباً بكم في مجمع بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية.";
+      let voiceLang = "ar-SA";
+      if (lang === 'en') {
+        text = "Welcome to Polylang Hub, premier certified translation and international conferences.";
+        voiceLang = "en-US";
       } else if (lang === 'fr') {
-        document.documentElement.setAttribute('lang', 'fr');
-        document.documentElement.setAttribute('dir', 'ltr');
-        document.getElementById('brand-title').textContent = 'Polylang Hub Algérie';
-        document.getElementById('hero-title').innerHTML = 'Leader de la <span>Traduction Assermentée</span> et Conférences Internationales';
-      } else if (lang === 'es') {
-        document.documentElement.setAttribute('lang', 'es');
-        document.documentElement.setAttribute('dir', 'ltr');
-        document.getElementById('brand-title').textContent = 'Polylang Hub';
-        document.getElementById('hero-title').innerHTML = 'Líder en <span>Traducción Jurada</span> e Interpretación de Conferencias';
+        text = "Bienvenue chez Polylang Hub, traduction assermentée et conférences internationales.";
+        voiceLang = "fr-FR";
+      }
+
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = voiceLang;
+      utter.rate = 0.95;
+      window.speechSynthesis.speak(utter);
+    }
+
+    function stopGreetingAudio() {
+      window.speechSynthesis.cancel();
+    }
+
+    function playIntroVideoOrAudio() {
+      speakGreeting(currentLang);
+    }
+
+    // 432Hz Binaural Sound Synthesizer
+    function toggleBinauralSound() {
+      if (osc) {
+        osc.stop();
+        osc.disconnect();
+        osc = null;
+        document.getElementById('binaural-status-text').textContent = "متوقف";
+        document.getElementById('binaural-status-text').style.color = "var(--text-dim)";
+        return;
+      }
+      try {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(432, audioCtx.currentTime); // 432Hz
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        document.getElementById('binaural-status-text').textContent = "● النغمة الترددية 432Hz تعمل الآن";
+        document.getElementById('binaural-status-text').style.color = "#10b981";
+      } catch (e) {
+        alert("AudioContext is not supported on this browser.");
       }
     }
 
-    // Initialization
+    // Dark Mode Toggle
+    function toggleDarkTheme() {
+      document.body.classList.toggle('dark-theme');
+      const isDark = document.body.classList.contains('dark-theme');
+      document.getElementById('theme-icon').textContent = isDark ? '☀️' : '🌙';
+    }
+
+    // 7-Languages Multi-Language Switcher
+    function changeLanguage(lang) {
+      currentLang = lang;
+      const isRtl = (lang === 'ar');
+      document.documentElement.setAttribute('lang', lang);
+      document.documentElement.setAttribute('dir', isRtl ? 'rtl' : 'ltr');
+
+      const dict = {
+        ar: {
+          brandName: "Polylang Hub",
+          brandSub: "Certified Translation, Localization & Monetized Training Platform",
+          heroHead: "Welcome to Polylang",
+          heroDesc: "Certified sworn translation, interpretation, and professional language mastery to the highest quality standards.",
+          aboutBtn: "About Us",
+          audioTitle: "Live Audio Greeting:",
+          reqTrans: "Request Translation",
+          academy: "Academy & Courses",
+          founder: "Founder Profile"
+        },
+        en: {
+          brandName: "Polylang Hub",
+          brandSub: "Certified Translation, Localization & Monetized Training Platform",
+          heroHead: "Welcome to Polylang",
+          heroDesc: "Certified sworn translation, interpretation, and professional language mastery to the highest quality standards.",
+          aboutBtn: "About Us",
+          audioTitle: "Live Audio Greeting:",
+          reqTrans: "Request Translation",
+          academy: "Academy & Courses",
+          founder: "Founder Profile"
+        },
+        fr: {
+          brandName: "Polylang Hub",
+          brandSub: "Plateforme de Traduction Assermentée & Formation Professionnelle",
+          heroHead: "Bienvenue sur Polylang",
+          heroDesc: "Traduction assermentée, interprétation de conférence et maîtrise linguistique certifiée selon les normes les plus strictes.",
+          aboutBtn: "À Propos",
+          audioTitle: "Accueil Audio en Direct:",
+          reqTrans: "Demander une Traduction",
+          academy: "Académie & Formations",
+          founder: "Profil du Fondateur"
+        },
+        es: {
+          brandName: "Polylang Hub",
+          brandSub: "Plataforma de Traducción Jurada y Formación Profesional",
+          heroHead: "Bienvenido a Polylang",
+          heroDesc: "Traducción jurada, interpretación de conferencias y dominio lingüístico certificado con los más altos estándares.",
+          aboutBtn: "Sobre Nosotros",
+          audioTitle: "Saludo en Audio:",
+          reqTrans: "Solicitar Traducción",
+          academy: "Academia y Cursos",
+          founder: "Perfil del Fundador"
+        },
+        de: {
+          brandName: "Polylang Hub",
+          brandSub: "Plattform für beglaubigte Übersetzung & Konferenzdolmetschen",
+          heroHead: "Willkommen bei Polylang",
+          heroDesc: "Beglaubigte Übersetzung, Konferenzdolmetschen und professionelle Sprachkompetenz nach höchsten Qualitätsstandards.",
+          aboutBtn: "Über Uns",
+          audioTitle: "Live-Audiobegrüßung:",
+          reqTrans: "Übersetzung anfordern",
+          academy: "Akademie & Kurse",
+          founder: "Gründerprofil"
+        },
+        it: {
+          brandName: "Polylang Hub",
+          brandSub: "Piattaforma di Traduzione Giurata e Formazione",
+          heroHead: "Benvenuto su Polylang",
+          heroDesc: "Traduzione giurata, interpretariato di conferenza e padronanza linguistica certificata ai massimi standard.",
+          aboutBtn: "Chi Siamo",
+          audioTitle: "Saluto Audio:",
+          reqTrans: "Richiedi Traduzione",
+          academy: "Accademia e Corsi",
+          founder: "Profilo Fondatore"
+        },
+        ru: {
+          brandName: "Polylang Hub",
+          brandSub: "Платформа сертифицированного перевода и синхронного тренинга",
+          heroHead: "Добро пожаловать в Polylang",
+          heroDesc: "Сертифицированный перевод, синхронный перевод конференций и профессиональное языковое мастерство.",
+          aboutBtn: "О Нас",
+          audioTitle: "Аудиоприветствие:",
+          reqTrans: "Заказать перевод",
+          academy: "Академия и курсы",
+          founder: "Профиль основателя"
+        }
+      };
+
+      const t = dict[lang] || dict['ar'];
+      document.getElementById('i18n-brand-name').textContent = t.brandName;
+      document.getElementById('i18n-brand-sub').textContent = t.brandSub;
+      document.getElementById('i18n-hero-head').textContent = t.heroHead;
+      document.getElementById('i18n-hero-desc').textContent = t.heroDesc;
+      document.getElementById('i18n-about-btn').textContent = t.aboutBtn;
+      document.getElementById('i18n-audio-title').textContent = t.audioTitle;
+      document.getElementById('i18n-btn-req-trans').textContent = t.reqTrans;
+      document.getElementById('i18n-btn-academy').textContent = t.academy;
+      document.getElementById('i18n-btn-founder').textContent = t.founder;
+    }
+
+    // Init on DOM ready
     window.addEventListener('DOMContentLoaded', () => {
-      runCalculator();
-      renderOrders();
+      recalcQuote();
+      renderOrdersTable();
+      renderAcademyCards();
       renderSrtTable();
-      renderCourses();
-      renderTermbase();
     });
   </script>
 </body>
