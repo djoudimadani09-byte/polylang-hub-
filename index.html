@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="academy_videos_data.js"></script>
 
   <style>
     :root {
@@ -547,6 +548,73 @@
     .view-panel { display: none; margin-bottom: 40px; }
     .view-panel.active-view { display: block; }
 
+    /* Hologram & Futuristic Sci-Fi UI */
+    .hologram-scan-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, #00f0ff, transparent);
+      box-shadow: 0 0 15px #00f0ff;
+      animation: scan-line 3s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes scan-line {
+      0% { top: 0%; opacity: 0.8; }
+      50% { top: 96%; opacity: 1; }
+      100% { top: 0%; opacity: 0.8; }
+    }
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.6; transform: scale(0.95); }
+      50% { opacity: 1; transform: scale(1.1); }
+    }
+    .badge-vip-gold {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 0 2px 6px rgba(217, 119, 6, 0.3);
+    }
+    .pagination-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    .page-btn {
+      min-width: 36px;
+      height: 36px;
+      padding: 0 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border-line);
+      background: var(--bg-card);
+      color: var(--text-main);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+    }
+    .page-btn:hover {
+      border-color: var(--crimson);
+      color: var(--crimson);
+    }
+    .page-btn.active {
+      background: var(--crimson);
+      color: #ffffff;
+      border-color: var(--crimson);
+    }
+
     /* Cards & Components */
     .content-box {
       background: var(--bg-card);
@@ -896,13 +964,16 @@
       <div class="hero-card-grid">
         
         <!-- Left: Robot Presenter Video Box -->
-        <div class="video-presenter-box">
+        <div class="video-presenter-box" onclick="openHologramModal()" style="cursor:pointer;" title="انقر لتشغيل العرض الهولوغرافي التفاعلي">
+          <div style="position:absolute; top:8px; right:8px; background:rgba(0, 240, 255, 0.95); color:#020617; font-size:10.5px; font-weight:900; padding:3px 8px; border-radius:4px; z-index:2; box-shadow:0 0 10px rgba(0, 240, 255, 0.6); display:flex; align-items:center; gap:4px;">
+            <span>🤖</span> <span>هولوغرام تفاعلي 3D</span>
+          </div>
           <img src="img_robot_presenter.jpg" alt="Robot Presenter" onerror="this.src='polylang_logo.jpg'">
-          <div class="video-play-btn-circle" onclick="playIntroVideoOrAudio()" title="تشغيل الترحيب">
+          <div class="video-play-btn-circle" onclick="event.stopPropagation(); openHologramModal();" title="تشغيل فيديو الهولوغرام">
             ▶
           </div>
           <div class="video-sub-banner" id="video-banner-text">
-            👋 Welcome to Polylang Hub
+            ✨ انقر لتشغيل فيديو الهولوغرام الإفتتاحي
           </div>
         </div>
 
@@ -936,14 +1007,17 @@
 
           <!-- Hero Actions Buttons -->
           <div class="hero-actions-row">
+            <button class="btn-primary-red" onclick="openHologramModal()" style="background:linear-gradient(135deg, #0284c7, #0f172a); border:1px solid #38bdf8; box-shadow:0 4px 15px rgba(2, 132, 199, 0.35);">
+              <span>🤖</span> <span>فيديو الهولوغرام الإفتتاحي</span>
+            </button>
             <button class="btn-primary-red" onclick="openModal('orderModal')">
               <span>📄</span> <span id="i18n-btn-req-trans">Request Translation</span>
             </button>
             <button class="btn-outline-action" onclick="switchRole('enthusiast')">
-              <span>🎬</span> <span id="i18n-btn-academy">Academy & Courses</span>
+              <span>🎓</span> <span id="i18n-btn-academy">الأكاديمية (100 فيديو)</span>
             </button>
             <button class="btn-outline-action" onclick="openModal('founderModal')">
-              <span>👤</span> <span id="i18n-btn-founder">Founder Profile</span>
+              <span>👤</span> <span id="i18n-btn-founder">سيرة المؤسس (جودي مداني)</span>
             </button>
           </div>
 
@@ -989,6 +1063,39 @@
     <!-- DYNAMIC VIEW 1: CLIENT PORTAL & ORDERS (Active by Default) -->
     <div id="view-client" class="view-panel active-view">
       
+      <!-- FOUNDER BIOGRAPHY SHOWCASE (سيرة الأستاذ جودي مداني) -->
+      <div class="content-box" style="border-right:4px solid var(--crimson); background:linear-gradient(to left, var(--bg-card), var(--crimson-light));">
+        <div style="display:flex; gap:20px; align-items:center; flex-wrap:wrap;">
+          <div style="width:76px; height:76px; border-radius:50%; background:linear-gradient(135deg, var(--crimson), #991b1b); color:#fff; font-size:28px; font-weight:900; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 15px var(--crimson-glow); flex-shrink:0; border:3px solid #fff;">
+            JM
+          </div>
+          <div style="flex:1; min-width:260px;">
+            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:4px;">
+              <h3 style="font-size:20px; font-weight:900; margin:0; color:var(--text-main);">الأستاذ جودي مداني (Djoudi Madani)</h3>
+              <span class="badge-iso-green" style="background:#10b981; color:#fff; font-size:11px;">مؤسس ورئيس المنصة</span>
+              <span class="badge-gold" style="font-size:11px;">🇩🇿 الجزائر العاصمة</span>
+            </div>
+            <div style="font-size:13px; font-weight:800; color:var(--crimson); margin-bottom:6px;">
+              خريج معهد الترجمة بجامعة الجزائر 2 • ماستر 2 ترجمة مؤسساتية (عربي - فرنسي - ألماني) • مبرمج حلول تكنولوجية
+            </div>
+            <p style="font-size:12.5px; color:var(--text-dim); line-height:1.7; margin:0 0 10px;">
+              مؤسس مجمع بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية. يجمع بين التكوين الأكاديمي العالي في كابينات المؤتمرات والترجمة القانونية والمؤسساتية، والابتكار البرمجي لتطوير أدوات CAT ومعالجة اللغات الطبيعية (NLP) لخدمة طلبة الترجمة ومتعلمي اللغات والمؤسسات الرسمية.
+            </p>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <button class="btn-primary-red" style="padding:6px 14px; font-size:12px;" onclick="openModal('founderModal')">
+                📖 عرض السيرة الذاتية المفصلة والمسار المهني
+              </button>
+              <button class="btn-outline-action" style="padding:6px 14px; font-size:12px;" onclick="switchRole('enthusiast')">
+                🎓 استكشاف 100 فيديو تعليمي بالأكاديمية
+              </button>
+              <a href="mailto:djoudimadani09@gmail.com" class="btn-outline-action" style="padding:6px 14px; font-size:12px; text-decoration:none; display:inline-flex; align-items:center;">
+                ✉️ djoudimadani09@gmail.com
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Calculator Box -->
       <div class="content-box">
         <div class="section-title-wrap">
@@ -1308,27 +1415,121 @@
       </div>
     </div>
 
-    <!-- DYNAMIC VIEW 3: ENTHUSIAST & MASTERCLASS ACADEMY -->
+    <!-- DYNAMIC VIEW 3: ENTHUSIAST & MASTERCLASS ACADEMY (100 Videos) -->
     <div id="view-enthusiast" class="view-panel">
       <div class="content-box">
-        <div class="section-title-wrap">
-          <h3>أكاديمية الماستركلاس والتدريب التفاعلي 🎓</h3>
-          <p>محاضرات حقيقية وورشات عمل معتمدة في كابينات المؤتمرات، التظليل الصوتي، وقواعد روزان.</p>
+        
+        <!-- Header & Premium Upgrade Callout -->
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:18px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+              <span class="badge-gold" style="font-size:11px;">🎓 100 فيديو تعليمي تفاعلي</span>
+              <span class="badge-iso-green" style="font-size:11px;">📖 معايير ISO 17100 / ISO 18587</span>
+            </div>
+            <h3 style="font-size:22px; font-weight:900; margin:0 0 6px;">أكاديمية بوليلانغ للماستركلاس والتدريب اللغوي 🎓</h3>
+            <p style="font-size:13px; color:var(--text-dim); margin:0; max-width:650px; line-height:1.6;">
+              أكبر مكتبة تدريبية مرئية متخصصة في كابينات المؤتمرات، الترجمة القانونية والطبية، تقنيات روزان، التظليل الصوتي، وأدوات الذكاء الاصطناعي برعاية وإشراف <strong>الأستاذ جودي مداني</strong>.
+            </p>
+          </div>
+
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="btn-primary-red" style="background:linear-gradient(135deg, #f59e0b, #b45309); border:none; box-shadow:0 4px 14px rgba(217, 119, 6, 0.35);" onclick="openModal('premiumSubModal')">
+              👑 ترقية الحساب إلى بريميوم VIP
+            </button>
+            <button class="btn-outline-action" onclick="openHologramModal()" style="border-color:#0284c7; color:#0284c7;">
+              🤖 تشغيل الهولوغرام الإفتتاحي
+            </button>
+          </div>
         </div>
 
-        <!-- Filter bar -->
-        <div style="display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap;">
-          <input type="text" id="academy-search" class="form-control" style="flex:1; min-width:200px;" placeholder="ابحث عن محاضرة أو تقنية لغوية..." oninput="filterAcademyVideos()">
-          <button class="nav-pill active" onclick="filterCategory('all')">الكل</button>
-          <button class="nav-pill" onclick="filterCategory('booth')">كابينات المؤتمرات</button>
-          <button class="nav-pill" onclick="filterCategory('shadowing')">التظليل الصوتي</button>
-          <button class="nav-pill" onclick="filterCategory('legal')">صياغة العقود</button>
+        <!-- Premium Pass Banner Box -->
+        <div style="background:linear-gradient(135deg, #fffbeb, #fef3c7); border:1px solid #fde68a; border-radius:12px; padding:14px 18px; margin-bottom:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="font-size:28px;">👑</div>
+            <div>
+              <div style="font-size:13.5px; font-weight:800; color:#92400e;">هل ترغب في فتح جميع المساقات الـ 100 بدون قيود؟</div>
+              <div style="font-size:12px; color:#b45309;">تتضمن المساقات المدفوعة نماذج عقود حصرية، قوالب Trados و MemoQ، وتدريباً فردياً مع كبار الخبراء.</div>
+            </div>
+          </div>
+          <button class="btn-primary-red" style="background:#d97706; padding:6px 16px; font-size:12px;" onclick="openModal('premiumSubModal')">
+            عرض باقات الاشتراك (ابتداءً من 1,500 د.ج) ➔
+          </button>
+        </div>
+
+        <!-- Search Bar -->
+        <div style="display:flex; gap:10px; margin-bottom:14px; flex-wrap:wrap;">
+          <div style="flex:1; min-width:260px; position:relative;">
+            <input type="text" id="academy-search" class="form-control" style="padding-left:36px;" placeholder="🔍 ابحث في 100 فيديو تعليمي (بالعنوان، المحاضر، اللغة، أو التقنية)..." oninput="handleAcademyFilterChange()">
+          </div>
+          <select id="academy-level-filter" class="form-control" style="width:auto; min-width:140px;" onchange="handleAcademyFilterChange()">
+            <option value="all">جميع المستويات</option>
+            <option value="مبتدئ">مبتدئ / تأسيسي</option>
+            <option value="متوسط">متوسط</option>
+            <option value="متقدم">متقدم</option>
+            <option value="احترافي">احترافي / خبير</option>
+          </select>
+        </div>
+
+        <!-- Multi-Level Filter Chips -->
+        <!-- 1. Language Chips -->
+        <div style="margin-bottom:10px;">
+          <div style="font-size:11.5px; font-weight:800; color:var(--text-dim); margin-bottom:6px; display:flex; align-items:center; gap:6px;">
+            <span>🌐 تصفية حسب اللغة:</span>
+            <span style="font-size:10.5px; color:var(--text-faint);">(اختر لغة المساق)</span>
+          </div>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;" id="lang-chips-container">
+            <button class="nav-pill active" onclick="setLangFilter('all', this)">الكل (100)</button>
+            <button class="nav-pill" onclick="setLangFilter('ar', this)">🇩🇿 العربية (20)</button>
+            <button class="nav-pill" onclick="setLangFilter('en', this)">🇬🇧 English (20)</button>
+            <button class="nav-pill" onclick="setLangFilter('fr', this)">🇫🇷 Français (18)</button>
+            <button class="nav-pill" onclick="setLangFilter('de', this)">🇩🇪 Deutsch (16)</button>
+            <button class="nav-pill" onclick="setLangFilter('es', this)">🇪🇸 Español (10)</button>
+            <button class="nav-pill" onclick="setLangFilter('other', this)">🌐 لغات أخرى (6)</button>
+            <button class="nav-pill" onclick="setLangFilter('tech', this)">💻 أدوات CAT و AI (10)</button>
+          </div>
+        </div>
+
+        <!-- 2. Category Chips -->
+        <div style="margin-bottom:12px;">
+          <div style="font-size:11.5px; font-weight:800; color:var(--text-dim); margin-bottom:6px; display:flex; align-items:center; gap:6px;">
+            <span>📂 تصفية حسب مجال التخصص:</span>
+          </div>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;" id="cat-chips-container">
+            <button class="nav-pill active" onclick="setCategoryFilter('all', this)">جميع التخصصات</button>
+            <button class="nav-pill" onclick="setCategoryFilter('booth', this)">🎙️ كابينة المؤتمرات والفورية</button>
+            <button class="nav-pill" onclick="setCategoryFilter('legal', this)">⚖️ الترجمة القانونية والمحلفة</button>
+            <button class="nav-pill" onclick="setCategoryFilter('medical', this)">🩺 الترجمة الطبية والدوائية</button>
+            <button class="nav-pill" onclick="setCategoryFilter('rozan', this)">📝 تقنيات روزان والتتابعية</button>
+            <button class="nav-pill" onclick="setCategoryFilter('subtitling', this)">🎬 ترجمة الشاشة والوسائط</button>
+            <button class="nav-pill" onclick="setCategoryFilter('shadowing', this)">🗣️ التظليل الصوتي والنطق</button>
+            <button class="nav-pill" onclick="setCategoryFilter('finance', this)">📊 المالية والاقتصادية</button>
+            <button class="nav-pill" onclick="setCategoryFilter('cat_tools', this)">🛠️ برمجيات CAT Tools</button>
+          </div>
+        </div>
+
+        <!-- 3. Access Level Filter & Results Counter -->
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; border-top:1px solid var(--border-line); border-bottom:1px solid var(--border-line); padding:10px 0; margin-bottom:18px;">
+          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+            <span style="font-size:12px; font-weight:700; color:var(--text-dim);">نوع الوصول:</span>
+            <button class="role-chip active" id="access-chip-all" style="padding:4px 10px; font-size:11.5px;" onclick="setAccessFilter('all')">الكل (100)</button>
+            <button class="role-chip" id="access-chip-free" style="padding:4px 10px; font-size:11.5px;" onclick="setAccessFilter('free')">🆓 مساقات مجانية</button>
+            <button class="role-chip" id="access-chip-premium" style="padding:4px 10px; font-size:11.5px; color:#d97706; border-color:#fde68a;" onclick="setAccessFilter('premium')">👑 مساقات بريميوم VIP 🔒</button>
+          </div>
+          <div style="font-size:12px; font-weight:800; color:var(--crimson);" id="academy-status-counter">
+            عرض 12 من أصل 100 فيديو تعليمي
+          </div>
         </div>
 
         <!-- Videos Grid -->
         <div class="courses-grid" id="academy-cards-container">
-          <!-- Populated via JS with real playable YouTube lessons -->
+          <!-- Populated dynamically via JS with all 100 educational lessons -->
         </div>
+
+        <!-- Pagination Controls -->
+        <div class="pagination-bar" id="academy-pagination">
+          <!-- Page buttons generated via JS -->
+        </div>
+
       </div>
     </div>
 
@@ -1530,34 +1731,51 @@
 
   <!-- 4. FOUNDER PROFILE MODAL (Djoudi Madani) -->
   <div id="founderModal" class="modal-backdrop">
-    <div class="modal-sheet">
+    <div class="modal-sheet" style="max-width:680px;">
       <div class="modal-close-x" onclick="closeModal('founderModal')">✕</div>
-      <div style="text-align:center; margin-bottom:16px;">
-        <div style="width:64px; height:64px; border-radius:50%; background:var(--crimson); color:white; font-size:24px; font-weight:900; display:flex; align-items:center; justify-content:center; margin:0 auto 10px;">
+      <div style="text-align:center; margin-bottom:18px;">
+        <div style="width:72px; height:72px; border-radius:50%; background:linear-gradient(135deg, var(--crimson), #991b1b); color:white; font-size:26px; font-weight:900; display:flex; align-items:center; justify-content:center; margin:0 auto 10px; border:3px solid #fff; box-shadow:0 4px 15px var(--crimson-glow);">
           JM
         </div>
-        <h3 style="font-size:18px; font-weight:900;">الأستاذ جودي مداني (Djoudi Madani)</h3>
-        <p style="font-size:12.5px; color:var(--crimson); font-weight:800;">مؤسس المنصة • مترجم مؤسساتي ومبرمج حلول تكنولوجية</p>
-      </div>
-
-      <div style="background:var(--bg-body); padding:16px; border-radius:12px; border:1px solid var(--border-line); font-size:13px; line-height:1.8; margin-bottom:14px;">
-        <p style="margin-bottom:10px;">
-          🎓 <strong>المؤهل العلمي:</strong> خريج معهد الترجمة بجامعة الجزائر 2 (Algiers 2 University - Institute of Translation).
-        </p>
-        <p style="margin-bottom:10px;">
-          📜 <strong>الشهادة العليا:</strong> حائز على شهادة <strong>ماستر 2 في الترجمة المؤسساتية (عربي - فرنسي - ألماني)</strong>.
-        </p>
-        <p style="margin-bottom:10px;">
-          💻 <strong>الخبرة التقنية والبرمجية:</strong> مبرمج ومطور لحلول تكنولوجية في مجالات متعددة، ومصمم معماريات رقمية لمنصات الترجمة والتدريب اللغوي.
-        </p>
-        <p>
-          🌐 <strong>الرسالة:</strong> تمكين طلبة الترجمة ومتعلمي اللغات بأحدث أدوات المحاكاة، وتوفير خدمات ترجمة مؤسساتية ومؤتمرات بأعلى درجات الدقة والاحترافية.
+        <h3 style="font-size:20px; font-weight:900; margin-bottom:4px;">سيرة الأستاذ جودي مداني (Djoudi Madani)</h3>
+        <p style="font-size:13px; color:var(--crimson); font-weight:800; margin:0;">
+          المؤسس والمدير العام لمنصة مجمع بوليلانغ الدولي • مترجم مؤسساتي ومبرمج حلول تكنولوجية
         </p>
       </div>
 
-      <button class="btn-primary-red" style="width:100%; justify-content:center;" onclick="openModal('orderModal')">
-        طلب استشارة أو ترجمة معتمدة مباشرة من الأستاذ جودي مداني
-      </button>
+      <div style="background:var(--bg-body); padding:18px; border-radius:12px; border:1px solid var(--border-line); font-size:13px; line-height:1.8; margin-bottom:16px;">
+        <div style="margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--border-line);">
+          <div style="font-weight:900; color:var(--crimson); margin-bottom:4px;">🎓 المؤهل الأكاديمي والشهادات العليا:</div>
+          <div>خريج معهد الترجمة - <strong>جامعة الجزائر 2</strong> (Algiers 2 University - Institute of Translation).</div>
+          <div>حائز على شهادة <strong>ماستر 2 في الترجمة المؤسساتية (Institutional Translation)</strong> تخصص ثلاثي اللغات: <strong>العربية ⇄ الفرنسية ⇄ الألمانية</strong>.</div>
+        </div>
+
+        <div style="margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--border-line);">
+          <div style="font-weight:900; color:var(--blue); margin-bottom:4px;">💻 الخبرة التقنية والبرمجية وحلول الـ IT:</div>
+          <div>مبرمج ومطور لحلول تكنولوجية متقدمة في مجالات متعددة، ومصمم معماريات رقمية سحابية.</div>
+          <div>متخصص في حوسبة اللغة الطبيعية (NLP)، تكامل أنظمة الذكاء الاصطناعي مع برمجيات الترجمة بمعونة الحاسوب (CAT Tools مثل Trados و MemoQ)، وتطوير منصات الترجمة المرئية السحابية.</div>
+        </div>
+
+        <div style="margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--border-line);">
+          <div style="font-weight:900; color:var(--gold); margin-bottom:4px;">🎙️ المسار المهني وكابينات المؤتمرات الدولية:</div>
+          <div>خبير في كابينات الترجمة الفورية للمؤتمرات الدولية والقمم الدبلوماسية، متخصص في إدارة الـ Décalage وتقنيات جان فرانسوا روزان (Rozan) في تدوين الملاحظات التتابعية.</div>
+          <div>إشراف وتدقيق مشاريع الترجمة القانونية المحلفة والمؤسساتية المطابقة للمواصفة القياسية العالمية <strong>ISO 17100:2015</strong>.</div>
+        </div>
+
+        <div>
+          <div style="font-weight:900; color:var(--green); margin-bottom:4px;">🌐 الرؤية والرسالة المؤسساتية:</div>
+          <div>تأسيس <strong>مجمع بوليلانغ (Polylang Hub)</strong> ليكون منصة متكاملة تحتضن طلبة الترجمة ومتعلمي اللغات لتطوير مهاراتهم عبر المحاكاة والماستركلاس، وفي نفس الوقت تزويد المؤسسات والأفراد بخدمات ترجمة معتمدة وفورية على أعلى مستوى من الدقة والموثوقية.</div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn-primary-red" style="flex:1; justify-content:center;" onclick="closeModal('founderModal'); openModal('orderModal');">
+          📄 طلب ترجمة أو استشارة معتمدة مباشرة من الأستاذ جودي مداني
+        </button>
+        <button class="btn-outline-action" onclick="closeModal('founderModal'); switchRole('enthusiast');">
+          🎓 استكشاف محاضرات الأكاديمية
+        </button>
+      </div>
     </div>
   </div>
 
@@ -1584,17 +1802,252 @@
     </div>
   </div>
 
-  <!-- 6. VIDEO PLAYER MODAL -->
+  <!-- 6. VIDEO PLAYER MODAL (Dual Engine: Embed + HTML5 Stream) -->
   <div id="videoModal" class="modal-backdrop">
-    <div class="modal-sheet" style="max-width:680px;">
+    <div class="modal-sheet" style="max-width:740px;">
       <div class="modal-close-x" onclick="closeVideoModal()">✕</div>
-      <h3 style="font-size:16px; font-weight:800; margin-bottom:10px;" id="modal-video-title">مشاهدة المحاضرة التدريبية</h3>
       
-      <div style="aspect-ratio:16/9; background:#000; border-radius:10px; overflow:hidden; margin-bottom:14px;">
+      <!-- Video Header -->
+      <div style="margin-bottom:12px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:4px;">
+          <div style="display:flex; align-items:center; gap:6px;">
+            <span class="badge-gold" id="modal-video-badge" style="font-size:10.5px;">🎓 ماستركلاس معتمد</span>
+            <span class="badge-iso-green" style="font-size:10.5px;">✓ ISO 17100</span>
+          </div>
+          <div style="display:flex; gap:6px;">
+            <button class="nav-pill active" id="btn-engine-embed" style="padding:3px 10px; font-size:11px;" onclick="switchVideoEngine('embed')">🌐 مشغل الويب</button>
+            <button class="nav-pill" id="btn-engine-mp4" style="padding:3px 10px; font-size:11px;" onclick="switchVideoEngine('mp4')">🎬 مشغل مباشر HTML5</button>
+          </div>
+        </div>
+        <h3 style="font-size:17px; font-weight:800; margin:0;" id="modal-video-title">مشاهدة المحاضرة التدريبية</h3>
+      </div>
+      
+      <!-- Video Screen Area -->
+      <div style="aspect-ratio:16/9; background:#000; border-radius:12px; overflow:hidden; margin-bottom:12px; position:relative; box-shadow:0 6px 20px rgba(0,0,0,0.3);">
         <iframe id="modal-video-iframe" style="width:100%; height:100%; border:none;" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+        <video id="modal-video-player" controls playsinline style="width:100%; height:100%; object-fit:contain; background:#000; display:none; position:absolute; top:0; left:0;">
+          <source id="modal-video-source" src="" type="video/mp4">
+        </video>
       </div>
 
-      <p style="font-size:12px; color:var(--text-dim); line-height:1.6;" id="modal-video-desc"></p>
+      <!-- Video Meta Details -->
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; background:var(--bg-body); padding:10px 14px; border-radius:8px; margin-bottom:10px; font-size:12px;">
+        <span style="font-weight:700;" id="modal-video-speaker">👤 المحاضر: الأستاذ جودي مداني</span>
+        <span style="color:var(--text-dim);" id="modal-video-duration">⏱️ 42:15 دقيقة</span>
+        <span style="color:var(--crimson); font-weight:700;" id="modal-video-level">📊 المستوى: متقدم</span>
+      </div>
+
+      <p style="font-size:12.5px; color:var(--text-dim); line-height:1.7; margin:0 0 14px;" id="modal-video-desc"></p>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; border-top:1px solid var(--border-line); padding-top:10px;">
+        <div style="font-size:11.5px; color:var(--text-faint);">✓ تشغيل مضمون 100% مع ميزة التبديل التلقائي بين المحركات</div>
+        <div style="display:flex; gap:8px;">
+          <button class="btn-outline-action" style="font-size:11.5px; padding:6px 12px;" onclick="closeVideoModal(); openModal('premiumSubModal');">👑 ترقية لـ VIP</button>
+          <button class="btn-primary-red" style="font-size:11.5px; padding:6px 14px;" onclick="closeVideoModal()">تمت المشاهدة ✓</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. HOLOGRAPHIC OPENING VIDEO & AI PRESENTER MODAL -->
+  <div id="hologramModal" class="modal-backdrop">
+    <div class="modal-sheet" style="max-width:760px; background:#070b13; color:#f1f5f9; border:1px solid rgba(0, 240, 255, 0.3); box-shadow:0 0 40px rgba(0, 240, 255, 0.2);">
+      <div class="modal-close-x" style="color:#00f0ff; background:rgba(0, 240, 255, 0.1);" onclick="closeHologramModal()">✕</div>
+      
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid rgba(0,240,255,0.2); padding-bottom:8px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#00f0ff; box-shadow:0 0 10px #00f0ff; animation:pulse-glow 1.5s infinite;"></span>
+          <span style="font-size:11px; font-family:monospace; color:#00f0ff; letter-spacing:1px; font-weight:700;">LIVE HOLOGRAPHIC STREAM • ISO 17100</span>
+        </div>
+        <div style="font-size:11px; color:#94a3b8; font-family:monospace;">POLYLANG HUB ENGINE 2026</div>
+      </div>
+
+      <h3 style="font-size:17px; font-weight:900; margin-bottom:8px; color:#ffffff; display:flex; align-items:center; gap:8px;">
+        <span>🤖</span> <span>العرض الهولوغرافي التفاعلي لمجمع بوليلانغ (Interactive AI Presenter)</span>
+      </h3>
+
+      <!-- Holographic Stage Area -->
+      <div style="position:relative; aspect-ratio:16/9; background:#020617; border-radius:12px; overflow:hidden; border:1px solid rgba(0,240,255,0.4); margin-bottom:14px; box-shadow:inset 0 0 30px rgba(0, 240, 255, 0.2);">
+        
+        <!-- Video Stream Player -->
+        <video id="hologram-video-player" playsinline loop style="width:100%; height:100%; object-fit:cover; opacity:0.85;">
+          <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" type="video/mp4">
+        </video>
+
+        <!-- Canvas Hologram HUD Visualizer Overlay -->
+        <canvas id="hologram-hud-canvas" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none;"></canvas>
+
+        <!-- Scanning Laser Line Overlay -->
+        <div class="hologram-scan-bar"></div>
+
+        <!-- System Telemetry Overlay Badges -->
+        <div style="position:absolute; top:12px; left:12px; background:rgba(2, 6, 23, 0.75); border:1px solid rgba(0,240,255,0.4); padding:4px 8px; border-radius:4px; font-family:monospace; font-size:10px; color:#38bdf8;">
+          <div>CORE: ACTIVE</div>
+          <div>FPS: 60 | LATENCY: 1.2ms</div>
+          <div>FOUNDER: DJOUDI MADANI</div>
+        </div>
+
+        <div style="position:absolute; top:12px; right:12px; background:rgba(2, 6, 23, 0.75); border:1px solid rgba(225,29,72,0.5); padding:4px 8px; border-radius:4px; font-family:monospace; font-size:10px; color:#f43f5e; text-align:right;">
+          <div>NEON DB: CONNECTED</div>
+          <div>AUDIO: 320 KBPS / 48kHz</div>
+          <div>STATUS: STREAMING</div>
+        </div>
+
+        <!-- Live Subtitles at Bottom of Hologram -->
+        <div style="position:absolute; bottom:12px; left:16px; right:16px; background:rgba(2,6,23,0.85); border:1px solid rgba(0,240,255,0.5); border-radius:8px; padding:8px 14px; text-align:center; font-size:13px; font-weight:700; color:#ffffff; text-shadow:0 2px 4px #000;" id="hologram-subtitle-text">
+          👋 مرحباً بكم في مجمع بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية بإشراف الأستاذ جودي مداني.
+        </div>
+      </div>
+
+      <!-- Hologram Controls & Language Speech Switcher -->
+      <div style="background:rgba(15,23,42,0.8); border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:12px; margin-bottom:12px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+          <span style="font-size:12px; font-weight:700; color:#38bdf8;">🌐 اختر لغة الترحيب الصوتي للهولوغرام:</span>
+          <div style="display:flex; gap:6px;">
+            <button class="btn-audio-sub" style="background:#0284c7; color:#fff;" onclick="playHologramSpeech('ar')">🇩🇿 العربية</button>
+            <button class="btn-audio-sub" style="background:#1e293b; color:#fff;" onclick="playHologramSpeech('en')">🇬🇧 English</button>
+            <button class="btn-audio-sub" style="background:#1e293b; color:#fff;" onclick="playHologramSpeech('fr')">🇫🇷 Français</button>
+            <button class="btn-audio-sub" style="background:#1e293b; color:#fff;" onclick="playHologramSpeech('de')">🇩🇪 Deutsch</button>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+          <div style="display:flex; gap:8px;">
+            <button class="btn-primary-red" style="background:linear-gradient(135deg, #00f0ff, #0284c7); color:#020617; font-weight:800; border:none; padding:6px 14px;" onclick="toggleHologramPlayback()">
+              <span id="hologram-play-icon">⏸️ إيقاف مؤقت</span>
+            </button>
+            <button class="btn-outline-action" style="border-color:#38bdf8; color:#38bdf8;" onclick="restartHologramStream()">
+              🔄 إعادة العرض
+            </button>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:#94a3b8;">
+            <span>🔊 الصوت:</span>
+            <input type="range" id="hologram-volume" min="0" max="1" step="0.05" value="0.8" oninput="changeHologramVolume(this.value)" style="width:80px;">
+            <button class="btn-outline-action" style="padding:4px 8px; font-size:11px;" onclick="toggleHologramMute()" id="hologram-mute-btn">كتم</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; font-size:11px; color:#64748b;">
+        <span>تم تصميم وبرمجة المحاكي الهولوغرافي بواسطة الأستاذ جودي مداني</span>
+        <button class="btn-outline-action" style="font-size:11px; padding:4px 10px; border-color:rgba(255,255,255,0.2);" onclick="switchRole('enthusiast'); closeHologramModal();">انتقل لمساقات الأكاديمية (100 فيديو) 🎓</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 9. PREMIUM SUBSCRIPTION MODAL -->
+  <div id="premiumSubModal" class="modal-backdrop">
+    <div class="modal-sheet" style="max-width:740px;">
+      <div class="modal-close-x" onclick="closeModal('premiumSubModal')">✕</div>
+      
+      <div style="text-align:center; margin-bottom:18px;">
+        <div style="display:inline-block; padding:4px 12px; border-radius:9999px; background:var(--gold-light); color:var(--gold); font-size:12px; font-weight:800; margin-bottom:6px;">
+          👑 POLYLANG ACADEMY VIP PASS
+        </div>
+        <h3 style="font-size:22px; font-weight:900; margin-bottom:4px;">ترقية الاشتراك للوصول غير المحدود (100 فيديو)</h3>
+        <p style="font-size:13px; color:var(--text-dim); max-width:540px; margin:0 auto;">
+          انضم إلى مجتمع مترجمي المؤتمرات والمحلفين. احصل على جميع المساقات الـ 100، قوالب العقود، والشهادات المعتمدة.
+        </p>
+      </div>
+
+      <!-- 3 Subscription Tiers -->
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-bottom:18px;">
+        
+        <!-- Tier 1: Student -->
+        <div style="border:1px solid var(--border-line); border-radius:12px; padding:16px; background:var(--bg-card); display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <div style="font-size:14px; font-weight:800; margin-bottom:4px;">باقة طالب الترجمة 🎓</div>
+            <div style="font-size:20px; font-weight:900; color:var(--crimson); margin-bottom:8px;">1,500 د.ج <span style="font-size:12px; color:var(--text-dim); font-weight:normal;">/ شهرياً</span></div>
+            <ul style="font-size:11.5px; color:var(--text-dim); line-height:1.7; padding-right:16px; margin-bottom:12px;">
+              <li>الوصول الكامل لـ 100 فيديو تعليمي</li>
+              <li>تمارين نظام روزان لتدوين الملاحظات</li>
+              <li>بنك مصطلحات قانونية وطبية</li>
+              <li>شهادة إتمام معتمدة بعد كل مساق</li>
+            </ul>
+          </div>
+          <button class="btn-outline-action" style="width:100%; justify-content:center;" onclick="selectSubscriptionPlan('student', 1500)">
+            اختيار باقة الطالب
+          </button>
+        </div>
+
+        <!-- Tier 2: Pro (Recommended) -->
+        <div style="border:2px solid var(--crimson); border-radius:12px; padding:16px; background:var(--crimson-light); display:flex; flex-direction:column; justify-content:space-between; position:relative; box-shadow:0 4px 20px var(--crimson-glow);">
+          <div style="position:absolute; top:-10px; right:16px; background:var(--crimson); color:#fff; font-size:10.5px; font-weight:800; padding:2px 8px; border-radius:6px;">
+            الأكثر اختياراً ⭐
+          </div>
+          <div>
+            <div style="font-size:14px; font-weight:800; margin-bottom:4px;">باقة المترجم المحترف 🎙️</div>
+            <div style="font-size:20px; font-weight:900; color:var(--crimson-dark); margin-bottom:8px;">3,500 د.ج <span style="font-size:12px; color:var(--text-dim); font-weight:normal;">/ شهرياً</span></div>
+            <ul style="font-size:11.5px; color:var(--text-main); line-height:1.7; padding-right:16px; margin-bottom:12px;">
+              <li>كل ميزات باقة الطالب</li>
+              <li>جلسة مراجعة شهرية مع الأستاذ جودي مداني</li>
+              <li>قوالب Trados و MemoQ وذاكرات TM حصرية</li>
+              <li>محاكي كابينات المؤتمرات والـ Décalage المتقدم</li>
+            </ul>
+          </div>
+          <button class="btn-primary-red" style="width:100%; justify-content:center;" onclick="selectSubscriptionPlan('pro', 3500)">
+            الاشتراك في باقة المحترف 🚀
+          </button>
+        </div>
+
+        <!-- Tier 3: Enterprise -->
+        <div style="border:1px solid var(--border-line); border-radius:12px; padding:16px; background:var(--bg-card); display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <div style="font-size:14px; font-weight:800; margin-bottom:4px;">الباقة المؤسساتية السنوية 🏛️</div>
+            <div style="font-size:20px; font-weight:900; color:var(--green); margin-bottom:8px;">18,000 د.ج <span style="font-size:12px; color:var(--text-dim); font-weight:normal;">/ سنوياً</span></div>
+            <ul style="font-size:11.5px; color:var(--text-dim); line-height:1.7; padding-right:16px; margin-bottom:12px;">
+              <li>ترخيص كامل لـ 5 حسابات تدريبية</li>
+              <li>ورشة عمل تدريبية حضورية أو افتراضية</li>
+              <li>تخصيص مسارد قطاع النفط والطاقة والقانون</li>
+              <li>دعم فني واستشاري ذو أولوية 24/7</li>
+            </ul>
+          </div>
+          <button class="btn-outline-action" style="width:100%; justify-content:center;" onclick="selectSubscriptionPlan('enterprise', 18000)">
+            اختيار الباقة المؤسساتية
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Payment Gateways Options -->
+      <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:12px; padding:14px; margin-bottom:14px;">
+        <div style="font-size:12.5px; font-weight:800; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
+          <span>💳</span> <span>طرق الدفع الإلكتروني والتحويل المتاحة بالدينار الجزائري والدولي:</span>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px;">
+          <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; background:var(--bg-card); padding:6px 10px; border-radius:6px; border:1px solid var(--border-line);">
+            <input type="radio" name="pay_gateway" value="edahabia" checked> 💳 البطاقة الذهبية (Edahabia)
+          </label>
+          <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; background:var(--bg-card); padding:6px 10px; border-radius:6px; border:1px solid var(--border-line);">
+            <input type="radio" name="pay_gateway" value="baridimob"> 📱 بريدي موب (BaridiMob)
+          </label>
+          <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; background:var(--bg-card); padding:6px 10px; border-radius:6px; border:1px solid var(--border-line);">
+            <input type="radio" name="pay_gateway" value="cib"> 💳 بطاقة CIB البنكية
+          </label>
+          <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; background:var(--bg-card); padding:6px 10px; border-radius:6px; border:1px solid var(--border-line);">
+            <input type="radio" name="pay_gateway" value="visa"> 🌍 Visa / MasterCard
+          </label>
+        </div>
+
+        <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+          <input type="text" id="promo-code-input" class="form-control" style="flex:1; min-width:180px; font-size:12px;" placeholder="هل لديك كود خصم VIP؟ (جرب: MADANI2026)">
+          <button class="btn-outline-action" style="font-size:12px; padding:8px 14px;" onclick="applyVipPromoCode()">
+            تفعيل الكود 🏷️
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Instant 7-Day Trial / Review Activation -->
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+        <button class="btn-primary-red" style="background:linear-gradient(135deg, #10b981, #059669); border:none; padding:10px 18px;" onclick="activateInstantFreeTrial()">
+          ⚡ تفعيل اشتراك تجريبي فوري (7 أيام مجاناً بكبسة واحدة)
+        </button>
+        <span style="font-size:11.5px; color:var(--text-faint);">
+          ضمان استرجاع الأموال 100% خلال 14 يوماً
+        </span>
+      </div>
+
     </div>
   </div>
 
@@ -1773,85 +2226,547 @@
       document.getElementById('active-role-title').textContent = titles[role] || "Portal";
     }
 
-    // Academy Videos Data (Universal Working YouTube Embed IDs)
-    const academyVideos = [
-      {
-        id: "MMmOLN5zBLY",
-        title: "The Bilingual Brain: المعالجة المتوازية في الترجمة الفورية",
-        speaker: "Mia Nacamulli (TED-Ed)",
-        category: "booth",
-        desc: "شرح علمي لكيفية إدارة الدماغ ثنائي اللغة للتحويل اللحظي بين اللغات تحت ضغط كابينة المؤتمرات."
-      },
-      {
-        id: "o_XVt5rdpFY",
-        title: "How Language Shapes the Way We Think: اللسانيات المعرفية",
-        speaker: "Lera Boroditsky (Cognitive Scientist)",
-        category: "legal",
-        desc: "دراسة معمقة في البنية اللغوية وصياغة العقود القانونية والمسؤولية اللغوية بين اللغات."
-      },
-      {
-        id: "d0yGdNEWdn0",
-        title: "Secrets of Learning a New Language: التظليل الصوتي (Shadowing)",
-        speaker: "Lýdia Machová (Senior Interpreter)",
-        category: "shadowing",
-        desc: "استراتيجيات اكتساب الطلاقة السريعة ورد الفعل اللحظي وتقليل الفارق الزمني (Décalage)."
-      },
-      {
-        id: "eIho2S0ZahI",
-        title: "How to Speak so that People Want to Listen: النبرة والصوت",
-        speaker: "Julian Treasure (Sound Consultant)",
-        category: "booth",
-        desc: "هندسة الصوت والرنين الصدري الدبلوماسي لمترجمي المؤتمرات والقمم الدولية."
-      }
-    ];
+    // ==========================================
+    // 100 EDUCATIONAL VIDEOS ENGINE & MONETIZATION
+    // ==========================================
+    let isUserVip = localStorage.getItem('polylang_vip_user') === 'true';
+    let currentAcademyPage = 1;
+    const ACADEMY_ITEMS_PER_PAGE = 12;
 
-    function renderAcademyCards(list = academyVideos) {
+    let selectedLangFilter = 'all';
+    let selectedCatFilter = 'all';
+    let selectedAccessFilter = 'all';
+    let currentFilteredVideos = [];
+
+    function getAllAcademyVideos() {
+      if (window.ACADEMY_100_VIDEOS && Array.isArray(window.ACADEMY_100_VIDEOS) && window.ACADEMY_100_VIDEOS.length > 0) {
+        return window.ACADEMY_100_VIDEOS;
+      }
+      return [
+        {
+          id: "MMmOLN5zBLY",
+          title: "The Bilingual Brain: المعالجة المتوازية في الترجمة الفورية",
+          speaker: "الأستاذ جودي مداني / Mia Nacamulli",
+          category: "booth",
+          lang: "العربية",
+          level: "متقدم",
+          duration: "28:40",
+          isPremium: false,
+          desc: "شرح علمي لكيفية إدارة الدماغ ثنائي اللغة للتحويل اللحظي بين اللغات تحت ضغط كابينة المؤتمرات."
+        }
+      ];
+    }
+
+    function handleAcademyFilterChange() {
+      currentAcademyPage = 1;
+      applyAcademyFilters();
+    }
+
+    function setLangFilter(lang, btn) {
+      selectedLangFilter = lang;
+      if (btn && btn.parentElement) {
+        btn.parentElement.querySelectorAll('.nav-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+      currentAcademyPage = 1;
+      applyAcademyFilters();
+    }
+
+    function setCategoryFilter(cat, btn) {
+      selectedCatFilter = cat;
+      if (btn && btn.parentElement) {
+        btn.parentElement.querySelectorAll('.nav-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+      currentAcademyPage = 1;
+      applyAcademyFilters();
+    }
+
+    function setAccessFilter(access) {
+      selectedAccessFilter = access;
+      ['all', 'free', 'premium'].forEach(a => {
+        const el = document.getElementById(`access-chip-${a}`);
+        if (el) el.classList.toggle('active', a === access);
+      });
+      currentAcademyPage = 1;
+      applyAcademyFilters();
+    }
+
+    function applyAcademyFilters() {
+      const all = getAllAcademyVideos();
+      const searchInput = document.getElementById('academy-search');
+      const q = searchInput ? searchInput.value.trim().toLowerCase() : '';
+      const levelEl = document.getElementById('academy-level-filter');
+      const level = levelEl ? levelEl.value : 'all';
+
+      currentFilteredVideos = all.filter(item => {
+        // Search query
+        if (q) {
+          const matchTitle = (item.title || '').toLowerCase().includes(q);
+          const matchDesc = (item.desc || '').toLowerCase().includes(q);
+          const matchSpeaker = (item.speaker || '').toLowerCase().includes(q);
+          const matchLang = (item.lang || '').toLowerCase().includes(q);
+          const matchTags = Array.isArray(item.tags) && item.tags.some(t => t.toLowerCase().includes(q));
+          if (!matchTitle && !matchDesc && !matchSpeaker && !matchLang && !matchTags) return false;
+        }
+
+        // Language
+        if (selectedLangFilter !== 'all') {
+          const itemLang = (item.language || '').toLowerCase();
+          const itemLabel = (item.langLabel || item.lang || '').toLowerCase();
+          if (selectedLangFilter === 'ar' && itemLang !== 'ar' && !itemLabel.includes('عربي')) return false;
+          if (selectedLangFilter === 'en' && itemLang !== 'en' && !itemLabel.includes('إنجليز') && !itemLabel.includes('english')) return false;
+          if (selectedLangFilter === 'fr' && itemLang !== 'fr' && !itemLabel.includes('فرنس') && !itemLabel.includes('français')) return false;
+          if (selectedLangFilter === 'de' && itemLang !== 'de' && !itemLabel.includes('ألمان') && !itemLabel.includes('deutsch')) return false;
+          if (selectedLangFilter === 'es' && itemLang !== 'es' && !itemLabel.includes('إسبان') && !itemLabel.includes('español')) return false;
+          if (selectedLangFilter === 'other' && (itemLang === 'ar' || itemLang === 'en' || itemLang === 'fr' || itemLang === 'de' || itemLang === 'es' || itemLang === 'tech')) return false;
+          if (selectedLangFilter === 'tech' && itemLang !== 'tech' && item.category !== 'cat_tools') return false;
+        }
+
+        // Category
+        if (selectedCatFilter !== 'all') {
+          if (item.category !== selectedCatFilter) return false;
+        }
+
+        // Access (Free vs Premium)
+        if (selectedAccessFilter === 'free' && item.isPremium) return false;
+        if (selectedAccessFilter === 'premium' && !item.isPremium) return false;
+
+        // Level
+        if (level !== 'all' && item.level !== level) return false;
+
+        return true;
+      });
+
+      renderAcademyCards();
+    }
+
+    function renderAcademyCards() {
       const container = document.getElementById('academy-cards-container');
+      const counterEl = document.getElementById('academy-status-counter');
+      const paginationEl = document.getElementById('academy-pagination');
+      if (!container) return;
+
       container.innerHTML = '';
-      list.forEach(item => {
+      const total = currentFilteredVideos.length;
+      const totalPages = Math.max(1, Math.ceil(total / ACADEMY_ITEMS_PER_PAGE));
+      if (currentAcademyPage > totalPages) currentAcademyPage = totalPages;
+
+      const startIndex = (currentAcademyPage - 1) * ACADEMY_ITEMS_PER_PAGE;
+      const endIndex = Math.min(total, startIndex + ACADEMY_ITEMS_PER_PAGE);
+      const pageItems = currentFilteredVideos.slice(startIndex, endIndex);
+
+      if (counterEl) {
+        counterEl.textContent = `عرض ${total > 0 ? (startIndex + 1) + '-' + endIndex : 0} من أصل ${total} فيديو تعليمي (المجموع الكلي: 100 فيديو)`;
+      }
+
+      if (pageItems.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column:1/-1; text-align:center; padding:40px 20px; background:var(--bg-body); border-radius:12px; border:1px dashed var(--border-line);">
+            <div style="font-size:36px; margin-bottom:8px;">🔍</div>
+            <h4 style="font-size:16px; font-weight:800; margin-bottom:6px;">لم يتم العثور على مساقات تطابق الفلاتر المحددة</h4>
+            <p style="font-size:12.5px; color:var(--text-dim); margin-bottom:12px;">جرب تغيير مصطلح البحث أو اختيار لغة وتخصص آخر.</p>
+            <button class="btn-outline-action" onclick="resetAcademyFilters()">إعادة ضبط الفلاتر 🔄</button>
+          </div>
+        `;
+        if (paginationEl) paginationEl.innerHTML = '';
+        return;
+      }
+
+      pageItems.forEach(item => {
         const card = document.createElement('div');
         card.className = 'course-card';
+        card.style.display = 'flex';
+        card.style.flexDirection = 'column';
+        card.style.justifyContent = 'space-between';
+
+        const isLocked = item.isPremium && !isUserVip;
+        const badgeColor = isLocked ? '#f59e0b' : '#10b981';
+        const badgeText = isLocked ? '👑 VIP بريميوم 🔒' : '🆓 متاح مجاناً';
+
         card.innerHTML = `
           <div>
-            <div class="course-thumb-box" onclick="openVideoPlayer('${item.id}', '${item.title}', '${item.desc}')" style="cursor:pointer;">
-              <img src="https://img.youtube.com/vi/${item.id}/hqdefault.jpg" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'">
-              <div class="video-play-btn-circle" style="width:44px; height:44px; font-size:18px;">▶</div>
+            <div class="course-thumb-box" onclick="handleCardVideoClick('${item.id}')" style="cursor:pointer; position:relative; overflow:hidden; border-radius:8px;">
+              <img src="https://img.youtube.com/vi/${item.id}/hqdefault.jpg" style="width:100%; height:100%; object-fit:cover; transition:transform 0.2s;" onerror="this.src='polylang_logo.jpg'">
+              
+              <!-- Badges on Thumbnail -->
+              <div style="position:absolute; top:8px; right:8px; display:flex; flex-direction:column; gap:4px; z-index:2;">
+                <span style="background:${badgeColor}; color:#fff; font-size:10px; font-weight:900; padding:2px 8px; border-radius:4px; box-shadow:0 2px 6px rgba(0,0,0,0.3);">
+                  ${badgeText}
+                </span>
+              </div>
+
+              <div style="position:absolute; bottom:8px; left:8px; background:rgba(0,0,0,0.75); color:#fff; font-size:10.5px; font-weight:700; padding:2px 6px; border-radius:4px; font-family:monospace; z-index:2;">
+                ⏱️ ${item.duration || '35:00'}
+              </div>
+
+              <div style="position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.75); color:#38bdf8; font-size:10.5px; font-weight:700; padding:2px 6px; border-radius:4px; z-index:2;">
+                ${item.langLabel || item.lang || 'العربية'}
+              </div>
+
+              <div class="video-play-btn-circle" style="width:46px; height:46px; font-size:18px; ${isLocked ? 'background:rgba(217,119,6,0.9);' : ''}">
+                ${isLocked ? '🔒' : '▶'}
+              </div>
             </div>
-            <h4>${item.title}</h4>
-            <p>${item.desc}</p>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px; margin-bottom:6px;">
+              <span style="font-size:11px; font-weight:800; color:var(--crimson);">${item.categoryLabel || item.categoryText || item.category || 'ماستركلاس'}</span>
+              <span style="font-size:10.5px; color:var(--text-dim); background:var(--bg-body); padding:2px 6px; border-radius:4px;">${item.level || 'متوسط'}</span>
+            </div>
+
+            <h4 style="font-size:14px; font-weight:800; line-height:1.4; margin:0 0 6px; color:var(--text-main);">${item.title}</h4>
+            <p style="font-size:12px; color:var(--text-dim); line-height:1.5; margin:0 0 12px; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;">
+              ${item.desc}
+            </p>
           </div>
-          <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-line); padding-top:10px;">
-            <span style="font-size:11px; color:var(--text-faint);">👤 ${item.speaker}</span>
-            <button class="btn-primary-red" style="padding:4px 10px; font-size:11.5px;" onclick="openVideoPlayer('${item.id}', '${item.title}', '${item.desc}')">
-              مشاهدة الآن ▶
+
+          <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-line); padding-top:10px; margin-top:8px;">
+            <div style="font-size:11px; color:var(--text-faint); max-width:140px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+              👤 ${item.speaker}
+            </div>
+            <button class="${isLocked ? 'btn-outline-action' : 'btn-primary-red'}" style="padding:5px 12px; font-size:11.5px; ${isLocked ? 'border-color:#f59e0b; color:#d97706;' : ''}" onclick="handleCardVideoClick('${item.id}')">
+              ${isLocked ? 'فتح بـ VIP 🔒' : 'مشاهدة الآن ▶'}
             </button>
           </div>
         `;
         container.appendChild(card);
       });
+
+      // Render Pagination
+      if (paginationEl) {
+        paginationEl.innerHTML = '';
+        if (totalPages > 1) {
+          // Prev button
+          const prevBtn = document.createElement('button');
+          prevBtn.className = 'page-btn';
+          prevBtn.innerHTML = '‹';
+          prevBtn.disabled = currentAcademyPage === 1;
+          prevBtn.onclick = () => { if (currentAcademyPage > 1) { currentAcademyPage--; renderAcademyCards(); window.scrollTo({ top: document.getElementById('view-enthusiast').offsetTop - 60, behavior: 'smooth' }); } };
+          paginationEl.appendChild(prevBtn);
+
+          // Numeric page buttons
+          for (let p = 1; p <= totalPages; p++) {
+            if (p === 1 || p === totalPages || (p >= currentAcademyPage - 1 && p <= currentAcademyPage + 1)) {
+              const pBtn = document.createElement('button');
+              pBtn.className = 'page-btn' + (p === currentAcademyPage ? ' active' : '');
+              pBtn.textContent = p;
+              pBtn.onclick = () => {
+                currentAcademyPage = p;
+                renderAcademyCards();
+                window.scrollTo({ top: document.getElementById('view-enthusiast').offsetTop - 60, behavior: 'smooth' });
+              };
+              paginationEl.appendChild(pBtn);
+            } else if (p === currentAcademyPage - 2 || p === currentAcademyPage + 2) {
+              const dots = document.createElement('span');
+              dots.style.padding = '0 4px';
+              dots.style.color = 'var(--text-dim)';
+              dots.textContent = '...';
+              paginationEl.appendChild(dots);
+            }
+          }
+
+          // Next button
+          const nextBtn = document.createElement('button');
+          nextBtn.className = 'page-btn';
+          nextBtn.innerHTML = '›';
+          nextBtn.disabled = currentAcademyPage === totalPages;
+          nextBtn.onclick = () => { if (currentAcademyPage < totalPages) { currentAcademyPage++; renderAcademyCards(); window.scrollTo({ top: document.getElementById('view-enthusiast').offsetTop - 60, behavior: 'smooth' }); } };
+          paginationEl.appendChild(nextBtn);
+        }
+      }
     }
 
-    function filterAcademyVideos() {
-      const q = document.getElementById('academy-search').value.toLowerCase();
-      const filtered = academyVideos.filter(v => v.title.toLowerCase().includes(q) || v.desc.toLowerCase().includes(q) || v.speaker.toLowerCase().includes(q));
-      renderAcademyCards(filtered);
+    function resetAcademyFilters() {
+      const search = document.getElementById('academy-search');
+      if (search) search.value = '';
+      const level = document.getElementById('academy-level-filter');
+      if (level) level.value = 'all';
+      selectedLangFilter = 'all';
+      selectedCatFilter = 'all';
+      selectedAccessFilter = 'all';
+      currentAcademyPage = 1;
+
+      document.querySelectorAll('#lang-chips-container .nav-pill').forEach((b, i) => b.classList.toggle('active', i === 0));
+      document.querySelectorAll('#cat-chips-container .nav-pill').forEach((b, i) => b.classList.toggle('active', i === 0));
+      ['all', 'free', 'premium'].forEach(a => {
+        const el = document.getElementById(`access-chip-${a}`);
+        if (el) el.classList.toggle('active', a === 'all');
+      });
+
+      applyAcademyFilters();
     }
 
-    function filterCategory(cat) {
-      if (cat === 'all') renderAcademyCards(academyVideos);
-      else renderAcademyCards(academyVideos.filter(v => v.category === cat));
+    function handleCardVideoClick(id) {
+      const all = getAllAcademyVideos();
+      const item = all.find(v => v.id === id);
+      if (!item) return;
+
+      if (item.isPremium && !isUserVip) {
+        alert(`👑 هذه المحاضرة تتبع باقة الماستركلاس بريميوم VIP:\n"${item.title}"\n\nيرجى ترقية اشتراكك أو تفعيل الـ 7 أيام التجريبية المجانية لفتح الوصول الفوري لجميع الـ 100 فيديو.`);
+        openModal('premiumSubModal');
+        return;
+      }
+
+      openVideoPlayer(item);
     }
 
-    function openVideoPlayer(id, title, desc) {
-      document.getElementById('modal-video-title').textContent = title;
-      document.getElementById('modal-video-desc').textContent = desc;
-      document.getElementById('modal-video-iframe').src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1`;
+    let activeVideoItem = null;
+    let currentVideoEngine = 'embed';
+
+    function openVideoPlayer(item) {
+      if (typeof item === 'string') {
+        const all = getAllAcademyVideos();
+        item = all.find(v => v.id === item) || { id: item, title: "محاضرة تدريبية", desc: "", speaker: "الأستاذ جودي مداني", duration: "30:00", level: "متوسط", isPremium: false };
+      }
+      activeVideoItem = item;
+
+      document.getElementById('modal-video-title').textContent = item.title;
+      document.getElementById('modal-video-desc').textContent = item.desc;
+      document.getElementById('modal-video-speaker').textContent = `👤 المحاضر: ${item.speaker || 'الأستاذ جودي مداني'}`;
+      document.getElementById('modal-video-duration').textContent = `⏱️ ${item.duration || '40:00'}`;
+      document.getElementById('modal-video-level').textContent = `📊 المستوى: ${item.level || 'متوسط'}`;
+      
+      const badge = document.getElementById('modal-video-badge');
+      if (badge) {
+        badge.textContent = item.isPremium ? '👑 مساق VIP معتمد' : '🎓 ماستركلاس معتمد';
+      }
+
+      // Default to embed engine
+      switchVideoEngine('embed');
       openModal('videoModal');
     }
 
+    function switchVideoEngine(engine) {
+      currentVideoEngine = engine;
+      const iframe = document.getElementById('modal-video-iframe');
+      const player = document.getElementById('modal-video-player');
+      const source = document.getElementById('modal-video-source');
+      const btnEmbed = document.getElementById('btn-engine-embed');
+      const btnMp4 = document.getElementById('btn-engine-mp4');
+
+      if (btnEmbed) btnEmbed.classList.toggle('active', engine === 'embed');
+      if (btnMp4) btnMp4.classList.toggle('active', engine === 'mp4');
+
+      if (!activeVideoItem) return;
+
+      if (engine === 'embed') {
+        player.pause();
+        player.style.display = 'none';
+        iframe.style.display = 'block';
+        iframe.src = `https://www.youtube-nocookie.com/embed/${activeVideoItem.id}?autoplay=1&rel=0&enablejsapi=1`;
+      } else {
+        iframe.src = '';
+        iframe.style.display = 'none';
+        player.style.display = 'block';
+        source.src = activeVideoItem.videoUrl || "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4";
+        player.load();
+        player.play().catch(e => console.log("Player autoplay prevented:", e));
+      }
+    }
+
     function closeVideoModal() {
-      document.getElementById('modal-video-iframe').src = '';
+      const iframe = document.getElementById('modal-video-iframe');
+      const player = document.getElementById('modal-video-player');
+      if (iframe) iframe.src = '';
+      if (player) {
+        player.pause();
+        player.style.display = 'none';
+      }
       closeModal('videoModal');
+    }
+
+    // ==========================================
+    // SUBSCRIPTION & VIP PASS CONTROLS
+    // ==========================================
+    function selectSubscriptionPlan(planTier, priceDzd) {
+      localStorage.setItem('polylang_vip_user', 'true');
+      isUserVip = true;
+      closeModal('premiumSubModal');
+      renderAcademyCards();
+      alert(`🎉 مبروك! تم تفعيل باقة الاشتراك (${planTier === 'pro' ? 'المترجم المحترف' : planTier === 'student' ? 'طالب الترجمة' : 'الباقة المؤسساتية'}) بنجاح.\nالقيمة: ${formatCurrency(priceDzd)}\nتم فتح الوصول الشامل لجميع الـ 100 فيديو تعليمي وشهادات الإتمام.`);
+    }
+
+    function applyVipPromoCode() {
+      const codeInput = document.getElementById('promo-code-input');
+      const code = codeInput ? codeInput.value.trim().toUpperCase() : '';
+      if (!code) {
+        alert("يرجى إدخال رمز الخصم أو الـ VIP.");
+        return;
+      }
+      if (code.includes("MADANI") || code.includes("POLYLANG") || code.includes("VIP") || code === "FREE2026") {
+        localStorage.setItem('polylang_vip_user', 'true');
+        isUserVip = true;
+        closeModal('premiumSubModal');
+        renderAcademyCards();
+        alert(`👑 تم قبول رمز الخصم الحصري [${code}] بنجاح!\nتم منحك اشتراك VIP مجاني بنسبة 100% بإهداء من الأستاذ جودي مداني.`);
+      } else {
+        alert("عذراً، هذا الرمز غير صالح أو انتهت صلاحيته. يمكنك تجربة الرمز: MADANI2026");
+      }
+    }
+
+    function activateInstantFreeTrial() {
+      localStorage.setItem('polylang_vip_user', 'true');
+      isUserVip = true;
+      closeModal('premiumSubModal');
+      renderAcademyCards();
+      alert("⚡ رائع! تم تفعيل الاشتراك التجريبي المجاني لمدة 7 أيام بنجاح بدون الحاجة لبطاقة دفع.\nجميع المساقات الـ 100 مفتوحة الآن لمشاهدتها بكامل الميزات!");
+    }
+
+    // ==========================================
+    // HOLOGRAPHIC 3D OPENING VIDEO & PRESENTER CONTROLLER
+    // ==========================================
+    let hologramAnimFrame = null;
+    let isHologramMuted = false;
+
+    function openHologramModal() {
+      const modal = document.getElementById('hologramModal');
+      if (!modal) return;
+      openModal('hologramModal');
+
+      const video = document.getElementById('hologram-video-player');
+      if (video) {
+        video.muted = isHologramMuted;
+        video.currentTime = 0;
+        video.play().catch(e => {
+          console.log("Hologram video autoplay prevented:", e);
+        });
+      }
+
+      startHologramHudVisualizer();
+      playHologramSpeech('ar');
+    }
+
+    function closeHologramModal() {
+      const video = document.getElementById('hologram-video-player');
+      if (video) video.pause();
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      if (hologramAnimFrame) {
+        cancelAnimationFrame(hologramAnimFrame);
+        hologramAnimFrame = null;
+      }
+      closeModal('hologramModal');
+    }
+
+    function toggleHologramPlayback() {
+      const video = document.getElementById('hologram-video-player');
+      const icon = document.getElementById('hologram-play-icon');
+      if (!video) return;
+      if (video.paused) {
+        video.play();
+        if (icon) icon.textContent = "⏸️ إيقاف مؤقت";
+      } else {
+        video.pause();
+        if (icon) icon.textContent = "▶️ تشغيل العرض";
+      }
+    }
+
+    function restartHologramStream() {
+      const video = document.getElementById('hologram-video-player');
+      if (video) {
+        video.currentTime = 0;
+        video.play();
+      }
+      playHologramSpeech('ar');
+    }
+
+    function changeHologramVolume(val) {
+      const video = document.getElementById('hologram-video-player');
+      if (video) {
+        video.volume = parseFloat(val);
+        if (video.volume > 0 && video.muted) video.muted = false;
+      }
+    }
+
+    function toggleHologramMute() {
+      const video = document.getElementById('hologram-video-player');
+      const btn = document.getElementById('hologram-mute-btn');
+      if (!video) return;
+      isHologramMuted = !isHologramMuted;
+      video.muted = isHologramMuted;
+      if (btn) btn.textContent = isHologramMuted ? "إلغاء الكتم 🔊" : "كتم 🔇";
+    }
+
+    function playHologramSpeech(lang) {
+      const subEl = document.getElementById('hologram-subtitle-text');
+      let speechText = "مرحباً بكم في مجمع بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية بإشراف الأستاذ جودي مداني.";
+      let voiceCode = "ar-SA";
+
+      if (lang === 'en') {
+        speechText = "Welcome to Polylang Hub for certified translation and international conferences, supervised by Mr. Djoudi Madani.";
+        voiceCode = "en-US";
+      } else if (lang === 'fr') {
+        speechText = "Bienvenue au complexe Polylang de traduction assermentée et conférences internationales, sous la direction de M. Djoudi Madani.";
+        voiceCode = "fr-FR";
+      } else if (lang === 'de') {
+        speechText = "Willkommen bei Polylang Hub für beglaubigte Übersetzung und internationale Konferenzen unter der Leitung von Herrn Djoudi Madani.";
+        voiceCode = "de-DE";
+      }
+
+      if (subEl) subEl.textContent = `👋 ${speechText}`;
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(speechText);
+        utter.lang = voiceCode;
+        utter.rate = 0.95;
+        window.speechSynthesis.speak(utter);
+      }
+    }
+
+    function startHologramHudVisualizer() {
+      const canvas = document.getElementById('hologram-hud-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      canvas.width = canvas.offsetWidth || 640;
+      canvas.height = canvas.offsetHeight || 360;
+
+      let tick = 0;
+
+      function renderFrame() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Circular Radar in corner
+        const cx = canvas.width - 50;
+        const cy = 50;
+        ctx.strokeStyle = "rgba(0, 240, 255, 0.4)";
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.arc(cx, cy, 28, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(cx, cy, 14, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Sweeping radar beam
+        const angle = (tick * 0.05) % (Math.PI * 2);
+        ctx.strokeStyle = "#00f0ff";
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + Math.cos(angle) * 28, cy + Math.sin(angle) * 28);
+        ctx.stroke();
+
+        // Audio Frequency Equalizer Waves at bottom
+        const bars = 24;
+        const barW = 4;
+        const spacing = 4;
+        const startX = 20;
+        const baseY = canvas.height - 40;
+
+        ctx.fillStyle = "rgba(0, 240, 255, 0.7)";
+        for (let i = 0; i < bars; i++) {
+          const h = Math.abs(Math.sin(tick * 0.1 + i * 0.4)) * 25 + 4;
+          ctx.fillRect(startX + i * (barW + spacing), baseY - h, barW, h);
+        }
+
+        tick++;
+        hologramAnimFrame = requestAnimationFrame(renderFrame);
+      }
+
+      if (hologramAnimFrame) cancelAnimationFrame(hologramAnimFrame);
+      hologramAnimFrame = requestAnimationFrame(renderFrame);
     }
 
     // SRT Studio Data & Persistence Functions
@@ -2553,7 +3468,7 @@
     }
 
     function playIntroVideoOrAudio() {
-      speakGreeting(currentLang);
+      openHologramModal();
     }
 
     // 432Hz Binaural Sound Synthesizer
@@ -2693,7 +3608,7 @@
     window.addEventListener('DOMContentLoaded', () => {
       recalcQuote();
       renderOrdersTable();
-      renderAcademyCards();
+      applyAcademyFilters();
       initSrtStudio();
     });
   </script>
