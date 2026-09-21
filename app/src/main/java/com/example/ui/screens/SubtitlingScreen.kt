@@ -1,5 +1,6 @@
 package com.example.ui.screens
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -14,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -23,6 +25,63 @@ import com.example.SrtCue
 import com.example.ui.theme.GoldYellow
 import com.example.ui.theme.RedPrimary
 import com.example.ui.theme.SuccessGreen
+import org.json.JSONArray
+import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+
+private const val PREFS_NAME = "polylang_srt_prefs"
+private const val KEY_SRT_DRAFT = "saved_srt_draft"
+private const val KEY_SRT_TIME = "saved_srt_time"
+
+private fun saveCuesToDraft(context: Context, cues: List<SrtCue>) {
+    try {
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val arr = JSONArray()
+        for (cue in cues) {
+            val obj = JSONObject()
+            obj.put("id", cue.id)
+            obj.put("start", cue.start)
+            obj.put("end", cue.end)
+            obj.put("sourceText", cue.sourceText)
+            obj.put("subtitleText", cue.subtitleText)
+            arr.put(obj)
+        }
+        val time = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
+        prefs.edit()
+            .putString(KEY_SRT_DRAFT, arr.toString())
+            .putString(KEY_SRT_TIME, time)
+            .apply()
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+}
+
+private fun loadCuesFromDraft(context: Context): Pair<List<SrtCue>?, String?> {
+    try {
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val jsonStr = prefs.getString(KEY_SRT_DRAFT, null) ?: return Pair(null, null)
+        val time = prefs.getString(KEY_SRT_TIME, null)
+        val arr = JSONArray(jsonStr)
+        val list = mutableListOf<SrtCue>()
+        for (i in 0 until arr.length()) {
+            val obj = arr.getJSONObject(i)
+            list.add(
+                SrtCue(
+                    id = obj.getInt("id"),
+                    start = obj.getString("start"),
+                    end = obj.getString("end"),
+                    sourceText = obj.getString("sourceText"),
+                    subtitleText = obj.getString("subtitleText")
+                )
+            )
+        }
+        return Pair(list, time)
+    } catch (e: Exception) {
+        return Pair(null, null)
+    }
+}
 
 @Composable
 fun SubtitlingScreen(
@@ -30,8 +89,20 @@ fun SubtitlingScreen(
     cues: MutableList<SrtCue>,
     onExportSrt: () -> Unit
 ) {
+    val context = LocalContext.current
     var selectedCueIndex by remember { mutableIntStateOf(0) }
     var showAddDialog by remember { mutableStateOf(false) }
+    var draftStatus by remember { mutableStateOf<String?>(null) }
+
+    // Load saved draft on start
+    LaunchedEffect(Unit) {
+        val (savedCues, savedTime) = loadCuesFromDraft(context)
+        if (!savedCues.isNullOrEmpty()) {
+            cues.clear()
+            cues.addAll(savedCues)
+            draftStatus = if (isArabic) "مسودة محفوظة ($savedTime)" else "Draft loaded ($savedTime)"
+        }
+    }
 
     // Dialog state for adding cue
     var newStart by remember { mutableStateOf("00:00:10,000") }
@@ -64,18 +135,40 @@ fun SubtitlingScreen(
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
+                if (draftStatus != null) {
+                    Text(
+                        text = "💾 $draftStatus",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = SuccessGreen,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
             }
 
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                 Button(
+                    onClick = {
+                        saveCuesToDraft(context, cues)
+                        val now = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
+                        draftStatus = if (isArabic) "تم حفظ المسودة بنجاح ($now)" else "Saved ($now)"
+                    },
+                    shape = RoundedCornerShape(10.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
+                    modifier = Modifier.testTag("save_srt_draft_btn")
+                ) {
+                    Icon(Icons.Default.Save, contentDescription = null, modifier = Modifier.size(15.dp))
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(text = if (isArabic) "حفظ المسودة" else "Save Draft", fontSize = 11.sp)
+                }
+
+                OutlinedButton(
                     onClick = { showAddDialog = true },
                     shape = RoundedCornerShape(10.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary),
                     modifier = Modifier.testTag("add_cue_btn")
                 ) {
-                    Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(16.dp))
+                    Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(15.dp))
                     Spacer(modifier = Modifier.width(4.dp))
-                    Text(text = if (isArabic) "سطر جديد" else "Add Cue", fontSize = 12.sp)
+                    Text(text = if (isArabic) "سطر جديد" else "Add Cue", fontSize = 11.sp)
                 }
 
                 Button(
@@ -84,9 +177,9 @@ fun SubtitlingScreen(
                     colors = ButtonDefaults.buttonColors(containerColor = RedPrimary),
                     modifier = Modifier.testTag("export_srt_btn")
                 ) {
-                    Icon(Icons.Default.Download, contentDescription = null, modifier = Modifier.size(16.dp))
+                    Icon(Icons.Default.Download, contentDescription = null, modifier = Modifier.size(15.dp))
                     Spacer(modifier = Modifier.width(4.dp))
-                    Text(text = if (isArabic) "تصدير SRT" else "Export SRT", fontSize = 12.sp)
+                    Text(text = if (isArabic) "تصدير" else "Export", fontSize = 11.sp)
                 }
             }
         }
@@ -221,6 +314,9 @@ fun SubtitlingScreen(
                                     if (selectedCueIndex >= cues.size) {
                                         selectedCueIndex = cues.size - 1
                                     }
+                                    saveCuesToDraft(context, cues)
+                                    val now = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
+                                    draftStatus = if (isArabic) "مسودة محفوظة ($now)" else "Saved ($now)"
                                 }
                             }
                         ) {
@@ -293,6 +389,9 @@ fun SubtitlingScreen(
                                 subtitleText = newSub.ifEmpty { "Translated segment" }
                             )
                         )
+                        saveCuesToDraft(context, cues)
+                        val now = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
+                        draftStatus = if (isArabic) "مسودة محفوظة ($now)" else "Saved ($now)"
                         newSource = ""
                         newSub = ""
                         showAddDialog = false

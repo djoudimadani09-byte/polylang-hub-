@@ -1,9 +1,11 @@
 package com.example
 
 enum class UserRole(val labelAr: String, val labelEn: String) {
-    CLIENT("عميل / طالب خدمة", "Client"),
+    ADMIN("المشرف العام (Admin)", "Platform Administrator"),
     TRANSLATOR("مترجم معتمد", "Certified Translator"),
-    ADMIN("مشرف عام / إدارة", "Admin & General Supervisor")
+    STUDENT("طلبة الترجمة", "Translation Students"),
+    LEARNER("متعلم لغات", "Language Learner"),
+    CLIENT("عميل ترجمة", "Translation Client")
 }
 
 enum class AppTab(val titleAr: String, val titleEn: String) {

@@ -44,6 +44,8 @@ fun HomeScreen(
     val context = LocalContext.current
     var tts by remember { mutableStateOf<TextToSpeech?>(null) }
     var isSpeaking by remember { mutableStateOf(false) }
+    var showAboutDialog by remember { mutableStateOf(false) }
+    var showFounderDialog by remember { mutableStateOf(false) }
 
     DisposableEffect(Unit) {
         var speech: TextToSpeech? = null
@@ -251,7 +253,7 @@ fun HomeScreen(
                         }
                     }
 
-                    // Hero Action Buttons
+                    // Hero Action Buttons (Row 1)
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -264,7 +266,7 @@ fun HomeScreen(
                         ) {
                             Icon(Icons.Default.Description, contentDescription = null, modifier = Modifier.size(16.dp))
                             Spacer(modifier = Modifier.width(4.dp))
-                            Text(if (isArabic) "طلب ترجمة" else "Request Translation", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                            Text(if (isArabic) "طلب ترجمة" else "Request", fontSize = 11.5.sp, fontWeight = FontWeight.Bold)
                         }
 
                         OutlinedButton(
@@ -272,7 +274,7 @@ fun HomeScreen(
                             shape = RoundedCornerShape(8.dp),
                             modifier = Modifier.weight(1f)
                         ) {
-                            Text(if (isArabic) "الماستركلاس" else "Academy", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                            Text(if (isArabic) "الأكاديمية" else "Academy", fontSize = 11.5.sp, fontWeight = FontWeight.Bold)
                         }
 
                         OutlinedButton(
@@ -280,11 +282,32 @@ fun HomeScreen(
                             shape = RoundedCornerShape(8.dp),
                             modifier = Modifier.weight(1f)
                         ) {
-                            Text(if (isArabic) "الحساب" else "Profile", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                            Text(if (isArabic) "تسجيل الدخول" else "Login", fontSize = 11.5.sp, fontWeight = FontWeight.Bold)
                         }
                     }
 
-                    // Official Algerian Commercial Registries Grid
+                    // Hero Secondary Buttons (Row 2: About & Founder Profile)
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        OutlinedButton(
+                            onClick = { showAboutDialog = true },
+                            shape = RoundedCornerShape(8.dp),
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Text(if (isArabic) "ℹ️ عن بوليلانغ" else "ℹ️ About Us", fontSize = 11.5.sp, fontWeight = FontWeight.Bold)
+                        }
+                        OutlinedButton(
+                            onClick = { showFounderDialog = true },
+                            shape = RoundedCornerShape(8.dp),
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Text(if (isArabic) "👨‍🏫 سيرة المطور" else "👨‍🏫 Founder Bio", fontSize = 11.5.sp, fontWeight = FontWeight.Bold)
+                        }
+                    }
+
+                    // Official Platform Mission & Location Badges (No commercial registry numbers)
                     Column(
                         modifier = Modifier.fillMaxWidth(),
                         verticalArrangement = Arrangement.spacedBy(6.dp)
@@ -294,11 +317,11 @@ fun HomeScreen(
                             horizontalArrangement = Arrangement.spacedBy(6.dp)
                         ) {
                             RegistryPill(
-                                label = if (isArabic) "✓ السجل التجاري: 16/00-0982341B26" else "✓ RC: 16/00-0982341B26",
+                                label = if (isArabic) "📍 المقر: الجزائر العاصمة" else "📍 HQ: Algiers, Algeria",
                                 modifier = Modifier.weight(1f)
                             )
                             RegistryPill(
-                                label = if (isArabic) "✓ NIF: 002616098234178" else "✓ NIF: 002616098234178",
+                                label = if (isArabic) "🎓 منصة لطلبة الترجمة ومتعلمي اللغات" else "🎓 For Students & Learners",
                                 modifier = Modifier.weight(1f)
                             )
                         }
@@ -307,11 +330,11 @@ fun HomeScreen(
                             horizontalArrangement = Arrangement.spacedBy(6.dp)
                         ) {
                             RegistryPill(
-                                label = if (isArabic) "✓ الدفع: SATIM / البطاقة الذهبية" else "✓ Payment: SATIM / Gold",
+                                label = if (isArabic) "⚖️ ترجمة معتمدة للمؤسسات والأفراد" else "⚖️ Certified Translation",
                                 modifier = Modifier.weight(1f)
                             )
                             RegistryPill(
-                                label = if (isArabic) "✓ الجودة: ISO 17100:2015" else "✓ Quality: ISO 17100:2015",
+                                label = if (isArabic) "🌐 عربي • فرنسي • ألماني • إنجليزي" else "🌐 AR • FR • DE • EN",
                                 modifier = Modifier.weight(1f)
                             )
                         }
@@ -320,7 +343,7 @@ fun HomeScreen(
             }
         }
 
-        // 2. ROLE SELECTOR CARD (:الصفة والدور الحالي)
+        // 2. ROLE SELECTOR CARD (5 Roles with strict data isolation)
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
@@ -333,42 +356,64 @@ fun HomeScreen(
             ) {
                 Column {
                     Text(
-                        text = if (isArabic) ":الصفة والدور الحالي" else "Current Active Role:",
+                        text = if (isArabic) ":الصفة والدور الحالي في المنصة" else "Active Role in Platform:",
                         fontSize = 11.sp,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         fontWeight = FontWeight.Bold
                     )
                     Text(
-                        text = if (isArabic) "مركز التدريب والوسائط (Training & Media Center)" else "Training & Media Center",
-                        fontSize = 15.sp,
+                        text = if (isArabic) "بوابة متعددة الأدوار (5 صلاحيات معزولة)" else "Multi-Role Portal (5 Isolated Views)",
+                        fontSize = 14.sp,
                         fontWeight = FontWeight.Black,
                         color = RedPrimary
                     )
                 }
 
-                // Horizontal scrolling role pills
-                Row(
+                // 5 Roles across two rows
+                Column(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+                    verticalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
-                    RoleChip(
-                        label = "🔒 المشرف العام (Admin)",
-                        isActive = false,
-                        onClick = onOpenAuthDialog,
-                        modifier = Modifier.weight(1f)
-                    )
-                    RoleChip(
-                        label = "🎓 مترجم معتمد",
-                        isActive = false,
-                        onClick = { onNavigate(AppTab.SUBTITLING) },
-                        modifier = Modifier.weight(1f)
-                    )
-                    RoleChip(
-                        label = "👤 عميل (Client)",
-                        isActive = true,
-                        onClick = { onNavigate(AppTab.SERVICES) },
-                        modifier = Modifier.weight(1f)
-                    )
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                    ) {
+                        RoleChip(
+                            label = "🔒 المشرف djoudimadani09",
+                            isActive = false,
+                            onClick = onOpenAuthDialog,
+                            modifier = Modifier.weight(1.3f)
+                        )
+                        RoleChip(
+                            label = "🎓 مترجم معتمد",
+                            isActive = false,
+                            onClick = { onNavigate(AppTab.SUBTITLING) },
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                    ) {
+                        RoleChip(
+                            label = "🏛️ طلبة الترجمة",
+                            isActive = true,
+                            onClick = { onNavigate(AppTab.ACADEMY) },
+                            modifier = Modifier.weight(1f)
+                        )
+                        RoleChip(
+                            label = "📚 متعلم لغات",
+                            isActive = false,
+                            onClick = { onNavigate(AppTab.ACADEMY) },
+                            modifier = Modifier.weight(1f)
+                        )
+                        RoleChip(
+                            label = "👤 عميل ترجمة",
+                            isActive = false,
+                            onClick = { onNavigate(AppTab.SERVICES) },
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
                 }
             }
         }
@@ -469,6 +514,20 @@ fun HomeScreen(
                 )
             }
         }
+    }
+
+    if (showAboutDialog) {
+        AboutUsDialog(
+            isArabic = isArabic,
+            onDismiss = { showAboutDialog = false }
+        )
+    }
+
+    if (showFounderDialog) {
+        FounderProfileDialog(
+            isArabic = isArabic,
+            onDismiss = { showFounderDialog = false }
+        )
     }
 }
 
@@ -575,6 +634,186 @@ private fun PortalCard(
                 minLines = 2,
                 maxLines = 2
             )
+        }
+    }
+}
+
+@Composable
+fun AboutUsDialog(
+    isArabic: Boolean,
+    onDismiss: () -> Unit
+) {
+    androidx.compose.ui.window.Dialog(onDismissRequest = onDismiss) {
+        Card(
+            modifier = Modifier.fillMaxWidth().padding(16.dp),
+            shape = RoundedCornerShape(20.dp),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+        ) {
+            Column(
+                modifier = Modifier.padding(20.dp),
+                verticalArrangement = Arrangement.spacedBy(14.dp)
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = if (isArabic) "ℹ️ عن منصة بوليلانغ (Polylang Hub)" else "ℹ️ About Polylang Hub",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp,
+                        color = RedPrimary
+                    )
+                    IconButton(onClick = onDismiss, modifier = Modifier.size(28.dp)) {
+                        Icon(Icons.Default.Close, contentDescription = "Close")
+                    }
+                }
+
+                Surface(
+                    shape = RoundedCornerShape(12.dp),
+                    color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
+                ) {
+                    Text(
+                        text = if (isArabic)
+                            "بوليالنغ هي منصة ترجمة تساعد طلبة الترجمة ومتعلمي اللغات في تحسين مستواهم ، والذين يبحثون عن ترجمة سيحصلون على ترجمة من مترجمي المنصة وغيرها مقر العاصمة"
+                        else
+                            "Polylang Hub is a translation platform designed to assist translation students and language learners in elevating their professional proficiency. Individuals and enterprises seeking certified linguistic services receive sworn translations and conference interpretation directly from our platform translators and certified associates in Algiers.",
+                        modifier = Modifier.padding(14.dp),
+                        fontSize = 13.sp,
+                        lineHeight = 20.sp,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                }
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    RegistryPill(
+                        label = if (isArabic) "📍 المقر: الجزائر العاصمة" else "📍 HQ: Algiers, Algeria",
+                        modifier = Modifier.weight(1f)
+                    )
+                    RegistryPill(
+                        label = if (isArabic) "📧 djoudimadani09@gmail.com" else "📧 Admin Contact",
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+
+                Button(
+                    onClick = onDismiss,
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(10.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
+                ) {
+                    Text(if (isArabic) "إغلاق" else "Close", fontWeight = FontWeight.Bold)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun FounderProfileDialog(
+    isArabic: Boolean,
+    onDismiss: () -> Unit
+) {
+    androidx.compose.ui.window.Dialog(onDismissRequest = onDismiss) {
+        Card(
+            modifier = Modifier.fillMaxWidth().padding(16.dp),
+            shape = RoundedCornerShape(20.dp),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+        ) {
+            Column(
+                modifier = Modifier.padding(20.dp),
+                verticalArrangement = Arrangement.spacedBy(14.dp)
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = if (isArabic) "👨‍🏫 سيرة المطور والمؤسس" else "👨‍🏫 Founder & Developer Profile",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp,
+                        color = RedPrimary
+                    )
+                    IconButton(onClick = onDismiss, modifier = Modifier.size(28.dp)) {
+                        Icon(Icons.Default.Close, contentDescription = "Close")
+                    }
+                }
+
+                // Profile Avatar & Title
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(52.dp)
+                            .clip(CircleShape)
+                            .background(RedPrimary),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text("ج", color = Color.White, fontWeight = FontWeight.Black, fontSize = 22.sp)
+                    }
+                    Column {
+                        Text(
+                            text = if (isArabic) "الأستاذ جودي مداني" else "Djoudi Madani",
+                            fontWeight = FontWeight.Black,
+                            fontSize = 16.sp
+                        )
+                        Text(
+                            text = if (isArabic) "مؤسس منصة بوليلانغ ومطور المنظومة" else "Founder & Chief Software Architect",
+                            fontSize = 11.5.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
+
+                Surface(
+                    shape = RoundedCornerShape(12.dp),
+                    color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
+                ) {
+                    Text(
+                        text = if (isArabic)
+                            "خريج معهد الترجمة بجامعة الجزائر 2 ماستر 2 ترجمة مؤسساتية عربي فرنسي ألماني ومبرمج لحلول تكنولوجية في مجالات متعددة"
+                        else
+                            "Graduate of the Institute of Translation at the University of Algiers 2 (Bouzaréah) with Master 2 in Institutional Translation (Arabic, French, German). Full-stack software engineer and developer of technological solutions across specialized domains.",
+                        modifier = Modifier.padding(14.dp),
+                        fontSize = 13.sp,
+                        lineHeight = 20.sp,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                }
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    RegistryPill(
+                        label = if (isArabic) "🏛️ معهد الترجمة - جامعة الجزائر 2" else "🏛️ Univ. of Algiers 2",
+                        modifier = Modifier.weight(1f)
+                    )
+                    RegistryPill(
+                        label = if (isArabic) "📜 ماستر 2 ترجمة مؤسساتية" else "📜 Master 2 Institutional",
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+
+                Button(
+                    onClick = onDismiss,
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(10.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
+                ) {
+                    Text(if (isArabic) "إغلاق" else "Close", fontWeight = FontWeight.Bold)
+                }
+            }
         }
     }
 }

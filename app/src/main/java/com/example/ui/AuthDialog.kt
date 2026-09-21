@@ -159,51 +159,90 @@ fun AuthDialog(
                             fontWeight = FontWeight.SemiBold,
                             color = MaterialTheme.colorScheme.primary
                         )
-                        Row(
+                        Column(
                             modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(6.dp)
+                            verticalArrangement = Arrangement.spacedBy(6.dp)
                         ) {
-                            // Client Demo
-                            OutlinedButton(
-                                onClick = {
-                                    onLoginSuccess("كريم حمداوي", "karim@polylang.dz", UserRole.CLIENT)
-                                },
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .height(36.dp)
-                                    .testTag("demo_client_btn"),
-                                contentPadding = PaddingValues(horizontal = 4.dp),
-                                shape = RoundedCornerShape(8.dp)
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.spacedBy(6.dp)
                             ) {
-                                Text(if (isArabic) "💼 عميل" else "Client", fontSize = 12.sp)
+                                // Admin Demo (Locked strictly to djoudimadani09@gmail.com)
+                                Button(
+                                    onClick = {
+                                        onLoginSuccess("الأستاذ جودي مداني", AdminEmailNotifier.ADMIN_EMAIL, UserRole.ADMIN)
+                                    },
+                                    modifier = Modifier
+                                        .weight(1.3f)
+                                        .height(34.dp)
+                                        .testTag("demo_admin_btn"),
+                                    contentPadding = PaddingValues(horizontal = 4.dp),
+                                    shape = RoundedCornerShape(8.dp),
+                                    colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
+                                ) {
+                                    Text(if (isArabic) "🔐 المشرف العام" else "Admin Portal", fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                                }
+                                // Translator Demo
+                                OutlinedButton(
+                                    onClick = {
+                                        onLoginSuccess("د. سمير بن حمادي", "samir@polylang.dz", UserRole.TRANSLATOR)
+                                    },
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .height(34.dp)
+                                        .testTag("demo_translator_btn"),
+                                    contentPadding = PaddingValues(horizontal = 4.dp),
+                                    shape = RoundedCornerShape(8.dp)
+                                ) {
+                                    Text(if (isArabic) "🎓 مترجم" else "Translator", fontSize = 11.sp)
+                                }
                             }
-                            // Translator Demo
-                            OutlinedButton(
-                                onClick = {
-                                    onLoginSuccess("د. سمير بن حمادي", "samir@polylang.dz", UserRole.TRANSLATOR)
-                                },
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .height(36.dp)
-                                    .testTag("demo_translator_btn"),
-                                contentPadding = PaddingValues(horizontal = 4.dp),
-                                shape = RoundedCornerShape(8.dp)
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.spacedBy(6.dp)
                             ) {
-                                Text(if (isArabic) "🎓 مترجم" else "Translator", fontSize = 12.sp)
-                            }
-                            // Admin Demo
-                            OutlinedButton(
-                                onClick = {
-                                    onLoginSuccess("أ. مداني جودي", AdminEmailNotifier.ADMIN_EMAIL, UserRole.ADMIN)
-                                },
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .height(36.dp)
-                                    .testTag("demo_admin_btn"),
-                                contentPadding = PaddingValues(horizontal = 4.dp),
-                                shape = RoundedCornerShape(8.dp)
-                            ) {
-                                Text(if (isArabic) "⚡ مسؤول" else "Admin", fontSize = 12.sp)
+                                // Student Demo
+                                OutlinedButton(
+                                    onClick = {
+                                        onLoginSuccess("سارة بن يحيى (طالبة ماستر)", "sarah.student@univ-alger2.dz", UserRole.STUDENT)
+                                    },
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .height(34.dp)
+                                        .testTag("demo_student_btn"),
+                                    contentPadding = PaddingValues(horizontal = 4.dp),
+                                    shape = RoundedCornerShape(8.dp)
+                                ) {
+                                    Text(if (isArabic) "🏛️ طالب ترجمة" else "Student", fontSize = 11.sp)
+                                }
+                                // Learner Demo
+                                OutlinedButton(
+                                    onClick = {
+                                        onLoginSuccess("يوسف قادري", "youssef@learner.dz", UserRole.LEARNER)
+                                    },
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .height(34.dp)
+                                        .testTag("demo_learner_btn"),
+                                    contentPadding = PaddingValues(horizontal = 4.dp),
+                                    shape = RoundedCornerShape(8.dp)
+                                ) {
+                                    Text(if (isArabic) "📚 متعلم لغات" else "Learner", fontSize = 11.sp)
+                                }
+                                // Client Demo
+                                OutlinedButton(
+                                    onClick = {
+                                        onLoginSuccess("كريم حمداوي", "karim@polylang.dz", UserRole.CLIENT)
+                                    },
+                                    modifier = Modifier
+                                        .weight(0.9f)
+                                        .height(34.dp)
+                                        .testTag("demo_client_btn"),
+                                    contentPadding = PaddingValues(horizontal = 4.dp),
+                                    shape = RoundedCornerShape(8.dp)
+                                ) {
+                                    Text(if (isArabic) "💼 عميل" else "Client", fontSize = 11.sp)
+                                }
                             }
                         }
                     }
@@ -284,8 +323,10 @@ fun AuthDialog(
                             isLoading = true
                             // Determine role based on email or default to Client
                             val role = when {
-                                email.contains("admin", ignoreCase = true) || email.equals(AdminEmailNotifier.ADMIN_EMAIL, ignoreCase = true) -> UserRole.ADMIN
+                                email.equals(AdminEmailNotifier.ADMIN_EMAIL, ignoreCase = true) || email.contains("admin", ignoreCase = true) -> UserRole.ADMIN
                                 email.contains("trans", ignoreCase = true) || email.contains("samir", ignoreCase = true) -> UserRole.TRANSLATOR
+                                email.contains("student", ignoreCase = true) || email.contains("sarah", ignoreCase = true) -> UserRole.STUDENT
+                                email.contains("learner", ignoreCase = true) || email.contains("youssef", ignoreCase = true) -> UserRole.LEARNER
                                 else -> UserRole.CLIENT
                             }
                             val name = email.substringBefore("@").replace(".", " ").replaceFirstChar { it.uppercase() }
@@ -391,28 +432,50 @@ fun AuthDialog(
                     )
                     Spacer(modifier = Modifier.height(6.dp))
 
-                    Row(
+                    Column(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
-                        FilterChip(
-                            selected = selectedRole == UserRole.CLIENT,
-                            onClick = { selectedRole = UserRole.CLIENT },
-                            label = { Text(if (isArabic) "عميل" else "Client", fontSize = 12.sp) },
-                            modifier = Modifier.weight(1f).testTag("chip_role_client")
-                        )
-                        FilterChip(
-                            selected = selectedRole == UserRole.TRANSLATOR,
-                            onClick = { selectedRole = UserRole.TRANSLATOR },
-                            label = { Text(if (isArabic) "مترجم" else "Translator", fontSize = 12.sp) },
-                            modifier = Modifier.weight(1f).testTag("chip_role_trans")
-                        )
-                        FilterChip(
-                            selected = selectedRole == UserRole.ADMIN,
-                            onClick = { selectedRole = UserRole.ADMIN },
-                            label = { Text(if (isArabic) "مشرف" else "Admin", fontSize = 12.sp) },
-                            modifier = Modifier.weight(1f).testTag("chip_role_admin")
-                        )
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        ) {
+                            FilterChip(
+                                selected = selectedRole == UserRole.STUDENT,
+                                onClick = { selectedRole = UserRole.STUDENT },
+                                label = { Text(if (isArabic) "طالب ترجمة" else "Student", fontSize = 11.sp) },
+                                modifier = Modifier.weight(1f).testTag("chip_role_student")
+                            )
+                            FilterChip(
+                                selected = selectedRole == UserRole.LEARNER,
+                                onClick = { selectedRole = UserRole.LEARNER },
+                                label = { Text(if (isArabic) "متعلم لغات" else "Learner", fontSize = 11.sp) },
+                                modifier = Modifier.weight(1f).testTag("chip_role_learner")
+                            )
+                        }
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        ) {
+                            FilterChip(
+                                selected = selectedRole == UserRole.CLIENT,
+                                onClick = { selectedRole = UserRole.CLIENT },
+                                label = { Text(if (isArabic) "عميل ترجمة" else "Client", fontSize = 11.sp) },
+                                modifier = Modifier.weight(1f).testTag("chip_role_client")
+                            )
+                            FilterChip(
+                                selected = selectedRole == UserRole.TRANSLATOR,
+                                onClick = { selectedRole = UserRole.TRANSLATOR },
+                                label = { Text(if (isArabic) "مترجم معتمد" else "Translator", fontSize = 11.sp) },
+                                modifier = Modifier.weight(1f).testTag("chip_role_trans")
+                            )
+                            FilterChip(
+                                selected = selectedRole == UserRole.ADMIN,
+                                onClick = { selectedRole = UserRole.ADMIN },
+                                label = { Text(if (isArabic) "مشرف" else "Admin", fontSize = 11.sp) },
+                                modifier = Modifier.weight(1f).testTag("chip_role_admin")
+                            )
+                        }
                     }
 
                     Spacer(modifier = Modifier.height(16.dp))

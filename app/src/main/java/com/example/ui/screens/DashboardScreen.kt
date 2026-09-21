@@ -95,7 +95,9 @@ fun DashboardScreen(
                             containerColor = when (userRole) {
                                 UserRole.ADMIN -> GoldYellow.copy(alpha = 0.2f)
                                 UserRole.TRANSLATOR -> SuccessGreen.copy(alpha = 0.15f)
-                                UserRole.CLIENT -> RedPrimary.copy(alpha = 0.12f)
+                                UserRole.STUDENT -> RedPrimary.copy(alpha = 0.15f)
+                                UserRole.LEARNER -> MaterialTheme.colorScheme.tertiary.copy(alpha = 0.15f)
+                                UserRole.CLIENT -> MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)
                             }
                         )
                     )
@@ -151,6 +153,117 @@ fun DashboardScreen(
                     }
                 }
             }
+        }
+
+        // Role-Specific Action Module
+        when (userRole) {
+            UserRole.STUDENT, UserRole.LEARNER -> {
+                Card(
+                    modifier = Modifier.fillMaxWidth().testTag("student_lab_dash_card"),
+                    shape = RoundedCornerShape(16.dp),
+                    colors = CardDefaults.cardColors(containerColor = RedPrimary.copy(alpha = 0.08f)),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, RedPrimary.copy(alpha = 0.3f))
+                ) {
+                    Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = if (isArabic) "🏛️ مخبر الترجمة والامتحانات (Student Lab)" else "🏛️ Translation Student Lab",
+                                fontWeight = FontWeight.Bold,
+                                color = RedPrimary,
+                                fontSize = 14.sp
+                            )
+                            Surface(
+                                shape = RoundedCornerShape(6.dp),
+                                color = RedPrimary.copy(alpha = 0.15f)
+                            ) {
+                                Text(
+                                    text = if (isArabic) "مخصص لطلبة المعاهد" else "For Students",
+                                    modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
+                                    fontSize = 10.sp,
+                                    color = RedPrimary,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            }
+                        }
+
+                        Text(
+                            text = if (isArabic)
+                                "تدرب على الترجمة الفورية والتتابعية عبر مقصورة المحاكاة، واستخدم دفتر رموز روزان، واختبر مستواك في امتحان الترجمة الأكاديمي (10 أسئلة متدرجة)."
+                            else
+                                "Practice simultaneous & consecutive interpretation, utilize Rozan notation symbols, and take the 10-question placement exam.",
+                            fontSize = 12.sp,
+                            lineHeight = 17.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            Button(
+                                onClick = onOpenAcademy,
+                                shape = RoundedCornerShape(8.dp),
+                                colors = ButtonDefaults.buttonColors(containerColor = RedPrimary),
+                                modifier = Modifier.weight(1f).testTag("enter_student_lab_btn")
+                            ) {
+                                Icon(Icons.Default.School, contentDescription = null, modifier = Modifier.size(16.dp))
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Text(if (isArabic) "دخول المخبر والأكاديمية" else "Open Lab & Academy", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                            }
+                        }
+                    }
+                }
+            }
+            UserRole.ADMIN -> {
+                val isAuthorizedAdmin = userEmail.equals(AdminEmailNotifier.ADMIN_EMAIL, ignoreCase = true)
+                Card(
+                    modifier = Modifier.fillMaxWidth().testTag("admin_dash_panel"),
+                    shape = RoundedCornerShape(16.dp),
+                    colors = CardDefaults.cardColors(containerColor = if (isAuthorizedAdmin) GoldYellow.copy(alpha = 0.12f) else MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.4f)),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, if (isAuthorizedAdmin) GoldYellow else MaterialTheme.colorScheme.error)
+                ) {
+                    Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = if (isAuthorizedAdmin) "🔐 لوحة التحكم المركزية للأدمن" else "⚠️ تنبيه صلاحيات المشرف",
+                                fontWeight = FontWeight.Black,
+                                fontSize = 14.sp,
+                                color = if (isAuthorizedAdmin) RedDark else MaterialTheme.colorScheme.error
+                            )
+                            Text(
+                                text = if (isAuthorizedAdmin) "✓ مصرح: أ. جودي مداني" else "غير مصرح",
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = if (isAuthorizedAdmin) SuccessGreen else MaterialTheme.colorScheme.error
+                            )
+                        }
+
+                        if (isAuthorizedAdmin) {
+                            Text(
+                                text = "🗄️ Neon PostgreSQL: متصل بنجاح عبر AWS Pooler (neondb)\n📧 التنبيهات الفورية: ترسل مباشرة إلى djoudimadani09@gmail.com\n👥 صلاحيات عزل البيانات: 5 أدوار نشطة معزولة",
+                                fontSize = 11.5.sp,
+                                lineHeight = 18.sp,
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
+                        } else {
+                            Text(
+                                text = "عزل بيانات الإدارة: صلاحية الأدمن مخصصة حصراً للأستاذ جودي مداني عبر بريده المعتمد: ${AdminEmailNotifier.ADMIN_EMAIL}",
+                                fontSize = 12.sp,
+                                color = MaterialTheme.colorScheme.error
+                            )
+                        }
+                    }
+                }
+            }
+            else -> {}
         }
 
         // Translation Orders Section

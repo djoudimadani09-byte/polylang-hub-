@@ -33,6 +33,7 @@ fun AcademyScreen(
 ) {
     var searchQuery by remember { mutableStateOf("") }
     var selectedCategory by remember { mutableStateOf(if (isArabic) "الكل" else "All") }
+    var selectedMainTab by remember { mutableIntStateOf(0) }
 
     val categories = remember(isArabic, courses) {
         val allCat = if (isArabic) "الكل" else "All"
@@ -64,67 +65,91 @@ fun AcademyScreen(
         ) {
             Column {
                 Text(
-                    text = if (isArabic) "أكاديمية بوليلانغ للماستركلاس" else "Polylang Masterclass Academy",
+                    text = if (isArabic) "أكاديمية ومخبر الترجمة (Academy & Lab)" else "Academy & Student Lab",
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = if (isArabic) "دورات مهنية متخصصة مع كبار المترجمين والخبراء" else "Professional courses led by senior translators & experts",
+                    text = if (isArabic) "مخصص لطلبة الترجمة ومتعلمي اللغات ومحاكاة الكابينة" else "For translation students & language learners",
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }
 
-        // Search Field
-        OutlinedTextField(
-            value = searchQuery,
-            onValueChange = { searchQuery = it },
-            modifier = Modifier
-                .fillMaxWidth()
-                .testTag("course_search_field"),
-            placeholder = { Text(if (isArabic) "ابحث عن دورة أو محاضر..." else "Search courses or instructors...") },
-            leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
-            trailingIcon = {
-                if (searchQuery.isNotEmpty()) {
-                    IconButton(onClick = { searchQuery = "" }) {
-                        Icon(Icons.Default.Clear, contentDescription = null)
-                    }
-                }
-            },
-            shape = RoundedCornerShape(12.dp),
-            singleLine = true
-        )
-
-        // Categories Chips
-        LazyRow(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.fillMaxWidth()
+        // Primary Module Switcher
+        TabRow(
+            selectedTabIndex = selectedMainTab,
+            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f),
+            modifier = Modifier.clip(RoundedCornerShape(12.dp))
         ) {
-            items(categories) { cat ->
-                FilterChip(
-                    selected = selectedCategory == cat,
-                    onClick = { selectedCategory = cat },
-                    label = { Text(cat, fontSize = 12.sp) },
-                    shape = RoundedCornerShape(8.dp)
-                )
-            }
+            Tab(
+                selected = selectedMainTab == 0,
+                onClick = { selectedMainTab = 0 },
+                text = { Text(if (isArabic) "🏛️ مخبر الترجمة والامتحان" else "Student Lab", fontWeight = FontWeight.Bold, fontSize = 12.sp) },
+                modifier = Modifier.testTag("tab_student_lab")
+            )
+            Tab(
+                selected = selectedMainTab == 1,
+                onClick = { selectedMainTab = 1 },
+                text = { Text(if (isArabic) "📚 مساقات الماستركلاس" else "Masterclasses", fontWeight = FontWeight.Bold, fontSize = 12.sp) },
+                modifier = Modifier.testTag("tab_masterclasses")
+            )
         }
 
-        // Courses List
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            items(filteredCourses, key = { it.id }) { course ->
-                CourseCard(
-                    isArabic = isArabic,
-                    course = course,
-                    onOpen = { onOpenCourse(course) },
-                    onCertificate = { onClaimCertificate(course.title) }
-                )
+        if (selectedMainTab == 0) {
+            StudentLabView(isArabic = isArabic)
+        } else {
+            // Search Field
+            OutlinedTextField(
+                value = searchQuery,
+                onValueChange = { searchQuery = it },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag("course_search_field"),
+                placeholder = { Text(if (isArabic) "ابحث عن دورة أو محاضر..." else "Search courses or instructors...") },
+                leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
+                trailingIcon = {
+                    if (searchQuery.isNotEmpty()) {
+                        IconButton(onClick = { searchQuery = "" }) {
+                            Icon(Icons.Default.Clear, contentDescription = null)
+                        }
+                    }
+                },
+                shape = RoundedCornerShape(12.dp),
+                singleLine = true
+            )
+
+            // Categories Chips
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                items(categories) { cat ->
+                    FilterChip(
+                        selected = selectedCategory == cat,
+                        onClick = { selectedCategory = cat },
+                        label = { Text(cat, fontSize = 12.sp) },
+                        shape = RoundedCornerShape(8.dp)
+                    )
+                }
+            }
+
+            // Courses List
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                items(filteredCourses, key = { it.id }) { course ->
+                    CourseCard(
+                        isArabic = isArabic,
+                        course = course,
+                        onOpen = { onOpenCourse(course) },
+                        onCertificate = { onClaimCertificate(course.title) }
+                    )
+                }
             }
         }
     }

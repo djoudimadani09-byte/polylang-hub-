@@ -947,12 +947,12 @@
             </button>
           </div>
 
-          <!-- Official Registry Pills -->
+          <!-- Official Platform Mission Badges -->
           <div class="registry-pills-grid">
-            <div class="reg-pill">✓ السجل التجاري: <strong>16/00-0982341B26</strong></div>
-            <div class="reg-pill">✓ NIF: <strong>002616098234178</strong></div>
-            <div class="reg-pill">✓ الدفع: <strong>SATIM / البطاقة الذهبية</strong></div>
-            <div class="reg-pill">✓ الجودة: <strong>ISO 17100:2015</strong></div>
+            <div class="reg-pill">📍 المقر الرئيسي: <strong>الجزائر العاصمة</strong></div>
+            <div class="reg-pill">🎓 بوابة متخصصة: <strong>لطلبة الترجمة ومتعلمي اللغات</strong></div>
+            <div class="reg-pill">⚖️ خدمات الترجمة: <strong>معتمدة للمؤسسات والأفراد</strong></div>
+            <div class="reg-pill">🌐 لغات التخصص: <strong>عربي • فرنسي • ألماني • إنجليزي</strong></div>
           </div>
 
         </div>
@@ -964,24 +964,24 @@
     <div class="role-section-card">
       <div class="role-section-head">
         <div class="role-label-text">:الصفة والدور الحالي</div>
-        <div class="role-current-title" id="active-role-title">Training & Media Center</div>
+        <div class="role-current-title" id="active-role-title">Client Portal & Project Orders</div>
       </div>
 
-      <div class="role-buttons-grid">
+      <div class="role-buttons-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
         <button class="role-chip" id="chip-admin" onclick="switchRole('admin')">
-          🔒 Platform Administrator (Admin) (محمي)
+          🔒 المشرف العام (Admin حصري)
         </button>
         <button class="role-chip" id="chip-translator" onclick="switchRole('translator')">
           🎓 مترجم معتمد (Translator)
         </button>
         <button class="role-chip active" id="chip-client" onclick="switchRole('client')">
-          👤 عميل (Client)
+          👤 عميل ترجمة (Client)
+        </button>
+        <button class="role-chip" id="chip-student" onclick="switchRole('student')">
+          📚 طلبة الترجمة (Students)
         </button>
         <button class="role-chip" id="chip-enthusiast" onclick="switchRole('enthusiast')">
-          💡 Language Enthusiast
-        </button>
-        <button class="role-chip role-chip-red-pill" onclick="switchRole('enthusiast')">
-          🎬 Training & Media Hub
+          💡 متعلم لغات (Learner)
         </button>
       </div>
     </div>
@@ -1076,8 +1076,21 @@
         </div>
 
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
-          <button class="btn-outline-action" onclick="addSrtRow()">+ إضافة مقطع زمني</button>
-          <button class="btn-primary-red" onclick="downloadSrtFile()">📥 تحميل ملف SRT المعتمد</button>
+          <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+            <button class="btn-outline-action" onclick="addSrtRow()">+ إضافة مقطع زمني</button>
+            <button class="btn-primary-red" id="btn-save-srt-draft" onclick="saveSrtDraft(true)" style="background:var(--crimson); color:#fff; display:inline-flex; align-items:center; gap:6px;">
+              💾 حفظ المسودة (Save Draft)
+            </button>
+            <button class="nav-pill" onclick="resetSrtDraft()" title="استعادة المقاطع الافتراضية" style="cursor:pointer; font-size:11px; padding:6px 12px;">
+              🔄 استعادة القالب
+            </button>
+          </div>
+          <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+            <span id="srt-draft-status" class="reg-pill" style="font-size:11px; display:inline-flex; align-items:center; gap:4px; border:1px solid #cbd5e1; background:#f8fafc; color:#475569;">
+              💾 جاري تهيئة المسودة...
+            </span>
+            <button class="btn-outline-action" onclick="downloadSrtFile()">📥 تحميل ملف SRT المعتمد</button>
+          </div>
         </div>
 
         <div class="table-scroll">
@@ -1088,7 +1101,8 @@
                 <th style="width:130px;">وقت البداية</th>
                 <th style="width:130px;">وقت النهاية</th>
                 <th>النص المترجم</th>
-                <th style="width:80px;">معاينة</th>
+                <th style="width:70px;">معاينة</th>
+                <th style="width:60px;">حذف</th>
               </tr>
             </thead>
             <tbody id="srt-tbody-list">
@@ -1096,6 +1110,201 @@
             </tbody>
           </table>
         </div>
+      </div>
+    </div>
+
+    <!-- DYNAMIC VIEW 3: TRANSLATION STUDENTS LAB (بوابة طلبة الترجمة) -->
+    <div id="view-student" class="view-panel">
+      <!-- 1. Intro Box -->
+      <div class="content-box" style="border-top:4px solid var(--crimson);">
+        <div class="section-title-wrap">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <div>
+              <h3>مختبر وبوابة طلبة الترجمة (Translation Students Lab) 📚</h3>
+              <p>مخصص لطلبة معاهد الترجمة (مثل جامعة الجزائر 2) لتعزيز الجاهزية لسوق العمل والترجمة الفورية والتتابعية.</p>
+            </div>
+            <span class="reg-pill" style="color:var(--crimson); font-weight:800;">إشراف: الأستاذ جودي مداني</span>
+          </div>
+        </div>
+
+        <!-- Quick Sub-Tabs for Students -->
+        <div style="display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap;">
+          <button class="nav-pill active" id="btn-tab-booth" onclick="switchStudentTab('booth')">🎙️ كابينة الترجمة الفورية</button>
+          <button class="nav-pill" id="btn-tab-consec" onclick="switchStudentTab('consec')">📝 الترجمة التتابعية ونظام روزان</button>
+          <button class="nav-pill" id="btn-tab-exam" onclick="switchStudentTab('exam')">🏆 امتحان تحديد المستوى الشامل</button>
+        </div>
+
+        <!-- STUDENT SUB-SECTION 1: SIMULTANEOUS INTERPRETATION BOOTH -->
+        <div id="student-booth-box" style="display:block;">
+          <div style="background:var(--bg-body); padding:16px; border-radius:12px; border:1px solid var(--border-line); margin-bottom:14px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+              <h4 style="font-size:15px; font-weight:800;">🎙️ محاكي كابينة المؤتمرات (Simultaneous Booth Simulator)</h4>
+              <div style="font-size:12px; font-weight:700; color:var(--crimson);">
+                الفارق الزمني (Décalage): <span id="decalage-timer-display" style="background:#fee2e2; padding:2px 8px; border-radius:4px;">0.0 ثانية</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>اختر خطاب المؤتمر للتدريب:</label>
+              <select id="booth-speech-select" class="form-control" onchange="loadSelectedBoothSpeech()">
+                <option value="climate">قمة المناخ الدولية (COP28) - الإنجليزية ➔ العربية</option>
+                <option value="un">افتتاح الجمعية العامة للأمم المتحدة - الفرنسية ➔ العربية</option>
+                <option value="energy">منتدى الطاقة والغاز بالجزائر - الإنجليزية ➔ العربية</option>
+              </select>
+            </div>
+
+            <!-- Speech player strip -->
+            <div style="background:var(--bg-surface); padding:12px; border-radius:8px; border:1px solid var(--border-line); margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+              <div style="font-size:12px; font-weight:700;">
+                📢 <span id="booth-speaker-name">خطاب الأمين العام للأمم المتحدة</span>
+              </div>
+              <div style="display:flex; gap:6px;">
+                <button class="btn-primary-red" style="padding:4px 12px; font-size:12px;" onclick="playBoothSpeechAudio()">
+                  ▶ تشغيل صوت الخطاب
+                </button>
+                <button class="btn-outline-action" style="padding:4px 12px; font-size:12px;" onclick="stopBoothSpeechAudio()">
+                  ⏹️ إيقاف
+                </button>
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
+              <div>
+                <label style="font-size:11.5px; font-weight:700; color:var(--text-dim);">النص المصدر المنطوق في الكابينة:</label>
+                <div id="booth-source-transcript" style="height:120px; overflow-y:auto; background:var(--bg-surface); padding:10px; border-radius:8px; border:1px solid var(--border-line); font-size:12px; line-height:1.6;">
+                  "Distinguished delegates, today the world stands at a decisive crossroads regarding clean energy transition and climate resilience."
+                </div>
+              </div>
+              <div>
+                <label style="font-size:11.5px; font-weight:700; color:var(--text-dim);">صياغتك الفورية (التفريغ الشفهي أو الكتابي):</label>
+                <textarea id="booth-user-transcription" class="form-control" style="height:120px; font-size:12px;" placeholder="ابدأ الترجمة الفورية فور سماع أول وحدة معنى (Ear-Voice Span: 2-3 ثوانٍ)..."></textarea>
+              </div>
+            </div>
+
+            <button class="btn-outline-action" style="width:100%; font-size:12px;" onclick="toggleBoothModelSolution()">
+              🔍 إظهار الترجمة المؤسساتية النموذجية المعتمدة
+            </button>
+            <div id="booth-model-solution" style="display:none; margin-top:10px; background:#ecfdf5; border:1px solid #6ee7b7; color:#065f46; padding:10px; border-radius:8px; font-size:12px; line-height:1.6;">
+              <strong>الترجمة النموذجية:</strong> "أيها المندوبون الموقرون، يقف العالم اليوم أمام مفترق طرق حاسم فيما يتعلق بالتحول نحو الطاقة النظيفة والقدرة على مجابهة التغيرات المناخية."
+            </div>
+          </div>
+        </div>
+
+        <!-- STUDENT SUB-SECTION 2: CONSECUTIVE INTERPRETATION & ROZAN NOTEPAD -->
+        <div id="student-consec-box" style="display:none;">
+          <div style="background:var(--bg-body); padding:16px; border-radius:12px; border:1px solid var(--border-line); margin-bottom:14px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+              <h4 style="font-size:15px; font-weight:800;">📝 ورشة الترجمة التتابعية ونظام روزان (Rozan System)</h4>
+              <span class="reg-pill">الترميز العمودي (Verticality)</span>
+            </div>
+            <p style="font-size:12px; color:var(--text-dim); margin-bottom:12px;">
+              استمع للمقطع الدبلوماسي، دوّن الأفكار باستخدام رموز روزان، ثم أعد صياغة الخطاب كاملاً بثقة وطلاقة.
+            </p>
+
+            <!-- Rozan Quick Symbols Toolbar -->
+            <div style="background:var(--bg-surface); padding:8px 12px; border-radius:8px; border:1px solid var(--border-line); margin-bottom:10px;">
+              <div style="font-size:11px; font-weight:700; margin-bottom:6px; color:var(--text-dim);">شريط رموز روزان السريعة (انقر للإدراج فوراً في الملاحظات):</div>
+              <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                <button class="nav-pill" style="padding:2px 8px; font-size:12px;" onclick="insertRozanSymbol('➔')">➔ (نتيجة/يؤدي)</button>
+                <button class="nav-pill" style="padding:2px 8px; font-size:12px;" onclick="insertRozanSymbol('▲')">▲ (زيادة/صعود)</button>
+                <button class="nav-pill" style="padding:2px 8px; font-size:12px;" onclick="insertRozanSymbol('▼')">▼ (انخفاض/تراجع)</button>
+                <button class="nav-pill" style="padding:2px 8px; font-size:12px;" onclick="insertRozanSymbol('≠')">≠ (اختلاف/معارضة)</button>
+                <button class="nav-pill" style="padding:2px 8px; font-size:12px;" onclick="insertRozanSymbol('§')">§ (فقرة جديدة)</button>
+                <button class="nav-pill" style="padding:2px 8px; font-size:12px;" onclick="insertRozanSymbol('⏳')">⏳ (زمن/مستقبل)</button>
+                <button class="nav-pill" style="padding:2px 8px; font-size:12px;" onclick="insertRozanSymbol('★')">★ (أولوية/مهم)</button>
+                <button class="nav-pill" style="padding:2px 8px; font-size:12px;" onclick="insertRozanSymbol('?')">? (شك/تساؤل)</button>
+                <button class="nav-pill" style="padding:2px 8px; font-size:12px;" onclick="insertRozanSymbol('P')">P (موقف/سياسة)</button>
+                <button class="nav-pill" style="padding:2px 8px; font-size:12px;" onclick="insertRozanSymbol('Ø')">Ø (نفي/إلغاء)</button>
+                <button class="nav-pill" style="padding:2px 8px; font-size:12px;" onclick="insertRozanSymbol('OK')">OK (موافقة/اتفاق)</button>
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1.2fr; gap:12px; margin-bottom:12px;">
+              <div>
+                <label style="font-size:11.5px; font-weight:700;">الخطاب المصدر للاستماع:</label>
+                <div style="background:var(--bg-surface); padding:10px; border-radius:8px; border:1px solid var(--border-line); font-size:12px; line-height:1.6; height:140px; overflow-y:auto;">
+                  <strong>تصريح ثنائي مشترك:</strong><br>
+                  "لقد اتفق الجانبان اليوم على تعزيز الاستثمارات في قطاع الهيدروجين الأخضر، مع التشديد على ضرورة إزالة القيود الجمركية وفتح خطوط الشحن المباشرة قبل نهاية الربع الأول."
+                </div>
+                <button class="btn-primary-red" style="margin-top:6px; width:100%; padding:4px; font-size:11.5px;" onclick="playConsecutiveSpeechAudio()">
+                  🔊 استمع للخطاب بصوت المتحدث
+                </button>
+              </div>
+
+              <div>
+                <label style="font-size:11.5px; font-weight:700;">مفكرة روزان التتابعية (Rozan Pad):</label>
+                <textarea id="rozan-notepad-text" class="form-control" style="height:140px; font-family:monospace; font-size:12px;" placeholder="دوّن الملاحظات العمودية هنا باستخدام الرموز أعلاه..."></textarea>
+              </div>
+            </div>
+
+            <button class="btn-outline-action" style="width:100%; font-size:12px;" onclick="toggleConsecModelSolution()">
+              🔍 مقارنة الصياغة مع الترجمة المؤسساتية المعتمدة
+            </button>
+            <div id="consec-model-solution" style="display:none; margin-top:10px; background:#eff6ff; border:1px solid #93c5fd; color:#1e40af; padding:10px; border-radius:8px; font-size:12px; line-height:1.6;">
+              <strong>الترجمة التتابعية النموذجية:</strong><br>
+              "Les deux parties sont convenues aujourd'hui de renforcer les investissements dans le secteur de l'hydrogène vert, tout en soulignant la nécessité de lever les barrières tarifaires et d'ouvrir des lignes de fret directes avant la fin du premier trimestre."
+            </div>
+          </div>
+        </div>
+
+        <!-- STUDENT SUB-SECTION 3: COMPREHENSIVE LEVEL-PLACEMENT EXAM -->
+        <div id="student-exam-box" style="display:none;">
+          <div style="background:var(--bg-body); padding:18px; border-radius:12px; border:1px solid var(--border-line);">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+              <div>
+                <h4 style="font-size:16px; font-weight:900;">🏆 امتحان تحديد المستوى في الترجمة واللغات (Placement Exam)</h4>
+                <p style="font-size:11.5px; color:var(--text-dim);">اختبار احترافي متدرج يقيس المعجم المؤسساتي، الصياغة القانونية، وسرعة البديهة في الترجمة الفورية.</p>
+              </div>
+              <div style="background:#fef2f2; color:var(--crimson); padding:4px 12px; border-radius:6px; font-weight:900; font-size:13px; border:1px solid #fca5a5;">
+                ⏱️ الوقت المتبقي: <span id="exam-timer">10:00</span>
+              </div>
+            </div>
+
+            <!-- Exam Container -->
+            <div id="exam-card-container">
+              <div style="background:var(--bg-surface); padding:16px; border-radius:10px; border:1px solid var(--border-line); margin-bottom:14px;">
+                <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                  <span style="font-size:12px; font-weight:800; color:var(--crimson);" id="exam-q-number">السؤال 1 من 10</span>
+                  <span style="font-size:11px; color:var(--text-dim);" id="exam-q-category">المعجم الدبلوماسي والدولي</span>
+                </div>
+                <h5 style="font-size:14px; font-weight:800; margin-bottom:12px;" id="exam-q-text">ما هي الترجمة المؤسساتية الدقيقة لمصطلح 'Plenipotentiary' في المعاهدات الدولية؟</h5>
+
+                <div id="exam-options-list" style="display:flex; flex-direction:column; gap:8px;">
+                  <!-- Populated via JS -->
+                </div>
+              </div>
+
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <button class="btn-outline-action" id="exam-prev-btn" onclick="prevExamQuestion()" disabled>السابق</button>
+                <button class="btn-primary-red" id="exam-next-btn" onclick="nextExamQuestion()">التالي ➔</button>
+              </div>
+            </div>
+
+            <!-- Exam Results Box (Hidden by default) -->
+            <div id="exam-result-box" style="display:none; text-align:center; padding:20px; background:var(--bg-surface); border-radius:12px; border:2px solid var(--crimson);">
+              <div style="font-size:40px; margin-bottom:10px;">🎓</div>
+              <h3 style="font-size:18px; font-weight:900; margin-bottom:6px;">شهادة تقييم المستوى المعتمدة من بوليلانغ</h3>
+              <p style="font-size:12px; color:var(--text-dim); margin-bottom:14px;">تم احتساب نتيجتك بنجاح وفق المعايير المؤسساتية ISO 17100</p>
+
+              <div style="display:inline-block; background:var(--bg-body); padding:12px 24px; border-radius:10px; border:1px solid var(--border-line); margin-bottom:14px;">
+                <div style="font-size:12px; color:var(--text-dim);">المستوى المستحق:</div>
+                <div style="font-size:26px; font-weight:900; color:var(--crimson);" id="exam-level-grade">C1 - مترجم مؤتمرات متقدم</div>
+                <div style="font-size:13px; font-weight:700;" id="exam-score-percent">الدرجة: 90% (9/10)</div>
+              </div>
+
+              <p style="font-size:12px; line-height:1.7; max-width:500px; margin:0 auto 16px; color:var(--text-dim);" id="exam-feedback-text">
+                أداء متميز في استيعاب التراكيب المؤسساتية والتعابير الدبلوماسية الدقيقة. نوصيك بمواصلة تدريبات الفارق الزمني (Décalage) بكابينات المؤتمرات.
+              </p>
+
+              <div style="display:flex; justify-content:center; gap:8px;">
+                <button class="btn-primary-red" onclick="restartExam()">إعادة الامتحان 🔄</button>
+                <button class="btn-outline-action" onclick="alert('✓ تم حفظ شهادة تحديد المستوى في ملفك الشخصي.')">حفظ الشهادة 📥</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -1156,7 +1365,7 @@
 
   <!-- ALL MODALS -->
 
-  <!-- 1. AUTHENTICATION & LOGIN MODAL (Fully Clickable & Interactive) -->
+  <!-- 1. AUTHENTICATION & LOGIN MODAL (5 Distinct Roles with Isolated Admin Access) -->
   <div id="authModal" class="modal-backdrop">
     <div class="modal-sheet">
       <div class="modal-close-x" onclick="closeModal('authModal')">✕</div>
@@ -1165,29 +1374,45 @@
         اختر أحد الحسابات السريعة الجاهزة، أو أدخل بريدك الإلكتروني لتسجيل الدخول:
       </p>
 
-      <!-- Quick Login Profiles -->
+      <!-- Quick Login Profiles for All 5 Roles -->
       <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:18px;">
-        <button class="nav-pill" style="justify-content:flex-start; padding:10px;" onclick="quickLoginUser('جودي مداني (Djoudi Madani)', 'djoudimadani09@gmail.com', 'Admin')">
+        <button class="nav-pill" style="justify-content:flex-start; padding:10px; border:2px solid var(--crimson);" onclick="quickLoginUser('الأستاذ جودي مداني (Djoudi Madani)', 'djoudimadani09@gmail.com', 'Admin')">
           <span>👑</span>
           <div style="text-align:start;">
-            <strong>جودي مداني (المدير العام والمترجم المحلف)</strong>
-            <div style="font-size:11px; color:var(--text-faint);">djoudimadani09@gmail.com — Admin</div>
-          </div>
-        </button>
-
-        <button class="nav-pill" style="justify-content:flex-start; padding:10px;" onclick="quickLoginUser('كريم حمداوي (عميل مؤسساتي)', 'karim@polylang.dz', 'Client')">
-          <span>👤</span>
-          <div style="text-align:start;">
-            <strong>كريم حمداوي (عميل مؤسساتي)</strong>
-            <div style="font-size:11px; color:var(--text-faint);">karim@polylang.dz — Client Portal</div>
+            <strong style="color:var(--crimson);">الأستاذ جودي مداني (المدير العام والمشرف الحصري)</strong>
+            <div style="font-size:11px; color:var(--text-faint);">djoudimadani09@gmail.com — المشرف العام وعزل البيانات</div>
           </div>
         </button>
 
         <button class="nav-pill" style="justify-content:flex-start; padding:10px;" onclick="quickLoginUser('أ. مريم بوعلام (مترجمة مؤتمرات معتمدة)', 'mariem.trans@polylang.dz', 'Translator')">
           <span>🎓</span>
           <div style="text-align:start;">
-            <strong>أ. مريم بوعلام (مترجمة مؤتمرات AIIC)</strong>
-            <div style="font-size:11px; color:var(--text-faint);">mariem.trans@polylang.dz — Translator Studio</div>
+            <strong>أ. مريم بوعلام (مترجمة معتمدة)</strong>
+            <div style="font-size:11px; color:var(--text-faint);">mariem.trans@polylang.dz — استوديو المترجم ومحرر SRT</div>
+          </div>
+        </button>
+
+        <button class="nav-pill" style="justify-content:flex-start; padding:10px;" onclick="quickLoginUser('كريم حمداوي (عميل ترجمة)', 'karim@polylang.dz', 'Client')">
+          <span>👤</span>
+          <div style="text-align:start;">
+            <strong>كريم حمداوي (عميل ترجمة ومؤسسات)</strong>
+            <div style="font-size:11px; color:var(--text-faint);">karim@polylang.dz — بوابة العميل وحاسبة الأسعار</div>
+          </div>
+        </button>
+
+        <button class="nav-pill" style="justify-content:flex-start; padding:10px;" onclick="quickLoginUser('سارة بن علي (طالبة ماستر ترجمة)', 'sara.student@univ-alger2.dz', 'Student')">
+          <span>📚</span>
+          <div style="text-align:start;">
+            <strong>سارة بن علي (طالبة معهد الترجمة - جامعة الجزائر 2)</strong>
+            <div style="font-size:11px; color:var(--text-faint);">sara.student@univ-alger2.dz — كابينة الترجمة الفورية وامتحان المستوى</div>
+          </div>
+        </button>
+
+        <button class="nav-pill" style="justify-content:flex-start; padding:10px;" onclick="quickLoginUser('يوسف مراد (متعلم لغات)', 'youssef.learner@gmail.com', 'Learner')">
+          <span>💡</span>
+          <div style="text-align:start;">
+            <strong>يوسف مراد (متعلم لغات وشغوف)</strong>
+            <div style="font-size:11px; color:var(--text-faint);">youssef.learner@gmail.com — التظليل الصوتي والكويزات</div>
           </div>
         </button>
       </div>
@@ -1204,6 +1429,29 @@
 
       <button class="btn-primary-red" style="width:100%; justify-content:center;" onclick="customFormLogin()">
         دخول إلى المنصة 🚀
+      </button>
+    </div>
+  </div>
+
+  <!-- ADMIN SECURITY LOCK MODAL (Strict Data Isolation) -->
+  <div id="adminLockModal" class="modal-backdrop">
+    <div class="modal-sheet" style="border-top:4px solid var(--crimson);">
+      <div class="modal-close-x" onclick="closeModal('adminLockModal')">✕</div>
+      <div style="text-align:center; margin-bottom:14px;">
+        <div style="font-size:36px; margin-bottom:8px;">⛔</div>
+        <h3 style="font-size:18px; font-weight:900; color:var(--crimson);">عزل البيانات والأمان المؤسساتي</h3>
+        <p style="font-size:12.5px; color:var(--text-dim); line-height:1.7; margin-top:6px;">
+          واجهة المشرف العام (Admin Portal) ولوحة التحكم وإدارة الخادم مقفلة حصرياً لبريد المدير العام: <strong>djoudimadani09@gmail.com</strong>.
+        </p>
+      </div>
+
+      <div style="background:var(--bg-body); padding:14px; border-radius:10px; border:1px solid var(--border-line); font-size:12.5px; line-height:1.7; margin-bottom:14px;">
+        <div>🔒 <strong>سياسة الأمان:</strong> عزل تام لبيانات المشرف عن حسابات المترجمين والطلبة والعملاء.</div>
+        <div>📧 <strong>المستخدم المصرح له:</strong> djoudimadani09@gmail.com</div>
+      </div>
+
+      <button class="btn-primary-red" style="width:100%; justify-content:center; padding:10px;" onclick="quickLoginAdminAndOpen()">
+        🔐 تسجيل الدخول الفوري بحساب المشرف (djoudimadani09@gmail.com)
       </button>
     </div>
   </div>
@@ -1255,28 +1503,32 @@
     </div>
   </div>
 
-  <!-- 3. ABOUT US MODAL (Official Registries) -->
+  <!-- 3. ABOUT US MODAL (Corrected Mission & Headquarters) -->
   <div id="aboutModal" class="modal-backdrop">
     <div class="modal-sheet">
       <div class="modal-close-x" onclick="closeModal('aboutModal')">✕</div>
-      <h3 style="font-size:18px; font-weight:800; margin-bottom:6px;">عن مجمع بوليلانغ للترجمة المعتمدة</h3>
+      <h3 style="font-size:18px; font-weight:800; margin-bottom:6px;">عن منصة بوليلانغ (About Polylang Hub)</h3>
       <p style="font-size:12px; color:var(--text-dim); margin-bottom:16px;">
-        المرجع الأول في الترجمة المحلفة وتجهيز المؤتمرات الدولية وفق أرقى معايير الجودة الدولية ISO 17100:2015.
+        منصة الترجمة المتكاملة للتطوير اللغوي وخدمات الترجمة المعتمدة.
       </p>
 
-      <div style="background:var(--bg-body); padding:14px; border-radius:10px; border:1px solid var(--border-line); font-size:12.5px; line-height:1.7;">
-        <div>🏢 <strong>المقر الرسمي:</strong> برج الأعمال باب الزوار، الطابق 7، حي الأعمال، الجزائر العاصمة.</div>
-        <div>📜 <strong>السجل التجاري (RC):</strong> 16/00-0982341B26 (المركز الوطني للسجل التجاري).</div>
-        <div>📑 <strong>الرقم التعريفي الجبائي (NIF):</strong> 002616098234178.</div>
-        <div>📊 <strong>الرقم التعريفي الإحصائي (NIS):</strong> 002616090014521.</div>
-        <div>💳 <strong>الدفع الإلكتروني الوطني:</strong> معتمد عبر شبكة SATIM والبطاقة الذهبية و CIB.</div>
-        <div>📞 <strong>الهاتف:</strong> +213 (0) 23 88 45 10 / +213 (0) 560 12 34 50</div>
-        <div>📧 <strong>البريد الإلكتروني:</strong> djoudimadani09@gmail.com</div>
+      <div style="background:var(--bg-body); padding:16px; border-radius:12px; border:1px solid var(--border-line); font-size:13px; line-height:1.8;">
+        <p style="margin-bottom:12px;">
+          <strong>بوليلانغ (Polylang Hub):</strong> هي منصة ترجمة رائدة تهدف إلى مساعدة <strong>طلبة الترجمة ومتعلمي اللغات</strong> في تحسين مستواهم وتطوير مهاراتهم التطبيقية من خلال التدريب التفاعلي، ورشات محاكاة كابينات الترجمة الفورية، وتمارين الترجمة التتابعية.
+        </p>
+        <p style="margin-bottom:12px;">
+          وفي الوقت ذاته، تتيح للأفراد والمؤسسات <strong>الذين يبحثون عن ترجمة</strong> الحصول على ترجمة دقيقة واحترافية معتمدة من نخبة مترجمي المنصة المؤهلين في مختلف المجالات القانونية، التقنية، الطبية، وترجمة المؤتمرات.
+        </p>
+        <div style="margin-top:14px; padding-top:12px; border-top:1px dashed var(--border-line); font-size:12.5px;">
+          <div>📍 <strong>المقر الرئيسي:</strong> الجزائر العاصمة (Algiers, Algeria)</div>
+          <div>🌐 <strong>لغات التخصص:</strong> العربية، الفرنسية، الألمانية، الإنجليزية، والإسبانية.</div>
+          <div>📧 <strong>البريد الإلكتروني للإدارة:</strong> djoudimadani09@gmail.com</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- 4. FOUNDER PROFILE MODAL -->
+  <!-- 4. FOUNDER PROFILE MODAL (Djoudi Madani) -->
   <div id="founderModal" class="modal-backdrop">
     <div class="modal-sheet">
       <div class="modal-close-x" onclick="closeModal('founderModal')">✕</div>
@@ -1285,15 +1537,26 @@
           JM
         </div>
         <h3 style="font-size:18px; font-weight:900;">الأستاذ جودي مداني (Djoudi Madani)</h3>
-        <p style="font-size:12px; color:var(--crimson); font-weight:800;">المدير العام والمترجم المحلف المعتمد • خبير المؤتمرات الدولية</p>
+        <p style="font-size:12.5px; color:var(--crimson); font-weight:800;">مؤسس المنصة • مترجم مؤسساتي ومبرمج حلول تكنولوجية</p>
       </div>
 
-      <p style="font-size:12.5px; color:var(--text-dim); line-height:1.7; margin-bottom:14px;">
-        مترجم رسمي محلف معتمد لدى المحاكم والمجالس القضائية، وعضو الهيئات الدولية للترجمة. خبير استشاري في صياغة العقود الدولية، تجهيز كابينات المؤتمرات ISO 4043، والإشراف الأكاديمي على ماستركلاس بوليلانغ.
-      </p>
+      <div style="background:var(--bg-body); padding:16px; border-radius:12px; border:1px solid var(--border-line); font-size:13px; line-height:1.8; margin-bottom:14px;">
+        <p style="margin-bottom:10px;">
+          🎓 <strong>المؤهل العلمي:</strong> خريج معهد الترجمة بجامعة الجزائر 2 (Algiers 2 University - Institute of Translation).
+        </p>
+        <p style="margin-bottom:10px;">
+          📜 <strong>الشهادة العليا:</strong> حائز على شهادة <strong>ماستر 2 في الترجمة المؤسساتية (عربي - فرنسي - ألماني)</strong>.
+        </p>
+        <p style="margin-bottom:10px;">
+          💻 <strong>الخبرة التقنية والبرمجية:</strong> مبرمج ومطور لحلول تكنولوجية في مجالات متعددة، ومصمم معماريات رقمية لمنصات الترجمة والتدريب اللغوي.
+        </p>
+        <p>
+          🌐 <strong>الرسالة:</strong> تمكين طلبة الترجمة ومتعلمي اللغات بأحدث أدوات المحاكاة، وتوفير خدمات ترجمة مؤسساتية ومؤتمرات بأعلى درجات الدقة والاحترافية.
+        </p>
+      </div>
 
       <button class="btn-primary-red" style="width:100%; justify-content:center;" onclick="openModal('orderModal')">
-        طلب استشارة أو ترجمة مباشرة من الأستاذ جودي مداني
+        طلب استشارة أو ترجمة معتمدة مباشرة من الأستاذ جودي مداني
       </button>
     </div>
   </div>
@@ -1481,8 +1744,15 @@
       openModal('orderModal');
     }
 
-    // Role Switching
+    // Role Switching with Strict Admin Data Isolation
     function switchRole(role) {
+      if (role === 'admin') {
+        if (currentUserEmail !== ADMIN_EMAIL) {
+          openModal('adminLockModal');
+          return;
+        }
+      }
+
       activeRole = role;
       document.querySelectorAll('.view-panel').forEach(el => el.classList.remove('active-view'));
       document.querySelectorAll('.role-chip').forEach(el => el.classList.remove('active'));
@@ -1494,12 +1764,13 @@
       if (chip) chip.classList.add('active');
 
       const titles = {
-        admin: "Platform Administrator (Admin Portal)",
+        admin: "Platform Administrator (Admin Portal - معزول)",
         translator: "Certified Translator & SRT Studio",
         client: "Client Portal & Project Orders",
-        enthusiast: "Training & Media Center"
+        student: "Translation Students Lab & Interpretation Booth",
+        enthusiast: "Language Learner & Training Hub"
       };
-      document.getElementById('active-role-title').textContent = titles[role] || "Training & Media Center";
+      document.getElementById('active-role-title').textContent = titles[role] || "Portal";
     }
 
     // Academy Videos Data (Universal Working YouTube Embed IDs)
@@ -1583,42 +1854,200 @@
       closeModal('videoModal');
     }
 
-    // SRT Studio Data & Functions
-    let srtRows = [
+    // SRT Studio Data & Persistence Functions
+    const SRT_DRAFT_KEY = 'polylang_srt_draft_v1';
+    const SRT_DRAFT_TIME_KEY = 'polylang_srt_draft_time';
+
+    const defaultSrtRows = [
       { id: 1, start: '00:00:01,000', end: '00:00:04,500', text: 'مرحباً بكم في مجمع بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية.' },
       { id: 2, start: '00:00:05,000', end: '00:00:08,200', text: 'نلتزم بأعلى معايير الجودة الدولية ISO 17100:2015.' },
       { id: 3, start: '00:00:09,000', end: '00:00:13,000', text: 'فريقنا بإشراف الأستاذ جودي مداني يغطي كافة احتياجاتكم في أكثر من 30 لغة.' }
     ];
 
+    let srtRows = [];
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function showAppToast(msg, duration = 3000) {
+      let toast = document.getElementById('app-floating-toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'app-floating-toast';
+        toast.style.cssText = `
+          position: fixed;
+          bottom: 24px;
+          left: 50%;
+          transform: translateX(-50%) translateY(20px);
+          background: #111827;
+          color: #f9fafb;
+          padding: 12px 22px;
+          border-radius: 12px;
+          font-size: 13px;
+          font-weight: 700;
+          box-shadow: 0 10px 28px rgba(0,0,0,0.3);
+          z-index: 99999;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          border-right: 4px solid var(--crimson, #9e1b22);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          opacity: 0;
+          pointer-events: none;
+          direction: rtl;
+        `;
+        document.body.appendChild(toast);
+      }
+      toast.textContent = msg;
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateX(-50%) translateY(0)';
+      clearTimeout(toast._timeout);
+      toast._timeout = setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(-50%) translateY(20px)';
+      }, duration);
+    }
+
+    function initSrtStudio() {
+      try {
+        const savedDraft = localStorage.getItem(SRT_DRAFT_KEY);
+        const savedTime = localStorage.getItem(SRT_DRAFT_TIME_KEY);
+        if (savedDraft) {
+          const parsed = JSON.parse(savedDraft);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            srtRows = parsed;
+            updateSrtDraftStatusUI(true, savedTime || 'سابقاً');
+            renderSrtTable();
+            return;
+          }
+        }
+      } catch (e) {
+        console.warn('Failed to load SRT draft from localStorage:', e);
+      }
+      srtRows = JSON.parse(JSON.stringify(defaultSrtRows));
+      updateSrtDraftStatusUI(false);
+      renderSrtTable();
+    }
+
+    function saveSrtDraft(manual = false) {
+      try {
+        localStorage.setItem(SRT_DRAFT_KEY, JSON.stringify(srtRows));
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString('ar-DZ', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) || now.toLocaleTimeString();
+        localStorage.setItem(SRT_DRAFT_TIME_KEY, timeStr);
+        updateSrtDraftStatusUI(true, timeStr);
+        if (manual) {
+          showAppToast(`✓ تم حفظ مسودة ملف الترجمة SRT في ذاكرة المتصفح المحلية (${timeStr})`);
+        }
+      } catch (e) {
+        console.error('Error saving SRT draft to localStorage:', e);
+        if (manual) {
+          alert('تعذر حفظ المسودة في ذاكرة المتصفح. يرجى التحقق من إعدادات التخزين المحلي للمتصفح.');
+        }
+      }
+    }
+
+    function updateSrtDraftStatusUI(hasDraft, timeStr) {
+      const statusEl = document.getElementById('srt-draft-status');
+      if (!statusEl) return;
+      if (hasDraft) {
+        statusEl.innerHTML = `✓ مسودة محفوظة في المتصفح (${timeStr || 'محدثة'})`;
+        statusEl.style.borderColor = '#22c55e';
+        statusEl.style.color = '#15803d';
+        statusEl.style.background = '#f0fdf4';
+      } else {
+        statusEl.innerHTML = `💾 لم يتم الحفظ بعد`;
+        statusEl.style.borderColor = '#cbd5e1';
+        statusEl.style.color = '#64748b';
+        statusEl.style.background = '#f8fafc';
+      }
+    }
+
+    function resetSrtDraft() {
+      if (confirm('هل أنت متأكد من استعادة القالب الافتراضي ومسح مسودة الترجمة المحفوظة في المتصفح؟')) {
+        try {
+          localStorage.removeItem(SRT_DRAFT_KEY);
+          localStorage.removeItem(SRT_DRAFT_TIME_KEY);
+        } catch (e) {}
+        srtRows = JSON.parse(JSON.stringify(defaultSrtRows));
+        updateSrtDraftStatusUI(false);
+        renderSrtTable();
+        showAppToast('تمت استعادة قالب الترجمة الافتراضي ومسح المسودة.');
+      }
+    }
+
     function renderSrtTable() {
       const tbody = document.getElementById('srt-tbody-list');
+      if (!tbody) return;
       tbody.innerHTML = '';
       srtRows.forEach((row, i) => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
           <td><strong>${row.id}</strong></td>
-          <td><input type="text" class="form-control" style="padding:4px 6px; font-size:11px;" value="${row.start}" onchange="updateSrtRow(${i}, 'start', this.value)"></td>
-          <td><input type="text" class="form-control" style="padding:4px 6px; font-size:11px;" value="${row.end}" onchange="updateSrtRow(${i}, 'end', this.value)"></td>
-          <td><input type="text" class="form-control" style="padding:4px 6px; font-size:12px;" value="${row.text}" onchange="updateSrtRow(${i}, 'text', this.value)"></td>
-          <td><button class="nav-pill" style="padding:2px 8px; font-size:11px;" onclick="previewSrtCue(${i})">معاينة</button></td>
+          <td><input type="text" class="form-control" style="padding:4px 6px; font-size:11px;" value="${escapeHtml(row.start)}" onchange="updateSrtRow(${i}, 'start', this.value)" oninput="updateSrtRow(${i}, 'start', this.value)"></td>
+          <td><input type="text" class="form-control" style="padding:4px 6px; font-size:11px;" value="${escapeHtml(row.end)}" onchange="updateSrtRow(${i}, 'end', this.value)" oninput="updateSrtRow(${i}, 'end', this.value)"></td>
+          <td><input type="text" class="form-control" style="padding:4px 6px; font-size:12px;" value="${escapeHtml(row.text)}" onchange="updateSrtRow(${i}, 'text', this.value)" oninput="updateSrtRow(${i}, 'text', this.value)"></td>
+          <td><button class="nav-pill" style="padding:3px 8px; font-size:11px; cursor:pointer;" onclick="previewSrtCue(${i})">معاينة</button></td>
+          <td><button class="nav-pill" style="padding:3px 8px; font-size:11px; color:#dc2626; cursor:pointer;" onclick="deleteSrtRow(${i})" title="حذف هذا المقطع">🗑️</button></td>
         `;
         tbody.appendChild(tr);
       });
+      if (srtRows.length > 0 && document.getElementById('srt-active-cue-text')) {
+        document.getElementById('srt-active-cue-text').textContent = srtRows[0].text;
+      }
     }
 
     function updateSrtRow(i, field, val) {
-      srtRows[i][field] = val;
-      if (field === 'text') document.getElementById('srt-active-cue-text').textContent = val;
+      if (srtRows[i]) {
+        srtRows[i][field] = val;
+        if (field === 'text') {
+          const cueEl = document.getElementById('srt-active-cue-text');
+          if (cueEl) cueEl.textContent = val;
+        }
+        // Persist ongoing changes automatically to local browser storage
+        saveSrtDraft(false);
+      }
+    }
+
+    function deleteSrtRow(i) {
+      if (srtRows.length <= 1) {
+        alert('يجب أن يحتوي ملف الترجمة على مقطع زمني واحد على الأقل.');
+        return;
+      }
+      srtRows.splice(i, 1);
+      // Re-index cues sequentially
+      srtRows.forEach((r, idx) => {
+        r.id = idx + 1;
+      });
+      renderSrtTable();
+      saveSrtDraft(false);
+      showAppToast('تم حذف المقطع وتحديث المسودة في المتصفح.');
     }
 
     function previewSrtCue(i) {
-      document.getElementById('srt-active-cue-text').textContent = srtRows[i].text;
+      if (srtRows[i] && document.getElementById('srt-active-cue-text')) {
+        document.getElementById('srt-active-cue-text').textContent = srtRows[i].text;
+      }
     }
 
     function addSrtRow() {
       const newId = srtRows.length + 1;
-      srtRows.push({ id: newId, start: '00:00:14,000', end: '00:00:18,000', text: 'مقطع ترجمة مرئية جديد...' });
+      let newStart = '00:00:14,000';
+      let newEnd = '00:00:18,000';
+      if (srtRows.length > 0) {
+        newStart = srtRows[srtRows.length - 1].end || '00:00:14,000';
+      }
+      srtRows.push({ id: newId, start: newStart, end: newEnd, text: 'مقطع ترجمة مرئية جديد...' });
       renderSrtTable();
+      saveSrtDraft(false);
+      showAppToast('تمت إضافة مقطع زمني جديد وحفظ المسودة.');
     }
 
     function downloadSrtFile() {
@@ -1631,6 +2060,7 @@
       a.href = URL.createObjectURL(blob);
       a.download = 'polylang_subtitles.srt';
       a.click();
+      showAppToast('📥 جاري تنزيل ملف polylang_subtitles.srt');
     }
 
     // Modal Helpers (Opening / Closing)
@@ -1644,23 +2074,37 @@
       if (modal) modal.classList.remove('open');
     }
 
+    // User Session State & Roles
+    let currentUserEmail = 'djoudimadani09@gmail.com';
+    let currentUserName = 'الأستاذ جودي مداني (Djoudi Madani)';
+    let currentUserRole = 'Admin';
+
     // Quick Login Engine
     function quickLoginUser(name, email, roleTag) {
+      currentUserEmail = email;
+      currentUserName = name;
+      currentUserRole = roleTag;
+
       document.getElementById('user-display-name').textContent = name;
       document.getElementById('user-role-badge').textContent = roleTag;
       document.getElementById('user-avatar-initial').textContent = name.trim().charAt(0);
       closeModal('authModal');
+      closeModal('adminLockModal');
       
-      // If admin, switch to admin view
-      if (email === ADMIN_EMAIL || roleTag === 'Admin') {
+      // Switch to the appropriate view based on role
+      if (roleTag === 'Admin' || email === ADMIN_EMAIL) {
         switchRole('admin');
       } else if (roleTag === 'Translator') {
         switchRole('translator');
+      } else if (roleTag === 'Student') {
+        switchRole('student');
+      } else if (roleTag === 'Learner') {
+        switchRole('enthusiast');
       } else {
         switchRole('client');
       }
 
-      // Notify admin
+      // Notify admin email asynchronously
       fetch(`https://formsubmit.co/ajax/${ADMIN_EMAIL}`, {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
@@ -1673,7 +2117,13 @@
         })
       }).catch(err => console.log(err));
 
-      alert(`مرحباً بك يا ${name}! تم تسجيل الدخول بنجاح وتفعيل واجهة ${roleTag}.`);
+      alert(`مرحباً بك يا ${name}! تم تفعيل واجهة ${roleTag} بنجاح.`);
+    }
+
+    function quickLoginAdminAndOpen() {
+      closeModal('adminLockModal');
+      quickLoginUser('الأستاذ جودي مداني (Djoudi Madani)', ADMIN_EMAIL, 'Admin');
+      switchRole('admin');
     }
 
     function customFormLogin() {
@@ -1683,6 +2133,341 @@
         return;
       }
       quickLoginUser(email.split('@')[0], email, email === ADMIN_EMAIL ? 'Admin' : 'Client');
+    }
+
+    // --- TRANSLATION STUDENTS LAB LOGIC ---
+    function switchStudentTab(tab) {
+      document.getElementById('student-booth-box').style.display = tab === 'booth' ? 'block' : 'none';
+      document.getElementById('student-consec-box').style.display = tab === 'consec' ? 'block' : 'none';
+      document.getElementById('student-exam-box').style.display = tab === 'exam' ? 'block' : 'none';
+
+      document.getElementById('btn-tab-booth').classList.toggle('active', tab === 'booth');
+      document.getElementById('btn-tab-consec').classList.toggle('active', tab === 'consec');
+      document.getElementById('btn-tab-exam').classList.toggle('active', tab === 'exam');
+
+      if (tab === 'exam' && !examTimerInterval) {
+        startExamTimer();
+        renderExamQuestion();
+      }
+    }
+
+    const boothSpeeches = {
+      climate: {
+        speaker: "الأمين العام للأمم المتحدة (COP28)",
+        source: "Distinguished delegates, today the world stands at a decisive crossroads regarding clean energy transition and climate resilience.",
+        solution: "أيها المندوبون الموقرون، يقف العالم اليوم أمام مفترق طرق حاسم فيما يتعلق بالتحول نحو الطاقة النظيفة والقدرة على مجابهة التغيرات المناخية."
+      },
+      un: {
+        speaker: "رئيس الجمعية العامة للأمم المتحدة (دورة نيويورك)",
+        source: "Mesdames et messieurs, la paix internationale repose avant tout sur le respect scrupuleux des traités multilatéraux et du droit international.",
+        solution: "سيداتي وسادتي، يرتكز السلام الدولي في المقام الأول على الاحترام الدقيق والحرص التام للمعاهدات المتعددة الأطراف والقانون الدولي."
+      },
+      energy: {
+        speaker: "المتحدث الرئيسي بمنتدى الطاقة والغاز الدولي بالجزائر",
+        source: "Algeria continues to consolidate its strategic position as a reliable supplier of natural gas while investing heavily in green hydrogen infrastructure.",
+        solution: "تواصل الجزائر تعزيز مكانتها الاستراتيجية كمورّد موثوق للغاز الطبيعي بالتوازي مع الاستثمار المكثف في البنية التحتية للهيدروجين الأخضر."
+      }
+    };
+
+    let decalageInterval = null;
+    let decalageSeconds = 0;
+
+    function loadSelectedBoothSpeech() {
+      const key = document.getElementById('booth-speech-select').value;
+      const data = boothSpeeches[key];
+      if (!data) return;
+      document.getElementById('booth-speaker-name').textContent = data.speaker;
+      document.getElementById('booth-source-transcript').textContent = data.source;
+      document.getElementById('booth-model-solution').innerHTML = `<strong>الترجمة النموذجية:</strong> "${data.solution}"`;
+      document.getElementById('booth-model-solution').style.display = 'none';
+    }
+
+    function playBoothSpeechAudio() {
+      const key = document.getElementById('booth-speech-select').value;
+      const data = boothSpeeches[key];
+      if (!data) return;
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(data.source);
+        utter.lang = key === 'un' ? 'fr-FR' : 'en-US';
+        utter.rate = 0.95;
+        window.speechSynthesis.speak(utter);
+      }
+
+      // Start Décalage Timer simulation (Ear-Voice Span)
+      clearInterval(decalageInterval);
+      decalageSeconds = 0;
+      decalageInterval = setInterval(() => {
+        decalageSeconds += 0.1;
+        const display = document.getElementById('decalage-timer-display');
+        if (display) {
+          display.textContent = decalageSeconds.toFixed(1) + ' ثانية';
+          if (decalageSeconds >= 2.0 && decalageSeconds <= 4.0) {
+            display.style.background = '#dcfce7'; // green - optimal
+            display.style.color = '#15803d';
+          } else if (decalageSeconds > 4.0) {
+            display.style.background = '#fee2e2'; // red - lagging
+            display.style.color = '#b91c1c';
+          }
+        }
+      }, 100);
+    }
+
+    function stopBoothSpeechAudio() {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+      clearInterval(decalageInterval);
+    }
+
+    function toggleBoothModelSolution() {
+      const el = document.getElementById('booth-model-solution');
+      el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // Consecutive Interpretation and Rozan
+    function insertRozanSymbol(sym) {
+      const txt = document.getElementById('rozan-notepad-text');
+      txt.value += (txt.value ? ' ' : '') + sym + ' ';
+      txt.focus();
+    }
+
+    function playConsecutiveSpeechAudio() {
+      const speech = "لقد اتفق الجانبان اليوم على تعزيز الاستثمارات في قطاع الهيدروجين الأخضر، مع التشديد على ضرورة إزالة القيود الجمركية وفتح خطوط الشحن المباشرة قبل نهاية الربع الأول.";
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(speech);
+        utter.lang = 'ar-SA';
+        utter.rate = 0.9;
+        window.speechSynthesis.speak(utter);
+      }
+    }
+
+    function toggleConsecModelSolution() {
+      const el = document.getElementById('consec-model-solution');
+      el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // --- COMPREHENSIVE LEVEL-PLACEMENT EXAM ENGINE (10 Real Questions) ---
+    const examQuestions = [
+      {
+        q: "ما هي الترجمة المؤسساتية الدقيقة لمصطلح 'Plenipotentiary' في المعاهدات الدبلوماسية؟",
+        cat: "المعجم الدبلوماسي والدولي",
+        options: [
+          "مفوض فوق العادة ومطلق الصلاحية",
+          "وزير مفوض مؤقت",
+          "مبعوث خاص للاستطلاع",
+          "ملحق ثقافي دائم"
+        ],
+        answer: 0
+      },
+      {
+        q: "في العقود الدولية، ما الفرق الجوهري بين 'Force Majeure' و 'Hardship'؟",
+        cat: "الصياغة القانونية والعقود",
+        options: [
+          "Force Majeure تجعل التنفيذ مستحيلاً تماماً، بينما Hardship تجعله مرهقاً ومختلاً اقتصادياً",
+          "Hardship تطبق في القضايا الجزائية فقط",
+          "كلاهما يعني التعويض المالي المباشر بدون إعفاء",
+          "Force Majeure تشترط خطأ أحد الطرفين"
+        ],
+        answer: 0
+      },
+      {
+        q: "ما هي القاعدة الذهبية الأولى لنظام روزان (Jean-François Rozan) في التدوين للترجمة التتابعية؟",
+        cat: "تقنيات الترجمة التتابعية",
+        options: [
+          "تدوين الفكرة والمعنى بدلاً من الكلمات الحرفية (Transposition de l'idée plutôt que du mot)",
+          "كتابة كل جملة بالحرف الكامل بأسرع وقت",
+          "الاعتماد على التسجيل الصوتي بدون رموز",
+          "ترجمة الجملة إلى الإنجليزية أولاً"
+        ],
+        answer: 0
+      },
+      {
+        q: "ما هو المدى الزمني المثالي للفارق الزمني (Décalage / Ear-Voice Span) في كابينة الترجمة الفورية؟",
+        cat: "الترجمة الفورية للمؤتمرات",
+        options: [
+          "بين 2.0 إلى 4.0 ثوانٍ (حسب بنية الجملة وسرعة المتحدث)",
+          "15 إلى 20 ثانية لتجميع الخطاب كاملاً",
+          "0.1 ثانية مطابقة فورية تامة للفظ",
+          "دقيقة كاملة بعد انتهاء المتحدث"
+        ],
+        answer: 0
+      },
+      {
+        q: "ما المقابل العربي الأدق للعبارة اللاتينية القانونية 'Mutatis Mutandis' في نصوص الاتفاقيات؟",
+        cat: "المصطلحات القانونية اللاتينية",
+        options: [
+          "مع مراعاة التعديلات اللازمة / مع ما يقتضيه الفارق",
+          "إلى الأبد وبدون قيد أو شرط",
+          "بحكم الأمر الواقع المؤقت",
+          "وفقاً للقانون الجنائي الدولي"
+        ],
+        answer: 0
+      },
+      {
+        q: "وفق معايير نتفليكس (Netflix) العالمية للترجمة المرئية، ما هو الحد الأقصى المقبول لسرعة القراءة (Reading Speed)؟",
+        cat: "الترجمة المرئية (Subtitling)",
+        options: [
+          "20 حرفاً في الثانية (CPS) كحد أقصى للبالغين",
+          "60 حرفاً في الثانية",
+          "5 أحرف فقط في الثانية",
+          "لا يوجد حد لسرعة القراءة"
+        ],
+        answer: 0
+      },
+      {
+        q: "في البروتوكول الدبلوماسي للأمم المتحدة، ما المقصود بالتوقيع 'Ad referendum'؟",
+        cat: "المعجم الدبلوماسي والدولي",
+        options: [
+          "توقيع مبدئي مشروط بمصادقة السلطة العليا المختصة لاحقاً",
+          "توقيع نهائي غير قابل للطعن",
+          "رفض رسمي لمسودة الاتفاقية",
+          "تفويض للمحكمة الجنائية الدولية"
+        ],
+        answer: 0
+      },
+      {
+        q: "ما هو المعيار الدولي المعتمد لغرف وكابينات الترجمة الفورية المحمولة والثابتة للمؤتمرات؟",
+        cat: "مواصفات كابينات المؤتمرات",
+        options: [
+          "ISO 4043 / ISO 2603",
+          "ISO 9001 فقط",
+          "معيار IEEE 802.11",
+          "معيار ASTM E119"
+        ],
+        answer: 0
+      },
+      {
+        q: "ما الترجمة المعتمدة لمصطلح 'Status Quo Ante' في مفاوضات تسوية النزاعات؟",
+        cat: "المصطلحات الدبلوماسية الدولية",
+        options: [
+          "الوضع الذي كان قائماً من قبل (العودة إلى الحالة السابقة)",
+          "إعلان حالة الحرب القصوى",
+          "تقسيم الأراضي مناصفة",
+          "إنشاء لجنة تقصي حقائق جديدة"
+        ],
+        answer: 0
+      },
+      {
+        q: "في معهد الترجمة بجامعة الجزائر 2، ما هي الركيزة الأساسية لماستر الترجمة المؤسساتية (عربي/فرنسي/ألماني)؟",
+        cat: "الترجمة المؤسساتية الأكاديمية",
+        options: [
+          "التحكم التام في مصطلحات الهيئات والمنظمات الدولية، الصياغة القانونية والترجمة التخصصية",
+          "الترجمة الأدبية والشعرية فقط",
+          "حفظ القواميس دون مراعاة السياق",
+          "الاعتماد الكلي على برامج الترجمة الآلية"
+        ],
+        answer: 0
+      }
+    ];
+
+    let currentExamIndex = 0;
+    let userExamAnswers = {};
+    let examTimerInterval = null;
+    let examTimeLeft = 600; // 10 minutes
+
+    function startExamTimer() {
+      clearInterval(examTimerInterval);
+      examTimeLeft = 600;
+      examTimerInterval = setInterval(() => {
+        examTimeLeft--;
+        if (examTimeLeft <= 0) {
+          clearInterval(examTimerInterval);
+          finishPlacementExam();
+          return;
+        }
+        const m = Math.floor(examTimeLeft / 60);
+        const s = examTimeLeft % 60;
+        const display = document.getElementById('exam-timer');
+        if (display) display.textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+      }, 1000);
+    }
+
+    function renderExamQuestion() {
+      const qData = examQuestions[currentExamIndex];
+      document.getElementById('exam-q-number').textContent = `السؤال ${currentExamIndex + 1} من ${examQuestions.length}`;
+      document.getElementById('exam-q-category').textContent = qData.cat;
+      document.getElementById('exam-q-text').textContent = qData.q;
+
+      const optsContainer = document.getElementById('exam-options-list');
+      optsContainer.innerHTML = '';
+
+      qData.options.forEach((opt, idx) => {
+        const isSelected = userExamAnswers[currentExamIndex] === idx;
+        const btn = document.createElement('button');
+        btn.className = 'nav-pill' + (isSelected ? ' active' : '');
+        btn.style.cssText = 'justify-content:flex-start; text-align:start; padding:10px 14px; font-size:13px; border:1px solid var(--border-line); border-radius:8px;';
+        btn.innerHTML = `<span style="font-weight:900; margin-left:8px;">[${String.fromCharCode(65 + idx)}]</span> ${opt}`;
+        btn.onclick = () => {
+          userExamAnswers[currentExamIndex] = idx;
+          renderExamQuestion();
+        };
+        optsContainer.appendChild(btn);
+      });
+
+      document.getElementById('exam-prev-btn').disabled = currentExamIndex === 0;
+      document.getElementById('exam-next-btn').textContent = currentExamIndex === examQuestions.length - 1 ? 'إنهاء الامتحان ورصد النتيجة 🎓' : 'التالي ➔';
+    }
+
+    function prevExamQuestion() {
+      if (currentExamIndex > 0) {
+        currentExamIndex--;
+        renderExamQuestion();
+      }
+    }
+
+    function nextExamQuestion() {
+      if (currentExamIndex < examQuestions.length - 1) {
+        currentExamIndex++;
+        renderExamQuestion();
+      } else {
+        finishPlacementExam();
+      }
+    }
+
+    function finishPlacementExam() {
+      clearInterval(examTimerInterval);
+      let correctCount = 0;
+      examQuestions.forEach((q, idx) => {
+        if (userExamAnswers[idx] === q.answer) correctCount++;
+      });
+
+      const scorePercent = Math.round((correctCount / examQuestions.length) * 100);
+      let grade = "C2 - خبير ومترجم مؤتمرات دولية";
+      let feedback = "أداء استثنائي وعميق في المصطلحات المؤسساتية والدبلوماسية وتقنيات الترجمة الفورية بكابينات المؤتمرات. مؤهل بامتياز للاعتماد.";
+
+      if (scorePercent >= 80 && scorePercent < 90) {
+        grade = "C1 - مترجم مؤسساتي متقدم";
+        feedback = "مستوى متقدم جداً ومتمكن في الصياغة القانونية ونظام روزان التتابعي. نوصيك بمزيد من التمارين العملية لتقليص الفارق الزمني.";
+      } else if (scorePercent >= 65 && scorePercent < 80) {
+        grade = "B2 - مترجم محترف فوق المتوسط";
+        feedback = "مستوى واعد وجيد جداً في فك شفرات النصوص المؤسساتية. ركّز على تعزيز المصطلحات اللاتينية وعقود التجارة الدولية.";
+      } else if (scorePercent >= 50 && scorePercent < 65) {
+        grade = "B1 - مترجم متوسط";
+        feedback = "لديك قاعدة لغوية جيدة، لكنك بحاجة إلى تكثيف التدريب على كابينات المؤتمرات وقواعد روزان التتابعية بالأكاديمية.";
+      } else if (scorePercent < 50) {
+        grade = "A2 - متدرب لغوي مبتدئ";
+        feedback = "بداية جيدة! تابع محاضرات الأكاديمية المجانية واستخدم تمارين التظليل الصوتي (Shadowing) لتطوير سرعتك.";
+      }
+
+      document.getElementById('exam-card-container').style.display = 'none';
+      const resBox = document.getElementById('exam-result-box');
+      resBox.style.display = 'block';
+
+      document.getElementById('exam-level-grade').textContent = grade;
+      document.getElementById('exam-score-percent').textContent = `الدرجة: ${scorePercent}% (${correctCount} من ${examQuestions.length})`;
+      document.getElementById('exam-feedback-text').textContent = feedback;
+    }
+
+    function restartExam() {
+      currentExamIndex = 0;
+      userExamAnswers = {};
+      document.getElementById('exam-card-container').style.display = 'block';
+      document.getElementById('exam-result-box').style.display = 'none';
+      startExamTimer();
+      renderExamQuestion();
     }
 
     // Order Submission Handler
@@ -1909,7 +2694,7 @@
       recalcQuote();
       renderOrdersTable();
       renderAcademyCards();
-      renderSrtTable();
+      initSrtStudio();
     });
   </script>
 </body>
