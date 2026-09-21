@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مجمع بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية | Polylang Hub</title>
+  <meta name="description" content="مجمع بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية ISO 17100:2015. ترجمة قانونية، طبية، تقنية وفورية معتمدة لدى السفارات والوزارات، وأكاديمية الماستركلاس.">
+  <link rel="icon" type="image/jpeg" href="polylang_logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #b91c1c;
+      --primary-dark: #991b1b;
+      --primary-light: #fef2f2;
+      --gold: #d97706;
+      --gold-light: #fef3c7;
+      --success: #15803d;
+      --success-light: #dcfce7;
+      --dark: #0f172a;
+      --dark-card: #1e293b;
+      --gray-bg: #f8fafc;
+      --gray-border: #e2e8f0;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --radius: 14px;
+      --shadow: 0 4px 20px -2px rgba(0,0,0,0.07);
+      --shadow-lg: 0 12px 32px -4px rgba(0,0,0,0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Cairo', 'Inter', system-ui, sans-serif;
+      background-color: var(--gray-bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* RTL / LTR Dynamic styling */
+    html[dir="ltr"] body {
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    /* Header & Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-border);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand img {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--primary);
+      box-shadow: 0 2px 8px rgba(185, 28, 28, 0.2);
+    }
+
+    .brand-text h1 {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      line-height: 1.2;
+    }
+
+    .brand-text span {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .nav-menu a {
+      text-decoration: none;
+      color: var(--text-main);
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .nav-menu a:hover, .nav-menu a.active {
+      color: var(--primary);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      box-shadow: 0 4px 12px rgba(185, 28, 28, 0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(185, 28, 28, 0.35);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary-light);
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold), #b45309);
+      color: white;
+    }
+
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+
+    .select-pill {
+      background: white;
+      border: 1px solid var(--gray-border);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-main);
+      cursor: pointer;
+      font-family: inherit;
+      outline: none;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #fff5f5 0%, #ffffff 50%, #fffbf0 100%);
+      padding: 60px 20px 40px;
+      border-bottom: 1px solid var(--gray-border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .badge-iso {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: var(--gold-light);
+      border: 1px solid #fde68a;
+      color: #92400e;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .hero h2 {
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--dark);
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+
+    .hero h2 span {
+      color: var(--primary);
+    }
+
+    .hero p {
+      font-size: 16px;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+      line-height: 1.8;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero-card-preview {
+      background: white;
+      padding: 24px;
+      border-radius: 20px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--gray-border);
+      width: 100%;
+      max-width: 400px;
+      position: relative;
+    }
+
+    .trust-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 24px;
+      padding: 14px;
+      background: var(--gray-bg);
+      border-radius: 12px;
+      border: 1px solid var(--gray-border);
+      text-align: center;
+    }
+
+    .trust-item h4 {
+      font-size: 13px;
+      color: var(--primary-dark);
+      font-weight: 800;
+    }
+
+    .trust-item span {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    /* Main Container & Sections */
+    .main-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .section-title h3 {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .section-title p {
+      color: var(--text-muted);
+      font-size: 14px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Calculator Card */
+    .calc-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--gray-border);
+      margin-bottom: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text-main);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid var(--gray-border);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+    }
+
+    .calc-result-box {
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      color: white;
+      padding: 28px;
+      border-radius: 16px;
+      text-align: center;
+    }
+
+    .calc-result-box h5 {
+      color: #94a3b8;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .calc-result-box .price-display {
+      font-size: 34px;
+      font-weight: 900;
+      color: #fbbf24;
+      margin-bottom: 8px;
+    }
+
+    .calc-result-box p {
+      font-size: 12px;
+      color: #cbd5e1;
+      margin-bottom: 18px;
+    }
+
+    /* Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--gray-border);
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary);
+    }
+
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    .service-card h4 {
+      font-size: 17px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--dark);
+    }
+
+    .service-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+
+    .service-card .service-rate {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 14px;
+    }
+
+    /* Subtitling Studio Interactive Tab */
+    .srt-studio {
+      background: white;
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--gray-border);
+      margin-bottom: 60px;
+    }
+
+    .srt-player-mockup {
+      background: #090d16;
+      border-radius: 14px;
+      height: 220px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      margin-bottom: 20px;
+      border: 1px solid #334155;
+      overflow: hidden;
+    }
+
+    .srt-subtitle-box {
+      position: absolute;
+      bottom: 20px;
+      background: rgba(0, 0, 0, 0.85);
+      border-radius: 6px;
+      padding: 8px 18px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #f8fafc;
+      text-align: center;
+      max-width: 85%;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .srt-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .srt-table th, .srt-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--gray-border);
+      text-align: start;
+    }
+
+    .srt-table th {
+      background: var(--gray-bg);
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    /* Academy Courses Section */
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 22px;
+      margin-bottom: 60px;
+    }
+
+    .course-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--gray-border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .course-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .course-card h4 {
+      font-size: 17px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--dark);
+    }
+
+    .course-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .course-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      padding-top: 12px;
+      border-top: 1px solid var(--gray-border);
+      margin-bottom: 14px;
+    }
+
+    /* Pricing Plans */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+
+    .plan-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--gray-border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .plan-card.featured {
+      border: 2px solid var(--primary);
+      background: linear-gradient(180deg, #fff8f8 0%, #ffffff 100%);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .plan-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary);
+      color: white;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 14px;
+      border-radius: 20px;
+    }
+
+    .plan-card h4 {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .plan-price {
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--primary-dark);
+      margin-bottom: 16px;
+    }
+
+    .plan-features {
+      list-style: none;
+      font-size: 13px;
+      color: var(--text-main);
+      margin-bottom: 24px;
+      flex-grow: 1;
+    }
+
+    .plan-features li {
+      padding: 6px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .plan-features li::before {
+      content: "✓";
+      color: var(--success);
+      font-weight: 900;
+    }
+
+    /* Modals */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background: white;
+      border-radius: 20px;
+      max-width: 520px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 28px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      background: var(--gray-bg);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      color: var(--text-muted);
+    }
+
+    html[dir="ltr"] .modal-close {
+      left: auto;
+      right: 18px;
+    }
+
+    /* Certificate View in Modal */
+    .certificate-frame {
+      border: 6px double #d97706;
+      padding: 24px;
+      background: #fefce8;
+      border-radius: 12px;
+      text-align: center;
+      margin-top: 16px;
+    }
+
+    /* Footer */
+    footer {
+      background: #0f172a;
+      color: #94a3b8;
+      padding: 50px 20px 24px;
+      font-size: 13px;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 36px;
+      margin-bottom: 40px;
+    }
+
+    .footer-col h4 {
+      color: white;
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 8px;
+    }
+
+    .footer-col ul li a {
+      color: #94a3b8;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul li a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 20px;
+      border-top: 1px solid #1e293b;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 12px;
+    }
+
+    @media (max-width: 860px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+      }
+      .calc-card {
+        grid-template-columns: 1fr;
+      }
+      .footer-container {
+        grid-template-columns: 1fr 1fr;
+      }
+      .nav-menu {
+        display: none;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .footer-container {
+        grid-template-columns: 1fr;
+      }
+      .hero h2 {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="brand">
+        <img src="polylang_logo.jpg" alt="Polylang Hub Logo" onerror="this.src='https://images.unsplash.com/photo-1544717305-2782549b5136?w=100&h=100&fit=crop'">
+        <div class="brand-text">
+          <h1 id="nav-brand-title">مجمع بوليلانغ للترجمة</h1>
+          <span id="nav-brand-sub">Polylang Hub • ISO 17100:2015</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="#services" id="link-services">خدمات الترجمة</a></li>
+          <li><a href="#srt-studio" id="link-srt">محرر SRT المرئي</a></li>
+          <li><a href="#academy" id="link-academy">الأكاديمية والماستركلاس</a></li>
+          <li><a href="#pricing" id="link-pricing">الأسعار والباقات</a></li>
+          <li><a href="#contact" id="link-contact">تواصل معنا</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Currency Selector -->
+        <select id="currency-select" class="select-pill" onchange="updateCurrency(this.value)">
+          <option value="DZD">🇩🇿 د.ج (DZD)</option>
+          <option value="USD">🇺🇸 $ (USD)</option>
+          <option value="EUR">🇪🇺 € (EUR)</option>
+        </select>
+
+        <!-- Language Toggle -->
+        <button id="lang-toggle-btn" class="btn btn-outline btn-sm" onclick="toggleLanguage()">
+          English
+        </button>
+
+        <!-- Order CTA -->
+        <button class="btn btn-primary btn-sm" onclick="openOrderModal('طلب ترجمة عام')">
+          <span id="btn-order-nav">طلب ترجمة</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-container">
+      <div>
+        <div class="badge-iso">
+          <span>🏆</span>
+          <span id="hero-badge">معتمد رسمياً وفق معايير الجودة الدولية ISO 17100:2015</span>
+        </div>
+        <h2 id="hero-title">الرائد في <span>الترجمة المعتمدة</span> وتجهيز المؤتمرات الدولية</h2>
+        <p id="hero-desc">
+          نخبة من كبار المترجمين المحلفين المعتمدين لدى السفارات، الوزارات والهيئات الدولية. ترجمة قانونية، طبية، تقنية، وتجهيز كامل لكابينات الترجمة الفورية في المؤتمرات والقمم.
+        </p>
+
+        <div class="hero-cta">
+          <button class="btn btn-primary" onclick="openOrderModal('ترجمة معتمدة رسمية')">
+            <span>📄</span>
+            <span id="hero-cta-order">طلب ترجمة معتمدة الآن</span>
+          </button>
+          <a href="#academy" class="btn btn-gold">
+            <span>🎓</span>
+            <span id="hero-cta-academy">استكشاف الماستركلاس</span>
+          </a>
+          <a href="#srt-studio" class="btn btn-outline">
+            <span>🎬</span>
+            <span id="hero-cta-srt">محرر SRT المرئي</span>
+          </a>
+        </div>
+
+        <div class="trust-strip">
+          <div class="trust-item">
+            <h4>ISO 17100:2015</h4>
+            <span id="trust-1">معايير دولية صارمة</span>
+          </div>
+          <div class="trust-item">
+            <h4 id="trust-2-title">اعتماد رسمي محلف</h4>
+            <span id="trust-2">مقبول لدى السفارات</span>
+          </div>
+          <div class="trust-item">
+            <h4>100% NDA</h4>
+            <span id="trust-3">سرية تامة للمستندات</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-card-preview">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+            <div style="width:40px; height:40px; border-radius:10px; background:#fef2f2; color:#b91c1c; display:flex; align-items:center; justify-content:center; font-size:20px;">
+              ⚖️
+            </div>
+            <div>
+              <h4 style="font-size:15px; font-weight:800;">شهادة مطابقة رسمية</h4>
+              <span style="font-size:11px; color:#64748b;">ختم وتوقيع مترجم رسمي محلف</span>
+            </div>
+          </div>
+          <p style="font-size:12px; color:#475569; line-height:1.7; margin-bottom:16px;">
+            جميع الترجمات القانونية مصحوبة بتعهد دقة المطابقة، والختم الرسمي المقبول لدى مصالح الهجرة، القنصليات والجامعات العالمية.
+          </p>
+          <div style="background:#f8fafc; padding:12px; border-radius:10px; border:1px solid #e2e8f0; font-size:11px; display:flex; justify-content:space-between;">
+            <span>⏱️ مدة التسليم القياسية:</span>
+            <strong style="color:#b91c1c;">24 - 48 ساعة</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Container -->
+  <main class="main-content">
+
+    <!-- Interactive Cost & Word Calculator -->
+    <div class="calc-card">
+      <div>
+        <h4 style="font-size: 19px; font-weight: 800; margin-bottom: 6px; color: var(--dark);" id="calc-title">
+          حاسبة الكلمات والأسعار الفورية 🧮
+        </h4>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 18px;" id="calc-desc">
+          احسب التكلفة التقديرية لمشروعك مباشرة بناءً على التخصص وعدد الكلمات.
+        </p>
+
+        <div class="form-group">
+          <label id="calc-label-words">عدد الكلمات التقريبي في المستند:</label>
+          <input type="number" id="calc-words" class="form-control" value="1200" min="50" step="50" oninput="calculateEstimate()">
+        </div>
+
+        <div class="form-group">
+          <label id="calc-label-field">مجال التخصص:</label>
+          <select id="calc-field" class="form-control" onchange="calculateEstimate()">
+            <option value="legal">ترجمة قانونية / محلفة رسمية (عقود، أحكام، شهادات)</option>
+            <option value="medical">ترجمة طبية / صيدلانية (تقارير، أبحاث سريرية)</option>
+            <option value="technical">ترجمة تقنية وهندسية ومناقصات</option>
+            <option value="subtitling">ترجمة مرئية وتوقيت SRT (للدقيقة/المقطع)</option>
+            <option value="general">ترجمة عامة وتجارية</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="calc-result-box">
+        <h5 id="calc-res-title">التكلفة التقديرية الإجمالية</h5>
+        <div class="price-display" id="calc-res-price">3,600 د.ج</div>
+        <p id="calc-res-sub">شاملة التدقيق اللغوي وختم الاعتماد وفق ISO 17100</p>
+        <button class="btn btn-gold" onclick="openOrderModal('حساب التكلفة: ' + document.getElementById('calc-words').value + ' كلمة')">
+          <span id="calc-res-btn">تأكيد الطلب بهذه التكلفة</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Section: Services -->
+    <section id="services">
+      <div class="section-title">
+        <h3 id="sec-services-title">خدمات مجمع بوليلانغ المتخصصة</h3>
+        <p id="sec-services-desc">حلول لغوية رفيعة المستوى مصممة لتلبية متطلبات الهيئات الدولية والشركات متعددة الجنسيات.</p>
+      </div>
+
+      <div class="services-grid">
+        <!-- Service 1 -->
+        <div class="service-card">
+          <div>
+            <div class="service-icon">⚖️</div>
+            <h4 id="srv-1-title">الترجمة القانونية والمحلفة</h4>
+            <p id="srv-1-desc">ترجمة العقود، الاتفاقيات التجارية، الأحكام القضائية، المستندات الرسمية وشهادات الحالة المدنية مع الختم المعتمد المقبول في كافة السفارات والقنصليات.</p>
+          </div>
+          <div>
+            <div class="service-rate" id="srv-1-rate">يبدأ من 3.00 د.ج / كلمة (مترجم محلف)</div>
+            <button class="btn btn-outline btn-sm" style="width: 100%;" onclick="openOrderModal('الترجمة القانونية والمحلفة')">طلب الخدمة</button>
+          </div>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="service-card">
+          <div>
+            <div class="service-icon">🎙️</div>
+            <h4 id="srv-2-title">الترجمة الفورية للمؤتمرات</h4>
+            <p id="srv-2-desc">تجهيز كامل للقمم والملتقيات الدولية: كابينات ترجمة عازلة للصوت ISO 4043، أنظمة ميكروفونات وسماعات رقمية لاسلكية، مع نخبة من كبار المترجمين الفوريين.</p>
+          </div>
+          <div>
+            <div class="service-rate" id="srv-2-rate">باقات مخصصة للمؤتمرات باليوم/الساعة</div>
+            <button class="btn btn-outline btn-sm" style="width: 100%;" onclick="openOrderModal('الترجمة الفورية للمؤتمرات')">حجز المؤتمر</button>
+          </div>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="service-card">
+          <div>
+            <div class="service-icon">🩺</div>
+            <h4 id="srv-3-title">الترجمة الطبية والدوائية</h4>
+            <p id="srv-3-desc">التقارير الطبية، ملفات تسجيل الأدوية لدى وزارات الصحة، بروتوكولات التجارب السريرية، وأدلة تشغيل الأجهزة الجراحية من قبل أطباء ومترجمين متخصصين.</p>
+          </div>
+          <div>
+            <div class="service-rate" id="srv-3-rate">دقة مصطلحات طبية 100%</div>
+            <button class="btn btn-outline btn-sm" style="width: 100%;" onclick="openOrderModal('الترجمة الطبية والدوائية')">طلب الخدمة</button>
+          </div>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="service-card">
+          <div>
+            <div class="service-icon">🎬</div>
+            <h4 id="srv-4-title">الترجمة المرئية ومزامنة SRT</h4>
+            <p id="srv-4-desc">ترجمة الأفلام الوثائقية، البرامج التلفزيونية، والدورات التعليمية مع التوقيت الدقيق وضبط عدد الأحرف في الثانية وفق معايير شبكات البث مثل Netflix وBBC.</p>
+          </div>
+          <div>
+            <div class="service-rate" id="srv-4-rate">مطابق لمعيار 20 CPS / 42 CPL</div>
+            <button class="btn btn-outline btn-sm" style="width: 100%;" onclick="openOrderModal('الترجمة المرئية ومزامنة SRT')">طلب الخدمة</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: SRT Subtitling Interactive Studio -->
+    <section id="srt-studio">
+      <div class="section-title">
+        <h3 id="sec-srt-title">استوديو ومحرر SRT المرئي التفاعلي 🎬</h3>
+        <p id="sec-srt-desc">أداة تفاعلية مباشرة لتعديل توقيت المقاطع، معاينة الترجمة المرئية، وتصدير ملفات SRT القياسية.</p>
+      </div>
+
+      <div class="srt-studio">
+        <div class="srt-player-mockup">
+          <div style="font-size: 36px; opacity: 0.6; margin-bottom: 8px;">▶️</div>
+          <div style="font-family: monospace; font-size: 13px; color: #fbbf24;" id="srt-current-timecode">
+            00:00:01,000 --> 00:00:04,500
+          </div>
+          <div class="srt-subtitle-box" id="srt-active-text">
+            مرحباً بكم في مجمع بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية.
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+          <h4 style="font-size: 15px; font-weight: 800;" id="srt-table-title">قائمة المقاطع الزمنية (Cues)</h4>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-sm btn-outline" onclick="addSrtCue()">+ إضافة مقطع جديد</button>
+            <button class="btn btn-sm btn-primary" onclick="exportSrtFile()">📥 تحميل ملف SRT</button>
+          </div>
+        </div>
+
+        <div style="overflow-x: auto;">
+          <table class="srt-table" id="srt-table">
+            <thead>
+              <tr>
+                <th style="width: 50px;">#</th>
+                <th style="width: 130px;">البداية</th>
+                <th style="width: 130px;">النهاية</th>
+                <th>النص المترجم</th>
+                <th style="width: 80px;">معاينة</th>
+              </tr>
+            </thead>
+            <tbody id="srt-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Masterclass Academy -->
+    <section id="academy">
+      <div class="section-title">
+        <h3 id="sec-academy-title">أكاديمية بوليلانغ للماستركلاس 🎓</h3>
+        <p id="sec-academy-desc">برامج تدريبية متقدمة وورشات عمل يقدمها كبار الخبراء والمترجمين مع شهادات إتمام معتمدة.</p>
+      </div>
+
+      <div class="courses-grid" id="courses-container">
+        <!-- Dynamically rendered via JS -->
+      </div>
+    </section>
+
+    <!-- Section: Pricing & Payment -->
+    <section id="pricing">
+      <div class="section-title">
+        <h3 id="sec-pricing-title">باقات الأسعار والاشتراكات الشفافة</h3>
+        <p id="sec-pricing-desc">خيارات تسعير واضحة تدعم الدفع المحلي بالدينار (BaridiMob / الذهبية / CIB) والعملات الدولية (PayPal / Visa / بطاقات بنكية).</p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Plan 1 -->
+        <div class="plan-card">
+          <div>
+            <h4 id="plan-1-name">باقة المستندات الأساسية</h4>
+            <div class="plan-price" id="plan-1-price">4,500 د.ج</div>
+            <ul class="plan-features">
+              <li>ترجمة معتمدة حتى 1,500 كلمة</li>
+              <li>ختم رسمي من مترجم محلف معتمد</li>
+              <li>تسليم خلال 48 ساعة بصيغة PDF وورقية</li>
+              <li>تدقيق لغوي ومطابقة للمصطلحات</li>
+            </ul>
+          </div>
+          <button class="btn btn-outline" style="width: 100%;" onclick="openPaymentModal('باقة المستندات الأساسية', 4500)">اختيار ودفع</button>
+        </div>
+
+        <!-- Plan 2 (Featured) -->
+        <div class="plan-card featured">
+          <div class="plan-badge" id="plan-2-badge">الأكثر طلباً للشركات</div>
+          <div>
+            <h4 id="plan-2-name">باقة الشركات والعقود Pro</h4>
+            <div class="plan-price" id="plan-2-price">18,000 د.ج</div>
+            <ul class="plan-features">
+              <li>ترجمة متخصصة حتى 6,000 كلمة</li>
+              <li>عقود قانونية، مناقصات وتقارير مالية</li>
+              <li>اتفاقية سرية بيانات صارمة (NDA)</li>
+              <li>أولوية تسليم فائقة (24 ساعة)</li>
+              <li>مدير حساب مخصص وتعديلات مجانية</li>
+            </ul>
+          </div>
+          <button class="btn btn-primary" style="width: 100%;" onclick="openPaymentModal('باقة الشركات والعقود Pro', 18000)">اختيار ودفع الآن</button>
+        </div>
+
+        <!-- Plan 3 -->
+        <div class="plan-card">
+          <div>
+            <h4 id="plan-3-name">باقة المؤتمرات والترجمة الفورية</h4>
+            <div class="plan-price" id="plan-3-price">50,000 د.ج</div>
+            <ul class="plan-features">
+              <li>يوم كامل ترجمة فورية متزامنة (Simultaneous)</li>
+              <li>فريق مترجمين فوريين معتمدين (شخصين)</li>
+              <li>تجهيز كابينة الترجمة وسماعات الراديو اللاسلكية</li>
+              <li>هندسة صوتية متكاملة داخل القاعة</li>
+            </ul>
+          </div>
+          <button class="btn btn-outline" style="width: 100%;" onclick="openPaymentModal('باقة المؤتمرات والترجمة الفورية', 50000)">حجز المؤتمر</button>
+        </div>
+
+        <!-- Plan 4 -->
+        <div class="plan-card">
+          <div>
+            <h4 id="plan-4-name">اشتراك الأكاديمية السنوي</h4>
+            <div class="plan-price" id="plan-4-price">12,000 د.ج</div>
+            <ul class="plan-features">
+              <li>وصول غير محدود لجميع ورشات العمل والماستركلاس</li>
+              <li>تطبيقات عملية على نصوص قانونية وهيئات أممية</li>
+              <li>شهادات إتمام دورات معتمدة برقم تسلسلي موثق</li>
+              <li>انضمام لشبكة التوظيف ومجتمع المترجمين</li>
+            </ul>
+          </div>
+          <button class="btn btn-gold" style="width: 100%;" onclick="openPaymentModal('اشتراك الأكاديمية السنوي', 12000)">اشتراك سنوي</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modals -->
+
+  <!-- Order Modal -->
+  <div id="order-modal" class="modal-overlay">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModals()">✕</button>
+      <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 6px;" id="order-modal-title">طلب خدمة ترجمة معتمدة</h3>
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 20px;">املأ البيانات وسيقوم فريق المجمع بالتواصل الفوري معك وإرسال الفاتورة الرسمية.</p>
+
+      <form onsubmit="handleOrderSubmit(event)">
+        <div class="form-group">
+          <label>الاسم الكامل / المؤسسة:</label>
+          <input type="text" id="order-name" class="form-control" required placeholder="مثال: د. مداني الجودي">
+        </div>
+
+        <div class="form-group">
+          <label>البريد الإلكتروني:</label>
+          <input type="email" id="order-email" class="form-control" required placeholder="name@example.com">
+        </div>
+
+        <div class="form-group">
+          <label>رقم الهاتف / واتساب:</label>
+          <input type="tel" id="order-phone" class="form-control" required placeholder="+213 6X XX XX XX">
+        </div>
+
+        <div class="form-group">
+          <label>نوع الخدمة المطلوبة:</label>
+          <input type="text" id="order-service" class="form-control" readonly>
+        </div>
+
+        <div class="form-group">
+          <label>اللغات المطلوبة (المصدر ➔ الهدف):</label>
+          <select id="order-languages" class="form-control">
+            <option value="العربية إلى الإنجليزية / الفرنسية">العربية ➔ الإنجليزية / الفرنسية</option>
+            <option value="الإنجليزية إلى العربية">الإنجليزية ➔ العربية</option>
+            <option value="الفرنسية إلى العربية">الفرنسية ➔ العربية</option>
+            <option value="الإسبانية / الألمانية إلى العربية">الإسبانية / الألمانية ➔ العربية</option>
+            <option value="لغات أخرى متعددة">لغات أخرى متعددة (متوفر أكثر من 30 لغة)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>ملاحظات إضافية أو تفاصيل المشروع:</label>
+          <textarea id="order-notes" class="form-control" rows="3" placeholder="اكتب أي متطلبات خاصة أو الموعد النهائي المطلوب..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+          إرسال الطلب والتواصل مع الإدارة
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Payment Modal -->
+  <div id="payment-modal" class="modal-overlay">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModals()">✕</button>
+      <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 6px;">بوابة الدفع الإلكتروني الآمن</h3>
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;" id="pay-modal-desc">إتمام الدفع للباقة المختارة</p>
+
+      <div style="background: var(--primary-light); padding: 14px; border-radius: 12px; margin-bottom: 18px;">
+        <div style="display: flex; justify-content: space-between; font-weight: 800; font-size: 14px;">
+          <span id="pay-plan-name">الباقة</span>
+          <span id="pay-plan-amount" style="color: var(--primary);">4,500 د.ج</span>
+        </div>
+      </div>
+
+      <h5 style="font-size: 13px; font-weight: 700; margin-bottom: 10px;">اختر طريقة الدفع:</h5>
+      <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px;">
+        <label style="border: 1px solid var(--gray-border); padding: 10px 14px; border-radius: 8px; display: flex; align-items: center; gap: 10px; cursor: pointer;">
+          <input type="radio" name="payment-method" value="baridimob" checked>
+          <span>📱 بريدي موب (BaridiMob) / البطاقة الذهبية (Algérie Poste)</span>
+        </label>
+        <label style="border: 1px solid var(--gray-border); padding: 10px 14px; border-radius: 8px; display: flex; align-items: center; gap: 10px; cursor: pointer;">
+          <input type="radio" name="payment-method" value="cib">
+          <span>💳 بطاقات بنكية وطنية CIB</span>
+        </label>
+        <label style="border: 1px solid var(--gray-border); padding: 10px 14px; border-radius: 8px; display: flex; align-items: center; gap: 10px; cursor: pointer;">
+          <input type="radio" name="payment-method" value="international">
+          <span>🌐 بطاقة دولية (Visa / MasterCard / PayPal)</span>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label>البريد الإلكتروني لاستلام الفاتورة ورمز التفعيل:</label>
+        <input type="email" id="pay-email" class="form-control" required placeholder="your-email@example.com">
+      </div>
+
+      <button class="btn btn-primary" style="width: 100%;" onclick="confirmPayment()">
+        تأكيد الدفع واستلام الوصل
+      </button>
+    </div>
+  </div>
+
+  <!-- Certificate Modal -->
+  <div id="cert-modal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 600px;">
+      <button class="modal-close" onclick="closeModals()">✕</button>
+      <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 4px;">شهادة إتمام الدورة المعتمدة</h3>
+      <p style="font-size: 12px; color: var(--text-muted);">شهادة رسمية موثقة برقم تسلسلي يمكن التحقق منها دولياً.</p>
+
+      <div class="certificate-frame" id="certificate-content">
+        <img src="polylang_logo.jpg" alt="Logo" style="width: 50px; height: 50px; border-radius: 50%; margin-bottom: 8px;">
+        <h4 style="font-size: 18px; font-weight: 900; color: #991b1b; letter-spacing: 1px;">CERTIFICATE OF COMPLETION</h4>
+        <div style="font-size: 12px; color: #78350f; margin-bottom: 12px;">POLYLANG HUB MASTERCLASS ACADEMY</div>
+        <p style="font-size: 13px; color: #475569;">تشهد إدارة مجمع بوليلانغ بأن المترجم(ة):</p>
+        <h3 style="font-size: 20px; font-weight: 900; color: #0f172a; margin: 8px 0; border-bottom: 2px solid #d97706; display: inline-block; padding: 0 16px;" id="cert-recipient">
+          مترجم محترف
+        </h3>
+        <p style="font-size: 12px; color: #475569; margin-top: 8px;">قد اجتاز بنجاح الورشة التدريبية المتقدمة في:</p>
+        <h4 style="font-size: 15px; font-weight: 800; color: #b91c1c; margin: 6px 0;" id="cert-course-name">
+          الترجمة القانونية المتقدمة وصياغة العقود الدولية
+        </h4>
+        <div style="display: flex; justify-content: space-between; font-size: 11px; color: #64748b; margin-top: 20px; padding-top: 10px; border-top: 1px dashed #d97706;">
+          <span>رقم التحقق: <strong id="cert-id" style="font-family: monospace; color:#b91c1c;">PLH-2026-8891</strong></span>
+          <span>المعيار: <strong>ISO 17100:2015</strong></span>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 10px; margin-top: 16px;">
+        <button class="btn btn-primary btn-sm" style="flex: 1;" onclick="window.print()">🖨️ طباعة الشهادة / حفظ PDF</button>
+        <button class="btn btn-outline btn-sm" style="flex: 1;" onclick="closeModals()">إغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Course Viewer Modal -->
+  <div id="course-modal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 650px;">
+      <button class="modal-close" onclick="closeModals()">✕</button>
+      <span class="course-badge" id="cview-category">ماستركلاس</span>
+      <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 4px;" id="cview-title">عنوان الدورة</h3>
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;" id="cview-instructor">المحاضر</p>
+
+      <div style="background: #0f172a; height: 220px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; margin-bottom: 16px;">
+        <div style="font-size: 40px; color: #fbbf24;">▶️</div>
+        <p style="font-size: 12px; color: #94a3b8; margin-top: 8px;">بث الورشة التدريبية - الدقة العالية HD</p>
+      </div>
+
+      <h5 style="font-size: 13px; font-weight: 700; margin-bottom: 8px;">محاور الدورة والتطبيق العملي:</h5>
+      <p style="font-size: 13px; color: var(--text-main); line-height: 1.7; margin-bottom: 18px;" id="cview-desc">تفاصيل الدورة ومحتواها التدريبي العملي.</p>
+
+      <div style="display: flex; gap: 10px;">
+        <button class="btn btn-primary" style="flex: 1;" onclick="openCertModalFromCourse()">الحصول على الشهادة الرسمية</button>
+        <button class="btn btn-outline" style="flex: 1;" onclick="closeModals()">إغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <div class="footer-container">
+      <div class="footer-col">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
+          <img src="polylang_logo.jpg" alt="Logo" style="width: 38px; height: 38px; border-radius: 50%; border: 2px solid #b91c1c;">
+          <h4 style="margin: 0; color: white;">مجمع بوليلانغ للترجمة</h4>
+        </div>
+        <p style="line-height: 1.7; margin-bottom: 16px;">
+          المنصة الرائدة في خدمات الترجمة الرسمية المعتمدة وتجهيز المؤتمرات الدولية وفق أرقى معايير الجودة العالمية ISO 17100:2015.
+        </p>
+        <p>📧 الإدارة: <strong>djoudimadani09@gmail.com</strong></p>
+      </div>
+
+      <div class="footer-col">
+        <h4>روابط سريعة</h4>
+        <ul>
+          <li><a href="#services">خدمات الترجمة</a></li>
+          <li><a href="#srt-studio">محرر SRT المرئي</a></li>
+          <li><a href="#academy">الماستركلاس</a></li>
+          <li><a href="#pricing">الأسعار والباقات</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>الاعتمادات</h4>
+        <ul>
+          <li>معيار ISO 17100:2015</li>
+          <li>مترجمون محلفون معتمدون</li>
+          <li>مقبول لدى السفارات والوزارات</li>
+          <li>سرية بيانات مطلقة NDA</li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>طلب فوري وسريع</h4>
+        <p style="margin-bottom: 12px;">تواصل مباشرة مع مدير المشاريع لتقديم طلبك واستلام عرض السعر خلال 15 دقيقة.</p>
+        <button class="btn btn-primary btn-sm" style="width: 100%;" onclick="openOrderModal('طلب سريع من الفوتر')">
+          إرسال طلب الآن
+        </button>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 مجمع بوليلانغ للترجمة المعتمدة (Polylang Hub). جميع الحقوق محفوظة.</div>
+      <div>نظام ISO 17100:2015 معتمد • تطوير مستمر ودعم فني 24/7</div>
+    </div>
+  </footer>
+
+  <!-- Scripts for Dynamic Interactivity -->
+  <script>
+    // State
+    let currentLang = 'ar';
+    let currentCurrency = 'DZD';
+    let currentCourseForCert = 'الترجمة القانونية المتقدمة وصياغة العقود الدولية';
+
+    // Currency rates relative to 1 DZD
+    const rates = {
+      DZD: { rate: 1, symbol: 'د.ج', name: 'دينار جزائري' },
+      USD: { rate: 0.005, symbol: '$', name: 'US Dollar' },
+      EUR: { rate: 0.0046, symbol: '€', name: 'Euro' }
+    };
+
+    function formatPrice(dzd) {
+      if (currentCurrency === 'DZD') {
+        return dzd.toLocaleString('en-US') + ' د.ج';
+      } else if (currentCurrency === 'USD') {
+        const val = Math.round(dzd * rates.USD.rate);
+        return '$' + val.toLocaleString('en-US');
+      } else {
+        const val = Math.round(dzd * rates.EUR.rate);
+        return '€' + val.toLocaleString('en-US');
+      }
+    }
+
+    function updateCurrency(curr) {
+      currentCurrency = curr;
+      calculateEstimate();
+      document.getElementById('plan-1-price').textContent = formatPrice(4500);
+      document.getElementById('plan-2-price').textContent = formatPrice(18000);
+      document.getElementById('plan-3-price').textContent = formatPrice(50000);
+      document.getElementById('plan-4-price').textContent = formatPrice(12000);
+    }
+
+    // Word Count & Calculator
+    function calculateEstimate() {
+      const words = parseInt(document.getElementById('calc-words').value) || 0;
+      const field = document.getElementById('calc-field').value;
+      let ratePerWord = 3.0; // DZD
+
+      if (field === 'legal') ratePerWord = 3.5;
+      else if (field === 'medical') ratePerWord = 3.8;
+      else if (field === 'technical') ratePerWord = 3.2;
+      else if (field === 'subtitling') ratePerWord = 4.0;
+      else ratePerWord = 2.8;
+
+      const totalDzd = Math.round(words * ratePerWord);
+      document.getElementById('calc-res-price').textContent = formatPrice(totalDzd);
+    }
+
+    // Courses Data
+    const courses = [
+      {
+        id: 1,
+        title: "الترجمة القانونية المتقدمة وصياغة العقود الدولية",
+        category: "ترجمة قانونية",
+        instructor: "د. عبد القادر مداني - مترجم محلف ومستشار دولي",
+        desc: "صياغة وتدقيق العقود الدولية وفق أنظمة القانون المقارن (Common Law & Civil Law) والمصطلحات المعتمدة لدى الأمم المتحدة.",
+        duration: "18 ساعة تدريبية",
+        level: "متقدم"
+      },
+      {
+        id: 2,
+        title: "هندسة الترجمة الفورية والتقنيات الصوتية في المؤتمرات",
+        category: "ترجمة فورية",
+        instructor: "أ. مريم بوعلام - خبيرة مؤتمرات دولية (AIIC)",
+        desc: "إتقان الترجمة الفورية المتزامنة (Simultaneous Interpretation)، تدريبات الضغط العالي، وإدارة كابينات الصوت وأنظمة الترجمة المتزامنة.",
+        duration: "24 ساعة تدريبية",
+        level: "محترف"
+      },
+      {
+        id: 3,
+        title: "الترجمة الطبية والتقارير الدوائية ومنشورات اللقاحات",
+        category: "ترجمة طبية",
+        instructor: "د. سامي العرابي - طبيب استشاري ومترجم طبي معتمد",
+        desc: "شرح معمق للمصطلحات التشريحية والسريرية وملفات الأدوية والمطابقة الصارمة مع تعليمات منظمة الصحة العالمية WHO.",
+        duration: "14 ساعة تدريبية",
+        level: "متوسط إلى متقدم"
+      },
+      {
+        id: 4,
+        title: "الترجمة المرئية (Subtitling) ومعايير Netflix العالمية",
+        category: "ترجمة مرئية",
+        instructor: "م. كريم علام - خبير التوطين والمونتاج المرئي",
+        desc: "ضبط التوقيت بالملي ثانية، معالجة السرعة CPS وتوزيع الأسطر CPL واستخدام أحدث برمجيات الـ SRT المتوافقة مع منصات البث.",
+        duration: "16 ساعة تدريبية",
+        level: "شامل"
+      }
+    ];
+
+    function renderCourses() {
+      const container = document.getElementById('courses-container');
+      container.innerHTML = '';
+      courses.forEach(c => {
+        const card = document.createElement('div');
+        card.className = 'course-card';
+        card.innerHTML = `
+          <div>
+            <span class="course-badge">${c.category}</span>
+            <h4>${c.title}</h4>
+            <p>${c.desc}</p>
+          </div>
+          <div>
+            <div class="course-meta">
+              <span>👤 ${c.instructor.split('-')[0]}</span>
+              <span>⏱️ ${c.duration}</span>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-primary btn-sm" style="flex: 1;" onclick="openCourseViewer(${c.id})">مشاهدة المحتوى</button>
+              <button class="btn btn-outline btn-sm" onclick="openCertModal('${c.title}')">الشهادة</button>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function openCourseViewer(id) {
+      const c = courses.find(item => item.id === id);
+      if (!c) return;
+      currentCourseForCert = c.title;
+      document.getElementById('cview-category').textContent = c.category;
+      document.getElementById('cview-title').textContent = c.title;
+      document.getElementById('cview-instructor').textContent = c.instructor;
+      document.getElementById('cview-desc').textContent = c.desc;
+      openModal('course-modal');
+    }
+
+    function openCertModalFromCourse() {
+      closeModals();
+      openCertModal(currentCourseForCert);
+    }
+
+    function openCertModal(courseTitle) {
+      currentCourseForCert = courseTitle || 'الترجمة القانونية المتقدمة وصياغة العقود الدولية';
+      document.getElementById('cert-course-name').textContent = currentCourseForCert;
+      document.getElementById('cert-id').textContent = 'PLH-' + Math.floor(100000 + Math.random() * 900000);
+      openModal('cert-modal');
+    }
+
+    // SRT Studio State
+    let srtCues = [
+      { id: 1, start: '00:00:01,000', end: '00:00:04,500', text: 'مرحباً بكم في مجمع بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية.' },
+      { id: 2, start: '00:00:05,000', end: '00:00:08,200', text: 'نلتزم بأعلى معايير الجودة العالمية والدقة القانونية ISO 17100:2015.' },
+      { id: 3, start: '00:00:09,000', end: '00:00:13,000', text: 'فريقنا من المترجمين المحلفين جاهز لتلبية كافة احتياجاتكم في أكثر من 30 لغة.' }
+    ];
+
+    function renderSrtTable() {
+      const tbody = document.getElementById('srt-tbody');
+      tbody.innerHTML = '';
+      srtCues.forEach((cue, index) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${cue.id}</strong></td>
+          <td><input type="text" class="form-control" style="padding:4px 6px; font-size:11px;" value="${cue.start}" onchange="updateCue(${index}, 'start', this.value)"></td>
+          <td><input type="text" class="form-control" style="padding:4px 6px; font-size:11px;" value="${cue.end}" onchange="updateCue(${index}, 'end', this.value)"></td>
+          <td><input type="text" class="form-control" style="padding:4px 6px; font-size:12px;" value="${cue.text}" onchange="updateCue(${index}, 'text', this.value)"></td>
+          <td>
+            <button class="btn btn-sm btn-outline" style="padding:3px 8px; font-size:11px;" onclick="previewCue(${index})">عرض</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updateCue(index, field, val) {
+      srtCues[index][field] = val;
+      if (field === 'text') {
+        document.getElementById('srt-active-text').textContent = val;
+      }
+    }
+
+    function previewCue(index) {
+      const cue = srtCues[index];
+      document.getElementById('srt-current-timecode').textContent = cue.start + ' --> ' + cue.end;
+      document.getElementById('srt-active-text').textContent = cue.text;
+    }
+
+    function addSrtCue() {
+      const nextId = srtCues.length + 1;
+      srtCues.push({
+        id: nextId,
+        start: '00:00:14,000',
+        end: '00:00:18,000',
+        text: 'مقطع ترجمة مرئية جديد...'
+      });
+      renderSrtTable();
+    }
+
+    function exportSrtFile() {
+      let content = '';
+      srtCues.forEach(c => {
+        content += `${c.id}\n${c.start} --> ${c.end}\n${c.text}\n\n`;
+      });
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'polylang_subtitles.srt';
+      a.click();
+    }
+
+    // Modal helpers
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+    }
+
+    function closeModals() {
+      document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+    }
+
+    function openOrderModal(serviceName) {
+      document.getElementById('order-service').value = serviceName || 'ترجمة معتمدة عامة';
+      openModal('order-modal');
+    }
+
+    function openPaymentModal(planName, priceDzd) {
+      document.getElementById('pay-plan-name').textContent = planName;
+      document.getElementById('pay-plan-amount').textContent = formatPrice(priceDzd);
+      openModal('payment-modal');
+    }
+
+    function handleOrderSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('order-name').value;
+      const email = document.getElementById('order-email').value;
+      const service = document.getElementById('order-service').value;
+      const notes = document.getElementById('order-notes').value;
+
+      // Construct mailto link as fallback to admin email
+      const subject = encodeURIComponent(`طلب خدمة جديد من ${name} - ${service}`);
+      const body = encodeURIComponent(`اسم العميل: ${name}\nالبريد: ${email}\nالخدمة: ${service}\nالتفاصيل: ${notes}`);
+      window.open(`mailto:djoudimadani09@gmail.com?subject=${subject}&body=${body}`);
+
+      alert(`شكراً لك يا ${name}! تم تسجيل طلبك بنجاح وسيتصل بك منسق المشاريع في مجمع بوليلانغ فوراً.`);
+      closeModals();
+    }
+
+    function confirmPayment() {
+      const email = document.getElementById('pay-email').value;
+      if (!email) {
+        alert('يرجى إدخال البريد الإلكتروني لإرسال الفاتورة.');
+        return;
+      }
+      alert('تم تأكيد العملية بنجاح! تم إرسال وصل الاستلام ورمز تفعيل الخدمة إلى ' + email);
+      closeModals();
+    }
+
+    // Language switcher
+    function toggleLanguage() {
+      if (currentLang === 'ar') {
+        currentLang = 'en';
+        document.documentElement.setAttribute('lang', 'en');
+        document.documentElement.setAttribute('dir', 'ltr');
+        document.getElementById('lang-toggle-btn').textContent = 'العربية';
+        // English translations
+        document.getElementById('nav-brand-title').textContent = 'Polylang Hub';
+        document.getElementById('nav-brand-sub').textContent = 'Certified Translation & Interpretation Hub';
+        document.getElementById('link-services').textContent = 'Services';
+        document.getElementById('link-srt').textContent = 'SRT Studio';
+        document.getElementById('link-academy').textContent = 'Academy';
+        document.getElementById('link-pricing').textContent = 'Pricing';
+        document.getElementById('link-contact').textContent = 'Contact';
+        document.getElementById('btn-order-nav').textContent = 'Order Now';
+        document.getElementById('hero-badge').textContent = 'ISO 17100:2015 Officially Certified Quality Standard';
+        document.getElementById('hero-title').innerHTML = 'Leader in <span>Certified Translation</span> & Conference Interpretation';
+        document.getElementById('hero-desc').textContent = 'Senior sworn translators accredited by embassies, ministries, and international organizations. Providing legal, medical, technical translations and full conference booth setups.';
+        document.getElementById('hero-cta-order').textContent = 'Order Translation Now';
+        document.getElementById('hero-cta-academy').textContent = 'Explore Masterclass';
+        document.getElementById('hero-cta-srt').textContent = 'SRT Subtitle Studio';
+      } else {
+        currentLang = 'ar';
+        document.documentElement.setAttribute('lang', 'ar');
+        document.documentElement.setAttribute('dir', 'rtl');
+        document.getElementById('lang-toggle-btn').textContent = 'English';
+        document.getElementById('nav-brand-title').textContent = 'مجمع بوليلانغ للترجمة';
+        document.getElementById('nav-brand-sub').textContent = 'Polylang Hub • ISO 17100:2015';
+        document.getElementById('link-services').textContent = 'خدمات الترجمة';
+        document.getElementById('link-srt').textContent = 'محرر SRT المرئي';
+        document.getElementById('link-academy').textContent = 'الأكاديمية والماستركلاس';
+        document.getElementById('link-pricing').textContent = 'الأسعار والباقات';
+        document.getElementById('link-contact').textContent = 'تواصل معنا';
+        document.getElementById('btn-order-nav').textContent = 'طلب ترجمة';
+        document.getElementById('hero-badge').textContent = 'معتمد رسمياً وفق معايير الجودة الدولية ISO 17100:2015';
+        document.getElementById('hero-title').innerHTML = 'الرائد في <span>الترجمة المعتمدة</span> وتجهيز المؤتمرات الدولية';
+        document.getElementById('hero-desc').textContent = 'نخبة من كبار المترجمين المحلفين المعتمدين لدى السفارات، الوزارات والهيئات الدولية. ترجمة قانونية، طبية، تقنية، وتجهيز كامل لكابينات الترجمة الفورية في المؤتمرات والقمم.';
+        document.getElementById('hero-cta-order').textContent = 'طلب ترجمة معتمدة الآن';
+        document.getElementById('hero-cta-academy').textContent = 'استكشاف الماستركلاس';
+        document.getElementById('hero-cta-srt').textContent = 'محرر SRT المرئي';
+      }
+    }
+
+    // Initialize
+    window.addEventListener('DOMContentLoaded', () => {
+      calculateEstimate();
+      renderCourses();
+      renderSrtTable();
+    });
+  </script>
+</body>
+</html>
