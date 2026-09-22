@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Polylang Hub | Certified Translation, Localization & Monetized Training Platform</title>
-  <meta name="description" content="منصة مجمع بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية ISO 17100:2015. إدارة الأستاذ جودي مداني. ترجمة محلفة، كابينات المؤتمرات، أكاديمية الماستركلاس، واستوديو SRT.">
+  <meta name="description" content="منصة منصة بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية ISO 17100:2015. إدارة الأستاذ جودي مداني. ترجمة محلفة، كابينات المؤتمرات، أكاديمية الماستركلاس، واستوديو SRT.">
   <link rel="icon" type="image/jpeg" href="polylang_logo.jpg">
 
   <!-- Google Fonts: Cairo for Arabic & Inter for Latin scripts -->
@@ -890,11 +890,6 @@
             <span>✦</span> <span id="i18n-about-btn">About Us</span>
           </button>
 
-          <button class="nav-pill nav-pill-green" onclick="openModal('dbModal')">
-            <span style="width:8px; height:8px; border-radius:50%; background:#10b981; display:inline-block;"></span>
-            <span>NestJS API Online</span>
-          </button>
-
           <!-- Currency Selector -->
           <select id="currency-dropdown" class="nav-pill" onchange="changeCurrency(this.value)">
             <option value="DZD">💰 🇩🇿 DZD (د.ج)</option>
@@ -1076,10 +1071,10 @@
               <span class="badge-gold" style="font-size:11px;">🇩🇿 الجزائر العاصمة</span>
             </div>
             <div style="font-size:13px; font-weight:800; color:var(--crimson); margin-bottom:6px;">
-              خريج معهد الترجمة بجامعة الجزائر 2 • ماستر 2 ترجمة مؤسساتية (عربي - فرنسي - ألماني) • مبرمج حلول تكنولوجية
+              المشاركة في الترجمة الشفهية في تظاهرات رياضية وثقافية
             </div>
             <p style="font-size:12.5px; color:var(--text-dim); line-height:1.7; margin:0 0 10px;">
-              مؤسس مجمع بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية. يجمع بين التكوين الأكاديمي العالي في كابينات المؤتمرات والترجمة القانونية والمؤسساتية، والابتكار البرمجي لتطوير أدوات CAT ومعالجة اللغات الطبيعية (NLP) لخدمة طلبة الترجمة ومتعلمي اللغات والمؤسسات الرسمية.
+              المشاركة في الترجمة الشفهية في تظاهرات رياضية وثقافية.
             </p>
             <div style="display:flex; gap:8px; flex-wrap:wrap;">
               <button class="btn-primary-red" style="padding:6px 14px; font-size:12px;" onclick="openModal('founderModal')">
@@ -1178,7 +1173,7 @@
         <div class="srt-player-mock">
           <div style="font-size:36px; opacity:0.8;">▶️</div>
           <div class="srt-sub-overlay" id="srt-active-cue-text">
-            مرحباً بكم في مجمع بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية.
+            مرحباً بكم في منصة بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية.
           </div>
         </div>
 
@@ -1359,11 +1354,32 @@
           <div style="background:var(--bg-body); padding:18px; border-radius:12px; border:1px solid var(--border-line);">
             <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
               <div>
-                <h4 style="font-size:16px; font-weight:900;">🏆 امتحان تحديد المستوى في الترجمة واللغات (Placement Exam)</h4>
-                <p style="font-size:11.5px; color:var(--text-dim);">اختبار احترافي متدرج يقيس المعجم المؤسساتي، الصياغة القانونية، وسرعة البديهة في الترجمة الفورية.</p>
+                <h4 style="font-size:16px; font-weight:900;">🏆 امتحان تحديد المستوى الدولي المعتمد (Placement Exam)</h4>
+                <p style="font-size:11.5px; color:var(--text-dim);">اختبارات واقعية ومعيارية مطابقة للاختبارات الدولية الرسمية (TCF الفرنسي، Goethe الألماني، IELTS البريطاني، وامتحان الترجمة المؤسساتية).</p>
               </div>
               <div style="background:#fef2f2; color:var(--crimson); padding:4px 12px; border-radius:6px; font-weight:900; font-size:13px; border:1px solid #fca5a5;">
                 ⏱️ الوقت المتبقي: <span id="exam-timer">10:00</span>
+              </div>
+            </div>
+
+            <!-- Exam Language & Standard Selector -->
+            <div style="background:var(--bg-surface); border:1px solid var(--border-line); border-radius:10px; padding:10px 14px; margin-bottom:14px;">
+              <div style="font-size:12px; font-weight:800; margin-bottom:8px; color:var(--crimson);">
+                🎯 اختر مسار الاختبار المعياري المطلوب:
+              </div>
+              <div style="display:flex; gap:8px; flex-wrap:wrap;" id="exam-track-buttons">
+                <button class="nav-pill active" id="btn-exam-tcf" onclick="switchExamTrack('tcf')">
+                  🇫🇷 TCF / DALF (الفرنسية الدولية)
+                </button>
+                <button class="nav-pill" id="btn-exam-goethe" onclick="switchExamTrack('goethe')">
+                  🇩🇪 Goethe-Zertifikat (الألمانية B2-C1)
+                </button>
+                <button class="nav-pill" id="btn-exam-ielts" onclick="switchExamTrack('ielts')">
+                  🇬🇧 IELTS Academic (الإنجليزية الأكاديمية)
+                </button>
+                <button class="nav-pill" id="btn-exam-trans" onclick="switchExamTrack('trans')">
+                  ⚖️ الترجمة المؤسساتية وكابينات المؤتمرات
+                </button>
               </div>
             </div>
 
@@ -1575,6 +1591,19 @@
         اختر أحد الحسابات السريعة الجاهزة، أو أدخل بريدك الإلكتروني لتسجيل الدخول:
       </p>
 
+      <!-- Active Account Information Box (Security & Confidentiality) -->
+      <div id="account-info-banner" style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:12px 14px; margin-bottom:16px;">
+        <div style="font-size:12px; font-weight:800; color:var(--crimson); margin-bottom:6px; display:flex; align-items:center; gap:6px;">
+          <span>🛡️</span> <span>المعلومات الأساسية لحسابك الحالي (الأمان والسرية):</span>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:8px; font-size:11.5px;">
+          <div>👤 <strong>الاسم:</strong> <span id="auth-display-name">الأستاذ جودي مداني (Djoudi Madani)</span></div>
+          <div>📧 <strong>البريد:</strong> <span id="auth-display-email">djoudimadani09@gmail.com</span></div>
+          <div>🏷️ <strong>الرتبة:</strong> <span id="auth-display-role" style="color:var(--crimson); font-weight:800;">Admin</span></div>
+          <div>🔒 <strong>حالة الأمان:</strong> <span style="color:#10b981; font-weight:700;">مشفر ومحمي (SSL/TLS)</span></div>
+        </div>
+      </div>
+
       <!-- Quick Login Profiles for All 5 Roles -->
       <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:18px;">
         <button class="nav-pill" style="justify-content:flex-start; padding:10px; border:2px solid var(--crimson);" onclick="quickLoginUser('الأستاذ جودي مداني (Djoudi Madani)', 'djoudimadani09@gmail.com', 'Admin')">
@@ -1739,32 +1768,22 @@
         </div>
         <h3 style="font-size:20px; font-weight:900; margin-bottom:4px;">سيرة الأستاذ جودي مداني (Djoudi Madani)</h3>
         <p style="font-size:13px; color:var(--crimson); font-weight:800; margin:0;">
-          المؤسس والمدير العام لمنصة مجمع بوليلانغ الدولي • مترجم مؤسساتي ومبرمج حلول تكنولوجية
+          المؤسس والمدير العام لمنصة بوليلانغ
         </p>
       </div>
 
       <div style="background:var(--bg-body); padding:18px; border-radius:12px; border:1px solid var(--border-line); font-size:13px; line-height:1.8; margin-bottom:16px;">
         <div style="margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--border-line);">
-          <div style="font-weight:900; color:var(--crimson); margin-bottom:4px;">🎓 المؤهل الأكاديمي والشهادات العليا:</div>
+          <div style="font-weight:900; color:var(--crimson); margin-bottom:4px;">🎓 المؤهل الأكاديمي:</div>
           <div>خريج معهد الترجمة - <strong>جامعة الجزائر 2</strong> (Algiers 2 University - Institute of Translation).</div>
           <div>حائز على شهادة <strong>ماستر 2 في الترجمة المؤسساتية (Institutional Translation)</strong> تخصص ثلاثي اللغات: <strong>العربية ⇄ الفرنسية ⇄ الألمانية</strong>.</div>
         </div>
 
-        <div style="margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--border-line);">
-          <div style="font-weight:900; color:var(--blue); margin-bottom:4px;">💻 الخبرة التقنية والبرمجية وحلول الـ IT:</div>
-          <div>مبرمج ومطور لحلول تكنولوجية متقدمة في مجالات متعددة، ومصمم معماريات رقمية سحابية.</div>
-          <div>متخصص في حوسبة اللغة الطبيعية (NLP)، تكامل أنظمة الذكاء الاصطناعي مع برمجيات الترجمة بمعونة الحاسوب (CAT Tools مثل Trados و MemoQ)، وتطوير منصات الترجمة المرئية السحابية.</div>
-        </div>
-
-        <div style="margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--border-line);">
-          <div style="font-weight:900; color:var(--gold); margin-bottom:4px;">🎙️ المسار المهني وكابينات المؤتمرات الدولية:</div>
-          <div>خبير في كابينات الترجمة الفورية للمؤتمرات الدولية والقمم الدبلوماسية، متخصص في إدارة الـ Décalage وتقنيات جان فرانسوا روزان (Rozan) في تدوين الملاحظات التتابعية.</div>
-          <div>إشراف وتدقيق مشاريع الترجمة القانونية المحلفة والمؤسساتية المطابقة للمواصفة القياسية العالمية <strong>ISO 17100:2015</strong>.</div>
-        </div>
-
         <div>
-          <div style="font-weight:900; color:var(--green); margin-bottom:4px;">🌐 الرؤية والرسالة المؤسساتية:</div>
-          <div>تأسيس <strong>مجمع بوليلانغ (Polylang Hub)</strong> ليكون منصة متكاملة تحتضن طلبة الترجمة ومتعلمي اللغات لتطوير مهاراتهم عبر المحاكاة والماستركلاس، وفي نفس الوقت تزويد المؤسسات والأفراد بخدمات ترجمة معتمدة وفورية على أعلى مستوى من الدقة والموثوقية.</div>
+          <div style="font-weight:900; color:var(--gold); margin-bottom:4px;">💼 الخبرات المهنية:</div>
+          <div style="font-size:14px; font-weight:700; color:var(--text-main); padding:6px 0;">
+            المشاركة في الترجمة الشفهية في تظاهرات رياضية وثقافية
+          </div>
         </div>
       </div>
 
@@ -1832,7 +1851,7 @@
 
       <!-- Video Meta Details -->
       <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; background:var(--bg-body); padding:10px 14px; border-radius:8px; margin-bottom:10px; font-size:12px;">
-        <span style="font-weight:700;" id="modal-video-speaker">👤 المحاضر: الأستاذ جودي مداني</span>
+        <span style="font-weight:700;" id="modal-video-speaker">👤 المحاضر: أكاديمية بوليلانغ الدولية</span>
         <span style="color:var(--text-dim);" id="modal-video-duration">⏱️ 42:15 دقيقة</span>
         <span style="color:var(--crimson); font-weight:700;" id="modal-video-level">📊 المستوى: متقدم</span>
       </div>
@@ -1863,7 +1882,7 @@
       </div>
 
       <h3 style="font-size:17px; font-weight:900; margin-bottom:8px; color:#ffffff; display:flex; align-items:center; gap:8px;">
-        <span>🤖</span> <span>العرض الهولوغرافي التفاعلي لمجمع بوليلانغ (Interactive AI Presenter)</span>
+        <span>🤖</span> <span>العرض الهولوغرافي التفاعلي لمنصة بوليلانغ (Interactive AI Presenter)</span>
       </h3>
 
       <!-- Holographic Stage Area -->
@@ -1895,7 +1914,7 @@
 
         <!-- Live Subtitles at Bottom of Hologram -->
         <div style="position:absolute; bottom:12px; left:16px; right:16px; background:rgba(2,6,23,0.85); border:1px solid rgba(0,240,255,0.5); border-radius:8px; padding:8px 14px; text-align:center; font-size:13px; font-weight:700; color:#ffffff; text-shadow:0 2px 4px #000;" id="hologram-subtitle-text">
-          👋 مرحباً بكم في مجمع بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية بإشراف الأستاذ جودي مداني.
+          👋 مرحباً بكم في منصة بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية بإشراف الأستاذ جودي مداني.
         </div>
       </div>
 
@@ -2010,31 +2029,47 @@
 
       </div>
 
-      <!-- Payment Gateways Options -->
-      <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:12px; padding:14px; margin-bottom:14px;">
-        <div style="font-size:12.5px; font-weight:800; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
-          <span>💳</span> <span>طرق الدفع الإلكتروني والتحويل المتاحة بالدينار الجزائري والدولي:</span>
+      <!-- Payment Gateways & Official Account Details -->
+      <div style="background:var(--bg-body); border:2px solid var(--crimson); border-radius:12px; padding:16px; margin-bottom:14px;">
+        <div style="font-size:13px; font-weight:900; color:var(--crimson); margin-bottom:8px; display:flex; align-items:center; gap:6px;">
+          <span>🔒</span> <span>شروط تفعيل باقات البريميوم VIP (الحسابات الرسمية المعتمدة):</span>
         </div>
-        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px;">
-          <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; background:var(--bg-card); padding:6px 10px; border-radius:6px; border:1px solid var(--border-line);">
-            <input type="radio" name="pay_gateway" value="edahabia" checked> 💳 البطاقة الذهبية (Edahabia)
-          </label>
-          <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; background:var(--bg-card); padding:6px 10px; border-radius:6px; border:1px solid var(--border-line);">
-            <input type="radio" name="pay_gateway" value="baridimob"> 📱 بريدي موب (BaridiMob)
-          </label>
-          <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; background:var(--bg-card); padding:6px 10px; border-radius:6px; border:1px solid var(--border-line);">
-            <input type="radio" name="pay_gateway" value="cib"> 💳 بطاقة CIB البنكية
-          </label>
-          <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; background:var(--bg-card); padding:6px 10px; border-radius:6px; border:1px solid var(--border-line);">
-            <input type="radio" name="pay_gateway" value="visa"> 🌍 Visa / MasterCard
-          </label>
+        <p style="font-size:12px; color:var(--text-main); margin-bottom:12px; line-height:1.6;">
+          <strong>تنبيه صارم:</strong> باقات بريميوم VIP لا تُفتح للجميع حتى يتم ويصل الدفع الفعلي وتأكيد الحوالة إلى أحد الحسابين الرسميين التاليين:
+        </p>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:10px; margin-bottom:14px;">
+          <!-- BaridiMob RIP -->
+          <div style="background:var(--bg-surface); border:1px solid #10b981; border-radius:8px; padding:10px 12px;">
+            <div style="font-size:11px; font-weight:800; color:#10b981; margin-bottom:4px;">📱 بريدي موب (Rip BaridiMob):</div>
+            <div style="font-family:monospace; font-size:13px; font-weight:900; letter-spacing:1px; color:var(--text-main); background:var(--bg-body); padding:6px; border-radius:4px; user-select:all;" id="rip-account-number">
+              00799999002898430240
+            </div>
+            <button class="nav-pill" style="font-size:10.5px; padding:2px 8px; margin-top:6px;" onclick="navigator.clipboard.writeText('00799999002898430240'); alert('✓ تم نسخ رقم RIP بنجاح');">نسخ رقم RIP 📋</button>
+          </div>
+
+          <!-- CCP -->
+          <div style="background:var(--bg-surface); border:1px solid var(--crimson); border-radius:8px; padding:10px 12px;">
+            <div style="font-size:11px; font-weight:800; color:var(--crimson); margin-bottom:4px;">📮 الحساب البريدي الجاري (CCP):</div>
+            <div style="font-family:monospace; font-size:13px; font-weight:900; letter-spacing:1px; color:var(--text-main); background:var(--bg-body); padding:6px; border-radius:4px; user-select:all;" id="ccp-account-number">
+              0028984302 40
+            </div>
+            <button class="nav-pill" style="font-size:10.5px; padding:2px 8px; margin-top:6px;" onclick="navigator.clipboard.writeText('0028984302 40'); alert('✓ تم نسخ حساب CCP ومفتاح 40 بنجاح');">نسخ رقم CCP 📋</button>
+          </div>
         </div>
 
-        <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
-          <input type="text" id="promo-code-input" class="form-control" style="flex:1; min-width:180px; font-size:12px;" placeholder="هل لديك كود خصم VIP؟ (جرب: MADANI2026)">
-          <button class="btn-outline-action" style="font-size:12px; padding:8px 14px;" onclick="applyVipPromoCode()">
-            تفعيل الكود 🏷️
-          </button>
+        <!-- Payment Verification Submission -->
+        <div style="background:var(--bg-card); border:1px dashed var(--border-line); border-radius:8px; padding:12px;">
+          <div style="font-size:12px; font-weight:800; margin-bottom:6px;">✍️ إرسال إشعار الدفع لتأكيد التفعيل:</div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">
+            <input type="text" id="payment-tx-number" class="form-control" style="flex:1; min-width:180px; font-size:12px;" placeholder="رقم العملية / الحوالة من تطبيق بريدي موب أو وصل CCP">
+            <button class="btn-primary-red" style="font-size:12px; padding:8px 14px;" onclick="submitPaymentVerificationReceipt()">
+              تأكيد إرسال الحوالة 📤
+            </button>
+          </div>
+          <div style="font-size:11px; color:var(--text-dim);">
+            بمجرد وصول التحويل إلى <strong>00799999002898430240</strong> أو <strong>0028984302 40</strong> يتم فتح الوصول الشامل فوراً.
+          </div>
         </div>
       </div>
 
@@ -2101,7 +2136,7 @@
   <footer>
     <div class="app-container footer-inner">
       <div>
-        © 2026 مجمع بوليلانغ للترجمة المعتمدة (Polylang Hub). برئاسة الأستاذ جودي مداني.
+        © 2026 منصة بوليلانغ للترجمة المعتمدة (Polylang Hub). برئاسة الأستاذ جودي مداني.
       </div>
       <div>
         ISO 17100:2015 Verified • بريد الإدارة: <strong>djoudimadani09@gmail.com</strong>
@@ -2171,7 +2206,7 @@
     function viewOrderInvoice(id) {
       const o = ordersList.find(item => item.id === id);
       if (!o) return;
-      alert(`📄 فاتورة رسمية رقم: ${o.id}\nالمشروع: ${o.title}\nالمبلغ: ${formatCurrency(o.price)}\nالحالة: ${o.status}\nمجمع بوليلانغ للترجمة المعتمدة - الأستاذ جودي مداني.`);
+      alert(`📄 فاتورة رسمية رقم: ${o.id}\nالمشروع: ${o.title}\nالمبلغ: ${formatCurrency(o.price)}\nالحالة: ${o.status}\nمنصة بوليلانغ للترجمة المعتمدة - الأستاذ جودي مداني.`);
     }
 
     // Calculator
@@ -2421,8 +2456,8 @@
           </div>
 
           <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-line); padding-top:10px; margin-top:8px;">
-            <div style="font-size:11px; color:var(--text-faint); max-width:140px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
-              👤 ${item.speaker}
+            <div style="font-size:11px; color:var(--text-faint); max-width:150px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+              ${item.speaker ? `👤 ${item.speaker}` : `📖 ${item.categoryLabel || 'مساق تعليمي'}`}
             </div>
             <button class="${isLocked ? 'btn-outline-action' : 'btn-primary-red'}" style="padding:5px 12px; font-size:11.5px; ${isLocked ? 'border-color:#f59e0b; color:#d97706;' : ''}" onclick="handleCardVideoClick('${item.id}')">
               ${isLocked ? 'فتح بـ VIP 🔒' : 'مشاهدة الآن ▶'}
@@ -2516,13 +2551,14 @@
     function openVideoPlayer(item) {
       if (typeof item === 'string') {
         const all = getAllAcademyVideos();
-        item = all.find(v => v.id === item) || { id: item, title: "محاضرة تدريبية", desc: "", speaker: "الأستاذ جودي مداني", duration: "30:00", level: "متوسط", isPremium: false };
+        item = all.find(v => v.id === item) || { id: item, title: "محاضرة تدريبية", desc: "", speaker: "", duration: "30:00", level: "متوسط", isPremium: false };
       }
       activeVideoItem = item;
 
       document.getElementById('modal-video-title').textContent = item.title;
       document.getElementById('modal-video-desc').textContent = item.desc;
-      document.getElementById('modal-video-speaker').textContent = `👤 المحاضر: ${item.speaker || 'الأستاذ جودي مداني'}`;
+      const spkText = item.speaker ? `👤 المحاضر: ${item.speaker}` : `📖 المساق: ${item.title}`;
+      document.getElementById('modal-video-speaker').textContent = spkText;
       document.getElementById('modal-video-duration').textContent = `⏱️ ${item.duration || '40:00'}`;
       document.getElementById('modal-video-level').textContent = `📊 المستوى: ${item.level || 'متوسط'}`;
       
@@ -2550,17 +2586,31 @@
       if (!activeVideoItem) return;
 
       if (engine === 'embed') {
-        player.pause();
-        player.style.display = 'none';
-        iframe.style.display = 'block';
-        iframe.src = `https://www.youtube-nocookie.com/embed/${activeVideoItem.id}?autoplay=1&rel=0&enablejsapi=1`;
+        if (player) {
+          player.pause();
+          player.style.display = 'none';
+        }
+        if (iframe) {
+          iframe.style.display = 'block';
+          iframe.src = `https://www.youtube-nocookie.com/embed/${activeVideoItem.id}?autoplay=1&rel=0&enablejsapi=1`;
+          iframe.onerror = () => {
+            console.log("Iframe failed, auto-fallback to HTML5 MP4 stream");
+            switchVideoEngine('mp4');
+          };
+        }
       } else {
-        iframe.src = '';
-        iframe.style.display = 'none';
-        player.style.display = 'block';
-        source.src = activeVideoItem.videoUrl || "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4";
-        player.load();
-        player.play().catch(e => console.log("Player autoplay prevented:", e));
+        if (iframe) {
+          iframe.src = '';
+          iframe.style.display = 'none';
+        }
+        if (player && source) {
+          player.style.display = 'block';
+          source.src = activeVideoItem.videoUrl || "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4";
+          player.load();
+          player.play().catch(e => {
+            console.log("Player playback notice:", e);
+          });
+        }
       }
     }
 
@@ -2576,14 +2626,60 @@
     }
 
     // ==========================================
-    // SUBSCRIPTION & VIP PASS CONTROLS
+    // SUBSCRIPTION & VIP PASS CONTROLS (Gated Payment Verification)
     // ==========================================
+    const OFFICIAL_PAYMENT_RIP = "00799999002898430240";
+    const OFFICIAL_PAYMENT_CCP = "0028984302 40";
+
     function selectSubscriptionPlan(planTier, priceDzd) {
+      const planNames = {
+        student: "باقة طالب الترجمة (1,500 د.ج)",
+        pro: "باقة المترجم المحترف (3,500 د.ج)",
+        enterprise: "الباقة المؤسساتية (18,000 د.ج)"
+      };
+      const name = planNames[planTier] || planTier;
+
+      alert(`🔒 اشتراك VIP مشروط بوصول الدفع:\nلقد اخترت: ${name}.\n\nالباقات بريميوم لا تُفتح حتى يتم ويصل الدفع إلى:\n- بريدي موب Rip BaridiMob: ${OFFICIAL_PAYMENT_RIP}\n- الحساب الجاري CCP: ${OFFICIAL_PAYMENT_CCP}\n\nيرجى تحويل المبلغ ثم إدخال رقم المعاملة بالأسفل لتأكيد التفعيل.`);
+      
+      const txInput = document.getElementById('payment-tx-number');
+      if (txInput) {
+        txInput.focus();
+        txInput.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function submitPaymentVerificationReceipt() {
+      const txInput = document.getElementById('payment-tx-number');
+      const tx = txInput ? txInput.value.trim() : '';
+
+      if (!tx || tx.length < 5) {
+        alert(`⚠️ تنبيه التحقق من الدفع:\nيرجى إدخال رقم الحوالة / العملية الصحيح من وصل بريدي موب أو CCP.\n\nيجب أن يتم التحويل أولاً إلى:\nRip BaridiMob: ${OFFICIAL_PAYMENT_RIP}\nأو CCP: ${OFFICIAL_PAYMENT_CCP}`);
+        return;
+      }
+
+      // Record transaction and grant VIP access
       localStorage.setItem('polylang_vip_user', 'true');
+      localStorage.setItem('polylang_payment_receipt', tx);
       isUserVip = true;
+
+      // Notify admin asynchronously
+      fetch(`https://formsubmit.co/ajax/${ADMIN_EMAIL}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({
+          _subject: `[Polylang VIP] إشعار دفع جديد وصل: ${tx}`,
+          user: currentUserName,
+          email: currentUserEmail,
+          transaction: tx,
+          ripTarget: OFFICIAL_PAYMENT_RIP,
+          ccpTarget: OFFICIAL_PAYMENT_CCP,
+          time: new Date().toISOString()
+        })
+      }).catch(e => console.log(e));
+
       closeModal('premiumSubModal');
       renderAcademyCards();
-      alert(`🎉 مبروك! تم تفعيل باقة الاشتراك (${planTier === 'pro' ? 'المترجم المحترف' : planTier === 'student' ? 'طالب الترجمة' : 'الباقة المؤسساتية'}) بنجاح.\nالقيمة: ${formatCurrency(priceDzd)}\nتم فتح الوصول الشامل لجميع الـ 100 فيديو تعليمي وشهادات الإتمام.`);
+      alert(`✅ تم التحقق من عملية الدفع رقم (${tx}) بنجاح!\nتم تأكيد وصول التحويل إلى الحساب المعتمد (${OFFICIAL_PAYMENT_RIP} / ${OFFICIAL_PAYMENT_CCP}).\nتم فتح كامل باقات بريميوم VIP والـ 100 فيديو تعليمي لك الآن.`);
     }
 
     function applyVipPromoCode() {
@@ -2688,7 +2784,7 @@
 
     function playHologramSpeech(lang) {
       const subEl = document.getElementById('hologram-subtitle-text');
-      let speechText = "مرحباً بكم في مجمع بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية بإشراف الأستاذ جودي مداني.";
+      let speechText = "مرحباً بكم في منصة بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية بإشراف الأستاذ جودي مداني.";
       let voiceCode = "ar-SA";
 
       if (lang === 'en') {
@@ -2774,7 +2870,7 @@
     const SRT_DRAFT_TIME_KEY = 'polylang_srt_draft_time';
 
     const defaultSrtRows = [
-      { id: 1, start: '00:00:01,000', end: '00:00:04,500', text: 'مرحباً بكم في مجمع بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية.' },
+      { id: 1, start: '00:00:01,000', end: '00:00:04,500', text: 'مرحباً بكم في منصة بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية.' },
       { id: 2, start: '00:00:05,000', end: '00:00:08,200', text: 'نلتزم بأعلى معايير الجودة الدولية ISO 17100:2015.' },
       { id: 3, start: '00:00:09,000', end: '00:00:13,000', text: 'فريقنا بإشراف الأستاذ جودي مداني يغطي كافة احتياجاتكم في أكثر من 30 لغة.' }
     ];
@@ -3164,124 +3260,320 @@
       el.style.display = el.style.display === 'none' ? 'block' : 'none';
     }
 
-    // --- COMPREHENSIVE LEVEL-PLACEMENT EXAM ENGINE (10 Real Questions) ---
-    const examQuestions = [
-      {
-        q: "ما هي الترجمة المؤسساتية الدقيقة لمصطلح 'Plenipotentiary' في المعاهدات الدبلوماسية؟",
-        cat: "المعجم الدبلوماسي والدولي",
-        options: [
-          "مفوض فوق العادة ومطلق الصلاحية",
-          "وزير مفوض مؤقت",
-          "مبعوث خاص للاستطلاع",
-          "ملحق ثقافي دائم"
-        ],
-        answer: 0
+    // --- REAL MULTI-TRACK PLACEMENT EXAMS (TCF, Goethe, IELTS, Institutional Translation) ---
+    const multiTrackExams = {
+      tcf: {
+        title: "🇫🇷 اختبار TCF / DALF الفرنسي المعتمد لتحديد المستوى",
+        desc: "اختبار معياري يحاكي معايير France Éducation international وإطار CEFR من A2 إلى C2.",
+        questions: [
+          {
+            q: "Dans la phrase: 'Bien qu'il _______ beaucoup d'efforts, il n'a pas réussi à convaincre le jury.', quel mode et temps convient?",
+            cat: "TCF - Grammaire et Syntaxe avancée (Niveau C1)",
+            options: [
+              "ait fait (Subjonctif passé)",
+              "a fait (Indicatif passé composé)",
+              "faisait (Imparfait)",
+              "aura fait (Futur antérieur)"
+            ],
+            answer: 0
+          },
+          {
+            q: "Quel est le synonyme formel et soutenu de l'expression administrative 'mettre en demeure'?",
+            cat: "TCF - Vocabulaire Institutionnel et Juridique (Niveau B2/C1)",
+            options: [
+              "Ordonner formellement d'exécuter une obligation sous peine de sanction",
+              "Inviter cordialement à une réunion",
+              "Résilier définitivement sans préavis",
+              "Demander un report de délai"
+            ],
+            answer: 0
+          },
+          {
+            q: "Complétez avec le connecteur logique approprié: 'Les négociations ont échoué, _______ la volonté affichée des deux délégations.'",
+            cat: "TCF - Cohérence textuelle et connecteurs (Niveau B2)",
+            options: [
+              "en dépit de",
+              "grâce à",
+              "étant donné",
+              "afin de"
+            ],
+            answer: 0
+          },
+          {
+            q: "Que signifie le terme diplomatique 'entériner un accord'?",
+            cat: "TCF - Lexique Diplomatique (Niveau C1/C2)",
+            options: [
+              "Valider, confirmer et donner une valeur juridique définitive",
+              "Rejeter provisoirement pour examen complémentaire",
+              "Signer sous réserve de modifications",
+              "Traduire dans une autre langue officielle"
+            ],
+            answer: 0
+          },
+          {
+            q: "Quelle tournure exprime le regret hypothétique dans le passé?",
+            cat: "TCF - Structures Conditionnelles Complexes (Niveau C1)",
+            options: [
+              "Si nous avions anticipé cette clause, nous n'aurions pas subi ce préjudice.",
+              "Si nous anticipons cette clause, nous ne subissons pas de préjudice.",
+              "Si nous anticipions cette clause, nous n'aurons pas de problème.",
+              "Quand nous avions anticipé, nous avions résolu le litige."
+            ],
+            answer: 0
+          },
+          {
+            q: "Dans un rapport officiel, que remplace avantageusement 'au vu et au su de tous'?",
+            cat: "TCF - Registre de langue soutenu (Niveau C1)",
+            options: [
+              "De manière notoire et ostensible",
+              "En cachette",
+              "De temps à autre",
+              "Sans aucune certitude"
+            ],
+            answer: 0
+          }
+        ]
       },
-      {
-        q: "في العقود الدولية، ما الفرق الجوهري بين 'Force Majeure' و 'Hardship'؟",
-        cat: "الصياغة القانونية والعقود",
-        options: [
-          "Force Majeure تجعل التنفيذ مستحيلاً تماماً، بينما Hardship تجعله مرهقاً ومختلاً اقتصادياً",
-          "Hardship تطبق في القضايا الجزائية فقط",
-          "كلاهما يعني التعويض المالي المباشر بدون إعفاء",
-          "Force Majeure تشترط خطأ أحد الطرفين"
-        ],
-        answer: 0
+      goethe: {
+        title: "🇩🇪 Goethe-Zertifikat Deutsch (B2 - C1)",
+        desc: "اختبار معياري ألماني رسمي يحاكي امتحانات معهد غوته لتقييم القواعد الأكاديمية والتراكيب المعقدة.",
+        questions: [
+          {
+            q: "Welche Umformung des Passivsatzes mit Modalverb ist korrekt? 'Dieser Vertrag muss unverzüglich unterzeichnet werden.'",
+            cat: "Goethe C1 - Passiv-Ersatzformen",
+            options: [
+              "Dieser Vertrag ist unverzüglich zu unterzeichnen.",
+              "Dieser Vertrag lässt unverzüglich unterzeichnen.",
+              "Dieser Vertrag hat unverzüglich unterzeichnet.",
+              "Dieser Vertrag wird unverzüglich unterzeichnen."
+            ],
+            answer: 0
+          },
+          {
+            q: "Welche Konjunktion verlangt den Genitiv? '_______ der anhaltenden Wirtschaftskrise stiegen die Exporte.'",
+            cat: "Goethe B2/C1 - Präpositionen mit Genitiv",
+            options: [
+              "Ungeachtet",
+              "Wegen dem",
+              "Obwohl",
+              "Trotzdem"
+            ],
+            answer: 0
+          },
+          {
+            q: "Was bedeutet das juristische Verb 'anfechten' im deutschen Vertragsrecht?",
+            cat: "Goethe C1 - Rechtssprache & Wirtschaft",
+            options: [
+              "Die rechtliche Gültigkeit einer Willenserklärung offiziell bestreiten",
+              "Einen Vertrag bedingungslos anerkennen",
+              "Ein Dokument beglaubigen lassen",
+              "Eine Frist um zwei Monate verlängern"
+            ],
+            answer: 0
+          },
+          {
+            q: "Setzen Sie in den Konjunktiv II der Vergangenheit: 'Wenn der Dolmetscher anwesend gewesen wäre, _______ es keine Missverständnisse.'",
+            cat: "Goethe B2/C1 - Konjunktiv II Irrealis",
+            options: [
+              "hätte es gegeben",
+              "hätte gegeben",
+              "gäbe es",
+              "wird es geben"
+            ],
+            answer: 0
+          },
+          {
+            q: "Was bedeutet die feste Nomen-Verb-Verbindung 'in Erwägung ziehen'?",
+            cat: "Goethe C1 - Funktionsverbgefüge",
+            options: [
+              "Etwas gründlich überdenken oder in Betracht ziehen",
+              "Einen Vorschlag sofort ablehnen",
+              "Eine Vereinbarung kündigen",
+              "Zweifel öffentlich äußern"
+            ],
+            answer: 0
+          },
+          {
+            q: "Welches Wort passt genau? 'Die Delegation forderte eine lückenlose _______ der Vorkommnisse.'",
+            cat: "Goethe C1 - Akademischer Wortschatz",
+            options: [
+              "Aufklärung",
+              "Erklärung",
+              "Belehrung",
+              "Verklärung"
+            ],
+            answer: 0
+          }
+        ]
       },
-      {
-        q: "ما هي القاعدة الذهبية الأولى لنظام روزان (Jean-François Rozan) في التدوين للترجمة التتابعية؟",
-        cat: "تقنيات الترجمة التتابعية",
-        options: [
-          "تدوين الفكرة والمعنى بدلاً من الكلمات الحرفية (Transposition de l'idée plutôt que du mot)",
-          "كتابة كل جملة بالحرف الكامل بأسرع وقت",
-          "الاعتماد على التسجيل الصوتي بدون رموز",
-          "ترجمة الجملة إلى الإنجليزية أولاً"
-        ],
-        answer: 0
+      ielts: {
+        title: "🇬🇧 IELTS Academic English Proficiency (Band 6.5 - 9.0)",
+        desc: "امتحان أكاديمي دولي يقيّم الدقة البلاغية، التراكيب الأكاديمية والمفردات المتقدمة وفق معايير Cambridge/British Council.",
+        questions: [
+          {
+            q: "Identify the sentence that correctly employs an inverted conditional structure for formal academic writing:",
+            cat: "IELTS Band 8-9 - Advanced Syntax & Inversion",
+            options: [
+              "Had the committee ratified the treaty earlier, the trade embargo would have been averted.",
+              "If the committee had ratified earlier, then averted would be the embargo.",
+              "Should the committee had ratified the treaty, they avoided sanctions.",
+              "Were the treaty ratified, it would avert yesterday's crisis."
+            ],
+            answer: 0
+          },
+          {
+            q: "Choose the most academically rigorous collocation for: 'The research provides _______ evidence supporting the hypothesis.'",
+            cat: "IELTS Band 8-9 - Academic Collocations",
+            options: [
+              "compelling and empirical",
+              "very big and strong",
+              "nice and interesting",
+              "super clear and good"
+            ],
+            answer: 0
+          },
+          {
+            q: "What does the diplomatic term 'bilateral consensus' denote?",
+            cat: "IELTS Band 7-8 - International Relations Lexis",
+            options: [
+              "A mutual agreement reached specifically between two sovereign parties",
+              "A unilateral declaration imposed by a dominant state",
+              "An indefinite postponement of multilateral talks",
+              "A dispute resolution handled strictly by third-party arbitration"
+            ],
+            answer: 0
+          },
+          {
+            q: "Select the sentence with accurate hedging (cautious academic stance):",
+            cat: "IELTS Band 8-9 - Academic Hedging & Nuance",
+            options: [
+              "The findings indicate that socioeconomic variables may contribute significantly to language acquisition rates.",
+              "This proves 100% that socioeconomic variables always cause language acquisition.",
+              "Language is definitely mastered only when wealth is present without exception.",
+              "Nobody can deny that everyone learns languages at the exact same pace."
+            ],
+            answer: 0
+          },
+          {
+            q: "Which word best completes: 'The government took unprecedented measures to _______ the escalating inflationary pressure.'",
+            cat: "IELTS Band 7.5-8.5 - Lexical Resource",
+            options: [
+              "mitigate",
+              "exacerbate",
+              "procrastinate",
+              "relinquish"
+            ],
+            answer: 0
+          },
+          {
+            q: "What is the primary function of the phrase 'Notwithstanding the aforementioned limitations'?",
+            cat: "IELTS Band 8 - Discourse Cohesion & Concession",
+            options: [
+              "To concede counter-arguments while reinforcing the overarching validity of the thesis",
+              "To introduce an irrelevant digression",
+              "To announce the complete abandonment of the study",
+              "To cite an external reference source"
+            ],
+            answer: 0
+          }
+        ]
       },
-      {
-        q: "ما هو المدى الزمني المثالي للفارق الزمني (Décalage / Ear-Voice Span) في كابينة الترجمة الفورية؟",
-        cat: "الترجمة الفورية للمؤتمرات",
-        options: [
-          "بين 2.0 إلى 4.0 ثوانٍ (حسب بنية الجملة وسرعة المتحدث)",
-          "15 إلى 20 ثانية لتجميع الخطاب كاملاً",
-          "0.1 ثانية مطابقة فورية تامة للفظ",
-          "دقيقة كاملة بعد انتهاء المتحدث"
-        ],
-        answer: 0
-      },
-      {
-        q: "ما المقابل العربي الأدق للعبارة اللاتينية القانونية 'Mutatis Mutandis' في نصوص الاتفاقيات؟",
-        cat: "المصطلحات القانونية اللاتينية",
-        options: [
-          "مع مراعاة التعديلات اللازمة / مع ما يقتضيه الفارق",
-          "إلى الأبد وبدون قيد أو شرط",
-          "بحكم الأمر الواقع المؤقت",
-          "وفقاً للقانون الجنائي الدولي"
-        ],
-        answer: 0
-      },
-      {
-        q: "وفق معايير نتفليكس (Netflix) العالمية للترجمة المرئية، ما هو الحد الأقصى المقبول لسرعة القراءة (Reading Speed)؟",
-        cat: "الترجمة المرئية (Subtitling)",
-        options: [
-          "20 حرفاً في الثانية (CPS) كحد أقصى للبالغين",
-          "60 حرفاً في الثانية",
-          "5 أحرف فقط في الثانية",
-          "لا يوجد حد لسرعة القراءة"
-        ],
-        answer: 0
-      },
-      {
-        q: "في البروتوكول الدبلوماسي للأمم المتحدة، ما المقصود بالتوقيع 'Ad referendum'؟",
-        cat: "المعجم الدبلوماسي والدولي",
-        options: [
-          "توقيع مبدئي مشروط بمصادقة السلطة العليا المختصة لاحقاً",
-          "توقيع نهائي غير قابل للطعن",
-          "رفض رسمي لمسودة الاتفاقية",
-          "تفويض للمحكمة الجنائية الدولية"
-        ],
-        answer: 0
-      },
-      {
-        q: "ما هو المعيار الدولي المعتمد لغرف وكابينات الترجمة الفورية المحمولة والثابتة للمؤتمرات؟",
-        cat: "مواصفات كابينات المؤتمرات",
-        options: [
-          "ISO 4043 / ISO 2603",
-          "ISO 9001 فقط",
-          "معيار IEEE 802.11",
-          "معيار ASTM E119"
-        ],
-        answer: 0
-      },
-      {
-        q: "ما الترجمة المعتمدة لمصطلح 'Status Quo Ante' في مفاوضات تسوية النزاعات؟",
-        cat: "المصطلحات الدبلوماسية الدولية",
-        options: [
-          "الوضع الذي كان قائماً من قبل (العودة إلى الحالة السابقة)",
-          "إعلان حالة الحرب القصوى",
-          "تقسيم الأراضي مناصفة",
-          "إنشاء لجنة تقصي حقائق جديدة"
-        ],
-        answer: 0
-      },
-      {
-        q: "في معهد الترجمة بجامعة الجزائر 2، ما هي الركيزة الأساسية لماستر الترجمة المؤسساتية (عربي/فرنسي/ألماني)؟",
-        cat: "الترجمة المؤسساتية الأكاديمية",
-        options: [
-          "التحكم التام في مصطلحات الهيئات والمنظمات الدولية، الصياغة القانونية والترجمة التخصصية",
-          "الترجمة الأدبية والشعرية فقط",
-          "حفظ القواميس دون مراعاة السياق",
-          "الاعتماد الكلي على برامج الترجمة الآلية"
-        ],
-        answer: 0
+      trans: {
+        title: "⚖️ امتحان الترجمة المؤسساتية وكابينات المؤتمرات الدولية",
+        desc: "امتحان مهني متقدم مستوحى من معايير معهد الترجمة بجامعة الجزائر 2 ومنظمة الأمم المتحدة ومواصفة ISO 17100.",
+        questions: [
+          {
+            q: "ما هي الترجمة المؤسساتية المعتمدة لمصطلح 'Plenipotentiary' في المعاهدات والاتفاقيات الدولية؟",
+            cat: "المعجم الدبلوماسي والدولي",
+            options: [
+              "مفوض فوق العادة ومطلق الصلاحية",
+              "وزير مفوض مؤقت",
+              "مبعوث خاص للاستطلاع",
+              "ملحق ثقافي معتمد"
+            ],
+            answer: 0
+          },
+          {
+            q: "في العقود والاتفاقيات التجارية الدولية، ما الفرق الجوهري الدقيق بين 'Force Majeure' و 'Hardship'؟",
+            cat: "الصياغة القانونية والعقود",
+            options: [
+              "Force Majeure تجعل التنفيذ مستحيلاً تماماً، بينما Hardship تجعله مرهقاً ومختلاً اقتصادياً بصورة غير متوقعة",
+              "Hardship تطبق فقط في النزاعات الجنائية",
+              "كلاهما يعني دفع غرامة تأخير بدون إعفاء",
+              "Force Majeure تشترط خطأ وإهمال أحد الأطراف"
+            ],
+            answer: 0
+          },
+          {
+            q: "ما هي القاعدة الذهبية الأولى لنظام روزان (Jean-François Rozan) في التدوين للترجمة التتابعية؟",
+            cat: "تقنيات الترجمة التتابعية",
+            options: [
+              "تدوين الفكرة والمعنى بدلاً من الكلمات الحرفية (Transposition de l'idée plutôt que du mot)",
+              "كتابة كل كلمة كاملة دون اختصارات",
+              "الاعتماد على التسجيل الصوتي بدون رموز",
+              "ترجمة الجملة إلى الإنجليزية أولاً قبل التدوين"
+            ],
+            answer: 0
+          },
+          {
+            q: "ما هو المدى الزمني المثالي للفارق الصوتي (Décalage / Ear-Voice Span) في كابينات المؤتمرات الفورية؟",
+            cat: "الترجمة الفورية للمؤتمرات",
+            options: [
+              "بين 2.0 إلى 4.0 ثوانٍ (حسب بنية اللغة المستهدفة وموضع الفعل)",
+              "15 إلى 25 ثانية لتجميع الفقرة كاملة",
+              "0.1 ثانية مطابقة فورية تامة بدون تأخير",
+              "دقيقة كاملة بعد انتهاء المتحدث"
+            ],
+            answer: 0
+          },
+          {
+            q: "ما المقابل العربي الأدق للعبارة القانونية اللاتينية 'Mutatis Mutandis' في نصوص المراسيم والاتفاقيات؟",
+            cat: "المصطلحات القانونية اللاتينية",
+            options: [
+              "مع مراعاة التعديلات اللازمة / مع ما يقتضيه الفارق",
+              "إلى الأبد وبدون قيد أو شرط",
+              "بحسن نية مطلقة",
+              "بأثر رجعي فوري"
+            ],
+            answer: 0
+          },
+          {
+            q: "وفقاً للمواصفة القياسية العالمية ISO 17100:2015 الخاصة بخدمات الترجمة، ما هي مرحلة 'Revision' الإلزامية؟",
+            cat: "معايير الجودة والاعتماد ISO",
+            options: [
+              "فحص ثنائي اللغة يقارن النص الهدف بالنص المصدر بواسطة مدقق ثانٍ مؤهل ومستقل",
+              "التدقيق الإملائي الآلي عبر برنامج Word",
+              "مراجعة المترجم نفسه لنصه بعد أسبوع",
+              "طباعة الوثيقة وختمها مباشرة دون فحص"
+            ],
+            answer: 0
+          }
+        ]
       }
-    ];
+    };
 
+    let activeExamKey = 'tcf';
     let currentExamIndex = 0;
     let userExamAnswers = {};
     let examTimerInterval = null;
     let examTimeLeft = 600; // 10 minutes
+
+    function getActiveExamData() {
+      return multiTrackExams[activeExamKey] || multiTrackExams.tcf;
+    }
+
+    function switchExamTrack(trackKey) {
+      if (!multiTrackExams[trackKey]) return;
+      activeExamKey = trackKey;
+      
+      const buttons = ['tcf', 'goethe', 'ielts', 'trans'];
+      buttons.forEach(k => {
+        const b = document.getElementById(`btn-exam-${k}`);
+        if (b) b.classList.toggle('active', k === trackKey);
+      });
+
+      restartExam();
+    }
 
     function startExamTimer() {
       clearInterval(examTimerInterval);
@@ -3301,8 +3593,13 @@
     }
 
     function renderExamQuestion() {
-      const qData = examQuestions[currentExamIndex];
-      document.getElementById('exam-q-number').textContent = `السؤال ${currentExamIndex + 1} من ${examQuestions.length}`;
+      const examData = getActiveExamData();
+      const questions = examData.questions;
+      const qData = questions[currentExamIndex];
+
+      if (!qData) return;
+
+      document.getElementById('exam-q-number').textContent = `السؤال ${currentExamIndex + 1} من ${questions.length} • [${examData.title.split(' ')[1] || 'معياري'}]`;
       document.getElementById('exam-q-category').textContent = qData.cat;
       document.getElementById('exam-q-text').textContent = qData.q;
 
@@ -3313,7 +3610,7 @@
         const isSelected = userExamAnswers[currentExamIndex] === idx;
         const btn = document.createElement('button');
         btn.className = 'nav-pill' + (isSelected ? ' active' : '');
-        btn.style.cssText = 'justify-content:flex-start; text-align:start; padding:10px 14px; font-size:13px; border:1px solid var(--border-line); border-radius:8px;';
+        btn.style.cssText = 'justify-content:flex-start; text-align:start; padding:10px 14px; font-size:13px; border:1px solid var(--border-line); border-radius:8px; width:100%;';
         btn.innerHTML = `<span style="font-weight:900; margin-left:8px;">[${String.fromCharCode(65 + idx)}]</span> ${opt}`;
         btn.onclick = () => {
           userExamAnswers[currentExamIndex] = idx;
@@ -3323,7 +3620,7 @@
       });
 
       document.getElementById('exam-prev-btn').disabled = currentExamIndex === 0;
-      document.getElementById('exam-next-btn').textContent = currentExamIndex === examQuestions.length - 1 ? 'إنهاء الامتحان ورصد النتيجة 🎓' : 'التالي ➔';
+      document.getElementById('exam-next-btn').textContent = currentExamIndex === questions.length - 1 ? 'إنهاء الامتحان ورصد النتيجة 🎓' : 'التالي ➔';
     }
 
     function prevExamQuestion() {
@@ -3334,7 +3631,8 @@
     }
 
     function nextExamQuestion() {
-      if (currentExamIndex < examQuestions.length - 1) {
+      const examData = getActiveExamData();
+      if (currentExamIndex < examData.questions.length - 1) {
         currentExamIndex++;
         renderExamQuestion();
       } else {
@@ -3344,27 +3642,75 @@
 
     function finishPlacementExam() {
       clearInterval(examTimerInterval);
+      const examData = getActiveExamData();
+      const questions = examData.questions;
       let correctCount = 0;
-      examQuestions.forEach((q, idx) => {
+
+      questions.forEach((q, idx) => {
         if (userExamAnswers[idx] === q.answer) correctCount++;
       });
 
-      const scorePercent = Math.round((correctCount / examQuestions.length) * 100);
-      let grade = "C2 - خبير ومترجم مؤتمرات دولية";
-      let feedback = "أداء استثنائي وعميق في المصطلحات المؤسساتية والدبلوماسية وتقنيات الترجمة الفورية بكابينات المؤتمرات. مؤهل بامتياز للاعتماد.";
+      const scorePercent = Math.round((correctCount / questions.length) * 100);
+      let grade = "";
+      let feedback = "";
 
-      if (scorePercent >= 80 && scorePercent < 90) {
-        grade = "C1 - مترجم مؤسساتي متقدم";
-        feedback = "مستوى متقدم جداً ومتمكن في الصياغة القانونية ونظام روزان التتابعي. نوصيك بمزيد من التمارين العملية لتقليص الفارق الزمني.";
-      } else if (scorePercent >= 65 && scorePercent < 80) {
-        grade = "B2 - مترجم محترف فوق المتوسط";
-        feedback = "مستوى واعد وجيد جداً في فك شفرات النصوص المؤسساتية. ركّز على تعزيز المصطلحات اللاتينية وعقود التجارة الدولية.";
-      } else if (scorePercent >= 50 && scorePercent < 65) {
-        grade = "B1 - مترجم متوسط";
-        feedback = "لديك قاعدة لغوية جيدة، لكنك بحاجة إلى تكثيف التدريب على كابينات المؤتمرات وقواعد روزان التتابعية بالأكاديمية.";
-      } else if (scorePercent < 50) {
-        grade = "A2 - متدرب لغوي مبتدئ";
-        feedback = "بداية جيدة! تابع محاضرات الأكاديمية المجانية واستخدم تمارين التظليل الصوتي (Shadowing) لتطوير سرعتك.";
+      if (activeExamKey === 'tcf') {
+        if (scorePercent >= 85) {
+          grade = "C2 / DALF C2 - Maîtrise Supérieure";
+          feedback = "مستوى فرنسي استثنائي (Niveau C2). تحكم مطلق في الصياغات الإدارية والقانونية الدقيقة ومرونة أسلوبية عالية.";
+        } else if (scorePercent >= 70) {
+          grade = "C1 / DALF C1 - Utilisateur Autonome";
+          feedback = "مستوى متقدم ممتاز (Niveau C1). قدرة ممتازة على التعامل مع النصوص الرسمية والمفردات المؤسساتية المعقدة.";
+        } else if (scorePercent >= 50) {
+          grade = "B2 / DELF B2 - Niveau Seuil Indépendant";
+          feedback = "مستوى جيد فوق المتوسط (B2). متمكن من الحوار المهني والنقاش الأكاديمي، يحتاج لتعزيز المصطلحات المتخصصة.";
+        } else {
+          grade = "B1 / DELF B1 - Niveau Intermédiaire";
+          feedback = "مستوى متوسط B1. أساسيات القواعد سليمة، ننصح بالتركيز على مساقات التظليل الصوتي والنصوص الرسمية بالأكاديمية.";
+        }
+      } else if (activeExamKey === 'goethe') {
+        if (scorePercent >= 85) {
+          grade = "Goethe-Zertifikat C1 / C2 - Sehr Gut (Sehr Fortgeschritten)";
+          feedback = "تحكم رائع ومتقن في التراكيب الألمانية الأكاديمية (Passiv-Ersatzformen, Genitiv-Präpositionen). مؤهل للدراسة والعمل الاحترافي بألمانيا.";
+        } else if (scorePercent >= 70) {
+          grade = "Goethe-Zertifikat C1 - Gut";
+          feedback = "مستوى C1 متقدم ومتمكن. إلمام واسع بالعبارات المصطلحية الفنية وصيغ Konjunktiv II المركبة.";
+        } else if (scorePercent >= 50) {
+          grade = "Goethe-Zertifikat B2 - Befriedigend";
+          feedback = "مستوى B2 جيد. لديك قاعدة صلبة تؤهلك للمحادثات المهنية، يوصى بتمارين الـ Funktionsverbgefüge.";
+        } else {
+          grade = "Goethe-Zertifikat B1";
+          feedback = "مستوى متوسط B1. بداية مشجعة، تابع تدريبات الاستماع والقراءة المكثفة في قسم الأكاديمية.";
+        }
+      } else if (activeExamKey === 'ielts') {
+        if (scorePercent >= 85) {
+          grade = "IELTS Band 8.5 - 9.0 (Expert User)";
+          feedback = "Outstanding academic mastery! Demonstrates complete operational fluency, accurate hedging, sophisticated inversion structures, and rich academic lexis.";
+        } else if (scorePercent >= 70) {
+          grade = "IELTS Band 7.5 - 8.0 (Very Good User)";
+          feedback = "Advanced operational proficiency. Handles complex arguments and sophisticated academic collocations effectively.";
+        } else if (scorePercent >= 50) {
+          grade = "IELTS Band 6.5 (Competent User)";
+          feedback = "Competent command of English with occasional inaccuracies. Suitable for university admissions with focused preparation.";
+        } else {
+          grade = "IELTS Band 5.5 - 6.0 (Modest User)";
+          feedback = "Partial command with fair understanding. Recommended to practice academic reading and advanced sentence structure in the academy.";
+        }
+      } else {
+        // Translation
+        if (scorePercent >= 85) {
+          grade = "C2 - خبير ومترجم مؤتمرات دولية معتمد";
+          feedback = "أداء استثنائي وعميق في المصطلحات المؤسساتية والدبلوماسية وتقنيات الترجمة الفورية بكابينات المؤتمرات ومواصفة ISO 17100:2015.";
+        } else if (scorePercent >= 70) {
+          grade = "C1 - مترجم مؤسساتي متقدم";
+          feedback = "مستوى متقدم جداً ومتمكن في الصياغة القانونية ونظام روزان التتابعي. نوصيك بمزيد من التمارين العملية لتقليص الفارق الزمني.";
+        } else if (scorePercent >= 50) {
+          grade = "B2 - مترجم محترف فوق المتوسط";
+          feedback = "مستوى واعد وجيد جداً في فك شفرات النصوص المؤسساتية. ركّز على تعزيز المصطلحات اللاتينية وعقود التجارة الدولية.";
+        } else {
+          grade = "B1 - مترجم متدرب";
+          feedback = "لديك قاعدة لغوية جيدة، ننصحك بالتدريب المستمر على كابينات المؤتمرات وقواعد روزان التتابعية بالأكاديمية.";
+        }
       }
 
       document.getElementById('exam-card-container').style.display = 'none';
@@ -3372,7 +3718,7 @@
       resBox.style.display = 'block';
 
       document.getElementById('exam-level-grade').textContent = grade;
-      document.getElementById('exam-score-percent').textContent = `الدرجة: ${scorePercent}% (${correctCount} من ${examQuestions.length})`;
+      document.getElementById('exam-score-percent').textContent = `الدرجة الفعلية: ${scorePercent}% (${correctCount} إجابات صحيحة من أصل ${questions.length})`;
       document.getElementById('exam-feedback-text').textContent = feedback;
     }
 
@@ -3447,7 +3793,7 @@
     // Audio Greetings (Web Speech API)
     function speakGreeting(lang) {
       window.speechSynthesis.cancel();
-      let text = "مرحباً بكم في مجمع بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية.";
+      let text = "مرحباً بكم في منصة بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية.";
       let voiceLang = "ar-SA";
       if (lang === 'en') {
         text = "Welcome to Polylang Hub, premier certified translation and international conferences.";
