@@ -217,38 +217,79 @@
       font-weight: 800;
     }
 
-    /* Secondary Sub-Navbar */
+    /* Secondary Sub-Navbar - CRA.DZ Style Navigation */
     .nav-sub-bar {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       padding: 6px 0 10px;
-      overflow-x: auto;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
+      overflow-x: visible;
+      flex-wrap: wrap;
     }
-    .nav-sub-bar::-webkit-scrollbar { display: none; }
+
+    .cra-nav-item {
+      position: relative;
+      display: inline-block;
+    }
 
     .sub-nav-btn {
-      padding: 5px 12px;
-      font-size: 11.5px;
+      padding: 6px 14px;
+      font-size: 12px;
       font-weight: 700;
       border-radius: var(--radius-pill);
       background: var(--bg-card);
       border: 1px solid var(--border-line);
-      color: var(--text-dim);
+      color: var(--text-main);
       white-space: nowrap;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
       transition: all 0.15s ease;
     }
 
     .sub-nav-btn:hover, .sub-nav-btn.active {
-      color: var(--crimson);
+      color: #fff;
       border-color: var(--crimson);
+      background: var(--crimson);
+      box-shadow: 0 2px 8px var(--crimson-glow);
+    }
+
+    .cra-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      min-width: 230px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-line);
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      z-index: 100;
+      padding: 8px 0;
+      margin-top: 4px;
+    }
+
+    .cra-nav-item:hover .cra-dropdown-menu {
+      display: block;
+    }
+
+    .cra-dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-main);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .cra-dropdown-item:hover {
       background: var(--crimson-light);
+      color: var(--crimson);
     }
 
     /* Hero Section Card */
@@ -928,14 +969,118 @@
 
       </div>
 
-      <!-- Secondary Sub-Navbar with Shortcuts -->
+      <!-- Secondary Sub-Navbar with CRA.DZ Official Sections (المنصات الإلكترونية، نشاطات، كيف تنضم، اتصل بنا) -->
       <div class="nav-sub-bar">
-        <button class="sub-nav-btn" onclick="openModal('aboutModal')">✦ About Us</button>
-        <button class="sub-nav-btn active" onclick="switchRole('client')">العودة للوحة الرئيسية</button>
-        <button class="sub-nav-btn" onclick="openModal('binauralModal')">🧠 التحمل الذهني (432Hz)</button>
-        <button class="sub-nav-btn" onclick="switchRole('enthusiast')">🎧 تمارين التظليل الصوتي</button>
-        <button class="sub-nav-btn" onclick="switchRole('enthusiast')">📹 محاضرات الفيديو</button>
-        <button class="sub-nav-btn" onclick="switchRole('translator')">🎬 جميع الوسائط ومحرر SRT</button>
+        <!-- 1. الرئيسية -->
+        <div class="cra-nav-item">
+          <button class="sub-nav-btn active" onclick="switchRole('client')">
+            <span>🏠</span> <span>الرئيسية</span>
+          </button>
+        </div>
+
+        <!-- 2. من نحن (About) -->
+        <div class="cra-nav-item">
+          <button class="sub-nav-btn" onclick="openModal('aboutModal')">
+            <span>✦</span> <span>من نحن</span> <span>▾</span>
+          </button>
+          <div class="cra-dropdown-menu">
+            <div class="cra-dropdown-item" onclick="openModal('aboutModal')">
+              <span>🏛️</span> <span>عن المنصة ورسالتها المؤسساتية</span>
+            </div>
+            <div class="cra-dropdown-item" onclick="openModal('founderModal')">
+              <span>👨‍🏫</span> <span>سيرة المؤسس الأستاذ جودي مداني</span>
+            </div>
+            <div class="cra-dropdown-item" onclick="openHologramModal()">
+              <span>🤖</span> <span>فيديو الهولوغرام الإفتتاحي التفاعلي</span>
+            </div>
+            <div class="cra-dropdown-item" onclick="openModal('binauralModal')">
+              <span>🧠</span> <span>التحمل الذهني لمترجمي المؤتمرات (432Hz)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. المنصات الإلكترونية (cra.dz Core Highlight) -->
+        <div class="cra-nav-item">
+          <button class="sub-nav-btn" onclick="switchRole('student')">
+            <span>💻</span> <span>المنصات الإلكترونية</span> <span>▾</span>
+          </button>
+          <div class="cra-dropdown-menu">
+            <div class="cra-dropdown-item" onclick="openExamDirectly('trans')">
+              <span>🏆</span> <strong>امتحان تحديد المستوى المعياري</strong>
+            </div>
+            <div class="cra-dropdown-item" onclick="switchRole('student'); switchStudentTab('booth');">
+              <span>🎙️</span> <span>مقصورة ومحاكي الترجمة الفورية</span>
+            </div>
+            <div class="cra-dropdown-item" onclick="switchRole('student'); switchStudentTab('consec');">
+              <span>📝</span> <span>الترجمة التتابعية ونظام روزان (Rozan)</span>
+            </div>
+            <div class="cra-dropdown-item" onclick="switchRole('translator')">
+              <span>🎬</span> <span>استوديو الترجمة المرئية ومحرر SRT</span>
+            </div>
+            <div class="cra-dropdown-item" onclick="switchRole('enthusiast')">
+              <span>🎓</span> <span>أكاديمية الماستركلاس (100 فيديو)</span>
+            </div>
+            <div class="cra-dropdown-item" onclick="switchRole('client')">
+              <span>⚖️</span> <span>بوابة طلب وتتبع الترجمة المحلفة</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. نشاطات وخدمات الترجمة -->
+        <div class="cra-nav-item">
+          <button class="sub-nav-btn" onclick="switchRole('client')">
+            <span>⚡</span> <span>نشاطات وخدمات</span> <span>▾</span>
+          </button>
+          <div class="cra-dropdown-menu">
+            <div class="cra-dropdown-item" onclick="openModal('orderModal')">
+              <span>⚖️</span> <span>الترجمة الرسمية والقانونية المحلفة</span>
+            </div>
+            <div class="cra-dropdown-item" onclick="openModal('orderModal')">
+              <span>🎙️</span> <span>تغطية المؤتمرات والترجمة الفورية</span>
+            </div>
+            <div class="cra-dropdown-item" onclick="openModal('orderModal')">
+              <span>⚡</span> <span>ترجمة قطاع الطاقة والمحروقات والهيدروجين</span>
+            </div>
+            <div class="cra-dropdown-item" onclick="openModal('orderModal')">
+              <span>🏥</span> <span>الترجمة الطبية والصيدلانية الدقيقة</span>
+            </div>
+            <div class="cra-dropdown-item" onclick="switchRole('enthusiast')">
+              <span>🎧</span> <span>جلسات التظليل الصوتي (Shadowing)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. كيف تنضم (اشتراكات وعضوية المترجمين) -->
+        <div class="cra-nav-item">
+          <button class="sub-nav-btn" onclick="scrollToPricingPlans()">
+            <span>🤝</span> <span>كيف تنضم</span> <span>▾</span>
+          </button>
+          <div class="cra-dropdown-menu">
+            <div class="cra-dropdown-item" onclick="scrollToPricingPlans()">
+              <span>💳</span> <span>باقات اشتراك الطلبة والمحترفين (VIP)</span>
+            </div>
+            <div class="cra-dropdown-item" onclick="openModal('authModal')">
+              <span>🔑</span> <span>تسجيل حساب طالب / مترجم جديد</span>
+            </div>
+            <div class="cra-dropdown-item" onclick="openExamDirectly('trans')">
+              <span>📊</span> <span>اجتياز فحص القبول وتحديد المستوى</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. اتصل بنا -->
+        <div class="cra-nav-item">
+          <button class="sub-nav-btn" onclick="openContactSupport()">
+            <span>📞</span> <span>اتصل بنا</span>
+          </button>
+        </div>
+
+        <!-- Fast Action Direct Link: Placement Exam -->
+        <div class="cra-nav-item" style="margin-inline-start:auto;">
+          <button class="sub-nav-btn" onclick="openExamDirectly('trans')" style="background:linear-gradient(135deg, var(--crimson), #991b1b); color:#fff; border-color:var(--crimson);">
+            <span>🏆</span> <span>امتحان تحديد المستوى (ابدأ الآن)</span>
+          </button>
+        </div>
       </div>
 
     </div>
@@ -4141,6 +4286,35 @@
       document.getElementById('exam-result-box').style.display = 'none';
       startExamTimer();
       renderExamQuestion();
+    }
+
+    // Direct Navigation Helper for CRA.DZ Portal Structure
+    function openExamDirectly(trackKey) {
+      switchRole('student');
+      switchStudentTab('exam');
+      if (trackKey) {
+        switchExamTrack(trackKey);
+      }
+      const examBox = document.getElementById('student-exam-box');
+      if (examBox) {
+        examBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function scrollToPricingPlans() {
+      switchRole('client');
+      const pricingBox = document.getElementById('pricing-plans-section') || document.querySelector('.pricing-plans-grid') || document.getElementById('view-client');
+      if (pricingBox) {
+        pricingBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
+    function openContactSupport() {
+      openModal('orderModal');
+      const serviceSelect = document.getElementById('order-service-name');
+      if (serviceSelect) {
+        serviceSelect.value = 'استشارة واستفسار عام';
+      }
     }
 
     // Order Submission Handler

@@ -418,29 +418,92 @@ fun HomeScreen(
             }
         }
 
-        // 3. CORE SERVICE PORTALS GRID
+        // 3. CRA.DZ ALIGNED SECTIONS: المنصات الإلكترونية، نشاطات، كيف تنضم
         Text(
-            text = if (isArabic) "بوابات الخدمات السريعة" else "Core Service Portals",
+            text = if (isArabic) "🏛️ المنصات والخدمات الإلكترونية (cra.dz)" else "Electronic Portals & Services",
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold
         )
 
+        // Highlight: Placement Exam Banner Card
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { onNavigate(AppTab.ACADEMY) },
+            shape = RoundedCornerShape(16.dp),
+            colors = CardDefaults.cardColors(containerColor = RedPrimary.copy(alpha = 0.08f)),
+            border = androidx.compose.foundation.BorderStroke(1.5.dp, RedPrimary.copy(alpha = 0.35f))
+        ) {
+            Row(
+                modifier = Modifier.padding(14.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(46.dp)
+                        .clip(RoundedCornerShape(10.dp))
+                        .background(RedPrimary),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.School,
+                        contentDescription = null,
+                        tint = Color.White,
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
+                Column(modifier = Modifier.weight(1f)) {
+                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                        Text(
+                            text = if (isArabic) "امتحان تحديد المستوى المعياري" else "Standard Placement Exam",
+                            style = MaterialTheme.typography.titleSmall,
+                            fontWeight = FontWeight.Bold,
+                            color = RedPrimary
+                        )
+                        Surface(
+                            shape = RoundedCornerShape(4.dp),
+                            color = RedPrimary
+                        ) {
+                            Text(
+                                text = "CEFR",
+                                color = Color.White,
+                                fontSize = 10.sp,
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier.padding(horizontal = 4.dp, vertical = 1.dp)
+                            )
+                        }
+                    }
+                    Text(
+                        text = if (isArabic) "اختبارات تفاعلية حقيقية مع سلم تنقيط معتمد لتقييم كفاءتك المهنية" else "Interactive exams with realistic rubric scoring to assess your proficiency",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+                Icon(
+                    imageVector = Icons.Default.ArrowForward,
+                    contentDescription = null,
+                    tint = RedPrimary
+                )
+            }
+        }
+
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             PortalCard(
                 modifier = Modifier.weight(1f),
-                title = if (isArabic) "خدمات الترجمة" else "Translation",
+                title = if (isArabic) "خدمات ونشاطات الترجمة" else "Translation Services",
                 desc = if (isArabic) "قانونية، طبية وأكاديمية" else "Legal, Medical & Academic",
                 icon = Icons.Default.Description,
-                badge = if (isArabic) "معتمد" else "Sworn",
+                badge = if (isArabic) "نشاطات" else "Services",
                 color = RedPrimary,
                 onClick = { onNavigate(AppTab.SERVICES) }
             )
             PortalCard(
                 modifier = Modifier.weight(1f),
-                title = if (isArabic) "محرر SRT المرئي" else "SRT Subtitling",
-                desc = if (isArabic) "توقيت وتصدير ملفات SRT" else "Sync & Export SRT",
+                title = if (isArabic) "المنصات الإلكترونية (SRT)" else "SRT Subtitling",
+                desc = if (isArabic) "توقيت وتصدير ملفات الترجمة" else "Sync & Export SRT",
                 icon = Icons.Default.Subtitles,
-                badge = "Netflix CPS",
+                badge = "المنصات",
                 color = RedDark,
                 onClick = { onNavigate(AppTab.SUBTITLING) }
             )
@@ -450,18 +513,18 @@ fun HomeScreen(
             PortalCard(
                 modifier = Modifier.weight(1f),
                 title = if (isArabic) "الأكاديمية والماستركلاس" else "Academy & Courses",
-                desc = if (isArabic) "ورشات عمل متقدمة مع خبراء" else "Workshops with Top Experts",
+                desc = if (isArabic) "100 محاضرة متخصصة مع خبراء" else "100 Specialized Lectures",
                 icon = Icons.Default.School,
-                badge = if (isArabic) "شهادات معتمدة" else "Certificates",
+                badge = if (isArabic) "تدريب" else "Training",
                 color = GoldYellow,
                 onClick = { onNavigate(AppTab.ACADEMY) }
             )
             PortalCard(
                 modifier = Modifier.weight(1f),
-                title = if (isArabic) "الأسعار والباقات" else "Pricing & Plans",
-                desc = if (isArabic) "أسعار شفافة بالدينار والعملات" else "Clear Rates in DZD/USD/EUR",
+                title = if (isArabic) "كيف تنضم والاشتراكات" else "How to Join & Plans",
+                desc = if (isArabic) "باقات واشتراكات بريدي موب وCCP" else "Plans via BaridiMob & CCP",
                 icon = Icons.Default.Payments,
-                badge = if (isArabic) "عروض خاصة" else "Best Rates",
+                badge = if (isArabic) "كيف تنضم" else "Join",
                 color = SuccessGreen,
                 onClick = { onNavigate(AppTab.PRICING) }
             )
