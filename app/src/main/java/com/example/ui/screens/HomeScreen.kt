@@ -66,8 +66,83 @@ fun HomeScreen(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
             .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(18.dp)
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+        // cra.dz Style Quick Portal Bar
+        Surface(
+            modifier = Modifier.fillMaxWidth(),
+            color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f),
+            shape = RoundedCornerShape(12.dp),
+            border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f))
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 10.dp, vertical = 8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(28.dp)
+                            .clip(RoundedCornerShape(6.dp))
+                            .background(RedPrimary),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text("P", color = Color.White, fontWeight = FontWeight.Black, fontSize = 14.sp)
+                    }
+                    Column {
+                        Text(
+                            text = if (isArabic) "بوابة الترجمة واللغات" else "Translation & Language Portal",
+                            fontSize = 11.5.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = RedPrimary
+                        )
+                        Text(
+                            text = "cra.dz / polylang-hub",
+                            fontSize = 9.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
+
+                Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Surface(
+                        modifier = Modifier.clickable { onNavigate(AppTab.ACADEMY) },
+                        shape = RoundedCornerShape(50),
+                        color = RedPrimary.copy(alpha = 0.12f),
+                        border = androidx.compose.foundation.BorderStroke(1.dp, RedPrimary.copy(alpha = 0.4f))
+                    ) {
+                        Text(
+                            text = if (isArabic) "📊 الامتحان المعياري" else "Exam",
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                            fontSize = 10.5.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = RedPrimary
+                        )
+                    }
+                    Surface(
+                        modifier = Modifier.clickable { onNavigate(AppTab.PRICING) },
+                        shape = RoundedCornerShape(50),
+                        color = SuccessGreen.copy(alpha = 0.12f),
+                        border = androidx.compose.foundation.BorderStroke(1.dp, SuccessGreen.copy(alpha = 0.4f))
+                    ) {
+                        Text(
+                            text = if (isArabic) "كيف تنضم" else "Join",
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                            fontSize = 10.5.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = SuccessGreen
+                        )
+                    }
+                }
+            }
+        }
+
         // 1. HERO WELCOME CARD (Matching Screenshot 100%)
         Card(
             modifier = Modifier

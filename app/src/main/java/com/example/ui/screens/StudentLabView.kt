@@ -515,6 +515,7 @@ private fun LevelPlacementExamComponent(isArabic: Boolean) {
     var selectedAnswers by remember { mutableStateOf(mutableMapOf<Int, Int>()) }
     var examSubmitted by remember { mutableStateOf(false) }
 
+    val answeredCount = selectedAnswers.size
     val score = remember(examSubmitted) {
         if (!examSubmitted) 0
         else questions.count { q -> selectedAnswers[q.id] == q.correctIndex }
@@ -522,54 +523,143 @@ private fun LevelPlacementExamComponent(isArabic: Boolean) {
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
         item {
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(14.dp),
-                colors = CardDefaults.cardColors(containerColor = RedPrimary.copy(alpha = 0.08f)),
-                border = androidx.compose.foundation.BorderStroke(1.dp, RedPrimary.copy(alpha = 0.25f))
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+                border = androidx.compose.foundation.BorderStroke(1.dp, RedPrimary.copy(alpha = 0.3f))
             ) {
-                Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Text(
-                        text = if (isArabic) "📊 امتحان تحديد مستوى المترجم الأكاديمي (10 أسئلة)" else "Translator Level Placement Exam",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
-                        color = RedPrimary
-                    )
+                Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                            Text(
+                                text = "🎓",
+                                fontSize = 18.sp
+                            )
+                            Text(
+                                text = if (isArabic) "امتحان تقييم المستوى الأكاديمي والمهني" else "Professional Level Placement Exam",
+                                fontWeight = FontWeight.Black,
+                                fontSize = 14.sp,
+                                color = RedPrimary
+                            )
+                        }
+
+                        Surface(
+                            shape = RoundedCornerShape(50),
+                            color = RedPrimary.copy(alpha = 0.12f),
+                            border = androidx.compose.foundation.BorderStroke(1.dp, RedPrimary.copy(alpha = 0.3f))
+                        ) {
+                            Text(
+                                text = "ISO 17100 • CEFR",
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp),
+                                fontSize = 10.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = RedPrimary
+                            )
+                        }
+                    }
+
                     Text(
                         text = if (isArabic)
-                            "أجب عن الأسئلة العشرة التالية لتقييم كفاءتك في المصطلحات القانونية، معايير السبتاتلينغ، تقنيات روزان، والترجمة الفورية."
+                            "اختبار تقييمي معياري يتكون من 10 أسئلة تغطي: الصياغة القانونية المحلفة، معايير السبتاتلينغ والسترابينغ، تقنيات رموز روزان، واستراتيجيات الديكالاج في الترجمة الفورية."
                         else
-                            "Answer all 10 questions to assess your competency in legal translation, subtitling standards, and conference interpretation.",
+                            "Standardized 10-question assessment covering legal translation, subtitling standards, Rozan symbols, and simultaneous décalage techniques.",
                         fontSize = 11.5.sp,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        lineHeight = 17.sp
                     )
+
+                    // Progress indicators
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = if (isArabic) "الإجابات المنجزة: $answeredCount من ${questions.size}" else "Answered: $answeredCount of ${questions.size}",
+                            fontSize = 11.5.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = if (answeredCount == questions.size) SuccessGreen else MaterialTheme.colorScheme.onSurface
+                        )
+                        LinearProgressIndicator(
+                            progress = { answeredCount.toFloat() / questions.size.toFloat() },
+                            modifier = Modifier.width(130.dp).height(8.dp).clip(RoundedCornerShape(4.dp)),
+                            color = RedPrimary,
+                            trackColor = MaterialTheme.colorScheme.surfaceVariant
+                        )
+                    }
 
                     if (examSubmitted) {
                         Surface(
                             modifier = Modifier.fillMaxWidth(),
-                            shape = RoundedCornerShape(10.dp),
-                            color = if (score >= 8) SuccessGreen.copy(alpha = 0.15f) else GoldYellow.copy(alpha = 0.2f),
-                            border = androidx.compose.foundation.BorderStroke(1.dp, if (score >= 8) SuccessGreen else GoldYellow)
+                            shape = RoundedCornerShape(12.dp),
+                            color = if (score >= 8) SuccessGreen.copy(alpha = 0.12f) else if (score >= 5) GoldYellow.copy(alpha = 0.15f) else RedPrimary.copy(alpha = 0.12f),
+                            border = androidx.compose.foundation.BorderStroke(1.5.dp, if (score >= 8) SuccessGreen else if (score >= 5) GoldYellow else RedPrimary)
                         ) {
-                            Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                                Text(
-                                    text = "النتيجة: $score / 10",
-                                    fontWeight = FontWeight.Black,
-                                    fontSize = 16.sp,
-                                    color = if (score >= 8) SuccessGreen else RedPrimary
-                                )
+                            Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceBetween,
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Text(
+                                        text = "الدرجة المحققة: $score / ${questions.size} (${score * 10}%)",
+                                        fontWeight = FontWeight.Black,
+                                        fontSize = 15.sp,
+                                        color = if (score >= 8) SuccessGreen else if (score >= 5) RedPrimary else RedPrimary
+                                    )
+                                    Surface(
+                                        shape = RoundedCornerShape(6.dp),
+                                        color = if (score >= 8) SuccessGreen else if (score >= 5) GoldYellow else RedPrimary
+                                    ) {
+                                        Text(
+                                            text = when {
+                                                score >= 9 -> "C2 خبير"
+                                                score >= 7 -> "C1 متقدم"
+                                                score >= 5 -> "B2 متوسط مرتفع"
+                                                else -> "B1 تأسيسي"
+                                            },
+                                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
+                                            color = Color.White,
+                                            fontWeight = FontWeight.Bold,
+                                            fontSize = 10.5.sp
+                                        )
+                                    }
+                                }
+
                                 Text(
                                     text = when {
-                                        score >= 9 -> "🏆 المستوى C2: مترجم محترف خبير ومؤهل للاعتماد"
-                                        score >= 7 -> "🎓 المستوى C1: كفاءة مهنية عالية ومترجم متقدم"
-                                        score >= 5 -> "📘 المستوى B2: طالب ترجمة واعد يحتاج لمزيد من التدريب العملي"
-                                        else -> "📗 المستوى B1: متعلم في بداية المسار الأكاديمي"
+                                        score >= 9 -> "🏆 المستوى المستحق C2: مترجم محترف خبير ومؤهل لكابينات المؤتمرات والترجمة المحلفة المعتمدة."
+                                        score >= 7 -> "🎓 المستوى المستحق C1: كفاءة مهنية عالية ومترجم مؤتمرات متقدم قادر على التعامل مع النصوص المعقدة."
+                                        score >= 5 -> "📘 المستوى المستحق B2: طالب وممارس واعد، يُوصى بحضور مساقات الماستركلاس وممارسة كابينة المحاكاة."
+                                        else -> "📗 المستوى المستحق B1: بداية المسار الأكاديمي، يُنصح بالبدء بدورات المصطلحات التأسيسية وقواعد روزان."
                                     },
+                                    fontWeight = FontWeight.SemiBold,
+                                    fontSize = 12.sp,
+                                    lineHeight = 17.sp
+                                )
+
+                                HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp), color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
+
+                                Text(
+                                    text = "📊 سلّم التنقيط المعتمد (CEFR & ISO 17100):",
+                                    fontSize = 11.sp,
                                     fontWeight = FontWeight.Bold,
-                                    fontSize = 12.sp
+                                    color = RedPrimary
+                                )
+                                Text(
+                                    text = "• 9 - 10 نقاط: C2 (مترجم محترف معتمد / خبير مؤتمرات)\n• 7 - 8 نقاط: C1 (مترجم متقدم / صياغة قانونية متخصصة)\n• 5 - 6 نقاط: B2 (مستوى فوق المتوسط / مؤهل لمخبر التدريب)\n• أقل من 5: B1 (مستوى تأسيسي بحاجة لتمارين مكثفة)",
+                                    fontSize = 10.5.sp,
+                                    lineHeight = 15.sp,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             }
                         }
@@ -598,12 +688,10 @@ private fun LevelPlacementExamComponent(isArabic: Boolean) {
                         Surface(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clickable {
-                                    if (!examSubmitted) {
-                                        selectedAnswers = selectedAnswers.toMutableMap().apply { put(q.id, optIdx) }
-                                    }
+                                .clickable(enabled = !examSubmitted) {
+                                    selectedAnswers = selectedAnswers.toMutableMap().apply { put(q.id, optIdx) }
                                 },
-                            shape = RoundedCornerShape(8.dp),
+                            shape = RoundedCornerShape(10.dp),
                             color = when {
                                 examSubmitted && isCorrect -> SuccessGreen.copy(alpha = 0.2f)
                                 examSubmitted && isSelected && !isCorrect -> RedPrimary.copy(alpha = 0.2f)
@@ -611,30 +699,31 @@ private fun LevelPlacementExamComponent(isArabic: Boolean) {
                                 else -> MaterialTheme.colorScheme.surface
                             },
                             border = androidx.compose.foundation.BorderStroke(
-                                1.dp,
+                                if (isSelected || (examSubmitted && isCorrect)) 1.5.dp else 1.dp,
                                 when {
                                     examSubmitted && isCorrect -> SuccessGreen
                                     examSubmitted && isSelected && !isCorrect -> RedPrimary
                                     isSelected -> RedPrimary
-                                    else -> MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)
+                                    else -> MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
                                 }
                             )
                         ) {
                             Row(
-                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 8.dp),
+                                modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 RadioButton(
                                     selected = isSelected,
-                                    onClick = {
-                                        if (!examSubmitted) {
-                                            selectedAnswers = selectedAnswers.toMutableMap().apply { put(q.id, optIdx) }
-                                        }
-                                    },
+                                    onClick = null, // delegated to outer Surface clickable to avoid event conflicts
                                     modifier = Modifier.size(20.dp)
                                 )
-                                Spacer(modifier = Modifier.width(8.dp))
-                                Text(optText, fontSize = 11.5.sp)
+                                Spacer(modifier = Modifier.width(10.dp))
+                                Text(
+                                    text = optText,
+                                    fontSize = 12.sp,
+                                    fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal,
+                                    color = if (isSelected) RedPrimary else MaterialTheme.colorScheme.onSurface
+                                )
                             }
                         }
                     }
