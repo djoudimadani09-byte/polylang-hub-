@@ -1247,11 +1247,16 @@
             </div>
 
             <div class="form-group">
-              <label>اختر خطاب المؤتمر للتدريب:</label>
+              <label>اختر خطاب المؤتمر للتدريب (خطابات متنوعة ومستويات دولية):</label>
               <select id="booth-speech-select" class="form-control" onchange="loadSelectedBoothSpeech()">
-                <option value="climate">قمة المناخ الدولية (COP28) - الإنجليزية ➔ العربية</option>
-                <option value="un">افتتاح الجمعية العامة للأمم المتحدة - الفرنسية ➔ العربية</option>
-                <option value="energy">منتدى الطاقة والغاز بالجزائر - الإنجليزية ➔ العربية</option>
+                <option value="climate">🌍 قمة المناخ الدولية (COP28) - الإنجليزية ➔ العربية</option>
+                <option value="un">🕊️ افتتاح الجمعية العامة للأمم المتحدة - الفرنسية ➔ العربية</option>
+                <option value="energy">⚡ منتدى الطاقة والغاز الدولي بالجزائر - الإنجليزية ➔ العربية</option>
+                <option value="davos">💼 المنتدى الاقتصادي العالمي دافوس (WEF) - الإنجليزية ➔ العربية</option>
+                <option value="unesco">🏛️ المؤتمر العام لمنظمة اليونسكو بباريس - الفرنسية ➔ العربية</option>
+                <option value="berlin">🔬 قمة التكنولوجيا والتحول الرقمي ببرلين - الألمانية ➔ العربية</option>
+                <option value="who">🏥 منظمة الصحة العالمية (WHO) جنيف - الإنجليزية ➔ العربية</option>
+                <option value="arab_league">🤝 مؤتمر القمة العربية (مجلس الجامعة) - العربية ➔ الإنجليزية</option>
               </select>
             </div>
 
@@ -1303,6 +1308,18 @@
               استمع للمقطع الدبلوماسي، دوّن الأفكار باستخدام رموز روزان، ثم أعد صياغة الخطاب كاملاً بثقة وطلاقة.
             </p>
 
+            <div class="form-group" style="margin-bottom:12px;">
+              <label style="font-size:12px; font-weight:700;">اختر خطاب الترجمة التتابعية (مستويات وموضوعات دبلوماسية واقتصادية):</label>
+              <select id="consec-speech-select" class="form-control" onchange="loadSelectedConsecSpeech()">
+                <option value="bilateral_green">🤝 تصريح ثنائي مشترك: الاستثمار في الهيدروجين الأخضر والتجارة (العربية ➔ الفرنسية)</option>
+                <option value="eu_trade">🇪🇺 مؤتمر الشراكة الاقتصادية الأوروبية المتوسطية (الفرنسية ➔ العربية)</option>
+                <option value="opec">🛢️ البيان الختامي لاجتماع منظمة أوبك+ الوزاري (الإنجليزية ➔ العربية)</option>
+                <option value="legal_dispute">⚖️ مرافعة تحكيم تجاري دولي أمام محكمة غرفة التجارة الدولية (ICC) (الإنجليزية ➔ العربية)</option>
+                <option value="german_invest">🇩🇪 ملتقى رجال الأعمال الجزائري الألماني للطاقات المتجددة (الألمانية ➔ العربية)</option>
+                <option value="diplomatic_credentials">📜 تقديم أوراق اعتماد سفير جديد ومراسم البروتوكول (العربية ➔ الإنجليزية)</option>
+              </select>
+            </div>
+
             <!-- Rozan Quick Symbols Toolbar -->
             <div style="background:var(--bg-surface); padding:8px 12px; border-radius:8px; border:1px solid var(--border-line); margin-bottom:10px;">
               <div style="font-size:11px; font-weight:700; margin-bottom:6px; color:var(--text-dim);">شريط رموز روزان السريعة (انقر للإدراج فوراً في الملاحظات):</div>
@@ -1324,13 +1341,18 @@
             <div style="display:grid; grid-template-columns:1fr 1.2fr; gap:12px; margin-bottom:12px;">
               <div>
                 <label style="font-size:11.5px; font-weight:700;">الخطاب المصدر للاستماع:</label>
-                <div style="background:var(--bg-surface); padding:10px; border-radius:8px; border:1px solid var(--border-line); font-size:12px; line-height:1.6; height:140px; overflow-y:auto;">
+                <div id="consec-source-transcript" style="background:var(--bg-surface); padding:10px; border-radius:8px; border:1px solid var(--border-line); font-size:12px; line-height:1.6; height:140px; overflow-y:auto;">
                   <strong>تصريح ثنائي مشترك:</strong><br>
                   "لقد اتفق الجانبان اليوم على تعزيز الاستثمارات في قطاع الهيدروجين الأخضر، مع التشديد على ضرورة إزالة القيود الجمركية وفتح خطوط الشحن المباشرة قبل نهاية الربع الأول."
                 </div>
-                <button class="btn-primary-red" style="margin-top:6px; width:100%; padding:4px; font-size:11.5px;" onclick="playConsecutiveSpeechAudio()">
-                  🔊 استمع للخطاب بصوت المتحدث
-                </button>
+                <div style="display:flex; gap:6px; margin-top:6px;">
+                  <button class="btn-primary-red" style="flex:1; padding:4px; font-size:11.5px;" onclick="playConsecutiveSpeechAudio()">
+                    🔊 استمع للخطاب بصوت المتحدث
+                  </button>
+                  <button class="btn-outline-action" style="padding:4px 10px; font-size:11.5px;" onclick="stopConsecutiveSpeechAudio()">
+                    ⏹️ إيقاف
+                  </button>
+                </div>
               </div>
 
               <div>
@@ -1407,21 +1429,60 @@
             <div id="exam-result-box" style="display:none; text-align:center; padding:20px; background:var(--bg-surface); border-radius:12px; border:2px solid var(--crimson);">
               <div style="font-size:40px; margin-bottom:10px;">🎓</div>
               <h3 style="font-size:18px; font-weight:900; margin-bottom:6px;">شهادة تقييم المستوى المعتمدة من بوليلانغ</h3>
-              <p style="font-size:12px; color:var(--text-dim); margin-bottom:14px;">تم احتساب نتيجتك بنجاح وفق المعايير المؤسساتية ISO 17100</p>
+              <p style="font-size:12px; color:var(--text-dim); margin-bottom:14px;">تم احتساب نتيجتك بنجاح وفق المعايير المؤسساتية العالمية وسلّم CEFR و ISO 17100:2015</p>
 
-              <div style="display:inline-block; background:var(--bg-body); padding:12px 24px; border-radius:10px; border:1px solid var(--border-line); margin-bottom:14px;">
-                <div style="font-size:12px; color:var(--text-dim);">المستوى المستحق:</div>
+              <div style="display:inline-block; background:var(--bg-body); padding:16px 28px; border-radius:12px; border:1px solid var(--border-line); margin-bottom:16px; box-shadow:0 4px 12px rgba(0,0,0,0.06);">
+                <div style="font-size:12px; color:var(--text-dim); margin-bottom:4px;">المستوى الأكاديمي والمهني المستحق:</div>
                 <div style="font-size:26px; font-weight:900; color:var(--crimson);" id="exam-level-grade">C1 - مترجم مؤتمرات متقدم</div>
-                <div style="font-size:13px; font-weight:700;" id="exam-score-percent">الدرجة: 90% (9/10)</div>
+                <div style="font-size:14px; font-weight:800; margin-top:4px;" id="exam-score-percent">الدرجة: 90% (9/10)</div>
               </div>
 
-              <p style="font-size:12px; line-height:1.7; max-width:500px; margin:0 auto 16px; color:var(--text-dim);" id="exam-feedback-text">
+              <!-- Real Grading Scale (سلم التنقيط المعتمد) -->
+              <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:12px; max-width:640px; margin:0 auto 16px; text-align:start;">
+                <div style="font-size:12px; font-weight:800; color:var(--crimson); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                  <span>📊 سلّم التنقيط والمعايير المعتمدة (Grading Scale):</span>
+                  <span id="exam-rubric-status-pill" style="font-size:11px; padding:2px 8px; border-radius:12px; font-weight:700;"></span>
+                </div>
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:6px; font-size:11px; margin-bottom:10px;">
+                  <div id="scale-c2" style="padding:6px; border-radius:6px; background:var(--bg-surface); border:1px solid var(--border-line);">
+                    <strong>85% - 100%</strong>: خبير متمرس (C2/Expert)
+                  </div>
+                  <div id="scale-c1" style="padding:6px; border-radius:6px; background:var(--bg-surface); border:1px solid var(--border-line);">
+                    <strong>70% - 84%</strong>: متقدم مستقل (C1/Very Good)
+                  </div>
+                  <div id="scale-b2" style="padding:6px; border-radius:6px; background:var(--bg-surface); border:1px solid var(--border-line);">
+                    <strong>50% - 69%</strong>: فوق المتوسط (B2/Competent)
+                  </div>
+                  <div id="scale-b1" style="padding:6px; border-radius:6px; background:var(--bg-surface); border:1px solid var(--border-line);">
+                    <strong>أقل من 50%</strong>: متوسط تأسيسي (B1/Developing)
+                  </div>
+                </div>
+
+                <!-- Detailed Competencies Breakdown -->
+                <div style="font-size:11.5px; font-weight:800; margin-bottom:6px;">تفصيل تقييم المهارات والمحاور (Competencies Breakdown):</div>
+                <div id="exam-categories-breakdown" style="display:flex; flex-direction:column; gap:6px; font-size:11.5px;">
+                  <!-- Injected via JavaScript -->
+                </div>
+              </div>
+
+              <p style="font-size:12.5px; line-height:1.7; max-width:600px; margin:0 auto 16px; color:var(--text-dim); text-align:start; background:var(--bg-body); padding:10px 14px; border-radius:8px; border:1px solid var(--border-line);" id="exam-feedback-text">
                 أداء متميز في استيعاب التراكيب المؤسساتية والتعابير الدبلوماسية الدقيقة. نوصيك بمواصلة تدريبات الفارق الزمني (Décalage) بكابينات المؤتمرات.
               </p>
 
+              <!-- Question by Question Review -->
+              <div style="max-width:640px; margin:0 auto 16px; text-align:start;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                  <span style="font-size:12px; font-weight:800;">مراجعة الأسئلة وتصحيح الإجابات:</span>
+                  <button class="nav-pill" style="padding:2px 8px; font-size:11px;" onclick="toggleExamAnswersReview()">👁️ إظهار/إخفاء التحليل التفصيلي</button>
+                </div>
+                <div id="exam-detailed-review" style="display:none; max-height:260px; overflow-y:auto; background:var(--bg-body); padding:10px; border-radius:8px; border:1px solid var(--border-line); font-size:11.5px; line-height:1.6;">
+                  <!-- Injected via JavaScript -->
+                </div>
+              </div>
+
               <div style="display:flex; justify-content:center; gap:8px;">
                 <button class="btn-primary-red" onclick="restartExam()">إعادة الامتحان 🔄</button>
-                <button class="btn-outline-action" onclick="alert('✓ تم حفظ شهادة تحديد المستوى في ملفك الشخصي.')">حفظ الشهادة 📥</button>
+                <button class="btn-outline-action" onclick="printExamCertificate()">طباعة / حفظ الشهادة الرسمية 📥</button>
               </div>
             </div>
 
@@ -1582,84 +1643,132 @@
 
   <!-- ALL MODALS -->
 
-  <!-- 1. AUTHENTICATION & LOGIN MODAL (5 Distinct Roles with Isolated Admin Access) -->
+  <!-- 1. AUTHENTICATION & LOGIN MODAL (World-Class UX with Dual Tab, Validation & Security) -->
   <div id="authModal" class="modal-backdrop">
-    <div class="modal-sheet">
+    <div class="modal-sheet" style="max-width:540px; border-radius:18px; padding:24px; box-shadow:0 20px 45px rgba(0,0,0,0.35);">
       <div class="modal-close-x" onclick="closeModal('authModal')">✕</div>
-      <h3 style="font-size:18px; font-weight:800; margin-bottom:6px;">تسجيل الدخول / تبديل الحساب</h3>
-      <p style="font-size:12px; color:var(--text-dim); margin-bottom:16px;">
-        اختر أحد الحسابات السريعة الجاهزة، أو أدخل بريدك الإلكتروني لتسجيل الدخول:
-      </p>
-
-      <!-- Active Account Information Box (Security & Confidentiality) -->
-      <div id="account-info-banner" style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:12px 14px; margin-bottom:16px;">
-        <div style="font-size:12px; font-weight:800; color:var(--crimson); margin-bottom:6px; display:flex; align-items:center; gap:6px;">
-          <span>🛡️</span> <span>المعلومات الأساسية لحسابك الحالي (الأمان والسرية):</span>
+      
+      <!-- Brand & Security Header -->
+      <div style="text-align:center; margin-bottom:18px;">
+        <div style="display:inline-flex; align-items:center; justify-content:center; width:52px; height:52px; border-radius:14px; background:linear-gradient(135deg, #fee2e2, #fecaca); color:var(--crimson); font-size:26px; margin-bottom:10px;">
+          🌐
         </div>
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:8px; font-size:11.5px;">
-          <div>👤 <strong>الاسم:</strong> <span id="auth-display-name">الأستاذ جودي مداني (Djoudi Madani)</span></div>
-          <div>📧 <strong>البريد:</strong> <span id="auth-display-email">djoudimadani09@gmail.com</span></div>
+        <h3 style="font-size:20px; font-weight:900; margin:0 0 4px; color:var(--text-main);">بوابة الدخول الموحدة لمنصة بوليلانغ</h3>
+        <p style="font-size:12.5px; color:var(--text-dim); margin:0;">
+          معايير أمان وتشفير عالمية (256-Bit SSL/TLS) مع عزل حسابات المشرف والمترجمين والعملاء
+        </p>
+      </div>
+
+      <!-- Segmented Auth Mode Switcher -->
+      <div style="display:flex; background:var(--bg-body); padding:4px; border-radius:10px; border:1px solid var(--border-line); margin-bottom:16px;">
+        <button id="auth-tab-direct" class="nav-pill active" style="flex:1; justify-content:center; font-size:12.5px; font-weight:800; border-radius:8px; border:none; padding:8px;" onclick="switchAuthTab('direct')">
+          🔑 الدخول المباشر بالبريد
+        </button>
+        <button id="auth-tab-roles" class="nav-pill" style="flex:1; justify-content:center; font-size:12.5px; font-weight:800; border-radius:8px; border:none; padding:8px;" onclick="switchAuthTab('roles')">
+          ⚡ حسابات تجريبية سريعة
+        </button>
+      </div>
+
+      <!-- Tab 1: Direct Form Login / Register -->
+      <div id="auth-panel-direct" style="display:block;">
+        <div style="margin-bottom:12px;">
+          <label style="font-size:12px; font-weight:700; display:block; margin-bottom:4px;">البريد الإلكتروني المعتمد:</label>
+          <div style="position:relative;">
+            <input type="email" id="auth-email-input" class="form-control" placeholder="name@example.com" style="padding:10px 12px; font-size:13px; border-radius:8px;">
+          </div>
+          <div id="auth-email-error" style="color:var(--crimson); font-size:11px; margin-top:4px; display:none;">يرجى إدخال عنوان بريد إلكتروني صالح.</div>
+        </div>
+
+        <div style="margin-bottom:14px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <label style="font-size:12px; font-weight:700;">كلمة المرور:</label>
+            <a href="javascript:void(0)" onclick="forgotPasswordNotice()" style="font-size:11.5px; color:var(--crimson); text-decoration:none;">نسيت كلمة المرور؟</a>
+          </div>
+          <div style="position:relative; display:flex; align-items:center;">
+            <input type="password" id="auth-pass-input" class="form-control" placeholder="••••••••" style="padding:10px 12px; font-size:13px; border-radius:8px; width:100%;">
+            <button type="button" onclick="togglePasswordVisibility()" style="position:absolute; left:10px; background:none; border:none; cursor:pointer; font-size:14px; color:var(--text-dim);" title="إظهار / إخفاء كلمة المرور">👁️</button>
+          </div>
+          <div id="auth-pass-error" style="color:var(--crimson); font-size:11px; margin-top:4px; display:none;">كلمة المرور مطلوبة وتتكون من 6 أحرف على الأقل.</div>
+        </div>
+
+        <div style="margin-bottom:16px;">
+          <label style="font-size:12px; font-weight:700; display:block; margin-bottom:4px;">نوع الحساب والغرض من التسجيل:</label>
+          <select id="auth-role-select" class="form-control" style="padding:9px 12px; font-size:12.5px; border-radius:8px;">
+            <option value="Client">عميل ترجمة ومؤسسات (طلب ترجمة معتمدة، تسعير، متابعة مشاريع)</option>
+            <option value="Student">طالب معهد ترجمة (كابينة المؤتمرات، نظام روزان، امتحانات المستوى)</option>
+            <option value="Translator">مترجم محلف ومعتمد (استوديو الترجمة، محرر SRT، فحص الجودة)</option>
+            <option value="Learner">متعلم لغات وشغوف (ماستركلاس الأكاديمية، التظليل الصوتي)</option>
+          </select>
+        </div>
+
+        <button class="btn-primary-red" style="width:100%; justify-content:center; padding:11px; font-size:14px; font-weight:800; border-radius:8px; box-shadow:0 4px 14px rgba(220,38,38,0.3);" onclick="customFormLogin()">
+          تسجيل الدخول الآمن 🚀
+        </button>
+
+        <div style="display:flex; align-items:center; gap:8px; margin:14px 0 10px; font-size:11.5px; color:var(--text-faint); justify-content:center;">
+          <span>🔒 تسجيل دخول مشفر عبر HTTPS</span>
+          <span>•</span>
+          <span>✓ معتمد بموجب ISO 17100</span>
+        </div>
+      </div>
+
+      <!-- Tab 2: One-Click Verified Role Profiles -->
+      <div id="auth-panel-roles" style="display:none;">
+        <div style="font-size:11.5px; color:var(--text-dim); margin-bottom:10px;">
+          يمكنك الدخول الفوري بملفات محاكاة واقعية لاختبار تجربة المستخدم لكافة أطراف المنصة:
+        </div>
+        <div style="display:flex; flex-direction:column; gap:8px; max-height:280px; overflow-y:auto; padding-right:2px;">
+          <button class="nav-pill" style="justify-content:flex-start; padding:10px; border:2px solid var(--crimson); border-radius:10px;" onclick="quickLoginUser('الأستاذ جودي مداني (Djoudi Madani)', 'djoudimadani09@gmail.com', 'Admin')">
+            <span style="font-size:20px;">👑</span>
+            <div style="text-align:start;">
+              <strong style="color:var(--crimson); font-size:12.5px;">الأستاذ جودي مداني (المدير العام والمشرف الحصري)</strong>
+              <div style="font-size:11px; color:var(--text-faint);">djoudimadani09@gmail.com — المشرف العام وعزل البيانات</div>
+            </div>
+          </button>
+
+          <button class="nav-pill" style="justify-content:flex-start; padding:10px; border-radius:10px;" onclick="quickLoginUser('أ. مريم بوعلام (مترجمة مؤتمرات معتمدة)', 'mariem.trans@polylang.dz', 'Translator')">
+            <span style="font-size:20px;">🎓</span>
+            <div style="text-align:start;">
+              <strong style="font-size:12.5px;">أ. مريم بوعلام (مترجمة معتمدة)</strong>
+              <div style="font-size:11px; color:var(--text-faint);">mariem.trans@polylang.dz — استوديو المترجم ومحرر SRT</div>
+            </div>
+          </button>
+
+          <button class="nav-pill" style="justify-content:flex-start; padding:10px; border-radius:10px;" onclick="quickLoginUser('سارة بن علي (طالبة ماستر ترجمة)', 'sara.student@univ-alger2.dz', 'Student')">
+            <span style="font-size:20px;">📚</span>
+            <div style="text-align:start;">
+              <strong style="font-size:12.5px;">سارة بن علي (طالبة معهد الترجمة - جامعة الجزائر 2)</strong>
+              <div style="font-size:11px; color:var(--text-faint);">sara.student@univ-alger2.dz — كابينة الترجمة الفورية وامتحان المستوى</div>
+            </div>
+          </button>
+
+          <button class="nav-pill" style="justify-content:flex-start; padding:10px; border-radius:10px;" onclick="quickLoginUser('كريم حمداوي (عميل ترجمة)', 'karim@polylang.dz', 'Client')">
+            <span style="font-size:20px;">👤</span>
+            <div style="text-align:start;">
+              <strong style="font-size:12.5px;">كريم حمداوي (عميل ترجمة ومؤسسات)</strong>
+              <div style="font-size:11px; color:var(--text-faint);">karim@polylang.dz — بوابة العميل وحاسبة الأسعار</div>
+            </div>
+          </button>
+
+          <button class="nav-pill" style="justify-content:flex-start; padding:10px; border-radius:10px;" onclick="quickLoginUser('يوسف مراد (متعلم لغات)', 'youssef.learner@gmail.com', 'Learner')">
+            <span style="font-size:20px;">💡</span>
+            <div style="text-align:start;">
+              <strong style="font-size:12.5px;">يوسف مراد (متعلم لغات وشغوف)</strong>
+              <div style="font-size:11px; color:var(--text-faint);">youssef.learner@gmail.com — التظليل الصوتي والكويزات</div>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Active Account Information Footer -->
+      <div id="account-info-banner" style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:10px 12px; margin-top:14px; font-size:11.5px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+          <div>👤 <strong>المستخدم النشط:</strong> <span id="auth-display-name">الأستاذ جودي مداني</span></div>
           <div>🏷️ <strong>الرتبة:</strong> <span id="auth-display-role" style="color:var(--crimson); font-weight:800;">Admin</span></div>
-          <div>🔒 <strong>حالة الأمان:</strong> <span style="color:#10b981; font-weight:700;">مشفر ومحمي (SSL/TLS)</span></div>
+          <div>🔒 <strong>التشفير:</strong> <span style="color:#10b981; font-weight:700;">256-Bit SSL/TLS</span></div>
         </div>
       </div>
 
-      <!-- Quick Login Profiles for All 5 Roles -->
-      <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:18px;">
-        <button class="nav-pill" style="justify-content:flex-start; padding:10px; border:2px solid var(--crimson);" onclick="quickLoginUser('الأستاذ جودي مداني (Djoudi Madani)', 'djoudimadani09@gmail.com', 'Admin')">
-          <span>👑</span>
-          <div style="text-align:start;">
-            <strong style="color:var(--crimson);">الأستاذ جودي مداني (المدير العام والمشرف الحصري)</strong>
-            <div style="font-size:11px; color:var(--text-faint);">djoudimadani09@gmail.com — المشرف العام وعزل البيانات</div>
-          </div>
-        </button>
-
-        <button class="nav-pill" style="justify-content:flex-start; padding:10px;" onclick="quickLoginUser('أ. مريم بوعلام (مترجمة مؤتمرات معتمدة)', 'mariem.trans@polylang.dz', 'Translator')">
-          <span>🎓</span>
-          <div style="text-align:start;">
-            <strong>أ. مريم بوعلام (مترجمة معتمدة)</strong>
-            <div style="font-size:11px; color:var(--text-faint);">mariem.trans@polylang.dz — استوديو المترجم ومحرر SRT</div>
-          </div>
-        </button>
-
-        <button class="nav-pill" style="justify-content:flex-start; padding:10px;" onclick="quickLoginUser('كريم حمداوي (عميل ترجمة)', 'karim@polylang.dz', 'Client')">
-          <span>👤</span>
-          <div style="text-align:start;">
-            <strong>كريم حمداوي (عميل ترجمة ومؤسسات)</strong>
-            <div style="font-size:11px; color:var(--text-faint);">karim@polylang.dz — بوابة العميل وحاسبة الأسعار</div>
-          </div>
-        </button>
-
-        <button class="nav-pill" style="justify-content:flex-start; padding:10px;" onclick="quickLoginUser('سارة بن علي (طالبة ماستر ترجمة)', 'sara.student@univ-alger2.dz', 'Student')">
-          <span>📚</span>
-          <div style="text-align:start;">
-            <strong>سارة بن علي (طالبة معهد الترجمة - جامعة الجزائر 2)</strong>
-            <div style="font-size:11px; color:var(--text-faint);">sara.student@univ-alger2.dz — كابينة الترجمة الفورية وامتحان المستوى</div>
-          </div>
-        </button>
-
-        <button class="nav-pill" style="justify-content:flex-start; padding:10px;" onclick="quickLoginUser('يوسف مراد (متعلم لغات)', 'youssef.learner@gmail.com', 'Learner')">
-          <span>💡</span>
-          <div style="text-align:start;">
-            <strong>يوسف مراد (متعلم لغات وشغوف)</strong>
-            <div style="font-size:11px; color:var(--text-faint);">youssef.learner@gmail.com — التظليل الصوتي والكويزات</div>
-          </div>
-        </button>
-      </div>
-
-      <!-- Custom Form -->
-      <div class="form-group">
-        <label>البريد الإلكتروني:</label>
-        <input type="email" id="auth-email-input" class="form-control" placeholder="name@domain.com">
-      </div>
-      <div class="form-group">
-        <label>كلمة المرور:</label>
-        <input type="password" id="auth-pass-input" class="form-control" placeholder="••••••••">
-      </div>
-
-      <button class="btn-primary-red" style="width:100%; justify-content:center;" onclick="customFormLogin()">
-        دخول إلى المنصة 🚀
-      </button>
     </div>
   </div>
 
@@ -2567,8 +2676,8 @@
         badge.textContent = item.isPremium ? '👑 مساق VIP معتمد' : '🎓 ماستركلاس معتمد';
       }
 
-      // Default to embed engine
-      switchVideoEngine('embed');
+      // Default to robust HTML5 direct player to ensure immediate working playback
+      switchVideoEngine('mp4');
       openModal('videoModal');
     }
 
@@ -3137,13 +3246,64 @@
       switchRole('admin');
     }
 
-    function customFormLogin() {
-      const email = document.getElementById('auth-email-input').value;
-      if (!email) {
-        alert('يرجى كتابة البريد الإلكتروني.');
-        return;
+    function switchAuthTab(tab) {
+      const panelDirect = document.getElementById('auth-panel-direct');
+      const panelRoles = document.getElementById('auth-panel-roles');
+      const btnDirect = document.getElementById('auth-tab-direct');
+      const btnRoles = document.getElementById('auth-tab-roles');
+
+      if (panelDirect && panelRoles && btnDirect && btnRoles) {
+        panelDirect.style.display = tab === 'direct' ? 'block' : 'none';
+        panelRoles.style.display = tab === 'roles' ? 'block' : 'none';
+        btnDirect.classList.toggle('active', tab === 'direct');
+        btnRoles.classList.toggle('active', tab === 'roles');
       }
-      quickLoginUser(email.split('@')[0], email, email === ADMIN_EMAIL ? 'Admin' : 'Client');
+    }
+
+    function togglePasswordVisibility() {
+      const passInput = document.getElementById('auth-pass-input');
+      if (passInput) {
+        passInput.type = passInput.type === 'password' ? 'text' : 'password';
+      }
+    }
+
+    function forgotPasswordNotice() {
+      alert("🔒 استعادة كلمة المرور:\nلأسباب أمنية وتوافقاً مع معايير حماية البيانات، يتم إرسال رمز التحقق وإعادة التعيين عبر البريد الإلكتروني المعتمد.\nيرجى التواصل مع المشرف: djoudimadani09@gmail.com");
+    }
+
+    function customFormLogin() {
+      const emailInput = document.getElementById('auth-email-input');
+      const passInput = document.getElementById('auth-pass-input');
+      const roleSelect = document.getElementById('auth-role-select');
+      const emailErr = document.getElementById('auth-email-error');
+      const passErr = document.getElementById('auth-pass-error');
+
+      const email = emailInput ? emailInput.value.trim() : '';
+      const pass = passInput ? passInput.value.trim() : '';
+      const role = roleSelect ? roleSelect.value : 'Client';
+
+      let valid = true;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!email || !emailRegex.test(email)) {
+        if (emailErr) emailErr.style.display = 'block';
+        valid = false;
+      } else {
+        if (emailErr) emailErr.style.display = 'none';
+      }
+
+      if (!pass || pass.length < 6) {
+        if (passErr) passErr.style.display = 'block';
+        valid = false;
+      } else {
+        if (passErr) passErr.style.display = 'none';
+      }
+
+      if (!valid) return;
+
+      const userName = email.split('@')[0];
+      const finalRole = email === ADMIN_EMAIL ? 'Admin' : role;
+      quickLoginUser(userName, email, finalRole);
     }
 
     // --- TRANSLATION STUDENTS LAB LOGIC ---
@@ -3165,18 +3325,51 @@
     const boothSpeeches = {
       climate: {
         speaker: "الأمين العام للأمم المتحدة (COP28)",
+        lang: "en-US",
         source: "Distinguished delegates, today the world stands at a decisive crossroads regarding clean energy transition and climate resilience.",
         solution: "أيها المندوبون الموقرون، يقف العالم اليوم أمام مفترق طرق حاسم فيما يتعلق بالتحول نحو الطاقة النظيفة والقدرة على مجابهة التغيرات المناخية."
       },
       un: {
         speaker: "رئيس الجمعية العامة للأمم المتحدة (دورة نيويورك)",
+        lang: "fr-FR",
         source: "Mesdames et messieurs, la paix internationale repose avant tout sur le respect scrupuleux des traités multilatéraux et du droit international.",
         solution: "سيداتي وسادتي، يرتكز السلام الدولي في المقام الأول على الاحترام الدقيق والحرص التام للمعاهدات المتعددة الأطراف والقانون الدولي."
       },
       energy: {
         speaker: "المتحدث الرئيسي بمنتدى الطاقة والغاز الدولي بالجزائر",
+        lang: "en-US",
         source: "Algeria continues to consolidate its strategic position as a reliable supplier of natural gas while investing heavily in green hydrogen infrastructure.",
         solution: "تواصل الجزائر تعزيز مكانتها الاستراتيجية كمورّد موثوق للغاز الطبيعي بالتوازي مع الاستثمار المكثف في البنية التحتية للهيدروجين الأخضر."
+      },
+      davos: {
+        speaker: "المنتدى الاقتصادي العالمي (World Economic Forum Davos)",
+        lang: "en-US",
+        source: "Global economic fragmentation and geopolitical disruptions require immediate monetary coordination and cross-border regulatory harmonization.",
+        solution: "إن التشرذم الاقتصادي العالمي والاضطرابات الجيوسياسية تستدعي تنسيقاً نقدياً فورياً ومواءمة للتشريعات التنظيمية عبر الحدود الوطنية."
+      },
+      unesco: {
+        speaker: "المديرة العامة لليونسكو - قصر المؤتمرات بباريس",
+        lang: "fr-FR",
+        source: "La préservation du patrimoine immatériel et la protection de la diversité linguistique constituent le rempart le plus solide contre l'oubli historique.",
+        solution: "إن صون التراث غير المادي وحماية التنوع اللغوي يشكلان أمنع حصن ضد طمس الذاكرة التاريخية."
+      },
+      berlin: {
+        speaker: "وزير الاقتصاد وحماية المناخ الاتحادي الألماني (Berlin)",
+        lang: "de-DE",
+        source: "Die Dekarbonisierung unserer Industrie und die strategische Partnerschaft im Bereich der erneuerbaren Energien bieten historische Kooperationschancen.",
+        solution: "إن إزالة الكربون من قطاعنا الصناعي والشراكة الاستراتيجية في مجال الطاقات المتجددة تتيحان فرصاً تاريخية للتعاون المشترك."
+      },
+      who: {
+        speaker: "المدير العام لمنظمة الصحة العالمية (WHO) جنيف",
+        lang: "en-US",
+        source: "Equitable access to biomedical innovations and pandemic preparedness must be enshrined in an enforceable international convention.",
+        solution: "يجب إرساء مبدأ الوصول العادل للابتكارات الطبية الحيوية والتأهب للأوبئة ضمن معاهدة دولية ملزمة ونافذة."
+      },
+      arab_league: {
+        speaker: "الأمين العام لجامعة الدول العربية (قمة القادة)",
+        lang: "ar-SA",
+        source: "إن العمل العربي المشترك والتكامل الاقتصادي الإقليمي هما السبيل الأوحد لمواجهة التحديات التنموية وتحقيق الأمن الغذائي والمائي المستدام.",
+        solution: "Joint Arab action and regional economic integration represent the sole path to confronting developmental challenges and attaining sustainable food and water security."
       }
     };
 
@@ -3191,6 +3384,7 @@
       document.getElementById('booth-source-transcript').textContent = data.source;
       document.getElementById('booth-model-solution').innerHTML = `<strong>الترجمة النموذجية:</strong> "${data.solution}"`;
       document.getElementById('booth-model-solution').style.display = 'none';
+      stopBoothSpeechAudio();
     }
 
     function playBoothSpeechAudio() {
@@ -3201,7 +3395,7 @@
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
         const utter = new SpeechSynthesisUtterance(data.source);
-        utter.lang = key === 'un' ? 'fr-FR' : 'en-US';
+        utter.lang = data.lang || (key === 'un' ? 'fr-FR' : 'en-US');
         utter.rate = 0.95;
         window.speechSynthesis.speak(utter);
       }
@@ -3237,27 +3431,91 @@
       el.style.display = el.style.display === 'none' ? 'block' : 'none';
     }
 
-    // Consecutive Interpretation and Rozan
-    function insertRozanSymbol(sym) {
-      const txt = document.getElementById('rozan-notepad-text');
-      txt.value += (txt.value ? ' ' : '') + sym + ' ';
-      txt.focus();
+    // --- CONSECUTIVE INTERPRETATION (ROZAN SPEECHES DATA & ENGINE) ---
+    const consecSpeeches = {
+      bilateral_green: {
+        title: "تصريح ثنائي مشترك: الاستثمار في الهيدروجين الأخضر والتجارة",
+        lang: "ar-SA",
+        source: "لقد اتفق الجانبان اليوم على تعزيز الاستثمارات في قطاع الهيدروجين الأخضر، مع التشديد على ضرورة إزالة القيود الجمركية وفتح خطوط الشحن المباشرة قبل نهاية الربع الأول.",
+        solution: "Les deux parties sont convenues aujourd'hui de renforcer les investissements dans le secteur de l'hydrogène vert, tout en soulignant la nécessité de lever les barrières tarifaires et d'ouvrir des lignes de fret directes avant la fin du premier trimestre."
+      },
+      eu_trade: {
+        title: "مؤتمر الشراكة الاقتصادية الأوروبية المتوسطية",
+        lang: "fr-FR",
+        source: "Nous lançons aujourd'hui un fonds souverain d'amorçage de deux milliards d'euros pour moderniser les chaînes d'approvisionnement portuaires et créer cinquante mille emplois qualifiés.",
+        solution: "نطلق اليوم صندوقاً سيادياً أولياً بقيمة ملياري يورو لتحديث سلاسل الإمداد المينائية واستحداث خمسين ألف منصب عمل مؤهل."
+      },
+      opec: {
+        title: "البيان الختامي لاجتماع منظمة أوبك+ الوزاري",
+        lang: "en-US",
+        source: "Ministers reaffirmed their commitment to crude market stability through precautionary quota adjustments and continuous monitoring of global commercial inventories.",
+        solution: "جدد الوزراء التزامهم باستقرار أسواق النفط الخام من خلال تعديلات الحصص الاحترازية والمراقبة المستمرة للمخزونات التجارية العالمية."
+      },
+      legal_dispute: {
+        title: "مرافعة تحكيم تجاري دولي أمام محكمة غرفة التجارة الدولية (ICC)",
+        lang: "en-US",
+        source: "The claimant alleges a breach of the exclusivity covenant under clause fourteen, demanding liquidated damages of twelve million dollars and interim protective measures.",
+        solution: "يدّعي المدعي خرقاً لشرط الحصرية المنصوص عليه في البند الرابع عشر، مطالباً بتعويضات اتفاقية محددة قدرها اثنا عشر مليون دولار وتدابير تحفظية وقتية."
+      },
+      german_invest: {
+        title: "ملتقى رجال الأعمال الجزائري الألماني للطاقات المتجددة",
+        lang: "de-DE",
+        source: "Deutsche Technologiekonzerne beabsichtigen, gemeinsam mit lokalen Partnern moderne Solar- und Windparks zu errichten, um den industriellen Technologietransfer zu beschleunigen.",
+        solution: "تعتزم المجمعات التكنولوجية الألمانية، بالاشتراك مع شركاء محليين، إنشاء محطات حديثة للطاقة الشمسية وطاقة الرياح لتسريع نقل التكنولوجيا الصناعية."
+      },
+      diplomatic_credentials: {
+        title: "تقديم أوراق اعتماد سفير جديد ومراسم البروتوكول",
+        lang: "ar-SA",
+        source: "يشرفني أن أرفع إلى فخامتكم أوراق اعتمادي سفيراً ومفوضاً فوق العادة، مؤكداً العزم الراسخ على الارتقاء بالعلاقات الثنائية إلى آفاق استراتيجية أرحب.",
+        solution: "I have the honour to present to Your Excellency my letters of credence as Ambassador Extraordinary and Plenipotentiary, reaffirming the steadfast commitment to elevate bilateral relations to broader strategic horizons."
+      }
+    };
+
+    function loadSelectedConsecSpeech() {
+      const key = document.getElementById('consec-speech-select').value;
+      const data = consecSpeeches[key];
+      if (!data) return;
+      const transcriptBox = document.getElementById('consec-source-transcript');
+      if (transcriptBox) {
+        transcriptBox.innerHTML = `<strong>${data.title}:</strong><br>"${data.source}"`;
+      }
+      const solutionBox = document.getElementById('consec-model-solution');
+      if (solutionBox) {
+        solutionBox.innerHTML = `<strong>الترجمة التتابعية النموذجية:</strong><br>"${data.solution}"`;
+        solutionBox.style.display = 'none';
+      }
+      stopConsecutiveSpeechAudio();
     }
 
     function playConsecutiveSpeechAudio() {
-      const speech = "لقد اتفق الجانبان اليوم على تعزيز الاستثمارات في قطاع الهيدروجين الأخضر، مع التشديد على ضرورة إزالة القيود الجمركية وفتح خطوط الشحن المباشرة قبل نهاية الربع الأول.";
+      const key = document.getElementById('consec-speech-select') ? document.getElementById('consec-speech-select').value : 'bilateral_green';
+      const data = consecSpeeches[key] || consecSpeeches.bilateral_green;
+
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
-        const utter = new SpeechSynthesisUtterance(speech);
-        utter.lang = 'ar-SA';
+        const utter = new SpeechSynthesisUtterance(data.source);
+        utter.lang = data.lang || 'ar-SA';
         utter.rate = 0.9;
         window.speechSynthesis.speak(utter);
+      }
+    }
+
+    function stopConsecutiveSpeechAudio() {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
       }
     }
 
     function toggleConsecModelSolution() {
       const el = document.getElementById('consec-model-solution');
       el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function insertRozanSymbol(sym) {
+      const txt = document.getElementById('rozan-notepad-text');
+      if (!txt) return;
+      txt.value += (txt.value ? ' ' : '') + sym + ' ';
+      txt.focus();
     }
 
     // --- REAL MULTI-TRACK PLACEMENT EXAMS (TCF, Goethe, IELTS, Institutional Translation) ---
@@ -3645,72 +3903,168 @@
       const examData = getActiveExamData();
       const questions = examData.questions;
       let correctCount = 0;
+      const categoryStats = {};
 
       questions.forEach((q, idx) => {
-        if (userExamAnswers[idx] === q.answer) correctCount++;
+        const cat = q.cat || "المعايير العامة";
+        if (!categoryStats[cat]) {
+          categoryStats[cat] = { total: 0, correct: 0 };
+        }
+        categoryStats[cat].total++;
+
+        const isCorrect = userExamAnswers[idx] === q.answer;
+        if (isCorrect) {
+          correctCount++;
+          categoryStats[cat].correct++;
+        }
       });
 
       const scorePercent = Math.round((correctCount / questions.length) * 100);
       let grade = "";
       let feedback = "";
+      let rubricTier = "b1";
 
       if (activeExamKey === 'tcf') {
         if (scorePercent >= 85) {
-          grade = "C2 / DALF C2 - Maîtrise Supérieure";
-          feedback = "مستوى فرنسي استثنائي (Niveau C2). تحكم مطلق في الصياغات الإدارية والقانونية الدقيقة ومرونة أسلوبية عالية.";
+          grade = "C2 / DALF C2 - Maîtrise Supérieure (مستوى خبير متميز)";
+          feedback = "أداء استثنائي فائق الدقة (Niveau C2). إتقان تام للتراكيب المعقدة (Subjonctif passé, structures concessives)، وصياغة النصوص القانونية والدبلوماسية بأسلوب رفيع.";
+          rubricTier = "c2";
         } else if (scorePercent >= 70) {
-          grade = "C1 / DALF C1 - Utilisateur Autonome";
-          feedback = "مستوى متقدم ممتاز (Niveau C1). قدرة ممتازة على التعامل مع النصوص الرسمية والمفردات المؤسساتية المعقدة.";
+          grade = "C1 / DALF C1 - Utilisateur Autonome (مستوى متقدم)";
+          feedback = "مستوى متقدم متمكن (Niveau C1). استيعاب عميق لدلالات المصطلحات الإدارية والقانونية الدقيقة وتماسك الجمل الطويلة.";
+          rubricTier = "c1";
         } else if (scorePercent >= 50) {
-          grade = "B2 / DELF B2 - Niveau Seuil Indépendant";
-          feedback = "مستوى جيد فوق المتوسط (B2). متمكن من الحوار المهني والنقاش الأكاديمي، يحتاج لتعزيز المصطلحات المتخصصة.";
+          grade = "B2 / DELF B2 - Niveau Seuil Indépendant (مستوى فوق المتوسط)";
+          feedback = "مستوى مستقل جيد (B2). متمكن من الحوار المهني والنقاش الأكاديمي، يوصى بالتركيز على الروابط المنطقية المركبة ومصطلحات المعاهدات.";
+          rubricTier = "b2";
         } else {
-          grade = "B1 / DELF B1 - Niveau Intermédiaire";
-          feedback = "مستوى متوسط B1. أساسيات القواعد سليمة، ننصح بالتركيز على مساقات التظليل الصوتي والنصوص الرسمية بالأكاديمية.";
+          grade = "B1 / DELF B1 - Niveau Intermédiaire (مستوى متوسط)";
+          feedback = "مستوى متوسط B1. لديك أساسيات سليمة، ننصحك بالالتحاق بمساقات استوديو المترجم والتظليل الصوتي في الأكاديمية لبلوغ C1.";
+          rubricTier = "b1";
         }
       } else if (activeExamKey === 'goethe') {
         if (scorePercent >= 85) {
           grade = "Goethe-Zertifikat C1 / C2 - Sehr Gut (Sehr Fortgeschritten)";
-          feedback = "تحكم رائع ومتقن في التراكيب الألمانية الأكاديمية (Passiv-Ersatzformen, Genitiv-Präpositionen). مؤهل للدراسة والعمل الاحترافي بألمانيا.";
+          feedback = "تحكم رائع ومتقن في التراكيب الألمانية الأكاديمية (Passiv-Ersatzformen, Genitiv-Präpositionen, Konjunktiv II). مؤهل للدراسة والعمل الاحترافي بألمانيا.";
+          rubricTier = "c2";
         } else if (scorePercent >= 70) {
-          grade = "Goethe-Zertifikat C1 - Gut";
-          feedback = "مستوى C1 متقدم ومتمكن. إلمام واسع بالعبارات المصطلحية الفنية وصيغ Konjunktiv II المركبة.";
+          grade = "Goethe-Zertifikat C1 - Gut (مستوى متقدم)";
+          feedback = "مستوى C1 متقدم ومتمكن. إلمام واسع بالعبارات المصطلحية الفنية وصيغ Funktionsverbgefüge في السياقات القانونية والاقتصادية.";
+          rubricTier = "c1";
         } else if (scorePercent >= 50) {
-          grade = "Goethe-Zertifikat B2 - Befriedigend";
-          feedback = "مستوى B2 جيد. لديك قاعدة صلبة تؤهلك للمحادثات المهنية، يوصى بتمارين الـ Funktionsverbgefüge.";
+          grade = "Goethe-Zertifikat B2 - Befriedigend (فوق المتوسط)";
+          feedback = "مستوى B2 جيد. لديك قاعدة صلبة تؤهلك للمحادثات المهنية وصياغة المراسلات، يوصى بمزيد من التركيز على بدائل المبني للمجهول.";
+          rubricTier = "b2";
         } else {
-          grade = "Goethe-Zertifikat B1";
-          feedback = "مستوى متوسط B1. بداية مشجعة، تابع تدريبات الاستماع والقراءة المكثفة في قسم الأكاديمية.";
+          grade = "Goethe-Zertifikat B1 (متوسط)";
+          feedback = "مستوى متوسط B1. بداية مشجعة، ننصح بمتابعة تدريبات الاستماع والقراءة المكثفة في قسم الأكاديمية.";
+          rubricTier = "b1";
         }
       } else if (activeExamKey === 'ielts') {
         if (scorePercent >= 85) {
-          grade = "IELTS Band 8.5 - 9.0 (Expert User)";
-          feedback = "Outstanding academic mastery! Demonstrates complete operational fluency, accurate hedging, sophisticated inversion structures, and rich academic lexis.";
+          grade = "IELTS Band 8.5 - 9.0 (Expert User - خبير لغوي)";
+          feedback = "Outstanding academic mastery! Demonstrates complete operational fluency, accurate hedging, sophisticated inversion structures, and rich academic lexis suitable for top international universities and UN agencies.";
+          rubricTier = "c2";
         } else if (scorePercent >= 70) {
-          grade = "IELTS Band 7.5 - 8.0 (Very Good User)";
-          feedback = "Advanced operational proficiency. Handles complex arguments and sophisticated academic collocations effectively.";
+          grade = "IELTS Band 7.5 - 8.0 (Very Good User - مستخدم متقدم جداً)";
+          feedback = "Advanced operational proficiency. Handles complex arguments and sophisticated academic collocations effectively with subtle nuance.";
+          rubricTier = "c1";
         } else if (scorePercent >= 50) {
-          grade = "IELTS Band 6.5 (Competent User)";
-          feedback = "Competent command of English with occasional inaccuracies. Suitable for university admissions with focused preparation.";
+          grade = "IELTS Band 6.5 (Competent User - مستخدم كفء)";
+          feedback = "Competent command of English with occasional inaccuracies. Suitable for university admissions with focused preparation on formal inversion and discourse markers.";
+          rubricTier = "b2";
         } else {
-          grade = "IELTS Band 5.5 - 6.0 (Modest User)";
+          grade = "IELTS Band 5.5 - 6.0 (Modest User - مستخدم متوسط)";
           feedback = "Partial command with fair understanding. Recommended to practice academic reading and advanced sentence structure in the academy.";
+          rubricTier = "b1";
         }
       } else {
         // Translation
         if (scorePercent >= 85) {
-          grade = "C2 - خبير ومترجم مؤتمرات دولية معتمد";
-          feedback = "أداء استثنائي وعميق في المصطلحات المؤسساتية والدبلوماسية وتقنيات الترجمة الفورية بكابينات المؤتمرات ومواصفة ISO 17100:2015.";
+          grade = "C2 - خبير ومترجم مؤتمرات دولية معتمد (Chief Conference Interpreter)";
+          feedback = "أداء استثنائي وعميق في المصطلحات المؤسساتية والدبلوماسية وتقنيات الترجمة الفورية بكابينات المؤتمرات والالتزام التام بمواصفة ISO 17100:2015.";
+          rubricTier = "c2";
         } else if (scorePercent >= 70) {
-          grade = "C1 - مترجم مؤسساتي متقدم";
-          feedback = "مستوى متقدم جداً ومتمكن في الصياغة القانونية ونظام روزان التتابعي. نوصيك بمزيد من التمارين العملية لتقليص الفارق الزمني.";
+          grade = "C1 - مترجم مؤسساتي متقدم (Senior Institutional Translator)";
+          feedback = "مستوى متقدم جداً ومتمكن في الصياغة القانونية ونظام روزان التتابعي والتحكيم التجاري. نوصيك بمزيد من التمارين العملية لتقليص الفارق الزمني (Décalage).";
+          rubricTier = "c1";
         } else if (scorePercent >= 50) {
-          grade = "B2 - مترجم محترف فوق المتوسط";
-          feedback = "مستوى واعد وجيد جداً في فك شفرات النصوص المؤسساتية. ركّز على تعزيز المصطلحات اللاتينية وعقود التجارة الدولية.";
+          grade = "B2 - مترجم محترف فوق المتوسط (Professional Translator)";
+          feedback = "مستوى واعد وجيد جداً في فك شفرات النصوص المؤسساتية. ركّز على تعزيز المصطلحات اللاتينية وعقود التجارة الدولية وقواعد روزان للتدوين.";
+          rubricTier = "b2";
         } else {
-          grade = "B1 - مترجم متدرب";
-          feedback = "لديك قاعدة لغوية جيدة، ننصحك بالتدريب المستمر على كابينات المؤتمرات وقواعد روزان التتابعية بالأكاديمية.";
+          grade = "B1 - مترجم متدرب (Junior Associate Translator)";
+          feedback = "لديك قاعدة لغوية واعدة، ننصحك بالتدريب المستمر في كابينات المؤتمرات ومحرر SRT وقواعد روزان التتابعية بأكاديمية بوليلانغ.";
+          rubricTier = "b1";
         }
+      }
+
+      // Highlight the active rubric tier
+      ['c2', 'c1', 'b2', 'b1'].forEach(t => {
+        const el = document.getElementById(`scale-${t}`);
+        if (el) {
+          if (t === rubricTier) {
+            el.style.borderColor = 'var(--crimson)';
+            el.style.background = '#fef2f2';
+            el.style.fontWeight = 'bold';
+          } else {
+            el.style.borderColor = 'var(--border-line)';
+            el.style.background = 'var(--bg-surface)';
+            el.style.fontWeight = 'normal';
+          }
+        }
+      });
+
+      const pill = document.getElementById('exam-rubric-status-pill');
+      if (pill) {
+        pill.textContent = `الفئة المحققة: ${rubricTier.toUpperCase()}`;
+        pill.style.background = rubricTier === 'c2' || rubricTier === 'c1' ? '#dcfce7' : '#fef3c7';
+        pill.style.color = rubricTier === 'c2' || rubricTier === 'c1' ? '#15803d' : '#b45309';
+      }
+
+      // Render Competencies Breakdown
+      const compContainer = document.getElementById('exam-categories-breakdown');
+      if (compContainer) {
+        compContainer.innerHTML = '';
+        Object.keys(categoryStats).forEach(cat => {
+          const stats = categoryStats[cat];
+          const catPercent = Math.round((stats.correct / stats.total) * 100);
+          const barColor = catPercent >= 80 ? '#10b981' : (catPercent >= 50 ? '#f59e0b' : '#ef4444');
+          const row = document.createElement('div');
+          row.style.cssText = 'background:var(--bg-surface); padding:8px 10px; border-radius:6px; border:1px solid var(--border-line);';
+          row.innerHTML = `
+            <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+              <span><strong>${escapeHtml(cat)}</strong>:</span>
+              <span style="font-weight:700; color:${barColor};">${stats.correct}/${stats.total} (${catPercent}%)</span>
+            </div>
+            <div style="width:100%; height:6px; background:#e2e8f0; border-radius:3px; overflow:hidden;">
+              <div style="width:${catPercent}%; height:100%; background:${barColor}; border-radius:3px;"></div>
+            </div>
+          `;
+          compContainer.appendChild(row);
+        });
+      }
+
+      // Render Question-by-Question Review
+      const reviewContainer = document.getElementById('exam-detailed-review');
+      if (reviewContainer) {
+        reviewContainer.innerHTML = '';
+        questions.forEach((q, idx) => {
+          const userAns = userExamAnswers[idx];
+          const isCorrect = userAns === q.answer;
+          const userChoiceText = userAns !== undefined ? q.options[userAns] : 'لم تتم الإجابة';
+          const correctChoiceText = q.options[q.answer];
+
+          const item = document.createElement('div');
+          item.style.cssText = `margin-bottom:8px; padding:8px; border-radius:6px; background:${isCorrect ? '#f0fdf4' : '#fef2f2'}; border:1px solid ${isCorrect ? '#86efac' : '#fca5a5'};`;
+          item.innerHTML = `
+            <div><strong>س${idx + 1}: ${escapeHtml(q.q)}</strong></div>
+            <div style="margin-top:4px; font-size:11px;">
+              ${isCorrect ? '✅ <span style="color:#15803d; font-weight:700;">إجابتك صحيحة: ' + escapeHtml(correctChoiceText) + '</span>' : '❌ <span style="color:#b91c1c;">إجابتك: ' + escapeHtml(userChoiceText) + '</span><br>✔️ <span style="color:#15803d; font-weight:700;">الإجابة المعتمدة: ' + escapeHtml(correctChoiceText) + '</span>'}
+            </div>
+          `;
+          reviewContainer.appendChild(item);
+        });
       }
 
       document.getElementById('exam-card-container').style.display = 'none';
@@ -3720,6 +4074,64 @@
       document.getElementById('exam-level-grade').textContent = grade;
       document.getElementById('exam-score-percent').textContent = `الدرجة الفعلية: ${scorePercent}% (${correctCount} إجابات صحيحة من أصل ${questions.length})`;
       document.getElementById('exam-feedback-text').textContent = feedback;
+    }
+
+    function toggleExamAnswersReview() {
+      const el = document.getElementById('exam-detailed-review');
+      if (el) {
+        el.style.display = el.style.display === 'none' ? 'block' : 'none';
+      }
+    }
+
+    function printExamCertificate() {
+      const grade = document.getElementById('exam-level-grade').textContent;
+      const score = document.getElementById('exam-score-percent').textContent;
+      const name = currentUserName || 'المترجم المتدرب';
+      const examTitle = getActiveExamData().title;
+      const dateStr = new Date().toLocaleDateString('ar-DZ', { year: 'numeric', month: 'long', day: 'numeric' });
+
+      const printWin = window.open('', '', 'width=800,height=600');
+      printWin.document.write(`
+        <!DOCTYPE html>
+        <html dir="rtl" lang="ar">
+        <head>
+          <meta charset="utf-8">
+          <title>شهادة تقييم المستوى - منصة بوليلانغ</title>
+          <style>
+            body { font-family: system-ui, -apple-system, sans-serif; padding: 40px; background:#fff; color:#0f172a; }
+            .cert-border { border: 8px double #dc2626; padding: 30px; border-radius: 12px; text-align: center; }
+            h1 { color: #dc2626; font-size: 28px; margin-bottom: 6px; }
+            h2 { font-size: 20px; color: #334155; margin-bottom: 20px; }
+            .name { font-size: 24px; font-weight: bold; color: #0f172a; margin: 15px 0; border-bottom: 2px solid #cbd5e1; display: inline-block; padding-bottom: 4px; }
+            .grade-box { background: #f8fafc; border: 2px solid #e2e8f0; padding: 15px; border-radius: 8px; margin: 20px 0; font-size: 18px; }
+            .footer { margin-top: 30px; display: flex; justify-content: space-between; font-size: 13px; color: #64748b; }
+          </style>
+        </head>
+        <body>
+          <div class="cert-border">
+            <h1>منصة بوليلانغ الدولية للترجمة التحريرية والشفهية</h1>
+            <h2>شهادة تقييم المستوى والكفاءة المهنية المعيارية</h2>
+            <p>تشهد إدارة المنصة ومجلس التدقيق المعياري ISO 17100 بأن:</p>
+            <div class="name">${escapeHtml(name)}</div>
+            <p>قد أتم بنجاح الامتحان المهني المعتمد:</p>
+            <p><strong>${escapeHtml(examTitle)}</strong></p>
+            <div class="grade-box">
+              <div>المستوى المحقق: <strong style="color:#dc2626;">${escapeHtml(grade)}</strong></div>
+              <div>${escapeHtml(score)}</div>
+            </div>
+            <p style="font-size:12px; color:#64748b;">رقم الشهادة المرجعي: PL-CERT-${Math.floor(100000 + Math.random() * 900000)} | اعتماد الأستاذ جودي مداني</p>
+            <div class="footer">
+              <div>التاريخ: ${dateStr}</div>
+              <div>الختم المعتمد: منصة بوليلانغ ©</div>
+            </div>
+          </div>
+          <script>
+            window.onload = function() { window.print(); }
+          <\/script>
+        </body>
+        </html>
+      `);
+      printWin.document.close();
     }
 
     function restartExam() {
