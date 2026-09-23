@@ -116,10 +116,10 @@ fun PaymentDialog(
 
                 // Payment Methods
                 val methods = listOf(
+                    Triple("baridi", if (isArabic) "📱 بريدي موب Rip BaridiMob (دفع فوري)" else "BaridiMob RIP", "00799999002898430240"),
+                    Triple("ccp", if (isArabic) "📮 الحساب البريدي الجاري (CCP)" else "Postal CCP Account", "0028984302 40"),
                     Triple("edahabia", if (isArabic) "💳 البطاقة الذهبية (Edahabia)" else "Edahabia Card", "بريد الجزائر"),
-                    Triple("cib", if (isArabic) "🏦 البطاقة البنكية (CIB)" else "CIB Bank Card", "البنوك الجزائرية"),
-                    Triple("baridi", if (isArabic) "📱 بريدي موب / تطبيق فوري" else "BaridiMob App", "دفع فوري QR"),
-                    Triple("ccp", if (isArabic) "📜 حوالة بريدية (CCP)" else "Postal CCP Order", "صك بريدي رسمي")
+                    Triple("cib", if (isArabic) "🏦 البطاقة البنكية (CIB)" else "CIB Bank Card", "البنوك الجزائرية")
                 )
 
                 methods.forEach { (id, title, subtitle) ->
@@ -143,20 +143,43 @@ fun PaymentDialog(
                             )
                             Column {
                                 Text(title, fontWeight = FontWeight.Bold, style = MaterialTheme.typography.bodyMedium)
-                                Text(subtitle, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                Text(subtitle, style = MaterialTheme.typography.labelSmall, color = if (id == "baridi" || id == "ccp") RedPrimary else MaterialTheme.colorScheme.onSurfaceVariant, fontWeight = if (id == "baridi" || id == "ccp") FontWeight.Bold else FontWeight.Normal)
                             }
                         }
                     }
                 }
 
-                // Card Number input
+                // Official Notice Card
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)),
+                    shape = RoundedCornerShape(10.dp)
+                ) {
+                    Column(modifier = Modifier.padding(10.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                        Text(
+                            text = if (isArabic) "🔒 بيانات التحويل المعتمدة:" else "Official Account Details:",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 11.5.sp,
+                            color = RedPrimary
+                        )
+                        Text(
+                            text = "• بريدي موب (RIP): 00799999002898430240\n• الحساب الجاري (CCP): 0028984302 40",
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                }
+
+                // Card Number / Transaction input
                 OutlinedTextField(
                     value = cardNumber,
-                    onValueChange = { if (it.length <= 16) cardNumber = it },
+                    onValueChange = { cardNumber = it },
                     label = {
                         Text(
-                            if (selectedMethod == "ccp") (if (isArabic) "رقم الحساب البريدي الجاري (CCP + Clé)" else "CCP Account Number")
-                            else (if (isArabic) "رقم البطاقة (16 رقماً)" else "Card Number (16 digits)")
+                            if (selectedMethod == "baridi" || selectedMethod == "ccp")
+                                (if (isArabic) "رقم العملية أو الحوالة من وصل الدفع" else "Transaction / Receipt Number")
+                            else
+                                (if (isArabic) "رقم البطاقة (16 رقماً)" else "Card Number (16 digits)")
                         )
                     },
                     modifier = Modifier.fillMaxWidth().testTag("payment_card_input"),

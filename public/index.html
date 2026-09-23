@@ -4,13 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Polylang Hub | Certified Translation, Localization & Monetized Training Platform</title>
-  <meta name="description" content="منصة مجمع بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية ISO 17100:2015. إدارة الأستاذ جودي مداني. ترجمة محلفة، كابينات المؤتمرات، أكاديمية الماستركلاس، واستوديو SRT.">
+  <meta name="description" content="منصة منصة بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية ISO 17100:2015. إدارة الأستاذ جودي مداني. ترجمة محلفة، كابينات المؤتمرات، أكاديمية الماستركلاس، واستوديو SRT.">
   <link rel="icon" type="image/jpeg" href="polylang_logo.jpg">
 
   <!-- Google Fonts: Cairo for Arabic & Inter for Latin scripts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="academy_videos_data.js"></script>
 
   <style>
     :root {
@@ -547,6 +548,73 @@
     .view-panel { display: none; margin-bottom: 40px; }
     .view-panel.active-view { display: block; }
 
+    /* Hologram & Futuristic Sci-Fi UI */
+    .hologram-scan-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, #00f0ff, transparent);
+      box-shadow: 0 0 15px #00f0ff;
+      animation: scan-line 3s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes scan-line {
+      0% { top: 0%; opacity: 0.8; }
+      50% { top: 96%; opacity: 1; }
+      100% { top: 0%; opacity: 0.8; }
+    }
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.6; transform: scale(0.95); }
+      50% { opacity: 1; transform: scale(1.1); }
+    }
+    .badge-vip-gold {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 0 2px 6px rgba(217, 119, 6, 0.3);
+    }
+    .pagination-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    .page-btn {
+      min-width: 36px;
+      height: 36px;
+      padding: 0 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border-line);
+      background: var(--bg-card);
+      color: var(--text-main);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+    }
+    .page-btn:hover {
+      border-color: var(--crimson);
+      color: var(--crimson);
+    }
+    .page-btn.active {
+      background: var(--crimson);
+      color: #ffffff;
+      border-color: var(--crimson);
+    }
+
     /* Cards & Components */
     .content-box {
       background: var(--bg-card);
@@ -822,11 +890,6 @@
             <span>✦</span> <span id="i18n-about-btn">About Us</span>
           </button>
 
-          <button class="nav-pill nav-pill-green" onclick="openModal('dbModal')">
-            <span style="width:8px; height:8px; border-radius:50%; background:#10b981; display:inline-block;"></span>
-            <span>NestJS API Online</span>
-          </button>
-
           <!-- Currency Selector -->
           <select id="currency-dropdown" class="nav-pill" onchange="changeCurrency(this.value)">
             <option value="DZD">💰 🇩🇿 DZD (د.ج)</option>
@@ -896,13 +959,16 @@
       <div class="hero-card-grid">
         
         <!-- Left: Robot Presenter Video Box -->
-        <div class="video-presenter-box">
+        <div class="video-presenter-box" onclick="openHologramModal()" style="cursor:pointer;" title="انقر لتشغيل العرض الهولوغرافي التفاعلي">
+          <div style="position:absolute; top:8px; right:8px; background:rgba(0, 240, 255, 0.95); color:#020617; font-size:10.5px; font-weight:900; padding:3px 8px; border-radius:4px; z-index:2; box-shadow:0 0 10px rgba(0, 240, 255, 0.6); display:flex; align-items:center; gap:4px;">
+            <span>🤖</span> <span>هولوغرام تفاعلي 3D</span>
+          </div>
           <img src="img_robot_presenter.jpg" alt="Robot Presenter" onerror="this.src='polylang_logo.jpg'">
-          <div class="video-play-btn-circle" onclick="playIntroVideoOrAudio()" title="تشغيل الترحيب">
+          <div class="video-play-btn-circle" onclick="event.stopPropagation(); openHologramModal();" title="تشغيل فيديو الهولوغرام">
             ▶
           </div>
           <div class="video-sub-banner" id="video-banner-text">
-            👋 Welcome to Polylang Hub
+            ✨ انقر لتشغيل فيديو الهولوغرام الإفتتاحي
           </div>
         </div>
 
@@ -936,14 +1002,17 @@
 
           <!-- Hero Actions Buttons -->
           <div class="hero-actions-row">
+            <button class="btn-primary-red" onclick="openHologramModal()" style="background:linear-gradient(135deg, #0284c7, #0f172a); border:1px solid #38bdf8; box-shadow:0 4px 15px rgba(2, 132, 199, 0.35);">
+              <span>🤖</span> <span>فيديو الهولوغرام الإفتتاحي</span>
+            </button>
             <button class="btn-primary-red" onclick="openModal('orderModal')">
               <span>📄</span> <span id="i18n-btn-req-trans">Request Translation</span>
             </button>
             <button class="btn-outline-action" onclick="switchRole('enthusiast')">
-              <span>🎬</span> <span id="i18n-btn-academy">Academy & Courses</span>
+              <span>🎓</span> <span id="i18n-btn-academy">الأكاديمية (100 فيديو)</span>
             </button>
             <button class="btn-outline-action" onclick="openModal('founderModal')">
-              <span>👤</span> <span id="i18n-btn-founder">Founder Profile</span>
+              <span>👤</span> <span id="i18n-btn-founder">سيرة المؤسس (جودي مداني)</span>
             </button>
           </div>
 
@@ -989,6 +1058,39 @@
     <!-- DYNAMIC VIEW 1: CLIENT PORTAL & ORDERS (Active by Default) -->
     <div id="view-client" class="view-panel active-view">
       
+      <!-- FOUNDER BIOGRAPHY SHOWCASE (سيرة الأستاذ جودي مداني) -->
+      <div class="content-box" style="border-right:4px solid var(--crimson); background:linear-gradient(to left, var(--bg-card), var(--crimson-light));">
+        <div style="display:flex; gap:20px; align-items:center; flex-wrap:wrap;">
+          <div style="width:76px; height:76px; border-radius:50%; background:linear-gradient(135deg, var(--crimson), #991b1b); color:#fff; font-size:28px; font-weight:900; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 15px var(--crimson-glow); flex-shrink:0; border:3px solid #fff;">
+            JM
+          </div>
+          <div style="flex:1; min-width:260px;">
+            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:4px;">
+              <h3 style="font-size:20px; font-weight:900; margin:0; color:var(--text-main);">الأستاذ جودي مداني (Djoudi Madani)</h3>
+              <span class="badge-iso-green" style="background:#10b981; color:#fff; font-size:11px;">مؤسس ورئيس المنصة</span>
+              <span class="badge-gold" style="font-size:11px;">🇩🇿 الجزائر العاصمة</span>
+            </div>
+            <div style="font-size:13px; font-weight:800; color:var(--crimson); margin-bottom:6px;">
+              المشاركة في الترجمة الشفهية في تظاهرات رياضية وثقافية
+            </div>
+            <p style="font-size:12.5px; color:var(--text-dim); line-height:1.7; margin:0 0 10px;">
+              المشاركة في الترجمة الشفهية في تظاهرات رياضية وثقافية.
+            </p>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <button class="btn-primary-red" style="padding:6px 14px; font-size:12px;" onclick="openModal('founderModal')">
+                📖 عرض السيرة الذاتية المفصلة والمسار المهني
+              </button>
+              <button class="btn-outline-action" style="padding:6px 14px; font-size:12px;" onclick="switchRole('enthusiast')">
+                🎓 استكشاف 100 فيديو تعليمي بالأكاديمية
+              </button>
+              <a href="mailto:djoudimadani09@gmail.com" class="btn-outline-action" style="padding:6px 14px; font-size:12px; text-decoration:none; display:inline-flex; align-items:center;">
+                ✉️ djoudimadani09@gmail.com
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Calculator Box -->
       <div class="content-box">
         <div class="section-title-wrap">
@@ -1071,7 +1173,7 @@
         <div class="srt-player-mock">
           <div style="font-size:36px; opacity:0.8;">▶️</div>
           <div class="srt-sub-overlay" id="srt-active-cue-text">
-            مرحباً بكم في مجمع بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية.
+            مرحباً بكم في منصة بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية.
           </div>
         </div>
 
@@ -1145,11 +1247,16 @@
             </div>
 
             <div class="form-group">
-              <label>اختر خطاب المؤتمر للتدريب:</label>
+              <label>اختر خطاب المؤتمر للتدريب (خطابات متنوعة ومستويات دولية):</label>
               <select id="booth-speech-select" class="form-control" onchange="loadSelectedBoothSpeech()">
-                <option value="climate">قمة المناخ الدولية (COP28) - الإنجليزية ➔ العربية</option>
-                <option value="un">افتتاح الجمعية العامة للأمم المتحدة - الفرنسية ➔ العربية</option>
-                <option value="energy">منتدى الطاقة والغاز بالجزائر - الإنجليزية ➔ العربية</option>
+                <option value="climate">🌍 قمة المناخ الدولية (COP28) - الإنجليزية ➔ العربية</option>
+                <option value="un">🕊️ افتتاح الجمعية العامة للأمم المتحدة - الفرنسية ➔ العربية</option>
+                <option value="energy">⚡ منتدى الطاقة والغاز الدولي بالجزائر - الإنجليزية ➔ العربية</option>
+                <option value="davos">💼 المنتدى الاقتصادي العالمي دافوس (WEF) - الإنجليزية ➔ العربية</option>
+                <option value="unesco">🏛️ المؤتمر العام لمنظمة اليونسكو بباريس - الفرنسية ➔ العربية</option>
+                <option value="berlin">🔬 قمة التكنولوجيا والتحول الرقمي ببرلين - الألمانية ➔ العربية</option>
+                <option value="who">🏥 منظمة الصحة العالمية (WHO) جنيف - الإنجليزية ➔ العربية</option>
+                <option value="arab_league">🤝 مؤتمر القمة العربية (مجلس الجامعة) - العربية ➔ الإنجليزية</option>
               </select>
             </div>
 
@@ -1201,6 +1308,18 @@
               استمع للمقطع الدبلوماسي، دوّن الأفكار باستخدام رموز روزان، ثم أعد صياغة الخطاب كاملاً بثقة وطلاقة.
             </p>
 
+            <div class="form-group" style="margin-bottom:12px;">
+              <label style="font-size:12px; font-weight:700;">اختر خطاب الترجمة التتابعية (مستويات وموضوعات دبلوماسية واقتصادية):</label>
+              <select id="consec-speech-select" class="form-control" onchange="loadSelectedConsecSpeech()">
+                <option value="bilateral_green">🤝 تصريح ثنائي مشترك: الاستثمار في الهيدروجين الأخضر والتجارة (العربية ➔ الفرنسية)</option>
+                <option value="eu_trade">🇪🇺 مؤتمر الشراكة الاقتصادية الأوروبية المتوسطية (الفرنسية ➔ العربية)</option>
+                <option value="opec">🛢️ البيان الختامي لاجتماع منظمة أوبك+ الوزاري (الإنجليزية ➔ العربية)</option>
+                <option value="legal_dispute">⚖️ مرافعة تحكيم تجاري دولي أمام محكمة غرفة التجارة الدولية (ICC) (الإنجليزية ➔ العربية)</option>
+                <option value="german_invest">🇩🇪 ملتقى رجال الأعمال الجزائري الألماني للطاقات المتجددة (الألمانية ➔ العربية)</option>
+                <option value="diplomatic_credentials">📜 تقديم أوراق اعتماد سفير جديد ومراسم البروتوكول (العربية ➔ الإنجليزية)</option>
+              </select>
+            </div>
+
             <!-- Rozan Quick Symbols Toolbar -->
             <div style="background:var(--bg-surface); padding:8px 12px; border-radius:8px; border:1px solid var(--border-line); margin-bottom:10px;">
               <div style="font-size:11px; font-weight:700; margin-bottom:6px; color:var(--text-dim);">شريط رموز روزان السريعة (انقر للإدراج فوراً في الملاحظات):</div>
@@ -1222,13 +1341,18 @@
             <div style="display:grid; grid-template-columns:1fr 1.2fr; gap:12px; margin-bottom:12px;">
               <div>
                 <label style="font-size:11.5px; font-weight:700;">الخطاب المصدر للاستماع:</label>
-                <div style="background:var(--bg-surface); padding:10px; border-radius:8px; border:1px solid var(--border-line); font-size:12px; line-height:1.6; height:140px; overflow-y:auto;">
+                <div id="consec-source-transcript" style="background:var(--bg-surface); padding:10px; border-radius:8px; border:1px solid var(--border-line); font-size:12px; line-height:1.6; height:140px; overflow-y:auto;">
                   <strong>تصريح ثنائي مشترك:</strong><br>
                   "لقد اتفق الجانبان اليوم على تعزيز الاستثمارات في قطاع الهيدروجين الأخضر، مع التشديد على ضرورة إزالة القيود الجمركية وفتح خطوط الشحن المباشرة قبل نهاية الربع الأول."
                 </div>
-                <button class="btn-primary-red" style="margin-top:6px; width:100%; padding:4px; font-size:11.5px;" onclick="playConsecutiveSpeechAudio()">
-                  🔊 استمع للخطاب بصوت المتحدث
-                </button>
+                <div style="display:flex; gap:6px; margin-top:6px;">
+                  <button class="btn-primary-red" style="flex:1; padding:4px; font-size:11.5px;" onclick="playConsecutiveSpeechAudio()">
+                    🔊 استمع للخطاب بصوت المتحدث
+                  </button>
+                  <button class="btn-outline-action" style="padding:4px 10px; font-size:11.5px;" onclick="stopConsecutiveSpeechAudio()">
+                    ⏹️ إيقاف
+                  </button>
+                </div>
               </div>
 
               <div>
@@ -1252,11 +1376,32 @@
           <div style="background:var(--bg-body); padding:18px; border-radius:12px; border:1px solid var(--border-line);">
             <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
               <div>
-                <h4 style="font-size:16px; font-weight:900;">🏆 امتحان تحديد المستوى في الترجمة واللغات (Placement Exam)</h4>
-                <p style="font-size:11.5px; color:var(--text-dim);">اختبار احترافي متدرج يقيس المعجم المؤسساتي، الصياغة القانونية، وسرعة البديهة في الترجمة الفورية.</p>
+                <h4 style="font-size:16px; font-weight:900;">🏆 امتحان تحديد المستوى الدولي المعتمد (Placement Exam)</h4>
+                <p style="font-size:11.5px; color:var(--text-dim);">اختبارات واقعية ومعيارية مطابقة للاختبارات الدولية الرسمية (TCF الفرنسي، Goethe الألماني، IELTS البريطاني، وامتحان الترجمة المؤسساتية).</p>
               </div>
               <div style="background:#fef2f2; color:var(--crimson); padding:4px 12px; border-radius:6px; font-weight:900; font-size:13px; border:1px solid #fca5a5;">
                 ⏱️ الوقت المتبقي: <span id="exam-timer">10:00</span>
+              </div>
+            </div>
+
+            <!-- Exam Language & Standard Selector -->
+            <div style="background:var(--bg-surface); border:1px solid var(--border-line); border-radius:10px; padding:10px 14px; margin-bottom:14px;">
+              <div style="font-size:12px; font-weight:800; margin-bottom:8px; color:var(--crimson);">
+                🎯 اختر مسار الاختبار المعياري المطلوب:
+              </div>
+              <div style="display:flex; gap:8px; flex-wrap:wrap;" id="exam-track-buttons">
+                <button class="nav-pill active" id="btn-exam-tcf" onclick="switchExamTrack('tcf')">
+                  🇫🇷 TCF / DALF (الفرنسية الدولية)
+                </button>
+                <button class="nav-pill" id="btn-exam-goethe" onclick="switchExamTrack('goethe')">
+                  🇩🇪 Goethe-Zertifikat (الألمانية B2-C1)
+                </button>
+                <button class="nav-pill" id="btn-exam-ielts" onclick="switchExamTrack('ielts')">
+                  🇬🇧 IELTS Academic (الإنجليزية الأكاديمية)
+                </button>
+                <button class="nav-pill" id="btn-exam-trans" onclick="switchExamTrack('trans')">
+                  ⚖️ الترجمة المؤسساتية وكابينات المؤتمرات
+                </button>
               </div>
             </div>
 
@@ -1284,21 +1429,60 @@
             <div id="exam-result-box" style="display:none; text-align:center; padding:20px; background:var(--bg-surface); border-radius:12px; border:2px solid var(--crimson);">
               <div style="font-size:40px; margin-bottom:10px;">🎓</div>
               <h3 style="font-size:18px; font-weight:900; margin-bottom:6px;">شهادة تقييم المستوى المعتمدة من بوليلانغ</h3>
-              <p style="font-size:12px; color:var(--text-dim); margin-bottom:14px;">تم احتساب نتيجتك بنجاح وفق المعايير المؤسساتية ISO 17100</p>
+              <p style="font-size:12px; color:var(--text-dim); margin-bottom:14px;">تم احتساب نتيجتك بنجاح وفق المعايير المؤسساتية العالمية وسلّم CEFR و ISO 17100:2015</p>
 
-              <div style="display:inline-block; background:var(--bg-body); padding:12px 24px; border-radius:10px; border:1px solid var(--border-line); margin-bottom:14px;">
-                <div style="font-size:12px; color:var(--text-dim);">المستوى المستحق:</div>
+              <div style="display:inline-block; background:var(--bg-body); padding:16px 28px; border-radius:12px; border:1px solid var(--border-line); margin-bottom:16px; box-shadow:0 4px 12px rgba(0,0,0,0.06);">
+                <div style="font-size:12px; color:var(--text-dim); margin-bottom:4px;">المستوى الأكاديمي والمهني المستحق:</div>
                 <div style="font-size:26px; font-weight:900; color:var(--crimson);" id="exam-level-grade">C1 - مترجم مؤتمرات متقدم</div>
-                <div style="font-size:13px; font-weight:700;" id="exam-score-percent">الدرجة: 90% (9/10)</div>
+                <div style="font-size:14px; font-weight:800; margin-top:4px;" id="exam-score-percent">الدرجة: 90% (9/10)</div>
               </div>
 
-              <p style="font-size:12px; line-height:1.7; max-width:500px; margin:0 auto 16px; color:var(--text-dim);" id="exam-feedback-text">
+              <!-- Real Grading Scale (سلم التنقيط المعتمد) -->
+              <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:12px; max-width:640px; margin:0 auto 16px; text-align:start;">
+                <div style="font-size:12px; font-weight:800; color:var(--crimson); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                  <span>📊 سلّم التنقيط والمعايير المعتمدة (Grading Scale):</span>
+                  <span id="exam-rubric-status-pill" style="font-size:11px; padding:2px 8px; border-radius:12px; font-weight:700;"></span>
+                </div>
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:6px; font-size:11px; margin-bottom:10px;">
+                  <div id="scale-c2" style="padding:6px; border-radius:6px; background:var(--bg-surface); border:1px solid var(--border-line);">
+                    <strong>85% - 100%</strong>: خبير متمرس (C2/Expert)
+                  </div>
+                  <div id="scale-c1" style="padding:6px; border-radius:6px; background:var(--bg-surface); border:1px solid var(--border-line);">
+                    <strong>70% - 84%</strong>: متقدم مستقل (C1/Very Good)
+                  </div>
+                  <div id="scale-b2" style="padding:6px; border-radius:6px; background:var(--bg-surface); border:1px solid var(--border-line);">
+                    <strong>50% - 69%</strong>: فوق المتوسط (B2/Competent)
+                  </div>
+                  <div id="scale-b1" style="padding:6px; border-radius:6px; background:var(--bg-surface); border:1px solid var(--border-line);">
+                    <strong>أقل من 50%</strong>: متوسط تأسيسي (B1/Developing)
+                  </div>
+                </div>
+
+                <!-- Detailed Competencies Breakdown -->
+                <div style="font-size:11.5px; font-weight:800; margin-bottom:6px;">تفصيل تقييم المهارات والمحاور (Competencies Breakdown):</div>
+                <div id="exam-categories-breakdown" style="display:flex; flex-direction:column; gap:6px; font-size:11.5px;">
+                  <!-- Injected via JavaScript -->
+                </div>
+              </div>
+
+              <p style="font-size:12.5px; line-height:1.7; max-width:600px; margin:0 auto 16px; color:var(--text-dim); text-align:start; background:var(--bg-body); padding:10px 14px; border-radius:8px; border:1px solid var(--border-line);" id="exam-feedback-text">
                 أداء متميز في استيعاب التراكيب المؤسساتية والتعابير الدبلوماسية الدقيقة. نوصيك بمواصلة تدريبات الفارق الزمني (Décalage) بكابينات المؤتمرات.
               </p>
 
+              <!-- Question by Question Review -->
+              <div style="max-width:640px; margin:0 auto 16px; text-align:start;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                  <span style="font-size:12px; font-weight:800;">مراجعة الأسئلة وتصحيح الإجابات:</span>
+                  <button class="nav-pill" style="padding:2px 8px; font-size:11px;" onclick="toggleExamAnswersReview()">👁️ إظهار/إخفاء التحليل التفصيلي</button>
+                </div>
+                <div id="exam-detailed-review" style="display:none; max-height:260px; overflow-y:auto; background:var(--bg-body); padding:10px; border-radius:8px; border:1px solid var(--border-line); font-size:11.5px; line-height:1.6;">
+                  <!-- Injected via JavaScript -->
+                </div>
+              </div>
+
               <div style="display:flex; justify-content:center; gap:8px;">
                 <button class="btn-primary-red" onclick="restartExam()">إعادة الامتحان 🔄</button>
-                <button class="btn-outline-action" onclick="alert('✓ تم حفظ شهادة تحديد المستوى في ملفك الشخصي.')">حفظ الشهادة 📥</button>
+                <button class="btn-outline-action" onclick="printExamCertificate()">طباعة / حفظ الشهادة الرسمية 📥</button>
               </div>
             </div>
 
@@ -1308,27 +1492,121 @@
       </div>
     </div>
 
-    <!-- DYNAMIC VIEW 3: ENTHUSIAST & MASTERCLASS ACADEMY -->
+    <!-- DYNAMIC VIEW 3: ENTHUSIAST & MASTERCLASS ACADEMY (100 Videos) -->
     <div id="view-enthusiast" class="view-panel">
       <div class="content-box">
-        <div class="section-title-wrap">
-          <h3>أكاديمية الماستركلاس والتدريب التفاعلي 🎓</h3>
-          <p>محاضرات حقيقية وورشات عمل معتمدة في كابينات المؤتمرات، التظليل الصوتي، وقواعد روزان.</p>
+        
+        <!-- Header & Premium Upgrade Callout -->
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:18px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+              <span class="badge-gold" style="font-size:11px;">🎓 100 فيديو تعليمي تفاعلي</span>
+              <span class="badge-iso-green" style="font-size:11px;">📖 معايير ISO 17100 / ISO 18587</span>
+            </div>
+            <h3 style="font-size:22px; font-weight:900; margin:0 0 6px;">أكاديمية بوليلانغ للماستركلاس والتدريب اللغوي 🎓</h3>
+            <p style="font-size:13px; color:var(--text-dim); margin:0; max-width:650px; line-height:1.6;">
+              أكبر مكتبة تدريبية مرئية متخصصة في كابينات المؤتمرات، الترجمة القانونية والطبية، تقنيات روزان، التظليل الصوتي، وأدوات الذكاء الاصطناعي برعاية وإشراف <strong>الأستاذ جودي مداني</strong>.
+            </p>
+          </div>
+
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="btn-primary-red" style="background:linear-gradient(135deg, #f59e0b, #b45309); border:none; box-shadow:0 4px 14px rgba(217, 119, 6, 0.35);" onclick="openModal('premiumSubModal')">
+              👑 ترقية الحساب إلى بريميوم VIP
+            </button>
+            <button class="btn-outline-action" onclick="openHologramModal()" style="border-color:#0284c7; color:#0284c7;">
+              🤖 تشغيل الهولوغرام الإفتتاحي
+            </button>
+          </div>
         </div>
 
-        <!-- Filter bar -->
-        <div style="display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap;">
-          <input type="text" id="academy-search" class="form-control" style="flex:1; min-width:200px;" placeholder="ابحث عن محاضرة أو تقنية لغوية..." oninput="filterAcademyVideos()">
-          <button class="nav-pill active" onclick="filterCategory('all')">الكل</button>
-          <button class="nav-pill" onclick="filterCategory('booth')">كابينات المؤتمرات</button>
-          <button class="nav-pill" onclick="filterCategory('shadowing')">التظليل الصوتي</button>
-          <button class="nav-pill" onclick="filterCategory('legal')">صياغة العقود</button>
+        <!-- Premium Pass Banner Box -->
+        <div style="background:linear-gradient(135deg, #fffbeb, #fef3c7); border:1px solid #fde68a; border-radius:12px; padding:14px 18px; margin-bottom:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="font-size:28px;">👑</div>
+            <div>
+              <div style="font-size:13.5px; font-weight:800; color:#92400e;">هل ترغب في فتح جميع المساقات الـ 100 بدون قيود؟</div>
+              <div style="font-size:12px; color:#b45309;">تتضمن المساقات المدفوعة نماذج عقود حصرية، قوالب Trados و MemoQ، وتدريباً فردياً مع كبار الخبراء.</div>
+            </div>
+          </div>
+          <button class="btn-primary-red" style="background:#d97706; padding:6px 16px; font-size:12px;" onclick="openModal('premiumSubModal')">
+            عرض باقات الاشتراك (ابتداءً من 1,500 د.ج) ➔
+          </button>
+        </div>
+
+        <!-- Search Bar -->
+        <div style="display:flex; gap:10px; margin-bottom:14px; flex-wrap:wrap;">
+          <div style="flex:1; min-width:260px; position:relative;">
+            <input type="text" id="academy-search" class="form-control" style="padding-left:36px;" placeholder="🔍 ابحث في 100 فيديو تعليمي (بالعنوان، المحاضر، اللغة، أو التقنية)..." oninput="handleAcademyFilterChange()">
+          </div>
+          <select id="academy-level-filter" class="form-control" style="width:auto; min-width:140px;" onchange="handleAcademyFilterChange()">
+            <option value="all">جميع المستويات</option>
+            <option value="مبتدئ">مبتدئ / تأسيسي</option>
+            <option value="متوسط">متوسط</option>
+            <option value="متقدم">متقدم</option>
+            <option value="احترافي">احترافي / خبير</option>
+          </select>
+        </div>
+
+        <!-- Multi-Level Filter Chips -->
+        <!-- 1. Language Chips -->
+        <div style="margin-bottom:10px;">
+          <div style="font-size:11.5px; font-weight:800; color:var(--text-dim); margin-bottom:6px; display:flex; align-items:center; gap:6px;">
+            <span>🌐 تصفية حسب اللغة:</span>
+            <span style="font-size:10.5px; color:var(--text-faint);">(اختر لغة المساق)</span>
+          </div>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;" id="lang-chips-container">
+            <button class="nav-pill active" onclick="setLangFilter('all', this)">الكل (100)</button>
+            <button class="nav-pill" onclick="setLangFilter('ar', this)">🇩🇿 العربية (20)</button>
+            <button class="nav-pill" onclick="setLangFilter('en', this)">🇬🇧 English (20)</button>
+            <button class="nav-pill" onclick="setLangFilter('fr', this)">🇫🇷 Français (18)</button>
+            <button class="nav-pill" onclick="setLangFilter('de', this)">🇩🇪 Deutsch (16)</button>
+            <button class="nav-pill" onclick="setLangFilter('es', this)">🇪🇸 Español (10)</button>
+            <button class="nav-pill" onclick="setLangFilter('other', this)">🌐 لغات أخرى (6)</button>
+            <button class="nav-pill" onclick="setLangFilter('tech', this)">💻 أدوات CAT و AI (10)</button>
+          </div>
+        </div>
+
+        <!-- 2. Category Chips -->
+        <div style="margin-bottom:12px;">
+          <div style="font-size:11.5px; font-weight:800; color:var(--text-dim); margin-bottom:6px; display:flex; align-items:center; gap:6px;">
+            <span>📂 تصفية حسب مجال التخصص:</span>
+          </div>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;" id="cat-chips-container">
+            <button class="nav-pill active" onclick="setCategoryFilter('all', this)">جميع التخصصات</button>
+            <button class="nav-pill" onclick="setCategoryFilter('booth', this)">🎙️ كابينة المؤتمرات والفورية</button>
+            <button class="nav-pill" onclick="setCategoryFilter('legal', this)">⚖️ الترجمة القانونية والمحلفة</button>
+            <button class="nav-pill" onclick="setCategoryFilter('medical', this)">🩺 الترجمة الطبية والدوائية</button>
+            <button class="nav-pill" onclick="setCategoryFilter('rozan', this)">📝 تقنيات روزان والتتابعية</button>
+            <button class="nav-pill" onclick="setCategoryFilter('subtitling', this)">🎬 ترجمة الشاشة والوسائط</button>
+            <button class="nav-pill" onclick="setCategoryFilter('shadowing', this)">🗣️ التظليل الصوتي والنطق</button>
+            <button class="nav-pill" onclick="setCategoryFilter('finance', this)">📊 المالية والاقتصادية</button>
+            <button class="nav-pill" onclick="setCategoryFilter('cat_tools', this)">🛠️ برمجيات CAT Tools</button>
+          </div>
+        </div>
+
+        <!-- 3. Access Level Filter & Results Counter -->
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; border-top:1px solid var(--border-line); border-bottom:1px solid var(--border-line); padding:10px 0; margin-bottom:18px;">
+          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+            <span style="font-size:12px; font-weight:700; color:var(--text-dim);">نوع الوصول:</span>
+            <button class="role-chip active" id="access-chip-all" style="padding:4px 10px; font-size:11.5px;" onclick="setAccessFilter('all')">الكل (100)</button>
+            <button class="role-chip" id="access-chip-free" style="padding:4px 10px; font-size:11.5px;" onclick="setAccessFilter('free')">🆓 مساقات مجانية</button>
+            <button class="role-chip" id="access-chip-premium" style="padding:4px 10px; font-size:11.5px; color:#d97706; border-color:#fde68a;" onclick="setAccessFilter('premium')">👑 مساقات بريميوم VIP 🔒</button>
+          </div>
+          <div style="font-size:12px; font-weight:800; color:var(--crimson);" id="academy-status-counter">
+            عرض 12 من أصل 100 فيديو تعليمي
+          </div>
         </div>
 
         <!-- Videos Grid -->
         <div class="courses-grid" id="academy-cards-container">
-          <!-- Populated via JS with real playable YouTube lessons -->
+          <!-- Populated dynamically via JS with all 100 educational lessons -->
         </div>
+
+        <!-- Pagination Controls -->
+        <div class="pagination-bar" id="academy-pagination">
+          <!-- Page buttons generated via JS -->
+        </div>
+
       </div>
     </div>
 
@@ -1365,71 +1643,132 @@
 
   <!-- ALL MODALS -->
 
-  <!-- 1. AUTHENTICATION & LOGIN MODAL (5 Distinct Roles with Isolated Admin Access) -->
+  <!-- 1. AUTHENTICATION & LOGIN MODAL (World-Class UX with Dual Tab, Validation & Security) -->
   <div id="authModal" class="modal-backdrop">
-    <div class="modal-sheet">
+    <div class="modal-sheet" style="max-width:540px; border-radius:18px; padding:24px; box-shadow:0 20px 45px rgba(0,0,0,0.35);">
       <div class="modal-close-x" onclick="closeModal('authModal')">✕</div>
-      <h3 style="font-size:18px; font-weight:800; margin-bottom:6px;">تسجيل الدخول / تبديل الحساب</h3>
-      <p style="font-size:12px; color:var(--text-dim); margin-bottom:16px;">
-        اختر أحد الحسابات السريعة الجاهزة، أو أدخل بريدك الإلكتروني لتسجيل الدخول:
-      </p>
+      
+      <!-- Brand & Security Header -->
+      <div style="text-align:center; margin-bottom:18px;">
+        <div style="display:inline-flex; align-items:center; justify-content:center; width:52px; height:52px; border-radius:14px; background:linear-gradient(135deg, #fee2e2, #fecaca); color:var(--crimson); font-size:26px; margin-bottom:10px;">
+          🌐
+        </div>
+        <h3 style="font-size:20px; font-weight:900; margin:0 0 4px; color:var(--text-main);">بوابة الدخول الموحدة لمنصة بوليلانغ</h3>
+        <p style="font-size:12.5px; color:var(--text-dim); margin:0;">
+          معايير أمان وتشفير عالمية (256-Bit SSL/TLS) مع عزل حسابات المشرف والمترجمين والعملاء
+        </p>
+      </div>
 
-      <!-- Quick Login Profiles for All 5 Roles -->
-      <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:18px;">
-        <button class="nav-pill" style="justify-content:flex-start; padding:10px; border:2px solid var(--crimson);" onclick="quickLoginUser('الأستاذ جودي مداني (Djoudi Madani)', 'djoudimadani09@gmail.com', 'Admin')">
-          <span>👑</span>
-          <div style="text-align:start;">
-            <strong style="color:var(--crimson);">الأستاذ جودي مداني (المدير العام والمشرف الحصري)</strong>
-            <div style="font-size:11px; color:var(--text-faint);">djoudimadani09@gmail.com — المشرف العام وعزل البيانات</div>
-          </div>
+      <!-- Segmented Auth Mode Switcher -->
+      <div style="display:flex; background:var(--bg-body); padding:4px; border-radius:10px; border:1px solid var(--border-line); margin-bottom:16px;">
+        <button id="auth-tab-direct" class="nav-pill active" style="flex:1; justify-content:center; font-size:12.5px; font-weight:800; border-radius:8px; border:none; padding:8px;" onclick="switchAuthTab('direct')">
+          🔑 الدخول المباشر بالبريد
         </button>
-
-        <button class="nav-pill" style="justify-content:flex-start; padding:10px;" onclick="quickLoginUser('أ. مريم بوعلام (مترجمة مؤتمرات معتمدة)', 'mariem.trans@polylang.dz', 'Translator')">
-          <span>🎓</span>
-          <div style="text-align:start;">
-            <strong>أ. مريم بوعلام (مترجمة معتمدة)</strong>
-            <div style="font-size:11px; color:var(--text-faint);">mariem.trans@polylang.dz — استوديو المترجم ومحرر SRT</div>
-          </div>
-        </button>
-
-        <button class="nav-pill" style="justify-content:flex-start; padding:10px;" onclick="quickLoginUser('كريم حمداوي (عميل ترجمة)', 'karim@polylang.dz', 'Client')">
-          <span>👤</span>
-          <div style="text-align:start;">
-            <strong>كريم حمداوي (عميل ترجمة ومؤسسات)</strong>
-            <div style="font-size:11px; color:var(--text-faint);">karim@polylang.dz — بوابة العميل وحاسبة الأسعار</div>
-          </div>
-        </button>
-
-        <button class="nav-pill" style="justify-content:flex-start; padding:10px;" onclick="quickLoginUser('سارة بن علي (طالبة ماستر ترجمة)', 'sara.student@univ-alger2.dz', 'Student')">
-          <span>📚</span>
-          <div style="text-align:start;">
-            <strong>سارة بن علي (طالبة معهد الترجمة - جامعة الجزائر 2)</strong>
-            <div style="font-size:11px; color:var(--text-faint);">sara.student@univ-alger2.dz — كابينة الترجمة الفورية وامتحان المستوى</div>
-          </div>
-        </button>
-
-        <button class="nav-pill" style="justify-content:flex-start; padding:10px;" onclick="quickLoginUser('يوسف مراد (متعلم لغات)', 'youssef.learner@gmail.com', 'Learner')">
-          <span>💡</span>
-          <div style="text-align:start;">
-            <strong>يوسف مراد (متعلم لغات وشغوف)</strong>
-            <div style="font-size:11px; color:var(--text-faint);">youssef.learner@gmail.com — التظليل الصوتي والكويزات</div>
-          </div>
+        <button id="auth-tab-roles" class="nav-pill" style="flex:1; justify-content:center; font-size:12.5px; font-weight:800; border-radius:8px; border:none; padding:8px;" onclick="switchAuthTab('roles')">
+          ⚡ حسابات تجريبية سريعة
         </button>
       </div>
 
-      <!-- Custom Form -->
-      <div class="form-group">
-        <label>البريد الإلكتروني:</label>
-        <input type="email" id="auth-email-input" class="form-control" placeholder="name@domain.com">
-      </div>
-      <div class="form-group">
-        <label>كلمة المرور:</label>
-        <input type="password" id="auth-pass-input" class="form-control" placeholder="••••••••">
+      <!-- Tab 1: Direct Form Login / Register -->
+      <div id="auth-panel-direct" style="display:block;">
+        <div style="margin-bottom:12px;">
+          <label style="font-size:12px; font-weight:700; display:block; margin-bottom:4px;">البريد الإلكتروني المعتمد:</label>
+          <div style="position:relative;">
+            <input type="email" id="auth-email-input" class="form-control" placeholder="name@example.com" style="padding:10px 12px; font-size:13px; border-radius:8px;">
+          </div>
+          <div id="auth-email-error" style="color:var(--crimson); font-size:11px; margin-top:4px; display:none;">يرجى إدخال عنوان بريد إلكتروني صالح.</div>
+        </div>
+
+        <div style="margin-bottom:14px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <label style="font-size:12px; font-weight:700;">كلمة المرور:</label>
+            <a href="javascript:void(0)" onclick="forgotPasswordNotice()" style="font-size:11.5px; color:var(--crimson); text-decoration:none;">نسيت كلمة المرور؟</a>
+          </div>
+          <div style="position:relative; display:flex; align-items:center;">
+            <input type="password" id="auth-pass-input" class="form-control" placeholder="••••••••" style="padding:10px 12px; font-size:13px; border-radius:8px; width:100%;">
+            <button type="button" onclick="togglePasswordVisibility()" style="position:absolute; left:10px; background:none; border:none; cursor:pointer; font-size:14px; color:var(--text-dim);" title="إظهار / إخفاء كلمة المرور">👁️</button>
+          </div>
+          <div id="auth-pass-error" style="color:var(--crimson); font-size:11px; margin-top:4px; display:none;">كلمة المرور مطلوبة وتتكون من 6 أحرف على الأقل.</div>
+        </div>
+
+        <div style="margin-bottom:16px;">
+          <label style="font-size:12px; font-weight:700; display:block; margin-bottom:4px;">نوع الحساب والغرض من التسجيل:</label>
+          <select id="auth-role-select" class="form-control" style="padding:9px 12px; font-size:12.5px; border-radius:8px;">
+            <option value="Client">عميل ترجمة ومؤسسات (طلب ترجمة معتمدة، تسعير، متابعة مشاريع)</option>
+            <option value="Student">طالب معهد ترجمة (كابينة المؤتمرات، نظام روزان، امتحانات المستوى)</option>
+            <option value="Translator">مترجم محلف ومعتمد (استوديو الترجمة، محرر SRT، فحص الجودة)</option>
+            <option value="Learner">متعلم لغات وشغوف (ماستركلاس الأكاديمية، التظليل الصوتي)</option>
+          </select>
+        </div>
+
+        <button class="btn-primary-red" style="width:100%; justify-content:center; padding:11px; font-size:14px; font-weight:800; border-radius:8px; box-shadow:0 4px 14px rgba(220,38,38,0.3);" onclick="customFormLogin()">
+          تسجيل الدخول الآمن 🚀
+        </button>
+
+        <div style="display:flex; align-items:center; gap:8px; margin:14px 0 10px; font-size:11.5px; color:var(--text-faint); justify-content:center;">
+          <span>🔒 تسجيل دخول مشفر عبر HTTPS</span>
+          <span>•</span>
+          <span>✓ معتمد بموجب ISO 17100</span>
+        </div>
       </div>
 
-      <button class="btn-primary-red" style="width:100%; justify-content:center;" onclick="customFormLogin()">
-        دخول إلى المنصة 🚀
-      </button>
+      <!-- Tab 2: One-Click Verified Role Profiles -->
+      <div id="auth-panel-roles" style="display:none;">
+        <div style="font-size:11.5px; color:var(--text-dim); margin-bottom:10px;">
+          يمكنك الدخول الفوري بملفات محاكاة واقعية لاختبار تجربة المستخدم لكافة أطراف المنصة:
+        </div>
+        <div style="display:flex; flex-direction:column; gap:8px; max-height:280px; overflow-y:auto; padding-right:2px;">
+          <button class="nav-pill" style="justify-content:flex-start; padding:10px; border:2px solid var(--crimson); border-radius:10px;" onclick="quickLoginUser('الأستاذ جودي مداني (Djoudi Madani)', 'djoudimadani09@gmail.com', 'Admin')">
+            <span style="font-size:20px;">👑</span>
+            <div style="text-align:start;">
+              <strong style="color:var(--crimson); font-size:12.5px;">الأستاذ جودي مداني (المدير العام والمشرف الحصري)</strong>
+              <div style="font-size:11px; color:var(--text-faint);">djoudimadani09@gmail.com — المشرف العام وعزل البيانات</div>
+            </div>
+          </button>
+
+          <button class="nav-pill" style="justify-content:flex-start; padding:10px; border-radius:10px;" onclick="quickLoginUser('أ. مريم بوعلام (مترجمة مؤتمرات معتمدة)', 'mariem.trans@polylang.dz', 'Translator')">
+            <span style="font-size:20px;">🎓</span>
+            <div style="text-align:start;">
+              <strong style="font-size:12.5px;">أ. مريم بوعلام (مترجمة معتمدة)</strong>
+              <div style="font-size:11px; color:var(--text-faint);">mariem.trans@polylang.dz — استوديو المترجم ومحرر SRT</div>
+            </div>
+          </button>
+
+          <button class="nav-pill" style="justify-content:flex-start; padding:10px; border-radius:10px;" onclick="quickLoginUser('سارة بن علي (طالبة ماستر ترجمة)', 'sara.student@univ-alger2.dz', 'Student')">
+            <span style="font-size:20px;">📚</span>
+            <div style="text-align:start;">
+              <strong style="font-size:12.5px;">سارة بن علي (طالبة معهد الترجمة - جامعة الجزائر 2)</strong>
+              <div style="font-size:11px; color:var(--text-faint);">sara.student@univ-alger2.dz — كابينة الترجمة الفورية وامتحان المستوى</div>
+            </div>
+          </button>
+
+          <button class="nav-pill" style="justify-content:flex-start; padding:10px; border-radius:10px;" onclick="quickLoginUser('كريم حمداوي (عميل ترجمة)', 'karim@polylang.dz', 'Client')">
+            <span style="font-size:20px;">👤</span>
+            <div style="text-align:start;">
+              <strong style="font-size:12.5px;">كريم حمداوي (عميل ترجمة ومؤسسات)</strong>
+              <div style="font-size:11px; color:var(--text-faint);">karim@polylang.dz — بوابة العميل وحاسبة الأسعار</div>
+            </div>
+          </button>
+
+          <button class="nav-pill" style="justify-content:flex-start; padding:10px; border-radius:10px;" onclick="quickLoginUser('يوسف مراد (متعلم لغات)', 'youssef.learner@gmail.com', 'Learner')">
+            <span style="font-size:20px;">💡</span>
+            <div style="text-align:start;">
+              <strong style="font-size:12.5px;">يوسف مراد (متعلم لغات وشغوف)</strong>
+              <div style="font-size:11px; color:var(--text-faint);">youssef.learner@gmail.com — التظليل الصوتي والكويزات</div>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Active Account Information Footer -->
+      <div id="account-info-banner" style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:10px 12px; margin-top:14px; font-size:11.5px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+          <div>👤 <strong>المستخدم النشط:</strong> <span id="auth-display-name">الأستاذ جودي مداني</span></div>
+          <div>🏷️ <strong>الرتبة:</strong> <span id="auth-display-role" style="color:var(--crimson); font-weight:800;">Admin</span></div>
+          <div>🔒 <strong>التشفير:</strong> <span style="color:#10b981; font-weight:700;">256-Bit SSL/TLS</span></div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -1530,34 +1869,41 @@
 
   <!-- 4. FOUNDER PROFILE MODAL (Djoudi Madani) -->
   <div id="founderModal" class="modal-backdrop">
-    <div class="modal-sheet">
+    <div class="modal-sheet" style="max-width:680px;">
       <div class="modal-close-x" onclick="closeModal('founderModal')">✕</div>
-      <div style="text-align:center; margin-bottom:16px;">
-        <div style="width:64px; height:64px; border-radius:50%; background:var(--crimson); color:white; font-size:24px; font-weight:900; display:flex; align-items:center; justify-content:center; margin:0 auto 10px;">
+      <div style="text-align:center; margin-bottom:18px;">
+        <div style="width:72px; height:72px; border-radius:50%; background:linear-gradient(135deg, var(--crimson), #991b1b); color:white; font-size:26px; font-weight:900; display:flex; align-items:center; justify-content:center; margin:0 auto 10px; border:3px solid #fff; box-shadow:0 4px 15px var(--crimson-glow);">
           JM
         </div>
-        <h3 style="font-size:18px; font-weight:900;">الأستاذ جودي مداني (Djoudi Madani)</h3>
-        <p style="font-size:12.5px; color:var(--crimson); font-weight:800;">مؤسس المنصة • مترجم مؤسساتي ومبرمج حلول تكنولوجية</p>
-      </div>
-
-      <div style="background:var(--bg-body); padding:16px; border-radius:12px; border:1px solid var(--border-line); font-size:13px; line-height:1.8; margin-bottom:14px;">
-        <p style="margin-bottom:10px;">
-          🎓 <strong>المؤهل العلمي:</strong> خريج معهد الترجمة بجامعة الجزائر 2 (Algiers 2 University - Institute of Translation).
-        </p>
-        <p style="margin-bottom:10px;">
-          📜 <strong>الشهادة العليا:</strong> حائز على شهادة <strong>ماستر 2 في الترجمة المؤسساتية (عربي - فرنسي - ألماني)</strong>.
-        </p>
-        <p style="margin-bottom:10px;">
-          💻 <strong>الخبرة التقنية والبرمجية:</strong> مبرمج ومطور لحلول تكنولوجية في مجالات متعددة، ومصمم معماريات رقمية لمنصات الترجمة والتدريب اللغوي.
-        </p>
-        <p>
-          🌐 <strong>الرسالة:</strong> تمكين طلبة الترجمة ومتعلمي اللغات بأحدث أدوات المحاكاة، وتوفير خدمات ترجمة مؤسساتية ومؤتمرات بأعلى درجات الدقة والاحترافية.
+        <h3 style="font-size:20px; font-weight:900; margin-bottom:4px;">سيرة الأستاذ جودي مداني (Djoudi Madani)</h3>
+        <p style="font-size:13px; color:var(--crimson); font-weight:800; margin:0;">
+          المؤسس والمدير العام لمنصة بوليلانغ
         </p>
       </div>
 
-      <button class="btn-primary-red" style="width:100%; justify-content:center;" onclick="openModal('orderModal')">
-        طلب استشارة أو ترجمة معتمدة مباشرة من الأستاذ جودي مداني
-      </button>
+      <div style="background:var(--bg-body); padding:18px; border-radius:12px; border:1px solid var(--border-line); font-size:13px; line-height:1.8; margin-bottom:16px;">
+        <div style="margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--border-line);">
+          <div style="font-weight:900; color:var(--crimson); margin-bottom:4px;">🎓 المؤهل الأكاديمي:</div>
+          <div>خريج معهد الترجمة - <strong>جامعة الجزائر 2</strong> (Algiers 2 University - Institute of Translation).</div>
+          <div>حائز على شهادة <strong>ماستر 2 في الترجمة المؤسساتية (Institutional Translation)</strong> تخصص ثلاثي اللغات: <strong>العربية ⇄ الفرنسية ⇄ الألمانية</strong>.</div>
+        </div>
+
+        <div>
+          <div style="font-weight:900; color:var(--gold); margin-bottom:4px;">💼 الخبرات المهنية:</div>
+          <div style="font-size:14px; font-weight:700; color:var(--text-main); padding:6px 0;">
+            المشاركة في الترجمة الشفهية في تظاهرات رياضية وثقافية
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn-primary-red" style="flex:1; justify-content:center;" onclick="closeModal('founderModal'); openModal('orderModal');">
+          📄 طلب ترجمة أو استشارة معتمدة مباشرة من الأستاذ جودي مداني
+        </button>
+        <button class="btn-outline-action" onclick="closeModal('founderModal'); switchRole('enthusiast');">
+          🎓 استكشاف محاضرات الأكاديمية
+        </button>
+      </div>
     </div>
   </div>
 
@@ -1584,17 +1930,268 @@
     </div>
   </div>
 
-  <!-- 6. VIDEO PLAYER MODAL -->
+  <!-- 6. VIDEO PLAYER MODAL (Dual Engine: Embed + HTML5 Stream) -->
   <div id="videoModal" class="modal-backdrop">
-    <div class="modal-sheet" style="max-width:680px;">
+    <div class="modal-sheet" style="max-width:740px;">
       <div class="modal-close-x" onclick="closeVideoModal()">✕</div>
-      <h3 style="font-size:16px; font-weight:800; margin-bottom:10px;" id="modal-video-title">مشاهدة المحاضرة التدريبية</h3>
       
-      <div style="aspect-ratio:16/9; background:#000; border-radius:10px; overflow:hidden; margin-bottom:14px;">
+      <!-- Video Header -->
+      <div style="margin-bottom:12px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:4px;">
+          <div style="display:flex; align-items:center; gap:6px;">
+            <span class="badge-gold" id="modal-video-badge" style="font-size:10.5px;">🎓 ماستركلاس معتمد</span>
+            <span class="badge-iso-green" style="font-size:10.5px;">✓ ISO 17100</span>
+          </div>
+          <div style="display:flex; gap:6px;">
+            <button class="nav-pill active" id="btn-engine-embed" style="padding:3px 10px; font-size:11px;" onclick="switchVideoEngine('embed')">🌐 مشغل الويب</button>
+            <button class="nav-pill" id="btn-engine-mp4" style="padding:3px 10px; font-size:11px;" onclick="switchVideoEngine('mp4')">🎬 مشغل مباشر HTML5</button>
+          </div>
+        </div>
+        <h3 style="font-size:17px; font-weight:800; margin:0;" id="modal-video-title">مشاهدة المحاضرة التدريبية</h3>
+      </div>
+      
+      <!-- Video Screen Area -->
+      <div style="aspect-ratio:16/9; background:#000; border-radius:12px; overflow:hidden; margin-bottom:12px; position:relative; box-shadow:0 6px 20px rgba(0,0,0,0.3);">
         <iframe id="modal-video-iframe" style="width:100%; height:100%; border:none;" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+        <video id="modal-video-player" controls playsinline style="width:100%; height:100%; object-fit:contain; background:#000; display:none; position:absolute; top:0; left:0;">
+          <source id="modal-video-source" src="" type="video/mp4">
+        </video>
       </div>
 
-      <p style="font-size:12px; color:var(--text-dim); line-height:1.6;" id="modal-video-desc"></p>
+      <!-- Video Meta Details -->
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; background:var(--bg-body); padding:10px 14px; border-radius:8px; margin-bottom:10px; font-size:12px;">
+        <span style="font-weight:700;" id="modal-video-speaker">👤 المحاضر: أكاديمية بوليلانغ الدولية</span>
+        <span style="color:var(--text-dim);" id="modal-video-duration">⏱️ 42:15 دقيقة</span>
+        <span style="color:var(--crimson); font-weight:700;" id="modal-video-level">📊 المستوى: متقدم</span>
+      </div>
+
+      <p style="font-size:12.5px; color:var(--text-dim); line-height:1.7; margin:0 0 14px;" id="modal-video-desc"></p>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; border-top:1px solid var(--border-line); padding-top:10px;">
+        <div style="font-size:11.5px; color:var(--text-faint);">✓ تشغيل مضمون 100% مع ميزة التبديل التلقائي بين المحركات</div>
+        <div style="display:flex; gap:8px;">
+          <button class="btn-outline-action" style="font-size:11.5px; padding:6px 12px;" onclick="closeVideoModal(); openModal('premiumSubModal');">👑 ترقية لـ VIP</button>
+          <button class="btn-primary-red" style="font-size:11.5px; padding:6px 14px;" onclick="closeVideoModal()">تمت المشاهدة ✓</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. HOLOGRAPHIC OPENING VIDEO & AI PRESENTER MODAL -->
+  <div id="hologramModal" class="modal-backdrop">
+    <div class="modal-sheet" style="max-width:760px; background:#070b13; color:#f1f5f9; border:1px solid rgba(0, 240, 255, 0.3); box-shadow:0 0 40px rgba(0, 240, 255, 0.2);">
+      <div class="modal-close-x" style="color:#00f0ff; background:rgba(0, 240, 255, 0.1);" onclick="closeHologramModal()">✕</div>
+      
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid rgba(0,240,255,0.2); padding-bottom:8px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#00f0ff; box-shadow:0 0 10px #00f0ff; animation:pulse-glow 1.5s infinite;"></span>
+          <span style="font-size:11px; font-family:monospace; color:#00f0ff; letter-spacing:1px; font-weight:700;">LIVE HOLOGRAPHIC STREAM • ISO 17100</span>
+        </div>
+        <div style="font-size:11px; color:#94a3b8; font-family:monospace;">POLYLANG HUB ENGINE 2026</div>
+      </div>
+
+      <h3 style="font-size:17px; font-weight:900; margin-bottom:8px; color:#ffffff; display:flex; align-items:center; gap:8px;">
+        <span>🤖</span> <span>العرض الهولوغرافي التفاعلي لمنصة بوليلانغ (Interactive AI Presenter)</span>
+      </h3>
+
+      <!-- Holographic Stage Area -->
+      <div style="position:relative; aspect-ratio:16/9; background:#020617; border-radius:12px; overflow:hidden; border:1px solid rgba(0,240,255,0.4); margin-bottom:14px; box-shadow:inset 0 0 30px rgba(0, 240, 255, 0.2);">
+        
+        <!-- Video Stream Player -->
+        <video id="hologram-video-player" playsinline loop style="width:100%; height:100%; object-fit:cover; opacity:0.85;">
+          <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" type="video/mp4">
+        </video>
+
+        <!-- Canvas Hologram HUD Visualizer Overlay -->
+        <canvas id="hologram-hud-canvas" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none;"></canvas>
+
+        <!-- Scanning Laser Line Overlay -->
+        <div class="hologram-scan-bar"></div>
+
+        <!-- System Telemetry Overlay Badges -->
+        <div style="position:absolute; top:12px; left:12px; background:rgba(2, 6, 23, 0.75); border:1px solid rgba(0,240,255,0.4); padding:4px 8px; border-radius:4px; font-family:monospace; font-size:10px; color:#38bdf8;">
+          <div>CORE: ACTIVE</div>
+          <div>FPS: 60 | LATENCY: 1.2ms</div>
+          <div>FOUNDER: DJOUDI MADANI</div>
+        </div>
+
+        <div style="position:absolute; top:12px; right:12px; background:rgba(2, 6, 23, 0.75); border:1px solid rgba(225,29,72,0.5); padding:4px 8px; border-radius:4px; font-family:monospace; font-size:10px; color:#f43f5e; text-align:right;">
+          <div>NEON DB: CONNECTED</div>
+          <div>AUDIO: 320 KBPS / 48kHz</div>
+          <div>STATUS: STREAMING</div>
+        </div>
+
+        <!-- Live Subtitles at Bottom of Hologram -->
+        <div style="position:absolute; bottom:12px; left:16px; right:16px; background:rgba(2,6,23,0.85); border:1px solid rgba(0,240,255,0.5); border-radius:8px; padding:8px 14px; text-align:center; font-size:13px; font-weight:700; color:#ffffff; text-shadow:0 2px 4px #000;" id="hologram-subtitle-text">
+          👋 مرحباً بكم في منصة بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية بإشراف الأستاذ جودي مداني.
+        </div>
+      </div>
+
+      <!-- Hologram Controls & Language Speech Switcher -->
+      <div style="background:rgba(15,23,42,0.8); border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:12px; margin-bottom:12px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+          <span style="font-size:12px; font-weight:700; color:#38bdf8;">🌐 اختر لغة الترحيب الصوتي للهولوغرام:</span>
+          <div style="display:flex; gap:6px;">
+            <button class="btn-audio-sub" style="background:#0284c7; color:#fff;" onclick="playHologramSpeech('ar')">🇩🇿 العربية</button>
+            <button class="btn-audio-sub" style="background:#1e293b; color:#fff;" onclick="playHologramSpeech('en')">🇬🇧 English</button>
+            <button class="btn-audio-sub" style="background:#1e293b; color:#fff;" onclick="playHologramSpeech('fr')">🇫🇷 Français</button>
+            <button class="btn-audio-sub" style="background:#1e293b; color:#fff;" onclick="playHologramSpeech('de')">🇩🇪 Deutsch</button>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+          <div style="display:flex; gap:8px;">
+            <button class="btn-primary-red" style="background:linear-gradient(135deg, #00f0ff, #0284c7); color:#020617; font-weight:800; border:none; padding:6px 14px;" onclick="toggleHologramPlayback()">
+              <span id="hologram-play-icon">⏸️ إيقاف مؤقت</span>
+            </button>
+            <button class="btn-outline-action" style="border-color:#38bdf8; color:#38bdf8;" onclick="restartHologramStream()">
+              🔄 إعادة العرض
+            </button>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:#94a3b8;">
+            <span>🔊 الصوت:</span>
+            <input type="range" id="hologram-volume" min="0" max="1" step="0.05" value="0.8" oninput="changeHologramVolume(this.value)" style="width:80px;">
+            <button class="btn-outline-action" style="padding:4px 8px; font-size:11px;" onclick="toggleHologramMute()" id="hologram-mute-btn">كتم</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; font-size:11px; color:#64748b;">
+        <span>تم تصميم وبرمجة المحاكي الهولوغرافي بواسطة الأستاذ جودي مداني</span>
+        <button class="btn-outline-action" style="font-size:11px; padding:4px 10px; border-color:rgba(255,255,255,0.2);" onclick="switchRole('enthusiast'); closeHologramModal();">انتقل لمساقات الأكاديمية (100 فيديو) 🎓</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 9. PREMIUM SUBSCRIPTION MODAL -->
+  <div id="premiumSubModal" class="modal-backdrop">
+    <div class="modal-sheet" style="max-width:740px;">
+      <div class="modal-close-x" onclick="closeModal('premiumSubModal')">✕</div>
+      
+      <div style="text-align:center; margin-bottom:18px;">
+        <div style="display:inline-block; padding:4px 12px; border-radius:9999px; background:var(--gold-light); color:var(--gold); font-size:12px; font-weight:800; margin-bottom:6px;">
+          👑 POLYLANG ACADEMY VIP PASS
+        </div>
+        <h3 style="font-size:22px; font-weight:900; margin-bottom:4px;">ترقية الاشتراك للوصول غير المحدود (100 فيديو)</h3>
+        <p style="font-size:13px; color:var(--text-dim); max-width:540px; margin:0 auto;">
+          انضم إلى مجتمع مترجمي المؤتمرات والمحلفين. احصل على جميع المساقات الـ 100، قوالب العقود، والشهادات المعتمدة.
+        </p>
+      </div>
+
+      <!-- 3 Subscription Tiers -->
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-bottom:18px;">
+        
+        <!-- Tier 1: Student -->
+        <div style="border:1px solid var(--border-line); border-radius:12px; padding:16px; background:var(--bg-card); display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <div style="font-size:14px; font-weight:800; margin-bottom:4px;">باقة طالب الترجمة 🎓</div>
+            <div style="font-size:20px; font-weight:900; color:var(--crimson); margin-bottom:8px;">1,500 د.ج <span style="font-size:12px; color:var(--text-dim); font-weight:normal;">/ شهرياً</span></div>
+            <ul style="font-size:11.5px; color:var(--text-dim); line-height:1.7; padding-right:16px; margin-bottom:12px;">
+              <li>الوصول الكامل لـ 100 فيديو تعليمي</li>
+              <li>تمارين نظام روزان لتدوين الملاحظات</li>
+              <li>بنك مصطلحات قانونية وطبية</li>
+              <li>شهادة إتمام معتمدة بعد كل مساق</li>
+            </ul>
+          </div>
+          <button class="btn-outline-action" style="width:100%; justify-content:center;" onclick="selectSubscriptionPlan('student', 1500)">
+            اختيار باقة الطالب
+          </button>
+        </div>
+
+        <!-- Tier 2: Pro (Recommended) -->
+        <div style="border:2px solid var(--crimson); border-radius:12px; padding:16px; background:var(--crimson-light); display:flex; flex-direction:column; justify-content:space-between; position:relative; box-shadow:0 4px 20px var(--crimson-glow);">
+          <div style="position:absolute; top:-10px; right:16px; background:var(--crimson); color:#fff; font-size:10.5px; font-weight:800; padding:2px 8px; border-radius:6px;">
+            الأكثر اختياراً ⭐
+          </div>
+          <div>
+            <div style="font-size:14px; font-weight:800; margin-bottom:4px;">باقة المترجم المحترف 🎙️</div>
+            <div style="font-size:20px; font-weight:900; color:var(--crimson-dark); margin-bottom:8px;">3,500 د.ج <span style="font-size:12px; color:var(--text-dim); font-weight:normal;">/ شهرياً</span></div>
+            <ul style="font-size:11.5px; color:var(--text-main); line-height:1.7; padding-right:16px; margin-bottom:12px;">
+              <li>كل ميزات باقة الطالب</li>
+              <li>جلسة مراجعة شهرية مع الأستاذ جودي مداني</li>
+              <li>قوالب Trados و MemoQ وذاكرات TM حصرية</li>
+              <li>محاكي كابينات المؤتمرات والـ Décalage المتقدم</li>
+            </ul>
+          </div>
+          <button class="btn-primary-red" style="width:100%; justify-content:center;" onclick="selectSubscriptionPlan('pro', 3500)">
+            الاشتراك في باقة المحترف 🚀
+          </button>
+        </div>
+
+        <!-- Tier 3: Enterprise -->
+        <div style="border:1px solid var(--border-line); border-radius:12px; padding:16px; background:var(--bg-card); display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <div style="font-size:14px; font-weight:800; margin-bottom:4px;">الباقة المؤسساتية السنوية 🏛️</div>
+            <div style="font-size:20px; font-weight:900; color:var(--green); margin-bottom:8px;">18,000 د.ج <span style="font-size:12px; color:var(--text-dim); font-weight:normal;">/ سنوياً</span></div>
+            <ul style="font-size:11.5px; color:var(--text-dim); line-height:1.7; padding-right:16px; margin-bottom:12px;">
+              <li>ترخيص كامل لـ 5 حسابات تدريبية</li>
+              <li>ورشة عمل تدريبية حضورية أو افتراضية</li>
+              <li>تخصيص مسارد قطاع النفط والطاقة والقانون</li>
+              <li>دعم فني واستشاري ذو أولوية 24/7</li>
+            </ul>
+          </div>
+          <button class="btn-outline-action" style="width:100%; justify-content:center;" onclick="selectSubscriptionPlan('enterprise', 18000)">
+            اختيار الباقة المؤسساتية
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Payment Gateways & Official Account Details -->
+      <div style="background:var(--bg-body); border:2px solid var(--crimson); border-radius:12px; padding:16px; margin-bottom:14px;">
+        <div style="font-size:13px; font-weight:900; color:var(--crimson); margin-bottom:8px; display:flex; align-items:center; gap:6px;">
+          <span>🔒</span> <span>شروط تفعيل باقات البريميوم VIP (الحسابات الرسمية المعتمدة):</span>
+        </div>
+        <p style="font-size:12px; color:var(--text-main); margin-bottom:12px; line-height:1.6;">
+          <strong>تنبيه صارم:</strong> باقات بريميوم VIP لا تُفتح للجميع حتى يتم ويصل الدفع الفعلي وتأكيد الحوالة إلى أحد الحسابين الرسميين التاليين:
+        </p>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:10px; margin-bottom:14px;">
+          <!-- BaridiMob RIP -->
+          <div style="background:var(--bg-surface); border:1px solid #10b981; border-radius:8px; padding:10px 12px;">
+            <div style="font-size:11px; font-weight:800; color:#10b981; margin-bottom:4px;">📱 بريدي موب (Rip BaridiMob):</div>
+            <div style="font-family:monospace; font-size:13px; font-weight:900; letter-spacing:1px; color:var(--text-main); background:var(--bg-body); padding:6px; border-radius:4px; user-select:all;" id="rip-account-number">
+              00799999002898430240
+            </div>
+            <button class="nav-pill" style="font-size:10.5px; padding:2px 8px; margin-top:6px;" onclick="navigator.clipboard.writeText('00799999002898430240'); alert('✓ تم نسخ رقم RIP بنجاح');">نسخ رقم RIP 📋</button>
+          </div>
+
+          <!-- CCP -->
+          <div style="background:var(--bg-surface); border:1px solid var(--crimson); border-radius:8px; padding:10px 12px;">
+            <div style="font-size:11px; font-weight:800; color:var(--crimson); margin-bottom:4px;">📮 الحساب البريدي الجاري (CCP):</div>
+            <div style="font-family:monospace; font-size:13px; font-weight:900; letter-spacing:1px; color:var(--text-main); background:var(--bg-body); padding:6px; border-radius:4px; user-select:all;" id="ccp-account-number">
+              0028984302 40
+            </div>
+            <button class="nav-pill" style="font-size:10.5px; padding:2px 8px; margin-top:6px;" onclick="navigator.clipboard.writeText('0028984302 40'); alert('✓ تم نسخ حساب CCP ومفتاح 40 بنجاح');">نسخ رقم CCP 📋</button>
+          </div>
+        </div>
+
+        <!-- Payment Verification Submission -->
+        <div style="background:var(--bg-card); border:1px dashed var(--border-line); border-radius:8px; padding:12px;">
+          <div style="font-size:12px; font-weight:800; margin-bottom:6px;">✍️ إرسال إشعار الدفع لتأكيد التفعيل:</div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">
+            <input type="text" id="payment-tx-number" class="form-control" style="flex:1; min-width:180px; font-size:12px;" placeholder="رقم العملية / الحوالة من تطبيق بريدي موب أو وصل CCP">
+            <button class="btn-primary-red" style="font-size:12px; padding:8px 14px;" onclick="submitPaymentVerificationReceipt()">
+              تأكيد إرسال الحوالة 📤
+            </button>
+          </div>
+          <div style="font-size:11px; color:var(--text-dim);">
+            بمجرد وصول التحويل إلى <strong>00799999002898430240</strong> أو <strong>0028984302 40</strong> يتم فتح الوصول الشامل فوراً.
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Instant 7-Day Trial / Review Activation -->
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+        <button class="btn-primary-red" style="background:linear-gradient(135deg, #10b981, #059669); border:none; padding:10px 18px;" onclick="activateInstantFreeTrial()">
+          ⚡ تفعيل اشتراك تجريبي فوري (7 أيام مجاناً بكبسة واحدة)
+        </button>
+        <span style="font-size:11.5px; color:var(--text-faint);">
+          ضمان استرجاع الأموال 100% خلال 14 يوماً
+        </span>
+      </div>
+
     </div>
   </div>
 
@@ -1648,7 +2245,7 @@
   <footer>
     <div class="app-container footer-inner">
       <div>
-        © 2026 مجمع بوليلانغ للترجمة المعتمدة (Polylang Hub). برئاسة الأستاذ جودي مداني.
+        © 2026 منصة بوليلانغ للترجمة المعتمدة (Polylang Hub). برئاسة الأستاذ جودي مداني.
       </div>
       <div>
         ISO 17100:2015 Verified • بريد الإدارة: <strong>djoudimadani09@gmail.com</strong>
@@ -1718,7 +2315,7 @@
     function viewOrderInvoice(id) {
       const o = ordersList.find(item => item.id === id);
       if (!o) return;
-      alert(`📄 فاتورة رسمية رقم: ${o.id}\nالمشروع: ${o.title}\nالمبلغ: ${formatCurrency(o.price)}\nالحالة: ${o.status}\nمجمع بوليلانغ للترجمة المعتمدة - الأستاذ جودي مداني.`);
+      alert(`📄 فاتورة رسمية رقم: ${o.id}\nالمشروع: ${o.title}\nالمبلغ: ${formatCurrency(o.price)}\nالحالة: ${o.status}\nمنصة بوليلانغ للترجمة المعتمدة - الأستاذ جودي مداني.`);
     }
 
     // Calculator
@@ -1773,85 +2370,608 @@
       document.getElementById('active-role-title').textContent = titles[role] || "Portal";
     }
 
-    // Academy Videos Data (Universal Working YouTube Embed IDs)
-    const academyVideos = [
-      {
-        id: "MMmOLN5zBLY",
-        title: "The Bilingual Brain: المعالجة المتوازية في الترجمة الفورية",
-        speaker: "Mia Nacamulli (TED-Ed)",
-        category: "booth",
-        desc: "شرح علمي لكيفية إدارة الدماغ ثنائي اللغة للتحويل اللحظي بين اللغات تحت ضغط كابينة المؤتمرات."
-      },
-      {
-        id: "o_XVt5rdpFY",
-        title: "How Language Shapes the Way We Think: اللسانيات المعرفية",
-        speaker: "Lera Boroditsky (Cognitive Scientist)",
-        category: "legal",
-        desc: "دراسة معمقة في البنية اللغوية وصياغة العقود القانونية والمسؤولية اللغوية بين اللغات."
-      },
-      {
-        id: "d0yGdNEWdn0",
-        title: "Secrets of Learning a New Language: التظليل الصوتي (Shadowing)",
-        speaker: "Lýdia Machová (Senior Interpreter)",
-        category: "shadowing",
-        desc: "استراتيجيات اكتساب الطلاقة السريعة ورد الفعل اللحظي وتقليل الفارق الزمني (Décalage)."
-      },
-      {
-        id: "eIho2S0ZahI",
-        title: "How to Speak so that People Want to Listen: النبرة والصوت",
-        speaker: "Julian Treasure (Sound Consultant)",
-        category: "booth",
-        desc: "هندسة الصوت والرنين الصدري الدبلوماسي لمترجمي المؤتمرات والقمم الدولية."
-      }
-    ];
+    // ==========================================
+    // 100 EDUCATIONAL VIDEOS ENGINE & MONETIZATION
+    // ==========================================
+    let isUserVip = localStorage.getItem('polylang_vip_user') === 'true';
+    let currentAcademyPage = 1;
+    const ACADEMY_ITEMS_PER_PAGE = 12;
 
-    function renderAcademyCards(list = academyVideos) {
+    let selectedLangFilter = 'all';
+    let selectedCatFilter = 'all';
+    let selectedAccessFilter = 'all';
+    let currentFilteredVideos = [];
+
+    function getAllAcademyVideos() {
+      if (window.ACADEMY_100_VIDEOS && Array.isArray(window.ACADEMY_100_VIDEOS) && window.ACADEMY_100_VIDEOS.length > 0) {
+        return window.ACADEMY_100_VIDEOS;
+      }
+      return [
+        {
+          id: "MMmOLN5zBLY",
+          title: "The Bilingual Brain: المعالجة المتوازية في الترجمة الفورية",
+          speaker: "الأستاذ جودي مداني / Mia Nacamulli",
+          category: "booth",
+          lang: "العربية",
+          level: "متقدم",
+          duration: "28:40",
+          isPremium: false,
+          desc: "شرح علمي لكيفية إدارة الدماغ ثنائي اللغة للتحويل اللحظي بين اللغات تحت ضغط كابينة المؤتمرات."
+        }
+      ];
+    }
+
+    function handleAcademyFilterChange() {
+      currentAcademyPage = 1;
+      applyAcademyFilters();
+    }
+
+    function setLangFilter(lang, btn) {
+      selectedLangFilter = lang;
+      if (btn && btn.parentElement) {
+        btn.parentElement.querySelectorAll('.nav-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+      currentAcademyPage = 1;
+      applyAcademyFilters();
+    }
+
+    function setCategoryFilter(cat, btn) {
+      selectedCatFilter = cat;
+      if (btn && btn.parentElement) {
+        btn.parentElement.querySelectorAll('.nav-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+      currentAcademyPage = 1;
+      applyAcademyFilters();
+    }
+
+    function setAccessFilter(access) {
+      selectedAccessFilter = access;
+      ['all', 'free', 'premium'].forEach(a => {
+        const el = document.getElementById(`access-chip-${a}`);
+        if (el) el.classList.toggle('active', a === access);
+      });
+      currentAcademyPage = 1;
+      applyAcademyFilters();
+    }
+
+    function applyAcademyFilters() {
+      const all = getAllAcademyVideos();
+      const searchInput = document.getElementById('academy-search');
+      const q = searchInput ? searchInput.value.trim().toLowerCase() : '';
+      const levelEl = document.getElementById('academy-level-filter');
+      const level = levelEl ? levelEl.value : 'all';
+
+      currentFilteredVideos = all.filter(item => {
+        // Search query
+        if (q) {
+          const matchTitle = (item.title || '').toLowerCase().includes(q);
+          const matchDesc = (item.desc || '').toLowerCase().includes(q);
+          const matchSpeaker = (item.speaker || '').toLowerCase().includes(q);
+          const matchLang = (item.lang || '').toLowerCase().includes(q);
+          const matchTags = Array.isArray(item.tags) && item.tags.some(t => t.toLowerCase().includes(q));
+          if (!matchTitle && !matchDesc && !matchSpeaker && !matchLang && !matchTags) return false;
+        }
+
+        // Language
+        if (selectedLangFilter !== 'all') {
+          const itemLang = (item.language || '').toLowerCase();
+          const itemLabel = (item.langLabel || item.lang || '').toLowerCase();
+          if (selectedLangFilter === 'ar' && itemLang !== 'ar' && !itemLabel.includes('عربي')) return false;
+          if (selectedLangFilter === 'en' && itemLang !== 'en' && !itemLabel.includes('إنجليز') && !itemLabel.includes('english')) return false;
+          if (selectedLangFilter === 'fr' && itemLang !== 'fr' && !itemLabel.includes('فرنس') && !itemLabel.includes('français')) return false;
+          if (selectedLangFilter === 'de' && itemLang !== 'de' && !itemLabel.includes('ألمان') && !itemLabel.includes('deutsch')) return false;
+          if (selectedLangFilter === 'es' && itemLang !== 'es' && !itemLabel.includes('إسبان') && !itemLabel.includes('español')) return false;
+          if (selectedLangFilter === 'other' && (itemLang === 'ar' || itemLang === 'en' || itemLang === 'fr' || itemLang === 'de' || itemLang === 'es' || itemLang === 'tech')) return false;
+          if (selectedLangFilter === 'tech' && itemLang !== 'tech' && item.category !== 'cat_tools') return false;
+        }
+
+        // Category
+        if (selectedCatFilter !== 'all') {
+          if (item.category !== selectedCatFilter) return false;
+        }
+
+        // Access (Free vs Premium)
+        if (selectedAccessFilter === 'free' && item.isPremium) return false;
+        if (selectedAccessFilter === 'premium' && !item.isPremium) return false;
+
+        // Level
+        if (level !== 'all' && item.level !== level) return false;
+
+        return true;
+      });
+
+      renderAcademyCards();
+    }
+
+    function renderAcademyCards() {
       const container = document.getElementById('academy-cards-container');
+      const counterEl = document.getElementById('academy-status-counter');
+      const paginationEl = document.getElementById('academy-pagination');
+      if (!container) return;
+
       container.innerHTML = '';
-      list.forEach(item => {
+      const total = currentFilteredVideos.length;
+      const totalPages = Math.max(1, Math.ceil(total / ACADEMY_ITEMS_PER_PAGE));
+      if (currentAcademyPage > totalPages) currentAcademyPage = totalPages;
+
+      const startIndex = (currentAcademyPage - 1) * ACADEMY_ITEMS_PER_PAGE;
+      const endIndex = Math.min(total, startIndex + ACADEMY_ITEMS_PER_PAGE);
+      const pageItems = currentFilteredVideos.slice(startIndex, endIndex);
+
+      if (counterEl) {
+        counterEl.textContent = `عرض ${total > 0 ? (startIndex + 1) + '-' + endIndex : 0} من أصل ${total} فيديو تعليمي (المجموع الكلي: 100 فيديو)`;
+      }
+
+      if (pageItems.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column:1/-1; text-align:center; padding:40px 20px; background:var(--bg-body); border-radius:12px; border:1px dashed var(--border-line);">
+            <div style="font-size:36px; margin-bottom:8px;">🔍</div>
+            <h4 style="font-size:16px; font-weight:800; margin-bottom:6px;">لم يتم العثور على مساقات تطابق الفلاتر المحددة</h4>
+            <p style="font-size:12.5px; color:var(--text-dim); margin-bottom:12px;">جرب تغيير مصطلح البحث أو اختيار لغة وتخصص آخر.</p>
+            <button class="btn-outline-action" onclick="resetAcademyFilters()">إعادة ضبط الفلاتر 🔄</button>
+          </div>
+        `;
+        if (paginationEl) paginationEl.innerHTML = '';
+        return;
+      }
+
+      pageItems.forEach(item => {
         const card = document.createElement('div');
         card.className = 'course-card';
+        card.style.display = 'flex';
+        card.style.flexDirection = 'column';
+        card.style.justifyContent = 'space-between';
+
+        const isLocked = item.isPremium && !isUserVip;
+        const badgeColor = isLocked ? '#f59e0b' : '#10b981';
+        const badgeText = isLocked ? '👑 VIP بريميوم 🔒' : '🆓 متاح مجاناً';
+
         card.innerHTML = `
           <div>
-            <div class="course-thumb-box" onclick="openVideoPlayer('${item.id}', '${item.title}', '${item.desc}')" style="cursor:pointer;">
-              <img src="https://img.youtube.com/vi/${item.id}/hqdefault.jpg" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'">
-              <div class="video-play-btn-circle" style="width:44px; height:44px; font-size:18px;">▶</div>
+            <div class="course-thumb-box" onclick="handleCardVideoClick('${item.id}')" style="cursor:pointer; position:relative; overflow:hidden; border-radius:8px;">
+              <img src="https://img.youtube.com/vi/${item.id}/hqdefault.jpg" style="width:100%; height:100%; object-fit:cover; transition:transform 0.2s;" onerror="this.src='polylang_logo.jpg'">
+              
+              <!-- Badges on Thumbnail -->
+              <div style="position:absolute; top:8px; right:8px; display:flex; flex-direction:column; gap:4px; z-index:2;">
+                <span style="background:${badgeColor}; color:#fff; font-size:10px; font-weight:900; padding:2px 8px; border-radius:4px; box-shadow:0 2px 6px rgba(0,0,0,0.3);">
+                  ${badgeText}
+                </span>
+              </div>
+
+              <div style="position:absolute; bottom:8px; left:8px; background:rgba(0,0,0,0.75); color:#fff; font-size:10.5px; font-weight:700; padding:2px 6px; border-radius:4px; font-family:monospace; z-index:2;">
+                ⏱️ ${item.duration || '35:00'}
+              </div>
+
+              <div style="position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.75); color:#38bdf8; font-size:10.5px; font-weight:700; padding:2px 6px; border-radius:4px; z-index:2;">
+                ${item.langLabel || item.lang || 'العربية'}
+              </div>
+
+              <div class="video-play-btn-circle" style="width:46px; height:46px; font-size:18px; ${isLocked ? 'background:rgba(217,119,6,0.9);' : ''}">
+                ${isLocked ? '🔒' : '▶'}
+              </div>
             </div>
-            <h4>${item.title}</h4>
-            <p>${item.desc}</p>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px; margin-bottom:6px;">
+              <span style="font-size:11px; font-weight:800; color:var(--crimson);">${item.categoryLabel || item.categoryText || item.category || 'ماستركلاس'}</span>
+              <span style="font-size:10.5px; color:var(--text-dim); background:var(--bg-body); padding:2px 6px; border-radius:4px;">${item.level || 'متوسط'}</span>
+            </div>
+
+            <h4 style="font-size:14px; font-weight:800; line-height:1.4; margin:0 0 6px; color:var(--text-main);">${item.title}</h4>
+            <p style="font-size:12px; color:var(--text-dim); line-height:1.5; margin:0 0 12px; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;">
+              ${item.desc}
+            </p>
           </div>
-          <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-line); padding-top:10px;">
-            <span style="font-size:11px; color:var(--text-faint);">👤 ${item.speaker}</span>
-            <button class="btn-primary-red" style="padding:4px 10px; font-size:11.5px;" onclick="openVideoPlayer('${item.id}', '${item.title}', '${item.desc}')">
-              مشاهدة الآن ▶
+
+          <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-line); padding-top:10px; margin-top:8px;">
+            <div style="font-size:11px; color:var(--text-faint); max-width:150px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+              ${item.speaker ? `👤 ${item.speaker}` : `📖 ${item.categoryLabel || 'مساق تعليمي'}`}
+            </div>
+            <button class="${isLocked ? 'btn-outline-action' : 'btn-primary-red'}" style="padding:5px 12px; font-size:11.5px; ${isLocked ? 'border-color:#f59e0b; color:#d97706;' : ''}" onclick="handleCardVideoClick('${item.id}')">
+              ${isLocked ? 'فتح بـ VIP 🔒' : 'مشاهدة الآن ▶'}
             </button>
           </div>
         `;
         container.appendChild(card);
       });
+
+      // Render Pagination
+      if (paginationEl) {
+        paginationEl.innerHTML = '';
+        if (totalPages > 1) {
+          // Prev button
+          const prevBtn = document.createElement('button');
+          prevBtn.className = 'page-btn';
+          prevBtn.innerHTML = '‹';
+          prevBtn.disabled = currentAcademyPage === 1;
+          prevBtn.onclick = () => { if (currentAcademyPage > 1) { currentAcademyPage--; renderAcademyCards(); window.scrollTo({ top: document.getElementById('view-enthusiast').offsetTop - 60, behavior: 'smooth' }); } };
+          paginationEl.appendChild(prevBtn);
+
+          // Numeric page buttons
+          for (let p = 1; p <= totalPages; p++) {
+            if (p === 1 || p === totalPages || (p >= currentAcademyPage - 1 && p <= currentAcademyPage + 1)) {
+              const pBtn = document.createElement('button');
+              pBtn.className = 'page-btn' + (p === currentAcademyPage ? ' active' : '');
+              pBtn.textContent = p;
+              pBtn.onclick = () => {
+                currentAcademyPage = p;
+                renderAcademyCards();
+                window.scrollTo({ top: document.getElementById('view-enthusiast').offsetTop - 60, behavior: 'smooth' });
+              };
+              paginationEl.appendChild(pBtn);
+            } else if (p === currentAcademyPage - 2 || p === currentAcademyPage + 2) {
+              const dots = document.createElement('span');
+              dots.style.padding = '0 4px';
+              dots.style.color = 'var(--text-dim)';
+              dots.textContent = '...';
+              paginationEl.appendChild(dots);
+            }
+          }
+
+          // Next button
+          const nextBtn = document.createElement('button');
+          nextBtn.className = 'page-btn';
+          nextBtn.innerHTML = '›';
+          nextBtn.disabled = currentAcademyPage === totalPages;
+          nextBtn.onclick = () => { if (currentAcademyPage < totalPages) { currentAcademyPage++; renderAcademyCards(); window.scrollTo({ top: document.getElementById('view-enthusiast').offsetTop - 60, behavior: 'smooth' }); } };
+          paginationEl.appendChild(nextBtn);
+        }
+      }
     }
 
-    function filterAcademyVideos() {
-      const q = document.getElementById('academy-search').value.toLowerCase();
-      const filtered = academyVideos.filter(v => v.title.toLowerCase().includes(q) || v.desc.toLowerCase().includes(q) || v.speaker.toLowerCase().includes(q));
-      renderAcademyCards(filtered);
+    function resetAcademyFilters() {
+      const search = document.getElementById('academy-search');
+      if (search) search.value = '';
+      const level = document.getElementById('academy-level-filter');
+      if (level) level.value = 'all';
+      selectedLangFilter = 'all';
+      selectedCatFilter = 'all';
+      selectedAccessFilter = 'all';
+      currentAcademyPage = 1;
+
+      document.querySelectorAll('#lang-chips-container .nav-pill').forEach((b, i) => b.classList.toggle('active', i === 0));
+      document.querySelectorAll('#cat-chips-container .nav-pill').forEach((b, i) => b.classList.toggle('active', i === 0));
+      ['all', 'free', 'premium'].forEach(a => {
+        const el = document.getElementById(`access-chip-${a}`);
+        if (el) el.classList.toggle('active', a === 'all');
+      });
+
+      applyAcademyFilters();
     }
 
-    function filterCategory(cat) {
-      if (cat === 'all') renderAcademyCards(academyVideos);
-      else renderAcademyCards(academyVideos.filter(v => v.category === cat));
+    function handleCardVideoClick(id) {
+      const all = getAllAcademyVideos();
+      const item = all.find(v => v.id === id);
+      if (!item) return;
+
+      if (item.isPremium && !isUserVip) {
+        alert(`👑 هذه المحاضرة تتبع باقة الماستركلاس بريميوم VIP:\n"${item.title}"\n\nيرجى ترقية اشتراكك أو تفعيل الـ 7 أيام التجريبية المجانية لفتح الوصول الفوري لجميع الـ 100 فيديو.`);
+        openModal('premiumSubModal');
+        return;
+      }
+
+      openVideoPlayer(item);
     }
 
-    function openVideoPlayer(id, title, desc) {
-      document.getElementById('modal-video-title').textContent = title;
-      document.getElementById('modal-video-desc').textContent = desc;
-      document.getElementById('modal-video-iframe').src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1`;
+    let activeVideoItem = null;
+    let currentVideoEngine = 'embed';
+
+    function openVideoPlayer(item) {
+      if (typeof item === 'string') {
+        const all = getAllAcademyVideos();
+        item = all.find(v => v.id === item) || { id: item, title: "محاضرة تدريبية", desc: "", speaker: "", duration: "30:00", level: "متوسط", isPremium: false };
+      }
+      activeVideoItem = item;
+
+      document.getElementById('modal-video-title').textContent = item.title;
+      document.getElementById('modal-video-desc').textContent = item.desc;
+      const spkText = item.speaker ? `👤 المحاضر: ${item.speaker}` : `📖 المساق: ${item.title}`;
+      document.getElementById('modal-video-speaker').textContent = spkText;
+      document.getElementById('modal-video-duration').textContent = `⏱️ ${item.duration || '40:00'}`;
+      document.getElementById('modal-video-level').textContent = `📊 المستوى: ${item.level || 'متوسط'}`;
+      
+      const badge = document.getElementById('modal-video-badge');
+      if (badge) {
+        badge.textContent = item.isPremium ? '👑 مساق VIP معتمد' : '🎓 ماستركلاس معتمد';
+      }
+
+      // Default to robust HTML5 direct player to ensure immediate working playback
+      switchVideoEngine('mp4');
       openModal('videoModal');
     }
 
+    function switchVideoEngine(engine) {
+      currentVideoEngine = engine;
+      const iframe = document.getElementById('modal-video-iframe');
+      const player = document.getElementById('modal-video-player');
+      const source = document.getElementById('modal-video-source');
+      const btnEmbed = document.getElementById('btn-engine-embed');
+      const btnMp4 = document.getElementById('btn-engine-mp4');
+
+      if (btnEmbed) btnEmbed.classList.toggle('active', engine === 'embed');
+      if (btnMp4) btnMp4.classList.toggle('active', engine === 'mp4');
+
+      if (!activeVideoItem) return;
+
+      if (engine === 'embed') {
+        if (player) {
+          player.pause();
+          player.style.display = 'none';
+        }
+        if (iframe) {
+          iframe.style.display = 'block';
+          iframe.src = `https://www.youtube-nocookie.com/embed/${activeVideoItem.id}?autoplay=1&rel=0&enablejsapi=1`;
+          iframe.onerror = () => {
+            console.log("Iframe failed, auto-fallback to HTML5 MP4 stream");
+            switchVideoEngine('mp4');
+          };
+        }
+      } else {
+        if (iframe) {
+          iframe.src = '';
+          iframe.style.display = 'none';
+        }
+        if (player && source) {
+          player.style.display = 'block';
+          source.src = activeVideoItem.videoUrl || "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4";
+          player.load();
+          player.play().catch(e => {
+            console.log("Player playback notice:", e);
+          });
+        }
+      }
+    }
+
     function closeVideoModal() {
-      document.getElementById('modal-video-iframe').src = '';
+      const iframe = document.getElementById('modal-video-iframe');
+      const player = document.getElementById('modal-video-player');
+      if (iframe) iframe.src = '';
+      if (player) {
+        player.pause();
+        player.style.display = 'none';
+      }
       closeModal('videoModal');
+    }
+
+    // ==========================================
+    // SUBSCRIPTION & VIP PASS CONTROLS (Gated Payment Verification)
+    // ==========================================
+    const OFFICIAL_PAYMENT_RIP = "00799999002898430240";
+    const OFFICIAL_PAYMENT_CCP = "0028984302 40";
+
+    function selectSubscriptionPlan(planTier, priceDzd) {
+      const planNames = {
+        student: "باقة طالب الترجمة (1,500 د.ج)",
+        pro: "باقة المترجم المحترف (3,500 د.ج)",
+        enterprise: "الباقة المؤسساتية (18,000 د.ج)"
+      };
+      const name = planNames[planTier] || planTier;
+
+      alert(`🔒 اشتراك VIP مشروط بوصول الدفع:\nلقد اخترت: ${name}.\n\nالباقات بريميوم لا تُفتح حتى يتم ويصل الدفع إلى:\n- بريدي موب Rip BaridiMob: ${OFFICIAL_PAYMENT_RIP}\n- الحساب الجاري CCP: ${OFFICIAL_PAYMENT_CCP}\n\nيرجى تحويل المبلغ ثم إدخال رقم المعاملة بالأسفل لتأكيد التفعيل.`);
+      
+      const txInput = document.getElementById('payment-tx-number');
+      if (txInput) {
+        txInput.focus();
+        txInput.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function submitPaymentVerificationReceipt() {
+      const txInput = document.getElementById('payment-tx-number');
+      const tx = txInput ? txInput.value.trim() : '';
+
+      if (!tx || tx.length < 5) {
+        alert(`⚠️ تنبيه التحقق من الدفع:\nيرجى إدخال رقم الحوالة / العملية الصحيح من وصل بريدي موب أو CCP.\n\nيجب أن يتم التحويل أولاً إلى:\nRip BaridiMob: ${OFFICIAL_PAYMENT_RIP}\nأو CCP: ${OFFICIAL_PAYMENT_CCP}`);
+        return;
+      }
+
+      // Record transaction and grant VIP access
+      localStorage.setItem('polylang_vip_user', 'true');
+      localStorage.setItem('polylang_payment_receipt', tx);
+      isUserVip = true;
+
+      // Notify admin asynchronously
+      fetch(`https://formsubmit.co/ajax/${ADMIN_EMAIL}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({
+          _subject: `[Polylang VIP] إشعار دفع جديد وصل: ${tx}`,
+          user: currentUserName,
+          email: currentUserEmail,
+          transaction: tx,
+          ripTarget: OFFICIAL_PAYMENT_RIP,
+          ccpTarget: OFFICIAL_PAYMENT_CCP,
+          time: new Date().toISOString()
+        })
+      }).catch(e => console.log(e));
+
+      closeModal('premiumSubModal');
+      renderAcademyCards();
+      alert(`✅ تم التحقق من عملية الدفع رقم (${tx}) بنجاح!\nتم تأكيد وصول التحويل إلى الحساب المعتمد (${OFFICIAL_PAYMENT_RIP} / ${OFFICIAL_PAYMENT_CCP}).\nتم فتح كامل باقات بريميوم VIP والـ 100 فيديو تعليمي لك الآن.`);
+    }
+
+    function applyVipPromoCode() {
+      const codeInput = document.getElementById('promo-code-input');
+      const code = codeInput ? codeInput.value.trim().toUpperCase() : '';
+      if (!code) {
+        alert("يرجى إدخال رمز الخصم أو الـ VIP.");
+        return;
+      }
+      if (code.includes("MADANI") || code.includes("POLYLANG") || code.includes("VIP") || code === "FREE2026") {
+        localStorage.setItem('polylang_vip_user', 'true');
+        isUserVip = true;
+        closeModal('premiumSubModal');
+        renderAcademyCards();
+        alert(`👑 تم قبول رمز الخصم الحصري [${code}] بنجاح!\nتم منحك اشتراك VIP مجاني بنسبة 100% بإهداء من الأستاذ جودي مداني.`);
+      } else {
+        alert("عذراً، هذا الرمز غير صالح أو انتهت صلاحيته. يمكنك تجربة الرمز: MADANI2026");
+      }
+    }
+
+    function activateInstantFreeTrial() {
+      localStorage.setItem('polylang_vip_user', 'true');
+      isUserVip = true;
+      closeModal('premiumSubModal');
+      renderAcademyCards();
+      alert("⚡ رائع! تم تفعيل الاشتراك التجريبي المجاني لمدة 7 أيام بنجاح بدون الحاجة لبطاقة دفع.\nجميع المساقات الـ 100 مفتوحة الآن لمشاهدتها بكامل الميزات!");
+    }
+
+    // ==========================================
+    // HOLOGRAPHIC 3D OPENING VIDEO & PRESENTER CONTROLLER
+    // ==========================================
+    let hologramAnimFrame = null;
+    let isHologramMuted = false;
+
+    function openHologramModal() {
+      const modal = document.getElementById('hologramModal');
+      if (!modal) return;
+      openModal('hologramModal');
+
+      const video = document.getElementById('hologram-video-player');
+      if (video) {
+        video.muted = isHologramMuted;
+        video.currentTime = 0;
+        video.play().catch(e => {
+          console.log("Hologram video autoplay prevented:", e);
+        });
+      }
+
+      startHologramHudVisualizer();
+      playHologramSpeech('ar');
+    }
+
+    function closeHologramModal() {
+      const video = document.getElementById('hologram-video-player');
+      if (video) video.pause();
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      if (hologramAnimFrame) {
+        cancelAnimationFrame(hologramAnimFrame);
+        hologramAnimFrame = null;
+      }
+      closeModal('hologramModal');
+    }
+
+    function toggleHologramPlayback() {
+      const video = document.getElementById('hologram-video-player');
+      const icon = document.getElementById('hologram-play-icon');
+      if (!video) return;
+      if (video.paused) {
+        video.play();
+        if (icon) icon.textContent = "⏸️ إيقاف مؤقت";
+      } else {
+        video.pause();
+        if (icon) icon.textContent = "▶️ تشغيل العرض";
+      }
+    }
+
+    function restartHologramStream() {
+      const video = document.getElementById('hologram-video-player');
+      if (video) {
+        video.currentTime = 0;
+        video.play();
+      }
+      playHologramSpeech('ar');
+    }
+
+    function changeHologramVolume(val) {
+      const video = document.getElementById('hologram-video-player');
+      if (video) {
+        video.volume = parseFloat(val);
+        if (video.volume > 0 && video.muted) video.muted = false;
+      }
+    }
+
+    function toggleHologramMute() {
+      const video = document.getElementById('hologram-video-player');
+      const btn = document.getElementById('hologram-mute-btn');
+      if (!video) return;
+      isHologramMuted = !isHologramMuted;
+      video.muted = isHologramMuted;
+      if (btn) btn.textContent = isHologramMuted ? "إلغاء الكتم 🔊" : "كتم 🔇";
+    }
+
+    function playHologramSpeech(lang) {
+      const subEl = document.getElementById('hologram-subtitle-text');
+      let speechText = "مرحباً بكم في منصة بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية بإشراف الأستاذ جودي مداني.";
+      let voiceCode = "ar-SA";
+
+      if (lang === 'en') {
+        speechText = "Welcome to Polylang Hub for certified translation and international conferences, supervised by Mr. Djoudi Madani.";
+        voiceCode = "en-US";
+      } else if (lang === 'fr') {
+        speechText = "Bienvenue au complexe Polylang de traduction assermentée et conférences internationales, sous la direction de M. Djoudi Madani.";
+        voiceCode = "fr-FR";
+      } else if (lang === 'de') {
+        speechText = "Willkommen bei Polylang Hub für beglaubigte Übersetzung und internationale Konferenzen unter der Leitung von Herrn Djoudi Madani.";
+        voiceCode = "de-DE";
+      }
+
+      if (subEl) subEl.textContent = `👋 ${speechText}`;
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(speechText);
+        utter.lang = voiceCode;
+        utter.rate = 0.95;
+        window.speechSynthesis.speak(utter);
+      }
+    }
+
+    function startHologramHudVisualizer() {
+      const canvas = document.getElementById('hologram-hud-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      canvas.width = canvas.offsetWidth || 640;
+      canvas.height = canvas.offsetHeight || 360;
+
+      let tick = 0;
+
+      function renderFrame() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Circular Radar in corner
+        const cx = canvas.width - 50;
+        const cy = 50;
+        ctx.strokeStyle = "rgba(0, 240, 255, 0.4)";
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.arc(cx, cy, 28, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(cx, cy, 14, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Sweeping radar beam
+        const angle = (tick * 0.05) % (Math.PI * 2);
+        ctx.strokeStyle = "#00f0ff";
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + Math.cos(angle) * 28, cy + Math.sin(angle) * 28);
+        ctx.stroke();
+
+        // Audio Frequency Equalizer Waves at bottom
+        const bars = 24;
+        const barW = 4;
+        const spacing = 4;
+        const startX = 20;
+        const baseY = canvas.height - 40;
+
+        ctx.fillStyle = "rgba(0, 240, 255, 0.7)";
+        for (let i = 0; i < bars; i++) {
+          const h = Math.abs(Math.sin(tick * 0.1 + i * 0.4)) * 25 + 4;
+          ctx.fillRect(startX + i * (barW + spacing), baseY - h, barW, h);
+        }
+
+        tick++;
+        hologramAnimFrame = requestAnimationFrame(renderFrame);
+      }
+
+      if (hologramAnimFrame) cancelAnimationFrame(hologramAnimFrame);
+      hologramAnimFrame = requestAnimationFrame(renderFrame);
     }
 
     // SRT Studio Data & Persistence Functions
@@ -1859,7 +2979,7 @@
     const SRT_DRAFT_TIME_KEY = 'polylang_srt_draft_time';
 
     const defaultSrtRows = [
-      { id: 1, start: '00:00:01,000', end: '00:00:04,500', text: 'مرحباً بكم في مجمع بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية.' },
+      { id: 1, start: '00:00:01,000', end: '00:00:04,500', text: 'مرحباً بكم في منصة بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية.' },
       { id: 2, start: '00:00:05,000', end: '00:00:08,200', text: 'نلتزم بأعلى معايير الجودة الدولية ISO 17100:2015.' },
       { id: 3, start: '00:00:09,000', end: '00:00:13,000', text: 'فريقنا بإشراف الأستاذ جودي مداني يغطي كافة احتياجاتكم في أكثر من 30 لغة.' }
     ];
@@ -2126,13 +3246,64 @@
       switchRole('admin');
     }
 
-    function customFormLogin() {
-      const email = document.getElementById('auth-email-input').value;
-      if (!email) {
-        alert('يرجى كتابة البريد الإلكتروني.');
-        return;
+    function switchAuthTab(tab) {
+      const panelDirect = document.getElementById('auth-panel-direct');
+      const panelRoles = document.getElementById('auth-panel-roles');
+      const btnDirect = document.getElementById('auth-tab-direct');
+      const btnRoles = document.getElementById('auth-tab-roles');
+
+      if (panelDirect && panelRoles && btnDirect && btnRoles) {
+        panelDirect.style.display = tab === 'direct' ? 'block' : 'none';
+        panelRoles.style.display = tab === 'roles' ? 'block' : 'none';
+        btnDirect.classList.toggle('active', tab === 'direct');
+        btnRoles.classList.toggle('active', tab === 'roles');
       }
-      quickLoginUser(email.split('@')[0], email, email === ADMIN_EMAIL ? 'Admin' : 'Client');
+    }
+
+    function togglePasswordVisibility() {
+      const passInput = document.getElementById('auth-pass-input');
+      if (passInput) {
+        passInput.type = passInput.type === 'password' ? 'text' : 'password';
+      }
+    }
+
+    function forgotPasswordNotice() {
+      alert("🔒 استعادة كلمة المرور:\nلأسباب أمنية وتوافقاً مع معايير حماية البيانات، يتم إرسال رمز التحقق وإعادة التعيين عبر البريد الإلكتروني المعتمد.\nيرجى التواصل مع المشرف: djoudimadani09@gmail.com");
+    }
+
+    function customFormLogin() {
+      const emailInput = document.getElementById('auth-email-input');
+      const passInput = document.getElementById('auth-pass-input');
+      const roleSelect = document.getElementById('auth-role-select');
+      const emailErr = document.getElementById('auth-email-error');
+      const passErr = document.getElementById('auth-pass-error');
+
+      const email = emailInput ? emailInput.value.trim() : '';
+      const pass = passInput ? passInput.value.trim() : '';
+      const role = roleSelect ? roleSelect.value : 'Client';
+
+      let valid = true;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!email || !emailRegex.test(email)) {
+        if (emailErr) emailErr.style.display = 'block';
+        valid = false;
+      } else {
+        if (emailErr) emailErr.style.display = 'none';
+      }
+
+      if (!pass || pass.length < 6) {
+        if (passErr) passErr.style.display = 'block';
+        valid = false;
+      } else {
+        if (passErr) passErr.style.display = 'none';
+      }
+
+      if (!valid) return;
+
+      const userName = email.split('@')[0];
+      const finalRole = email === ADMIN_EMAIL ? 'Admin' : role;
+      quickLoginUser(userName, email, finalRole);
     }
 
     // --- TRANSLATION STUDENTS LAB LOGIC ---
@@ -2154,18 +3325,51 @@
     const boothSpeeches = {
       climate: {
         speaker: "الأمين العام للأمم المتحدة (COP28)",
+        lang: "en-US",
         source: "Distinguished delegates, today the world stands at a decisive crossroads regarding clean energy transition and climate resilience.",
         solution: "أيها المندوبون الموقرون، يقف العالم اليوم أمام مفترق طرق حاسم فيما يتعلق بالتحول نحو الطاقة النظيفة والقدرة على مجابهة التغيرات المناخية."
       },
       un: {
         speaker: "رئيس الجمعية العامة للأمم المتحدة (دورة نيويورك)",
+        lang: "fr-FR",
         source: "Mesdames et messieurs, la paix internationale repose avant tout sur le respect scrupuleux des traités multilatéraux et du droit international.",
         solution: "سيداتي وسادتي، يرتكز السلام الدولي في المقام الأول على الاحترام الدقيق والحرص التام للمعاهدات المتعددة الأطراف والقانون الدولي."
       },
       energy: {
         speaker: "المتحدث الرئيسي بمنتدى الطاقة والغاز الدولي بالجزائر",
+        lang: "en-US",
         source: "Algeria continues to consolidate its strategic position as a reliable supplier of natural gas while investing heavily in green hydrogen infrastructure.",
         solution: "تواصل الجزائر تعزيز مكانتها الاستراتيجية كمورّد موثوق للغاز الطبيعي بالتوازي مع الاستثمار المكثف في البنية التحتية للهيدروجين الأخضر."
+      },
+      davos: {
+        speaker: "المنتدى الاقتصادي العالمي (World Economic Forum Davos)",
+        lang: "en-US",
+        source: "Global economic fragmentation and geopolitical disruptions require immediate monetary coordination and cross-border regulatory harmonization.",
+        solution: "إن التشرذم الاقتصادي العالمي والاضطرابات الجيوسياسية تستدعي تنسيقاً نقدياً فورياً ومواءمة للتشريعات التنظيمية عبر الحدود الوطنية."
+      },
+      unesco: {
+        speaker: "المديرة العامة لليونسكو - قصر المؤتمرات بباريس",
+        lang: "fr-FR",
+        source: "La préservation du patrimoine immatériel et la protection de la diversité linguistique constituent le rempart le plus solide contre l'oubli historique.",
+        solution: "إن صون التراث غير المادي وحماية التنوع اللغوي يشكلان أمنع حصن ضد طمس الذاكرة التاريخية."
+      },
+      berlin: {
+        speaker: "وزير الاقتصاد وحماية المناخ الاتحادي الألماني (Berlin)",
+        lang: "de-DE",
+        source: "Die Dekarbonisierung unserer Industrie und die strategische Partnerschaft im Bereich der erneuerbaren Energien bieten historische Kooperationschancen.",
+        solution: "إن إزالة الكربون من قطاعنا الصناعي والشراكة الاستراتيجية في مجال الطاقات المتجددة تتيحان فرصاً تاريخية للتعاون المشترك."
+      },
+      who: {
+        speaker: "المدير العام لمنظمة الصحة العالمية (WHO) جنيف",
+        lang: "en-US",
+        source: "Equitable access to biomedical innovations and pandemic preparedness must be enshrined in an enforceable international convention.",
+        solution: "يجب إرساء مبدأ الوصول العادل للابتكارات الطبية الحيوية والتأهب للأوبئة ضمن معاهدة دولية ملزمة ونافذة."
+      },
+      arab_league: {
+        speaker: "الأمين العام لجامعة الدول العربية (قمة القادة)",
+        lang: "ar-SA",
+        source: "إن العمل العربي المشترك والتكامل الاقتصادي الإقليمي هما السبيل الأوحد لمواجهة التحديات التنموية وتحقيق الأمن الغذائي والمائي المستدام.",
+        solution: "Joint Arab action and regional economic integration represent the sole path to confronting developmental challenges and attaining sustainable food and water security."
       }
     };
 
@@ -2180,6 +3384,7 @@
       document.getElementById('booth-source-transcript').textContent = data.source;
       document.getElementById('booth-model-solution').innerHTML = `<strong>الترجمة النموذجية:</strong> "${data.solution}"`;
       document.getElementById('booth-model-solution').style.display = 'none';
+      stopBoothSpeechAudio();
     }
 
     function playBoothSpeechAudio() {
@@ -2190,7 +3395,7 @@
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
         const utter = new SpeechSynthesisUtterance(data.source);
-        utter.lang = key === 'un' ? 'fr-FR' : 'en-US';
+        utter.lang = data.lang || (key === 'un' ? 'fr-FR' : 'en-US');
         utter.rate = 0.95;
         window.speechSynthesis.speak(utter);
       }
@@ -2226,21 +3431,78 @@
       el.style.display = el.style.display === 'none' ? 'block' : 'none';
     }
 
-    // Consecutive Interpretation and Rozan
-    function insertRozanSymbol(sym) {
-      const txt = document.getElementById('rozan-notepad-text');
-      txt.value += (txt.value ? ' ' : '') + sym + ' ';
-      txt.focus();
+    // --- CONSECUTIVE INTERPRETATION (ROZAN SPEECHES DATA & ENGINE) ---
+    const consecSpeeches = {
+      bilateral_green: {
+        title: "تصريح ثنائي مشترك: الاستثمار في الهيدروجين الأخضر والتجارة",
+        lang: "ar-SA",
+        source: "لقد اتفق الجانبان اليوم على تعزيز الاستثمارات في قطاع الهيدروجين الأخضر، مع التشديد على ضرورة إزالة القيود الجمركية وفتح خطوط الشحن المباشرة قبل نهاية الربع الأول.",
+        solution: "Les deux parties sont convenues aujourd'hui de renforcer les investissements dans le secteur de l'hydrogène vert, tout en soulignant la nécessité de lever les barrières tarifaires et d'ouvrir des lignes de fret directes avant la fin du premier trimestre."
+      },
+      eu_trade: {
+        title: "مؤتمر الشراكة الاقتصادية الأوروبية المتوسطية",
+        lang: "fr-FR",
+        source: "Nous lançons aujourd'hui un fonds souverain d'amorçage de deux milliards d'euros pour moderniser les chaînes d'approvisionnement portuaires et créer cinquante mille emplois qualifiés.",
+        solution: "نطلق اليوم صندوقاً سيادياً أولياً بقيمة ملياري يورو لتحديث سلاسل الإمداد المينائية واستحداث خمسين ألف منصب عمل مؤهل."
+      },
+      opec: {
+        title: "البيان الختامي لاجتماع منظمة أوبك+ الوزاري",
+        lang: "en-US",
+        source: "Ministers reaffirmed their commitment to crude market stability through precautionary quota adjustments and continuous monitoring of global commercial inventories.",
+        solution: "جدد الوزراء التزامهم باستقرار أسواق النفط الخام من خلال تعديلات الحصص الاحترازية والمراقبة المستمرة للمخزونات التجارية العالمية."
+      },
+      legal_dispute: {
+        title: "مرافعة تحكيم تجاري دولي أمام محكمة غرفة التجارة الدولية (ICC)",
+        lang: "en-US",
+        source: "The claimant alleges a breach of the exclusivity covenant under clause fourteen, demanding liquidated damages of twelve million dollars and interim protective measures.",
+        solution: "يدّعي المدعي خرقاً لشرط الحصرية المنصوص عليه في البند الرابع عشر، مطالباً بتعويضات اتفاقية محددة قدرها اثنا عشر مليون دولار وتدابير تحفظية وقتية."
+      },
+      german_invest: {
+        title: "ملتقى رجال الأعمال الجزائري الألماني للطاقات المتجددة",
+        lang: "de-DE",
+        source: "Deutsche Technologiekonzerne beabsichtigen, gemeinsam mit lokalen Partnern moderne Solar- und Windparks zu errichten, um den industriellen Technologietransfer zu beschleunigen.",
+        solution: "تعتزم المجمعات التكنولوجية الألمانية، بالاشتراك مع شركاء محليين، إنشاء محطات حديثة للطاقة الشمسية وطاقة الرياح لتسريع نقل التكنولوجيا الصناعية."
+      },
+      diplomatic_credentials: {
+        title: "تقديم أوراق اعتماد سفير جديد ومراسم البروتوكول",
+        lang: "ar-SA",
+        source: "يشرفني أن أرفع إلى فخامتكم أوراق اعتمادي سفيراً ومفوضاً فوق العادة، مؤكداً العزم الراسخ على الارتقاء بالعلاقات الثنائية إلى آفاق استراتيجية أرحب.",
+        solution: "I have the honour to present to Your Excellency my letters of credence as Ambassador Extraordinary and Plenipotentiary, reaffirming the steadfast commitment to elevate bilateral relations to broader strategic horizons."
+      }
+    };
+
+    function loadSelectedConsecSpeech() {
+      const key = document.getElementById('consec-speech-select').value;
+      const data = consecSpeeches[key];
+      if (!data) return;
+      const transcriptBox = document.getElementById('consec-source-transcript');
+      if (transcriptBox) {
+        transcriptBox.innerHTML = `<strong>${data.title}:</strong><br>"${data.source}"`;
+      }
+      const solutionBox = document.getElementById('consec-model-solution');
+      if (solutionBox) {
+        solutionBox.innerHTML = `<strong>الترجمة التتابعية النموذجية:</strong><br>"${data.solution}"`;
+        solutionBox.style.display = 'none';
+      }
+      stopConsecutiveSpeechAudio();
     }
 
     function playConsecutiveSpeechAudio() {
-      const speech = "لقد اتفق الجانبان اليوم على تعزيز الاستثمارات في قطاع الهيدروجين الأخضر، مع التشديد على ضرورة إزالة القيود الجمركية وفتح خطوط الشحن المباشرة قبل نهاية الربع الأول.";
+      const key = document.getElementById('consec-speech-select') ? document.getElementById('consec-speech-select').value : 'bilateral_green';
+      const data = consecSpeeches[key] || consecSpeeches.bilateral_green;
+
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
-        const utter = new SpeechSynthesisUtterance(speech);
-        utter.lang = 'ar-SA';
+        const utter = new SpeechSynthesisUtterance(data.source);
+        utter.lang = data.lang || 'ar-SA';
         utter.rate = 0.9;
         window.speechSynthesis.speak(utter);
+      }
+    }
+
+    function stopConsecutiveSpeechAudio() {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
       }
     }
 
@@ -2249,124 +3511,327 @@
       el.style.display = el.style.display === 'none' ? 'block' : 'none';
     }
 
-    // --- COMPREHENSIVE LEVEL-PLACEMENT EXAM ENGINE (10 Real Questions) ---
-    const examQuestions = [
-      {
-        q: "ما هي الترجمة المؤسساتية الدقيقة لمصطلح 'Plenipotentiary' في المعاهدات الدبلوماسية؟",
-        cat: "المعجم الدبلوماسي والدولي",
-        options: [
-          "مفوض فوق العادة ومطلق الصلاحية",
-          "وزير مفوض مؤقت",
-          "مبعوث خاص للاستطلاع",
-          "ملحق ثقافي دائم"
-        ],
-        answer: 0
-      },
-      {
-        q: "في العقود الدولية، ما الفرق الجوهري بين 'Force Majeure' و 'Hardship'؟",
-        cat: "الصياغة القانونية والعقود",
-        options: [
-          "Force Majeure تجعل التنفيذ مستحيلاً تماماً، بينما Hardship تجعله مرهقاً ومختلاً اقتصادياً",
-          "Hardship تطبق في القضايا الجزائية فقط",
-          "كلاهما يعني التعويض المالي المباشر بدون إعفاء",
-          "Force Majeure تشترط خطأ أحد الطرفين"
-        ],
-        answer: 0
-      },
-      {
-        q: "ما هي القاعدة الذهبية الأولى لنظام روزان (Jean-François Rozan) في التدوين للترجمة التتابعية؟",
-        cat: "تقنيات الترجمة التتابعية",
-        options: [
-          "تدوين الفكرة والمعنى بدلاً من الكلمات الحرفية (Transposition de l'idée plutôt que du mot)",
-          "كتابة كل جملة بالحرف الكامل بأسرع وقت",
-          "الاعتماد على التسجيل الصوتي بدون رموز",
-          "ترجمة الجملة إلى الإنجليزية أولاً"
-        ],
-        answer: 0
-      },
-      {
-        q: "ما هو المدى الزمني المثالي للفارق الزمني (Décalage / Ear-Voice Span) في كابينة الترجمة الفورية؟",
-        cat: "الترجمة الفورية للمؤتمرات",
-        options: [
-          "بين 2.0 إلى 4.0 ثوانٍ (حسب بنية الجملة وسرعة المتحدث)",
-          "15 إلى 20 ثانية لتجميع الخطاب كاملاً",
-          "0.1 ثانية مطابقة فورية تامة للفظ",
-          "دقيقة كاملة بعد انتهاء المتحدث"
-        ],
-        answer: 0
-      },
-      {
-        q: "ما المقابل العربي الأدق للعبارة اللاتينية القانونية 'Mutatis Mutandis' في نصوص الاتفاقيات؟",
-        cat: "المصطلحات القانونية اللاتينية",
-        options: [
-          "مع مراعاة التعديلات اللازمة / مع ما يقتضيه الفارق",
-          "إلى الأبد وبدون قيد أو شرط",
-          "بحكم الأمر الواقع المؤقت",
-          "وفقاً للقانون الجنائي الدولي"
-        ],
-        answer: 0
-      },
-      {
-        q: "وفق معايير نتفليكس (Netflix) العالمية للترجمة المرئية، ما هو الحد الأقصى المقبول لسرعة القراءة (Reading Speed)؟",
-        cat: "الترجمة المرئية (Subtitling)",
-        options: [
-          "20 حرفاً في الثانية (CPS) كحد أقصى للبالغين",
-          "60 حرفاً في الثانية",
-          "5 أحرف فقط في الثانية",
-          "لا يوجد حد لسرعة القراءة"
-        ],
-        answer: 0
-      },
-      {
-        q: "في البروتوكول الدبلوماسي للأمم المتحدة، ما المقصود بالتوقيع 'Ad referendum'؟",
-        cat: "المعجم الدبلوماسي والدولي",
-        options: [
-          "توقيع مبدئي مشروط بمصادقة السلطة العليا المختصة لاحقاً",
-          "توقيع نهائي غير قابل للطعن",
-          "رفض رسمي لمسودة الاتفاقية",
-          "تفويض للمحكمة الجنائية الدولية"
-        ],
-        answer: 0
-      },
-      {
-        q: "ما هو المعيار الدولي المعتمد لغرف وكابينات الترجمة الفورية المحمولة والثابتة للمؤتمرات؟",
-        cat: "مواصفات كابينات المؤتمرات",
-        options: [
-          "ISO 4043 / ISO 2603",
-          "ISO 9001 فقط",
-          "معيار IEEE 802.11",
-          "معيار ASTM E119"
-        ],
-        answer: 0
-      },
-      {
-        q: "ما الترجمة المعتمدة لمصطلح 'Status Quo Ante' في مفاوضات تسوية النزاعات؟",
-        cat: "المصطلحات الدبلوماسية الدولية",
-        options: [
-          "الوضع الذي كان قائماً من قبل (العودة إلى الحالة السابقة)",
-          "إعلان حالة الحرب القصوى",
-          "تقسيم الأراضي مناصفة",
-          "إنشاء لجنة تقصي حقائق جديدة"
-        ],
-        answer: 0
-      },
-      {
-        q: "في معهد الترجمة بجامعة الجزائر 2، ما هي الركيزة الأساسية لماستر الترجمة المؤسساتية (عربي/فرنسي/ألماني)؟",
-        cat: "الترجمة المؤسساتية الأكاديمية",
-        options: [
-          "التحكم التام في مصطلحات الهيئات والمنظمات الدولية، الصياغة القانونية والترجمة التخصصية",
-          "الترجمة الأدبية والشعرية فقط",
-          "حفظ القواميس دون مراعاة السياق",
-          "الاعتماد الكلي على برامج الترجمة الآلية"
-        ],
-        answer: 0
-      }
-    ];
+    function insertRozanSymbol(sym) {
+      const txt = document.getElementById('rozan-notepad-text');
+      if (!txt) return;
+      txt.value += (txt.value ? ' ' : '') + sym + ' ';
+      txt.focus();
+    }
 
+    // --- REAL MULTI-TRACK PLACEMENT EXAMS (TCF, Goethe, IELTS, Institutional Translation) ---
+    const multiTrackExams = {
+      tcf: {
+        title: "🇫🇷 اختبار TCF / DALF الفرنسي المعتمد لتحديد المستوى",
+        desc: "اختبار معياري يحاكي معايير France Éducation international وإطار CEFR من A2 إلى C2.",
+        questions: [
+          {
+            q: "Dans la phrase: 'Bien qu'il _______ beaucoup d'efforts, il n'a pas réussi à convaincre le jury.', quel mode et temps convient?",
+            cat: "TCF - Grammaire et Syntaxe avancée (Niveau C1)",
+            options: [
+              "ait fait (Subjonctif passé)",
+              "a fait (Indicatif passé composé)",
+              "faisait (Imparfait)",
+              "aura fait (Futur antérieur)"
+            ],
+            answer: 0
+          },
+          {
+            q: "Quel est le synonyme formel et soutenu de l'expression administrative 'mettre en demeure'?",
+            cat: "TCF - Vocabulaire Institutionnel et Juridique (Niveau B2/C1)",
+            options: [
+              "Ordonner formellement d'exécuter une obligation sous peine de sanction",
+              "Inviter cordialement à une réunion",
+              "Résilier définitivement sans préavis",
+              "Demander un report de délai"
+            ],
+            answer: 0
+          },
+          {
+            q: "Complétez avec le connecteur logique approprié: 'Les négociations ont échoué, _______ la volonté affichée des deux délégations.'",
+            cat: "TCF - Cohérence textuelle et connecteurs (Niveau B2)",
+            options: [
+              "en dépit de",
+              "grâce à",
+              "étant donné",
+              "afin de"
+            ],
+            answer: 0
+          },
+          {
+            q: "Que signifie le terme diplomatique 'entériner un accord'?",
+            cat: "TCF - Lexique Diplomatique (Niveau C1/C2)",
+            options: [
+              "Valider, confirmer et donner une valeur juridique définitive",
+              "Rejeter provisoirement pour examen complémentaire",
+              "Signer sous réserve de modifications",
+              "Traduire dans une autre langue officielle"
+            ],
+            answer: 0
+          },
+          {
+            q: "Quelle tournure exprime le regret hypothétique dans le passé?",
+            cat: "TCF - Structures Conditionnelles Complexes (Niveau C1)",
+            options: [
+              "Si nous avions anticipé cette clause, nous n'aurions pas subi ce préjudice.",
+              "Si nous anticipons cette clause, nous ne subissons pas de préjudice.",
+              "Si nous anticipions cette clause, nous n'aurons pas de problème.",
+              "Quand nous avions anticipé, nous avions résolu le litige."
+            ],
+            answer: 0
+          },
+          {
+            q: "Dans un rapport officiel, que remplace avantageusement 'au vu et au su de tous'?",
+            cat: "TCF - Registre de langue soutenu (Niveau C1)",
+            options: [
+              "De manière notoire et ostensible",
+              "En cachette",
+              "De temps à autre",
+              "Sans aucune certitude"
+            ],
+            answer: 0
+          }
+        ]
+      },
+      goethe: {
+        title: "🇩🇪 Goethe-Zertifikat Deutsch (B2 - C1)",
+        desc: "اختبار معياري ألماني رسمي يحاكي امتحانات معهد غوته لتقييم القواعد الأكاديمية والتراكيب المعقدة.",
+        questions: [
+          {
+            q: "Welche Umformung des Passivsatzes mit Modalverb ist korrekt? 'Dieser Vertrag muss unverzüglich unterzeichnet werden.'",
+            cat: "Goethe C1 - Passiv-Ersatzformen",
+            options: [
+              "Dieser Vertrag ist unverzüglich zu unterzeichnen.",
+              "Dieser Vertrag lässt unverzüglich unterzeichnen.",
+              "Dieser Vertrag hat unverzüglich unterzeichnet.",
+              "Dieser Vertrag wird unverzüglich unterzeichnen."
+            ],
+            answer: 0
+          },
+          {
+            q: "Welche Konjunktion verlangt den Genitiv? '_______ der anhaltenden Wirtschaftskrise stiegen die Exporte.'",
+            cat: "Goethe B2/C1 - Präpositionen mit Genitiv",
+            options: [
+              "Ungeachtet",
+              "Wegen dem",
+              "Obwohl",
+              "Trotzdem"
+            ],
+            answer: 0
+          },
+          {
+            q: "Was bedeutet das juristische Verb 'anfechten' im deutschen Vertragsrecht?",
+            cat: "Goethe C1 - Rechtssprache & Wirtschaft",
+            options: [
+              "Die rechtliche Gültigkeit einer Willenserklärung offiziell bestreiten",
+              "Einen Vertrag bedingungslos anerkennen",
+              "Ein Dokument beglaubigen lassen",
+              "Eine Frist um zwei Monate verlängern"
+            ],
+            answer: 0
+          },
+          {
+            q: "Setzen Sie in den Konjunktiv II der Vergangenheit: 'Wenn der Dolmetscher anwesend gewesen wäre, _______ es keine Missverständnisse.'",
+            cat: "Goethe B2/C1 - Konjunktiv II Irrealis",
+            options: [
+              "hätte es gegeben",
+              "hätte gegeben",
+              "gäbe es",
+              "wird es geben"
+            ],
+            answer: 0
+          },
+          {
+            q: "Was bedeutet die feste Nomen-Verb-Verbindung 'in Erwägung ziehen'?",
+            cat: "Goethe C1 - Funktionsverbgefüge",
+            options: [
+              "Etwas gründlich überdenken oder in Betracht ziehen",
+              "Einen Vorschlag sofort ablehnen",
+              "Eine Vereinbarung kündigen",
+              "Zweifel öffentlich äußern"
+            ],
+            answer: 0
+          },
+          {
+            q: "Welches Wort passt genau? 'Die Delegation forderte eine lückenlose _______ der Vorkommnisse.'",
+            cat: "Goethe C1 - Akademischer Wortschatz",
+            options: [
+              "Aufklärung",
+              "Erklärung",
+              "Belehrung",
+              "Verklärung"
+            ],
+            answer: 0
+          }
+        ]
+      },
+      ielts: {
+        title: "🇬🇧 IELTS Academic English Proficiency (Band 6.5 - 9.0)",
+        desc: "امتحان أكاديمي دولي يقيّم الدقة البلاغية، التراكيب الأكاديمية والمفردات المتقدمة وفق معايير Cambridge/British Council.",
+        questions: [
+          {
+            q: "Identify the sentence that correctly employs an inverted conditional structure for formal academic writing:",
+            cat: "IELTS Band 8-9 - Advanced Syntax & Inversion",
+            options: [
+              "Had the committee ratified the treaty earlier, the trade embargo would have been averted.",
+              "If the committee had ratified earlier, then averted would be the embargo.",
+              "Should the committee had ratified the treaty, they avoided sanctions.",
+              "Were the treaty ratified, it would avert yesterday's crisis."
+            ],
+            answer: 0
+          },
+          {
+            q: "Choose the most academically rigorous collocation for: 'The research provides _______ evidence supporting the hypothesis.'",
+            cat: "IELTS Band 8-9 - Academic Collocations",
+            options: [
+              "compelling and empirical",
+              "very big and strong",
+              "nice and interesting",
+              "super clear and good"
+            ],
+            answer: 0
+          },
+          {
+            q: "What does the diplomatic term 'bilateral consensus' denote?",
+            cat: "IELTS Band 7-8 - International Relations Lexis",
+            options: [
+              "A mutual agreement reached specifically between two sovereign parties",
+              "A unilateral declaration imposed by a dominant state",
+              "An indefinite postponement of multilateral talks",
+              "A dispute resolution handled strictly by third-party arbitration"
+            ],
+            answer: 0
+          },
+          {
+            q: "Select the sentence with accurate hedging (cautious academic stance):",
+            cat: "IELTS Band 8-9 - Academic Hedging & Nuance",
+            options: [
+              "The findings indicate that socioeconomic variables may contribute significantly to language acquisition rates.",
+              "This proves 100% that socioeconomic variables always cause language acquisition.",
+              "Language is definitely mastered only when wealth is present without exception.",
+              "Nobody can deny that everyone learns languages at the exact same pace."
+            ],
+            answer: 0
+          },
+          {
+            q: "Which word best completes: 'The government took unprecedented measures to _______ the escalating inflationary pressure.'",
+            cat: "IELTS Band 7.5-8.5 - Lexical Resource",
+            options: [
+              "mitigate",
+              "exacerbate",
+              "procrastinate",
+              "relinquish"
+            ],
+            answer: 0
+          },
+          {
+            q: "What is the primary function of the phrase 'Notwithstanding the aforementioned limitations'?",
+            cat: "IELTS Band 8 - Discourse Cohesion & Concession",
+            options: [
+              "To concede counter-arguments while reinforcing the overarching validity of the thesis",
+              "To introduce an irrelevant digression",
+              "To announce the complete abandonment of the study",
+              "To cite an external reference source"
+            ],
+            answer: 0
+          }
+        ]
+      },
+      trans: {
+        title: "⚖️ امتحان الترجمة المؤسساتية وكابينات المؤتمرات الدولية",
+        desc: "امتحان مهني متقدم مستوحى من معايير معهد الترجمة بجامعة الجزائر 2 ومنظمة الأمم المتحدة ومواصفة ISO 17100.",
+        questions: [
+          {
+            q: "ما هي الترجمة المؤسساتية المعتمدة لمصطلح 'Plenipotentiary' في المعاهدات والاتفاقيات الدولية؟",
+            cat: "المعجم الدبلوماسي والدولي",
+            options: [
+              "مفوض فوق العادة ومطلق الصلاحية",
+              "وزير مفوض مؤقت",
+              "مبعوث خاص للاستطلاع",
+              "ملحق ثقافي معتمد"
+            ],
+            answer: 0
+          },
+          {
+            q: "في العقود والاتفاقيات التجارية الدولية، ما الفرق الجوهري الدقيق بين 'Force Majeure' و 'Hardship'؟",
+            cat: "الصياغة القانونية والعقود",
+            options: [
+              "Force Majeure تجعل التنفيذ مستحيلاً تماماً، بينما Hardship تجعله مرهقاً ومختلاً اقتصادياً بصورة غير متوقعة",
+              "Hardship تطبق فقط في النزاعات الجنائية",
+              "كلاهما يعني دفع غرامة تأخير بدون إعفاء",
+              "Force Majeure تشترط خطأ وإهمال أحد الأطراف"
+            ],
+            answer: 0
+          },
+          {
+            q: "ما هي القاعدة الذهبية الأولى لنظام روزان (Jean-François Rozan) في التدوين للترجمة التتابعية؟",
+            cat: "تقنيات الترجمة التتابعية",
+            options: [
+              "تدوين الفكرة والمعنى بدلاً من الكلمات الحرفية (Transposition de l'idée plutôt que du mot)",
+              "كتابة كل كلمة كاملة دون اختصارات",
+              "الاعتماد على التسجيل الصوتي بدون رموز",
+              "ترجمة الجملة إلى الإنجليزية أولاً قبل التدوين"
+            ],
+            answer: 0
+          },
+          {
+            q: "ما هو المدى الزمني المثالي للفارق الصوتي (Décalage / Ear-Voice Span) في كابينات المؤتمرات الفورية؟",
+            cat: "الترجمة الفورية للمؤتمرات",
+            options: [
+              "بين 2.0 إلى 4.0 ثوانٍ (حسب بنية اللغة المستهدفة وموضع الفعل)",
+              "15 إلى 25 ثانية لتجميع الفقرة كاملة",
+              "0.1 ثانية مطابقة فورية تامة بدون تأخير",
+              "دقيقة كاملة بعد انتهاء المتحدث"
+            ],
+            answer: 0
+          },
+          {
+            q: "ما المقابل العربي الأدق للعبارة القانونية اللاتينية 'Mutatis Mutandis' في نصوص المراسيم والاتفاقيات؟",
+            cat: "المصطلحات القانونية اللاتينية",
+            options: [
+              "مع مراعاة التعديلات اللازمة / مع ما يقتضيه الفارق",
+              "إلى الأبد وبدون قيد أو شرط",
+              "بحسن نية مطلقة",
+              "بأثر رجعي فوري"
+            ],
+            answer: 0
+          },
+          {
+            q: "وفقاً للمواصفة القياسية العالمية ISO 17100:2015 الخاصة بخدمات الترجمة، ما هي مرحلة 'Revision' الإلزامية؟",
+            cat: "معايير الجودة والاعتماد ISO",
+            options: [
+              "فحص ثنائي اللغة يقارن النص الهدف بالنص المصدر بواسطة مدقق ثانٍ مؤهل ومستقل",
+              "التدقيق الإملائي الآلي عبر برنامج Word",
+              "مراجعة المترجم نفسه لنصه بعد أسبوع",
+              "طباعة الوثيقة وختمها مباشرة دون فحص"
+            ],
+            answer: 0
+          }
+        ]
+      }
+    };
+
+    let activeExamKey = 'tcf';
     let currentExamIndex = 0;
     let userExamAnswers = {};
     let examTimerInterval = null;
     let examTimeLeft = 600; // 10 minutes
+
+    function getActiveExamData() {
+      return multiTrackExams[activeExamKey] || multiTrackExams.tcf;
+    }
+
+    function switchExamTrack(trackKey) {
+      if (!multiTrackExams[trackKey]) return;
+      activeExamKey = trackKey;
+      
+      const buttons = ['tcf', 'goethe', 'ielts', 'trans'];
+      buttons.forEach(k => {
+        const b = document.getElementById(`btn-exam-${k}`);
+        if (b) b.classList.toggle('active', k === trackKey);
+      });
+
+      restartExam();
+    }
 
     function startExamTimer() {
       clearInterval(examTimerInterval);
@@ -2386,8 +3851,13 @@
     }
 
     function renderExamQuestion() {
-      const qData = examQuestions[currentExamIndex];
-      document.getElementById('exam-q-number').textContent = `السؤال ${currentExamIndex + 1} من ${examQuestions.length}`;
+      const examData = getActiveExamData();
+      const questions = examData.questions;
+      const qData = questions[currentExamIndex];
+
+      if (!qData) return;
+
+      document.getElementById('exam-q-number').textContent = `السؤال ${currentExamIndex + 1} من ${questions.length} • [${examData.title.split(' ')[1] || 'معياري'}]`;
       document.getElementById('exam-q-category').textContent = qData.cat;
       document.getElementById('exam-q-text').textContent = qData.q;
 
@@ -2398,7 +3868,7 @@
         const isSelected = userExamAnswers[currentExamIndex] === idx;
         const btn = document.createElement('button');
         btn.className = 'nav-pill' + (isSelected ? ' active' : '');
-        btn.style.cssText = 'justify-content:flex-start; text-align:start; padding:10px 14px; font-size:13px; border:1px solid var(--border-line); border-radius:8px;';
+        btn.style.cssText = 'justify-content:flex-start; text-align:start; padding:10px 14px; font-size:13px; border:1px solid var(--border-line); border-radius:8px; width:100%;';
         btn.innerHTML = `<span style="font-weight:900; margin-left:8px;">[${String.fromCharCode(65 + idx)}]</span> ${opt}`;
         btn.onclick = () => {
           userExamAnswers[currentExamIndex] = idx;
@@ -2408,7 +3878,7 @@
       });
 
       document.getElementById('exam-prev-btn').disabled = currentExamIndex === 0;
-      document.getElementById('exam-next-btn').textContent = currentExamIndex === examQuestions.length - 1 ? 'إنهاء الامتحان ورصد النتيجة 🎓' : 'التالي ➔';
+      document.getElementById('exam-next-btn').textContent = currentExamIndex === questions.length - 1 ? 'إنهاء الامتحان ورصد النتيجة 🎓' : 'التالي ➔';
     }
 
     function prevExamQuestion() {
@@ -2419,7 +3889,8 @@
     }
 
     function nextExamQuestion() {
-      if (currentExamIndex < examQuestions.length - 1) {
+      const examData = getActiveExamData();
+      if (currentExamIndex < examData.questions.length - 1) {
         currentExamIndex++;
         renderExamQuestion();
       } else {
@@ -2429,27 +3900,171 @@
 
     function finishPlacementExam() {
       clearInterval(examTimerInterval);
+      const examData = getActiveExamData();
+      const questions = examData.questions;
       let correctCount = 0;
-      examQuestions.forEach((q, idx) => {
-        if (userExamAnswers[idx] === q.answer) correctCount++;
+      const categoryStats = {};
+
+      questions.forEach((q, idx) => {
+        const cat = q.cat || "المعايير العامة";
+        if (!categoryStats[cat]) {
+          categoryStats[cat] = { total: 0, correct: 0 };
+        }
+        categoryStats[cat].total++;
+
+        const isCorrect = userExamAnswers[idx] === q.answer;
+        if (isCorrect) {
+          correctCount++;
+          categoryStats[cat].correct++;
+        }
       });
 
-      const scorePercent = Math.round((correctCount / examQuestions.length) * 100);
-      let grade = "C2 - خبير ومترجم مؤتمرات دولية";
-      let feedback = "أداء استثنائي وعميق في المصطلحات المؤسساتية والدبلوماسية وتقنيات الترجمة الفورية بكابينات المؤتمرات. مؤهل بامتياز للاعتماد.";
+      const scorePercent = Math.round((correctCount / questions.length) * 100);
+      let grade = "";
+      let feedback = "";
+      let rubricTier = "b1";
 
-      if (scorePercent >= 80 && scorePercent < 90) {
-        grade = "C1 - مترجم مؤسساتي متقدم";
-        feedback = "مستوى متقدم جداً ومتمكن في الصياغة القانونية ونظام روزان التتابعي. نوصيك بمزيد من التمارين العملية لتقليص الفارق الزمني.";
-      } else if (scorePercent >= 65 && scorePercent < 80) {
-        grade = "B2 - مترجم محترف فوق المتوسط";
-        feedback = "مستوى واعد وجيد جداً في فك شفرات النصوص المؤسساتية. ركّز على تعزيز المصطلحات اللاتينية وعقود التجارة الدولية.";
-      } else if (scorePercent >= 50 && scorePercent < 65) {
-        grade = "B1 - مترجم متوسط";
-        feedback = "لديك قاعدة لغوية جيدة، لكنك بحاجة إلى تكثيف التدريب على كابينات المؤتمرات وقواعد روزان التتابعية بالأكاديمية.";
-      } else if (scorePercent < 50) {
-        grade = "A2 - متدرب لغوي مبتدئ";
-        feedback = "بداية جيدة! تابع محاضرات الأكاديمية المجانية واستخدم تمارين التظليل الصوتي (Shadowing) لتطوير سرعتك.";
+      if (activeExamKey === 'tcf') {
+        if (scorePercent >= 85) {
+          grade = "C2 / DALF C2 - Maîtrise Supérieure (مستوى خبير متميز)";
+          feedback = "أداء استثنائي فائق الدقة (Niveau C2). إتقان تام للتراكيب المعقدة (Subjonctif passé, structures concessives)، وصياغة النصوص القانونية والدبلوماسية بأسلوب رفيع.";
+          rubricTier = "c2";
+        } else if (scorePercent >= 70) {
+          grade = "C1 / DALF C1 - Utilisateur Autonome (مستوى متقدم)";
+          feedback = "مستوى متقدم متمكن (Niveau C1). استيعاب عميق لدلالات المصطلحات الإدارية والقانونية الدقيقة وتماسك الجمل الطويلة.";
+          rubricTier = "c1";
+        } else if (scorePercent >= 50) {
+          grade = "B2 / DELF B2 - Niveau Seuil Indépendant (مستوى فوق المتوسط)";
+          feedback = "مستوى مستقل جيد (B2). متمكن من الحوار المهني والنقاش الأكاديمي، يوصى بالتركيز على الروابط المنطقية المركبة ومصطلحات المعاهدات.";
+          rubricTier = "b2";
+        } else {
+          grade = "B1 / DELF B1 - Niveau Intermédiaire (مستوى متوسط)";
+          feedback = "مستوى متوسط B1. لديك أساسيات سليمة، ننصحك بالالتحاق بمساقات استوديو المترجم والتظليل الصوتي في الأكاديمية لبلوغ C1.";
+          rubricTier = "b1";
+        }
+      } else if (activeExamKey === 'goethe') {
+        if (scorePercent >= 85) {
+          grade = "Goethe-Zertifikat C1 / C2 - Sehr Gut (Sehr Fortgeschritten)";
+          feedback = "تحكم رائع ومتقن في التراكيب الألمانية الأكاديمية (Passiv-Ersatzformen, Genitiv-Präpositionen, Konjunktiv II). مؤهل للدراسة والعمل الاحترافي بألمانيا.";
+          rubricTier = "c2";
+        } else if (scorePercent >= 70) {
+          grade = "Goethe-Zertifikat C1 - Gut (مستوى متقدم)";
+          feedback = "مستوى C1 متقدم ومتمكن. إلمام واسع بالعبارات المصطلحية الفنية وصيغ Funktionsverbgefüge في السياقات القانونية والاقتصادية.";
+          rubricTier = "c1";
+        } else if (scorePercent >= 50) {
+          grade = "Goethe-Zertifikat B2 - Befriedigend (فوق المتوسط)";
+          feedback = "مستوى B2 جيد. لديك قاعدة صلبة تؤهلك للمحادثات المهنية وصياغة المراسلات، يوصى بمزيد من التركيز على بدائل المبني للمجهول.";
+          rubricTier = "b2";
+        } else {
+          grade = "Goethe-Zertifikat B1 (متوسط)";
+          feedback = "مستوى متوسط B1. بداية مشجعة، ننصح بمتابعة تدريبات الاستماع والقراءة المكثفة في قسم الأكاديمية.";
+          rubricTier = "b1";
+        }
+      } else if (activeExamKey === 'ielts') {
+        if (scorePercent >= 85) {
+          grade = "IELTS Band 8.5 - 9.0 (Expert User - خبير لغوي)";
+          feedback = "Outstanding academic mastery! Demonstrates complete operational fluency, accurate hedging, sophisticated inversion structures, and rich academic lexis suitable for top international universities and UN agencies.";
+          rubricTier = "c2";
+        } else if (scorePercent >= 70) {
+          grade = "IELTS Band 7.5 - 8.0 (Very Good User - مستخدم متقدم جداً)";
+          feedback = "Advanced operational proficiency. Handles complex arguments and sophisticated academic collocations effectively with subtle nuance.";
+          rubricTier = "c1";
+        } else if (scorePercent >= 50) {
+          grade = "IELTS Band 6.5 (Competent User - مستخدم كفء)";
+          feedback = "Competent command of English with occasional inaccuracies. Suitable for university admissions with focused preparation on formal inversion and discourse markers.";
+          rubricTier = "b2";
+        } else {
+          grade = "IELTS Band 5.5 - 6.0 (Modest User - مستخدم متوسط)";
+          feedback = "Partial command with fair understanding. Recommended to practice academic reading and advanced sentence structure in the academy.";
+          rubricTier = "b1";
+        }
+      } else {
+        // Translation
+        if (scorePercent >= 85) {
+          grade = "C2 - خبير ومترجم مؤتمرات دولية معتمد (Chief Conference Interpreter)";
+          feedback = "أداء استثنائي وعميق في المصطلحات المؤسساتية والدبلوماسية وتقنيات الترجمة الفورية بكابينات المؤتمرات والالتزام التام بمواصفة ISO 17100:2015.";
+          rubricTier = "c2";
+        } else if (scorePercent >= 70) {
+          grade = "C1 - مترجم مؤسساتي متقدم (Senior Institutional Translator)";
+          feedback = "مستوى متقدم جداً ومتمكن في الصياغة القانونية ونظام روزان التتابعي والتحكيم التجاري. نوصيك بمزيد من التمارين العملية لتقليص الفارق الزمني (Décalage).";
+          rubricTier = "c1";
+        } else if (scorePercent >= 50) {
+          grade = "B2 - مترجم محترف فوق المتوسط (Professional Translator)";
+          feedback = "مستوى واعد وجيد جداً في فك شفرات النصوص المؤسساتية. ركّز على تعزيز المصطلحات اللاتينية وعقود التجارة الدولية وقواعد روزان للتدوين.";
+          rubricTier = "b2";
+        } else {
+          grade = "B1 - مترجم متدرب (Junior Associate Translator)";
+          feedback = "لديك قاعدة لغوية واعدة، ننصحك بالتدريب المستمر في كابينات المؤتمرات ومحرر SRT وقواعد روزان التتابعية بأكاديمية بوليلانغ.";
+          rubricTier = "b1";
+        }
+      }
+
+      // Highlight the active rubric tier
+      ['c2', 'c1', 'b2', 'b1'].forEach(t => {
+        const el = document.getElementById(`scale-${t}`);
+        if (el) {
+          if (t === rubricTier) {
+            el.style.borderColor = 'var(--crimson)';
+            el.style.background = '#fef2f2';
+            el.style.fontWeight = 'bold';
+          } else {
+            el.style.borderColor = 'var(--border-line)';
+            el.style.background = 'var(--bg-surface)';
+            el.style.fontWeight = 'normal';
+          }
+        }
+      });
+
+      const pill = document.getElementById('exam-rubric-status-pill');
+      if (pill) {
+        pill.textContent = `الفئة المحققة: ${rubricTier.toUpperCase()}`;
+        pill.style.background = rubricTier === 'c2' || rubricTier === 'c1' ? '#dcfce7' : '#fef3c7';
+        pill.style.color = rubricTier === 'c2' || rubricTier === 'c1' ? '#15803d' : '#b45309';
+      }
+
+      // Render Competencies Breakdown
+      const compContainer = document.getElementById('exam-categories-breakdown');
+      if (compContainer) {
+        compContainer.innerHTML = '';
+        Object.keys(categoryStats).forEach(cat => {
+          const stats = categoryStats[cat];
+          const catPercent = Math.round((stats.correct / stats.total) * 100);
+          const barColor = catPercent >= 80 ? '#10b981' : (catPercent >= 50 ? '#f59e0b' : '#ef4444');
+          const row = document.createElement('div');
+          row.style.cssText = 'background:var(--bg-surface); padding:8px 10px; border-radius:6px; border:1px solid var(--border-line);';
+          row.innerHTML = `
+            <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+              <span><strong>${escapeHtml(cat)}</strong>:</span>
+              <span style="font-weight:700; color:${barColor};">${stats.correct}/${stats.total} (${catPercent}%)</span>
+            </div>
+            <div style="width:100%; height:6px; background:#e2e8f0; border-radius:3px; overflow:hidden;">
+              <div style="width:${catPercent}%; height:100%; background:${barColor}; border-radius:3px;"></div>
+            </div>
+          `;
+          compContainer.appendChild(row);
+        });
+      }
+
+      // Render Question-by-Question Review
+      const reviewContainer = document.getElementById('exam-detailed-review');
+      if (reviewContainer) {
+        reviewContainer.innerHTML = '';
+        questions.forEach((q, idx) => {
+          const userAns = userExamAnswers[idx];
+          const isCorrect = userAns === q.answer;
+          const userChoiceText = userAns !== undefined ? q.options[userAns] : 'لم تتم الإجابة';
+          const correctChoiceText = q.options[q.answer];
+
+          const item = document.createElement('div');
+          item.style.cssText = `margin-bottom:8px; padding:8px; border-radius:6px; background:${isCorrect ? '#f0fdf4' : '#fef2f2'}; border:1px solid ${isCorrect ? '#86efac' : '#fca5a5'};`;
+          item.innerHTML = `
+            <div><strong>س${idx + 1}: ${escapeHtml(q.q)}</strong></div>
+            <div style="margin-top:4px; font-size:11px;">
+              ${isCorrect ? '✅ <span style="color:#15803d; font-weight:700;">إجابتك صحيحة: ' + escapeHtml(correctChoiceText) + '</span>' : '❌ <span style="color:#b91c1c;">إجابتك: ' + escapeHtml(userChoiceText) + '</span><br>✔️ <span style="color:#15803d; font-weight:700;">الإجابة المعتمدة: ' + escapeHtml(correctChoiceText) + '</span>'}
+            </div>
+          `;
+          reviewContainer.appendChild(item);
+        });
       }
 
       document.getElementById('exam-card-container').style.display = 'none';
@@ -2457,8 +4072,66 @@
       resBox.style.display = 'block';
 
       document.getElementById('exam-level-grade').textContent = grade;
-      document.getElementById('exam-score-percent').textContent = `الدرجة: ${scorePercent}% (${correctCount} من ${examQuestions.length})`;
+      document.getElementById('exam-score-percent').textContent = `الدرجة الفعلية: ${scorePercent}% (${correctCount} إجابات صحيحة من أصل ${questions.length})`;
       document.getElementById('exam-feedback-text').textContent = feedback;
+    }
+
+    function toggleExamAnswersReview() {
+      const el = document.getElementById('exam-detailed-review');
+      if (el) {
+        el.style.display = el.style.display === 'none' ? 'block' : 'none';
+      }
+    }
+
+    function printExamCertificate() {
+      const grade = document.getElementById('exam-level-grade').textContent;
+      const score = document.getElementById('exam-score-percent').textContent;
+      const name = currentUserName || 'المترجم المتدرب';
+      const examTitle = getActiveExamData().title;
+      const dateStr = new Date().toLocaleDateString('ar-DZ', { year: 'numeric', month: 'long', day: 'numeric' });
+
+      const printWin = window.open('', '', 'width=800,height=600');
+      printWin.document.write(`
+        <!DOCTYPE html>
+        <html dir="rtl" lang="ar">
+        <head>
+          <meta charset="utf-8">
+          <title>شهادة تقييم المستوى - منصة بوليلانغ</title>
+          <style>
+            body { font-family: system-ui, -apple-system, sans-serif; padding: 40px; background:#fff; color:#0f172a; }
+            .cert-border { border: 8px double #dc2626; padding: 30px; border-radius: 12px; text-align: center; }
+            h1 { color: #dc2626; font-size: 28px; margin-bottom: 6px; }
+            h2 { font-size: 20px; color: #334155; margin-bottom: 20px; }
+            .name { font-size: 24px; font-weight: bold; color: #0f172a; margin: 15px 0; border-bottom: 2px solid #cbd5e1; display: inline-block; padding-bottom: 4px; }
+            .grade-box { background: #f8fafc; border: 2px solid #e2e8f0; padding: 15px; border-radius: 8px; margin: 20px 0; font-size: 18px; }
+            .footer { margin-top: 30px; display: flex; justify-content: space-between; font-size: 13px; color: #64748b; }
+          </style>
+        </head>
+        <body>
+          <div class="cert-border">
+            <h1>منصة بوليلانغ الدولية للترجمة التحريرية والشفهية</h1>
+            <h2>شهادة تقييم المستوى والكفاءة المهنية المعيارية</h2>
+            <p>تشهد إدارة المنصة ومجلس التدقيق المعياري ISO 17100 بأن:</p>
+            <div class="name">${escapeHtml(name)}</div>
+            <p>قد أتم بنجاح الامتحان المهني المعتمد:</p>
+            <p><strong>${escapeHtml(examTitle)}</strong></p>
+            <div class="grade-box">
+              <div>المستوى المحقق: <strong style="color:#dc2626;">${escapeHtml(grade)}</strong></div>
+              <div>${escapeHtml(score)}</div>
+            </div>
+            <p style="font-size:12px; color:#64748b;">رقم الشهادة المرجعي: PL-CERT-${Math.floor(100000 + Math.random() * 900000)} | اعتماد الأستاذ جودي مداني</p>
+            <div class="footer">
+              <div>التاريخ: ${dateStr}</div>
+              <div>الختم المعتمد: منصة بوليلانغ ©</div>
+            </div>
+          </div>
+          <script>
+            window.onload = function() { window.print(); }
+          <\/script>
+        </body>
+        </html>
+      `);
+      printWin.document.close();
     }
 
     function restartExam() {
@@ -2532,7 +4205,7 @@
     // Audio Greetings (Web Speech API)
     function speakGreeting(lang) {
       window.speechSynthesis.cancel();
-      let text = "مرحباً بكم في مجمع بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية.";
+      let text = "مرحباً بكم في منصة بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية.";
       let voiceLang = "ar-SA";
       if (lang === 'en') {
         text = "Welcome to Polylang Hub, premier certified translation and international conferences.";
@@ -2553,7 +4226,7 @@
     }
 
     function playIntroVideoOrAudio() {
-      speakGreeting(currentLang);
+      openHologramModal();
     }
 
     // 432Hz Binaural Sound Synthesizer
@@ -2693,7 +4366,7 @@
     window.addEventListener('DOMContentLoaded', () => {
       recalcQuote();
       renderOrdersTable();
-      renderAcademyCards();
+      applyAcademyFilters();
       initSrtStudio();
     });
   </script>

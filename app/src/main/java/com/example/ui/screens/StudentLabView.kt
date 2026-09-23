@@ -93,16 +93,36 @@ private fun InterpretationBoothComponent(isArabic: Boolean) {
 
     val speeches = listOf(
         Pair(
-            "خطاب قمة الطاقة بالجزائر (عربي ⇄ فرنسي/إنجليزي)",
-            "أصحاب المعالي والسعادة، نرحب بكم في الجزائر عاصمة الدبلوماسية والتنمية المستدامة. إن أمن الطاقة اليوم لا ينفصل عن العدالة المناخية والتعاون جنوب-شمال."
+            "🌍 قمة المناخ الدولية (COP28) - الإنجليزية ➔ العربية",
+            "Distinguished delegates, today the world stands at a decisive crossroads regarding clean energy transition and climate resilience."
         ),
         Pair(
-            "ندوة التحكيم التجاري الدولي (إنجليزي ⇄ عربي)",
-            "Ladies and gentlemen, arbitration clauses in institutional contracts require utmost precision, particularly regarding choice of law and procedural rules."
+            "🕊️ افتتاح الجمعية العامة للأمم المتحدة - الفرنسية ➔ العربية",
+            "Monsieur le Président, Mesdames et Messieurs les délégués, la paix mondiale exige un engagement multilatéral inébranlable et le respect du droit international."
         ),
         Pair(
-            "مؤتمر المنظمة العالمية للصحة (فرنسي ⇄ عربي)",
-            "L'accès équitable aux technologies médicales et aux vaccins constitue un impératif éthique pour l'ensemble des États membres."
+            "⚡ منتدى الطاقة والغاز الدولي بالجزائر - الإنجليزية ➔ العربية",
+            "Algeria continues to consolidate its strategic position as a reliable supplier of natural gas while investing heavily in green hydrogen infrastructure."
+        ),
+        Pair(
+            "💼 المنتدى الاقتصادي العالمي دافوس (WEF) - الإنجليزية ➔ العربية",
+            "Global economic fragmentation and geopolitical disruptions require immediate monetary coordination and cross-border regulatory harmonization."
+        ),
+        Pair(
+            "🏛️ المؤتمر العام لمنظمة اليونسكو بباريس - الفرنسية ➔ العربية",
+            "La préservation du patrimoine immatériel et la protection de la diversité linguistique constituent le rempart le plus solide contre l'oubli historique."
+        ),
+        Pair(
+            "🇩🇪 قمة التكنولوجيا والتحول الرقمي ببرلين - الألمانية ➔ العربية",
+            "Die Dekarbonisierung unserer Industrie und die strategische Partnerschaft im Bereich der erneuerbaren Energien bieten historische Kooperationschancen."
+        ),
+        Pair(
+            "🏥 منظمة الصحة العالمية (WHO) جنيف - الإنجليزية ➔ العربية",
+            "Equitable access to biomedical innovations and pandemic preparedness must be enshrined in an enforceable international convention."
+        ),
+        Pair(
+            "🤝 مؤتمر القمة العربية (مجلس الجامعة) - العربية ➔ الإنجليزية",
+            "إن العمل العربي المشترك والتكامل الاقتصادي الإقليمي هما السبيل الأوحد لمواجهة التحديات التنموية وتحقيق الأمن الغذائي والمائي المستدام."
         )
     )
 
@@ -230,6 +250,42 @@ private fun InterpretationBoothComponent(isArabic: Boolean) {
 @Composable
 private fun RozanNotebookComponent(isArabic: Boolean) {
     var notesText by remember { mutableStateOf("") }
+    var selectedConsecIndex by remember { mutableIntStateOf(0) }
+    var showSolution by remember { mutableStateOf(false) }
+
+    val consecSpeeches = listOf(
+        Triple(
+            "🤝 تصريح ثنائي مشترك: الاستثمار في الهيدروجين الأخضر والتجارة (العربية ➔ الفرنسية)",
+            "لقد اتفق الجانبان اليوم على تعزيز الاستثمارات في قطاع الهيدروجين الأخضر، مع التشديد على ضرورة إزالة القيود الجمركية وفتح خطوط الشحن المباشرة قبل نهاية الربع الأول.",
+            "Les deux parties sont convenues aujourd'hui de renforcer les investissements dans le secteur de l'hydrogène vert, tout en soulignant la nécessité de lever les barrières tarifaires et d'ouvrir des lignes de fret directes avant la fin du premier trimestre."
+        ),
+        Triple(
+            "🇪🇺 مؤتمر الشراكة الاقتصادية الأوروبية المتوسطية (الفرنسية ➔ العربية)",
+            "Nous lançons aujourd'hui un fonds souverain d'amorçage de deux milliards d'euros pour moderniser les chaînes d'approvisionnement portuaires et créer cinquante mille emplois qualifiés.",
+            "نطلق اليوم صندوقاً سيادياً أولياً بقيمة ملياري يورو لتحديث سلاسل الإمداد المينائية واستحداث خمسين ألف منصب عمل مؤهل."
+        ),
+        Triple(
+            "🛢️ البيان الختامي لاجتماع منظمة أوبك+ الوزاري (الإنجليزية ➔ العربية)",
+            "Ministers reaffirmed their commitment to crude market stability through precautionary quota adjustments and continuous monitoring of global commercial inventories.",
+            "جدد الوزراء التزامهم باستقرار أسواق النفط الخام من خلال تعديلات الحصص الاحترازية والمراقبة المستمرة للمخزونات التجارية العالمية."
+        ),
+        Triple(
+            "⚖️ مرافعة تحكيم تجاري دولي أمام محكمة غرفة التجارة الدولية (ICC) (الإنجليزية ➔ العربية)",
+            "The claimant alleges a breach of the exclusivity covenant under clause fourteen, demanding liquidated damages of twelve million dollars and interim protective measures.",
+            "يدّعي المدعي خرقاً لشرط الحصرية المنصوص عليه في البند الرابع عشر، مطالباً بتعويضات اتفاقية محددة قدرها اثنا عشر مليون دولار وتدابير تحفظية وقتية."
+        ),
+        Triple(
+            "🇩🇪 ملتقى رجال الأعمال الجزائري الألماني للطاقات المتجددة (الألمانية ➔ العربية)",
+            "Deutsche Technologiekonzerne beabsichtigen, gemeinsam mit lokalen Partnern moderne Solar- und Windparks zu errichten, um den industriellen Technologietransfer zu beschleunigen.",
+            "تعتزم المجمعات التكنولوجية الألمانية، بالاشتراك مع شركاء محليين، إنشاء محطات حديثة للطاقة الشمسية وطاقة الرياح لتسريع نقل التكنولوجيا الصناعية."
+        ),
+        Triple(
+            "📜 تقديم أوراق اعتماد سفير جديد ومراسم البروتوكول (العربية ➔ الإنجليزية)",
+            "يشرفني أن أرفع إلى فخامتكم أوراق اعتمادي سفيراً ومفوضاً فوق العادة، مؤكداً العزم الراسخ على الارتقاء بالعلاقات الثنائية إلى آفاق استراتيجية أرحب.",
+            "I have the honour to present to Your Excellency my letters of credence as Ambassador Extraordinary and Plenipotentiary, reaffirming the steadfast commitment to elevate bilateral relations to broader strategic horizons."
+        )
+    )
+
     val rozanSymbols = listOf(
         Pair("∵", "السبب (car / because)"),
         Pair("∴", "النتيجة (donc / therefore)"),
@@ -255,7 +311,7 @@ private fun RozanNotebookComponent(isArabic: Boolean) {
             ) {
                 Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     Text(
-                        text = if (isArabic) "📝 دفتر تقنية روزان للترجمة التتابعية (Jean-François Rozan)" else "Rozan Consecutive Notepad",
+                        text = if (isArabic) "📝 ورشة الترجمة التتابعية ونظام روزان (Jean-François Rozan)" else "Rozan Consecutive Notepad",
                         fontWeight = FontWeight.Bold,
                         fontSize = 13.sp,
                         color = RedPrimary
@@ -266,13 +322,52 @@ private fun RozanNotebookComponent(isArabic: Boolean) {
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
 
+                    // Speech selector
+                    Text(if (isArabic) "اختر خطاب التدريب التتابعي:" else "Select consecutive speech:", fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                    consecSpeeches.forEachIndexed { idx, item ->
+                        Surface(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable {
+                                    selectedConsecIndex = idx
+                                    showSolution = false
+                                },
+                            shape = RoundedCornerShape(8.dp),
+                            color = if (selectedConsecIndex == idx) RedPrimary.copy(alpha = 0.1f) else MaterialTheme.colorScheme.surface,
+                            border = androidx.compose.foundation.BorderStroke(
+                                1.dp,
+                                if (selectedConsecIndex == idx) RedPrimary else MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
+                            )
+                        ) {
+                            Text(
+                                text = item.first,
+                                modifier = Modifier.padding(10.dp),
+                                fontSize = 11.5.sp,
+                                fontWeight = if (selectedConsecIndex == idx) FontWeight.Bold else FontWeight.Normal
+                            )
+                        }
+                    }
+
+                    // Source speech box
+                    Surface(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(8.dp),
+                        color = MaterialTheme.colorScheme.surface,
+                        border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f))
+                    ) {
+                        Column(modifier = Modifier.padding(10.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                            Text(if (isArabic) "النص المصدر للتدوين:" else "Source text:", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = RedPrimary)
+                            Text(consecSpeeches[selectedConsecIndex].second, fontSize = 12.sp, lineHeight = 18.sp)
+                        }
+                    }
+
                     // Quick Insert Rozan Symbols
-                    Text("شريط الرموز السريعة (انقر للإدراج):", fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                    Text("شريط رموز روزان السريعة (انقر للإدراج فوراً):", fontSize = 11.sp, fontWeight = FontWeight.Bold)
                     LazyRow(
                         horizontalArrangement = Arrangement.spacedBy(6.dp),
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        items(rozanSymbols) { (sym, desc) ->
+                        items(rozanSymbols) { (sym, _) ->
                             Button(
                                 onClick = { notesText += " $sym " },
                                 contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp),
@@ -289,7 +384,7 @@ private fun RozanNotebookComponent(isArabic: Boolean) {
                         onValueChange = { notesText = it },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(180.dp)
+                            .height(160.dp)
                             .testTag("rozan_notes_input"),
                         placeholder = { Text(if (isArabic) "دوّن ملاحظاتك التتابعية هنا باستخدام الرموز والمحاذاة العمودية..." else "Take your consecutive notes here...") },
                         shape = RoundedCornerShape(10.dp)
@@ -297,10 +392,31 @@ private fun RozanNotebookComponent(isArabic: Boolean) {
 
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.End
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
+                        OutlinedButton(
+                            onClick = { showSolution = !showSolution },
+                            shape = RoundedCornerShape(8.dp)
+                        ) {
+                            Text(if (showSolution) "إخفاء الصياغة النموذجية" else "🔍 عرض الترجمة التتابعية النموذجية", fontSize = 11.sp)
+                        }
                         TextButton(onClick = { notesText = "" }) {
                             Text(if (isArabic) "مسح المفكرة" else "Clear", fontSize = 11.sp)
+                        }
+                    }
+
+                    if (showSolution) {
+                        Surface(
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(8.dp),
+                            color = SuccessGreen.copy(alpha = 0.12f),
+                            border = androidx.compose.foundation.BorderStroke(1.dp, SuccessGreen)
+                        ) {
+                            Column(modifier = Modifier.padding(10.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                Text("الترجمة النموذجية المعتمدة:", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = SuccessGreen)
+                                Text(consecSpeeches[selectedConsecIndex].third, fontSize = 12.sp, lineHeight = 18.sp)
+                            }
                         }
                     }
                 }
