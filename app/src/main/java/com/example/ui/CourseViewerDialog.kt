@@ -135,11 +135,34 @@ fun CourseViewerDialog(
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onSurface
                 )
-                Text(
-                    text = "${if (isArabic) "المحاضر:" else "Instructor:"} ${course.instructor} • ${course.duration}",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.primary
-                )
+
+                // Prominently Highlighted Creator / Instructor
+                Surface(
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+                    shape = RoundedCornerShape(8.dp),
+                    color = RedPrimary.copy(alpha = 0.08f),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, RedPrimary.copy(alpha = 0.3f))
+                ) {
+                    Row(
+                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                    ) {
+                        Icon(Icons.Default.Person, contentDescription = null, tint = RedPrimary, modifier = Modifier.size(16.dp))
+                        Text(
+                            text = if (isArabic) "صاحب المحتوى / الأستاذ: " else "Creator / Instructor: ",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = RedPrimary
+                        )
+                        Text(
+                            text = "${course.instructor} • ${course.duration}",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.ExtraBold,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+                }
 
                 Spacer(modifier = Modifier.height(12.dp))
 

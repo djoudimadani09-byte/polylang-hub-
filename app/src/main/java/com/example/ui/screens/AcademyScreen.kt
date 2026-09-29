@@ -28,6 +28,8 @@ import com.example.ui.theme.SuccessGreen
 fun AcademyScreen(
     isArabic: Boolean,
     courses: List<MasterclassCourse>,
+    userName: String = "طالب الترجمة",
+    userEmail: String = "djoudimadani09@gmail.com",
     onOpenCourse: (MasterclassCourse) -> Unit,
     onClaimCertificate: (courseTitle: String) -> Unit
 ) {
@@ -98,7 +100,7 @@ fun AcademyScreen(
         }
 
         if (selectedMainTab == 0) {
-            StudentLabView(isArabic = isArabic)
+            StudentLabView(isArabic = isArabic, userName = userName, userEmail = userEmail)
         } else {
             // Search Field
             OutlinedTextField(
@@ -207,6 +209,34 @@ private fun CourseCard(
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
             )
+
+            // Prominent Author / Creator Badge
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(8.dp),
+                color = RedPrimary.copy(alpha = 0.08f),
+                border = androidx.compose.foundation.BorderStroke(1.dp, RedPrimary.copy(alpha = 0.25f))
+            ) {
+                Row(
+                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+                ) {
+                    Icon(Icons.Default.Person, contentDescription = null, tint = RedPrimary, modifier = Modifier.size(16.dp))
+                    Text(
+                        text = if (isArabic) "صاحب المحتوى / الأستاذ: " else "Creator / Instructor: ",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 11.5.sp,
+                        color = RedPrimary
+                    )
+                    Text(
+                        text = course.instructor,
+                        fontWeight = FontWeight.ExtraBold,
+                        fontSize = 12.sp,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                }
+            }
 
             Text(
                 text = course.desc,

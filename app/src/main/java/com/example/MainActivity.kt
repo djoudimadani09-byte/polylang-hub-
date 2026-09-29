@@ -255,6 +255,8 @@ fun PolylangHubApp() {
                 AppTab.ACADEMY -> AcademyScreen(
                     isArabic = isArabic,
                     courses = allCourses,
+                    userName = userName,
+                    userEmail = userEmail,
                     onOpenCourse = { course ->
                         // User clicked on course content -> open viewer!
                         activeCourseForViewer = course

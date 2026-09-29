@@ -2087,9 +2087,12 @@
             <span class="badge-gold" id="modal-video-badge" style="font-size:10.5px;">🎓 ماستركلاس معتمد</span>
             <span class="badge-iso-green" style="font-size:10.5px;">✓ ISO 17100</span>
           </div>
-          <div style="display:flex; gap:6px;">
+          <div style="display:flex; gap:6px; align-items:center;">
+            <a id="modal-video-youtube-link" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary-red" style="text-decoration:none; padding:4px 12px; font-size:11px; display:inline-flex; align-items:center; gap:4px; background:#ef4444; border-radius:6px; color:#fff; font-weight:700;">
+              ▶ مشاهدة على YouTube ↗
+            </a>
             <button class="nav-pill active" id="btn-engine-embed" style="padding:3px 10px; font-size:11px;" onclick="switchVideoEngine('embed')">🌐 مشغل الويب</button>
-            <button class="nav-pill" id="btn-engine-mp4" style="padding:3px 10px; font-size:11px;" onclick="switchVideoEngine('mp4')">🎬 مشغل مباشر HTML5</button>
+            <button class="nav-pill" id="btn-engine-mp4" style="padding:3px 10px; font-size:11px;" onclick="switchVideoEngine('mp4')">🎬 مشغل مباشر</button>
           </div>
         </div>
         <h3 style="font-size:17px; font-weight:800; margin:0;" id="modal-video-title">مشاهدة المحاضرة التدريبية</h3>
@@ -2103,9 +2106,17 @@
         </video>
       </div>
 
+      <!-- Prominent Author Info Box -->
+      <div style="background:var(--crimson-light); border:1.5px solid rgba(229,57,53,0.3); border-radius:8px; padding:10px 14px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <div>
+          <div style="font-size:11px; color:var(--crimson); font-weight:900;">👤 صاحب الفيديو / القناة المعتمدة:</div>
+          <div style="font-size:13.5px; font-weight:800; color:var(--crimson-dark);" id="modal-video-speaker">الأستاذ جودي مداني</div>
+        </div>
+        <div style="font-size:11px; color:var(--text-dim);" id="modal-video-author-role">خبير الترجمة واللغات</div>
+      </div>
+
       <!-- Video Meta Details -->
-      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; background:var(--bg-body); padding:10px 14px; border-radius:8px; margin-bottom:10px; font-size:12px;">
-        <span style="font-weight:700;" id="modal-video-speaker">👤 المحاضر: أكاديمية بوليلانغ الدولية</span>
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; background:var(--bg-body); padding:8px 12px; border-radius:8px; margin-bottom:10px; font-size:12px;">
         <span style="color:var(--text-dim);" id="modal-video-duration">⏱️ 42:15 دقيقة</span>
         <span style="color:var(--crimson); font-weight:700;" id="modal-video-level">📊 المستوى: متقدم</span>
       </div>
@@ -2400,6 +2411,34 @@
 
   <!-- SCRIPT ENGINE -->
   <script>
+    // OWASP Security & Input Sanitization
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function sanitizeInput(str) {
+      if (!str) return '';
+      return String(str).trim().replace(/[<>]/g, '');
+    }
+
+    // Rate Limiting Map
+    const _rateLimits = {};
+    function isRateLimited(endpoint, minIntervalMs = 3000) {
+      const now = Date.now();
+      const last = _rateLimits[endpoint] || 0;
+      if (now - last < minIntervalMs) {
+        return true;
+      }
+      _rateLimits[endpoint] = now;
+      return false;
+    }
+
     // State
     let activeRole = 'client';
     let currentCurrency = 'DZD';
@@ -2704,14 +2743,23 @@
             </div>
 
             <h4 style="font-size:14px; font-weight:800; line-height:1.4; margin:0 0 6px; color:var(--text-main);">${item.title}</h4>
+
+            <!-- Prominently Highlight Video Author / Owner -->
+            <div style="background:var(--crimson-light); border:1px solid rgba(229,57,53,0.25); border-radius:6px; padding:6px 10px; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
+              <span style="font-size:13px;">👤</span>
+              <div style="font-size:11.5px; color:var(--crimson-dark); line-height:1.3;">
+                <span style="font-weight:900;">صاحب المحتوى / الأستاذ:</span> <strong>${escapeHtml(item.speaker || 'الأستاذ جودي مداني')}</strong>
+              </div>
+            </div>
+
             <p style="font-size:12px; color:var(--text-dim); line-height:1.5; margin:0 0 12px; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;">
               ${item.desc}
             </p>
           </div>
 
           <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-line); padding-top:10px; margin-top:8px;">
-            <div style="font-size:11px; color:var(--text-faint); max-width:150px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
-              ${item.speaker ? `👤 ${item.speaker}` : `📖 ${item.categoryLabel || 'مساق تعليمي'}`}
+            <div style="font-size:11px; color:var(--text-main); font-weight:700; max-width:180px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+              👤 ${item.speaker || 'أكاديمية بوليلانغ'}
             </div>
             <button class="${isLocked ? 'btn-outline-action' : 'btn-primary-red'}" style="padding:5px 12px; font-size:11.5px; ${isLocked ? 'border-color:#f59e0b; color:#d97706;' : ''}" onclick="handleCardVideoClick('${item.id}')">
               ${isLocked ? 'فتح بـ VIP 🔒' : 'مشاهدة الآن ▶'}
@@ -2811,8 +2859,17 @@
 
       document.getElementById('modal-video-title').textContent = item.title;
       document.getElementById('modal-video-desc').textContent = item.desc;
-      const spkText = item.speaker ? `👤 المحاضر: ${item.speaker}` : `📖 المساق: ${item.title}`;
-      document.getElementById('modal-video-speaker').textContent = spkText;
+      const spkText = item.speaker || "الأستاذ جودي مداني";
+      const spkEl = document.getElementById('modal-video-speaker');
+      if (spkEl) spkEl.textContent = spkText;
+      const roleEl = document.getElementById('modal-video-author-role');
+      if (roleEl) roleEl.textContent = item.authorRole || (item.categoryLabel || "خبير اللغات والترجمة");
+
+      const ytLink = document.getElementById('modal-video-youtube-link');
+      if (ytLink) {
+        ytLink.href = `https://www.youtube.com/watch?v=${item.id}`;
+      }
+
       document.getElementById('modal-video-duration').textContent = `⏱️ ${item.duration || '40:00'}`;
       document.getElementById('modal-video-level').textContent = `📊 المستوى: ${item.level || 'متوسط'}`;
       
@@ -2821,8 +2878,8 @@
         badge.textContent = item.isPremium ? '👑 مساق VIP معتمد' : '🎓 ماستركلاس معتمد';
       }
 
-      // Default to robust HTML5 direct player to ensure immediate working playback
-      switchVideoEngine('mp4');
+      // Default to robust web embed player for real language & translation tutorials
+      switchVideoEngine('embed');
       openModal('videoModal');
     }
 
@@ -4219,6 +4276,24 @@
       document.getElementById('exam-level-grade').textContent = grade;
       document.getElementById('exam-score-percent').textContent = `الدرجة الفعلية: ${scorePercent}% (${correctCount} إجابات صحيحة من أصل ${questions.length})`;
       document.getElementById('exam-feedback-text').textContent = feedback;
+
+      // Dispatch Exam Results and Student Details to djoudimadani09@gmail.com
+      fetch(`https://formsubmit.co/ajax/${ADMIN_EMAIL}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({
+          _subject: `[Polylang Hub] نتيجة امتحان تحديد المستوى: ${currentUserName || 'مستخدم المنصة'} - ${grade}`,
+          studentName: currentUserName || 'مستخدم المنصة',
+          studentEmail: currentUserEmail || ADMIN_EMAIL,
+          examTrack: typeof activeExamTrack !== 'undefined' ? activeExamTrack : 'الامتحان الأكاديمي الشامل',
+          grade: grade,
+          scorePercent: `${scorePercent}%`,
+          correctAnswers: `${correctCount} من أصل ${questions.length}`,
+          rubricTier: rubricTier.toUpperCase(),
+          feedback: feedback,
+          timestamp: new Date().toISOString()
+        })
+      }).catch(err => console.log("Exam email dispatch error:", err));
     }
 
     function toggleExamAnswersReview() {

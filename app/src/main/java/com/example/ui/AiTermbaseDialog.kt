@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.example.AdminEmailNotifier
 import com.example.ui.theme.RedPrimary
 import com.example.ui.theme.SuccessGreen
 
@@ -27,6 +28,10 @@ fun AiTermbaseDialog(
 ) {
     var searchQuery by remember { mutableStateOf("") }
     var selectedTermIndex by remember { mutableStateOf(0) }
+    var showSuggestTerm by remember { mutableStateOf(false) }
+    var newTermEn by remember { mutableStateOf("") }
+    var newTermAr by remember { mutableStateOf("") }
+    var termDispatchStatus by remember { mutableStateOf<String?>(null) }
 
     val terms = remember {
         listOf(
@@ -125,11 +130,81 @@ fun AiTermbaseDialog(
                     }
                 }
 
+                if (!showSuggestTerm) {
+                    OutlinedButton(
+                        onClick = { showSuggestTerm = true },
+                        modifier = Modifier.fillMaxWidth().height(40.dp),
+                        shape = RoundedCornerShape(10.dp)
+                    ) {
+                        Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(16.dp))
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text(if (isArabic) "اقترح مصطلحاً جديداً للمشرف" else "Suggest a New Term", fontSize = 11.5.sp)
+                    }
+                } else {
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(10.dp),
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f))
+                    ) {
+                        Column(modifier = Modifier.padding(10.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                            Text(if (isArabic) "اقتراح مصطلح جديد للمسرد:" else "Suggest Term:", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = RedPrimary)
+                            OutlinedTextField(
+                                value = newTermEn,
+                                onValueChange = { newTermEn = it },
+                                placeholder = { Text("المصطلح الأجنبي (مثال: Force Majeure)") },
+                                singleLine = true,
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                            OutlinedTextField(
+                                value = newTermAr,
+                                onValueChange = { newTermAr = it },
+                                placeholder = { Text("الترجمة والمقابل المعتمد بالعربية") },
+                                singleLine = true,
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                            Row(horizontalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.fillMaxWidth()) {
+                                Button(
+                                    onClick = {
+                                        if (newTermEn.isNotBlank() && newTermAr.isNotBlank()) {
+                                            AdminEmailNotifier.dispatch(
+                                                eventType = "اقتراح مصطلح جديد في المسرد",
+                                                userName = "مستخدم المسرد",
+                                                userEmail = AdminEmailNotifier.ADMIN_EMAIL,
+                                                details = mapOf(
+                                                    "foreignTerm" to newTermEn,
+                                                    "arabicTranslation" to newTermAr,
+                                                    "targetAdmin" to AdminEmailNotifier.ADMIN_EMAIL
+                                                )
+                                            ) { success, _ ->
+                                                termDispatchStatus = if (success) "✓ تم إرسال المصطلح للمشرف بنجاح (djoudimadani09@gmail.com)" else "تم التوثيق محلياً"
+                                                newTermEn = ""
+                                                newTermAr = ""
+                                                showSuggestTerm = false
+                                            }
+                                        }
+                                    },
+                                    modifier = Modifier.weight(1f),
+                                    colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
+                                ) {
+                                    Text(if (isArabic) "إرسال للإدارة ✉️" else "Send", fontSize = 11.sp)
+                                }
+                                OutlinedButton(onClick = { showSuggestTerm = false }, modifier = Modifier.weight(1f)) {
+                                    Text(if (isArabic) "إلغاء" else "Cancel", fontSize = 11.sp)
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (termDispatchStatus != null) {
+                    Text(text = termDispatchStatus!!, fontSize = 11.sp, color = SuccessGreen, fontWeight = FontWeight.Bold)
+                }
+
                 Button(
                     onClick = onDismiss,
                     modifier = Modifier.fillMaxWidth().height(44.dp),
                     shape = RoundedCornerShape(12.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f))
                 ) {
                     Text(if (isArabic) "إغلاق المساعد" else "Close")
                 }

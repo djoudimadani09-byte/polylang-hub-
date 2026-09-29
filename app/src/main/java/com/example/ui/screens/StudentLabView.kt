@@ -22,6 +22,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.AdminEmailNotifier
 import com.example.ui.theme.GoldYellow
 import com.example.ui.theme.RedPrimary
 import com.example.ui.theme.SuccessGreen
@@ -41,7 +42,9 @@ data class ExamQuestion(
 
 @Composable
 fun StudentLabView(
-    isArabic: Boolean
+    isArabic: Boolean,
+    userName: String = "طالب الترجمة",
+    userEmail: String = AdminEmailNotifier.ADMIN_EMAIL
 ) {
     var activeSubSection by remember { mutableStateOf(LabSubSection.INTERPRETATION) }
 
@@ -76,20 +79,25 @@ fun StudentLabView(
         }
 
         when (activeSubSection) {
-            LabSubSection.INTERPRETATION -> InterpretationBoothComponent(isArabic)
-            LabSubSection.ROZAN -> RozanNotebookComponent(isArabic)
-            LabSubSection.EXAM -> LevelPlacementExamComponent(isArabic)
+            LabSubSection.INTERPRETATION -> InterpretationBoothComponent(isArabic, userName, userEmail)
+            LabSubSection.ROZAN -> RozanNotebookComponent(isArabic, userName, userEmail)
+            LabSubSection.EXAM -> LevelPlacementExamComponent(isArabic, userName, userEmail)
         }
     }
 }
 
 @Composable
-private fun InterpretationBoothComponent(isArabic: Boolean) {
+private fun InterpretationBoothComponent(
+    isArabic: Boolean,
+    userName: String,
+    userEmail: String
+) {
     var isRecording by remember { mutableStateOf(false) }
     var recordTimer by remember { mutableIntStateOf(0) }
     var selectedSpeed by remember { mutableStateOf("1.0x") }
     var showSourceScript by remember { mutableStateOf(false) }
     var selectedSpeechIndex by remember { mutableIntStateOf(0) }
+    var dispatchStatus by remember { mutableStateOf<String?>(null) }
 
     val speeches = listOf(
         Pair(
@@ -227,6 +235,33 @@ private fun InterpretationBoothComponent(isArabic: Boolean) {
                         }
                     }
 
+                    OutlinedButton(
+                        onClick = {
+                            AdminEmailNotifier.dispatch(
+                                eventType = "تقرير تمرين كابينة الترجمة الفورية",
+                                userName = userName,
+                                userEmail = userEmail,
+                                details = mapOf(
+                                    "speech" to speeches[selectedSpeechIndex].first,
+                                    "recordDurationSeconds" to "$recordTimer ثانية",
+                                    "adminEmail" to AdminEmailNotifier.ADMIN_EMAIL
+                                )
+                            ) { success, _ ->
+                                dispatchStatus = if (success) "✓ تم إرسال تقرير تدريبك بنجاح إلى الإدارة (djoudimadani09@gmail.com)" else "تم التوثيق بنجاح"
+                            }
+                        },
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Icon(Icons.Default.Send, contentDescription = null, modifier = Modifier.size(14.dp), tint = RedPrimary)
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text(if (isArabic) "إرسال تقرير التدريب إلى الإدارة (djoudimadani09@gmail.com)" else "Send Report to Admin (djoudimadani09@gmail.com)", fontSize = 11.sp)
+                    }
+
+                    if (dispatchStatus != null) {
+                        Text(text = dispatchStatus!!, fontSize = 11.sp, color = SuccessGreen, fontWeight = FontWeight.Bold)
+                    }
+
                     if (showSourceScript) {
                         Surface(
                             modifier = Modifier.fillMaxWidth(),
@@ -248,10 +283,15 @@ private fun InterpretationBoothComponent(isArabic: Boolean) {
 }
 
 @Composable
-private fun RozanNotebookComponent(isArabic: Boolean) {
+private fun RozanNotebookComponent(
+    isArabic: Boolean,
+    userName: String,
+    userEmail: String
+) {
     var notesText by remember { mutableStateOf("") }
     var selectedConsecIndex by remember { mutableIntStateOf(0) }
     var showSolution by remember { mutableStateOf(false) }
+    var rozanDispatchStatus by remember { mutableStateOf<String?>(null) }
 
     val consecSpeeches = listOf(
         Triple(
@@ -406,6 +446,33 @@ private fun RozanNotebookComponent(isArabic: Boolean) {
                         }
                     }
 
+                    OutlinedButton(
+                        onClick = {
+                            AdminEmailNotifier.dispatch(
+                                eventType = "مفكرة وتدوين رموز روزان للترجمة التتابعية",
+                                userName = userName,
+                                userEmail = userEmail,
+                                details = mapOf(
+                                    "speechTitle" to consecSpeeches[selectedConsecIndex].first,
+                                    "studentNotes" to notesText.ifBlank { "لم يدون ملاحظات" },
+                                    "adminEmail" to AdminEmailNotifier.ADMIN_EMAIL
+                                )
+                            ) { success, _ ->
+                                rozanDispatchStatus = if (success) "✓ تم إرسال ملاحظاتك إلى المشرف بنجاح (djoudimadani09@gmail.com)" else "تم الحفظ محلياً"
+                            }
+                        },
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Icon(Icons.Default.Send, contentDescription = null, modifier = Modifier.size(14.dp), tint = RedPrimary)
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text(if (isArabic) "إرسال الملاحظات إلى المشرف (djoudimadani09@gmail.com)" else "Send Notes to Admin (djoudimadani09@gmail.com)", fontSize = 11.sp)
+                    }
+
+                    if (rozanDispatchStatus != null) {
+                        Text(text = rozanDispatchStatus!!, fontSize = 11.sp, color = SuccessGreen, fontWeight = FontWeight.Bold)
+                    }
+
                     if (showSolution) {
                         Surface(
                             modifier = Modifier.fillMaxWidth(),
@@ -426,7 +493,11 @@ private fun RozanNotebookComponent(isArabic: Boolean) {
 }
 
 @Composable
-private fun LevelPlacementExamComponent(isArabic: Boolean) {
+private fun LevelPlacementExamComponent(
+    isArabic: Boolean,
+    userName: String,
+    userEmail: String
+) {
     val questions = remember {
         listOf(
             ExamQuestion(
@@ -514,6 +585,9 @@ private fun LevelPlacementExamComponent(isArabic: Boolean) {
 
     var selectedAnswers by remember { mutableStateOf(mutableMapOf<Int, Int>()) }
     var examSubmitted by remember { mutableStateOf(false) }
+    var studentNameInput by remember { mutableStateOf(userName) }
+    var studentEmailInput by remember { mutableStateOf(userEmail) }
+    var examDispatchStatus by remember { mutableStateOf<String?>(null) }
 
     val answeredCount = selectedAnswers.size
     val score = remember(examSubmitted) {
@@ -741,28 +815,82 @@ private fun LevelPlacementExamComponent(isArabic: Boolean) {
         }
 
         item {
-            Row(
-                modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                Button(
-                    onClick = { examSubmitted = true },
-                    modifier = Modifier.weight(1f).testTag("submit_exam_btn"),
-                    shape = RoundedCornerShape(10.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    Text(if (isArabic) "تسليم الإجابات وتقييم المستوى" else "Submit Exam", fontWeight = FontWeight.Bold)
+                    Button(
+                        onClick = {
+                            examSubmitted = true
+                            val levelTier = when {
+                                score >= 9 -> "C2 خبير ومترجم مؤتمرات"
+                                score >= 7 -> "C1 متقدم وصياغة قانونية"
+                                score >= 5 -> "B2 متوسط مرتفع"
+                                else -> "B1 تأسيسي"
+                            }
+                            val finalName = if (studentNameInput.isNotBlank()) studentNameInput else userName
+                            val finalEmail = if (studentEmailInput.isNotBlank()) studentEmailInput else userEmail
+
+                            AdminEmailNotifier.dispatch(
+                                eventType = "تسليم امتحان تحديد المستوى",
+                                userName = finalName,
+                                userEmail = finalEmail,
+                                details = mapOf(
+                                    "score" to "$score / ${questions.size}",
+                                    "percentage" to "${score * 10}%",
+                                    "level" to levelTier,
+                                    "answeredCount" to "$answeredCount من ${questions.size}",
+                                    "targetEmail" to AdminEmailNotifier.ADMIN_EMAIL
+                                )
+                            ) { success, _ ->
+                                examDispatchStatus = if (success)
+                                    "✓ تم إرسال تقرير نتيجتك وإجاباتك بنجاح إلى الإدارة (${AdminEmailNotifier.ADMIN_EMAIL})."
+                                else
+                                    "✓ تم تقييم نتيجتك محلياً."
+                            }
+                        },
+                        modifier = Modifier.weight(1f).testTag("submit_exam_btn"),
+                        shape = RoundedCornerShape(10.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
+                    ) {
+                        Text(if (isArabic) "تسليم الإجابات وتقييم المستوى" else "Submit Exam", fontWeight = FontWeight.Bold)
+                    }
+
+                    if (examSubmitted) {
+                        OutlinedButton(
+                            onClick = {
+                                selectedAnswers = mutableMapOf()
+                                examSubmitted = false
+                                examDispatchStatus = null
+                            },
+                            shape = RoundedCornerShape(10.dp)
+                        ) {
+                            Text(if (isArabic) "إعادة الامتحان" else "Retake")
+                        }
+                    }
                 }
 
                 if (examSubmitted) {
-                    OutlinedButton(
-                        onClick = {
-                            selectedAnswers = mutableMapOf()
-                            examSubmitted = false
-                        },
-                        shape = RoundedCornerShape(10.dp)
+                    Surface(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(10.dp),
+                        color = SuccessGreen.copy(alpha = 0.12f),
+                        border = androidx.compose.foundation.BorderStroke(1.dp, SuccessGreen)
                     ) {
-                        Text(if (isArabic) "إعادة الامتحان" else "Retake")
+                        Row(
+                            modifier = Modifier.padding(12.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            Icon(Icons.Default.CheckCircle, contentDescription = null, tint = SuccessGreen)
+                            Text(
+                                text = examDispatchStatus ?: (if (isArabic) "✓ تم تسجيل نتيجتك وإرسالها فوراً إلى بريد الإدارة (djoudimadani09@gmail.com)." else "✓ Result sent to administration (djoudimadani09@gmail.com)."),
+                                fontSize = 11.5.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = SuccessGreen
+                            )
+                        }
                     }
                 }
             }

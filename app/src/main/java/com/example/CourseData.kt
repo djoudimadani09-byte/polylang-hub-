@@ -2,185 +2,199 @@ package com.example
 
 object CourseData {
     val sampleCourses = listOf(
+        // --- 1. لغات بالعربية (Languages in Arabic) ---
         MasterclassCourse(
             id = 1,
-            title = "الترجمة القانونية وصياغة العقود الدولية",
-            category = "عقود وقانون",
-            instructor = "د. ليلى مزياني (مترجم محلف)",
-            duration = "45 دقيقة",
-            level = "متقدم",
-            desc = "دراسة تحليلية لصياغة شروط القوة القاهرة (Force Majeure) وبنود إبراء الذمة والتعويض (Indemnity & Hold Harmless) في العقود الإنجليزية المعتمدة."
+            title = "كورس شامل لتعلم قواعد اللغة الإنجليزية من الصفر للمبتدئين",
+            category = "الإنجليزية بالعربية",
+            instructor = "إبراهيم عادل (ZAmericanEnglish)",
+            duration = "48 دقيقة",
+            level = "مبتدئ A1",
+            desc = "شرح كامل وتفاعلي لقواعد اللغة الإنجليزية وتراكيب الجمل الشائعة مع أمثلة حية وتمارين نطق مصممة للناطقين بالعربية."
         ),
         MasterclassCourse(
             id = 2,
-            title = "أسرار الترجمة الفورية والتحكم في الـ Décalage",
-            category = "فورية ودبلوماسية",
-            instructor = "أ. مداني جودي (خبير الترجمة الفورية)",
-            duration = "60 دقيقة",
-            level = "احترافي",
-            desc = "تقنيات التحكم في الفارق الزمني (Décalage) بين الاستماع والتحدث في كابينة المؤتمرات الدولية دون إجهاد ذهني وضمان دقة نقل المعنى."
+            title = "أهم 1000 كلمة في اللغة الإنجليزية واستخدامها في محادثات حية",
+            category = "الإنجليزية بالعربية",
+            instructor = "إبراهيم عادل (طليق - Taleek)",
+            duration = "65 دقيقة",
+            level = "محادثة وتأسيس",
+            desc = "مفردات المحادثة اليومية والعملية بالإنجليزية مع اللفظ السليم باللكنة الأمريكية وكيفية ربط الجمل دون تردد."
         ),
         MasterclassCourse(
             id = 3,
-            title = "نظام روزان لتدوين الملاحظات في الترجمة التتابعية",
-            category = "فورية ودبلوماسية",
-            instructor = "أ. مداني جودي",
-            duration = "50 دقيقة",
-            level = "متوسط",
-            desc = "التطبيق العملي للقواعد السبعة لنظام جان فرانسوا روزان (Rozan 7 Rules)، الرموز البصرية للروابط المنطقية، والتسلسل الرأسي للملاحظات."
+            title = "تعلم اللغة الفرنسية من الصفر: النطق السليم والحروف والمحادثة",
+            category = "الفرنسية بالعربية",
+            instructor = "الأستاذ حسن (Français avec Hassan / طليق)",
+            duration = "44 دقيقة",
+            level = "مبتدئ A1",
+            desc = "إتقان الأبجدية الفرنسية، الحروف الصوتية والأنفية المركبة، وتكوين أول حوار تعارف متكامل باللغة الفرنسية."
         ),
         MasterclassCourse(
             id = 4,
-            title = "معايير الترجمة المرئية (SRT) وضوابط Netflix",
+            title = "أهم 300 جملة وتعبير في اللغة الفرنسية للحياة اليومية والسفر",
+            category = "الفرنسية بالعربية",
+            instructor = "الأستاذ فوزي (Apprendre le français)",
+            duration = "52 دقيقة",
+            level = "متوسط A2",
+            desc = "تراكيب التحدث السريع في المقاهي والمطارات والمواقف اليومية بفرنسا مع النطق النموذجي والترجمة العربية."
+        ),
+        MasterclassCourse(
+            id = 5,
+            title = "دورة اللغة الإسبانية الكاملة للمبتدئين بالعربية من الصفر",
+            category = "الإسبانية بالعربية",
+            instructor = "الأستاذ طارق الصالح (Aprende Español con Tareq)",
+            duration = "58 دقيقة",
+            level = "مبتدئ A1",
+            desc = "مدخل شامل للأبجدية الإسبانية، التحيات، أفعال الكينونة Ser و Estar، وبناء جمل المحادثة اليومية في إسبانيا وأمريكا اللاتينية."
+        ),
+        MasterclassCourse(
+            id = 6,
+            title = "تعلم اللغة الألمانية بالعربية: نطق الحروف وتركيب الجملة الألمانية",
+            category = "الألمانية بالعربية",
+            instructor = "الأستاذ شحاتة (Deutsch lernen mit Shehata)",
+            duration = "50 دقيقة",
+            level = "مبتدئ A1",
+            desc = "مدخل ميسر لفهم تراكيب الجملة الألمانية، أدوات التعريف (der, die, das) وقواعد النطق الصوتي الصحيح مع أمثلة تطبيقية."
+        ),
+        MasterclassCourse(
+            id = 7,
+            title = "الحالات الإعرابية الألمانية (Nominativ, Akkusativ, Dativ)",
+            category = "الألمانية بالعربية",
+            instructor = "الأستاذ ضياء عبد الله (Deutsch mit Dyaa)",
+            duration = "46 دقيقة",
+            level = "متوسط B1",
+            desc = "تفكيك عقدة الإعراب الألماني وجداول الأدوات والضمائر بأمثلة مقارنة باللغة العربية لتسهيل الفهم والترجمة."
+        ),
+        MasterclassCourse(
+            id = 8,
+            title = "تعلم اللغة الإيطالية من الصفر: التحيات والحوارات اليومية",
+            category = "الإيطالية بالعربية",
+            instructor = "أكاديمية طليق (Taleek Italian Team)",
+            duration = "36 دقيقة",
+            level = "مبتدئ A1",
+            desc = "التعرف على النغمات الموسيقية للحروف الإيطالية، المفردات اليومية الأساسية، وتصريف الأفعال المنتظمة في المحادثة."
+        ),
+        MasterclassCourse(
+            id = 9,
+            title = "تعلم اللغة التركية بالعربية: التوافق الصوتي وبناء الجمل باللواحق",
+            category = "التركية بالعربية",
+            instructor = "الأستاذ صهيب (تعلم التركية بالعربي)",
+            duration = "42 دقيقة",
+            level = "مبتدئ ومتوسط",
+            desc = "أسرار اللواحق في اللغة التركية وقاعدة التوافق الصوتي الثنائي والرباعي لتكوين جمل متناسقة وسلسة في الحياة اليومية."
+        ),
+        MasterclassCourse(
+            id = 10,
+            title = "أساسيات اللغة الروسية: قراءة الحروف السيريلية والمفردات التأسيسية",
+            category = "الروسية بالعربية",
+            instructor = "د. مروان الكيالي (Russian for Arabs)",
+            duration = "41 دقيقة",
+            level = "مبتدئ A1",
+            desc = "إتقان الأبجدية السيريلية بالصوت والصورة، نبر الكلمات الروسية، وأهم عبارات التعارف والترحيب الروسية."
+        ),
+
+        // --- 2. لغات أجنبية مع ناطقين أصليين (Native Foreign Languages) ---
+        MasterclassCourse(
+            id = 11,
+            title = "Advanced English Vocabulary & How to Sound Like a Native Speaker",
+            category = "English Native",
+            instructor = "Lucy Bella Simkins (English with Lucy)",
+            duration = "26 دقيقة",
+            level = "متقدم C1-C2",
+            desc = "Master high-level English idioms, natural expressions, and polite British conversational phrases used in professional environments."
+        ),
+        MasterclassCourse(
+            id = 12,
+            title = "Real Life English: Fast Spoken Speech & Connected Pronunciation",
+            category = "English Native",
+            instructor = "Emma (mmmEnglish / Australia)",
+            duration = "22 دقيقة",
+            level = "متوسط B2",
+            desc = "Learn why native speakers sound so fast, how words link together naturally, and how to train your ear for spontaneous conversations."
+        ),
+        MasterclassCourse(
+            id = 13,
+            title = "Dialogues en Français Réel: Écoute Active et Vocabulaire du Quotidien",
+            category = "Français Natif",
+            instructor = "Pierre Babon (Français avec Pierre)",
+            duration = "30 دقيقة",
+            level = "متوسط B1-B2",
+            desc = "Immersion complète en français parlé avec sous-titres, tournures familières et amélioration de la compréhension orale."
+        ),
+        MasterclassCourse(
+            id = 14,
+            title = "Español Real para Extranjeros: Conversaciones Cotidianas",
+            category = "Español Nativo",
+            instructor = "Brenda Romaniello (Hola Spanish)",
+            duration = "25 دقيقة",
+            level = "متوسط B1",
+            desc = "Aprende cómo hablan los hispanohablantes en situaciones reales, modismos habituales y trucos para sonar con total naturalidad."
+        ),
+        MasterclassCourse(
+            id = 15,
+            title = "Easy German: Street Interviews in Berlin with Dual Subtitles",
+            category = "Deutsch Muttersprachler",
+            instructor = "Carina & Janusz (Easy German Team)",
+            duration = "21 دقيقة",
+            level = "A2-B2 Deutsch",
+            desc = "Authentic German language learning from the streets of Berlin with dual German/English transcripts for natural listening comprehension."
+        ),
+
+        // --- 3. فنون وعلوم الترجمة المعتمدة (Translation Masterclasses) ---
+        MasterclassCourse(
+            id = 16,
+            title = "أسرار الترجمة الفورية والتحكم في الـ Décalage بكابينات المؤتمرات",
+            category = "فورية ودبلوماسية",
+            instructor = "الأستاذ جودي مداني (مترجم محلف وخبير كابينات المؤتمرات)",
+            duration = "60 دقيقة",
+            level = "احترافي خبير",
+            desc = "تقنيات التحكم في الفارق الزمني (Décalage) بين الاستماع والتحدث في كابينة المؤتمرات الدولية دون إجهاد ذهني وضمان دقة نقل المعنى."
+        ),
+        MasterclassCourse(
+            id = 17,
+            title = "القواعد السبعة لنظام روزان لتدوين الملاحظات في الترجمة التتابعية",
+            category = "فورية ودبلوماسية",
+            instructor = "الأستاذ جودي مداني (مدرب الترجمة التتابعية)",
+            duration = "50 دقيقة",
+            level = "متوسط إلى متقدم",
+            desc = "التطبيق العملي للقواعد السبعة لنظام جان فرانسوا روزان (Rozan 7 Rules)، الرموز البصرية للروابط المنطقية، والتسلسل الرأسي للملاحظات."
+        ),
+        MasterclassCourse(
+            id = 18,
+            title = "الترجمة القانونية وصياغة العقود التجارية الدولية المقارنة",
+            category = "عقود وقانون",
+            instructor = "د. ليلى مزياني (مترجم محلف ودكتوراه قانون أعمال)",
+            duration = "45 دقيقة",
+            level = "متقدم C1",
+            desc = "دراسة تحليلية لصياغة شروط القوة القاهرة (Force Majeure) وبنود إبراء الذمة والتعويض (Indemnity) في العقود الإنجليزية المعتمدة."
+        ),
+        MasterclassCourse(
+            id = 19,
+            title = "معايير الترجمة المرئية (SRT) الاحترافية وضوابط نتفليكس العالمية",
             category = "ترجمة مرئية",
-            instructor = "م. يوسف بلحاج",
+            instructor = "المهندس يوسف بلحاج (أخصائي Subtitling)",
             duration = "40 دقيقة",
             level = "متوسط",
             desc = "حساب سرعة القراءة (CPS)، عدد الحروف في السطر (CPL)، قواعد تجزئة الجمل نحوياً وتوقيت الظهور والاختفاء بدقة الإطار الواحد."
         ),
         MasterclassCourse(
-            id = 5,
-            title = "ضمان الجودة ومطابقة المواصفة القياسية ISO 17100",
-            category = "ضمان الجودة",
-            instructor = "د. فتيحة بوقرة",
-            duration = "35 دقيقة",
-            level = "شامل",
-            desc = "الإجراءات الإلزامية للمعيار الدولي ISO 17100:2015: التدقيق المستقل المزدوج (Four-Eyes Principle)، إدارة المصطلحات، وتوثيق المشاريع."
-        ),
-        MasterclassCourse(
-            id = 6,
-            title = "ترجمة وثائق قطاع النفط والغاز والطاقة المتجددة",
+            id = 20,
+            title = "صناعة الذاكرات الترجمية وقواعد المصطلحات الآلية ببرنامج Trados",
             category = "تقنية وأنظمة CAT",
-            instructor = "المهندس طارق بن عيسى",
-            duration = "55 دقيقة",
-            level = "متقدم",
-            desc = "مصطلحات الحفر والاستكشاف البترولي، اتفاقيات تقاسم الإنتاج النفطي (PSA)، ومشاريع الهيدروجين الأخضر وسوناطراك."
-        ),
-        MasterclassCourse(
-            id = 7,
-            title = "المصطلحات الدوائية وترجمة تقارير التجارب السريرية",
-            category = "طبية ودوائية",
-            instructor = "د. سمية قندوز (دكتوراه صيدلة)",
-            duration = "50 دقيقة",
-            level = "متقدم",
-            desc = "بروتوكولات التجارب السريرية ومصطلحات اليقظة الدوائية (Pharmacovigilance)، والموافقات المستنيرة المعتمدة لدى منظمة الصحة العالمية."
-        ),
-        MasterclassCourse(
-            id = 8,
-            title = "صناعة الذاكرات الترجمية وقواعد المصطلحات في Trados",
-            category = "تقنية وأنظمة CAT",
-            instructor = "أ. نبيل قاسمي",
+            instructor = "المهندس نبيل قاسمي (مدرب أنظمة CAT)",
             duration = "45 دقيقة",
-            level = "متوسط",
+            level = "متوسط إلى متقدم",
             desc = "إنشاء وصيانة ملفات TMX وTBX، وضبط خوارزميات المطابقة التقريبية (Fuzzy Match)، وضمان الاتساق المصطلحي للمشاريع الضخمة."
         ),
         MasterclassCourse(
-            id = 9,
-            title = "ترجمة الميزانيات المالية والتقارير المحاسبية IFRS",
-            category = "مالية ومحاسبة",
-            instructor = "أ. رفيق سلطاني (خبير محاسبي)",
-            duration = "40 دقيقة",
-            level = "متقدم",
-            desc = "المعايير الدولية لإعداد التقارير المالية (IFRS)، القوائم المالية، حسابات الأرباح والخسائر، وتدقيق حسابات الشركات المتعددة الجنسيات."
-        ),
-        MasterclassCourse(
-            id = 10,
-            title = "استراتيجيات ترجمة خطابات القادة في القمم الدبلوماسية",
-            category = "فورية ودبلوماسية",
-            instructor = "د. كمال حركاتي",
-            duration = "60 دقيقة",
-            level = "احترافي",
-            desc = "فنون التعامل مع البلاغة السياسية، الكنايات الثقافية والمجازات الصعبة أثناء الخطابات المباشرة للرؤساء والدبلوماسيين في مجلس الأمن."
-        ),
-        MasterclassCourse(
-            id = 11,
-            title = "ترجمة براءات الاختراع والملكية الفكرية WIPO",
-            category = "عقود وقانون",
-            instructor = "أ. حنان بوشارب",
-            duration = "45 دقيقة",
-            level = "متقدم",
-            desc = "صياغة المطالبات القانونية (Claims) في براءات الاختراع، لغة الوصف التقني، ومتطلبات المعهد الوطني الجزائري للملكية الصناعية (INAPI)."
-        ),
-        MasterclassCourse(
-            id = 12,
-            title = "دبلجة الأفلام الوثائقية ومزامنة حركة الشفاه (Lip-Sync)",
-            category = "ترجمة مرئية",
-            instructor = "المخرج عادل زروق",
-            duration = "50 دقيقة",
-            level = "متقدم",
-            desc = "تقنيات كتابة سيناريو الدوبلاج، مطابقة حركات الشفاه الساكنة والمتحركة (Labials)، واختيار النبرة الصوتية الملائمة للشخصيات."
-        ),
-        MasterclassCourse(
-            id = 13,
-            title = "أخلاقيات مهنة المترجم المحلف والسرية المهنية",
-            category = "عقود وقانون",
-            instructor = "الأستاذ رشيد بوخالفة",
-            duration = "30 دقيقة",
-            level = "أساسي",
-            desc = "ميثاق الشرف للمترجمين، اتفاقيات عدم الإفصاح (NDA)، مسؤولية المترجم الجنائية والمدنية عن دقة النص المترجم المصدق."
-        ),
-        MasterclassCourse(
-            id = 14,
-            title = "الذكاء الاصطناعي التوليدي والتدقيق اللغوي البشري (MTPE)",
-            category = "تقنية وأنظمة CAT",
-            instructor = "د. أنيس بلول",
-            duration = "45 دقيقة",
-            level = "شامل",
-            desc = "أفضل الممارسات للتحرير اللاحق للترجمة الآلية (Machine Translation Post-Editing) ومعايير ISO 18587 لرفع الإنتاجية."
-        ),
-        MasterclassCourse(
-            id = 15,
-            title = "المصطلحات الاقتصادية في منظمة التجارة العالمية WTO",
-            category = "مالية ومحاسبة",
-            instructor = "د. مراد بن شريف",
-            duration = "40 دقيقة",
-            level = "متوسط",
-            desc = "اتفاقيات الجات، التعريفات الجمركية، الدعم الحكومي والإغراق التجاري، وسلاسل الإمداد والتوريد العالمية."
-        ),
-        MasterclassCourse(
-            id = 16,
-            title = "الترجمة في غرف العمليات والمستشفيات الطارئة",
-            category = "طبية ودوائية",
-            instructor = "د. نادية تلمساني",
-            duration = "40 دقيقة",
-            level = "احترافي",
-            desc = "الترجمة الشفهية الفورية بين الأطباء والمرضى في الحالات الحرجة، تشخيص الأعراض الطارئة، ونقل التعليمات الجراحية دون تأخير."
-        ),
-        MasterclassCourse(
-            id = 17,
-            title = "إدارة مشاريع الترجمة الاحترافية وتنسيق فرق العمل",
+            id = 21,
+            title = "ضمان الجودة ومطابقة المواصفة القياسية الدولية للترجمة ISO 17100:2015",
             category = "ضمان الجودة",
-            instructor = "أ. إيمان سعدي",
-            duration = "45 دقيقة",
-            level = "متقدم",
-            desc = "تقدير التكاليف، وضع الجداول الزمنية لتسليم المشاريع المتعددة اللغات، واختبار كفاءة المترجمين المستقلين وفق منهجيات دقيقة."
-        ),
-        MasterclassCourse(
-            id = 18,
-            title = "ترجمة النزاعات والتحكيم التجاري الدولي (CCI / LCIA)",
-            category = "عقود وقانون",
-            instructor = "د. فاروق بن عمارة",
-            duration = "55 دقيقة",
-            level = "احترافي",
-            desc = "وثائق هيئات التحكيم بباريس ولندن، لوائح الدعاوى والدفوع والشهادات المحلفة وأحكام الإلزام والتنفيذ القضائي."
-        ),
-        MasterclassCourse(
-            id = 19,
-            title = "الترجمة الصحفية والإعلامية وتحرير الأخبار العاجلة",
-            category = "فورية ودبلوماسية",
-            instructor = "الإعلامي بشير مهديد",
+            instructor = "د. فتيحة بوقرة (خبيرة الجودة والتدقيق اللغوي)",
             duration = "35 دقيقة",
-            level = "متوسط",
-            desc = "صياغة العناوين الصحفية الجذابة، ترجمة برقيات وكالات الأنباء العالمية (رويترز، فرانس برس)، وتجنب الانحياز الأيديولوجي."
-        ),
-        MasterclassCourse(
-            id = 20,
-            title = "توطين البرمجيات والمواقع وتطبيقات الهواتف الذكية (L10n)",
-            category = "تقنية وأنظمة CAT",
-            instructor = "المهندس أسامة بلقاسم",
-            duration = "50 دقيقة",
-            level = "متقدم",
-            desc = "التعامل مع ملفات JSON وXML، ضبط محاذاة اللغات من اليمين إلى اليسار (RTL)، وسياق السلاسل النصية لواجهات المستخدم (UI/UX)."
+            level = "شامل",
+            desc = "الإجراءات الإلزامية للمعيار الدولي ISO 17100:2015: التدقيق المستقل المزدوج (Four-Eyes Principle)، إدارة المصطلحات، وتوثيق المشاريع."
         )
     )
 }
