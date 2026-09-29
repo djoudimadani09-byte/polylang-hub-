@@ -1089,6 +1089,27 @@
   <!-- MAIN APP CONTAINER -->
   <div class="app-container">
 
+    <!-- GOINTERPREP AGHILAS SPECIAL OFFER BANNER (AGHILAS3M50 / AGHILAS-DZ) -->
+    <div style="background: linear-gradient(135deg, #1e3a8a, #1d4ed8); border-radius: 18px; padding: 18px 24px; margin-bottom: 22px; color: #fff; box-shadow: 0 10px 25px rgba(30, 58, 138, 0.25); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;">
+      <div style="flex: 1; min-width: 280px;">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom: 6px;">
+          <span style="background:#fef08a; color:#854d0e; font-size:11px; font-weight:800; padding:3px 10px; border-radius:20px;">🔥 عرض أغيلاس الحصري • AGHILAS-DZ</span>
+          <span style="background:#22c55e; color:#fff; font-size:11px; font-weight:800; padding:3px 8px; border-radius:6px;">خصم 50%</span>
+        </div>
+        <h3 style="margin:0 0 6px; font-size:18px; font-weight:800; color:#fff;">منصة تدريب المترجمين الذكية - GoInterPrep Offer</h3>
+        <p style="margin:0; font-size:13px; color:#dbeafe; line-height:1.5;">تخفيض 50% لطلبة معاهد الترجمة والمترجمين في الجزائر على مقصورة الترجمة الفورية والتتابعية واختبارات الكفاءة.</p>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div style="background:rgba(255,255,255,0.15); border:1px dashed #93c5fd; border-radius:10px; padding:8px 14px; text-align:center;">
+          <span style="display:block; font-size:10px; color:#bfdbfe; font-weight:700;">كود الخصم:</span>
+          <strong style="font-size:16px; letter-spacing:1px; color:#fef08a;">AGHILAS3M50</strong>
+        </div>
+        <button onclick="openModal('premiumSubModal'); if(typeof applyAghilasPromo==='function'){applyAghilasPromo();}" class="btn-primary-red" style="background:#f59e0b; color:#1e1b4b; font-weight:800; border:none; padding:12px 18px; border-radius:10px; cursor:pointer; font-size:13px; box-shadow:0 4px 12px rgba(245,158,11,0.4);">
+          ⚡ تفعيل كود الخصم (50%)
+        </button>
+      </div>
+    </div>
+
     <!-- HERO WELCOME & INTRODUCTION CARD (Matching Screenshot 100%) -->
     <div class="hero-welcome-card">
       <div class="hero-card-header">
@@ -2235,6 +2256,23 @@
         </p>
       </div>
 
+      <!-- AGHILAS PROMO CODE BOX (AGHILAS3M50) -->
+      <div style="background:#eff6ff; border:2px dashed #3b82f6; border-radius:12px; padding:12px 16px; margin-bottom:16px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:10px;">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="font-size:22px;">🏷️</span>
+          <div>
+            <div style="font-size:13px; font-weight:800; color:#1e40af;">عرض أغيلاس الحصري • AGHILAS-DZ</div>
+            <div style="font-size:11.5px; color:#3b82f6;">كود الخصم: <strong id="promo-code-display" style="color:#b45309; background:#fef3c7; padding:2px 6px; border-radius:4px;">AGHILAS3M50</strong> (خصم 50% على جميع الباقات)</div>
+          </div>
+        </div>
+        <div style="display:flex; gap:6px; align-items:center;">
+          <input type="text" id="aghilas-promo-input" value="AGHILAS3M50" style="padding:6px 10px; font-size:12px; border:1px solid #93c5fd; border-radius:6px; width:120px; text-align:center; font-weight:bold;">
+          <button id="btn-toggle-aghilas-promo" onclick="toggleAghilasPromo()" style="background:#22c55e; color:#fff; border:none; padding:6px 12px; border-radius:6px; font-size:12px; font-weight:bold; cursor:pointer;">
+            مفعّل (50%-) ✓
+          </button>
+        </div>
+      </div>
+
       <!-- 3 Subscription Tiers -->
       <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-bottom:18px;">
         
@@ -2991,6 +3029,43 @@
       closeModal('premiumSubModal');
       renderAcademyCards();
       alert(`✅ تم التحقق من عملية الدفع رقم (${tx}) بنجاح!\nتم تأكيد وصول التحويل إلى الحساب المعتمد (${OFFICIAL_PAYMENT_RIP} / ${OFFICIAL_PAYMENT_CCP}).\nتم فتح كامل باقات بريميوم VIP والـ 100 فيديو تعليمي لك الآن.`);
+    }
+
+    let isAghilasPromoActive = true;
+
+    function applyAghilasPromo() {
+      isAghilasPromoActive = true;
+      const btn = document.getElementById('btn-toggle-aghilas-promo');
+      const input = document.getElementById('aghilas-promo-input');
+      if (btn) {
+        btn.textContent = "مفعّل (50%-) ✓";
+        btn.style.background = "#22c55e";
+      }
+      if (input) input.value = "AGHILAS3M50";
+    }
+
+    function toggleAghilasPromo() {
+      const input = document.getElementById('aghilas-promo-input');
+      const val = input ? input.value.trim().toUpperCase() : '';
+      const btn = document.getElementById('btn-toggle-aghilas-promo');
+
+      if (val === 'AGHILAS3M50' || val === 'AGHILAS-DZ') {
+        isAghilasPromoActive = !isAghilasPromoActive;
+      } else {
+        isAghilasPromoActive = true;
+      }
+
+      if (btn) {
+        if (isAghilasPromoActive) {
+          btn.textContent = "مفعّل (50%-) ✓";
+          btn.style.background = "#22c55e";
+          alert("✓ تم تطبيق كود الخصم AGHILAS3M50 بنجاح!\nخصم 50% على جميع باقات اشتراك المترجمين.");
+        } else {
+          btn.textContent = "تفعيل الخصم";
+          btn.style.background = "#3b82f6";
+          alert("تم إلغاء تفعيل كود الخصم.");
+        }
+      }
     }
 
     function applyVipPromoCode() {

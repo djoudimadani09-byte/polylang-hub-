@@ -1,7 +1,5 @@
 package com.example.ui.screens
 
-import android.speech.tts.TextToSpeech
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -19,20 +17,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import com.example.AppTab
-import com.example.R
-import com.example.ui.theme.GoldYellow
-import com.example.ui.theme.RedDark
 import com.example.ui.theme.RedPrimary
 import com.example.ui.theme.SuccessGreen
-import java.util.Locale
+
+enum class TrainingCategoryFilter {
+    ALL, SIMULTANEOUS, CONSECUTIVE, SHADOWING, OPI, EXAM, ACADEMY
+}
 
 @Composable
 fun HomeScreen(
@@ -41,701 +39,337 @@ fun HomeScreen(
     onOpenOrderDialog: (serviceType: String) -> Unit,
     onOpenAuthDialog: () -> Unit
 ) {
-    val context = LocalContext.current
-    var tts by remember { mutableStateOf<TextToSpeech?>(null) }
-    var isSpeaking by remember { mutableStateOf(false) }
-    var showAboutDialog by remember { mutableStateOf(false) }
-    var showFounderDialog by remember { mutableStateOf(false) }
-
-    DisposableEffect(Unit) {
-        var speech: TextToSpeech? = null
-        speech = TextToSpeech(context) { status ->
-            if (status == TextToSpeech.SUCCESS) {
-                speech?.language = if (isArabic) Locale("ar") else Locale.ENGLISH
-            }
-        }
-        tts = speech
-        onDispose {
-            speech.stop()
-            speech.shutdown()
-        }
-    }
+    var showShadowingDialog by remember { mutableStateOf(false) }
+    var showOpiDialog by remember { mutableStateOf(false) }
+    var selectedCategory by remember { mutableStateOf(TrainingCategoryFilter.ALL) }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(Color(0xFFF8FAFC))
             .verticalScroll(rememberScrollState())
-            .padding(16.dp),
+            .padding(horizontal = 16.dp, vertical = 14.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        // cra.dz Style Quick Portal Bar
-        Surface(
-            modifier = Modifier.fillMaxWidth(),
-            color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f),
-            shape = RoundedCornerShape(12.dp),
-            border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f))
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 10.dp, vertical = 8.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .size(28.dp)
-                            .clip(RoundedCornerShape(6.dp))
-                            .background(RedPrimary),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text("P", color = Color.White, fontWeight = FontWeight.Black, fontSize = 14.sp)
-                    }
-                    Column {
-                        Text(
-                            text = if (isArabic) "بوابة الترجمة واللغات" else "Translation & Language Portal",
-                            fontSize = 11.5.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = RedPrimary
-                        )
-                        Text(
-                            text = "cra.dz / polylang-hub",
-                            fontSize = 9.sp,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                }
-
-                Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                    Surface(
-                        modifier = Modifier.clickable { onNavigate(AppTab.ACADEMY) },
-                        shape = RoundedCornerShape(50),
-                        color = RedPrimary.copy(alpha = 0.12f),
-                        border = androidx.compose.foundation.BorderStroke(1.dp, RedPrimary.copy(alpha = 0.4f))
-                    ) {
-                        Text(
-                            text = if (isArabic) "📊 الامتحان المعياري" else "Exam",
-                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-                            fontSize = 10.5.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = RedPrimary
-                        )
-                    }
-                    Surface(
-                        modifier = Modifier.clickable { onNavigate(AppTab.PRICING) },
-                        shape = RoundedCornerShape(50),
-                        color = SuccessGreen.copy(alpha = 0.12f),
-                        border = androidx.compose.foundation.BorderStroke(1.dp, SuccessGreen.copy(alpha = 0.4f))
-                    ) {
-                        Text(
-                            text = if (isArabic) "كيف تنضم" else "Join",
-                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-                            fontSize = 10.5.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = SuccessGreen
-                        )
-                    }
-                }
-            }
-        }
-
-        // 1. HERO WELCOME CARD (Matching Screenshot 100%)
+        // --- 1. GOINTERPREP AGHILAS SPECIAL OFFER HERO BANNER ---
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .testTag("hero_welcome_card"),
-            shape = RoundedCornerShape(20.dp),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-            elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),
-            border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
+                .clip(RoundedCornerShape(22.dp))
+                .clickable { onNavigate(AppTab.PRICING) }
+                .testTag("home_premium_banner"),
+            shape = RoundedCornerShape(22.dp),
+            colors = CardDefaults.cardColors(containerColor = Color(0xFF1E3A8A)),
+            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
         ) {
             Column(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(20.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                // Header Bar inside Card
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(RedPrimary.copy(alpha = 0.08f))
-                        .padding(horizontal = 16.dp, vertical = 10.dp),
+                    modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
+                    Surface(
+                        shape = RoundedCornerShape(20.dp),
+                        color = Color(0xFFFEF08A)
+                    ) {
+                        Text(
+                            text = if (isArabic) "🔥 عرض أغيلاس الحصري • AGHILAS-DZ" else "🔥 Exclusive Aghilas Offer",
+                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 5.dp),
+                            fontSize = 11.5.sp,
+                            fontWeight = FontWeight.ExtraBold,
+                            color = Color(0xFF854D0E)
+                        )
+                    }
+
+                    Surface(
+                        shape = RoundedCornerShape(12.dp),
+                        color = Color(0xFF2563EB)
+                    ) {
+                        Text(
+                            text = "50% OFF",
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Black,
+                            color = Color.White
+                        )
+                    }
+                }
+
+                Text(
+                    text = if (isArabic) "منصة تدريب المترجمين الذكية - GoInterPrep" else "Smart Interpreter Training Platform",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    color = Color.White
+                )
+
+                Text(
+                    text = if (isArabic)
+                        "تدرّب على الترجمة الفورية، التتابعية، والتظليل الصوتي بأحدث بيئات المحاكاة. كود التخفيض: AGHILAS3M50"
+                    else
+                        "Practice simultaneous, consecutive, and speech shadowing. Use promo code: AGHILAS3M50",
+                    fontSize = 12.5.sp,
+                    color = Color(0xFFDBEAFE),
+                    lineHeight = 18.sp
+                )
+
+                Button(
+                    onClick = { onNavigate(AppTab.PRICING) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(46.dp)
+                        .testTag("banner_upgrade_btn"),
+                    shape = RoundedCornerShape(12.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2563EB))
+                ) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        horizontalArrangement = Arrangement.Center
                     ) {
+                        Icon(Icons.Default.LocalOffer, contentDescription = null, tint = Color.White, modifier = Modifier.size(16.dp))
+                        Spacer(modifier = Modifier.width(6.dp))
                         Text(
-                            text = "🎙️ 🤖",
-                            fontSize = 14.sp
-                        )
-                        Text(
-                            text = if (isArabic) "فيديو الترحيب والتقديم" else "Welcome & Introduction Video",
-                            fontSize = 12.5.sp,
+                            text = if (isArabic) "الاستفادة من عرض 50% وتصفح الباقات ←" else "Claim 50% Offer & View Plans →",
+                            fontSize = 13.5.sp,
                             fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.onSurface
+                            color = Color.White
                         )
-                    }
-
-                    Surface(
-                        color = Color(0xFFDCFCE7),
-                        shape = RoundedCornerShape(50),
-                        border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF86EFAC))
-                    ) {
-                        Text(
-                            text = "📖 ISO 17100 معتمد",
-                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp),
-                            fontSize = 11.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color(0xFF166534)
-                        )
-                    }
-                }
-
-                Column(
-                    modifier = Modifier.padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(14.dp)
-                ) {
-                    // Robot Presenter Banner Image
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(180.dp)
-                            .clip(RoundedCornerShape(14.dp))
-                            .background(Color.Black),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.img_robot_presenter_1789724327311),
-                            contentDescription = "Robot Presenter",
-                            modifier = Modifier.fillMaxSize(),
-                            contentScale = ContentScale.Crop
-                        )
-
-                        // Play Button Overlay
-                        Box(
-                            modifier = Modifier
-                                .size(54.dp)
-                                .clip(CircleShape)
-                                .background(Color.White.copy(alpha = 0.9f))
-                                .clickable {
-                                    val text = if (isArabic)
-                                        "مرحباً بكم في مجمع بوليلانغ للترجمة المعتمدة والمؤتمرات الدولية بإشراف الأستاذ جودي مداني."
-                                    else
-                                        "Welcome to Polylang Hub, premier certified translation and international conference hub."
-                                    tts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, "greeting")
-                                    isSpeaking = true
-                                },
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.PlayArrow,
-                                contentDescription = "Play Greeting",
-                                tint = RedPrimary,
-                                modifier = Modifier.size(32.dp)
-                            )
-                        }
-
-                        // Bottom subtitle strip
-                        Surface(
-                            modifier = Modifier
-                                .align(Alignment.BottomCenter)
-                                .padding(bottom = 8.dp),
-                            color = Color.Black.copy(alpha = 0.75f),
-                            shape = RoundedCornerShape(6.dp)
-                        ) {
-                            Text(
-                                text = "👋 Welcome to Polylang Hub",
-                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 3.dp),
-                                fontSize = 11.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.White
-                            )
-                        }
-                    }
-
-                    // Content details
-                    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                        Text(
-                            text = if (isArabic) "مرحباً بكم في بوليلانغ (Welcome to Polylang)" else "Welcome to Polylang",
-                            style = MaterialTheme.typography.titleMedium,
-                            fontWeight = FontWeight.Black,
-                            color = MaterialTheme.colorScheme.onSurface
-                        )
-                        Text(
-                            text = if (isArabic)
-                                "خدمات الترجمة المحلفة، ترجمة كابينات المؤتمرات وتطوير المهارات اللغوية وفق أرقى معايير الجودة الدولية ISO 17100:2015."
-                            else
-                                "Certified sworn translation, interpretation, and professional language mastery to the highest quality standards.",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            lineHeight = 18.sp
-                        )
-                    }
-
-                    // Live Audio Greeting Box
-                    Surface(
-                        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
-                        shape = RoundedCornerShape(10.dp)
-                    ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(10.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                                Icon(Icons.Default.Mic, contentDescription = null, tint = RedPrimary, modifier = Modifier.size(16.dp))
-                                Text(
-                                    text = if (isArabic) "الترحيب الصوتي المباشر:" else "Live Audio Greeting:",
-                                    fontSize = 11.5.sp,
-                                    fontWeight = FontWeight.Bold
-                                )
-                            }
-
-                            Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                                Button(
-                                    onClick = {
-                                        tts?.language = Locale("ar")
-                                        tts?.speak("مرحباً بكم في بوليلانغ هوب للترجمة المعتمدة والمؤتمرات الدولية.", TextToSpeech.QUEUE_FLUSH, null, "ar")
-                                        isSpeaking = true
-                                    },
-                                    colors = ButtonDefaults.buttonColors(containerColor = RedPrimary),
-                                    shape = RoundedCornerShape(6.dp),
-                                    contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp),
-                                    modifier = Modifier.height(30.dp)
-                                ) {
-                                    Text("▶ استمع", fontSize = 11.sp, fontWeight = FontWeight.Bold)
-                                }
-
-                                OutlinedButton(
-                                    onClick = {
-                                        tts?.stop()
-                                        isSpeaking = false
-                                    },
-                                    shape = RoundedCornerShape(6.dp),
-                                    contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp),
-                                    modifier = Modifier.height(30.dp)
-                                ) {
-                                    Text("⏹️ إيقاف", fontSize = 11.sp)
-                                }
-                            }
-                        }
-                    }
-
-                    // Hero Action Buttons (Row 1)
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        Button(
-                            onClick = { onOpenOrderDialog(if (isArabic) "ترجمة قانونية محلفة" else "Certified Translation") },
-                            colors = ButtonDefaults.buttonColors(containerColor = RedPrimary),
-                            shape = RoundedCornerShape(8.dp),
-                            modifier = Modifier.weight(1.2f)
-                        ) {
-                            Icon(Icons.Default.Description, contentDescription = null, modifier = Modifier.size(16.dp))
-                            Spacer(modifier = Modifier.width(4.dp))
-                            Text(if (isArabic) "طلب ترجمة" else "Request", fontSize = 11.5.sp, fontWeight = FontWeight.Bold)
-                        }
-
-                        OutlinedButton(
-                            onClick = { onNavigate(AppTab.ACADEMY) },
-                            shape = RoundedCornerShape(8.dp),
-                            modifier = Modifier.weight(1f)
-                        ) {
-                            Text(if (isArabic) "الأكاديمية" else "Academy", fontSize = 11.5.sp, fontWeight = FontWeight.Bold)
-                        }
-
-                        OutlinedButton(
-                            onClick = onOpenAuthDialog,
-                            shape = RoundedCornerShape(8.dp),
-                            modifier = Modifier.weight(1f)
-                        ) {
-                            Text(if (isArabic) "تسجيل الدخول" else "Login", fontSize = 11.5.sp, fontWeight = FontWeight.Bold)
-                        }
-                    }
-
-                    // Hero Secondary Buttons (Row 2: About & Founder Profile)
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        OutlinedButton(
-                            onClick = { showAboutDialog = true },
-                            shape = RoundedCornerShape(8.dp),
-                            modifier = Modifier.weight(1f)
-                        ) {
-                            Text(if (isArabic) "ℹ️ عن بوليلانغ" else "ℹ️ About Us", fontSize = 11.5.sp, fontWeight = FontWeight.Bold)
-                        }
-                        OutlinedButton(
-                            onClick = { showFounderDialog = true },
-                            shape = RoundedCornerShape(8.dp),
-                            modifier = Modifier.weight(1f)
-                        ) {
-                            Text(if (isArabic) "👨‍🏫 سيرة المطور" else "👨‍🏫 Founder Bio", fontSize = 11.5.sp, fontWeight = FontWeight.Bold)
-                        }
-                    }
-
-                    // Official Platform Mission & Location Badges (No commercial registry numbers)
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalArrangement = Arrangement.spacedBy(6.dp)
-                    ) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(6.dp)
-                        ) {
-                            RegistryPill(
-                                label = if (isArabic) "📍 المقر: الجزائر العاصمة" else "📍 HQ: Algiers, Algeria",
-                                modifier = Modifier.weight(1f)
-                            )
-                            RegistryPill(
-                                label = if (isArabic) "🎓 منصة لطلبة الترجمة ومتعلمي اللغات" else "🎓 For Students & Learners",
-                                modifier = Modifier.weight(1f)
-                            )
-                        }
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(6.dp)
-                        ) {
-                            RegistryPill(
-                                label = if (isArabic) "⚖️ ترجمة معتمدة للمؤسسات والأفراد" else "⚖️ Certified Translation",
-                                modifier = Modifier.weight(1f)
-                            )
-                            RegistryPill(
-                                label = if (isArabic) "🌐 عربي • فرنسي • ألماني • إنجليزي" else "🌐 AR • FR • DE • EN",
-                                modifier = Modifier.weight(1f)
-                            )
-                        }
                     }
                 }
             }
         }
 
-        // 2. ROLE SELECTOR CARD (5 Roles with strict data isolation)
-        Card(
+        // --- 2. SECTION HEADER (Clean & Minimal) ---
+        Column(
             modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+            horizontalAlignment = Alignment.Start
         ) {
-            Column(
-                modifier = Modifier.padding(14.dp),
-                verticalArrangement = Arrangement.spacedBy(10.dp)
-            ) {
-                Column {
-                    Text(
-                        text = if (isArabic) ":الصفة والدور الحالي في المنصة" else "Active Role in Platform:",
-                        fontSize = 11.sp,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        text = if (isArabic) "بوابة متعددة الأدوار (5 صلاحيات معزولة)" else "Multi-Role Portal (5 Isolated Views)",
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Black,
-                        color = RedPrimary
-                    )
-                }
-
-                // 5 Roles across two rows
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(6.dp)
-                ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(6.dp)
-                    ) {
-                        RoleChip(
-                            label = "🔒 المشرف djoudimadani09",
-                            isActive = false,
-                            onClick = onOpenAuthDialog,
-                            modifier = Modifier.weight(1.3f)
-                        )
-                        RoleChip(
-                            label = "🎓 مترجم معتمد",
-                            isActive = false,
-                            onClick = { onNavigate(AppTab.SUBTITLING) },
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(6.dp)
-                    ) {
-                        RoleChip(
-                            label = "🏛️ طلبة الترجمة",
-                            isActive = true,
-                            onClick = { onNavigate(AppTab.ACADEMY) },
-                            modifier = Modifier.weight(1f)
-                        )
-                        RoleChip(
-                            label = "📚 متعلم لغات",
-                            isActive = false,
-                            onClick = { onNavigate(AppTab.ACADEMY) },
-                            modifier = Modifier.weight(1f)
-                        )
-                        RoleChip(
-                            label = "👤 عميل ترجمة",
-                            isActive = false,
-                            onClick = { onNavigate(AppTab.SERVICES) },
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
-                }
-            }
-        }
-
-        // 3. CRA.DZ ALIGNED SECTIONS: المنصات الإلكترونية، نشاطات، كيف تنضم
-        Text(
-            text = if (isArabic) "🏛️ المنصات والخدمات الإلكترونية (cra.dz)" else "Electronic Portals & Services",
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Bold
-        )
-
-        // Highlight: Placement Exam Banner Card
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable { onNavigate(AppTab.ACADEMY) },
-            shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(containerColor = RedPrimary.copy(alpha = 0.08f)),
-            border = androidx.compose.foundation.BorderStroke(1.5.dp, RedPrimary.copy(alpha = 0.35f))
-        ) {
-            Row(
-                modifier = Modifier.padding(14.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(46.dp)
-                        .clip(RoundedCornerShape(10.dp))
-                        .background(RedPrimary),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.School,
-                        contentDescription = null,
-                        tint = Color.White,
-                        modifier = Modifier.size(24.dp)
-                    )
-                }
-                Column(modifier = Modifier.weight(1f)) {
-                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                        Text(
-                            text = if (isArabic) "امتحان تحديد المستوى المعياري" else "Standard Placement Exam",
-                            style = MaterialTheme.typography.titleSmall,
-                            fontWeight = FontWeight.Bold,
-                            color = RedPrimary
-                        )
-                        Surface(
-                            shape = RoundedCornerShape(4.dp),
-                            color = RedPrimary
-                        ) {
-                            Text(
-                                text = "CEFR",
-                                color = Color.White,
-                                fontSize = 10.sp,
-                                fontWeight = FontWeight.Bold,
-                                modifier = Modifier.padding(horizontal = 4.dp, vertical = 1.dp)
-                            )
-                        }
-                    }
-                    Text(
-                        text = if (isArabic) "اختبارات تفاعلية حقيقية مع سلم تنقيط معتمد لتقييم كفاءتك المهنية" else "Interactive exams with realistic rubric scoring to assess your proficiency",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-                Icon(
-                    imageVector = Icons.Default.ArrowForward,
-                    contentDescription = null,
-                    tint = RedPrimary
-                )
-            }
-        }
-
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            PortalCard(
-                modifier = Modifier.weight(1f),
-                title = if (isArabic) "خدمات ونشاطات الترجمة" else "Translation Services",
-                desc = if (isArabic) "قانونية، طبية وأكاديمية" else "Legal, Medical & Academic",
-                icon = Icons.Default.Description,
-                badge = if (isArabic) "نشاطات" else "Services",
-                color = RedPrimary,
-                onClick = { onNavigate(AppTab.SERVICES) }
+            Text(
+                text = if (isArabic) "أنماط تدريب المترجم الشفهي" else "Interpreter Training Modes",
+                fontSize = 19.sp,
+                fontWeight = FontWeight.ExtraBold,
+                color = Color(0xFF0F172A)
             )
-            PortalCard(
-                modifier = Modifier.weight(1f),
-                title = if (isArabic) "المنصات الإلكترونية (SRT)" else "SRT Subtitling",
-                desc = if (isArabic) "توقيت وتصدير ملفات الترجمة" else "Sync & Export SRT",
-                icon = Icons.Default.Subtitles,
-                badge = "المنصات",
-                color = RedDark,
-                onClick = { onNavigate(AppTab.SUBTITLING) }
+            Spacer(modifier = Modifier.height(2.dp))
+            Text(
+                text = if (isArabic) "اختر المسار التدريبي المناسب لمستواك المهني والأكاديمي" else "Select the training path tailored to your proficiency level",
+                fontSize = 12.sp,
+                color = Color(0xFF64748B)
             )
         }
 
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            PortalCard(
-                modifier = Modifier.weight(1f),
-                title = if (isArabic) "الأكاديمية والماستركلاس" else "Academy & Courses",
-                desc = if (isArabic) "100 محاضرة متخصصة مع خبراء" else "100 Specialized Lectures",
+        // --- 3. CATEGORY FILTER CHIPS (Quick Filter) ---
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(6.dp)
+        ) {
+            FilterChip(
+                selected = selectedCategory == TrainingCategoryFilter.ALL,
+                onClick = { selectedCategory = TrainingCategoryFilter.ALL },
+                label = { Text(if (isArabic) "الكل" else "All", fontSize = 11.5.sp, fontWeight = FontWeight.Bold) }
+            )
+            FilterChip(
+                selected = selectedCategory == TrainingCategoryFilter.SIMULTANEOUS,
+                onClick = { selectedCategory = TrainingCategoryFilter.SIMULTANEOUS },
+                label = { Text(if (isArabic) "فورية" else "Simul", fontSize = 11.5.sp) }
+            )
+            FilterChip(
+                selected = selectedCategory == TrainingCategoryFilter.CONSECUTIVE,
+                onClick = { selectedCategory = TrainingCategoryFilter.CONSECUTIVE },
+                label = { Text(if (isArabic) "تتابعية" else "Consec", fontSize = 11.5.sp) }
+            )
+            FilterChip(
+                selected = selectedCategory == TrainingCategoryFilter.SHADOWING,
+                onClick = { selectedCategory = TrainingCategoryFilter.SHADOWING },
+                label = { Text(if (isArabic) "تظليل" else "Shadow", fontSize = 11.5.sp) }
+            )
+            FilterChip(
+                selected = selectedCategory == TrainingCategoryFilter.EXAM,
+                onClick = { selectedCategory = TrainingCategoryFilter.EXAM },
+                label = { Text(if (isArabic) "تقييم" else "Exam", fontSize = 11.5.sp) }
+            )
+        }
+
+        // --- 4. UNCLUTTERED TRAINING MODE CARDS ---
+
+        // CARD 1: الترجمة الفورية (Simultaneous Interpretation)
+        if (selectedCategory == TrainingCategoryFilter.ALL || selectedCategory == TrainingCategoryFilter.SIMULTANEOUS) {
+            CleanTrainingCard(
+                icon = Icons.Default.Groups,
+                iconBgColor = Color(0xFFFEE2E2),
+                iconTint = Color(0xFFDC2626),
+                title = if (isArabic) "الترجمة الفورية (Simultaneous)" else "Simultaneous Interpretation",
+                description = if (isArabic)
+                    "محاكاة مقصورة المؤتمرات الحية مع تدريب على تقليص الفارق الزمني (Décalage)."
+                else
+                    "Live conference booth simulation focusing on lag management and fast delivery.",
+                levelBadge = if (isArabic) "متقدم" else "Advanced",
+                levelBadgeBg = Color(0xFFFEE2E2),
+                levelBadgeText = Color(0xFF991B1B),
+                actionLabel = if (isArabic) "دخول مقصورة الترجمة ←" else "Enter Booth →",
+                onClick = { onNavigate(AppTab.ACADEMY) },
+                testTag = "card_simultaneous"
+            )
+        }
+
+        // CARD 2: الترجمة التتابعية (Consecutive Interpretation)
+        if (selectedCategory == TrainingCategoryFilter.ALL || selectedCategory == TrainingCategoryFilter.CONSECUTIVE) {
+            CleanTrainingCard(
+                icon = Icons.Default.Schedule,
+                iconBgColor = Color(0xFFFEF9C3),
+                iconTint = Color(0xFFB45309),
+                title = if (isArabic) "الترجمة التتابعية (Consecutive)" else "Consecutive Interpretation",
+                description = if (isArabic)
+                    "تدوين الملاحظات بنظام رموز روزان المعتمد والإلقاء السليم خلال فواصل الخطاب."
+                else
+                    "Note-taking via Rozan symbolics and structured delivery during pauses.",
+                levelBadge = if (isArabic) "متوسط" else "Intermediate",
+                levelBadgeBg = Color(0xFFFEF9C3),
+                levelBadgeText = Color(0xFF854D0E),
+                actionLabel = if (isArabic) "بدء التدريب التتابعي ←" else "Start Consecutive →",
+                onClick = { onNavigate(AppTab.ACADEMY) },
+                testTag = "card_consecutive"
+            )
+        }
+
+        // CARD 3: محاكاة النطق والتظليل الصوتي (Shadowing)
+        if (selectedCategory == TrainingCategoryFilter.ALL || selectedCategory == TrainingCategoryFilter.SHADOWING) {
+            CleanTrainingCard(
+                icon = Icons.Default.SyncAlt,
+                iconBgColor = Color(0xFFDCFCE7),
+                iconTint = Color(0xFF16A34A),
+                title = if (isArabic) "محاكاة النطق والتظليل (Shadowing)" else "Speech Shadowing",
+                description = if (isArabic)
+                    "ترديد كلام المتحدث الفصيح لصقل مخارج الحروف وبناء الطلاقة والذاكرة السمعية."
+                else
+                    "Repeat native speech in real-time to build vocal fluency and auditory memory.",
+                levelBadge = if (isArabic) "مبتدئ إلى متقدم" else "All Levels",
+                levelBadgeBg = Color(0xFFDCFCE7),
+                levelBadgeText = Color(0xFF166534),
+                actionLabel = if (isArabic) "تجربة التظليل الصوتي ←" else "Try Shadowing →",
+                onClick = { showShadowingDialog = true },
+                testTag = "card_shadowing"
+            )
+        }
+
+        // CARD 4: OPI - الترجمة الفورية عبر الهاتف
+        if (selectedCategory == TrainingCategoryFilter.ALL) {
+            CleanTrainingCard(
+                icon = Icons.Default.PhoneInTalk,
+                iconBgColor = Color(0xFFFEF3C7),
+                iconTint = Color(0xFFD97706),
+                title = if (isArabic) "الترجمة الهاتفية (OPI)" else "Over-the-Phone Interpreting",
+                description = if (isArabic)
+                    "سيناريوهات مهنية حية للمكالمات الطبية، الدبلوماسية، والطارئة بين لغات متعددة."
+                else
+                    "Simulated live medical, consular and emergency phone interpretation drills.",
+                levelBadge = if (isArabic) "محاكاة مهنية" else "Professional",
+                levelBadgeBg = Color(0xFFFEF3C7),
+                levelBadgeText = Color(0xFFB45309),
+                actionLabel = if (isArabic) "بدء السيناريو الهاتفي ←" else "Start Phone Drill →",
+                onClick = { showOpiDialog = true },
+                testTag = "card_opi"
+            )
+        }
+
+        // CARD 5: امتحان تشخيص الكفاءة وتحديد المستوى (CEFR)
+        if (selectedCategory == TrainingCategoryFilter.ALL || selectedCategory == TrainingCategoryFilter.EXAM) {
+            CleanTrainingCard(
                 icon = Icons.Default.School,
-                badge = if (isArabic) "تدريب" else "Training",
-                color = GoldYellow,
-                onClick = { onNavigate(AppTab.ACADEMY) }
-            )
-            PortalCard(
-                modifier = Modifier.weight(1f),
-                title = if (isArabic) "كيف تنضم والاشتراكات" else "How to Join & Plans",
-                desc = if (isArabic) "باقات واشتراكات بريدي موب وCCP" else "Plans via BaridiMob & CCP",
-                icon = Icons.Default.Payments,
-                badge = if (isArabic) "كيف تنضم" else "Join",
-                color = SuccessGreen,
-                onClick = { onNavigate(AppTab.PRICING) }
+                iconBgColor = Color(0xFFEDE9FE),
+                iconTint = Color(0xFF7C3AED),
+                title = if (isArabic) "اختبار الكفاءة المعياري (CEFR)" else "CEFR Diagnostic Exam",
+                description = if (isArabic)
+                    "تقييم أكاديمي دقيق لكفاءتك اللغوية والترجمية مع تقرير نتائج معتمد يرسل للمشرف."
+                else
+                    "Standardized proficiency test with instant evaluation scorecard dispatched to admin.",
+                levelBadge = if (isArabic) "تقييم أكاديمي" else "CEFR Test",
+                levelBadgeBg = Color(0xFFEDE9FE),
+                levelBadgeText = Color(0xFF6D28D9),
+                actionLabel = if (isArabic) "بدء الاختبار التشخيصي ←" else "Start Assessment →",
+                onClick = { onNavigate(AppTab.ACADEMY) },
+                testTag = "card_exam"
             )
         }
 
-        // 4. CONFERENCE INTERPRETATION BANNER
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable { onOpenOrderDialog(if (isArabic) "ترجمة فورية للمؤتمرات" else "Conference Interpretation") },
-            shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
-        ) {
-            Row(
-                modifier = Modifier.padding(16.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(14.dp)
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(52.dp)
-                        .clip(RoundedCornerShape(12.dp))
-                        .background(RedPrimary.copy(alpha = 0.12f)),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.HeadsetMic,
-                        contentDescription = null,
-                        tint = RedPrimary,
-                        modifier = Modifier.size(28.dp)
-                    )
-                }
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = if (isArabic) "تجهيز المؤتمرات والترجمة الفورية" else "Conference & Booth Interpretation",
-                        style = MaterialTheme.typography.titleSmall,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        text = if (isArabic) "كابينات عازلة للصوت، أجهزة استقبال لاسلكية، ومترجمون فوريون متخصصون." else "Soundproof booths, RF receivers, and senior simultaneous interpreters.",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-                Icon(
-                    imageVector = Icons.Default.ArrowForward,
-                    contentDescription = null,
-                    tint = RedPrimary
-                )
-            }
+        // CARD 6: أكاديمية اللغات والماستركلاس
+        if (selectedCategory == TrainingCategoryFilter.ALL) {
+            CleanTrainingCard(
+                icon = Icons.Default.VideoLibrary,
+                iconBgColor = Color(0xFFE0E7FF),
+                iconTint = Color(0xFF4338CA),
+                title = if (isArabic) "أكاديمية اللغات والماستركلاس" else "Language Masterclasses",
+                description = if (isArabic)
+                    "محاضرات مرئية منتقاة لنخبة الأساتذة والمترجمين المحلفين مع ذكر أصحاب الفيديوهات."
+                else
+                    "Curated video masterclasses with verified professors and channel authors.",
+                levelBadge = if (isArabic) "مكتبة معتمدة" else "Curated",
+                levelBadgeBg = Color(0xFFE0E7FF),
+                levelBadgeText = Color(0xFF3730A3),
+                actionLabel = if (isArabic) "تصفح المحاضرات واللغات ←" else "Browse Library →",
+                onClick = { onNavigate(AppTab.ACADEMY) },
+                testTag = "card_videos"
+            )
         }
+
+        Spacer(modifier = Modifier.height(16.dp))
     }
 
-    if (showAboutDialog) {
-        AboutUsDialog(
+    // --- INTERACTIVE DIALOGS FOR SHADOWING & OPI ---
+    if (showShadowingDialog) {
+        ShadowingPracticeDialog(
             isArabic = isArabic,
-            onDismiss = { showAboutDialog = false }
+            onDismiss = { showShadowingDialog = false }
         )
     }
 
-    if (showFounderDialog) {
-        FounderProfileDialog(
+    if (showOpiDialog) {
+        OpiScenariosDialog(
             isArabic = isArabic,
-            onDismiss = { showFounderDialog = false }
+            onDismiss = { showOpiDialog = false }
         )
     }
 }
 
+/**
+ * Modern, uncluttered card component styled cleanly like GoInterPrep
+ */
 @Composable
-private fun RegistryPill(label: String, modifier: Modifier = Modifier) {
-    Surface(
-        modifier = modifier,
-        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f),
-        shape = RoundedCornerShape(6.dp),
-        border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f))
-    ) {
-        Text(
-            text = label,
-            modifier = Modifier.padding(horizontal = 6.dp, vertical = 4.dp),
-            fontSize = 9.5.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-    }
-}
-
-@Composable
-private fun RoleChip(
-    label: String,
-    isActive: Boolean,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Surface(
-        modifier = modifier.clickable { onClick() },
-        color = if (isActive) RedPrimary.copy(alpha = 0.12f) else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
-        shape = RoundedCornerShape(50),
-        border = androidx.compose.foundation.BorderStroke(
-            1.dp,
-            if (isActive) RedPrimary else MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
-        )
-    ) {
-        Text(
-            text = label,
-            modifier = Modifier.padding(horizontal = 6.dp, vertical = 6.dp),
-            fontSize = 10.5.sp,
-            fontWeight = if (isActive) FontWeight.ExtraBold else FontWeight.Bold,
-            color = if (isActive) RedPrimary else MaterialTheme.colorScheme.onSurface,
-            maxLines = 1
-        )
-    }
-}
-
-@Composable
-private fun PortalCard(
-    modifier: Modifier = Modifier,
-    title: String,
-    desc: String,
+private fun CleanTrainingCard(
     icon: ImageVector,
-    badge: String,
-    color: Color,
-    onClick: () -> Unit
+    iconBgColor: Color,
+    iconTint: Color,
+    title: String,
+    description: String,
+    levelBadge: String,
+    levelBadgeBg: Color,
+    levelBadgeText: Color,
+    actionLabel: String,
+    onClick: () -> Unit,
+    testTag: String
 ) {
     Card(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxWidth()
-            .clickable { onClick() },
-        shape = RoundedCornerShape(14.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+            .clip(RoundedCornerShape(20.dp))
+            .clickable { onClick() }
+            .testTag(testTag),
+        shape = RoundedCornerShape(20.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFE2E8F0)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
     ) {
         Column(
-            modifier = Modifier.padding(14.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(18.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
+            // Top Row: Icon on Left/Right & Badge
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -743,53 +377,111 @@ private fun PortalCard(
             ) {
                 Box(
                     modifier = Modifier
-                        .size(40.dp)
-                        .clip(RoundedCornerShape(10.dp))
-                        .background(color.copy(alpha = 0.15f)),
+                        .size(46.dp)
+                        .clip(RoundedCornerShape(14.dp))
+                        .background(iconBgColor),
                     contentAlignment = Alignment.Center
                 ) {
-                    Icon(icon, contentDescription = null, tint = color, modifier = Modifier.size(22.dp))
+                    Icon(
+                        imageVector = icon,
+                        contentDescription = null,
+                        tint = iconTint,
+                        modifier = Modifier.size(24.dp)
+                    )
                 }
+
                 Surface(
-                    shape = RoundedCornerShape(6.dp),
-                    color = color.copy(alpha = 0.12f)
+                    shape = RoundedCornerShape(10.dp),
+                    color = levelBadgeBg
                 ) {
                     Text(
-                        text = badge,
-                        modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
-                        fontSize = 10.sp,
+                        text = levelBadge,
+                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
+                        fontSize = 11.5.sp,
                         fontWeight = FontWeight.Bold,
-                        color = color
+                        color = levelBadgeText
                     )
                 }
             }
-            Text(text = title, fontWeight = FontWeight.Bold, fontSize = 14.sp)
+
+            // Title
             Text(
-                text = desc,
-                fontSize = 11.sp,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                lineHeight = 15.sp,
-                minLines = 2,
-                maxLines = 2
+                text = title,
+                fontSize = 16.5.sp,
+                fontWeight = FontWeight.ExtraBold,
+                color = Color(0xFF0F172A)
             )
+
+            // 1-sentence Clear Description (No non-essential noise)
+            Text(
+                text = description,
+                fontSize = 12.5.sp,
+                color = Color(0xFF475569),
+                lineHeight = 18.sp
+            )
+
+            // Direct Action CTA Button
+            Button(
+                onClick = onClick,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(42.dp),
+                shape = RoundedCornerShape(10.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF1F5F9))
+            ) {
+                Text(
+                    text = actionLabel,
+                    fontSize = 12.5.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFF1E293B)
+                )
+            }
         }
     }
 }
 
+/**
+ * Interactive Dialog for Speech Shadowing (محاكاة النطق والتظليل اللغوي)
+ */
 @Composable
-fun AboutUsDialog(
+private fun ShadowingPracticeDialog(
     isArabic: Boolean,
     onDismiss: () -> Unit
 ) {
-    androidx.compose.ui.window.Dialog(onDismissRequest = onDismiss) {
+    var isPlayingAudio by remember { mutableStateOf(false) }
+    var isRecordingUser by remember { mutableStateOf(false) }
+    var selectedExerciseIndex by remember { mutableIntStateOf(0) }
+
+    val exercises = listOf(
+        Pair(
+            "International Trade & Diplomacy (EN)",
+            "Distinguished delegates, sustainable economic partnerships require transparent legal frameworks and reliable cross-border cooperation."
+        ),
+        Pair(
+            "Conférence de l'Énergie Propre (FR)",
+            "Mesdames et messieurs, la transition énergétique vers l'hydrogène vert constitue un pilier stratégique pour l'avenir économique mondial."
+        ),
+        Pair(
+            "الخطاب الافتتاحي لمنتدى الترجمة المعتمدة (AR)",
+            "يرتكز نجاح المترجم الشفهي في كابينات المؤتمرات على سرعة البديهة والتحكم الصوتي الدقيق ونقل المعنى دون أي تلكؤ."
+        )
+    )
+
+    Dialog(
+        onDismissRequest = onDismiss,
+        properties = DialogProperties(usePlatformDefaultWidth = false)
+    ) {
         Card(
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
-            shape = RoundedCornerShape(20.dp),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-            elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+            modifier = Modifier
+                .fillMaxWidth(0.95f)
+                .padding(vertical = 16.dp),
+            shape = RoundedCornerShape(24.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White)
         ) {
             Column(
-                modifier = Modifier.padding(20.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(20.dp),
                 verticalArrangement = Arrangement.spacedBy(14.dp)
             ) {
                 Row(
@@ -797,75 +489,145 @@ fun AboutUsDialog(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(
-                        text = if (isArabic) "ℹ️ عن منصة بوليلانغ (Polylang Hub)" else "ℹ️ About Polylang Hub",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 16.sp,
-                        color = RedPrimary
-                    )
-                    IconButton(onClick = onDismiss, modifier = Modifier.size(28.dp)) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .size(36.dp)
+                                .clip(RoundedCornerShape(10.dp))
+                                .background(Color(0xFFDCFCE7)),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(Icons.Default.SyncAlt, contentDescription = null, tint = Color(0xFF16A34A), modifier = Modifier.size(20.dp))
+                        }
+                        Text(
+                            text = if (isArabic) "محاكاة النطق والتظليل (Shadowing)" else "Speech Shadowing",
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                    IconButton(onClick = onDismiss) {
                         Icon(Icons.Default.Close, contentDescription = "Close")
+                    }
+                }
+
+                Text(
+                    text = if (isArabic)
+                        "استمع للمتحدث الفصيح وردّد فورياً لصقل مخارج الحروف وبناء الطلاقة وإيقاع الإلقاء في كابينة الترجمة."
+                    else
+                        "Listen to native speech and shadow concurrently to develop fluency, rhythm and booth delivery.",
+                    fontSize = 12.sp,
+                    color = Color(0xFF64748B)
+                )
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+                ) {
+                    exercises.forEachIndexed { idx, item ->
+                        FilterChip(
+                            selected = selectedExerciseIndex == idx,
+                            onClick = { selectedExerciseIndex = idx },
+                            label = { Text(if (idx == 0) "English" else if (idx == 1) "Français" else "العربية", fontSize = 11.sp) },
+                            modifier = Modifier.weight(1f)
+                        )
                     }
                 }
 
                 Surface(
                     shape = RoundedCornerShape(12.dp),
-                    color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f),
-                    border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
+                    color = Color(0xFFF8FAFC),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFE2E8F0)),
+                    modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text(
-                        text = if (isArabic)
-                            "بوليالنغ هي منصة ترجمة تساعد طلبة الترجمة ومتعلمي اللغات في تحسين مستواهم ، والذين يبحثون عن ترجمة سيحصلون على ترجمة من مترجمي المنصة وغيرها مقر العاصمة"
-                        else
-                            "Polylang Hub is a translation platform designed to assist translation students and language learners in elevating their professional proficiency. Individuals and enterprises seeking certified linguistic services receive sworn translations and conference interpretation directly from our platform translators and certified associates in Algiers.",
-                        modifier = Modifier.padding(14.dp),
-                        fontSize = 13.sp,
-                        lineHeight = 20.sp,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
+                    Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                        Text(
+                            text = exercises[selectedExerciseIndex].first,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF2563EB)
+                        )
+                        Text(
+                            text = exercises[selectedExerciseIndex].second,
+                            fontSize = 13.5.sp,
+                            lineHeight = 20.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = Color(0xFF0F172A)
+                        )
+                    }
                 }
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    RegistryPill(
-                        label = if (isArabic) "📍 المقر: الجزائر العاصمة" else "📍 HQ: Algiers, Algeria",
-                        modifier = Modifier.weight(1f)
-                    )
-                    RegistryPill(
-                        label = if (isArabic) "📧 djoudimadani09@gmail.com" else "📧 Admin Contact",
-                        modifier = Modifier.weight(1f)
-                    )
+                    Button(
+                        onClick = { isPlayingAudio = !isPlayingAudio },
+                        modifier = Modifier.weight(1f).height(46.dp),
+                        shape = RoundedCornerShape(12.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1D4ED8))
+                    ) {
+                        Icon(if (isPlayingAudio) Icons.Default.Pause else Icons.Default.PlayArrow, contentDescription = null)
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text(if (isPlayingAudio) "إيقاف الصوت" else "تشغيل المتحدث")
+                    }
+
+                    OutlinedButton(
+                        onClick = { isRecordingUser = !isRecordingUser },
+                        modifier = Modifier.weight(1f).height(46.dp),
+                        shape = RoundedCornerShape(12.dp),
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            contentColor = if (isRecordingUser) Color(0xFFDC2626) else Color(0xFF0F172A)
+                        )
+                    ) {
+                        Icon(if (isRecordingUser) Icons.Default.Stop else Icons.Default.Mic, contentDescription = null)
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text(if (isRecordingUser) "إيقاف التسجيل" else "سجّل صوتك")
+                    }
                 }
 
-                Button(
-                    onClick = onDismiss,
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(10.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
-                ) {
-                    Text(if (isArabic) "إغلاق" else "Close", fontWeight = FontWeight.Bold)
+                if (isRecordingUser) {
+                    Text(
+                        text = "● جاري التقاط صوتك للمحاكاة والمقارنة اللحظية...",
+                        fontSize = 11.sp,
+                        color = Color(0xFFDC2626),
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth()
+                    )
                 }
             }
         }
     }
 }
 
+/**
+ * Interactive Dialog for OPI (Over-the-Phone Interpreting)
+ */
 @Composable
-fun FounderProfileDialog(
+private fun OpiScenariosDialog(
     isArabic: Boolean,
     onDismiss: () -> Unit
 ) {
-    androidx.compose.ui.window.Dialog(onDismissRequest = onDismiss) {
+    var isCallActive by remember { mutableStateOf(false) }
+
+    Dialog(
+        onDismissRequest = onDismiss,
+        properties = DialogProperties(usePlatformDefaultWidth = false)
+    ) {
         Card(
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
-            shape = RoundedCornerShape(20.dp),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-            elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+            modifier = Modifier
+                .fillMaxWidth(0.95f)
+                .padding(vertical = 16.dp),
+            shape = RoundedCornerShape(24.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White)
         ) {
             Column(
-                modifier = Modifier.padding(20.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(20.dp),
                 verticalArrangement = Arrangement.spacedBy(14.dp)
             ) {
                 Row(
@@ -873,83 +635,62 @@ fun FounderProfileDialog(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(
-                        text = if (isArabic) "👨‍🏫 سيرة المطور والمؤسس" else "👨‍🏫 Founder & Developer Profile",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 16.sp,
-                        color = RedPrimary
-                    )
-                    IconButton(onClick = onDismiss, modifier = Modifier.size(28.dp)) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .size(36.dp)
+                                .clip(RoundedCornerShape(10.dp))
+                                .background(Color(0xFFFEF3C7)),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(Icons.Default.PhoneInTalk, contentDescription = null, tint = Color(0xFFD97706), modifier = Modifier.size(20.dp))
+                        }
+                        Text(
+                            text = "OPI - محاكاة الترجمة عبر الهاتف",
+                            fontSize = 16.5.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                    IconButton(onClick = onDismiss) {
                         Icon(Icons.Default.Close, contentDescription = "Close")
                     }
                 }
 
-                // Profile Avatar & Title
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .size(52.dp)
-                            .clip(CircleShape)
-                            .background(RedPrimary),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text("ج", color = Color.White, fontWeight = FontWeight.Black, fontSize = 22.sp)
-                    }
-                    Column {
-                        Text(
-                            text = if (isArabic) "الأستاذ جودي مداني" else "Djoudi Madani",
-                            fontWeight = FontWeight.Black,
-                            fontSize = 16.sp
-                        )
-                        Text(
-                            text = if (isArabic) "مؤسس منصة بوليلانغ ومطور المنظومة" else "Founder & Chief Software Architect",
-                            fontSize = 11.5.sp,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                }
+                Text(
+                    text = "سيناريو تجريبي واقعي: مكالمة طارئة في مركز استشفائي ومصالح الهجرة.",
+                    fontSize = 12.sp,
+                    color = Color(0xFF64748B)
+                )
 
                 Surface(
                     shape = RoundedCornerShape(12.dp),
-                    color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f),
-                    border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
+                    color = Color(0xFFF8FAFC),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFE2E8F0)),
+                    modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text(
-                        text = if (isArabic)
-                            "خريج معهد الترجمة بجامعة الجزائر 2 ماستر 2 ترجمة مؤسساتية عربي فرنسي ألماني ومبرمج لحلول تكنولوجية في مجالات متعددة"
-                        else
-                            "Graduate of the Institute of Translation at the University of Algiers 2 (Bouzaréah) with Master 2 in Institutional Translation (Arabic, French, German). Full-stack software engineer and developer of technological solutions across specialized domains.",
-                        modifier = Modifier.padding(14.dp),
-                        fontSize = 13.sp,
-                        lineHeight = 20.sp,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                }
+                    Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text("📞 الطرف الأول (المستشفى - EN):", fontSize = 11.5.sp, fontWeight = FontWeight.Bold, color = Color(0xFF2563EB))
+                        Text("\"Doctor: The patient presents severe abdominal pain and requires immediate allergy tests before surgery.\"", fontSize = 12.5.sp, color = Color(0xFF0F172A))
+                        
+                        HorizontalDivider(color = Color(0xFFE2E8F0))
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    RegistryPill(
-                        label = if (isArabic) "🏛️ معهد الترجمة - جامعة الجزائر 2" else "🏛️ Univ. of Algiers 2",
-                        modifier = Modifier.weight(1f)
-                    )
-                    RegistryPill(
-                        label = if (isArabic) "📜 ماستر 2 ترجمة مؤسساتية" else "📜 Master 2 Institutional",
-                        modifier = Modifier.weight(1f)
-                    )
+                        Text("🗣️ دورك كمترجم فوري OPI (نقل للطرف الثاني بالعربية):", fontSize = 11.5.sp, fontWeight = FontWeight.Bold, color = Color(0xFF16A34A))
+                        Text("\"الطبيب: المريض يعاني من آلام حادة بالبطن ويلزم إجراء اختبارات الحساسية فوراً قبل التدخل الجراحي.\"", fontSize = 12.5.sp, color = Color(0xFF0F172A))
+                    }
                 }
 
                 Button(
-                    onClick = onDismiss,
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(10.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
+                    onClick = { isCallActive = !isCallActive },
+                    modifier = Modifier.fillMaxWidth().height(46.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = if (isCallActive) Color(0xFFDC2626) else Color(0xFF16A34A))
                 ) {
-                    Text(if (isArabic) "إغلاق" else "Close", fontWeight = FontWeight.Bold)
+                    Icon(if (isCallActive) Icons.Default.CallEnd else Icons.Default.Call, contentDescription = null)
+                    Spacer(modifier = Modifier.width(6.dp))
+                    Text(if (isCallActive) "إنهاء المكالمة التدريبية" else "بدء اتصال المحاكاة الهاتفي")
                 }
             }
         }
