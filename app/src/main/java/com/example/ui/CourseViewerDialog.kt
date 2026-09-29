@@ -136,30 +136,46 @@ fun CourseViewerDialog(
                     color = MaterialTheme.colorScheme.onSurface
                 )
 
-                // Prominently Highlighted Creator / Instructor
+                // Prominently Highlighted Creator / Instructor with Verified Exclusivity Badge
                 Surface(
                     modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
-                    shape = RoundedCornerShape(8.dp),
-                    color = RedPrimary.copy(alpha = 0.08f),
-                    border = androidx.compose.foundation.BorderStroke(1.dp, RedPrimary.copy(alpha = 0.3f))
+                    shape = RoundedCornerShape(10.dp),
+                    color = Color(0xFFF0FDF4),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF86EFAC))
                 ) {
-                    Row(
-                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                    Column(
+                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+                        verticalArrangement = Arrangement.spacedBy(3.dp)
                     ) {
-                        Icon(Icons.Default.Person, contentDescription = null, tint = RedPrimary, modifier = Modifier.size(16.dp))
-                        Text(
-                            text = if (isArabic) "صاحب المحتوى / الأستاذ: " else "Creator / Instructor: ",
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = RedPrimary
-                        )
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = if (isArabic) "👤 المحاضر وصاحب المحتوى:" else "Creator / Instructor:",
+                                fontSize = 11.5.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color(0xFF166534)
+                            )
+                            Surface(
+                                shape = RoundedCornerShape(6.dp),
+                                color = Color(0xFFDCFCE7)
+                            ) {
+                                Text(
+                                    text = "✓ محتوى معتمد وموثق لصاحبه",
+                                    fontSize = 10.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = Color(0xFF15803D),
+                                    modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                                )
+                            }
+                        }
                         Text(
                             text = "${course.instructor} • ${course.duration}",
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = MaterialTheme.colorScheme.onSurface
+                            fontSize = 12.5.sp,
+                            fontWeight = FontWeight.Black,
+                            color = Color(0xFF0F172A)
                         )
                     }
                 }

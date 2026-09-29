@@ -391,5 +391,77 @@ fun DashboardScreen(
                 }
             }
         }
+
+        // Unified About Platform & Founder Section (One Single Clean Place)
+        Card(
+            modifier = Modifier.fillMaxWidth().testTag("dashboard_about_founder_card"),
+            shape = RoundedCornerShape(18.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFE2E8F0)),
+            elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
+        ) {
+            Column(modifier = Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = if (isArabic) "🏛️ عن المنصة والمؤسس" else "🏛️ About Platform & Founder",
+                        fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.titleSmall,
+                        color = Color(0xFF0F172A)
+                    )
+                    Surface(
+                        shape = RoundedCornerShape(6.dp),
+                        color = Color(0xFFDCFCE7)
+                    ) {
+                        Text(
+                            text = "ISO 17100 معتمد",
+                            fontSize = 10.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF15803D),
+                            modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                        )
+                    }
+                }
+
+                Text(
+                    text = if (isArabic)
+                        "الأستاذ جودي مداني (Djoudi Madani) • مؤسس ومدير عام منصة بوليلانغ هاب. حائز على شهادة ماستر 2 في الترجمة المؤسساتية من معهد الترجمة بجامعة الجزائر 2، تخصص عربي-فرنسي-ألماني، مع خبرة عملية واسعة في كابينات المؤتمرات والترجمة الشفهية الفورية والتتابعية."
+                    else
+                        "Prof. Djoudi Madani, Founder & Director of Polylang Hub. Master 2 in Institutional Translation from University of Algiers 2 (AR-FR-DE) with extensive conference interpretation experience.",
+                    fontSize = 12.sp,
+                    color = Color(0xFF475569),
+                    lineHeight = 18.sp
+                )
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Surface(
+                        shape = RoundedCornerShape(8.dp),
+                        color = Color(0xFFF1F5F9),
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Column(modifier = Modifier.padding(8.dp)) {
+                            Text("📍 المقر:", fontSize = 10.sp, color = Color(0xFF64748B), fontWeight = FontWeight.Bold)
+                            Text("الجزائر العاصمة", fontSize = 11.5.sp, fontWeight = FontWeight.ExtraBold, color = Color(0xFF1E293B))
+                        }
+                    }
+                    Surface(
+                        shape = RoundedCornerShape(8.dp),
+                        color = Color(0xFFF1F5F9),
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Column(modifier = Modifier.padding(8.dp)) {
+                            Text("📧 البريد المباشر:", fontSize = 10.sp, color = Color(0xFF64748B), fontWeight = FontWeight.Bold)
+                            Text(AdminEmailNotifier.ADMIN_EMAIL, fontSize = 10.sp, fontWeight = FontWeight.ExtraBold, color = Color(0xFF1E293B))
+                        }
+                    }
+                }
+            }
+        }
     }
 }

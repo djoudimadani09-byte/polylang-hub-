@@ -925,12 +925,8 @@
           </div>
         </a>
 
-        <!-- Controls: About, Status, Currency, Lang, Theme, User -->
+        <!-- Controls: Currency, Lang, Theme, User (No duplicate About button) -->
         <div class="nav-controls-row">
-          <button class="nav-pill nav-pill-red" onclick="openModal('aboutModal')">
-            <span>✦</span> <span id="i18n-about-btn">About Us</span>
-          </button>
-
           <!-- Currency Selector -->
           <select id="currency-dropdown" class="nav-pill" onchange="changeCurrency(this.value)">
             <option value="DZD">💰 🇩🇿 DZD (د.ج)</option>
@@ -969,118 +965,42 @@
 
       </div>
 
-      <!-- Secondary Sub-Navbar with CRA.DZ Official Sections (المنصات الإلكترونية، نشاطات، كيف تنضم، اتصل بنا) -->
-      <div class="nav-sub-bar">
+      <!-- Streamlined, Clean Navbar (Consolidated into single unified 'من نحن والمؤسس' button) -->
+      <div class="nav-sub-bar" style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; padding:8px 0;">
         <!-- 1. الرئيسية -->
-        <div class="cra-nav-item">
-          <button class="sub-nav-btn active" onclick="switchRole('client')">
-            <span>🏠</span> <span>الرئيسية</span>
-          </button>
-        </div>
+        <button class="sub-nav-btn active" onclick="switchRole('client')">
+          <span>🏠</span> <span>الرئيسية</span>
+        </button>
 
-        <!-- 2. من نحن (About) -->
-        <div class="cra-nav-item">
-          <button class="sub-nav-btn" onclick="openModal('aboutModal')">
-            <span>✦</span> <span>من نحن</span> <span>▾</span>
-          </button>
-          <div class="cra-dropdown-menu">
-            <div class="cra-dropdown-item" onclick="openModal('aboutModal')">
-              <span>🏛️</span> <span>عن المنصة ورسالتها المؤسساتية</span>
-            </div>
-            <div class="cra-dropdown-item" onclick="openModal('founderModal')">
-              <span>👨‍🏫</span> <span>سيرة المؤسس الأستاذ جودي مداني</span>
-            </div>
-            <div class="cra-dropdown-item" onclick="openHologramModal()">
-              <span>🤖</span> <span>فيديو الهولوغرام الإفتتاحي التفاعلي</span>
-            </div>
-            <div class="cra-dropdown-item" onclick="openModal('binauralModal')">
-              <span>🧠</span> <span>التحمل الذهني لمترجمي المؤتمرات (432Hz)</span>
-            </div>
-          </div>
-        </div>
+        <!-- 2. مقصورة ومحاكي الترجمة -->
+        <button class="sub-nav-btn" onclick="switchRole('student'); switchStudentTab('booth');">
+          <span>🎙️</span> <span>مقصورة الترجمة الفورية</span>
+        </button>
 
-        <!-- 3. المنصات الإلكترونية (cra.dz Core Highlight) -->
-        <div class="cra-nav-item">
-          <button class="sub-nav-btn" onclick="switchRole('student')">
-            <span>💻</span> <span>المنصات الإلكترونية</span> <span>▾</span>
-          </button>
-          <div class="cra-dropdown-menu">
-            <div class="cra-dropdown-item" onclick="openExamDirectly('trans')">
-              <span>🏆</span> <strong>امتحان تحديد المستوى المعياري</strong>
-            </div>
-            <div class="cra-dropdown-item" onclick="switchRole('student'); switchStudentTab('booth');">
-              <span>🎙️</span> <span>مقصورة ومحاكي الترجمة الفورية</span>
-            </div>
-            <div class="cra-dropdown-item" onclick="switchRole('student'); switchStudentTab('consec');">
-              <span>📝</span> <span>الترجمة التتابعية ونظام روزان (Rozan)</span>
-            </div>
-            <div class="cra-dropdown-item" onclick="switchRole('translator')">
-              <span>🎬</span> <span>استوديو الترجمة المرئية ومحرر SRT</span>
-            </div>
-            <div class="cra-dropdown-item" onclick="switchRole('enthusiast')">
-              <span>🎓</span> <span>أكاديمية الماستركلاس (100 فيديو)</span>
-            </div>
-            <div class="cra-dropdown-item" onclick="switchRole('client')">
-              <span>⚖️</span> <span>بوابة طلب وتتبع الترجمة المحلفة</span>
-            </div>
-          </div>
-        </div>
+        <!-- 3. أكاديمية اللغات والماستركلاس -->
+        <button class="sub-nav-btn" onclick="switchRole('enthusiast')">
+          <span>🎓</span> <span>مكتبة اللغات والماستركلاس</span>
+        </button>
 
-        <!-- 4. نشاطات وخدمات الترجمة -->
-        <div class="cra-nav-item">
-          <button class="sub-nav-btn" onclick="switchRole('client')">
-            <span>⚡</span> <span>نشاطات وخدمات</span> <span>▾</span>
-          </button>
-          <div class="cra-dropdown-menu">
-            <div class="cra-dropdown-item" onclick="openModal('orderModal')">
-              <span>⚖️</span> <span>الترجمة الرسمية والقانونية المحلفة</span>
-            </div>
-            <div class="cra-dropdown-item" onclick="openModal('orderModal')">
-              <span>🎙️</span> <span>تغطية المؤتمرات والترجمة الفورية</span>
-            </div>
-            <div class="cra-dropdown-item" onclick="openModal('orderModal')">
-              <span>⚡</span> <span>ترجمة قطاع الطاقة والمحروقات والهيدروجين</span>
-            </div>
-            <div class="cra-dropdown-item" onclick="openModal('orderModal')">
-              <span>🏥</span> <span>الترجمة الطبية والصيدلانية الدقيقة</span>
-            </div>
-            <div class="cra-dropdown-item" onclick="switchRole('enthusiast')">
-              <span>🎧</span> <span>جلسات التظليل الصوتي (Shadowing)</span>
-            </div>
-          </div>
-        </div>
+        <!-- 4. خدمات الترجمة الرسمية -->
+        <button class="sub-nav-btn" onclick="openModal('orderModal')">
+          <span>⚖️</span> <span>طلب ترجمة معتمدة</span>
+        </button>
 
-        <!-- 5. كيف تنضم (اشتراكات وعضوية المترجمين) -->
-        <div class="cra-nav-item">
-          <button class="sub-nav-btn" onclick="scrollToPricingPlans()">
-            <span>🤝</span> <span>كيف تنضم</span> <span>▾</span>
-          </button>
-          <div class="cra-dropdown-menu">
-            <div class="cra-dropdown-item" onclick="scrollToPricingPlans()">
-              <span>💳</span> <span>باقات اشتراك الطلبة والمحترفين (VIP)</span>
-            </div>
-            <div class="cra-dropdown-item" onclick="openModal('authModal')">
-              <span>🔑</span> <span>تسجيل حساب طالب / مترجم جديد</span>
-            </div>
-            <div class="cra-dropdown-item" onclick="openExamDirectly('trans')">
-              <span>📊</span> <span>اجتياز فحص القبول وتحديد المستوى</span>
-            </div>
-          </div>
-        </div>
+        <!-- 5. عرض أغيلاس الترويجي -->
+        <button class="sub-nav-btn" onclick="openModal('premiumSubModal'); applyAghilasPromo();" style="border-color:#3b82f6; color:#1d4ed8; font-weight:800;">
+          <span>🔥</span> <span>عرض أغيلاس (50%-)</span>
+        </button>
 
-        <!-- 6. اتصل بنا -->
-        <div class="cra-nav-item">
-          <button class="sub-nav-btn" onclick="openContactSupport()">
-            <span>📞</span> <span>اتصل بنا</span>
-          </button>
-        </div>
+        <!-- 6. امتحان تحديد المستوى -->
+        <button class="sub-nav-btn" onclick="openExamDirectly('trans')" style="background:linear-gradient(135deg, var(--crimson), #991b1b); color:#fff; border-color:var(--crimson);">
+          <span>📊</span> <span>تحديد المستوى CEFR</span>
+        </button>
 
-        <!-- Fast Action Direct Link: Placement Exam -->
-        <div class="cra-nav-item" style="margin-inline-start:auto;">
-          <button class="sub-nav-btn" onclick="openExamDirectly('trans')" style="background:linear-gradient(135deg, var(--crimson), #991b1b); color:#fff; border-color:var(--crimson);">
-            <span>🏆</span> <span>امتحان تحديد المستوى (ابدأ الآن)</span>
-          </button>
-        </div>
+        <!-- 7. زر موحد واحد فقط للمنصة والمؤسس (Single Unified Button: No Duplicates!) -->
+        <button class="sub-nav-btn" onclick="openModal('aboutModal')" style="margin-inline-start:auto; background:var(--crimson-light); color:var(--crimson-dark); border-color:var(--crimson); font-weight:800;">
+          <span>🏛️</span> <span>من نحن والمؤسس (الأستاذ جودي مداني)</span>
+        </button>
       </div>
 
     </div>
@@ -1166,19 +1086,16 @@
             </div>
           </div>
 
-          <!-- Hero Actions Buttons -->
+          <!-- Hero Actions Buttons (Clean & Organized) -->
           <div class="hero-actions-row">
-            <button class="btn-primary-red" onclick="openHologramModal()" style="background:linear-gradient(135deg, #0284c7, #0f172a); border:1px solid #38bdf8; box-shadow:0 4px 15px rgba(2, 132, 199, 0.35);">
-              <span>🤖</span> <span>فيديو الهولوغرام الإفتتاحي</span>
+            <button class="btn-primary-red" onclick="switchRole('student'); switchStudentTab('booth');" style="background:linear-gradient(135deg, #1d4ed8, #1e3a8a); box-shadow:0 4px 15px rgba(29, 78, 216, 0.35);">
+              <span>🎙️</span> <span>دخول مقصورة ومحاكي الترجمة</span>
             </button>
-            <button class="btn-primary-red" onclick="openModal('orderModal')">
-              <span>📄</span> <span id="i18n-btn-req-trans">Request Translation</span>
+            <button class="btn-outline-action" onclick="switchRole('enthusiast')" style="font-weight:800;">
+              <span>🎓</span> <span>مكتبة اللغات والماستركلاس</span>
             </button>
-            <button class="btn-outline-action" onclick="switchRole('enthusiast')">
-              <span>🎓</span> <span id="i18n-btn-academy">الأكاديمية (100 فيديو)</span>
-            </button>
-            <button class="btn-outline-action" onclick="openModal('founderModal')">
-              <span>👤</span> <span id="i18n-btn-founder">سيرة المؤسس (جودي مداني)</span>
+            <button class="btn-outline-action" onclick="openModal('orderModal')" style="font-weight:800;">
+              <span>⚖️</span> <span>طلب ترجمة معتمدة</span>
             </button>
           </div>
 
@@ -1243,8 +1160,8 @@
               المشاركة في الترجمة الشفهية في تظاهرات رياضية وثقافية.
             </p>
             <div style="display:flex; gap:8px; flex-wrap:wrap;">
-              <button class="btn-primary-red" style="padding:6px 14px; font-size:12px;" onclick="openModal('founderModal')">
-                📖 عرض السيرة الذاتية المفصلة والمسار المهني
+              <button class="btn-primary-red" style="padding:6px 14px; font-size:12px;" onclick="openModal('aboutModal')">
+                🏛️ عرض سيرة المؤسس ورسالة المنصة المعتمدة
               </button>
               <button class="btn-outline-action" style="padding:6px 14px; font-size:12px;" onclick="switchRole('enthusiast')">
                 🎓 استكشاف 100 فيديو تعليمي بالأكاديمية
@@ -2008,66 +1925,51 @@
     </div>
   </div>
 
-  <!-- 3. ABOUT US MODAL (Corrected Mission & Headquarters) -->
+  <!-- 3. UNIFIED ABOUT US & FOUNDER MODAL (One single comprehensive presentation) -->
   <div id="aboutModal" class="modal-backdrop">
-    <div class="modal-sheet">
+    <div class="modal-sheet" style="max-width:700px;">
       <div class="modal-close-x" onclick="closeModal('aboutModal')">✕</div>
-      <h3 style="font-size:18px; font-weight:800; margin-bottom:6px;">عن منصة بوليلانغ (About Polylang Hub)</h3>
-      <p style="font-size:12px; color:var(--text-dim); margin-bottom:16px;">
-        منصة الترجمة المتكاملة للتطوير اللغوي وخدمات الترجمة المعتمدة.
-      </p>
-
-      <div style="background:var(--bg-body); padding:16px; border-radius:12px; border:1px solid var(--border-line); font-size:13px; line-height:1.8;">
-        <p style="margin-bottom:12px;">
-          <strong>بوليلانغ (Polylang Hub):</strong> هي منصة ترجمة رائدة تهدف إلى مساعدة <strong>طلبة الترجمة ومتعلمي اللغات</strong> في تحسين مستواهم وتطوير مهاراتهم التطبيقية من خلال التدريب التفاعلي، ورشات محاكاة كابينات الترجمة الفورية، وتمارين الترجمة التتابعية.
-        </p>
-        <p style="margin-bottom:12px;">
-          وفي الوقت ذاته، تتيح للأفراد والمؤسسات <strong>الذين يبحثون عن ترجمة</strong> الحصول على ترجمة دقيقة واحترافية معتمدة من نخبة مترجمي المنصة المؤهلين في مختلف المجالات القانونية، التقنية، الطبية، وترجمة المؤتمرات.
-        </p>
-        <div style="margin-top:14px; padding-top:12px; border-top:1px dashed var(--border-line); font-size:12.5px;">
-          <div>📍 <strong>المقر الرئيسي:</strong> الجزائر العاصمة (Algiers, Algeria)</div>
-          <div>🌐 <strong>لغات التخصص:</strong> العربية، الفرنسية، الألمانية، الإنجليزية، والإسبانية.</div>
-          <div>📧 <strong>البريد الإلكتروني للإدارة:</strong> djoudimadani09@gmail.com</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 4. FOUNDER PROFILE MODAL (Djoudi Madani) -->
-  <div id="founderModal" class="modal-backdrop">
-    <div class="modal-sheet" style="max-width:680px;">
-      <div class="modal-close-x" onclick="closeModal('founderModal')">✕</div>
-      <div style="text-align:center; margin-bottom:18px;">
+      
+      <!-- Header -->
+      <div style="text-align:center; margin-bottom:16px;">
         <div style="width:72px; height:72px; border-radius:50%; background:linear-gradient(135deg, var(--crimson), #991b1b); color:white; font-size:26px; font-weight:900; display:flex; align-items:center; justify-content:center; margin:0 auto 10px; border:3px solid #fff; box-shadow:0 4px 15px var(--crimson-glow);">
           JM
         </div>
-        <h3 style="font-size:20px; font-weight:900; margin-bottom:4px;">سيرة الأستاذ جودي مداني (Djoudi Madani)</h3>
+        <h3 style="font-size:20px; font-weight:900; margin-bottom:4px;">منصة بوليلانغ والمؤسس الأستاذ جودي مداني</h3>
         <p style="font-size:13px; color:var(--crimson); font-weight:800; margin:0;">
-          المؤسس والمدير العام لمنصة بوليلانغ
+          المؤسس والمدير العام • خريج معهد الترجمة - جامعة الجزائر 2
         </p>
       </div>
 
+      <!-- Combined Body: Platform Mission + Founder Qualifications -->
       <div style="background:var(--bg-body); padding:18px; border-radius:12px; border:1px solid var(--border-line); font-size:13px; line-height:1.8; margin-bottom:16px;">
         <div style="margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--border-line);">
-          <div style="font-weight:900; color:var(--crimson); margin-bottom:4px;">🎓 المؤهل الأكاديمي:</div>
-          <div>خريج معهد الترجمة - <strong>جامعة الجزائر 2</strong> (Algiers 2 University - Institute of Translation).</div>
-          <div>حائز على شهادة <strong>ماستر 2 في الترجمة المؤسساتية (Institutional Translation)</strong> تخصص ثلاثي اللغات: <strong>العربية ⇄ الفرنسية ⇄ الألمانية</strong>.</div>
+          <div style="font-weight:900; color:var(--crimson); margin-bottom:4px;">🏛️ رسالة المنصة ورؤيتها:</div>
+          <div>
+            <strong>بوليلانغ هاب (Polylang Hub):</strong> منصة رائدة متخصصة في تدريب <strong>طلبة الترجمة ومتعلمي اللغات</strong> عبر ورشات تفاعلية ومحاكاة حية لكابينات الترجمة الفورية ونظام روزان التتابعي، مع توفير خدمات الترجمة المحلفة المعتمدة رسمياً للمؤسسات والأفراد وفق المعيار الدولي <strong>ISO 17100</strong>.
+          </div>
         </div>
 
-        <div>
-          <div style="font-weight:900; color:var(--gold); margin-bottom:4px;">💼 الخبرات المهنية:</div>
-          <div style="font-size:14px; font-weight:700; color:var(--text-main); padding:6px 0;">
-            المشاركة في الترجمة الشفهية في تظاهرات رياضية وثقافية
-          </div>
+        <div style="margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--border-line);">
+          <div style="font-weight:900; color:var(--crimson); margin-bottom:4px;">🎓 سيرة ومؤهلات المؤسس الأكاديمية:</div>
+          <div>• حائز على شهادة <strong>ماستر 2 في الترجمة المؤسساتية (Institutional Translation)</strong> تخصص ثلاثي اللغات: <strong>العربية ⇄ الفرنسية ⇄ الألمانية</strong>.</div>
+          <div>• خريج معهد الترجمة المرموق - <strong>جامعة الجزائر 2 (Algiers 2 University)</strong>.</div>
+          <div>• خبرة عملية في <strong>الترجمة الشفهية الفورية والتتابعية</strong> في المؤتمرات والتظاهرات الرياضية والثقافية الدولية.</div>
+        </div>
+
+        <div style="font-size:12.5px; background:var(--bg-card); padding:10px; border-radius:8px;">
+          <div>📍 <strong>المقر الرئيسي:</strong> الجزائر العاصمة (Algiers, Algeria)</div>
+          <div>🌐 <strong>لغات التخصص:</strong> العربية، الإنجليزية، الفرنسية، الألمانية، والإسبانية.</div>
+          <div>📧 <strong>البريد الإلكتروني المباشر:</strong> djoudimadani09@gmail.com</div>
         </div>
       </div>
 
       <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <button class="btn-primary-red" style="flex:1; justify-content:center;" onclick="closeModal('founderModal'); openModal('orderModal');">
-          📄 طلب ترجمة أو استشارة معتمدة مباشرة من الأستاذ جودي مداني
+        <button class="btn-primary-red" style="flex:1; justify-content:center;" onclick="closeModal('aboutModal'); openModal('orderModal');">
+          📄 طلب ترجمة معتمدة أو استشارة رسمية
         </button>
-        <button class="btn-outline-action" onclick="closeModal('founderModal'); switchRole('enthusiast');">
-          🎓 استكشاف محاضرات الأكاديمية
+        <button class="btn-outline-action" onclick="closeModal('aboutModal'); switchRole('student'); switchStudentTab('booth');">
+          🎙️ تجربة مقصورة الترجمة الفورية
         </button>
       </div>
     </div>
@@ -3462,6 +3364,7 @@
 
     // Modal Helpers (Opening / Closing)
     function openModal(id) {
+      if (id === 'founderModal') id = 'aboutModal';
       const modal = document.getElementById(id);
       if (modal) modal.classList.add('open');
     }

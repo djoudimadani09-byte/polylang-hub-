@@ -210,30 +210,43 @@ private fun CourseCard(
                 fontWeight = FontWeight.Bold
             )
 
-            // Prominent Author / Creator Badge
+            // Prominent Author / Creator Badge with Exclusivity Verification
             Surface(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(8.dp),
-                color = RedPrimary.copy(alpha = 0.08f),
-                border = androidx.compose.foundation.BorderStroke(1.dp, RedPrimary.copy(alpha = 0.25f))
+                shape = RoundedCornerShape(10.dp),
+                color = Color(0xFFF0FDF4),
+                border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFBBF7D0))
             ) {
-                Row(
-                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(6.dp)
-                ) {
-                    Icon(Icons.Default.Person, contentDescription = null, tint = RedPrimary, modifier = Modifier.size(16.dp))
-                    Text(
-                        text = if (isArabic) "صاحب المحتوى / الأستاذ: " else "Creator / Instructor: ",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 11.5.sp,
-                        color = RedPrimary
-                    )
+                Column(modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = if (isArabic) "👤 المحاضر / صاحب المساق:" else "Creator / Instructor:",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 11.sp,
+                            color = Color(0xFF166534)
+                        )
+                        Surface(
+                            shape = RoundedCornerShape(6.dp),
+                            color = Color(0xFFDCFCE7)
+                        ) {
+                            Text(
+                                text = "✓ محتوى معتمد وموثق",
+                                fontSize = 10.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color(0xFF15803D),
+                                modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                            )
+                        }
+                    }
                     Text(
                         text = course.instructor,
                         fontWeight = FontWeight.ExtraBold,
-                        fontSize = 12.sp,
-                        color = MaterialTheme.colorScheme.onSurface
+                        fontSize = 13.sp,
+                        color = Color(0xFF0F172A)
                     )
                 }
             }
@@ -251,13 +264,12 @@ private fun CourseCard(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(6.dp)
-                ) {
-                    Icon(Icons.Default.Person, contentDescription = null, tint = RedPrimary, modifier = Modifier.size(16.dp))
-                    Text(text = course.instructor, fontSize = 12.sp, fontWeight = FontWeight.Medium)
-                }
+                Text(
+                    text = "📚 مساق تخصصي في اللغات والترجمة",
+                    fontSize = 11.sp,
+                    color = Color(0xFF64748B),
+                    fontWeight = FontWeight.Medium
+                )
 
                 Surface(
                     color = GoldYellow.copy(alpha = 0.2f),
