@@ -3,6 +3,8 @@ package com.example
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -222,74 +224,80 @@ fun PolylangHubApp() {
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            when (currentTab) {
-                AppTab.HOME -> HomeScreen(
-                    isArabic = isArabic,
-                    onNavigate = { currentTab = it },
-                    onOpenOrderDialog = { service ->
-                        initialOrderServiceType = service
-                        showOrderDialog = true
-                    },
-                    onOpenAuthDialog = { showAuthDialog = true }
-                )
-                AppTab.SERVICES -> ServicesScreen(
-                    isArabic = isArabic,
-                    currency = currentCurrency,
-                    onOpenOrderDialog = { service ->
-                        initialOrderServiceType = service
-                        showOrderDialog = true
-                    },
-                    onOpenTermbase = { showTermbaseDialog = true }
-                )
-                AppTab.SUBTITLING -> SubtitlingScreen(
-                    isArabic = isArabic,
-                    cues = subtitleCues,
-                    onExportSrt = {
-                        coroutineScope.launch {
-                            snackbarHostState.showSnackbar(
-                                message = if (isArabic) "✓ تم تجهيز وتصدير ملف Subtitles.srt بنجاح" else "✓ Subtitles.srt successfully exported"
-                            )
+            Crossfade(
+                targetState = currentTab,
+                animationSpec = tween(280),
+                label = "TabCrossfade"
+            ) { targetTab ->
+                when (targetTab) {
+                    AppTab.HOME -> HomeScreen(
+                        isArabic = isArabic,
+                        onNavigate = { currentTab = it },
+                        onOpenOrderDialog = { service ->
+                            initialOrderServiceType = service
+                            showOrderDialog = true
+                        },
+                        onOpenAuthDialog = { showAuthDialog = true }
+                    )
+                    AppTab.SERVICES -> ServicesScreen(
+                        isArabic = isArabic,
+                        currency = currentCurrency,
+                        onOpenOrderDialog = { service ->
+                            initialOrderServiceType = service
+                            showOrderDialog = true
+                        },
+                        onOpenTermbase = { showTermbaseDialog = true }
+                    )
+                    AppTab.SUBTITLING -> SubtitlingScreen(
+                        isArabic = isArabic,
+                        cues = subtitleCues,
+                        onExportSrt = {
+                            coroutineScope.launch {
+                                snackbarHostState.showSnackbar(
+                                    message = if (isArabic) "✓ تم تجهيز وتصدير ملف Subtitles.srt بنجاح" else "✓ Subtitles.srt successfully exported"
+                                )
+                            }
                         }
-                    }
-                )
-                AppTab.ACADEMY -> AcademyScreen(
-                    isArabic = isArabic,
-                    courses = allCourses,
-                    userName = userName,
-                    userEmail = userEmail,
-                    onOpenCourse = { course ->
-                        // User clicked on course content -> open viewer!
-                        activeCourseForViewer = course
-                    },
-                    onClaimCertificate = { title ->
-                        certificateCourseTitle = title
-                        showCertificateDialog = true
-                    }
-                )
-                AppTab.PRICING -> PricingScreen(
-                    isArabic = isArabic,
-                    currency = currentCurrency,
-                    onSelectPlan = { plan, price ->
-                        pendingPaymentPlan = plan
-                        pendingPaymentPriceDzd = price
-                        showPaymentDialog = true
-                    }
-                )
-                AppTab.DASHBOARD -> DashboardScreen(
-                    isArabic = isArabic,
-                    currency = currentCurrency,
-                    userName = userName,
-                    userEmail = userEmail,
-                    userPlan = userPlan,
-                    userRole = userRole,
-                    orders = orders,
-                    onOpenAuthDialog = { showAuthDialog = true },
-                    onOpenOrderDialog = { service ->
-                        initialOrderServiceType = service
-                        showOrderDialog = true
-                    },
-                    onOpenAcademy = { currentTab = AppTab.ACADEMY }
-                )
+                    )
+                    AppTab.ACADEMY -> AcademyScreen(
+                        isArabic = isArabic,
+                        courses = allCourses,
+                        userName = userName,
+                        userEmail = userEmail,
+                        onOpenCourse = { course ->
+                            // User clicked on course content -> open viewer!
+                            activeCourseForViewer = course
+                        },
+                        onClaimCertificate = { title ->
+                            certificateCourseTitle = title
+                            showCertificateDialog = true
+                        }
+                    )
+                    AppTab.PRICING -> PricingScreen(
+                        isArabic = isArabic,
+                        currency = currentCurrency,
+                        onSelectPlan = { plan, price ->
+                            pendingPaymentPlan = plan
+                            pendingPaymentPriceDzd = price
+                            showPaymentDialog = true
+                        }
+                    )
+                    AppTab.DASHBOARD -> DashboardScreen(
+                        isArabic = isArabic,
+                        currency = currentCurrency,
+                        userName = userName,
+                        userEmail = userEmail,
+                        userPlan = userPlan,
+                        userRole = userRole,
+                        orders = orders,
+                        onOpenAuthDialog = { showAuthDialog = true },
+                        onOpenOrderDialog = { service ->
+                            initialOrderServiceType = service
+                            showOrderDialog = true
+                        },
+                        onOpenAcademy = { currentTab = AppTab.ACADEMY }
+                    )
+                }
             }
         }
     }

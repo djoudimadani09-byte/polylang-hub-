@@ -47,7 +47,7 @@ fun AcademyScreen(
             val matchesCategory = selectedCategory == (if (isArabic) "الكل" else "All") || course.category == selectedCategory
             val matchesSearch = searchQuery.isBlank() ||
                     course.title.contains(searchQuery, ignoreCase = true) ||
-                    course.instructor.contains(searchQuery, ignoreCase = true) ||
+                    course.category.contains(searchQuery, ignoreCase = true) ||
                     course.desc.contains(searchQuery, ignoreCase = true)
             matchesCategory && matchesSearch
         }
@@ -109,7 +109,7 @@ fun AcademyScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .testTag("course_search_field"),
-                placeholder = { Text(if (isArabic) "ابحث عن دورة أو محاضر..." else "Search courses or instructors...") },
+                placeholder = { Text(if (isArabic) "ابحث عن عنوان المحاضرة أو المساق..." else "Search lecture title or topic...") },
                 leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
                 trailingIcon = {
                     if (searchQuery.isNotEmpty()) {
@@ -209,47 +209,6 @@ private fun CourseCard(
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
             )
-
-            // Prominent Author / Creator Badge with Exclusivity Verification
-            Surface(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(10.dp),
-                color = Color(0xFFF0FDF4),
-                border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFBBF7D0))
-            ) {
-                Column(modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = if (isArabic) "👤 المحاضر / صاحب المساق:" else "Creator / Instructor:",
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 11.sp,
-                            color = Color(0xFF166534)
-                        )
-                        Surface(
-                            shape = RoundedCornerShape(6.dp),
-                            color = Color(0xFFDCFCE7)
-                        ) {
-                            Text(
-                                text = "✓ محتوى معتمد وموثق",
-                                fontSize = 10.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Color(0xFF15803D),
-                                modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
-                            )
-                        }
-                    }
-                    Text(
-                        text = course.instructor,
-                        fontWeight = FontWeight.ExtraBold,
-                        fontSize = 13.sp,
-                        color = Color(0xFF0F172A)
-                    )
-                }
-            }
 
             Text(
                 text = course.desc,

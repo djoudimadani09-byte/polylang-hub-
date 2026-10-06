@@ -192,9 +192,9 @@ fun DashboardScreen(
 
                         Text(
                             text = if (isArabic)
-                                "تدرب على الترجمة الفورية والتتابعية عبر مقصورة المحاكاة، واستخدم دفتر رموز روزان، واختبر مستواك في امتحان الترجمة الأكاديمي (10 أسئلة متدرجة)."
+                                "تدرب على الترجمة الفورية والتتابعية عبر مقصورة المحاكاة، واستخدم دفتر رموز روزان، واختبر مستواك في امتحان الترجمة الأكاديمي الشامل (30 سؤالاً متدرجاً)."
                             else
-                                "Practice simultaneous & consecutive interpretation, utilize Rozan notation symbols, and take the 10-question placement exam.",
+                                "Practice simultaneous & consecutive interpretation, utilize Rozan notation symbols, and take the 30-question placement exam.",
                             fontSize = 12.sp,
                             lineHeight = 17.sp,
                             color = MaterialTheme.colorScheme.onSurfaceVariant

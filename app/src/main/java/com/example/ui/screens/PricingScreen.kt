@@ -95,7 +95,7 @@ fun PricingScreen(
                 }
 
                 Text(
-                    text = if (isArabic) "منصة تدريب المترجمين الذكية - GoInterPrep" else "Smart Interpreter Training Platform",
+                    text = if (isArabic) "منصة تدريب المترجمين الذكية (عرض أغيلاس الخاص)" else "Smart Interpreter Training Platform (Aghilas Special)",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.White

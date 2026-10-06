@@ -585,9 +585,30 @@
     }
     .role-chip-red-pill:hover { background: var(--crimson-dark); color: white; }
 
-    /* Dynamic Content Views */
-    .view-panel { display: none; margin-bottom: 40px; }
-    .view-panel.active-view { display: block; }
+    /* Dynamic Content Views with Smooth Fade-In Visual Transition */
+    .view-panel {
+      display: none;
+      margin-bottom: 40px;
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    .view-panel.active-view {
+      display: block;
+      animation: viewPanelFadeIn 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes viewPanelFadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .fade-in-content {
+      animation: viewPanelFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
 
     /* Hologram & Futuristic Sci-Fi UI */
     .hologram-scan-bar {
@@ -1009,14 +1030,14 @@
   <!-- MAIN APP CONTAINER -->
   <div class="app-container">
 
-    <!-- GOINTERPREP AGHILAS SPECIAL OFFER BANNER (AGHILAS3M50 / AGHILAS-DZ) -->
+    <!-- AGHILAS SPECIAL OFFER BANNER (AGHILAS3M50 / AGHILAS-DZ) -->
     <div style="background: linear-gradient(135deg, #1e3a8a, #1d4ed8); border-radius: 18px; padding: 18px 24px; margin-bottom: 22px; color: #fff; box-shadow: 0 10px 25px rgba(30, 58, 138, 0.25); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;">
       <div style="flex: 1; min-width: 280px;">
         <div style="display:flex; align-items:center; gap:8px; margin-bottom: 6px;">
           <span style="background:#fef08a; color:#854d0e; font-size:11px; font-weight:800; padding:3px 10px; border-radius:20px;">🔥 عرض أغيلاس الحصري • AGHILAS-DZ</span>
           <span style="background:#22c55e; color:#fff; font-size:11px; font-weight:800; padding:3px 8px; border-radius:6px;">خصم 50%</span>
         </div>
-        <h3 style="margin:0 0 6px; font-size:18px; font-weight:800; color:#fff;">منصة تدريب المترجمين الذكية - GoInterPrep Offer</h3>
+        <h3 style="margin:0 0 6px; font-size:18px; font-weight:800; color:#fff;">منصة تدريب المترجمين الذكية - عرض أغيلاس الخاص (AGHILAS-DZ)</h3>
         <p style="margin:0; font-size:13px; color:#dbeafe; line-height:1.5;">تخفيض 50% لطلبة معاهد الترجمة والمترجمين في الجزائر على مقصورة الترجمة الفورية والتتابعية واختبارات الكفاءة.</p>
       </div>
       <div style="display:flex; align-items:center; gap:10px;">
@@ -1473,17 +1494,20 @@
                 🎯 اختر مسار الاختبار المعياري المطلوب:
               </div>
               <div style="display:flex; gap:8px; flex-wrap:wrap;" id="exam-track-buttons">
-                <button class="nav-pill active" id="btn-exam-tcf" onclick="switchExamTrack('tcf')">
-                  🇫🇷 TCF / DALF (الفرنسية الدولية)
-                </button>
-                <button class="nav-pill" id="btn-exam-goethe" onclick="switchExamTrack('goethe')">
-                  🇩🇪 Goethe-Zertifikat (الألمانية B2-C1)
-                </button>
-                <button class="nav-pill" id="btn-exam-ielts" onclick="switchExamTrack('ielts')">
-                  🇬🇧 IELTS Academic (الإنجليزية الأكاديمية)
+                <button class="nav-pill active" id="btn-exam-comprehensive" onclick="switchExamTrack('comprehensive')">
+                  🏆 الامتحان الشامل للترجمة واللغات (30 سؤالاً)
                 </button>
                 <button class="nav-pill" id="btn-exam-trans" onclick="switchExamTrack('trans')">
                   ⚖️ الترجمة المؤسساتية وكابينات المؤتمرات
+                </button>
+                <button class="nav-pill" id="btn-exam-tcf" onclick="switchExamTrack('tcf')">
+                  🇫🇷 TCF / DALF (الفرنسية)
+                </button>
+                <button class="nav-pill" id="btn-exam-ielts" onclick="switchExamTrack('ielts')">
+                  🇬🇧 IELTS Academic (الإنجليزية)
+                </button>
+                <button class="nav-pill" id="btn-exam-goethe" onclick="switchExamTrack('goethe')">
+                  🇩🇪 Goethe-Zertifikat (الألمانية)
                 </button>
               </div>
             </div>
@@ -2029,13 +2053,12 @@
         </video>
       </div>
 
-      <!-- Prominent Author Info Box -->
-      <div style="background:var(--crimson-light); border:1.5px solid rgba(229,57,53,0.3); border-radius:8px; padding:10px 14px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-        <div>
-          <div style="font-size:11px; color:var(--crimson); font-weight:900;">👤 صاحب الفيديو / القناة المعتمدة:</div>
-          <div style="font-size:13.5px; font-weight:800; color:var(--crimson-dark);" id="modal-video-speaker">الأستاذ جودي مداني</div>
+      <!-- Video Topic Box (Title and Academic Category Only - No teacher names) -->
+      <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:8px; padding:10px 14px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <div style="font-size:12px; color:var(--crimson); font-weight:800;">
+          📚 المحور الأكاديمي: <span id="modal-video-category-label" style="color:var(--text-main);">مساق لغوي تخصصي</span>
         </div>
-        <div style="font-size:11px; color:var(--text-dim);" id="modal-video-author-role">خبير الترجمة واللغات</div>
+        <div style="font-size:11.5px; color:var(--text-dim);" id="modal-video-code-ref">محتوى تعليمي معتمد</div>
       </div>
 
       <!-- Video Meta Details -->
@@ -2479,7 +2502,11 @@
       document.querySelectorAll('.role-chip').forEach(el => el.classList.remove('active'));
 
       const targetView = document.getElementById('view-' + role);
-      if (targetView) targetView.classList.add('active-view');
+      if (targetView) {
+        targetView.classList.remove('active-view');
+        void targetView.offsetWidth;
+        targetView.classList.add('active-view');
+      }
 
       const chip = document.getElementById('chip-' + role);
       if (chip) chip.classList.add('active');
@@ -2684,22 +2711,14 @@
 
             <h4 style="font-size:14px; font-weight:800; line-height:1.4; margin:0 0 6px; color:var(--text-main);">${item.title}</h4>
 
-            <!-- Prominently Highlight Video Author / Owner -->
-            <div style="background:var(--crimson-light); border:1px solid rgba(229,57,53,0.25); border-radius:6px; padding:6px 10px; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
-              <span style="font-size:13px;">👤</span>
-              <div style="font-size:11.5px; color:var(--crimson-dark); line-height:1.3;">
-                <span style="font-weight:900;">صاحب المحتوى / الأستاذ:</span> <strong>${escapeHtml(item.speaker || 'الأستاذ جودي مداني')}</strong>
-              </div>
-            </div>
-
             <p style="font-size:12px; color:var(--text-dim); line-height:1.5; margin:0 0 12px; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;">
               ${item.desc}
             </p>
           </div>
 
           <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-line); padding-top:10px; margin-top:8px;">
-            <div style="font-size:11px; color:var(--text-main); font-weight:700; max-width:180px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
-              👤 ${item.speaker || 'أكاديمية بوليلانغ'}
+            <div style="font-size:11.5px; color:var(--text-dim); font-weight:700;">
+              📖 ${item.categoryLabel || item.category || 'مساق تخصصي'}
             </div>
             <button class="${isLocked ? 'btn-outline-action' : 'btn-primary-red'}" style="padding:5px 12px; font-size:11.5px; ${isLocked ? 'border-color:#f59e0b; color:#d97706;' : ''}" onclick="handleCardVideoClick('${item.id}')">
               ${isLocked ? 'فتح بـ VIP 🔒' : 'مشاهدة الآن ▶'}
@@ -2799,11 +2818,10 @@
 
       document.getElementById('modal-video-title').textContent = item.title;
       document.getElementById('modal-video-desc').textContent = item.desc;
-      const spkText = item.speaker || "الأستاذ جودي مداني";
-      const spkEl = document.getElementById('modal-video-speaker');
-      if (spkEl) spkEl.textContent = spkText;
-      const roleEl = document.getElementById('modal-video-author-role');
-      if (roleEl) roleEl.textContent = item.authorRole || (item.categoryLabel || "خبير اللغات والترجمة");
+      const catEl = document.getElementById('modal-video-category-label');
+      if (catEl) catEl.textContent = item.categoryLabel || item.category || "مساق تخصصي";
+      const codeRef = document.getElementById('modal-video-code-ref');
+      if (codeRef) codeRef.textContent = item.langLabel || "محتوى تعليمي معتمد";
 
       const ytLink = document.getElementById('modal-video-youtube-link');
       if (ytLink) {
@@ -3488,9 +3506,22 @@
 
     // --- TRANSLATION STUDENTS LAB LOGIC ---
     function switchStudentTab(tab) {
-      document.getElementById('student-booth-box').style.display = tab === 'booth' ? 'block' : 'none';
-      document.getElementById('student-consec-box').style.display = tab === 'consec' ? 'block' : 'none';
-      document.getElementById('student-exam-box').style.display = tab === 'exam' ? 'block' : 'none';
+      const boxes = {
+        booth: document.getElementById('student-booth-box'),
+        consec: document.getElementById('student-consec-box'),
+        exam: document.getElementById('student-exam-box')
+      };
+      Object.keys(boxes).forEach(k => {
+        const box = boxes[k];
+        if (box) {
+          box.style.display = k === tab ? 'block' : 'none';
+          if (k === tab) {
+            box.classList.remove('fade-in-content');
+            void box.offsetWidth;
+            box.classList.add('fade-in-content');
+          }
+        }
+      });
 
       document.getElementById('btn-tab-booth').classList.toggle('active', tab === 'booth');
       document.getElementById('btn-tab-consec').classList.toggle('active', tab === 'consec');
@@ -3700,6 +3731,342 @@
 
     // --- REAL MULTI-TRACK PLACEMENT EXAMS (TCF, Goethe, IELTS, Institutional Translation) ---
     const multiTrackExams = {
+      comprehensive: {
+        title: "🏆 امتحان تحديد المستوى الشامل في الترجمة واللغات (30 سؤالاً معتمداً)",
+        desc: "اختبار أكاديمي ومعياري متكامل يضم 30 سؤالاً وتدريباً متدرجاً يغطي المصطلحات القانونية والدبلوماسية، تقنيات كابينات المؤتمرات، نظام روزان، والترجمة السمعية البصرية ومواصفة ISO 17100.",
+        questions: [
+          {
+            q: "ما هي الترجمة المؤسساتية المعتمدة لمصطلح 'Plenipotentiary' في المعاهدات والاتفاقيات الدولية؟",
+            cat: "المعجم الدبلوماسي والدولي",
+            options: [
+              "مفوض فوق العادة ومطلق الصلاحية",
+              "وزير مفوض مؤقت",
+              "مبعوث استطلاعي خاص",
+              "ملحق ثقافي معتمد"
+            ],
+            answer: 0
+          },
+          {
+            q: "في العقود والاتفاقيات التجارية الدولية، ما الفرق الجوهري الدقيق بين 'Force Majeure' و 'Hardship'؟",
+            cat: "الصياغة القانونية والعقود",
+            options: [
+              "Force Majeure تجعل التنفيذ مستحيلاً تماماً، بينما Hardship تجعله مرهقاً ومختلاً اقتصادياً بصورة غير متوقعة",
+              "Hardship تطبق فقط في النزاعات الجنائية",
+              "كلاهما يعني دفع غرامة تأخير بدون إعفاء",
+              "Force Majeure تشترط خطأ وإهمال أحد الأطراف"
+            ],
+            answer: 0
+          },
+          {
+            q: "ما هي القاعدة الذهبية الأولى لنظام روزان (Jean-François Rozan) في التدوين للترجمة التتابعية؟",
+            cat: "تقنيات الترجمة التتابعية",
+            options: [
+              "تدوين الفكرة والمعنى بدلاً من الكلمات الحرفية (Transposition de l'idée plutôt que du mot)",
+              "كتابة كل كلمة كاملة دون اختصارات",
+              "الاعتماد على التسجيل الصوتي بدون رموز",
+              "ترجمة الجملة إلى الإنجليزية أولاً قبل التدوين"
+            ],
+            answer: 0
+          },
+          {
+            q: "ما هو المدى الزمني المثالي للفارق الصوتي (Décalage / Ear-Voice Span) في كابينات المؤتمرات الفورية؟",
+            cat: "الترجمة الفورية للمؤتمرات",
+            options: [
+              "بين 2.0 إلى 4.0 ثوانٍ (حسب بنية اللغة المستهدفة وموضع الفعل)",
+              "15 إلى 25 ثانية لتجميع الفقرة كاملة",
+              "0.1 ثانية مطابقة فورية تامة بدون تأخير",
+              "دقيقة كاملة بعد انتهاء المتحدث"
+            ],
+            answer: 0
+          },
+          {
+            q: "ما المقابل العربي الأدق للعبارة القانونية اللاتينية 'Mutatis Mutandis' في نصوص المراسيم والاتفاقيات؟",
+            cat: "المصطلحات القانونية اللاتينية",
+            options: [
+              "مع مراعاة التعديلات اللازمة / مع ما يقتضيه الفارق",
+              "إلى الأبد وبدون قيد أو شرط",
+              "بحسن نية مطلقة",
+              "بأثر رجعي فوري"
+            ],
+            answer: 0
+          },
+          {
+            q: "وفقاً للمواصفة القياسية العالمية ISO 17100:2015 الخاصة بخدمات الترجمة، ما هي مرحلة 'Revision' الإلزامية؟",
+            cat: "معايير الجودة والاعتماد ISO",
+            options: [
+              "فحص ثنائي اللغة يقارن النص الهدف بالنص المصدر بواسطة مدقق ثانٍ مؤهل ومستقل",
+              "التدقيق الإملائي الآلي عبر برنامج Word",
+              "مراجعة المترجم نفسه لنصه بعد أسبوع",
+              "طباعة الوثيقة وختمها مباشرة دون فحص"
+            ],
+            answer: 0
+          },
+          {
+            q: "في معايير ترجمة الشاشة (Subtitling)، ما هو الحد الأقصى الموصى به لعدد الأحرف في السطر الواحد (CPL) لخطوط اللغات اللاتينية والعربية؟",
+            cat: "الترجمة المرئية (Subtitling)",
+            options: [
+              "بين 37 و 42 حرفاً (Characters Per Line)",
+              "65 إلى 80 حرفاً",
+              "15 حرفاً كحد أقصى",
+              "لا يوجد حد للأحرف"
+            ],
+            answer: 0
+          },
+          {
+            q: "ماذا يُقصد بظاهرة 'False Friends' (Faux Amis) في لغويات الترجمة المقارنة؟",
+            cat: "اللسانيات المقارنة والأخطاء الشائعة",
+            options: [
+              "كلمات تتشابه في الرسم أو النطق بين لغتين وتختلف كلياً في المعنى والدلالة",
+              "مترجمون يرتكبون أخطاء مقصودة",
+              "نصوص غير قابلة للترجمة الآلية",
+              "أخطاء مطبعية ناتجة عن برامج المسح الضوئي"
+            ],
+            answer: 0
+          },
+          {
+            q: "ما هي الوظيفة الأساسية لذاكرة الترجمة (Translation Memory - TM) في أدوات الترجمة بمساعدة الحاسوب (CAT Tools)؟",
+            cat: "تقنيات وأنظمة CAT Tools",
+            options: [
+              "تخزين أزواج المقاطع النصية المترجمة (Segments) لإعادة استخدامها وتسريع الإنجاز وضمان الاتساق",
+              "الترجمة الفورية للصوت بدون تدخل بشري",
+              "تنسيق الصور والجداول الحسابية",
+              "حماية الملف من الفيروسات"
+            ],
+            answer: 0
+          },
+          {
+            q: "في اللغة الإنجليزية القانونية، أي التراكيب التالية يمثل الشرط المعكوس الرسمي (Inverted Conditional) الأكثر رصانة؟",
+            cat: "الصياغة الإنجليزية المتقدمة",
+            options: [
+              "Had the parties fulfilled their reciprocal covenants, no breach would have occurred.",
+              "If the parties fulfilled yesterday, no breach occurred.",
+              "Should the parties had fulfilled covenants, they avoided breach.",
+              "Were the breach occurring, we will litigate."
+            ],
+            answer: 0
+          },
+          {
+            q: "Dans la phrase: 'Bien qu'il _______ beaucoup d'efforts, il n'a pas réussi à convaincre le jury.', quel mode et temps convient?",
+            cat: "TCF / القواعد واللسانيات الفرنسية",
+            options: [
+              "ait fait (Subjonctif passé)",
+              "a fait (Indicatif passé composé)",
+              "faisait (Imparfait)",
+              "aura fait (Futur antérieur)"
+            ],
+            answer: 0
+          },
+          {
+            q: "Welche Umformung des Passivsatzes mit Modalverb ist im juristischen Deutsch korrekt? 'Dieser Vertrag muss unverzüglich unterzeichnet werden.'",
+            cat: "الألمانية الأكاديمية والتراكيب القانونية",
+            options: [
+              "Dieser Vertrag ist unverzüglich zu unterzeichnen.",
+              "Dieser Vertrag lässt unverzüglich unterzeichnen.",
+              "Dieser Vertrag hat unverzüglich unterzeichnet.",
+              "Dieser Vertrag wird unverzüglich unterzeichnen."
+            ],
+            answer: 0
+          },
+          {
+            q: "ما هو المفهوم الأكاديمي لأسلوب 'Hedging' في ترجمة الأبحاث العلمية والتقارير الاستراتيجية؟",
+            cat: "التحوط الدلالي والأكاديمي",
+            options: [
+              "استخدام صياغات التلطيف والاحتراس المعرفي (مثل: may suggest, tends to indicate) لتجنب الجزم المطلق",
+              "حذف الجمل الاستنتاجية غير المؤكدة",
+              "وضع هوامش اعتراضية لنقد الكاتب الأصلي",
+              "استبدال الأرقام بنسب تقريبية غير دقيقة"
+            ],
+            answer: 0
+          },
+          {
+            q: "ما هي الغاية الإلزامية من تقنية الترجمة العكسية (Back-Translation) في بروتوكولات الأدوية والتجارب السريرية؟",
+            cat: "الترجمة الطبية والدوائية",
+            options: [
+              "التحقق المستقل التام من دقة الجرعات وتعليمات السلامة عبر مترجم ثانٍ لا يرى النص الأصلي",
+              "مضاعفة التكاليف الإدارية للمشروع",
+              "ترجمة المنشور الطبي إلى لغات عامية محلية",
+              "استيفاء شكليات التنسيق المطبعي فقط"
+            ],
+            answer: 0
+          },
+          {
+            q: "في مشاريع التحرير اللاحق للترجمة الآلية (MTPE)، ما الفارق المعتمد وفق ISO 18587 بين Light MTPE و Full MTPE؟",
+            cat: "الترجمة الآلية والتحرير اللاحق MTPE",
+            options: [
+              "Light يضمن مجرد الفهم وتصحيح الأخطاء الفادحة، بينما Full يضمن جودة نص تضاهي الترجمة البشرية التامة بلاغياً",
+              "Light مجاني و Full مدفوع",
+              "Light للنصوص القصيرة و Full للكتب",
+              "لا يوجد فرق عملي بينهما"
+            ],
+            answer: 0
+          },
+          {
+            q: "في كابينات المؤتمرات الدولية، ما هو الفاصل الزمني الموصى به دولياً (AIIC) لتبديل المترجمين الفوريين؟",
+            cat: "معايير ممارسة الترجمة الفورية",
+            options: [
+              "كل 20 إلى 30 دقيقة لكل مترجم لتفادي الإجهاد الإدراكي وتراجع جودة التركيز",
+              "كل ساعتين دون توقف",
+              "كل 5 دقائق لمنع الملل",
+              "يوم كامل بالتناوب الصباحي والمسائي"
+            ],
+            answer: 0
+          },
+          {
+            q: "ما المقابل القانوني المعتمد في العقود والمراسيم الدولية للعبارة اللاتينية 'Prima Facie'؟",
+            cat: "المصطلحات القضائية اللاتينية",
+            options: [
+              "للوهلة الأولى / ظاهر الأمر والأدلة المبدئية الراجحة",
+              "بأثر رجعي مطلق",
+              "حكم نهائي بات غير قابل للاستئناف",
+              "وفق مبدأ تضارب المصالح"
+            ],
+            answer: 0
+          },
+          {
+            q: "ما هو المفهوم المالي لمصطلح 'Letter of Credit (L/C)' في المعاملات البنكية والتجارية العابرة للحدود؟",
+            cat: "الترجمة المصرفية والمالية",
+            options: [
+              "خطاب الاعتماد المستندي الذي يضمن فيه بنك المشتري سداد القيمة للمصدر بمجرد تقديم المستندات المطابقة",
+              "شيك بنكي مؤجل الدفع",
+              "سند إذني شخصي غير مضمون",
+              "إشعار خصم عمولة مصرفية"
+            ],
+            answer: 0
+          },
+          {
+            q: "عند تحكيم نزاع تجاري دولي وتفويض المحكمين للحكم 'Ex Aequo et Bono'، ماذا يعني هذا التفويض؟",
+            cat: "التحكيم التجاري الدولي",
+            options: [
+              "الحكم استناداً إلى مبادئ العدالة والإنصاف دون التقيد الحرفي بالقواعد القانونية الوضعية الصارمة",
+              "تطبيق القانون الجنائي حصراً دون غيره",
+              "إحالة النزاع إلى محكمة وطنية أخرى",
+              "إلغاء المطالبة بالتعويض المالي نهائياً"
+            ],
+            answer: 0
+          },
+          {
+            q: "ما هو الالتزام الأخلاقي الأول والأعلى صرامة في ميثاق شرف المترجمين المعتمدين والمحلفين؟",
+            cat: "أخلاقيات المهنة وميثاق الشرف",
+            options: [
+              "السرية المهنية المطلقة (Strict Confidentiality & Non-Disclosure) وحماية كافة وثائق ومداولات العميل",
+              "نشر نماذج من وثائق العملاء على الإنترنت للتسويق",
+              "الاحتفاظ بالوثائق الأصلية عند تأخر الدفع",
+              "إفشاء تفاصيل المفاوضات للصحافة بعد المؤتمر"
+            ],
+            answer: 0
+          },
+          {
+            q: "في دراسات الترجمة الثقافية (وفق Lawrence Venuti)، ما هو الفرق بين 'Domestication' و 'Foreignization'؟",
+            cat: "نظريات الترجمة الثقافية",
+            options: [
+              "Domestication يكيف النص ليلائم بيئة ثقافة القارئ الهدف، بينما Foreignization يحافظ على الخصوصية الثقافية للمصدر",
+              "Domestication يترجم الحيوانات فقط بينما Foreignization للدول",
+              "كلاهما يعني الترجمة الحرفية القاموسية",
+              "Domestication يعني استخدام الذكاء الاصطناعي فقط"
+            ],
+            answer: 0
+          },
+          {
+            q: "ما هي وظيفة قاعدة المصطلحات (Termbase) مقارنة بذاكرة الترجمة (Translation Memory)؟",
+            cat: "إدارة المصطلحات والمعاجم الآلية",
+            options: [
+              "قاعدة المصطلحات تسرد مفردات وتراكيب مصطلحية محددة مع تعريفاتها، بينما ذاكرة الترجمة تحفظ جملاً ومقاطع كاملة",
+              "قاعدة المصطلحات للتدقيق الصوتي فقط",
+              "لا فرق بينهما فهما نفس الملف التنسيقي",
+              "قاعدة المصطلحات مخصصة لترجمة مقاطع الفيديو"
+            ],
+            answer: 0
+          },
+          {
+            q: "في معايير السبتاتلينغ (CPS - Characters Per Second)، ما هي سرعة القراءة المثلى المعتمدة؟",
+            cat: "معايير الترجمة المرئية الحديثة",
+            options: [
+              "بين 17 إلى 20 حرفاً في الثانية لضمان راحة المشاهد وتزامن السمع والبصر",
+              "45 حرفاً في الثانية لقراءة سريعة",
+              "3 حروف في الثانية فقط",
+              "لا توجد أي معايير لسرعة القراءة"
+            ],
+            answer: 0
+          },
+          {
+            q: "في الدبلوماسية الدولية، ماذا تعني عملية 'Agréation' بخصوص المبعوثين الدبلوماسيين؟",
+            cat: "المعجم والمراسيم الدبلوماسية",
+            options: [
+              "موافقة الدولة المضيفة المسبقة على تعيين السفير أو رئيس البعثة المقترح قبل إيفاده",
+              "إلغاء المعاهدات الثنائية بسبب الحرب",
+              "طلب قرض مالي بين حكومتين",
+              "إصدار جواز سفر دبلوماسي جديد"
+            ],
+            answer: 0
+          },
+          {
+            q: "وفق تقنية جان فرانسوا روزان، ما الهدف من مبدأ 'العمودية والانزياح' (Verticality & Shift)؟",
+            cat: "تقنيات الترجمة التتابعية",
+            options: [
+              "إبراز الروابط المنطقية والفاعل والمفعول بشكل رأسي متدرج يسهل استيعابه بنظرة سريعة دون قراءة أفقية",
+              "توفير صفحات الدفتر لتقليل الاستهلاك",
+              "كتابة الحروف بخط مشفر لمنع القراءة",
+              "إجبار المترجم على الكتابة باليد اليسرى"
+            ],
+            answer: 0
+          },
+          {
+            q: "ما المقابل المؤسساتي الدقيق لمصطلح 'Without prejudice to' الوارد في ديباجة ومواد الاتفاقيات الدولية؟",
+            cat: "الصياغة القانونية الدولية",
+            options: [
+              "دون المساس بـ / مع عدم الإخلال بأحكام...",
+              "مع رفض قاطع لكل...",
+              "بما يناقض كلياً...",
+              "بصرف النظر عن أي اعتبار قانوني"
+            ],
+            answer: 0
+          },
+          {
+            q: "في الترجمة الاقتصادية الدولية، ما هو المعنى الدقيق لمصطلح 'Quantitative Easing (QE)'؟",
+            cat: "المصطلحات الاقتصادية والمصرفية",
+            options: [
+              "التيسير الكمي (سياسة نقدية غير تقليدية يشتري فيها البنك المركزي أصولاً لضخ السيولة)",
+              "التشديد المالي ورفع الضرائب",
+              "خفض الرواتب الحكومية",
+              "إعلان إفلاس العملة الوطنية"
+            ],
+            answer: 0
+          },
+          {
+            q: "ما هو المفهوم الطبي الدقيق لمصطلح 'Contraindication' في النشرات الدوائية والتقارير السريرية؟",
+            cat: "الترجمة الطبية السريرية",
+            options: [
+              "موانع الاستعمال (حالة تجعل استخدام الدواء أو الإجراء خطيراً على المريض)",
+              "الجرعة اليومية الموصى بها",
+              "الآثار الجانبية النادرة المقبولة",
+              "طريقة التخزين والحفظ في الثلاجة"
+            ],
+            answer: 0
+          },
+          {
+            q: "في الترجمة الفورية، ما هو الإجراء التقني الصحيح عندما يبدأ المتحدث في قراءة أرقام وإحصائيات سريعة جداً؟",
+            cat: "استراتيجيات كابينة الترجمة الفورية",
+            options: [
+              "الاعتماد على المترجم الشريك لتدوين الأرقام فوراً أمامه، أو تطبيق التكثيف والتقريب الإحصائي الدقيق (Chunking/Approximation)",
+              "إيقاف الميكروفون ومغادرة الكابينة",
+              "اختراع أرقام عشوائية لملء الصمت",
+              "الطلب من الجمهور عبر السماعات إيقاف المتحدث"
+            ],
+            answer: 0
+          },
+          {
+            q: "ما هي المواصفة الدولية المنظمة لمتطلبات كابينات الترجمة الفورية الثابتة والمتحركة؟",
+            cat: "معايير الأجهزة والكابينات الدولية",
+            options: [
+              "ISO 2603 (للكابينات الثابتة) و ISO 4043 (للكابينات المتنقلة)",
+              "ISO 9001 العامة فقط",
+              "IEEE 802.3",
+              "ASTM E29"
+            ],
+            answer: 0
+          }
+        ]
+      },
       tcf: {
         title: "🇫🇷 اختبار TCF / DALF الفرنسي المعتمد لتحديد المستوى",
         desc: "اختبار معياري يحاكي معايير France Éducation international وإطار CEFR من A2 إلى C2.",
@@ -3990,21 +4357,21 @@
       }
     };
 
-    let activeExamKey = 'tcf';
+    let activeExamKey = 'comprehensive';
     let currentExamIndex = 0;
     let userExamAnswers = {};
     let examTimerInterval = null;
-    let examTimeLeft = 600; // 10 minutes
+    let examTimeLeft = 1800; // 30 minutes for comprehensive 30 questions
 
     function getActiveExamData() {
-      return multiTrackExams[activeExamKey] || multiTrackExams.tcf;
+      return multiTrackExams[activeExamKey] || multiTrackExams.comprehensive;
     }
 
     function switchExamTrack(trackKey) {
       if (!multiTrackExams[trackKey]) return;
       activeExamKey = trackKey;
       
-      const buttons = ['tcf', 'goethe', 'ielts', 'trans'];
+      const buttons = ['comprehensive', 'trans', 'tcf', 'ielts', 'goethe'];
       buttons.forEach(k => {
         const b = document.getElementById(`btn-exam-${k}`);
         if (b) b.classList.toggle('active', k === trackKey);
@@ -4015,7 +4382,7 @@
 
     function startExamTimer() {
       clearInterval(examTimerInterval);
-      examTimeLeft = 600;
+      examTimeLeft = activeExamKey === 'comprehensive' ? 1800 : 600;
       examTimerInterval = setInterval(() => {
         examTimeLeft--;
         if (examTimeLeft <= 0) {

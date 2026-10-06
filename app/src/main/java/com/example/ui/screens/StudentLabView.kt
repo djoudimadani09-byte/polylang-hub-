@@ -579,6 +579,166 @@ private fun LevelPlacementExamComponent(
                 listOf("ترجمة رسمية معتمدة ومحلفة ذات حجية قانونية", "ترجمة مجانية غير رسمية", "ترجمة بالذكاء الاصطناعي بدون ختم", "مسودة ترجمة أولية"),
                 0,
                 "الترجمة المحلفة المعتمدة الصادرة عن مترجم رسمي مختوم ومعين ومسجل لدى الجهات القضائية."
+            ),
+            ExamQuestion(
+                11,
+                "ما المقابل العربي المعتمد للعبارة القانونية اللاتينية 'Mutatis Mutandis' في نصوص المعاهدات؟",
+                "What is the official Arabic equivalent of the Latin phrase 'Mutatis Mutandis'?",
+                listOf("مع مراعاة التعديلات اللازمة / مع ما يقتضيه الفارق", "إلى أجل غير مسمى وبدون شروط", "بحسن نية مطلقة بين المتعاقدين", "بأثر رجعي فوري دون استثناء"),
+                0,
+                "تستخدم في العقود والمعاهدات للإحالة إلى شروط سابقة مع تكييفها حسب الظروف الجديدة."
+            ),
+            ExamQuestion(
+                12,
+                "ما هي الترجمة الدبلوماسية المؤسساتية لمصطلح 'Plenipotentiary' في الاتفاقيات الدولية؟",
+                "What is the diplomatic translation of 'Plenipotentiary' in treaties?",
+                listOf("مفوض فوق العادة ومطلق الصلاحية", "مبعوث استطلاعي مؤقت", "ملحق ثقافي ومستشار إعلامي", "مندوب بروتوكولي شرفي"),
+                0,
+                "المفوض فوق العادة ومطلق الصلاحية يحمل تفويضاً رسمياً كاملاً لتوقيع المعاهدات باسم دولته."
+            ),
+            ExamQuestion(
+                13,
+                "في عقود التجارة الدولية، ما الفرق الجوهري بين شرط 'Hardship' وشرط 'Force Majeure'؟",
+                "What is the core distinction between 'Hardship' and 'Force Majeure' clauses?",
+                listOf("Force Majeure تجعل التنفيذ مستحيلاً كلياً بينما Hardship تجعله مرهقاً ومختلاً اقتصادياً بصورة غير متوقعة", "كلاهما يؤدي لإلغاء العقد فوراً دون تعويض", "Hardship تطبق فقط في الجرائم البحرية", "Force Majeure تتطلب خطأ مقصوداً من أحد الطرفين"),
+                0,
+                "الظروف المرهقة (Hardship) تتيح إعادة التفاوض على العقد بينما القوة القاهرة تعفي من الالتزام تماماً."
+            ),
+            ExamQuestion(
+                14,
+                "في معايير ترجمة الشاشة، ما هو المعدل الموصى به لسرعة القراءة (CPS - Characters Per Second)؟",
+                "In subtitling standards, what is the recommended reading speed (CPS)?",
+                listOf("بين 17 و 20 حرفاً في الثانية (CPS) لضمان القراءة المريحة دون إجهاد", "أكثر من 45 حرفاً في الثانية", "حرف واحد في الثانية فقط", "لا توجد قيود على سرعة القراءة"),
+                0,
+                "تحديد 17-20 CPS يسمح للمشاهد بقراءة الترجمة واستيعاب الصورة البصرية في آن واحد."
+            ),
+            ExamQuestion(
+                15,
+                "ما هو الفرق الجوهري بين قاعدة المصطلحات (Termbase - TB) وذاكرة الترجمة (TM)؟",
+                "What is the difference between a Termbase (TB) and a Translation Memory (TM)?",
+                listOf("TB تخزن مصطلحات ومفردات مفردة مع سياقها بينما TM تحفظ جملاً ومقاطع كاملة مترجمة", "TB مخصصة للصور بينما TM للنصوص", "لا يوجد فرق بينهما فهما نفس الملف", "TM تعمل فقط دون اتصال بالإنترنت"),
+                0,
+                "قاعدة المصطلحات بنك معجمي للمفردات الدقيقة، بينما ذاكرة الترجمة مخزن لأزواج الجمل المترجمة."
+            ),
+            ExamQuestion(
+                16,
+                "وفق مبادئ جان فرنسوا روزان (Rozan)، ما هي وظيفة التدوين العمودي (Verticality) في الترجمة التتابعية؟",
+                "According to Rozan, what is the role of verticality in consecutive interpretation notes?",
+                listOf("ترتيب عناصر الجملة رأسياً لإبراز الفاعل والفعل والروابط المنطقية بنظرة واحدة", "توفير مساحة الورقة لتقليل استهلاك الدفاتر", "إخفاء الملاحظات عن الجمهور الحاضر", "كتابة الحروف بخط كبير"),
+                0,
+                "العمودية والانزياح (Décalage/Shift) يمنحان المترجم رؤية فورية للبنية المنطقية دون قراءة أفقية مشتتة."
+            ),
+            ExamQuestion(
+                17,
+                "في اللغة الإنجليزية القانونية، أي التراكيب التالية يعبر عن الشرط المعكوس الرسمي (Inverted Conditional)؟",
+                "Which structure represents a formal inverted conditional in legal English?",
+                listOf("Had the contractor completed the works on schedule, no penalties would have applied.", "If the contractor finished yesterday, he gets money.", "Should the contractor had done, they were happy.", "Unless the contractor did not delay, we paid."),
+                0,
+                "الصيغة المعكوسة 'Had + Subject + Past Participle' هي الأسلوب الأكاديمي والقانوني الأرقى للشرط."
+            ),
+            ExamQuestion(
+                18,
+                "في الفرنسية الأكاديمية: 'Bien qu'il _______ son devoir, le comité a rejeté sa demande.' أي صيغة تناسب الفراغ؟",
+                "In formal French, which verb form correctly completes the sentence after 'Bien que'?",
+                listOf("ait accompli (Subjonctif passé)", "a accompli (Indicatif passé composé)", "accomplissait (Imparfait)", "aura accompli (Futur antérieur)"),
+                0,
+                "حرف الربط 'Bien que' يتطلب وجوباً صيغة المنصوب (Subjonctif) للتعبير عن التنازل والمفارقة."
+            ),
+            ExamQuestion(
+                19,
+                "في الألمانية المتخصصة، ما هو بديل المبني للمجهول الصحيح للجملة: 'Dieser Bericht muss überprüft werden'؟",
+                "In specialized German, which passive alternative correctly replaces the sentence?",
+                listOf("Dieser Bericht ist zu überprüfen. (sein + zu + Infinitiv)", "Dieser Bericht lässt überprüfen.", "Dieser Bericht hat überprüft.", "Dieser Bericht wird überprüfen."),
+                0,
+                "التركيب 'sein + zu + Infinitiv' هو الصيغة الإدارية والأكاديمية المعتمدة للمجهول الدال على الوجوب."
+            ),
+            ExamQuestion(
+                20,
+                "ما هو التحوط الأكاديمي (Hedging) في الترجمة التحريرية للنصوص العلمية والدبلوماسية؟",
+                "What is 'Hedging' in the translation of scientific and diplomatic texts?",
+                listOf("استخدام أسلوب التلطيف والاحتراس الدلالي (مثل: may suggest, tends to) لتفادي الجزم المطلق", "حذف الفقرات الصعبة من النص", "إضافة تعليقات المترجم داخل المتن", "ترجمة النص مرتين"),
+                0,
+                "التحوط يعكس الدقة العلمية والموضوعية الرصينة في تقديم النتائج والتقارير الدبلوماسية."
+            ),
+            ExamQuestion(
+                21,
+                "ما هي الغاية الأساسية من الترجمة العكسية (Back-Translation) في التجارب السريرية والدوائية؟",
+                "What is the primary purpose of Back-Translation in clinical trials?",
+                listOf("التحقق من التطابق التام للمعنى والجرعات بسلامة مطلقة عبر مترجم مستقل لم يرَ النص الأصلي", "زيادة تكلفة المشروع على العميل", "تدريب المترجمين المبتدئين", "ترجمة الوثيقة إلى لغات غير مطلوبة"),
+                0,
+                "الترجمة العكسية إلزامية من الهيئات الدوائية العالمية (FDA/EMA) لضمان عدم وجود أي التباس يهدد حياة المرضى."
+            ),
+            ExamQuestion(
+                22,
+                "في مهام التحرير اللاحق للترجمة الآلية (MTPE)، ما الفرق بين Light MTPE و Full MTPE؟",
+                "In MTPE, what is the core difference between Light MTPE and Full MTPE?",
+                listOf("Light يركز على الفهم الأساسي وتصحيح المعنى الجسيم، بينما Full يضمن جودة بشرية كاملة وسلاسة بلاغية", "Light يستخدم برامج مجانية بينما Full برامج مدفوعة", "لا يوجد فرق بينهما", "Light مخصص للفيديو فقط"),
+                0,
+                "التحرير الكامل (Full MTPE) يطابق معايير ISO 18587 لإنتاج نص مكافئ للترجمة البشرية الاحترافية."
+            ),
+            ExamQuestion(
+                23,
+                "في كابينات المؤتمرات الدولية، ما هو الحد الزمني الأقصى لتناوب المترجمين الفوريين في الكابينة الواحدة؟",
+                "In conference interpretation booths, what is the standard rotation interval per interpreter?",
+                listOf("20 إلى 30 دقيقة لكل مترجم لتفادي الإجهاد الذهني وتدهور الأداء السمعي", "ساعتان متواصلتان دون انقطاع", "5 دقائق فقط", "يوم كامل دون تبديل"),
+                0,
+                "معيار AIIC الدولي يفرض تناوب مترجمين اثنين كل 20-30 دقيقة للحفاظ على التركيز ودقة نقل الأفكار."
+            ),
+            ExamQuestion(
+                24,
+                "ما هي المعايير الدولية (مثل ISO 2603 و ISO 4043) المحددة لمقصورات الترجمة الفورية؟",
+                "What do ISO 2603 and ISO 4043 standards specify for interpretation booths?",
+                listOf("العزل الصوتي، زوايا الرؤية المباشرة للمنصة، أنظمة التهوية الصامتة وحماية الأذن من الصدمة الصوتية", "ألوان الستائر والديكور فقط", "سرعة شبكة الإنترنت اللاسلكية", "أنواع المأكولات المقدمة للمترجمين"),
+                0,
+                "تضمن هذه المعايير بيئة عمل صحية تمنع الإرهاق الصوتي وتتيح للمترجم الرؤية البصرية المباشرة للمتحدثين."
+            ),
+            ExamQuestion(
+                25,
+                "في البروتوكول الدبلوماسي الدولي، ماذا تعني وثيقة 'Agréation' (الموافقة المسبقة)؟",
+                "In diplomatic protocol, what does 'Agréation' signify?",
+                listOf("موافقة الدولة المستقبلة المسبقة على اعتماد رئيس البعثة الدبلوماسية (السفير) المقترح", "طلب الحصول على تأشيرة سياحية عادية", "اتفاقية تجارية لإلغاء الجمارك", "مذكرة احتجاج رسمية"),
+                0,
+                "الاستمزاج أو الموافقة المسبقة (Agréation) إجراء سيادي إلزامي قبل إيفاد السفير رسمياً."
+            ),
+            ExamQuestion(
+                26,
+                "ما المعنى القضائي الدقيق للعبارة اللاتينية 'Prima Facie' في الدعاوى والمرافعات؟",
+                "What is the precise legal meaning of the Latin phrase 'Prima Facie'?",
+                listOf("ظاهر الأمر / الأدلة المبدئية الكافية للإثبات ما لم يُقدَّم دليل ينقضها", "حكم نهائي بات غير قابل للطعن", "إفلاس مالي مؤكد", "شهادة زور معلنة"),
+                0,
+                "تعني كفاية الأدلة الظاهرة لتأسيس حق قانوني إلى أن يثبت الطرف الآخر العكس."
+            ),
+            ExamQuestion(
+                27,
+                "في الترجمة المصرفية والمالية، ما المقابل الدقيق لمصطلح 'Letter of Credit (L/C)'؟",
+                "In banking and financial translation, what is 'Letter of Credit (L/C)'?",
+                listOf("خطاب الاعتماد المستندي لضمان الوفاء المالي بين بنك المستورد والمصدر", "شيك بنكي سياحي غير مؤكد", "بطاقة ائتمان شخصية", "إشعار تحويل مصرفي عادي"),
+                0,
+                "الاعتماد المستندي وسيلة الدفع الأضمن عالمياً في التجارة الدولية لتقليل مخاطر عدم السداد."
+            ),
+            ExamQuestion(
+                28,
+                "في التحكيم التجاري الدولي، ما معنى تفويض المحكمين للحكم وفق مبدأ 'Ex Aequo et Bono'؟",
+                "In international arbitration, what does deciding 'Ex Aequo et Bono' mean?",
+                listOf("الفصل في النزاع استناداً لمبادئ العدالة والإنصاف والضمير دون التقيد الحرفي بالقواعد القانونية الصارمة", "تطبيق القانون الجنائي حصراً", "تأجيل القضية إلى محكمة أخرى", "إلزام الطرفين بالصلح دون تعويض"),
+                0,
+                "تفويض الصلح والإنصاف يمنح هيئة التحكيم مرونة تحقيق العدالة الموضوعية للمتعاقدين."
+            ),
+            ExamQuestion(
+                29,
+                "وفق ميثاق الشرف الأخلاقي للمترجمين، ما هو الالتزام الأكثر صرامة فيما يخص وثائق العملاء؟",
+                "According to the professional code of ethics, what is the most stringent obligation regarding client documents?",
+                listOf("السرية المهنية المطلقة (Strict Confidentiality & NDA) وعدم الإفصاح عن أي مداولات أو بيانات", "مشاركة الوثائق على وسائل التواصل الاجتماعي للدعاية", "الاحتفاظ بالنسخ الأصلية كرهينة", "بيع البيانات لشركات الإعلان"),
+                0,
+                "السرية المهنية حجر الزاوية لمصداقية المترجم المحلف والمترجم الفوري في المؤتمرات الحساسة."
+            ),
+            ExamQuestion(
+                30,
+                "في الترجمة السمعية البصرية، ما هي استراتيجية 'Domestication' (التوطين) في معالجة الأمثال الثقافية؟",
+                "In audiovisual translation, what is the 'Domestication' strategy for cultural idioms?",
+                listOf("تكييف المثل أو الدعابة بالاستعاضة عنها بما يقابلها في ثقافة المتلقي لتسهيل الفهم والوقع النفسي", "الترجمة الحرفية كلمة بكلمة حتى وإن فقدت المعنى", "حذف الجملة تماماً من شريط السبتاتل", "نطق الكلمة باللغة الأصلية دون كتابة"),
+                0,
+                "التوطين (وفق لورنس فينوتي) يقرب النص من عوالم المشاهد ويحقق الأثر الدلالي والفكاهي المستهدف."
             )
         )
     }
@@ -643,9 +803,9 @@ private fun LevelPlacementExamComponent(
 
                     Text(
                         text = if (isArabic)
-                            "اختبار تقييمي معياري يتكون من 10 أسئلة تغطي: الصياغة القانونية المحلفة، معايير السبتاتلينغ والسترابينغ، تقنيات رموز روزان، واستراتيجيات الديكالاج في الترجمة الفورية."
+                            "اختبار تقييمي معياري شامل يتكون من 30 سؤالاً تخصصياً يغطي: الصياغة القانونية والدبلوماسية، المعاهدات الدولية، تقنيات كابينات المؤتمرات، الديكالاج، رموز روزان، المصطلحات المالية والطبية، ومعايير ISO 17100."
                         else
-                            "Standardized 10-question assessment covering legal translation, subtitling standards, Rozan symbols, and simultaneous décalage techniques.",
+                            "Comprehensive 30-question standardized exam covering legal, diplomatic treaties, conference booth techniques, décalage, Rozan notation, financial/medical terms, and ISO 17100 standards.",
                         fontSize = 11.5.sp,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         lineHeight = 17.sp

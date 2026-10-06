@@ -136,46 +136,27 @@ fun CourseViewerDialog(
                     color = MaterialTheme.colorScheme.onSurface
                 )
 
-                // Prominently Highlighted Creator / Instructor with Verified Exclusivity Badge
-                Surface(
+                // Lesson Details Row (Title & Duration only, no instructor names)
+                Row(
                     modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
-                    shape = RoundedCornerShape(10.dp),
-                    color = Color(0xFFF0FDF4),
-                    border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF86EFAC))
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Column(
-                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
-                        verticalArrangement = Arrangement.spacedBy(3.dp)
+                    Text(
+                        text = if (isArabic) "⏱️ مدة المحاضرة: ${course.duration}" else "⏱️ Duration: ${course.duration}",
+                        fontSize = 12.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Surface(
+                        shape = RoundedCornerShape(6.dp),
+                        color = RedPrimary.copy(alpha = 0.1f)
                     ) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Text(
-                                text = if (isArabic) "👤 المحاضر وصاحب المحتوى:" else "Creator / Instructor:",
-                                fontSize = 11.5.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Color(0xFF166534)
-                            )
-                            Surface(
-                                shape = RoundedCornerShape(6.dp),
-                                color = Color(0xFFDCFCE7)
-                            ) {
-                                Text(
-                                    text = "✓ محتوى معتمد وموثق لصاحبه",
-                                    fontSize = 10.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = Color(0xFF15803D),
-                                    modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
-                                )
-                            }
-                        }
                         Text(
-                            text = "${course.instructor} • ${course.duration}",
-                            fontSize = 12.5.sp,
-                            fontWeight = FontWeight.Black,
-                            color = Color(0xFF0F172A)
+                            text = course.level,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = RedPrimary,
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp)
                         )
                     }
                 }

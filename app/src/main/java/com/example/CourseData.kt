@@ -7,7 +7,7 @@ object CourseData {
             id = 1,
             title = "كورس شامل لتعلم قواعد اللغة الإنجليزية من الصفر للمبتدئين",
             category = "الإنجليزية بالعربية",
-            instructor = "إبراهيم عادل (ZAmericanEnglish)",
+            instructor = "",
             duration = "48 دقيقة",
             level = "مبتدئ A1",
             desc = "شرح كامل وتفاعلي لقواعد اللغة الإنجليزية وتراكيب الجمل الشائعة مع أمثلة حية وتمارين نطق مصممة للناطقين بالعربية."
@@ -16,7 +16,7 @@ object CourseData {
             id = 2,
             title = "أهم 1000 كلمة في اللغة الإنجليزية واستخدامها في محادثات حية",
             category = "الإنجليزية بالعربية",
-            instructor = "إبراهيم عادل (طليق - Taleek)",
+            instructor = "",
             duration = "65 دقيقة",
             level = "محادثة وتأسيس",
             desc = "مفردات المحادثة اليومية والعملية بالإنجليزية مع اللفظ السليم باللكنة الأمريكية وكيفية ربط الجمل دون تردد."
@@ -25,7 +25,7 @@ object CourseData {
             id = 3,
             title = "تعلم اللغة الفرنسية من الصفر: النطق السليم والحروف والمحادثة",
             category = "الفرنسية بالعربية",
-            instructor = "الأستاذ حسن (Français avec Hassan / طليق)",
+            instructor = "",
             duration = "44 دقيقة",
             level = "مبتدئ A1",
             desc = "إتقان الأبجدية الفرنسية، الحروف الصوتية والأنفية المركبة، وتكوين أول حوار تعارف متكامل باللغة الفرنسية."
@@ -34,7 +34,7 @@ object CourseData {
             id = 4,
             title = "أهم 300 جملة وتعبير في اللغة الفرنسية للحياة اليومية والسفر",
             category = "الفرنسية بالعربية",
-            instructor = "الأستاذ فوزي (Apprendre le français)",
+            instructor = "",
             duration = "52 دقيقة",
             level = "متوسط A2",
             desc = "تراكيب التحدث السريع في المقاهي والمطارات والمواقف اليومية بفرنسا مع النطق النموذجي والترجمة العربية."
@@ -43,7 +43,7 @@ object CourseData {
             id = 5,
             title = "دورة اللغة الإسبانية الكاملة للمبتدئين بالعربية من الصفر",
             category = "الإسبانية بالعربية",
-            instructor = "الأستاذ طارق الصالح (Aprende Español con Tareq)",
+            instructor = "",
             duration = "58 دقيقة",
             level = "مبتدئ A1",
             desc = "مدخل شامل للأبجدية الإسبانية، التحيات، أفعال الكينونة Ser و Estar، وبناء جمل المحادثة اليومية في إسبانيا وأمريكا اللاتينية."
@@ -52,7 +52,7 @@ object CourseData {
             id = 6,
             title = "تعلم اللغة الألمانية بالعربية: نطق الحروف وتركيب الجملة الألمانية",
             category = "الألمانية بالعربية",
-            instructor = "الأستاذ شحاتة (Deutsch lernen mit Shehata)",
+            instructor = "",
             duration = "50 دقيقة",
             level = "مبتدئ A1",
             desc = "مدخل ميسر لفهم تراكيب الجملة الألمانية، أدوات التعريف (der, die, das) وقواعد النطق الصوتي الصحيح مع أمثلة تطبيقية."
@@ -61,7 +61,7 @@ object CourseData {
             id = 7,
             title = "الحالات الإعرابية الألمانية (Nominativ, Akkusativ, Dativ)",
             category = "الألمانية بالعربية",
-            instructor = "الأستاذ ضياء عبد الله (Deutsch mit Dyaa)",
+            instructor = "",
             duration = "46 دقيقة",
             level = "متوسط B1",
             desc = "تفكيك عقدة الإعراب الألماني وجداول الأدوات والضمائر بأمثلة مقارنة باللغة العربية لتسهيل الفهم والترجمة."
@@ -70,7 +70,7 @@ object CourseData {
             id = 8,
             title = "تعلم اللغة الإيطالية من الصفر: التحيات والحوارات اليومية",
             category = "الإيطالية بالعربية",
-            instructor = "أكاديمية طليق (Taleek Italian Team)",
+            instructor = "",
             duration = "36 دقيقة",
             level = "مبتدئ A1",
             desc = "التعرف على النغمات الموسيقية للحروف الإيطالية، المفردات اليومية الأساسية، وتصريف الأفعال المنتظمة في المحادثة."
@@ -79,7 +79,7 @@ object CourseData {
             id = 9,
             title = "تعلم اللغة التركية بالعربية: التوافق الصوتي وبناء الجمل باللواحق",
             category = "التركية بالعربية",
-            instructor = "الأستاذ صهيب (تعلم التركية بالعربي)",
+            instructor = "",
             duration = "42 دقيقة",
             level = "مبتدئ ومتوسط",
             desc = "أسرار اللواحق في اللغة التركية وقاعدة التوافق الصوتي الثنائي والرباعي لتكوين جمل متناسقة وسلسة في الحياة اليومية."
@@ -88,7 +88,7 @@ object CourseData {
             id = 10,
             title = "أساسيات اللغة الروسية: قراءة الحروف السيريلية والمفردات التأسيسية",
             category = "الروسية بالعربية",
-            instructor = "د. مروان الكيالي (Russian for Arabs)",
+            instructor = "",
             duration = "41 دقيقة",
             level = "مبتدئ A1",
             desc = "إتقان الأبجدية السيريلية بالصوت والصورة، نبر الكلمات الروسية، وأهم عبارات التعارف والترحيب الروسية."
@@ -99,7 +99,7 @@ object CourseData {
             id = 11,
             title = "Advanced English Vocabulary & How to Sound Like a Native Speaker",
             category = "English Native",
-            instructor = "Lucy Bella Simkins (English with Lucy)",
+            instructor = "",
             duration = "26 دقيقة",
             level = "متقدم C1-C2",
             desc = "Master high-level English idioms, natural expressions, and polite British conversational phrases used in professional environments."
@@ -108,7 +108,7 @@ object CourseData {
             id = 12,
             title = "Real Life English: Fast Spoken Speech & Connected Pronunciation",
             category = "English Native",
-            instructor = "Emma (mmmEnglish / Australia)",
+            instructor = "",
             duration = "22 دقيقة",
             level = "متوسط B2",
             desc = "Learn why native speakers sound so fast, how words link together naturally, and how to train your ear for spontaneous conversations."
@@ -117,7 +117,7 @@ object CourseData {
             id = 13,
             title = "Dialogues en Français Réel: Écoute Active et Vocabulaire du Quotidien",
             category = "Français Natif",
-            instructor = "Pierre Babon (Français avec Pierre)",
+            instructor = "",
             duration = "30 دقيقة",
             level = "متوسط B1-B2",
             desc = "Immersion complète en français parlé avec sous-titres, tournures familières et amélioration de la compréhension orale."
@@ -126,7 +126,7 @@ object CourseData {
             id = 14,
             title = "Español Real para Extranjeros: Conversaciones Cotidianas",
             category = "Español Nativo",
-            instructor = "Brenda Romaniello (Hola Spanish)",
+            instructor = "",
             duration = "25 دقيقة",
             level = "متوسط B1",
             desc = "Aprende cómo hablan los hispanohablantes en situaciones reales, modismos habituales y trucos para sonar con total naturalidad."
@@ -135,7 +135,7 @@ object CourseData {
             id = 15,
             title = "Easy German: Street Interviews in Berlin with Dual Subtitles",
             category = "Deutsch Muttersprachler",
-            instructor = "Carina & Janusz (Easy German Team)",
+            instructor = "",
             duration = "21 دقيقة",
             level = "A2-B2 Deutsch",
             desc = "Authentic German language learning from the streets of Berlin with dual German/English transcripts for natural listening comprehension."
@@ -146,7 +146,7 @@ object CourseData {
             id = 16,
             title = "أسرار الترجمة الفورية والتحكم في الـ Décalage بكابينات المؤتمرات",
             category = "فورية ودبلوماسية",
-            instructor = "الأستاذ جودي مداني (مترجم محلف وخبير كابينات المؤتمرات)",
+            instructor = "",
             duration = "60 دقيقة",
             level = "احترافي خبير",
             desc = "تقنيات التحكم في الفارق الزمني (Décalage) بين الاستماع والتحدث في كابينة المؤتمرات الدولية دون إجهاد ذهني وضمان دقة نقل المعنى."
@@ -155,7 +155,7 @@ object CourseData {
             id = 17,
             title = "القواعد السبعة لنظام روزان لتدوين الملاحظات في الترجمة التتابعية",
             category = "فورية ودبلوماسية",
-            instructor = "الأستاذ جودي مداني (مدرب الترجمة التتابعية)",
+            instructor = "",
             duration = "50 دقيقة",
             level = "متوسط إلى متقدم",
             desc = "التطبيق العملي للقواعد السبعة لنظام جان فرانسوا روزان (Rozan 7 Rules)، الرموز البصرية للروابط المنطقية، والتسلسل الرأسي للملاحظات."
@@ -164,7 +164,7 @@ object CourseData {
             id = 18,
             title = "الترجمة القانونية وصياغة العقود التجارية الدولية المقارنة",
             category = "عقود وقانون",
-            instructor = "د. ليلى مزياني (مترجم محلف ودكتوراه قانون أعمال)",
+            instructor = "",
             duration = "45 دقيقة",
             level = "متقدم C1",
             desc = "دراسة تحليلية لصياغة شروط القوة القاهرة (Force Majeure) وبنود إبراء الذمة والتعويض (Indemnity) في العقود الإنجليزية المعتمدة."
@@ -173,7 +173,7 @@ object CourseData {
             id = 19,
             title = "معايير الترجمة المرئية (SRT) الاحترافية وضوابط نتفليكس العالمية",
             category = "ترجمة مرئية",
-            instructor = "المهندس يوسف بلحاج (أخصائي Subtitling)",
+            instructor = "",
             duration = "40 دقيقة",
             level = "متوسط",
             desc = "حساب سرعة القراءة (CPS)، عدد الحروف في السطر (CPL)، قواعد تجزئة الجمل نحوياً وتوقيت الظهور والاختفاء بدقة الإطار الواحد."
@@ -182,7 +182,7 @@ object CourseData {
             id = 20,
             title = "صناعة الذاكرات الترجمية وقواعد المصطلحات الآلية ببرنامج Trados",
             category = "تقنية وأنظمة CAT",
-            instructor = "المهندس نبيل قاسمي (مدرب أنظمة CAT)",
+            instructor = "",
             duration = "45 دقيقة",
             level = "متوسط إلى متقدم",
             desc = "إنشاء وصيانة ملفات TMX وTBX، وضبط خوارزميات المطابقة التقريبية (Fuzzy Match)، وضمان الاتساق المصطلحي للمشاريع الضخمة."
@@ -191,7 +191,7 @@ object CourseData {
             id = 21,
             title = "ضمان الجودة ومطابقة المواصفة القياسية الدولية للترجمة ISO 17100:2015",
             category = "ضمان الجودة",
-            instructor = "د. فتيحة بوقرة (خبيرة الجودة والتدقيق اللغوي)",
+            instructor = "",
             duration = "35 دقيقة",
             level = "شامل",
             desc = "الإجراءات الإلزامية للمعيار الدولي ISO 17100:2015: التدقيق المستقل المزدوج (Four-Eyes Principle)، إدارة المصطلحات، وتوثيق المشاريع."

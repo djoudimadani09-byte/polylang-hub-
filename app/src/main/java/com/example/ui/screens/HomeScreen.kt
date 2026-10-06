@@ -101,7 +101,7 @@ fun HomeScreen(
                 }
 
                 Text(
-                    text = if (isArabic) "منصة تدريب المترجمين الذكية - GoInterPrep" else "Smart Interpreter Training Platform",
+                    text = if (isArabic) "منصة تدريب المترجمين الذكية (عرض أغيلاس الخاص)" else "Smart Interpreter Training Platform (Aghilas Special)",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.ExtraBold,
                     color = Color.White
@@ -304,9 +304,9 @@ fun HomeScreen(
                 iconTint = Color(0xFF4338CA),
                 title = if (isArabic) "أكاديمية اللغات والماستركلاس" else "Language Masterclasses",
                 description = if (isArabic)
-                    "محاضرات مرئية منتقاة لنخبة الأساتذة والمترجمين المحلفين مع ذكر أصحاب الفيديوهات."
+                    "محاضرات ودروس مرئية تخصصية في الترجمة واللغات تركز على المحتوى التعليمي وعناوين الدروس."
                 else
-                    "Curated video masterclasses with verified professors and channel authors.",
+                    "Curated translation and language lectures focused purely on pedagogical lesson topics.",
                 levelBadge = if (isArabic) "مكتبة معتمدة" else "Curated",
                 levelBadgeBg = Color(0xFFE0E7FF),
                 levelBadgeText = Color(0xFF3730A3),
