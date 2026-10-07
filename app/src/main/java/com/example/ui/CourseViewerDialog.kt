@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -285,7 +286,32 @@ fun CourseViewerDialog(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(10.dp))
+
+                val uriHandler = LocalUriHandler.current
+                if (course.videoUrl.isNotBlank()) {
+                    Button(
+                        onClick = {
+                            try {
+                                uriHandler.openUri(course.videoUrl)
+                            } catch (_: Exception) {}
+                        },
+                        colors = ButtonDefaults.buttonColors(containerColor = RedPrimary),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .testTag("open_verified_url_btn"),
+                        shape = RoundedCornerShape(10.dp)
+                    ) {
+                        Icon(Icons.Default.OpenInNew, contentDescription = null, modifier = Modifier.size(16.dp))
+                        Spacer(Modifier.width(6.dp))
+                        Text(
+                            text = if (isArabic) "🔗 فتح الرابط الأكاديمي المعتمد للمحاضرة / المستند" else "🔗 Open Verified Lecture / Academic Document",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 12.sp
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(6.dp))
+                }
 
                 // Navigation Tabs inside Course Content
                 TabRow(

@@ -88,70 +88,82 @@ fun AcademyScreen(
             Tab(
                 selected = selectedMainTab == 0,
                 onClick = { selectedMainTab = 0 },
-                text = { Text(if (isArabic) "🏛️ مخبر الترجمة والامتحان" else "Student Lab", fontWeight = FontWeight.Bold, fontSize = 12.sp) },
+                text = { Text(if (isArabic) "🏛️ مخبر الترجمة والامتحان" else "Student Lab", fontWeight = FontWeight.Bold, fontSize = 11.5.sp) },
                 modifier = Modifier.testTag("tab_student_lab")
             )
             Tab(
                 selected = selectedMainTab == 1,
                 onClick = { selectedMainTab = 1 },
-                text = { Text(if (isArabic) "📚 مساقات الماستركلاس" else "Masterclasses", fontWeight = FontWeight.Bold, fontSize = 12.sp) },
+                text = { Text(if (isArabic) "📚 مراجع ومساقات الترجمة" else "Translation Courses", fontWeight = FontWeight.Bold, fontSize = 11.5.sp) },
                 modifier = Modifier.testTag("tab_masterclasses")
+            )
+            Tab(
+                selected = selectedMainTab == 2,
+                onClick = { selectedMainTab = 2 },
+                text = { Text(if (isArabic) "🎮 ألعاب تعليمية للغات" else "Language Games", fontWeight = FontWeight.Bold, fontSize = 11.5.sp) },
+                modifier = Modifier.testTag("tab_language_games")
             )
         }
 
-        if (selectedMainTab == 0) {
-            StudentLabView(isArabic = isArabic, userName = userName, userEmail = userEmail)
-        } else {
-            // Search Field
-            OutlinedTextField(
-                value = searchQuery,
-                onValueChange = { searchQuery = it },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .testTag("course_search_field"),
-                placeholder = { Text(if (isArabic) "ابحث عن عنوان المحاضرة أو المساق..." else "Search lecture title or topic...") },
-                leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
-                trailingIcon = {
-                    if (searchQuery.isNotEmpty()) {
-                        IconButton(onClick = { searchQuery = "" }) {
-                            Icon(Icons.Default.Clear, contentDescription = null)
+        when (selectedMainTab) {
+            0 -> {
+                StudentLabView(isArabic = isArabic, userName = userName, userEmail = userEmail)
+            }
+            1 -> {
+                // Search Field
+                OutlinedTextField(
+                    value = searchQuery,
+                    onValueChange = { searchQuery = it },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .testTag("course_search_field"),
+                    placeholder = { Text(if (isArabic) "ابحث عن عنوان المحاضرة أو المساق..." else "Search lecture title or topic...") },
+                    leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
+                    trailingIcon = {
+                        if (searchQuery.isNotEmpty()) {
+                            IconButton(onClick = { searchQuery = "" }) {
+                                Icon(Icons.Default.Clear, contentDescription = null)
+                            }
                         }
-                    }
-                },
-                shape = RoundedCornerShape(12.dp),
-                singleLine = true
-            )
+                    },
+                    shape = RoundedCornerShape(12.dp),
+                    singleLine = true
+                )
 
-            // Categories Chips
-            LazyRow(
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                items(categories) { cat ->
-                    FilterChip(
-                        selected = selectedCategory == cat,
-                        onClick = { selectedCategory = cat },
-                        label = { Text(cat, fontSize = 12.sp) },
-                        shape = RoundedCornerShape(8.dp)
-                    )
+                // Categories Chips
+                LazyRow(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    items(categories) { cat ->
+                        FilterChip(
+                            selected = selectedCategory == cat,
+                            onClick = { selectedCategory = cat },
+                            label = { Text(cat, fontSize = 12.sp) },
+                            shape = RoundedCornerShape(8.dp)
+                        )
+                    }
+                }
+
+                // Courses List
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    items(filteredCourses, key = { it.id }) { course ->
+                        CourseCard(
+                            isArabic = isArabic,
+                            course = course,
+                            onOpen = { onOpenCourse(course) },
+                            onCertificate = { onClaimCertificate(course.title) }
+                        )
+                    }
                 }
             }
-
-            // Courses List
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                items(filteredCourses, key = { it.id }) { course ->
-                    CourseCard(
-                        isArabic = isArabic,
-                        course = course,
-                        onOpen = { onOpenCourse(course) },
-                        onCertificate = { onClaimCertificate(course.title) }
-                    )
-                }
+            2 -> {
+                LanguageGamesView(isArabic = isArabic, userName = userName)
             }
         }
     }

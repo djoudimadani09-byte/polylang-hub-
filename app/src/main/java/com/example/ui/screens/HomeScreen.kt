@@ -302,17 +302,35 @@ fun HomeScreen(
                 icon = Icons.Default.VideoLibrary,
                 iconBgColor = Color(0xFFE0E7FF),
                 iconTint = Color(0xFF4338CA),
-                title = if (isArabic) "أكاديمية اللغات والماستركلاس" else "Language Masterclasses",
+                title = if (isArabic) "مراجع ومساقات علم الترجمة" else "Translation Courses & Resources",
                 description = if (isArabic)
-                    "محاضرات ودروس مرئية تخصصية في الترجمة واللغات تركز على المحتوى التعليمي وعناوين الدروس."
+                    "محاضرات أكاديمية ووثائق PDF وعروض تقديمية ودورات جامعية معتمدة في علم الترجمة."
                 else
-                    "Curated translation and language lectures focused purely on pedagogical lesson topics.",
-                levelBadge = if (isArabic) "مكتبة معتمدة" else "Curated",
+                    "Academic lectures, PDFs, presentations, and verified university translation programs.",
+                levelBadge = if (isArabic) "مراجع موثقة" else "Verified Resources",
                 levelBadgeBg = Color(0xFFE0E7FF),
                 levelBadgeText = Color(0xFF3730A3),
-                actionLabel = if (isArabic) "تصفح المحاضرات واللغات ←" else "Browse Library →",
+                actionLabel = if (isArabic) "تصفح المراجع والمساقات ←" else "Browse Resources →",
                 onClick = { onNavigate(AppTab.ACADEMY) },
                 testTag = "card_videos"
+            )
+
+            // CARD 7: ألعاب تعليمية للغات والترجمة
+            CleanTrainingCard(
+                icon = Icons.Default.SportsEsports,
+                iconBgColor = Color(0xFFFEF3C7),
+                iconTint = Color(0xFFD97706),
+                title = if (isArabic) "ألعاب تعليمية للغات والترجمة" else "Language Educational Games",
+                description = if (isArabic)
+                    "ألعاب وتحديات تفاعلية: مطابقة المصطلحات السريعة، صائد الأصدقاء المزيفين، تركيب الجمل، وتحدي كابينة الفورية."
+                else
+                    "Interactive language games: Speed Terminology Match, False Friends Detective, and Booth Reflex Rush.",
+                levelBadge = if (isArabic) "ألعاب لغوية" else "Language Games",
+                levelBadgeBg = Color(0xFFFEF3C7),
+                levelBadgeText = Color(0xFFB45309),
+                actionLabel = if (isArabic) "ابدأ التحدي واللعب ←" else "Play Games →",
+                onClick = { onNavigate(AppTab.ACADEMY) },
+                testTag = "card_games"
             )
         }
 

@@ -1599,120 +1599,186 @@
       </div>
     </div>
 
-    <!-- DYNAMIC VIEW 3: ENTHUSIAST & MASTERCLASS ACADEMY (100 Videos) -->
+    <!-- DYNAMIC VIEW 3: ENTHUSIAST & LANGUAGE GAMES + ACADEMIC LIBRARY -->
     <div id="view-enthusiast" class="view-panel">
-      <div class="content-box">
-        
-        <!-- Header & Premium Upgrade Callout -->
-        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:18px;">
+      
+      <!-- ========================================================================= -->
+      <!-- 1. INTERACTIVE LANGUAGE EDUCATIONAL GAMES STUDIO (ألعاب تعليمية للغات) -->
+      <!-- ========================================================================= -->
+      <div class="content-box" style="border-top:4px solid var(--crimson); margin-bottom:24px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
           <div>
-            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
-              <span class="badge-gold" style="font-size:11px;">🎓 100 فيديو تعليمي تفاعلي</span>
-              <span class="badge-iso-green" style="font-size:11px;">📖 معايير ISO 17100 / ISO 18587</span>
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+              <span class="badge-gold" style="font-size:11px;">🎮 تدريب لغوي تفاعلي</span>
+              <span class="badge-iso-green" style="font-size:11px;">✨ تعزيز الحصيلة وسرعة البديهة</span>
             </div>
-            <h3 style="font-size:22px; font-weight:900; margin:0 0 6px;">أكاديمية بوليلانغ للماستركلاس والتدريب اللغوي 🎓</h3>
-            <p style="font-size:13px; color:var(--text-dim); margin:0; max-width:650px; line-height:1.6;">
-              أكبر مكتبة تدريبية مرئية متخصصة في كابينات المؤتمرات، الترجمة القانونية والطبية، تقنيات روزان، التظليل الصوتي، وأدوات الذكاء الاصطناعي برعاية وإشراف <strong>الأستاذ جودي مداني</strong>.
+            <h3 style="font-size:20px; font-weight:900; margin:0 0 4px;">استوديو الألعاب التعليمية للغات والترجمة 🎮</h3>
+            <p style="font-size:12.5px; color:var(--text-dim); margin:0;">
+              ألعاب تفاعلية ممتعة مصممة لمتعلمي اللغات وطلبة الترجمة لترسيخ المصطلحات وتفادي الأفخاخ اللغوية.
             </p>
           </div>
 
-          <div style="display:flex; gap:8px; flex-wrap:wrap;">
-            <button class="btn-primary-red" style="background:linear-gradient(135deg, #f59e0b, #b45309); border:none; box-shadow:0 4px 14px rgba(217, 119, 6, 0.35);" onclick="openModal('premiumSubModal')">
-              👑 ترقية الحساب إلى بريميوم VIP
-            </button>
-            <button class="btn-outline-action" onclick="openHologramModal()" style="border-color:#0284c7; color:#0284c7;">
-              🤖 تشغيل الهولوغرام الإفتتاحي
-            </button>
+          <div style="background:linear-gradient(135deg, #fef3c7, #fde68a); border:1px solid #f59e0b; border-radius:10px; padding:6px 14px; display:flex; align-items:center; gap:8px;">
+            <span style="font-size:20px;">🏆</span>
+            <div>
+              <div style="font-size:10.5px; color:#92400e; font-weight:700;">مجموع النقاط:</div>
+              <div style="font-size:14px; font-weight:900; color:#b45309;" id="game-total-score">140 نقطة</div>
+            </div>
           </div>
         </div>
 
-        <!-- Premium Pass Banner Box -->
-        <div style="background:linear-gradient(135deg, #fffbeb, #fef3c7); border:1px solid #fde68a; border-radius:12px; padding:14px 18px; margin-bottom:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
-          <div style="display:flex; align-items:center; gap:12px;">
-            <div style="font-size:28px;">👑</div>
-            <div>
-              <div style="font-size:13.5px; font-weight:800; color:#92400e;">هل ترغب في فتح جميع المساقات الـ 100 بدون قيود؟</div>
-              <div style="font-size:12px; color:#b45309;">تتضمن المساقات المدفوعة نماذج عقود حصرية، قوالب Trados و MemoQ، وتدريباً فردياً مع كبار الخبراء.</div>
+        <!-- Game Selector Tabs -->
+        <div style="display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap;">
+          <button class="nav-pill active" id="btn-game-match" onclick="switchLanguageGame('match')">⚡ مطابقة المصطلحات السريعة</button>
+          <button class="nav-pill" id="btn-game-false" onclick="switchLanguageGame('false_friends')">🕵️ صائد الأصدقاء المزيفين</button>
+          <button class="nav-pill" id="btn-game-syntax" onclick="switchLanguageGame('syntax')">🧩 تركيب الجملة المترجمة</button>
+          <button class="nav-pill" id="btn-game-reflex" onclick="switchLanguageGame('reflex')">🎙️ تحدي كابينة الفورية</button>
+        </div>
+
+        <!-- GAME CONTAINER 1: SPEED TERMINOLOGY MATCH -->
+        <div id="game-panel-match" style="display:block;">
+          <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:12px; padding:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div>
+                <h4 style="font-size:14px; font-weight:800; margin:0 0 4px;">⚡ لعبة مطابقة المصطلحات السريعة (Speed Terminology Match)</h4>
+                <div style="font-size:12px; color:var(--text-dim);">انقر على المصطلح بالإنجليزية/الفرنسية ثم اختر مقابله العربي المعتمد.</div>
+              </div>
+              <div id="match-combo-badge" style="background:#fee2e2; color:#ef4444; font-weight:800; font-size:11.5px; padding:4px 10px; border-radius:6px;">
+                Combo x1 🔥
+              </div>
+            </div>
+
+            <div id="match-board-container" style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;">
+              <!-- Dynamic Cards generated via JS -->
+            </div>
+
+            <div id="match-success-banner" style="display:none; text-align:center; padding:14px; background:#ecfdf5; border:1px solid #10b981; border-radius:10px; color:#065f46; font-weight:800; margin-bottom:12px;">
+              🎉 أحسنت صنعاً! تم ربط جميع المصطلحات بنجاح (+120 نقطة)
+              <br><button class="btn-primary-red" style="margin-top:8px; font-size:11.5px;" onclick="resetMatchGame()">إعادة اللعب 🔄</button>
             </div>
           </div>
-          <button class="btn-primary-red" style="background:#d97706; padding:6px 16px; font-size:12px;" onclick="openModal('premiumSubModal')">
-            عرض باقات الاشتراك (ابتداءً من 1,500 د.ج) ➔
-          </button>
+        </div>
+
+        <!-- GAME CONTAINER 2: FALSE FRIENDS DETECTIVE -->
+        <div id="game-panel-false_friends" style="display:none;">
+          <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:12px; padding:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div>
+                <h4 style="font-size:14px; font-weight:800; margin:0 0 4px;">🕵️ صائد الأصدقاء المزيفين (False Friends Detective)</h4>
+                <div style="font-size:12px; color:var(--text-dim);">تفادَ فخ التشابه الصوتي والشكل واكشف المعنى الدقيق في السياق.</div>
+              </div>
+              <span id="ff-progress-text" style="font-size:12px; font-weight:800; color:var(--crimson);">السؤال 1 من 4</span>
+            </div>
+
+            <div id="ff-card-container" style="background:var(--bg-card); border:1px solid var(--border-line); border-radius:10px; padding:16px; margin-bottom:14px;">
+              <!-- Populated via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- GAME CONTAINER 3: SENTENCE BUILDER -->
+        <div id="game-panel-syntax" style="display:none;">
+          <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:12px; padding:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div>
+                <h4 style="font-size:14px; font-weight:800; margin:0 0 4px;">🧩 لعبة تركيب وبناء الجملة المترجمة (Sentence Builder)</h4>
+                <div style="font-size:12px; color:var(--text-dim);">رتب الكلمات المبعثرة بالترتيب النحوي السليم لصياغة الجملة الهدف.</div>
+              </div>
+              <span id="sb-progress-text" style="font-size:12px; font-weight:800; color:var(--crimson);">الجملة 1 من 3</span>
+            </div>
+
+            <div id="sb-card-container" style="background:var(--bg-card); border:1px solid var(--border-line); border-radius:10px; padding:16px; margin-bottom:14px;">
+              <!-- Populated via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- GAME CONTAINER 4: BOOTH REFLEX BLITZ -->
+        <div id="game-panel-reflex" style="display:none;">
+          <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:12px; padding:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div>
+                <h4 style="font-size:14px; font-weight:800; margin:0 0 4px;">🎙️ تحدي كابينة المترجم الفوري (Booth Reflex Blitz)</h4>
+                <div style="font-size:12px; color:var(--text-dim);">اختر المقابل الفوري السليم قبل نفاد المؤقت الزمني لمحاكاة كابينة المؤتمرات.</div>
+              </div>
+              <div id="booth-game-timer" style="width:36px; height:36px; border-radius:50%; background:#ef4444; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:14px;">
+                10
+              </div>
+            </div>
+
+            <div id="booth-game-container" style="background:var(--bg-card); border:1px solid var(--border-line); border-radius:10px; padding:16px; margin-bottom:14px;">
+              <!-- Populated via JS -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ========================================================================= -->
+      <!-- 2. VERIFIED ACADEMIC TRANSLATION RESOURCES & COURSES (المكتبة المعتمدة) -->
+      <!-- ========================================================================= -->
+      <div class="content-box">
+        
+        <!-- Header -->
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:18px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+              <span class="badge-gold" style="font-size:11px;">📚 مراجع ومساقات معتمدة في علم الترجمة</span>
+              <span class="badge-iso-green" style="font-size:11px;">✓ روابط ومصادر موثقة</span>
+            </div>
+            <h3 style="font-size:22px; font-weight:900; margin:0 0 6px;">المكتبة الأكاديمية والمراجع المعتمدة لعلم الترجمة 🎓</h3>
+            <p style="font-size:13px; color:var(--text-dim); margin:0; max-width:680px; line-height:1.6;">
+              محاضرات أكاديمية موثقة، وثائق علمية بصيغة PDF، عروض تقديمية PPTX، سلاسل دروس، دورات كورسيرا، وبرامج شهادات جامعية دولية معتمدة من كبرى الجامعات العالمية.
+            </p>
+          </div>
         </div>
 
         <!-- Search Bar -->
         <div style="display:flex; gap:10px; margin-bottom:14px; flex-wrap:wrap;">
           <div style="flex:1; min-width:260px; position:relative;">
-            <input type="text" id="academy-search" class="form-control" style="padding-left:36px;" placeholder="🔍 ابحث في 100 فيديو تعليمي (بالعنوان، المحاضر، اللغة، أو التقنية)..." oninput="handleAcademyFilterChange()">
+            <input type="text" id="academy-search" class="form-control" style="padding-left:36px;" placeholder="🔍 ابحث في المراجع الأكاديمية والمساقات المعتمدة..." oninput="handleAcademyFilterChange()">
           </div>
           <select id="academy-level-filter" class="form-control" style="width:auto; min-width:140px;" onchange="handleAcademyFilterChange()">
             <option value="all">جميع المستويات</option>
-            <option value="مبتدئ">مبتدئ / تأسيسي</option>
-            <option value="متوسط">متوسط</option>
-            <option value="متقدم">متقدم</option>
-            <option value="احترافي">احترافي / خبير</option>
+            <option value="تأسيسي وأكاديمي">تأسيسي وأكاديمي</option>
+            <option value="جامعي وتخصصي">جامعي وتخصصي</option>
+            <option value="دراسات عليا متقدمة">دراسات عليا متقدمة</option>
+            <option value="شهادة مهنية احترافية">شهادة مهنية احترافية</option>
           </select>
         </div>
 
-        <!-- Multi-Level Filter Chips -->
-        <!-- 1. Language Chips -->
-        <div style="margin-bottom:10px;">
-          <div style="font-size:11.5px; font-weight:800; color:var(--text-dim); margin-bottom:6px; display:flex; align-items:center; gap:6px;">
-            <span>🌐 تصفية حسب اللغة:</span>
-            <span style="font-size:10.5px; color:var(--text-faint);">(اختر لغة المساق)</span>
-          </div>
-          <div style="display:flex; gap:6px; flex-wrap:wrap;" id="lang-chips-container">
-            <button class="nav-pill active" onclick="setLangFilter('all', this)">الكل (100)</button>
-            <button class="nav-pill" onclick="setLangFilter('ar', this)">🇩🇿 العربية (20)</button>
-            <button class="nav-pill" onclick="setLangFilter('en', this)">🇬🇧 English (20)</button>
-            <button class="nav-pill" onclick="setLangFilter('fr', this)">🇫🇷 Français (18)</button>
-            <button class="nav-pill" onclick="setLangFilter('de', this)">🇩🇪 Deutsch (16)</button>
-            <button class="nav-pill" onclick="setLangFilter('es', this)">🇪🇸 Español (10)</button>
-            <button class="nav-pill" onclick="setLangFilter('other', this)">🌐 لغات أخرى (6)</button>
-            <button class="nav-pill" onclick="setLangFilter('tech', this)">💻 أدوات CAT و AI (10)</button>
-          </div>
-        </div>
-
-        <!-- 2. Category Chips -->
+        <!-- Category Filter Chips -->
         <div style="margin-bottom:12px;">
-          <div style="font-size:11.5px; font-weight:800; color:var(--text-dim); margin-bottom:6px; display:flex; align-items:center; gap:6px;">
-            <span>📂 تصفية حسب مجال التخصص:</span>
+          <div style="font-size:11.5px; font-weight:800; color:var(--text-dim); margin-bottom:6px;">
+            📂 تصنيف المراجع والمساقات:
           </div>
           <div style="display:flex; gap:6px; flex-wrap:wrap;" id="cat-chips-container">
-            <button class="nav-pill active" onclick="setCategoryFilter('all', this)">جميع التخصصات</button>
-            <button class="nav-pill" onclick="setCategoryFilter('booth', this)">🎙️ كابينة المؤتمرات والفورية</button>
-            <button class="nav-pill" onclick="setCategoryFilter('legal', this)">⚖️ الترجمة القانونية والمحلفة</button>
-            <button class="nav-pill" onclick="setCategoryFilter('medical', this)">🩺 الترجمة الطبية والدوائية</button>
-            <button class="nav-pill" onclick="setCategoryFilter('rozan', this)">📝 تقنيات روزان والتتابعية</button>
-            <button class="nav-pill" onclick="setCategoryFilter('subtitling', this)">🎬 ترجمة الشاشة والوسائط</button>
-            <button class="nav-pill" onclick="setCategoryFilter('shadowing', this)">🗣️ التظليل الصوتي والنطق</button>
-            <button class="nav-pill" onclick="setCategoryFilter('finance', this)">📊 المالية والاقتصادية</button>
-            <button class="nav-pill" onclick="setCategoryFilter('cat_tools', this)">🛠️ برمجيات CAT Tools</button>
+            <button class="nav-pill active" onclick="setCategoryFilter('all', this)">جميع المراجع (9)</button>
+            <button class="nav-pill" onclick="setCategoryFilter('academic_lectures', this)">📄 محاضرات أكاديمية (PDF)</button>
+            <button class="nav-pill" onclick="setCategoryFilter('studies_books', this)">📖 دراسات ومراجع</button>
+            <button class="nav-pill" onclick="setCategoryFilter('series_lessons', this)">🎓 سلاسل دروس الترجمة</button>
+            <button class="nav-pill" onclick="setCategoryFilter('university_slides', this)">📊 عروض تقديمية (PPTX)</button>
+            <button class="nav-pill" onclick="setCategoryFilter('online_courses', this)">🌐 دورات Coursera</button>
+            <button class="nav-pill" onclick="setCategoryFilter('academic_degrees', this)">📜 شهادات جامعية دولية</button>
+            <button class="nav-pill" onclick="setCategoryFilter('postgraduate', this)">🏛️ ماجستير ودراسات عليا</button>
+            <button class="nav-pill" onclick="setCategoryFilter('pro_platforms', this)">⭐ منصات تدريب مهنية</button>
           </div>
         </div>
 
-        <!-- 3. Access Level Filter & Results Counter -->
+        <!-- Status Counter -->
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; border-top:1px solid var(--border-line); border-bottom:1px solid var(--border-line); padding:10px 0; margin-bottom:18px;">
-          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
-            <span style="font-size:12px; font-weight:700; color:var(--text-dim);">نوع الوصول:</span>
-            <button class="role-chip active" id="access-chip-all" style="padding:4px 10px; font-size:11.5px;" onclick="setAccessFilter('all')">الكل (100)</button>
-            <button class="role-chip" id="access-chip-free" style="padding:4px 10px; font-size:11.5px;" onclick="setAccessFilter('free')">🆓 مساقات مجانية</button>
-            <button class="role-chip" id="access-chip-premium" style="padding:4px 10px; font-size:11.5px; color:#d97706; border-color:#fde68a;" onclick="setAccessFilter('premium')">👑 مساقات بريميوم VIP 🔒</button>
-          </div>
           <div style="font-size:12px; font-weight:800; color:var(--crimson);" id="academy-status-counter">
-            عرض 12 من أصل 100 فيديو تعليمي
+            عرض 9 مراجع ومساقات أكاديمية معتمدة
           </div>
         </div>
 
-        <!-- Videos Grid -->
+        <!-- Resources Grid -->
         <div class="courses-grid" id="academy-cards-container">
-          <!-- Populated dynamically via JS with all 100 educational lessons -->
+          <!-- Populated dynamically via JS -->
         </div>
 
         <!-- Pagination Controls -->
-        <div class="pagination-bar" id="academy-pagination">
-          <!-- Page buttons generated via JS -->
-        </div>
+        <div class="pagination-bar" id="academy-pagination" style="display:none;"></div>
 
       </div>
     </div>
@@ -2522,15 +2588,514 @@
     }
 
     // ==========================================
-    // 100 EDUCATIONAL VIDEOS ENGINE & MONETIZATION
+    // LANGUAGE EDUCATIONAL GAMES ENGINE (ألعاب تعليمية للغات)
     // ==========================================
-    let isUserVip = localStorage.getItem('polylang_vip_user') === 'true';
-    let currentAcademyPage = 1;
-    const ACADEMY_ITEMS_PER_PAGE = 12;
+    let totalLanguageGameScore = 140;
 
-    let selectedLangFilter = 'all';
+    function addGameScore(points) {
+      totalLanguageGameScore += points;
+      const el = document.getElementById('game-total-score');
+      if (el) el.textContent = `${totalLanguageGameScore} نقطة`;
+    }
+
+    function switchLanguageGame(gameId) {
+      ['match', 'false_friends', 'syntax', 'reflex'].forEach(g => {
+        const panel = document.getElementById('game-panel-' + g);
+        const btn = document.getElementById('btn-game-' + (g === 'syntax' ? 'syntax' : (g === 'reflex' ? 'reflex' : (g === 'false_friends' ? 'false' : 'match'))));
+        if (panel) panel.style.display = (g === gameId) ? 'block' : 'none';
+        if (btn) btn.classList.toggle('active', g === gameId);
+      });
+      if (gameId === 'reflex') {
+        startBoothReflexTimer();
+      } else {
+        stopBoothReflexTimer();
+      }
+    }
+
+    // GAME 1: SPEED TERMINOLOGY MATCH
+    const MATCH_PAIRS = [
+      { id: 1, foreign: "Force Majeure", arabic: "القوة القاهرة", domain: "عقود وتجارة" },
+      { id: 2, foreign: "Plenipotentiary", arabic: "مفوض فوق العادة", domain: "دبلوماسية" },
+      { id: 3, foreign: "Subpoena", arabic: "مذكرة إحضار قضائية", domain: "قانون جنائي" },
+      { id: 4, foreign: "Décalage", arabic: "الفارق الزمني في الكابينة", domain: "ترجمة فورية" },
+      { id: 5, foreign: "Indemnity", arabic: "تعويض وإبراء ذمة", domain: "قانون مقارن" },
+      { id: 6, foreign: "Mutatis Mutandis", arabic: "مع مراعاة الفوارق اللازمة", domain: "صياغة لاتينية" }
+    ];
+
+    let matchSelectedForeign = null;
+    let matchSelectedArabic = null;
+    let matchedIdsSet = new Set();
+    let matchCombo = 1;
+
+    function initMatchGame() {
+      matchedIdsSet.clear();
+      matchSelectedForeign = null;
+      matchSelectedArabic = null;
+      matchCombo = 1;
+      const banner = document.getElementById('match-success-banner');
+      if (banner) banner.style.display = 'none';
+      renderMatchBoard();
+    }
+
+    function resetMatchGame() {
+      initMatchGame();
+    }
+
+    function renderMatchBoard() {
+      const container = document.getElementById('match-board-container');
+      if (!container) return;
+
+      const badge = document.getElementById('match-combo-badge');
+      if (badge) badge.textContent = `Combo x${matchCombo} 🔥`;
+
+      const foreignShuffled = [...MATCH_PAIRS].sort(() => 0.5 - Math.random());
+      const arabicShuffled = [...MATCH_PAIRS].sort(() => 0.5 - Math.random());
+
+      container.innerHTML = `
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div style="font-size:11.5px; font-weight:800; color:var(--text-dim); margin-bottom:4px;">المصطلح الأجنبي:</div>
+          ${foreignShuffled.map(item => {
+            const isMatched = matchedIdsSet.has(item.id);
+            const isSelected = matchSelectedForeign === item.id;
+            const bg = isMatched ? '#ecfdf5' : (isSelected ? 'var(--crimson)' : 'var(--bg-card)');
+            const color = isSelected ? '#fff' : (isMatched ? '#059669' : 'var(--text-main)');
+            const border = isMatched ? '1px solid #10b981' : (isSelected ? '1px solid var(--crimson)' : '1px solid var(--border-line)');
+            return `
+              <div onclick="handleMatchForeignClick(${item.id})" style="background:${bg}; color:${color}; border:${border}; border-radius:8px; padding:10px 12px; cursor:${isMatched ? 'default' : 'pointer'}; transition:all 0.2s; user-select:none;">
+                <div style="font-weight:800; font-size:13px;">${item.foreign}</div>
+                <div style="font-size:10px; opacity:0.8;">${isMatched ? '✓ تم الربط' : item.domain}</div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div style="font-size:11.5px; font-weight:800; color:var(--text-dim); margin-bottom:4px;">المقابل العربي المعتمد:</div>
+          ${arabicShuffled.map(item => {
+            const isMatched = matchedIdsSet.has(item.id);
+            const isSelected = matchSelectedArabic === item.id;
+            const bg = isMatched ? '#ecfdf5' : (isSelected ? 'var(--crimson)' : 'var(--bg-card)');
+            const color = isSelected ? '#fff' : (isMatched ? '#059669' : 'var(--text-main)');
+            const border = isMatched ? '1px solid #10b981' : (isSelected ? '1px solid var(--crimson)' : '1px solid var(--border-line)');
+            return `
+              <div onclick="handleMatchArabicClick(${item.id})" style="background:${bg}; color:${color}; border:${border}; border-radius:8px; padding:10px 12px; cursor:${isMatched ? 'default' : 'pointer'}; transition:all 0.2s; user-select:none;">
+                <div style="font-weight:800; font-size:13px;">${item.arabic}</div>
+                <div style="font-size:10px; opacity:0.8;">${isMatched ? '✓ موثق' : 'انقر للمطابقة'}</div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    function handleMatchForeignClick(id) {
+      if (matchedIdsSet.has(id)) return;
+      matchSelectedForeign = id;
+      if (matchSelectedArabic !== null) {
+        checkMatchPair(matchSelectedForeign, matchSelectedArabic);
+      } else {
+        renderMatchBoard();
+      }
+    }
+
+    function handleMatchArabicClick(id) {
+      if (matchedIdsSet.has(id)) return;
+      matchSelectedArabic = id;
+      if (matchSelectedForeign !== null) {
+        checkMatchPair(matchSelectedForeign, matchSelectedArabic);
+      } else {
+        renderMatchBoard();
+      }
+    }
+
+    function checkMatchPair(fId, aId) {
+      if (fId === aId) {
+        matchedIdsSet.add(fId);
+        addGameScore(20 * matchCombo);
+        matchCombo++;
+        matchSelectedForeign = null;
+        matchSelectedArabic = null;
+        renderMatchBoard();
+        if (matchedIdsSet.size === MATCH_PAIRS.length) {
+          const banner = document.getElementById('match-success-banner');
+          if (banner) banner.style.display = 'block';
+        }
+      } else {
+        matchCombo = 1;
+        matchSelectedForeign = null;
+        matchSelectedArabic = null;
+        renderMatchBoard();
+      }
+    }
+
+    // GAME 2: FALSE FRIENDS DETECTIVE
+    const FALSE_FRIENDS_DATA = [
+      {
+        word: "Actually",
+        context: "He seemed composed, but actually he was under severe emotional stress.",
+        trap: "حالياً / في الوقت الحاضر ❌",
+        correct: "في الحقيقة والواقع / في الأصل ✔️",
+        explanation: "كلمة Actually من أشهر الأفخاخ؛ لا تعني 'حالياً' (Currently/Actuellement)، بل تعني 'في الحقيقة والواقع'."
+      },
+      {
+        word: "Éventuel (الفرنسية)",
+        context: "Un accord éventuel entre les ministres de l'énergie.",
+        trap: "اتفاق نهائي وحتمي ❌",
+        correct: "اتفاق محتمل / ممكن الحدوث ✔️",
+        explanation: "في الفرنسية Éventuel تعني 'محتمل أو وارد الوقوع'، بينما Eventual بالإنجليزية تعني 'نهائي/في نهاية المطاف'."
+      },
+      {
+        word: "Sensible (الإنجليزية)",
+        context: "The court reached a sensible and balanced compromise.",
+        trap: "حساس / عاطفي مرهف ❌",
+        correct: "حكيم / رشيد ومنطقي ✔️",
+        explanation: "كلمة Sensible بالإنجليزية تعني عقلاني أو سديد الرأي. أما 'حساس' فتقابلها كلمة Sensitive."
+      },
+      {
+        word: "Préservatif (الفرنسية)",
+        context: "L'usage de ce produit comme préservatif alimentaire est interdit.",
+        trap: "مادة حافظة للأغذية ❌",
+        correct: "واقي طبي / وسيلة حماية وقائية ✔️",
+        explanation: "المادة الحافظة بالفرنسية هي Conservateur وبالإنجليزية Preservative. الخلط بينهما خطأ فادح في الترجمة الطبية."
+      }
+    ];
+    let currentFFIndex = 0;
+    let ffAnswered = false;
+
+    function renderFalseFriendsGame() {
+      const container = document.getElementById('ff-card-container');
+      const progress = document.getElementById('ff-progress-text');
+      if (!container) return;
+
+      const q = FALSE_FRIENDS_DATA[currentFFIndex];
+      if (progress) progress.textContent = `السؤال ${currentFFIndex + 1} من ${FALSE_FRIENDS_DATA.length}`;
+
+      container.innerHTML = `
+        <div style="background:var(--bg-body); border-radius:8px; padding:12px; margin-bottom:12px;">
+          <div style="font-size:16px; font-weight:900; color:var(--crimson); margin-bottom:4px;">المصطلح المستهدف: "${q.word}"</div>
+          <div style="font-size:12.5px; color:var(--text-main);">السياق: <em>${q.context}</em></div>
+        </div>
+
+        <div style="font-size:12.5px; font-weight:800; margin-bottom:8px;">أي الخيارين يمثل المعنى السليم الدقيق ويكشف الفخ الشكلي؟</div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
+          <button class="nav-pill" id="ff-btn-correct" style="padding:10px; font-size:12px; font-weight:700; text-align:center; white-space:normal; border-radius:8px;" onclick="chooseFFOption(true)">
+            ${q.correct}
+          </button>
+          <button class="nav-pill" id="ff-btn-trap" style="padding:10px; font-size:12px; font-weight:700; text-align:center; white-space:normal; border-radius:8px;" onclick="chooseFFOption(false)">
+            ${q.trap}
+          </button>
+        </div>
+
+        <div id="ff-result-box" style="display:none; background:#fffbeb; border:1px solid #fde68a; border-radius:8px; padding:12px; margin-bottom:10px; font-size:12px; line-height:1.6;">
+          <div style="font-weight:800; color:#b45309; margin-bottom:4px;">💡 التفسير الأكاديمي والتحليل الترجمي:</div>
+          <div>${q.explanation}</div>
+        </div>
+
+        <button id="ff-next-btn" class="btn-primary-red" style="display:none; width:100%; font-size:12px;" onclick="nextFFQuestion()">
+          السؤال التالي ➔
+        </button>
+      `;
+    }
+
+    function chooseFFOption(isCorrect) {
+      if (ffAnswered) return;
+      ffAnswered = true;
+      const resultBox = document.getElementById('ff-result-box');
+      const nextBtn = document.getElementById('ff-next-btn');
+      const btnCorrect = document.getElementById('ff-btn-correct');
+      const btnTrap = document.getElementById('ff-btn-trap');
+
+      if (btnCorrect) {
+        btnCorrect.style.background = '#ecfdf5';
+        btnCorrect.style.borderColor = '#10b981';
+        btnCorrect.style.color = '#065f46';
+      }
+      if (btnTrap && !isCorrect) {
+        btnTrap.style.background = '#fef2f2';
+        btnTrap.style.borderColor = '#ef4444';
+        btnTrap.style.color = '#991b1b';
+      }
+
+      if (isCorrect) addGameScore(25);
+      if (resultBox) resultBox.style.display = 'block';
+      if (nextBtn) nextBtn.style.display = 'block';
+    }
+
+    function nextFFQuestion() {
+      ffAnswered = false;
+      currentFFIndex = (currentFFIndex + 1) % FALSE_FRIENDS_DATA.length;
+      renderFalseFriendsGame();
+    }
+
+    // GAME 3: SENTENCE BUILDER
+    const SENTENCE_TASKS = [
+      {
+        source: "The contracting parties agree to settle all disputes amicably.",
+        tokens: ["اتفقت", "الأطراف", "المتعاقدة", "على", "تسوية", "كافة", "النزاعات", "ودياً"],
+        domain: "صياغة العقود التجارية"
+      },
+      {
+        source: "The patient showed marked improvement after the clinical trial.",
+        tokens: ["أظهر", "المريض", "تحسناً", "ملحوظاً", "عقب", "التجربة", "السريرية"],
+        domain: "الترجمة الطبية والدوائية"
+      },
+      {
+        source: "The ambassador presented his credentials to the head of state.",
+        tokens: ["قدّم", "السفير", "أوراق", "اعتماده", "إلى", "رئيس", "الدولة"],
+        domain: "السلك الدبلوماسي والبروتوكول"
+      }
+    ];
+    let currentSBIndex = 0;
+    let currentSelectedTokens = [];
+    let currentAvailableTokens = [];
+    let sbSubmitted = false;
+
+    function renderSentenceBuilderGame() {
+      const container = document.getElementById('sb-card-container');
+      const progress = document.getElementById('sb-progress-text');
+      if (!container) return;
+
+      const task = SENTENCE_TASKS[currentSBIndex];
+      if (progress) progress.textContent = `الجملة ${currentSBIndex + 1} من ${SENTENCE_TASKS.length}`;
+
+      if (currentAvailableTokens.length === 0 && currentSelectedTokens.length === 0) {
+        currentAvailableTokens = [...task.tokens].sort(() => 0.5 - Math.random());
+      }
+
+      container.innerHTML = `
+        <div style="background:var(--bg-body); border-radius:8px; padding:12px; margin-bottom:12px;">
+          <div style="font-size:11px; font-weight:800; color:var(--text-dim); margin-bottom:4px;">النص المصدر (${task.domain}):</div>
+          <div style="font-size:14px; font-weight:800; color:var(--crimson);">${task.source}</div>
+        </div>
+
+        <div style="font-size:11.5px; font-weight:800; margin-bottom:6px;">مساحة بناء الجملة المترجمة:</div>
+        <div id="sb-target-box" style="min-height:50px; background:var(--bg-card); border:2px dashed var(--border-line); border-radius:8px; padding:8px; display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin-bottom:12px;">
+          ${currentSelectedTokens.length === 0 ? '<span style="color:var(--text-dim); font-size:12px;">انقر على الكلمات بالترتيب النحوي السليم...</span>' : ''}
+          ${currentSelectedTokens.map((tok, idx) => `
+            <span onclick="removeSBToken(${idx})" style="background:var(--crimson); color:#fff; font-size:12px; font-weight:800; padding:4px 10px; border-radius:6px; cursor:pointer;">
+              ${tok} ✕
+            </span>
+          `).join('')}
+        </div>
+
+        <div style="font-size:11.5px; font-weight:800; margin-bottom:6px;">بنك الكلمات المتاحة:</div>
+        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px;">
+          ${currentAvailableTokens.map((tok, idx) => `
+            <button class="nav-pill" style="font-size:12px; padding:6px 12px;" onclick="addSBToken(${idx})">
+              ${tok}
+            </button>
+          `).join('')}
+        </div>
+
+        <div id="sb-feedback" style="display:none; font-size:12.5px; font-weight:800; margin-bottom:10px;"></div>
+
+        <div style="display:flex; gap:8px;">
+          <button class="btn-outline-action" style="flex:1; font-size:12px;" onclick="resetSBTask()">إعادة المحاولة 🔄</button>
+          <button class="btn-primary-red" id="sb-verify-btn" style="flex:1; font-size:12px;" onclick="verifySBSentence()">تحقق من الصياغة ✔️</button>
+          <button class="btn-primary-red" id="sb-next-btn" style="flex:1; font-size:12px; display:none;" onclick="nextSBTask()">الجملة التالية ➔</button>
+        </div>
+      `;
+    }
+
+    function addSBToken(idx) {
+      if (sbSubmitted) return;
+      const tok = currentAvailableTokens.splice(idx, 1)[0];
+      currentSelectedTokens.push(tok);
+      renderSentenceBuilderGame();
+    }
+
+    function removeSBToken(idx) {
+      if (sbSubmitted) return;
+      const tok = currentSelectedTokens.splice(idx, 1)[0];
+      currentAvailableTokens.push(tok);
+      renderSentenceBuilderGame();
+    }
+
+    function resetSBTask() {
+      const task = SENTENCE_TASKS[currentSBIndex];
+      currentSelectedTokens = [];
+      currentAvailableTokens = [...task.tokens].sort(() => 0.5 - Math.random());
+      sbSubmitted = false;
+      renderSentenceBuilderGame();
+    }
+
+    function verifySBSentence() {
+      const task = SENTENCE_TASKS[currentSBIndex];
+      const feedback = document.getElementById('sb-feedback');
+      const verifyBtn = document.getElementById('sb-verify-btn');
+      const nextBtn = document.getElementById('sb-next-btn');
+      const isCorrect = currentSelectedTokens.join(' ') === task.tokens.join(' ');
+      sbSubmitted = true;
+
+      if (feedback) {
+        feedback.style.display = 'block';
+        if (isCorrect) {
+          feedback.style.color = '#059669';
+          feedback.innerHTML = '🎉 صياغة دقيقة واحترافية مطابقة للمعايير المعتمدة (+30 نقطة)!';
+          addGameScore(30);
+        } else {
+          feedback.style.color = '#ef4444';
+          feedback.innerHTML = `❌ الترتيب النموذجي: ${task.tokens.join(' ')}`;
+        }
+      }
+
+      if (verifyBtn) verifyBtn.style.display = 'none';
+      if (nextBtn) nextBtn.style.display = 'inline-block';
+    }
+
+    function nextSBTask() {
+      currentSBIndex = (currentSBIndex + 1) % SENTENCE_TASKS.length;
+      currentSelectedTokens = [];
+      currentAvailableTokens = [];
+      sbSubmitted = false;
+      renderSentenceBuilderGame();
+    }
+
+    // GAME 4: BOOTH REFLEX BLITZ
+    const BOOTH_REFLEX_TASKS = [
+      {
+        speech: "\"We cannot ignore the elephant in the room regarding maritime trade.\"",
+        correct: "المشكلة الجلية والواضحة التي يتفاداها الجميع",
+        options: [
+          "وجود الفيل الضخم في الغرفة",
+          "المشكلة الجلية والواضحة التي يتفاداها الجميع",
+          "التجارة البحرية الحيوانية",
+          "العائق الإداري البسيط"
+        ]
+      },
+      {
+        speech: "\"The resolution was adopted by acclamation without a vote.\"",
+        correct: "اعتُمد القرار بالإجماع والتصفيق دون اقتراع",
+        options: [
+          "اعتُمد القرار بعد مناقشة عاصفة",
+          "اعتُمد القرار بالإجماع والتصفيق دون اقتراع",
+          "اعتُمد القرار بأغلبية الثلثين",
+          "تم تأجيل القرار لجلسة قادمة"
+        ]
+      },
+      {
+        speech: "\"This provision is without prejudice to national security interests.\"",
+        correct: "دون الإخلال بمصالح الأمن القومي / مع عدم المساس بها",
+        options: [
+          "مع إلحاق الضرر بالأمن القومي",
+          "بناءً على طلب الأمن القومي",
+          "دون الإخلال بمصالح الأمن القومي / مع عدم المساس بها",
+          "خارج نطاق السيادة الوطنية"
+        ]
+      }
+    ];
+
+    let currentBoothIndex = 0;
+    let boothTimerSeconds = 10;
+    let boothTimerInterval = null;
+    let boothAnswered = false;
+
+    function renderBoothReflexGame() {
+      const container = document.getElementById('booth-game-container');
+      if (!container) return;
+
+      const q = BOOTH_REFLEX_TASKS[currentBoothIndex];
+      boothAnswered = false;
+
+      container.innerHTML = `
+        <div style="background:#0f172a; border-radius:8px; padding:14px; margin-bottom:12px; color:#fff;">
+          <div style="display:flex; align-items:center; gap:6px; font-size:10px; color:#ef4444; font-weight:800; margin-bottom:6px;">
+            <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#ef4444; animation:pulse-glow 1s infinite;"></span>
+            LIVE SPEECH AUDIO FEED • كابينة الترجمة الفورية
+          </div>
+          <div style="font-size:14.5px; font-weight:800; line-height:1.5;">${q.speech}</div>
+        </div>
+
+        <div style="font-size:12px; font-weight:800; margin-bottom:8px;">اختر المقابل الفوري السليم قبل انتهاء الثواني الـ 10:</div>
+
+        <div style="display:grid; grid-template-columns:1fr; gap:8px; margin-bottom:12px;">
+          ${q.options.map(opt => `
+            <button class="nav-pill booth-opt-btn" style="padding:10px 14px; font-size:12.5px; font-weight:700; text-align:right; border-radius:8px; width:100%; white-space:normal;" onclick="chooseBoothOption('${opt}')">
+              ${opt}
+            </button>
+          `).join('')}
+        </div>
+
+        <div id="booth-feedback" style="display:none; font-size:12.5px; font-weight:800; margin-bottom:10px;"></div>
+
+        <button id="booth-next-btn" class="btn-primary-red" style="display:none; width:100%; font-size:12px;" onclick="nextBoothTask()">
+          التحدي التالي في الكابينة ➔
+        </button>
+      `;
+    }
+
+    function startBoothReflexTimer() {
+      stopBoothReflexTimer();
+      boothTimerSeconds = 10;
+      const timerEl = document.getElementById('booth-game-timer');
+      if (timerEl) timerEl.textContent = boothTimerSeconds;
+
+      boothTimerInterval = setInterval(() => {
+        if (boothAnswered) return;
+        boothTimerSeconds--;
+        if (timerEl) timerEl.textContent = boothTimerSeconds;
+        if (boothTimerSeconds <= 0) {
+          stopBoothReflexTimer();
+          handleBoothTimeout();
+        }
+      }, 1000);
+    }
+
+    function stopBoothReflexTimer() {
+      if (boothTimerInterval) {
+        clearInterval(boothTimerInterval);
+        boothTimerInterval = null;
+      }
+    }
+
+    function handleBoothTimeout() {
+      if (boothAnswered) return;
+      boothAnswered = true;
+      const feedback = document.getElementById('booth-feedback');
+      const nextBtn = document.getElementById('booth-next-btn');
+      if (feedback) {
+        feedback.style.display = 'block';
+        feedback.style.color = '#ef4444';
+        feedback.textContent = '⏳ انتهى الوقت! التأخر في الكابينة يؤدي إلى فقدان تسلسل المعنى.';
+      }
+      if (nextBtn) nextBtn.style.display = 'block';
+    }
+
+    function chooseBoothOption(choice) {
+      if (boothAnswered) return;
+      boothAnswered = true;
+      stopBoothReflexTimer();
+      const q = BOOTH_REFLEX_TASKS[currentBoothIndex];
+      const feedback = document.getElementById('booth-feedback');
+      const nextBtn = document.getElementById('booth-next-btn');
+      const isCorrect = choice === q.correct;
+
+      if (feedback) {
+        feedback.style.display = 'block';
+        if (isCorrect) {
+          feedback.style.color = '#059669';
+          feedback.innerHTML = `🎉 استجابة ممتازة وسريعة! كفاءة كابينة معتمدة (+${25 + boothTimerSeconds * 2} نقطة).`;
+          addGameScore(25 + boothTimerSeconds * 2);
+        } else {
+          feedback.style.color = '#ef4444';
+          feedback.innerHTML = `❌ خيار غير دقيق! المقابل الصحيح: ${q.correct}`;
+        }
+      }
+      if (nextBtn) nextBtn.style.display = 'block';
+    }
+
+    function nextBoothTask() {
+      currentBoothIndex = (currentBoothIndex + 1) % BOOTH_REFLEX_TASKS.length;
+      renderBoothReflexGame();
+      startBoothReflexTimer();
+    }
+
+    // ==========================================
+    // VERIFIED ACADEMIC RESOURCES LIBRARY ENGINE
+    // ==========================================
+    let currentAcademyPage = 1;
     let selectedCatFilter = 'all';
-    let selectedAccessFilter = 'all';
     let currentFilteredVideos = [];
 
     function getAllAcademyVideos() {
@@ -2539,30 +3104,22 @@
       }
       return [
         {
-          id: "MMmOLN5zBLY",
-          title: "The Bilingual Brain: المعالجة المتوازية في الترجمة الفورية",
-          speaker: "الأستاذ جودي مداني / Mia Nacamulli",
-          category: "booth",
-          lang: "العربية",
-          level: "متقدم",
-          duration: "28:40",
-          isPremium: false,
-          desc: "شرح علمي لكيفية إدارة الدماغ ثنائي اللغة للتحويل اللحظي بين اللغات تحت ضغط كابينة المؤتمرات."
+          id: "res_cheni_fairouz_pdf",
+          title: "محاضرات في علم الترجمة: قضايا ومقاربات (PDF)",
+          category: "academic_lectures",
+          categoryLabel: "محاضرات أكاديمية (PDF)",
+          format: "PDF Document",
+          formatIcon: "📄",
+          url: "https://fac.umc.edu.dz/fll/images/cours/CHENI%20FAIROUZ.pdf",
+          language: "ar",
+          duration: "وثيقة أكاديمية معتمدة",
+          level: "جامعي وتخصصي",
+          desc: "محاضرات أكاديمية موثقة في علم الترجمة تتناول القضايا والمقاربات النظرية والتطبيقية، ومناهج التحليل والترجمة التخصصية لطلبة الدراسات العليا والمترجمين."
         }
       ];
     }
 
     function handleAcademyFilterChange() {
-      currentAcademyPage = 1;
-      applyAcademyFilters();
-    }
-
-    function setLangFilter(lang, btn) {
-      selectedLangFilter = lang;
-      if (btn && btn.parentElement) {
-        btn.parentElement.querySelectorAll('.nav-pill').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-      }
       currentAcademyPage = 1;
       applyAcademyFilters();
     }
@@ -2577,16 +3134,6 @@
       applyAcademyFilters();
     }
 
-    function setAccessFilter(access) {
-      selectedAccessFilter = access;
-      ['all', 'free', 'premium'].forEach(a => {
-        const el = document.getElementById(`access-chip-${a}`);
-        if (el) el.classList.toggle('active', a === access);
-      });
-      currentAcademyPage = 1;
-      applyAcademyFilters();
-    }
-
     function applyAcademyFilters() {
       const all = getAllAcademyVideos();
       const searchInput = document.getElementById('academy-search');
@@ -2595,40 +3142,20 @@
       const level = levelEl ? levelEl.value : 'all';
 
       currentFilteredVideos = all.filter(item => {
-        // Search query
         if (q) {
           const matchTitle = (item.title || '').toLowerCase().includes(q);
           const matchDesc = (item.desc || '').toLowerCase().includes(q);
-          const matchSpeaker = (item.speaker || '').toLowerCase().includes(q);
-          const matchLang = (item.lang || '').toLowerCase().includes(q);
-          const matchTags = Array.isArray(item.tags) && item.tags.some(t => t.toLowerCase().includes(q));
-          if (!matchTitle && !matchDesc && !matchSpeaker && !matchLang && !matchTags) return false;
+          const matchCategory = (item.categoryLabel || item.category || '').toLowerCase().includes(q);
+          if (!matchTitle && !matchDesc && !matchCategory) return false;
         }
 
-        // Language
-        if (selectedLangFilter !== 'all') {
-          const itemLang = (item.language || '').toLowerCase();
-          const itemLabel = (item.langLabel || item.lang || '').toLowerCase();
-          if (selectedLangFilter === 'ar' && itemLang !== 'ar' && !itemLabel.includes('عربي')) return false;
-          if (selectedLangFilter === 'en' && itemLang !== 'en' && !itemLabel.includes('إنجليز') && !itemLabel.includes('english')) return false;
-          if (selectedLangFilter === 'fr' && itemLang !== 'fr' && !itemLabel.includes('فرنس') && !itemLabel.includes('français')) return false;
-          if (selectedLangFilter === 'de' && itemLang !== 'de' && !itemLabel.includes('ألمان') && !itemLabel.includes('deutsch')) return false;
-          if (selectedLangFilter === 'es' && itemLang !== 'es' && !itemLabel.includes('إسبان') && !itemLabel.includes('español')) return false;
-          if (selectedLangFilter === 'other' && (itemLang === 'ar' || itemLang === 'en' || itemLang === 'fr' || itemLang === 'de' || itemLang === 'es' || itemLang === 'tech')) return false;
-          if (selectedLangFilter === 'tech' && itemLang !== 'tech' && item.category !== 'cat_tools') return false;
+        if (selectedCatFilter !== 'all' && item.category !== selectedCatFilter) {
+          return false;
         }
 
-        // Category
-        if (selectedCatFilter !== 'all') {
-          if (item.category !== selectedCatFilter) return false;
+        if (level !== 'all' && item.level !== level) {
+          return false;
         }
-
-        // Access (Free vs Premium)
-        if (selectedAccessFilter === 'free' && item.isPremium) return false;
-        if (selectedAccessFilter === 'premium' && !item.isPremium) return false;
-
-        // Level
-        if (level !== 'all' && item.level !== level) return false;
 
         return true;
       });
@@ -2636,140 +3163,90 @@
       renderAcademyCards();
     }
 
+    function openResourceLink(url) {
+      if (url) {
+        window.open(url, '_blank', 'noopener,noreferrer');
+      }
+    }
+
     function renderAcademyCards() {
       const container = document.getElementById('academy-cards-container');
       const counterEl = document.getElementById('academy-status-counter');
-      const paginationEl = document.getElementById('academy-pagination');
       if (!container) return;
 
       container.innerHTML = '';
       const total = currentFilteredVideos.length;
-      const totalPages = Math.max(1, Math.ceil(total / ACADEMY_ITEMS_PER_PAGE));
-      if (currentAcademyPage > totalPages) currentAcademyPage = totalPages;
-
-      const startIndex = (currentAcademyPage - 1) * ACADEMY_ITEMS_PER_PAGE;
-      const endIndex = Math.min(total, startIndex + ACADEMY_ITEMS_PER_PAGE);
-      const pageItems = currentFilteredVideos.slice(startIndex, endIndex);
 
       if (counterEl) {
-        counterEl.textContent = `عرض ${total > 0 ? (startIndex + 1) + '-' + endIndex : 0} من أصل ${total} فيديو تعليمي (المجموع الكلي: 100 فيديو)`;
+        counterEl.textContent = `عرض ${total} من أصل ${getAllAcademyVideos().length} مراجع ومساقات أكاديمية معتمدة`;
       }
 
-      if (pageItems.length === 0) {
+      if (total === 0) {
         container.innerHTML = `
           <div style="grid-column:1/-1; text-align:center; padding:40px 20px; background:var(--bg-body); border-radius:12px; border:1px dashed var(--border-line);">
             <div style="font-size:36px; margin-bottom:8px;">🔍</div>
-            <h4 style="font-size:16px; font-weight:800; margin-bottom:6px;">لم يتم العثور على مساقات تطابق الفلاتر المحددة</h4>
-            <p style="font-size:12.5px; color:var(--text-dim); margin-bottom:12px;">جرب تغيير مصطلح البحث أو اختيار لغة وتخصص آخر.</p>
+            <h4 style="font-size:16px; font-weight:800; margin-bottom:6px;">لم يتم العثور على مراجع تطابق معايير البحث</h4>
+            <p style="font-size:12.5px; color:var(--text-dim); margin-bottom:12px;">جرب تغيير كلمة البحث أو اختيار تصنيف آخر.</p>
             <button class="btn-outline-action" onclick="resetAcademyFilters()">إعادة ضبط الفلاتر 🔄</button>
           </div>
         `;
-        if (paginationEl) paginationEl.innerHTML = '';
         return;
       }
 
-      pageItems.forEach(item => {
+      currentFilteredVideos.forEach(item => {
         const card = document.createElement('div');
         card.className = 'course-card';
         card.style.display = 'flex';
         card.style.flexDirection = 'column';
         card.style.justifyContent = 'space-between';
 
-        const isLocked = item.isPremium && !isUserVip;
-        const badgeColor = isLocked ? '#f59e0b' : '#10b981';
-        const badgeText = isLocked ? '👑 VIP بريميوم 🔒' : '🆓 متاح مجاناً';
+        const formatIcon = item.formatIcon || '📖';
 
         card.innerHTML = `
           <div>
-            <div class="course-thumb-box" onclick="handleCardVideoClick('${item.id}')" style="cursor:pointer; position:relative; overflow:hidden; border-radius:8px;">
-              <img src="https://img.youtube.com/vi/${item.id}/hqdefault.jpg" style="width:100%; height:100%; object-fit:cover; transition:transform 0.2s;" onerror="this.src='polylang_logo.jpg'">
-              
-              <!-- Badges on Thumbnail -->
-              <div style="position:absolute; top:8px; right:8px; display:flex; flex-direction:column; gap:4px; z-index:2;">
-                <span style="background:${badgeColor}; color:#fff; font-size:10px; font-weight:900; padding:2px 8px; border-radius:4px; box-shadow:0 2px 6px rgba(0,0,0,0.3);">
-                  ${badgeText}
+            <!-- Resource Card Header Banner -->
+            <div onclick="openResourceLink('${item.url}')" style="cursor:pointer; background:linear-gradient(135deg, #1e293b, #0f172a); border-radius:10px; padding:20px 16px; color:#fff; position:relative; overflow:hidden; margin-bottom:12px; box-shadow:0 4px 14px rgba(0,0,0,0.15);">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                <span style="font-size:32px;">${formatIcon}</span>
+                <span style="background:rgba(255,255,255,0.15); color:#fff; font-size:10.5px; font-weight:800; padding:3px 10px; border-radius:4px; backdrop-filter:blur(4px);">
+                  ${item.format || 'مرجع أكاديمي'}
                 </span>
               </div>
-
-              <div style="position:absolute; bottom:8px; left:8px; background:rgba(0,0,0,0.75); color:#fff; font-size:10.5px; font-weight:700; padding:2px 6px; border-radius:4px; font-family:monospace; z-index:2;">
-                ⏱️ ${item.duration || '35:00'}
+              <div style="font-size:11px; color:#38bdf8; font-weight:700; margin-bottom:4px;">
+                ${item.categoryLabel || 'علم الترجمة'}
               </div>
-
-              <div style="position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.75); color:#38bdf8; font-size:10.5px; font-weight:700; padding:2px 6px; border-radius:4px; z-index:2;">
-                ${item.langLabel || item.lang || 'العربية'}
-              </div>
-
-              <div class="video-play-btn-circle" style="width:46px; height:46px; font-size:18px; ${isLocked ? 'background:rgba(217,119,6,0.9);' : ''}">
-                ${isLocked ? '🔒' : '▶'}
+              <div style="font-size:14px; font-weight:900; line-height:1.4; color:#fff;">
+                ${item.title}
               </div>
             </div>
 
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px; margin-bottom:6px;">
-              <span style="font-size:11px; font-weight:800; color:var(--crimson);">${item.categoryLabel || item.categoryText || item.category || 'ماستركلاس'}</span>
-              <span style="font-size:10.5px; color:var(--text-dim); background:var(--bg-body); padding:2px 6px; border-radius:4px;">${item.level || 'متوسط'}</span>
+            <!-- Meta details -->
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <span style="font-size:11px; font-weight:800; color:var(--crimson);">${item.categoryLabel || item.category || 'مساق تخصصي'}</span>
+              <span style="font-size:10.5px; color:var(--text-dim); background:var(--bg-body); padding:2px 8px; border-radius:4px;">${item.level || 'معتمد'}</span>
             </div>
 
-            <h4 style="font-size:14px; font-weight:800; line-height:1.4; margin:0 0 6px; color:var(--text-main);">${item.title}</h4>
+            <div style="display:inline-block; font-size:11px; color:#059669; font-weight:800; background:#ecfdf5; padding:2px 8px; border-radius:4px; margin-bottom:8px;">
+              ${item.verifiedBadge || '✓ رابط أكاديمي موثق'}
+            </div>
 
-            <p style="font-size:12px; color:var(--text-dim); line-height:1.5; margin:0 0 12px; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;">
+            <p style="font-size:12.5px; color:var(--text-dim); line-height:1.6; margin:0 0 14px;">
               ${item.desc}
             </p>
           </div>
 
-          <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-line); padding-top:10px; margin-top:8px;">
-            <div style="font-size:11.5px; color:var(--text-dim); font-weight:700;">
-              📖 ${item.categoryLabel || item.category || 'مساق تخصصي'}
-            </div>
-            <button class="${isLocked ? 'btn-outline-action' : 'btn-primary-red'}" style="padding:5px 12px; font-size:11.5px; ${isLocked ? 'border-color:#f59e0b; color:#d97706;' : ''}" onclick="handleCardVideoClick('${item.id}')">
-              ${isLocked ? 'فتح بـ VIP 🔒' : 'مشاهدة الآن ▶'}
+          <!-- Bottom Action Buttons -->
+          <div style="display:flex; gap:8px; border-top:1px solid var(--border-line); padding-top:12px; margin-top:8px;">
+            <button class="btn-primary-red" style="flex:1; padding:7px 12px; font-size:11.5px; display:inline-flex; align-items:center; justify-content:center; gap:6px;" onclick="openResourceLink('${item.url}')">
+              <span>🔗 فتح الرابط الأصلي ↗</span>
+            </button>
+            <button class="btn-outline-action" style="padding:7px 12px; font-size:11.5px;" onclick="openVideoPlayer('${item.id}')">
+              تفاصيل 📋
             </button>
           </div>
         `;
         container.appendChild(card);
       });
-
-      // Render Pagination
-      if (paginationEl) {
-        paginationEl.innerHTML = '';
-        if (totalPages > 1) {
-          // Prev button
-          const prevBtn = document.createElement('button');
-          prevBtn.className = 'page-btn';
-          prevBtn.innerHTML = '‹';
-          prevBtn.disabled = currentAcademyPage === 1;
-          prevBtn.onclick = () => { if (currentAcademyPage > 1) { currentAcademyPage--; renderAcademyCards(); window.scrollTo({ top: document.getElementById('view-enthusiast').offsetTop - 60, behavior: 'smooth' }); } };
-          paginationEl.appendChild(prevBtn);
-
-          // Numeric page buttons
-          for (let p = 1; p <= totalPages; p++) {
-            if (p === 1 || p === totalPages || (p >= currentAcademyPage - 1 && p <= currentAcademyPage + 1)) {
-              const pBtn = document.createElement('button');
-              pBtn.className = 'page-btn' + (p === currentAcademyPage ? ' active' : '');
-              pBtn.textContent = p;
-              pBtn.onclick = () => {
-                currentAcademyPage = p;
-                renderAcademyCards();
-                window.scrollTo({ top: document.getElementById('view-enthusiast').offsetTop - 60, behavior: 'smooth' });
-              };
-              paginationEl.appendChild(pBtn);
-            } else if (p === currentAcademyPage - 2 || p === currentAcademyPage + 2) {
-              const dots = document.createElement('span');
-              dots.style.padding = '0 4px';
-              dots.style.color = 'var(--text-dim)';
-              dots.textContent = '...';
-              paginationEl.appendChild(dots);
-            }
-          }
-
-          // Next button
-          const nextBtn = document.createElement('button');
-          nextBtn.className = 'page-btn';
-          nextBtn.innerHTML = '›';
-          nextBtn.disabled = currentAcademyPage === totalPages;
-          nextBtn.onclick = () => { if (currentAcademyPage < totalPages) { currentAcademyPage++; renderAcademyCards(); window.scrollTo({ top: document.getElementById('view-enthusiast').offsetTop - 60, behavior: 'smooth' }); } };
-          paginationEl.appendChild(nextBtn);
-        }
-      }
     }
 
     function resetAcademyFilters() {
@@ -2777,18 +3254,9 @@
       if (search) search.value = '';
       const level = document.getElementById('academy-level-filter');
       if (level) level.value = 'all';
-      selectedLangFilter = 'all';
       selectedCatFilter = 'all';
-      selectedAccessFilter = 'all';
-      currentAcademyPage = 1;
 
-      document.querySelectorAll('#lang-chips-container .nav-pill').forEach((b, i) => b.classList.toggle('active', i === 0));
       document.querySelectorAll('#cat-chips-container .nav-pill').forEach((b, i) => b.classList.toggle('active', i === 0));
-      ['all', 'free', 'premium'].forEach(a => {
-        const el = document.getElementById(`access-chip-${a}`);
-        if (el) el.classList.toggle('active', a === 'all');
-      });
-
       applyAcademyFilters();
     }
 
@@ -2796,14 +3264,11 @@
       const all = getAllAcademyVideos();
       const item = all.find(v => v.id === id);
       if (!item) return;
-
-      if (item.isPremium && !isUserVip) {
-        alert(`👑 هذه المحاضرة تتبع باقة الماستركلاس بريميوم VIP:\n"${item.title}"\n\nيرجى ترقية اشتراكك أو تفعيل الـ 7 أيام التجريبية المجانية لفتح الوصول الفوري لجميع الـ 100 فيديو.`);
-        openModal('premiumSubModal');
-        return;
+      if (item.url) {
+        openResourceLink(item.url);
+      } else {
+        openVideoPlayer(item);
       }
-
-      openVideoPlayer(item);
     }
 
     let activeVideoItem = null;
@@ -2825,7 +3290,8 @@
 
       const ytLink = document.getElementById('modal-video-youtube-link');
       if (ytLink) {
-        ytLink.href = `https://www.youtube.com/watch?v=${item.id}`;
+        ytLink.href = item.url || `https://www.youtube.com/watch?v=${item.id}`;
+        ytLink.innerHTML = "🔗 فتح الرابط الأكاديمي المباشر ↗";
       }
 
       document.getElementById('modal-video-duration').textContent = `⏱️ ${item.duration || '40:00'}`;
@@ -4962,6 +5428,14 @@
       renderOrdersTable();
       applyAcademyFilters();
       initSrtStudio();
+      try {
+        initMatchGame();
+        renderFalseFriendsGame();
+        renderSentenceBuilderGame();
+        renderBoothReflexGame();
+      } catch (err) {
+        console.log("Game init note:", err);
+      }
     });
   </script>
 </body>
