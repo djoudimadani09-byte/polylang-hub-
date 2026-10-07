@@ -8,9 +8,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -33,10 +30,11 @@ import com.example.ui.theme.SuccessGreen
 import kotlinx.coroutines.delay
 
 enum class GameType(val titleAr: String, val titleEn: String, val icon: String) {
-    SPEED_MATCH("مطابقة المصطلحات السريعة", "Speed Terminology Match", "⚡"),
+    SPEED_MATCH("مطابقة المصطلحات السريعة", "Speed Term Match", "⚡"),
     FALSE_FRIENDS("صائد الأصدقاء المزيفين", "False Friends Detective", "🕵️"),
-    SENTENCE_BUILDER("تركيب الجملة المترجمة", "Sentence Builder Challenge", "🧩"),
-    BOOTH_REFLEX("تحدي سرعة بديهة الكابينة", "Simultaneous Booth Blitz", "🎙️")
+    SENTENCE_BUILDER("تركيب الجملة المترجمة", "Sentence Builder", "🧩"),
+    BOOTH_REFLEX("تحدي كابينة الفورية", "Booth Reflex Blitz", "🎙️"),
+    IDIOMS_MASTER("كاشف التعبيرات الاصطلاحية", "Idioms Decipherer", "💡")
 }
 
 @Composable
@@ -45,7 +43,7 @@ fun LanguageGamesView(
     userName: String = "طالب الترجمة"
 ) {
     var selectedGame by remember { mutableStateOf(GameType.SPEED_MATCH) }
-    var totalGamerScore by remember { mutableIntStateOf(120) }
+    var totalGamerScore by remember { mutableIntStateOf(160) }
 
     Column(
         modifier = Modifier
@@ -67,19 +65,14 @@ fun LanguageGamesView(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Column {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(6.dp)
-                    ) {
-                        Text(
-                            text = "🎮 " + if (isArabic) "استوديو الألعاب التعليمية للغات والترجمة" else "Language & Translation Games Studio",
-                            style = MaterialTheme.typography.titleMedium,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
+                Column(modifier = Modifier.weight(1f)) {
                     Text(
-                        text = if (isArabic) "طوّر حصيلتك اللغوية وسرعة استحضار المصطلحات بالتحديات التفاعلية" else "Gamify vocabulary retention and translation reflex",
+                        text = "🎮 " + if (isArabic) "استوديو الألعاب التعليمية للغات والترجمة" else "Language & Translation Games Studio",
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = if (isArabic) "5 ألعاب تفاعلية لترسيخ المعاجم القانونية والطبية والدبلوماسية وتفادي الأفخاخ" else "Gamify vocabulary retention and translation reflex",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -107,10 +100,10 @@ fun LanguageGamesView(
             }
         }
 
-        // Game Selection Chips
+        // Game Selection Chips (5 Games)
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(6.dp)
         ) {
             GameType.values().forEach { game ->
                 val isSelected = selectedGame == game
@@ -124,15 +117,15 @@ fun LanguageGamesView(
                     color = if (isSelected) RedPrimary else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f)
                 ) {
                     Column(
-                        modifier = Modifier.padding(vertical = 8.dp, horizontal = 4.dp),
+                        modifier = Modifier.padding(vertical = 8.dp, horizontal = 2.dp),
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center
                     ) {
-                        Text(game.icon, fontSize = 18.sp)
+                        Text(game.icon, fontSize = 16.sp)
                         Spacer(modifier = Modifier.height(2.dp))
                         Text(
                             text = if (isArabic) game.titleAr else game.titleEn,
-                            fontSize = 9.5.sp,
+                            fontSize = 8.5.sp,
                             fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
                             color = if (isSelected) Color.White else MaterialTheme.colorScheme.onSurface,
                             textAlign = TextAlign.Center,
@@ -161,40 +154,63 @@ fun LanguageGamesView(
                 isArabic = isArabic,
                 onAddScore = { totalGamerScore += it }
             )
+            GameType.IDIOMS_MASTER -> IdiomsDeciphererGame(
+                isArabic = isArabic,
+                onAddScore = { totalGamerScore += it }
+            )
         }
     }
 }
 
 // -------------------------------------------------------------------------------------------------
-// GAME 1: SPEED TERMINOLOGY MATCHING
+// GAME 1: SPEED TERMINOLOGY MATCHING (With 3 Multi-Domain Rounds)
 // -------------------------------------------------------------------------------------------------
 @Composable
 fun SpeedTerminologyMatchGame(
     isArabic: Boolean,
     onAddScore: (Int) -> Unit
 ) {
-    data class TermPair(val id: Int, val foreign: String, val arabic: String, val lang: String)
+    data class TermPair(val id: Int, val foreign: String, val arabic: String, val domain: String)
 
-    val allPairs = remember {
-        listOf(
-            TermPair(1, "Force Majeure", "القوة القاهرة", "القانون التجاري"),
-            TermPair(2, "Plenipotentiary", "مفوض فوق العادة", "السلك الدبلوماسي"),
-            TermPair(3, "Subpoena", "مذكرة إحضار قضائية", "القانون الجنائي"),
-            TermPair(4, "Décalage", "الفارق الزمني في الكابينة", "الترجمة الفورية"),
-            TermPair(5, "Indemnity", "تعويض وإبراء ذمة", "العقود والشركات"),
-            TermPair(6, "Mutatis Mutandis", "مع مراعاة الفوارق اللازمة", "المصطلحات اللاتينية")
-        )
+    var currentRound by remember { mutableIntStateOf(1) }
+
+    val roundPairs = remember(currentRound) {
+        when (currentRound) {
+            1 -> listOf(
+                TermPair(1, "Force Majeure", "القوة القاهرة", "قانون مدني وتجاري"),
+                TermPair(2, "Plenipotentiary", "مفوض فوق العادة ومطلق الصلاحية", "السلك الدبلوماسي"),
+                TermPair(3, "Subpoena", "مذكرة إحضار قضائية", "إجراءات جزائية"),
+                TermPair(4, "Décalage", "الفارق الزمني في الكابينة", "الترجمة الفورية"),
+                TermPair(5, "Indemnity", "تعويض وإبراء ذمة", "العقود والشركات"),
+                TermPair(6, "Mutatis Mutandis", "مع مراعاة الفوارق اللازمة", "المصطلحات اللاتينية")
+            )
+            2 -> listOf(
+                TermPair(7, "Informed Consent", "الموافقة المستنيرة المسبقة", "الأخلاقيات الطبية"),
+                TermPair(8, "Adverse Event", "حدث ضار / عرض جانبي غير مرغوب", "التجارب السريرية"),
+                TermPair(9, "Prophylaxis", "الوقاية الاستباقية / تدبير وقائي", "الطب الوقائي"),
+                TermPair(10, "Placebo", "عقار وهمي / علاج إرضائي", "البحث الصيدلاني"),
+                TermPair(11, "Contraindication", "موانع الاستعمال الدوائي", "علم الصيدلة"),
+                TermPair(12, "Double-Blind", "دراسة مزدوجة التعمية", "التجارب الإكلينيكية")
+            )
+            else -> listOf(
+                TermPair(13, "Point of Order", "نقطة نظام إجرائية", "المؤتمرات الدولية"),
+                TermPair(14, "Adjournment", "رفع الجلسة / إرجاء المداولات", "الجمعية العامة"),
+                TermPair(15, "Consensus", "التوافق بالتراضي دون تصويت", "المفاوضات الأممية"),
+                TermPair(16, "Ratification", "التصديق البرلماني على المعاهدة", "القانون الدولي"),
+                TermPair(17, "Memorandum of Understanding", "مذكرة تفاهم رسمية", "العلاقات الثنائية"),
+                TermPair(18, "Quorum", "النصاب القانوني لانعقاد الجلسة", "اللوائح الداخلية")
+            )
+        }
     }
 
     var selectedForeignId by remember { mutableStateOf<Int?>(null) }
     var selectedArabicId by remember { mutableStateOf<Int?>(null) }
-    var matchedIds by remember { mutableStateOf(setOf<Int>()) }
-    var mistakeStreak by remember { mutableStateOf(0) }
+    var matchedIds by remember(currentRound) { mutableStateOf(setOf<Int>()) }
     var streakCombo by remember { mutableIntStateOf(1) }
     var gameCompleted by remember { mutableStateOf(false) }
 
-    val shuffledForeign = remember { allPairs.shuffled() }
-    val shuffledArabic = remember { allPairs.shuffled() }
+    val shuffledForeign = remember(currentRound) { roundPairs.shuffled() }
+    val shuffledArabic = remember(currentRound) { roundPairs.shuffled() }
 
     fun checkMatch(fId: Int, aId: Int) {
         if (fId == aId) {
@@ -203,11 +219,10 @@ fun SpeedTerminologyMatchGame(
             streakCombo++
             selectedForeignId = null
             selectedArabicId = null
-            if (matchedIds.size == allPairs.size) {
+            if (matchedIds.size == roundPairs.size) {
                 gameCompleted = true
             }
         } else {
-            mistakeStreak++
             streakCombo = 1
             selectedForeignId = null
             selectedArabicId = null
@@ -215,17 +230,13 @@ fun SpeedTerminologyMatchGame(
     }
 
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .testTag("game_speed_match"),
+        modifier = Modifier.fillMaxWidth().testTag("game_speed_match"),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(14.dp),
+            modifier = Modifier.fillMaxWidth().padding(14.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Row(
@@ -240,7 +251,7 @@ fun SpeedTerminologyMatchGame(
                         style = MaterialTheme.typography.titleMedium
                     )
                     Text(
-                        text = if (isArabic) "اضغط على المصطلح بالإنجليزية/الفرنسية ثم اختر المقابل العربي الدقيق" else "Tap a term then tap its exact Arabic sworn equivalent",
+                        text = if (isArabic) "اختر المجال واضغط على المصطلح لمطابقته مع الترجمة المحلفة" else "Match source term with its certified equivalent",
                         fontSize = 11.5.sp,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -260,6 +271,30 @@ fun SpeedTerminologyMatchGame(
                 }
             }
 
+            // Domain Tabs Selector
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(6.dp)
+            ) {
+                listOf(
+                    1 to if (isArabic) "⚖️ العقود والقانون" else "Legal",
+                    2 to if (isArabic) "🩺 الطب والصيدلة" else "Medical",
+                    3 to if (isArabic) "🏛️ المؤتمرات الدولية" else "Diplomatic"
+                ).forEach { (round, title) ->
+                    FilterChip(
+                        selected = currentRound == round,
+                        onClick = {
+                            currentRound = round
+                            matchedIds = emptySet()
+                            gameCompleted = false
+                            streakCombo = 1
+                        },
+                        label = { Text(title, fontSize = 10.5.sp) },
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+            }
+
             if (gameCompleted) {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
@@ -271,17 +306,27 @@ fun SpeedTerminologyMatchGame(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        Text("🎉 ممتاز! تم إتقان جميع المصطلحات بنجاح!", fontWeight = FontWeight.Bold, color = SuccessGreen, fontSize = 15.sp)
-                        Text("حصلت على +120 نقطة خبرة لغوية للمترجمين", fontSize = 12.5.sp)
-                        Button(
-                            onClick = {
-                                matchedIds = emptySet()
-                                gameCompleted = false
-                                streakCombo = 1
-                            },
-                            colors = ButtonDefaults.buttonColors(containerColor = SuccessGreen)
-                        ) {
-                            Text(if (isArabic) "إعادة التحدي 🔄" else "Play Again 🔄")
+                        Text("🎉 رائع! تم إتقان جميع مصطلحات الجولة بنجاح!", fontWeight = FontWeight.Bold, color = SuccessGreen, fontSize = 14.sp)
+                        Text("حصلت على +120 نقطة خبرة لغوية", fontSize = 12.sp)
+                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Button(
+                                onClick = {
+                                    currentRound = if (currentRound < 3) currentRound + 1 else 1
+                                    matchedIds = emptySet()
+                                    gameCompleted = false
+                                },
+                                colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
+                            ) {
+                                Text(if (isArabic) "الجولة التالية ➔" else "Next Round ➔")
+                            }
+                            OutlinedButton(
+                                onClick = {
+                                    matchedIds = emptySet()
+                                    gameCompleted = false
+                                }
+                            ) {
+                                Text(if (isArabic) "إعادة التحدي 🔄" else "Replay")
+                            }
                         }
                     }
                 }
@@ -320,16 +365,16 @@ fun SpeedTerminologyMatchGame(
                                 },
                                 border = if (isSelected) BorderStroke(1.5.dp, RedPrimary) else null
                             ) {
-                                Column(modifier = Modifier.padding(horizontal = 10.dp, vertical = 10.dp)) {
+                                Column(modifier = Modifier.padding(horizontal = 10.dp, vertical = 8.dp)) {
                                     Text(
                                         text = item.foreign,
                                         fontWeight = FontWeight.Bold,
-                                        fontSize = 12.5.sp,
+                                        fontSize = 12.sp,
                                         color = if (isSelected) Color.White else (if (isMatched) SuccessGreen else MaterialTheme.colorScheme.onSurface)
                                     )
                                     Text(
-                                        text = item.lang,
-                                        fontSize = 10.sp,
+                                        text = item.domain,
+                                        fontSize = 9.5.sp,
                                         color = if (isSelected) Color.White.copy(alpha = 0.8f) else MaterialTheme.colorScheme.onSurfaceVariant
                                     )
                                 }
@@ -343,7 +388,7 @@ fun SpeedTerminologyMatchGame(
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         Text(
-                            text = if (isArabic) "المقابل العربي المعتمد" else "Arabic Sworn Equivalent",
+                            text = if (isArabic) "المقابل العربي المعتمد" else "Arabic Equivalent",
                             fontWeight = FontWeight.Bold,
                             fontSize = 12.sp,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -367,16 +412,16 @@ fun SpeedTerminologyMatchGame(
                                 },
                                 border = if (isSelected) BorderStroke(1.5.dp, RedPrimary) else null
                             ) {
-                                Column(modifier = Modifier.padding(horizontal = 10.dp, vertical = 10.dp)) {
+                                Column(modifier = Modifier.padding(horizontal = 10.dp, vertical = 8.dp)) {
                                     Text(
                                         text = item.arabic,
                                         fontWeight = FontWeight.Bold,
-                                        fontSize = 12.5.sp,
+                                        fontSize = 12.sp,
                                         color = if (isSelected) Color.White else (if (isMatched) SuccessGreen else MaterialTheme.colorScheme.onSurface)
                                     )
                                     Text(
-                                        text = if (isMatched) "✓ تم التوثيق" else "انقر للمطابقة",
-                                        fontSize = 10.sp,
+                                        text = if (isMatched) "✓ موثق" else "انقر للمطابقة",
+                                        fontSize = 9.5.sp,
                                         color = if (isSelected) Color.White.copy(alpha = 0.8f) else MaterialTheme.colorScheme.onSurfaceVariant
                                     )
                                 }
@@ -390,7 +435,7 @@ fun SpeedTerminologyMatchGame(
 }
 
 // -------------------------------------------------------------------------------------------------
-// GAME 2: FALSE FRIENDS DETECTIVE (صائد الأصدقاء المزيفين)
+// GAME 2: FALSE FRIENDS DETECTIVE (Expanded to 8 Questions)
 // -------------------------------------------------------------------------------------------------
 @Composable
 fun FalseFriendsDetectiveGame(
@@ -416,14 +461,14 @@ fun FalseFriendsDetectiveGame(
             ),
             FalseFriendQuestion(
                 word = "Éventuel (الفرنسية)",
-                context = "Un accord éventuel entre les deux délégations.",
+                context = "Un accord éventuel entre les deux délégations ministérielles.",
                 trapAnswer = "اتفاق نهائي وحتمي ❌",
                 correctAnswer = "اتفاق محتمل / ممكن الحدوث ✔️",
                 explanation = "في الفرنسية Éventuel تعني 'محتمل أو وارد الوقوع'، بينما Eventual بالإنجليزية تعني 'نهائي/في نهاية المطاف'."
             ),
             FalseFriendQuestion(
                 word = "Sensible (الإنجليزية)",
-                context = "She made a very sensible business decision.",
+                context = "She made a very sensible business decision during the financial crisis.",
                 trapAnswer = "حساس / عاطفي مرهف ❌",
                 correctAnswer = "حكيم / رشيد ومنطقي ✔️",
                 explanation = "كلمة Sensible بالإنجليزية تعني عقلاني أو سديد الرأي. أما 'حساس' فتقابلها كلمة Sensitive."
@@ -434,6 +479,34 @@ fun FalseFriendsDetectiveGame(
                 trapAnswer = "مادة حافظة للأغذية ❌",
                 correctAnswer = "واقي طبي / وقائي ✔️",
                 explanation = "المادة الحافظة بالفرنسية هي Conservateur وبالإنجليزية Preservative. الخلط بينهما خطأ فادح في الترجمة الطبية."
+            ),
+            FalseFriendQuestion(
+                word = "Demander (الفرنسية)",
+                context = "L'avocat va demander des éclaircissements au tribunal.",
+                trapAnswer = "يأمر بحزم / يفرض بالقوة ❌",
+                correctAnswer = "يطلب / يلتمس / يسأل ✔️",
+                explanation = "الفعل الفرنسي Demander يعني مجرد الطلب أو السؤال، ولا يعني الأمر الجازم كالفعل الإنجليزي Demand."
+            ),
+            FalseFriendQuestion(
+                word = "Librairie (الفرنسية)",
+                context = "Il a acheté ce dictionnaire juridique dans une librairie.",
+                trapAnswer = "مكتبة عامة للإعارة والمطالعة (Library) ❌",
+                correctAnswer = "مكتبة تجارية لبيع الكتب (Bookstore) ✔️",
+                explanation = "في الفرنسية: Librairie هي دكان بيع الكتب، بينما المكتبة العامة للمطالعة تسمى Bibliothèque."
+            ),
+            FalseFriendQuestion(
+                word = "Fast (الألمانية)",
+                context = "Wir haben die Übersetzung fast abgeschlossen.",
+                trapAnswer = "بسرعة فائقة (Fast الإنجليزية) ❌",
+                correctAnswer = "تقريباً / على وشك الإنجاز (Almost) ✔️",
+                explanation = "في الألمانية Fast تعني 'تقريباً / كاد'، ولا تعني السرعة كما يظن الناطقون بالإنجليزية."
+            ),
+            FalseFriendQuestion(
+                word = "Attendre (الفرنسية)",
+                context = "Les diplomates doivent attendre l'arrivée du secrétaire général.",
+                trapAnswer = "يحضر الجلسة / يشارك فيها (Attend) ❌",
+                correctAnswer = "ينتظر / يترقب الوصول ✔️",
+                explanation = "الفعل Attendre بالفرنسية يعني 'ينتظر'، بينما 'يحضر مؤتمراً' تقابلها Assister à."
             )
         )
     }
@@ -445,16 +518,12 @@ fun FalseFriendsDetectiveGame(
     val currentQ = questions[currentQIndex]
 
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .testTag("game_false_friends"),
+        modifier = Modifier.fillMaxWidth().testTag("game_false_friends"),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(14.dp),
+            modifier = Modifier.fillMaxWidth().padding(14.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Row(
@@ -484,20 +553,20 @@ fun FalseFriendsDetectiveGame(
                     Text(
                         text = "المصطلح: \"${currentQ.word}\"",
                         fontWeight = FontWeight.ExtraBold,
-                        fontSize = 17.sp,
+                        fontSize = 16.sp,
                         color = RedPrimary
                     )
                     Spacer(Modifier.height(4.dp))
                     Text(
                         text = "السياق: ${currentQ.context}",
-                        fontSize = 12.5.sp,
+                        fontSize = 12.sp,
                         color = MaterialTheme.colorScheme.onSurface
                     )
                 }
             }
 
             Text(
-                text = if (isArabic) "أي الخيارين هو المعنى السليم الدقيق وتجنب فخ الشبه الشكلي؟" else "Which is the authentic meaning without falling into the false cognate trap?",
+                text = if (isArabic) "أي الخيارين هو المعنى السليم الدقيق وتجنب فخ الشبه الشكلي؟" else "Pick authentic translation without falling into cognate trap:",
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 12.sp
             )
@@ -526,18 +595,13 @@ fun FalseFriendsDetectiveGame(
                     color = btnColor,
                     border = if (isChosen) BorderStroke(1.5.dp, if (isCorrect) SuccessGreen else Color.Red) else null
                 ) {
-                    Row(
-                        modifier = Modifier.padding(12.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text(
-                            text = opt,
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 13.sp,
-                            color = MaterialTheme.colorScheme.onSurface
-                        )
-                    }
+                    Text(
+                        text = opt,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 12.5.sp,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier.padding(12.dp)
+                    )
                 }
             }
 
@@ -548,8 +612,8 @@ fun FalseFriendsDetectiveGame(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Column(modifier = Modifier.padding(10.dp)) {
-                        Text("💡 التحليل الترجمي واللغوي:", fontWeight = FontWeight.Bold, fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurface)
-                        Text(currentQ.explanation, fontSize = 11.5.sp, lineHeight = 16.sp)
+                        Text("💡 التحليل الترجمي واللغوي:", fontWeight = FontWeight.Bold, fontSize = 11.5.sp, color = MaterialTheme.colorScheme.onSurface)
+                        Text(currentQ.explanation, fontSize = 11.sp, lineHeight = 16.sp)
                     }
                 }
 
@@ -562,7 +626,7 @@ fun FalseFriendsDetectiveGame(
                     modifier = Modifier.fillMaxWidth(),
                     colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
                 ) {
-                    Text(if (isArabic) "السؤال التالي ➡️" else "Next Word ➡️")
+                    Text(if (isArabic) "السؤال التالي ➔" else "Next Question ➔")
                 }
             }
         }
@@ -570,7 +634,7 @@ fun FalseFriendsDetectiveGame(
 }
 
 // -------------------------------------------------------------------------------------------------
-// GAME 3: SENTENCE BUILDER (تركيب الجملة المترجمة)
+// GAME 3: SENTENCE BUILDER (5 Tasks)
 // -------------------------------------------------------------------------------------------------
 @Composable
 fun SentenceBuilderGame(
@@ -599,6 +663,16 @@ fun SentenceBuilderGame(
                 source = "The ambassador presented his credentials to the head of state.",
                 targetTokens = listOf("قدّم", "السفير", "أوراق", "اعتماده", "إلى", "رئيس", "الدولة"),
                 context = "البروتوكول الدبلوماسي"
+            ),
+            SentenceTask(
+                source = "This agreement shall enter into force upon signature by all parties.",
+                targetTokens = listOf("تدخل", "هذه", "الاتفاقية", "حيز", "النفاذ", "فور", "توقيع", "الأطراف"),
+                context = "صياغة معاهدات دولية"
+            ),
+            SentenceTask(
+                source = "The central bank decided to raise interest rates to curb inflation.",
+                targetTokens = listOf("قرر", "البنك", "المركزي", "رفع", "أسعار", "الفائدة", "لكبح", "التضخم"),
+                context = "النشرات الاقتصادية والمالية"
             )
         )
     }
@@ -619,16 +693,12 @@ fun SentenceBuilderGame(
     }
 
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .testTag("game_sentence_builder"),
+        modifier = Modifier.fillMaxWidth().testTag("game_sentence_builder"),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(14.dp),
+            modifier = Modifier.fillMaxWidth().padding(14.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Row(
@@ -637,17 +707,18 @@ fun SentenceBuilderGame(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = if (isArabic) "🧩 لعبة تركيب وبناء الجملة المترجمة" else "🧩 Sentence Builder Challenge",
+                    text = if (isArabic) "🧩 لعبة تركيب وبناء الجملة المترجمة" else "🧩 Sentence Builder",
                     fontWeight = FontWeight.Bold,
                     style = MaterialTheme.typography.titleMedium
                 )
-                SuggestionChip(
-                    onClick = {},
-                    label = { Text(task.context, fontSize = 10.5.sp) }
+                Text(
+                    text = "${currentTaskIndex + 1} / ${tasks.size}",
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = RedPrimary
                 )
             }
 
-            // Source Sentence Box
             Surface(
                 shape = RoundedCornerShape(12.dp),
                 color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
@@ -655,15 +726,15 @@ fun SentenceBuilderGame(
             ) {
                 Column(modifier = Modifier.padding(12.dp)) {
                     Text(
-                        text = "النص المصدر (Source):",
-                        fontSize = 11.sp,
+                        text = "النص المصدر (${task.context}):",
+                        fontSize = 10.5.sp,
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                     Spacer(Modifier.height(4.dp))
                     Text(
                         text = task.source,
-                        fontSize = 14.sp,
+                        fontSize = 13.5.sp,
                         fontWeight = FontWeight.Bold,
                         color = RedPrimary
                     )
@@ -675,23 +746,19 @@ fun SentenceBuilderGame(
                 shape = RoundedCornerShape(12.dp),
                 color = if (selectedTokens.isEmpty()) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.2f),
                 border = BorderStroke(1.dp, if (isSubmitted) (if (isCorrect) SuccessGreen else Color.Red) else MaterialTheme.colorScheme.outlineVariant),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .defaultMinSize(minHeight = 65.dp)
+                modifier = Modifier.fillMaxWidth().defaultMinSize(minHeight = 60.dp)
             ) {
                 if (selectedTokens.isEmpty()) {
                     Box(modifier = Modifier.padding(12.dp), contentAlignment = Alignment.Center) {
                         Text(
-                            text = if (isArabic) "انقر على الكلمات بالترتيب النحوي السليم لبناء الجملة..." else "Tap words in grammatical sequence...",
+                            text = if (isArabic) "انقر على الكلمات بالترتيب النحوي السليم لبناء الجملة..." else "Tap words in sequence...",
                             fontSize = 11.5.sp,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
                 } else {
                     Row(
-                        modifier = Modifier
-                            .padding(8.dp)
-                            .fillMaxWidth(),
+                        modifier = Modifier.padding(8.dp).fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(6.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
@@ -700,7 +767,6 @@ fun SentenceBuilderGame(
                                 shape = RoundedCornerShape(8.dp),
                                 color = RedPrimary,
                                 modifier = Modifier.clickable(enabled = !isSubmitted) {
-                                    // Remove token and return to available
                                     selectedTokens = selectedTokens.toMutableList().also { it.removeAt(idx) }
                                     availableTokens = availableTokens + token
                                 }
@@ -742,7 +808,7 @@ fun SentenceBuilderGame(
                     ) {
                         Text(
                             text = token,
-                            fontSize = 12.sp,
+                            fontSize = 11.5.sp,
                             fontWeight = FontWeight.SemiBold,
                             modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)
                         )
@@ -750,7 +816,6 @@ fun SentenceBuilderGame(
                 }
             }
 
-            // Action Buttons
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -759,7 +824,7 @@ fun SentenceBuilderGame(
                     onClick = { resetTask() },
                     modifier = Modifier.weight(1f)
                 ) {
-                    Text(if (isArabic) "إعادة ترتيب 🔄" else "Reset 🔄")
+                    Text(if (isArabic) "إعادة ترتيب 🔄" else "Reset 🔄", fontSize = 11.sp)
                 }
 
                 Button(
@@ -772,7 +837,7 @@ fun SentenceBuilderGame(
                     modifier = Modifier.weight(1f),
                     colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
                 ) {
-                    Text(if (isArabic) "تحقق من الصياغة ✔️" else "Verify ✔️")
+                    Text(if (isArabic) "تحقق من الصياغة ✔️" else "Verify ✔️", fontSize = 11.sp)
                 }
             }
 
@@ -782,14 +847,14 @@ fun SentenceBuilderGame(
                         text = "🎉 صياغة دقيقة واحترافية متطابقة مع المعايير!",
                         color = SuccessGreen,
                         fontWeight = FontWeight.Bold,
-                        fontSize = 12.5.sp
+                        fontSize = 12.sp
                     )
                 } else {
                     Text(
                         text = "❌ الصياغة غير مطابقة، الترتيب النموذجي: " + task.targetTokens.joinToString(" "),
                         color = Color.Red,
                         fontWeight = FontWeight.Bold,
-                        fontSize = 11.5.sp
+                        fontSize = 11.sp
                     )
                 }
 
@@ -801,7 +866,7 @@ fun SentenceBuilderGame(
                     modifier = Modifier.fillMaxWidth(),
                     colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
                 ) {
-                    Text(if (isArabic) "الجملة التالية ➡️" else "Next Sentence ➡️")
+                    Text(if (isArabic) "الجملة التالية ➔" else "Next Sentence ➔")
                 }
             }
         }
@@ -809,7 +874,7 @@ fun SentenceBuilderGame(
 }
 
 // -------------------------------------------------------------------------------------------------
-// GAME 4: BOOTH REFLEX BLITZ (تحدي سرعة بديهة الكابينة)
+// GAME 4: BOOTH REFLEX BLITZ (6 Scenarios)
 // -------------------------------------------------------------------------------------------------
 @Composable
 fun BoothReflexRushGame(
@@ -817,27 +882,42 @@ fun BoothReflexRushGame(
     onAddScore: (Int) -> Unit
 ) {
     data class BoothTerm(
-        val speakerSentence: String,
-        val correctChoice: String,
-        val wrongChoices: List<String>
+        val speech: String,
+        val correct: String,
+        val wrong: List<String>
     )
 
     val boothChallenges = remember {
         listOf(
             BoothTerm(
-                speakerSentence = "\"We cannot ignore the elephant in the room regarding maritime trade.\"",
-                correctChoice = "المشكلة الجلية والواضحة التي يتفاداها الجميع",
-                wrongChoices = listOf("وجود الفيل الضخم في الغرفة", "التجارة البحرية الحيوانية", "العائق الإداري البسيط")
+                speech = "\"We cannot ignore the elephant in the room regarding maritime trade.\"",
+                correct = "المشكلة الجلية والواضحة التي يتفاداها الجميع",
+                wrong = listOf("وجود الفيل الضخم في الغرفة", "التجارة البحرية الحيوانية", "العائق الإداري البسيط")
             ),
             BoothTerm(
-                speakerSentence = "\"The resolution was adopted by acclamation without a vote.\"",
-                correctChoice = "اعتُمد القرار بالإجماع والتصفيق",
-                wrongChoices = listOf("اعتُمد القرار بعد مناقشة عاصفة", "اعتُمد القرار بالأغلبية البسيطة", "تم تأجيل القرار للاقتراع")
+                speech = "\"The resolution was adopted by acclamation without a vote.\"",
+                correct = "اعتُمد القرار بالإجماع والتصفيق دون اقتراع",
+                wrong = listOf("اعتُمد القرار بعد مناقشة عاصفة", "اعتُمد القرار بأغلبية الثلثين", "تم تأجيل القرار لجلسة قادمة")
             ),
             BoothTerm(
-                speakerSentence = "\"This provision is without prejudice to national security.\"",
-                correctChoice = "دون الإخلال بالأمن القومي / مع عدم المساس به",
-                wrongChoices = listOf("مع إلحاق الضرر بالأمن القومي", "بناءً على طلب الأمن القومي", "خارج نطاق السيادة الوطنية")
+                speech = "\"This provision is without prejudice to national security interests.\"",
+                correct = "دون الإخلال بمصالح الأمن القومي / مع عدم المساس بها",
+                wrong = listOf("مع إلحاق الضرر بالأمن القومي", "بناءً على طلب الأمن القومي", "خارج نطاق السيادة الوطنية")
+            ),
+            BoothTerm(
+                speech = "\"The parties must demonstrate political will to break the deadlock.\"",
+                correct = "إبداء الإرادة السياسية لكسر الجمود والانسداد",
+                wrong = listOf("إظهار القوة العسكرية لتفجير المأزق", "الرغبة في تأجيل المفاوضات", "الوصول إلى طريق مسدود حتمي")
+            ),
+            BoothTerm(
+                speech = "\"We call for the immediate cessation of hostilities on all fronts.\"",
+                correct = "الوقف الفوري للأعمال العدائية على كافة الجبهات",
+                wrong = listOf("استمرار العمليات العسكرية بحذر", "تعليق المساعدات الإنسانية فوراً", "إعادة تنظيم القوات المسلحة")
+            ),
+            BoothTerm(
+                speech = "\"The draft declaration reflects our shared commitment to net-zero emissions.\"",
+                correct = "مشروع الإعلان يعكس التزامنا المشترك بالوصول للحياد الكربوني",
+                wrong = listOf("البيان الختامي يرفض خفض الانبعاثات", "الإعلان ينفي وجود التغير المناخي", "تخفيض بنسبة صفر بالمئة")
             )
         )
     }
@@ -849,7 +929,7 @@ fun BoothReflexRushGame(
 
     val challenge = boothChallenges[currentIndex]
     val options = remember(currentIndex) {
-        (challenge.wrongChoices + challenge.correctChoice).shuffled()
+        (challenge.wrong + challenge.correct).shuffled()
     }
 
     LaunchedEffect(currentIndex, answered) {
@@ -867,16 +947,12 @@ fun BoothReflexRushGame(
     }
 
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .testTag("game_booth_reflex"),
+        modifier = Modifier.fillMaxWidth().testTag("game_booth_reflex"),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(14.dp),
+            modifier = Modifier.fillMaxWidth().padding(14.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Row(
@@ -891,7 +967,7 @@ fun BoothReflexRushGame(
                         style = MaterialTheme.typography.titleMedium
                     )
                     Text(
-                        text = if (isArabic) "محاكاة الضغط اللحظي: اختر المقابل السريع قبل انتهاء المؤقت!" else "Pick the exact translation under 10-second booth pressure",
+                        text = if (isArabic) "محاكاة الضغط اللحظي: اختر المقابل السريع قبل انتهاء المؤقت!" else "Pick translation under 10s booth pressure",
                         fontSize = 11.5.sp,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -934,7 +1010,7 @@ fun BoothReflexRushGame(
                     }
                     Spacer(Modifier.height(8.dp))
                     Text(
-                        text = challenge.speakerSentence,
+                        text = challenge.speech,
                         color = Color.White,
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold,
@@ -945,7 +1021,7 @@ fun BoothReflexRushGame(
 
             // Options List
             options.forEach { opt ->
-                val isCorrect = opt == challenge.correctChoice
+                val isCorrect = opt == challenge.correct
                 val isChosen = selectedAns == opt
                 val bg = when {
                     !answered -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
@@ -969,7 +1045,7 @@ fun BoothReflexRushGame(
                 ) {
                     Text(
                         text = opt,
-                        fontSize = 12.5.sp,
+                        fontSize = 12.sp,
                         fontWeight = FontWeight.SemiBold,
                         modifier = Modifier.padding(12.dp)
                     )
@@ -978,7 +1054,7 @@ fun BoothReflexRushGame(
 
             if (answered) {
                 if (selectedAns == "TIMEOUT") {
-                    Text("⏳ انتهى الوقت! في الكابينة، التأخير أكثر من 8 ثوانٍ يسبب انقطاع المعنى.", color = Color.Red, fontSize = 11.5.sp, fontWeight = FontWeight.Bold)
+                    Text("⏳ انتهى الوقت! في الكابينة، التأخير أكثر من 8 ثوانٍ يسبب انقطاع المعنى.", color = Color.Red, fontSize = 11.sp, fontWeight = FontWeight.Bold)
                 }
 
                 Button(
@@ -991,6 +1067,182 @@ fun BoothReflexRushGame(
                     colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
                 ) {
                     Text(if (isArabic) "التحدي التالي 🎙️" else "Next Speech Feed 🎙️")
+                }
+            }
+        }
+    }
+}
+
+// -------------------------------------------------------------------------------------------------
+// GAME 5: IDIOMS & COLLOCATIONS DECIPHERER (NEW GAME)
+// -------------------------------------------------------------------------------------------------
+@Composable
+fun IdiomsDeciphererGame(
+    isArabic: Boolean,
+    onAddScore: (Int) -> Unit
+) {
+    data class IdiomItem(
+        val idiom: String,
+        val literalTrap: String,
+        val culturalEquivalent: String,
+        val context: String,
+        val explanation: String
+    )
+
+    val idioms = remember {
+        listOf(
+            IdiomItem(
+                idiom = "To bite the bullet",
+                literalTrap = "عضّ الرصاصة بأسنانه ❌",
+                culturalEquivalent = "تجرّع المرارة / الإقدام على أمر شاق لا مفر منه ✔️",
+                context = "\"The government had to bite the bullet and cut subsidies.\"",
+                explanation = "تعبير اصطلاحي يعود لعلاج الجرحى قديماً؛ ويعني قبول موقف صعب ومؤلم بشجاعة لأن لا مفر منه."
+            ),
+            IdiomItem(
+                idiom = "A level playing field",
+                literalTrap = "ملعب كرة قدم مستوٍ ❌",
+                culturalEquivalent = "تكافؤ الفرص والعدالة التنافسية ✔️",
+                context = "\"New antitrust laws ensure a level playing field for all tech startups.\"",
+                explanation = "في الاقتصاد والتجارة، يعني توفير شروط تنافسية عادلة ومتساوية لكافة الأطراف دون تمييز."
+            ),
+            IdiomItem(
+                idiom = "To give someone the cold shoulder",
+                literalTrap = "إعطاء كتف بارد ولحم بارد ❌",
+                culturalEquivalent = "إبداء الجفاء / التجاهل المقصود والصدّ المتعمد ✔️",
+                context = "\"The delegate received a cold shoulder from his counterparts.\"",
+                explanation = "يعني التعامل بجفاء وازدراء مقصود ورفض التواصل مع الشخص."
+            ),
+            IdiomItem(
+                idiom = "Back to the drawing board",
+                literalTrap = "العودة إلى لوح الرسم الخشبي ❌",
+                culturalEquivalent = "العودة إلى نقطة الصفر / إعادة التخطيط من البداية ✔️",
+                context = "\"After the talks collapsed, the mediators went back to the drawing board.\"",
+                explanation = "يعني فشل الخطة والاضطرار للبدء من جديد بوضع خطة بديلة."
+            ),
+            IdiomItem(
+                idiom = "To read between the lines",
+                literalTrap = "قراءة الفراغ الأبيض بين السطور ❌",
+                culturalEquivalent = "استشفاف المعنى الضمني / فهم ما وراء الكلمات ✔️",
+                context = "\"Diplomats must know how to read between the lines in communiqués.\"",
+                explanation = "مهارة فهم المعاني غير المصرح بها صراحة في الخطابات الدبلوماسية."
+            )
+        )
+    }
+
+    var currentIdx by remember { mutableIntStateOf(0) }
+    var selectedAns by remember { mutableStateOf<String?>(null) }
+    var isAnswered by remember { mutableStateOf(false) }
+
+    val item = idioms[currentIdx]
+
+    Card(
+        modifier = Modifier.fillMaxWidth().testTag("game_idioms_master"),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth().padding(14.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = if (isArabic) "💡 كاشف التعبيرات الاصطلاحية والأمثال" else "💡 Idioms & Collocations Master",
+                    fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.titleMedium
+                )
+                Text(
+                    text = "${currentIdx + 1} / ${idioms.size}",
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = RedPrimary
+                )
+            }
+
+            Surface(
+                shape = RoundedCornerShape(12.dp),
+                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Column(modifier = Modifier.padding(12.dp)) {
+                    Text(
+                        text = "التعبير الاصطلاحي: \"${item.idiom}\"",
+                        fontSize = 15.sp,
+                        fontWeight = FontWeight.ExtraBold,
+                        color = RedPrimary
+                    )
+                    Spacer(Modifier.height(4.dp))
+                    Text(
+                        text = "السياق: ${item.context}",
+                        fontSize = 12.sp,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                }
+            }
+
+            Text(
+                text = if (isArabic) "أي الخيارين يمثل المقابل الثقافي البلاغي الدقيق ويتجنب الترجمة الحرفية القاتلة؟" else "Pick the authentic cultural equivalent:",
+                fontSize = 11.5.sp,
+                fontWeight = FontWeight.SemiBold
+            )
+
+            listOf(item.culturalEquivalent, item.literalTrap).shuffled(remember(currentIdx) { java.util.Random(currentIdx.toLong()) }).forEach { opt ->
+                val isCorrect = opt == item.culturalEquivalent
+                val isChosen = selectedAns == opt
+                val bg = when {
+                    !isAnswered -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+                    isCorrect -> SuccessGreen.copy(alpha = 0.25f)
+                    isChosen -> Color.Red.copy(alpha = 0.2f)
+                    else -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
+                }
+
+                Surface(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(10.dp))
+                        .clickable(enabled = !isAnswered) {
+                            selectedAns = opt
+                            isAnswered = true
+                            if (isCorrect) onAddScore(30)
+                        },
+                    shape = RoundedCornerShape(10.dp),
+                    color = bg,
+                    border = if (isChosen) BorderStroke(1.5.dp, if (isCorrect) SuccessGreen else Color.Red) else null
+                ) {
+                    Text(
+                        text = opt,
+                        fontSize = 12.5.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(12.dp)
+                    )
+                }
+            }
+
+            if (isAnswered) {
+                Surface(
+                    shape = RoundedCornerShape(10.dp),
+                    color = GoldYellow.copy(alpha = 0.15f),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Column(modifier = Modifier.padding(10.dp)) {
+                        Text("💡 الأصل البلاغي والترجمي:", fontWeight = FontWeight.Bold, fontSize = 11.5.sp, color = MaterialTheme.colorScheme.onSurface)
+                        Text(item.explanation, fontSize = 11.sp, lineHeight = 16.sp)
+                    }
+                }
+
+                Button(
+                    onClick = {
+                        isAnswered = false
+                        selectedAns = null
+                        currentIdx = (currentIdx + 1) % idioms.size
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
+                ) {
+                    Text(if (isArabic) "التعبير التالي ➔" else "Next Idiom ➔")
                 }
             }
         }

@@ -167,10 +167,10 @@ fun AuthDialog(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.spacedBy(6.dp)
                             ) {
-                                // Admin Demo (Locked strictly to djoudimadani09@gmail.com)
+                                // Admin Demo Account
                                 Button(
                                     onClick = {
-                                        onLoginSuccess("الأستاذ جودي مداني", AdminEmailNotifier.ADMIN_EMAIL, UserRole.ADMIN)
+                                        onLoginSuccess("المشرف العام (Admin)", "admin@polylang.dz", UserRole.ADMIN)
                                     },
                                     modifier = Modifier
                                         .weight(1.3f)

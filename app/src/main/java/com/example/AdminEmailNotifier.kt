@@ -1,8 +1,12 @@
 package com.example
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
@@ -29,13 +33,14 @@ object AdminEmailNotifier {
                 val timestamp = dateFormat.format(Date())
 
                 val jsonObj = JSONObject()
-                jsonObj.put("_subject", "[Polylang Android] $eventType: $userName")
-                jsonObj.put("_replyto", userEmail)
+                jsonObj.put("_subject", "[Polylang Hub] $eventType: ${userName.ifBlank { "عميل جديد" }}")
+                jsonObj.put("_replyto", userEmail.ifBlank { ADMIN_EMAIL })
                 jsonObj.put("_captcha", "false")
                 jsonObj.put("eventType", eventType)
                 jsonObj.put("timestamp", timestamp)
-                jsonObj.put("userName", userName)
-                jsonObj.put("userEmail", userEmail)
+                jsonObj.put("userName", userName.ifBlank { "غير مسجل / زائر" })
+                jsonObj.put("userEmail", userEmail.ifBlank { "لم يحدد" })
+                jsonObj.put("targetAdmin", ADMIN_EMAIL)
 
                 for ((key, value) in details) {
                     jsonObj.put(key, value)
@@ -47,8 +52,8 @@ object AdminEmailNotifier {
                 conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8")
                 conn.setRequestProperty("Accept", "application/json")
                 conn.doOutput = true
-                conn.connectTimeout = 6000
-                conn.readTimeout = 6000
+                conn.connectTimeout = 7000
+                conn.readTimeout = 7000
 
                 val writer = OutputStreamWriter(conn.outputStream, "UTF-8")
                 writer.use {
@@ -58,16 +63,28 @@ object AdminEmailNotifier {
 
                 val code = conn.responseCode
                 success = (code in 200..299)
-                responseMessage = if (success) "تم الإرسال بنجاح إلى الإدارة" else "كود الاستجابة: $code"
+                responseMessage = if (success) "تم الإرسال بنجاح إلى $ADMIN_EMAIL" else "كود الاستجابة: $code"
                 conn.disconnect()
             } catch (e: Exception) {
                 success = false
-                responseMessage = e.localizedMessage ?: "تعذر الإرسال"
+                responseMessage = e.localizedMessage ?: "تعذر الاتصال بالخادم"
             }
 
-            kotlinx.coroutines.withContext(Dispatchers.Main) {
+            withContext(Dispatchers.Main) {
                 onResult(success, responseMessage)
             }
         }
+    }
+
+    fun openMailClient(context: Context, subject: String, body: String) {
+        try {
+            val intent = Intent(Intent.ACTION_SENDTO).apply {
+                data = Uri.parse("mailto:$ADMIN_EMAIL")
+                putExtra(Intent.EXTRA_SUBJECT, subject)
+                putExtra(Intent.EXTRA_TEXT, body)
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+            context.startActivity(intent)
+        } catch (_: Exception) {}
     }
 }

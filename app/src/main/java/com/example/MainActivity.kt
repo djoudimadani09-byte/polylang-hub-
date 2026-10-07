@@ -47,11 +47,11 @@ fun PolylangHubApp() {
     var isArabic by remember { mutableStateOf(true) }
     var currentCurrency by remember { mutableStateOf(AppCurrency.DZD) }
 
-    // User Session State (Djoudi Madani - Director & Certified Sworn Translator)
-    var userName by remember { mutableStateOf("جودي مداني (Djoudi Madani)") }
-    var userEmail by remember { mutableStateOf("djoudimadani09@gmail.com") }
-    var userRole by remember { mutableStateOf(UserRole.ADMIN) }
-    var userPlan by remember { mutableStateOf("المدير العام والمترجم المحلف المعتمد") }
+    // User Session State (Default: clean visitor / client state)
+    var userName by remember { mutableStateOf("") }
+    var userEmail by remember { mutableStateOf("") }
+    var userRole by remember { mutableStateOf(UserRole.CLIENT) }
+    var userPlan by remember { mutableStateOf("حساب عميل جديد") }
 
     // Data State
     val allCourses = remember { CourseData.sampleCourses }
