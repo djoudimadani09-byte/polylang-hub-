@@ -91,6 +91,86 @@ object CourseData {
             level = "مهني تطبيقي",
             desc = "أكاديمية تدريب مهنية متخصصة تقدم دورات عملية للمترجمين في برامج الكات (CAT Tools) وترجمة الفيديو والدبلجة والترجمة الطبية والقانونية والتسويقية.",
             videoUrl = "https://www.translastars.com/"
+        ),
+        MasterclassCourse(
+            id = 10,
+            title = "الدرس التأسيسي في الألمانية: تراكيب الجملة والمحادثة اليومية (Deutsch lernen)",
+            category = "تعلم اللغة الألمانية 🇩🇪",
+            duration = "فيديو تدريبي تفاعلي",
+            instructor = "",
+            level = "A1 - A2 تأسيسي",
+            desc = "شرح مبسط ومباشر لبناء الجملة الأساسية في اللغة الألمانية وتصريف الأفعال الشائعة مع تدريب على النطق ومخارج الحروف السليمة لمتعلمي اللغات.",
+            videoUrl = "https://www.facebook.com/share/v/1BtueGUSXV/"
+        ),
+        MasterclassCourse(
+            id = 11,
+            title = "كبسولة المحادثة الألمانية السريعة: العبارات الحيوية والنطق الأصيل",
+            category = "تعلم اللغة الألمانية 🇩🇪",
+            duration = "مقطع تدريبي سريع (Reel)",
+            instructor = "",
+            level = "A1 للمبتدئين",
+            desc = "تدريب مكثف على العبارات اليومية والمواقف الحياتية في الشارع والمطعم والمطار بألمانيا وكيفية الرد التلقائي دون تردد.",
+            videoUrl = "https://www.facebook.com/share/r/1DL41mc34o/"
+        ),
+        MasterclassCourse(
+            id = 12,
+            title = "قواعد الألمانية ببساطة: ضبط أدوات التعريف وتراكيب الـ Dativ والـ Akkusativ",
+            category = "تعلم اللغة الألمانية 🇩🇪",
+            duration = "درس قواعد مركز (Reel)",
+            instructor = "",
+            level = "A2 - B1 متوسط",
+            desc = "تفكيك عقدة أدوات التعريف (der, die, das) وحالات الإعراب الألمانية (Nominativ, Akkusativ, Dativ) عبر أمثلة عملية سريعة الحفظ والتطبيق.",
+            videoUrl = "https://www.facebook.com/share/r/14ux22YaTvK/"
+        ),
+        MasterclassCourse(
+            id = 13,
+            title = "المصطلحات الألمانية للمترجمين ومتعلمي اللغات: الفروق الدلالية الدقيقة",
+            category = "تعلم اللغة الألمانية 🇩🇪",
+            duration = "مقطع دلالي ولساني (Reel)",
+            instructor = "",
+            level = "B1 - B2 متقدم",
+            desc = "التمييز بين الأفعال المركبة الألمانية واللواحق والتعبيرات الاصطلاحية وتفادي أخطاء الترجمة الحرفية بين العربية والألمانية.",
+            videoUrl = "https://www.facebook.com/share/r/1Ho4u33jNk/"
+        ),
+        MasterclassCourse(
+            id = 14,
+            title = "مهارة الاستماع والاستيعاب الشفهي في الألمانية (Hörverstehen Mastery)",
+            category = "تعلم اللغة الألمانية 🇩🇪",
+            duration = "تمرين استماع تطبيقي (Reel)",
+            instructor = "",
+            level = "A2 - B1 متوسط",
+            desc = "تقنيات تدريب الأذن على النبرة الألمانية وسرعة المتحدثين الأصليين واستخراج المعلومات الأساسية من الحوارات الشفهية لاجتياز اختبارات Goethe وTelc.",
+            videoUrl = "https://www.facebook.com/share/r/1CEm7LEw8Y/"
+        ),
+        MasterclassCourse(
+            id = 15,
+            title = "محادثات العمل والمكاتب والمراسلات الرسمية بالألمانية (Geschäftsdeutsch)",
+            category = "تعلم اللغة الألمانية 🇩🇪",
+            duration = "مقطع عملي ومهني (Reel)",
+            instructor = "",
+            level = "B1 - B2 للمحترفين",
+            desc = "صيغ الاحترام والمخاطبة الرسمية في بيئة العمل الألمانية، وكتابة الرسائل الإدارية، وإجراء المقابلات الشفهية والاجتماعات بنجاح.",
+            videoUrl = "https://www.facebook.com/share/r/1F6uREvqc5/"
+        ),
+        MasterclassCourse(
+            id = 16,
+            title = "محاضرة الألمانية الشاملة: أسرار الطلاقة وتجاوز حواجز التحدث (Fließend Deutsch)",
+            category = "تعلم اللغة الألمانية 🇩🇪",
+            duration = "محاضرة تفاعلية كاملة",
+            instructor = "",
+            level = "A1 إلى B2 شامل",
+            desc = "محاضرة توجيهية شاملة تشرح استراتيجيات بناء الحصيلة اللغوية، وتنظيم وقت المذاكرة اليومي، وتطبيق أسلوب التظليل الصوتي (Shadowing) في إتقان اللغة الألمانية.",
+            videoUrl = "https://www.facebook.com/share/v/1Hpwcf1i38/"
+        ),
+        MasterclassCourse(
+            id = 17,
+            title = "خلاصة القواعد والنطق السليم في الألمانية: تجنب الأفخاخ الشائعة",
+            category = "تعلم اللغة الألمانية 🇩🇪",
+            duration = "ملخص تطبيقي مركز (Reel)",
+            instructor = "",
+            level = "A2 - B1 شامل",
+            desc = "دليل سريع لتصحيح الأخطاء الشائعة بين المبتدئين في مخارج حروف (ch, st, sp, ä, ö, ü) وتثبيت صيغ الماضي (Perfekt و Präteritum) بثقة واحتراف.",
+            videoUrl = "https://www.facebook.com/share/r/14uNxRvyKVQ/"
         )
     )
 }

@@ -1892,7 +1892,8 @@
             📂 تصنيف المراجع والمساقات:
           </div>
           <div style="display:flex; gap:6px; flex-wrap:wrap;" id="cat-chips-container">
-            <button class="nav-pill active" onclick="setCategoryFilter('all', this)">جميع المراجع (9)</button>
+            <button class="nav-pill active" onclick="setCategoryFilter('all', this)">جميع المراجع والمساقات (17)</button>
+            <button class="nav-pill" style="border-color:#f59e0b; background:rgba(245,158,11,0.1); color:#b45309; font-weight:800;" onclick="setCategoryFilter('german_learning', this)">🇩🇪 مساقات تعلم اللغة الألمانية (8 فيديوهات)</button>
             <button class="nav-pill" onclick="setCategoryFilter('academic_lectures', this)">📄 محاضرات أكاديمية (PDF)</button>
             <button class="nav-pill" onclick="setCategoryFilter('studies_books', this)">📖 دراسات ومراجع</button>
             <button class="nav-pill" onclick="setCategoryFilter('series_lessons', this)">🎓 سلاسل دروس الترجمة</button>
@@ -1907,7 +1908,7 @@
         <!-- Status Counter -->
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; border-top:1px solid var(--border-line); border-bottom:1px solid var(--border-line); padding:10px 0; margin-bottom:18px;">
           <div style="font-size:12px; font-weight:800; color:var(--crimson);" id="academy-status-counter">
-            عرض 9 مراجع ومساقات أكاديمية معتمدة
+            عرض 17 مرجعاً ومساقاً أكاديمياً ولغوياً معتمداً
           </div>
         </div>
 
@@ -3844,7 +3845,13 @@
       const ytLink = document.getElementById('modal-video-youtube-link');
       if (ytLink) {
         ytLink.href = item.url || `https://www.youtube.com/watch?v=${item.id}`;
-        ytLink.innerHTML = "🔗 فتح الرابط الأكاديمي المباشر ↗";
+        if (item.url && item.url.includes('facebook.com')) {
+          ytLink.innerHTML = "🔗 فتح الفيديو على Facebook ↗";
+          ytLink.style.background = "#1877f2";
+        } else {
+          ytLink.innerHTML = "🔗 فتح الرابط الأكاديمي المباشر ↗";
+          ytLink.style.background = "#ef4444";
+        }
       }
 
       document.getElementById('modal-video-duration').textContent = `⏱️ ${item.duration || '40:00'}`;
@@ -3880,9 +3887,16 @@
         }
         if (iframe) {
           iframe.style.display = 'block';
-          iframe.src = `https://www.youtube-nocookie.com/embed/${activeVideoItem.id}?autoplay=1&rel=0&enablejsapi=1`;
+          if (activeVideoItem.url && activeVideoItem.url.includes('facebook.com')) {
+            const encodedFb = encodeURIComponent(activeVideoItem.url);
+            iframe.src = `https://www.facebook.com/plugins/video.php?href=${encodedFb}&show_text=false&t=0`;
+          } else if (activeVideoItem.url && activeVideoItem.url.endsWith('.pdf')) {
+            iframe.src = activeVideoItem.url;
+          } else {
+            iframe.src = `https://www.youtube-nocookie.com/embed/${activeVideoItem.id}?autoplay=1&rel=0&enablejsapi=1`;
+          }
           iframe.onerror = () => {
-            console.log("Iframe failed, auto-fallback to HTML5 MP4 stream");
+            console.log("Iframe fallback to HTML5 MP4 stream");
             switchVideoEngine('mp4');
           };
         }
