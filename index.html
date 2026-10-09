@@ -989,38 +989,38 @@
       <!-- Streamlined, Clean Navbar (Consolidated into single unified 'من نحن والمؤسس' button) -->
       <div class="nav-sub-bar" style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; padding:8px 0;">
         <!-- 1. الرئيسية -->
-        <button class="sub-nav-btn active" onclick="switchRole('client')">
-          <span>🏠</span> <span>الرئيسية</span>
+        <button class="sub-nav-btn active" id="sub-nav-home" onclick="switchRole('client')">
+          <span>🏠</span> <span id="txt-nav-home">الرئيسية</span>
         </button>
 
         <!-- 2. مقصورة ومحاكي الترجمة -->
-        <button class="sub-nav-btn" onclick="switchRole('student'); switchStudentTab('booth');">
-          <span>🎙️</span> <span>مقصورة الترجمة الفورية</span>
+        <button class="sub-nav-btn" id="sub-nav-booth" onclick="switchRole('student'); switchStudentTab('booth');">
+          <span>🎙️</span> <span id="txt-nav-booth">مقصورة الترجمة الفورية</span>
         </button>
 
         <!-- 3. أكاديمية اللغات والماستركلاس -->
-        <button class="sub-nav-btn" onclick="switchRole('enthusiast')">
-          <span>🎓</span> <span>مكتبة اللغات والماستركلاس</span>
+        <button class="sub-nav-btn" id="sub-nav-academy" onclick="switchRole('enthusiast')">
+          <span>🎓</span> <span id="txt-nav-academy">مكتبة اللغات والماستركلاس</span>
         </button>
 
         <!-- 4. خدمات الترجمة الرسمية -->
-        <button class="sub-nav-btn" onclick="openModal('orderModal')">
-          <span>⚖️</span> <span>طلب ترجمة معتمدة</span>
+        <button class="sub-nav-btn" id="sub-nav-order" onclick="openModal('orderModal')">
+          <span>⚖️</span> <span id="txt-nav-order">طلب ترجمة معتمدة</span>
         </button>
 
         <!-- 5. عرض أغيلاس الترويجي -->
-        <button class="sub-nav-btn" onclick="openModal('premiumSubModal'); applyAghilasPromo();" style="border-color:#3b82f6; color:#1d4ed8; font-weight:800;">
-          <span>🔥</span> <span>عرض أغيلاس (50%-)</span>
+        <button class="sub-nav-btn" id="sub-nav-aghilas" onclick="openModal('premiumSubModal'); applyAghilasPromo();" style="border-color:#3b82f6; color:#1d4ed8; font-weight:800;">
+          <span>🔥</span> <span id="txt-nav-aghilas">عرض أغيلاس (50%-)</span>
         </button>
 
         <!-- 6. امتحان تحديد المستوى -->
-        <button class="sub-nav-btn" onclick="openExamDirectly('trans')" style="background:linear-gradient(135deg, var(--crimson), #991b1b); color:#fff; border-color:var(--crimson);">
-          <span>📊</span> <span>تحديد المستوى CEFR</span>
+        <button class="sub-nav-btn" id="sub-nav-exam" onclick="openExamDirectly('trans')" style="background:linear-gradient(135deg, var(--crimson), #991b1b); color:#fff; border-color:var(--crimson);">
+          <span>📊</span> <span id="txt-nav-exam">تحديد المستوى CEFR</span>
         </button>
 
         <!-- 7. زر موحد واحد فقط للمنصة والمؤسس (Single Unified Button: No Duplicates!) -->
-        <button class="sub-nav-btn" onclick="openModal('aboutModal')" style="margin-inline-start:auto; background:var(--crimson-light); color:var(--crimson-dark); border-color:var(--crimson); font-weight:800;">
-          <span>🏛️</span> <span>من نحن والمؤسس (الأستاذ جودي مداني)</span>
+        <button class="sub-nav-btn" id="sub-nav-about" onclick="openModal('aboutModal')" style="margin-inline-start:auto; background:var(--crimson-light); color:var(--crimson-dark); border-color:var(--crimson); font-weight:800;">
+          <span>🏛️</span> <span id="txt-nav-about">من نحن والمؤسس (الأستاذ جودي مداني)</span>
         </button>
       </div>
 
@@ -1142,19 +1142,19 @@
 
       <div class="role-buttons-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
         <button class="role-chip" id="chip-admin" onclick="switchRole('admin')">
-          🔒 المشرف العام (Admin حصري)
+          <span id="txt-chip-admin">🔒 المشرف العام (Admin)</span>
         </button>
         <button class="role-chip" id="chip-translator" onclick="switchRole('translator')">
-          🎓 مترجم معتمد (Translator)
+          <span id="txt-chip-translator">🎓 مترجم معتمد (Translator)</span>
         </button>
         <button class="role-chip active" id="chip-client" onclick="switchRole('client')">
-          👤 عميل ترجمة (Client)
+          <span id="txt-chip-client">👤 عميل ترجمة (Client)</span>
         </button>
         <button class="role-chip" id="chip-student" onclick="switchRole('student')">
-          📚 طلبة الترجمة (Students)
+          <span id="txt-chip-student">📚 طلبة الترجمة (Students)</span>
         </button>
         <button class="role-chip" id="chip-enthusiast" onclick="switchRole('enthusiast')">
-          💡 متعلم لغات (Learner)
+          <span id="txt-chip-enthusiast">💡 متعلم لغات (Learner)</span>
         </button>
       </div>
     </div>
@@ -1891,11 +1891,11 @@
           يمكنك الدخول الفوري بملفات محاكاة واقعية لاختبار تجربة المستخدم لكافة أطراف المنصة:
         </div>
         <div style="display:flex; flex-direction:column; gap:8px; max-height:280px; overflow-y:auto; padding-right:2px;">
-          <button class="nav-pill" style="justify-content:flex-start; padding:10px; border:2px solid var(--crimson); border-radius:10px;" onclick="quickLoginUser('الأستاذ جودي مداني (Djoudi Madani)', 'djoudimadani09@gmail.com', 'Admin')">
+          <button class="nav-pill" style="justify-content:flex-start; padding:10px; border:2px solid var(--crimson); border-radius:10px;" onclick="quickLoginUser('المشرف الإداري للمنصة (Admin)', 'admin@polylang.dz', 'Admin')">
             <span style="font-size:20px;">👑</span>
             <div style="text-align:start;">
-              <strong style="color:var(--crimson); font-size:12.5px;">الأستاذ جودي مداني (المدير العام والمشرف الحصري)</strong>
-              <div style="font-size:11px; color:var(--text-faint);">djoudimadani09@gmail.com — المشرف العام وعزل البيانات</div>
+              <strong style="color:var(--crimson); font-size:12.5px;">المشرف الإداري للمنصة (Admin Portal)</strong>
+              <div style="font-size:11px; color:var(--text-faint);">admin@polylang.dz — صلاحيات الإدارة ومراقبة المنظومة</div>
             </div>
           </button>
 
@@ -1936,8 +1936,8 @@
       <!-- Active Account Information Footer -->
       <div id="account-info-banner" style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:10px 12px; margin-top:14px; font-size:11.5px;">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
-          <div>👤 <strong>المستخدم النشط:</strong> <span id="auth-display-name">الأستاذ جودي مداني</span></div>
-          <div>🏷️ <strong>الرتبة:</strong> <span id="auth-display-role" style="color:var(--crimson); font-weight:800;">Admin</span></div>
+          <div>👤 <strong>المستخدم النشط:</strong> <span id="auth-display-name">زائر جديد (Guest)</span></div>
+          <div>🏷️ <strong>الرتبة:</strong> <span id="auth-display-role" style="color:var(--text-dim); font-weight:700;">Client</span></div>
           <div>🔒 <strong>التشفير:</strong> <span style="color:#10b981; font-weight:700;">256-Bit SSL/TLS</span></div>
         </div>
       </div>
@@ -2003,9 +2003,43 @@
             <option value="لغات أخرى (+30 لغة)">لغات أخرى (+30 لغة)</option>
           </select>
         </div>
+        <!-- PDF Attachment Section -->
+        <div class="form-group" style="background:var(--bg-body); padding:10px; border-radius:10px; border:1px dashed var(--border-line);">
+          <label style="display:flex; justify-content:space-between; align-items:center;">
+            <span>📄 إرفاق ملف الترجمة (PDF):</span>
+            <span id="order-pdf-status" style="color:var(--text-faint); font-size:11px;">صيغة .pdf فقط</span>
+          </label>
+          <input type="file" id="order-pdf-file" accept="application/pdf" class="form-control" style="padding:6px; font-size:12px;" onchange="handleOrderPdfSelected(this)">
+          <div id="order-pdf-meta" style="display:none; margin-top:6px; font-size:11.5px; color:#10b981; font-weight:700;">
+            ✓ تم اختيار الملف: <span id="order-pdf-name"></span> (<span id="order-pdf-size"></span>)
+          </div>
+        </div>
+
         <div class="form-group">
           <label>تفاصيل وملاحظات المستند:</label>
-          <textarea id="order-notes" class="form-control" rows="3" placeholder="أدخل أي متطلبات خاصة بالصياغة أو الختم..."></textarea>
+          <textarea id="order-notes" class="form-control" rows="2" placeholder="أدخل أي متطلبات خاصة بالصياغة أو الختم..."></textarea>
+        </div>
+
+        <!-- Live Translation Preview Section (معاينة الترجمة) -->
+        <div style="margin-bottom:14px;">
+          <button type="button" class="btn-outline-action" style="width:100%; justify-content:center; padding:8px; font-size:12.5px; font-weight:700;" onclick="toggleOrderTranslationPreview()">
+            👁️ <span id="order-preview-toggle-text">معاينة نموذج الترجمة والاعتماد (Live Preview)</span>
+          </button>
+          
+          <div id="order-live-preview-box" style="display:none; margin-top:10px; background:var(--bg-body); border:1.5px solid var(--border-line); border-radius:10px; padding:12px; font-size:12px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <strong style="color:var(--crimson);">📋 معاينة الصياغة المحلفة ISO 17100:</strong>
+              <span style="background:rgba(234,179,8,0.2); color:#b45309; padding:2px 8px; border-radius:6px; font-size:10.5px; font-weight:800;">ختم رسمي معتمد ✓</span>
+            </div>
+            <div style="background:var(--bg-card); padding:8px 10px; border-radius:6px; margin-bottom:8px; border:1px solid var(--border-line);">
+              <div style="font-size:10.5px; color:var(--text-dim); font-weight:700; margin-bottom:3px;">المقتطف المصدر (Source Extract):</div>
+              <div id="order-preview-source" style="font-style:italic; line-height:1.5;">"The undersigned certified translator hereby attests that the translation is a true, faithful, and accurate rendering of the original document provided."</div>
+            </div>
+            <div style="background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); padding:8px 10px; border-radius:6px;">
+              <div style="font-size:10.5px; color:#10b981; font-weight:700; margin-bottom:3px;">المعاينة التقديرية للترجمة المحلفة (العربية):</div>
+              <div id="order-preview-target" style="font-weight:700; line-height:1.6; color:var(--text-main);">"يُشهد المترجم المحلف المعتمد والموقع أدناه بأن هذه الترجمة مطابقة كلياً وصادقة ودقيقة للوثيقة الأصلية المرفقة، صادرة وفق المعيار الدولي ISO 17100."</div>
+            </div>
+          </div>
         </div>
 
         <button type="submit" class="btn-primary-red" style="width:100%; justify-content:center;">
@@ -3858,10 +3892,10 @@
       if (modal) modal.classList.remove('open');
     }
 
-    // User Session State & Roles
-    let currentUserEmail = 'djoudimadani09@gmail.com';
-    let currentUserName = 'الأستاذ جودي مداني (Djoudi Madani)';
-    let currentUserRole = 'Admin';
+    // User Session State & Roles (Clean default guest session)
+    let currentUserEmail = 'guest@polylang.dz';
+    let currentUserName = 'زائر جديد (Guest)';
+    let currentUserRole = 'Client';
 
     // Quick Login Engine
     function quickLoginUser(name, email, roleTag) {
@@ -3906,7 +3940,7 @@
 
     function quickLoginAdminAndOpen() {
       closeModal('adminLockModal');
-      quickLoginUser('الأستاذ جودي مداني (Djoudi Madani)', ADMIN_EMAIL, 'Admin');
+      quickLoginUser('المشرف الإداري للمنصة (Admin)', 'admin@polylang.dz', 'Admin');
       switchRole('admin');
     }
 
@@ -5203,6 +5237,43 @@
       }
     }
 
+    // PDF Attachment and Live Preview Controllers for orderModal
+    let currentOrderPdfName = null;
+    let currentOrderPdfSize = null;
+
+    function handleOrderPdfSelected(input) {
+      if (input.files && input.files[0]) {
+        const file = input.files[0];
+        currentOrderPdfName = file.name;
+        currentOrderPdfSize = (file.size / 1024 > 1024) 
+          ? (file.size / (1024 * 1024)).toFixed(1) + " MB" 
+          : Math.round(file.size / 1024) + " KB";
+        document.getElementById('order-pdf-name').textContent = currentOrderPdfName;
+        document.getElementById('order-pdf-size').textContent = currentOrderPdfSize;
+        document.getElementById('order-pdf-meta').style.display = 'block';
+        document.getElementById('order-pdf-status').textContent = '✓ مرفق بنجاح';
+        document.getElementById('order-pdf-status').style.color = '#10b981';
+
+        // Update preview source with document name
+        const sourceBox = document.getElementById('order-preview-source');
+        if (sourceBox) {
+          sourceBox.innerHTML = `[المستند المرفق: ${currentOrderPdfName}]<br>"IN WITNESS WHEREOF, the duly authorized representatives have executed this official document in full compliance with ISO 17100 standard."`;
+        }
+      }
+    }
+
+    function toggleOrderTranslationPreview() {
+      const box = document.getElementById('order-live-preview-box');
+      const textSpan = document.getElementById('order-preview-toggle-text');
+      if (box.style.display === 'none' || box.style.display === '') {
+        box.style.display = 'block';
+        textSpan.textContent = 'إخفاء نافذة المعاينة (Hide Preview)';
+      } else {
+        box.style.display = 'none';
+        textSpan.textContent = 'معاينة نموذج الترجمة والاعتماد (Live Preview)';
+      }
+    }
+
     // Order Submission Handler
     function handleOrderSubmission(e) {
       e.preventDefault();
@@ -5216,7 +5287,7 @@
       const newId = "PL-" + Math.floor(1000 + Math.random() * 9000);
       ordersList.unshift({
         id: newId,
-        title: service,
+        title: service + (currentOrderPdfName ? ` (${currentOrderPdfName})` : ''),
         service: service,
         langs: langs,
         words: 1200,
@@ -5225,7 +5296,7 @@
       });
       renderOrdersTable();
 
-      // Dispatch AJAX notification to djoudimadani09@gmail.com
+      // Dispatch AJAX notification to djoudimadani09@gmail.com with PDF info
       fetch(`https://formsubmit.co/ajax/${ADMIN_EMAIL}`, {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
@@ -5237,12 +5308,13 @@
           clientPhone: phone,
           service: service,
           languages: langs,
+          attachedPdf: currentOrderPdfName ? `${currentOrderPdfName} (${currentOrderPdfSize})` : "لم يتم إرفاق PDF",
           notes: notes,
           time: new Date().toISOString()
         })
       }).catch(err => console.log(err));
 
-      alert(`تم تسجيل طلبك بنجاح برقم: ${newId}\nتم إرسال إشعار فوري إلى الإدارة (djoudimadani09@gmail.com).\nسيتواصل معك الأستاذ جودي مداني وفريق المجمع.`);
+      alert(`تم تسجيل طلبك بنجاح برقم: ${newId}\nتم إرسال إشعار فوري إلى الإدارة (djoudimadani09@gmail.com) متضمناً تفاصيل الملف المرفق.\nسيتواصل معك فريق المنصة في أقرب وقت.`);
       closeModal('orderModal');
     }
 
@@ -5332,94 +5404,206 @@
 
       const dict = {
         ar: {
-          brandName: "Polylang Hub",
-          brandSub: "Certified Translation, Localization & Monetized Training Platform",
-          heroHead: "Welcome to Polylang",
-          heroDesc: "Certified sworn translation, interpretation, and professional language mastery to the highest quality standards.",
-          aboutBtn: "About Us",
-          audioTitle: "Live Audio Greeting:",
-          reqTrans: "Request Translation",
-          academy: "Academy & Courses",
-          founder: "Founder Profile"
+          brandName: "منصة بوليلانغ للترجمة المعتمدة",
+          brandSub: "المنصة الرائدة في الترجمة المحلفة وكابينات المؤتمرات والتدريب الاحترافي",
+          heroHead: "مرحباً بكم في بوليلانغ هاب (Polylang Hub)",
+          heroDesc: "خدمات الترجمة المحلفة المعتمدة دولياً بموجب معيار ISO 17100، كابينات الترجمة الفورية للمؤتمرات، واستوديو التدريب الاحترافي للأكاديميين والمهنيين.",
+          aboutBtn: "من نحن والمؤسس",
+          audioTitle: "الترحيب الصوتي المباشر:",
+          reqTrans: "طلب ترجمة معتمدة",
+          academy: "الأكاديمية والمساقات",
+          founder: "نبذة عن المؤسس",
+          navHome: "الرئيسية",
+          navBooth: "مقصورة الترجمة الفورية",
+          navAcademy: "مكتبة اللغات والماستركلاس",
+          navOrder: "طلب ترجمة معتمدة",
+          navAghilas: "عرض أغيلاس (50%-)",
+          navExam: "تحديد المستوى CEFR",
+          navAbout: "من نحن والمؤسس",
+          chipAdmin: "🔒 المشرف العام (Admin)",
+          chipTranslator: "🎓 مترجم معتمد (Translator)",
+          chipClient: "👤 عميل ترجمة (Client)",
+          chipStudent: "📚 طلبة الترجمة (Students)",
+          chipEnthusiast: "💡 متعلم لغات (Learner)",
+          orderPreviewBtn: "معاينة نموذج الترجمة والاعتماد (Live Preview)"
         },
         en: {
-          brandName: "Polylang Hub",
-          brandSub: "Certified Translation, Localization & Monetized Training Platform",
-          heroHead: "Welcome to Polylang",
-          heroDesc: "Certified sworn translation, interpretation, and professional language mastery to the highest quality standards.",
-          aboutBtn: "About Us",
+          brandName: "Polylang Hub Official Platform",
+          brandSub: "Certified Sworn Translation, Interpretation Booths & Masterclass Academy",
+          heroHead: "Welcome to Polylang Hub",
+          heroDesc: "ISO 17100 certified sworn translation, simultaneous conference interpretation booths, and accredited professional language training.",
+          aboutBtn: "About Us & Founder",
           audioTitle: "Live Audio Greeting:",
-          reqTrans: "Request Translation",
+          reqTrans: "Request Certified Translation",
           academy: "Academy & Courses",
-          founder: "Founder Profile"
+          founder: "Founder Profile",
+          navHome: "Home",
+          navBooth: "Interpretation Booth",
+          navAcademy: "Languages & Masterclasses",
+          navOrder: "Request Translation",
+          navAghilas: "Aghilas Offer (-50%)",
+          navExam: "CEFR Placement Test",
+          navAbout: "About & Founder",
+          chipAdmin: "🔒 Admin Portal",
+          chipTranslator: "🎓 Certified Translator",
+          chipClient: "👤 Client Portal",
+          chipStudent: "📚 Student Lab",
+          chipEnthusiast: "💡 Language Learner",
+          orderPreviewBtn: "Live Translation & Document Preview"
         },
         fr: {
-          brandName: "Polylang Hub",
-          brandSub: "Plateforme de Traduction Assermentée & Formation Professionnelle",
-          heroHead: "Bienvenue sur Polylang",
-          heroDesc: "Traduction assermentée, interprétation de conférence et maîtrise linguistique certifiée selon les normes les plus strictes.",
-          aboutBtn: "À Propos",
-          audioTitle: "Accueil Audio en Direct:",
+          brandName: "Plateforme Officielle Polylang Hub",
+          brandSub: "Traduction Assermentée, Cabines d'Interprétation & Académie Masterclass",
+          heroHead: "Bienvenue sur Polylang Hub",
+          heroDesc: "Traduction assermentée certifiée ISO 17100, cabines d'interprétation simultanée de conférence et formation professionnelle d'excellence.",
+          aboutBtn: "À Propos & Fondateur",
+          audioTitle: "Accueil Audio en Direct :",
           reqTrans: "Demander une Traduction",
           academy: "Académie & Formations",
-          founder: "Profil du Fondateur"
+          founder: "Profil du Fondateur",
+          navHome: "Accueil",
+          navBooth: "Cabine d'Interprétation",
+          navAcademy: "Langues & Masterclass",
+          navOrder: "Commander Traduction",
+          navAghilas: "Offre Aghilas (-50%)",
+          navExam: "Test de Niveau CECR",
+          navAbout: "À Propos & Fondateur",
+          chipAdmin: "🔒 Administration",
+          chipTranslator: "🎓 Traducteur Assermenté",
+          chipClient: "👤 Espace Client",
+          chipStudent: "📚 Espace Étudiants",
+          chipEnthusiast: "💡 Apprenant Langues",
+          orderPreviewBtn: "Aperçu en Direct de la Traduction"
         },
         es: {
-          brandName: "Polylang Hub",
-          brandSub: "Plataforma de Traducción Jurada y Formación Profesional",
-          heroHead: "Bienvenido a Polylang",
-          heroDesc: "Traducción jurada, interpretación de conferencias y dominio lingüístico certificado con los más altos estándares.",
+          brandName: "Polylang Hub Plataforma Oficial",
+          brandSub: "Traducción Jurada, Cabinas de Interpretación y Academia",
+          heroHead: "Bienvenido a Polylang Hub",
+          heroDesc: "Traducción jurada certificada ISO 17100, cabinas de conferencias y formación lingüística profesional con los más altos estándares.",
           aboutBtn: "Sobre Nosotros",
           audioTitle: "Saludo en Audio:",
           reqTrans: "Solicitar Traducción",
           academy: "Academia y Cursos",
-          founder: "Perfil del Fundador"
+          founder: "Perfil del Fundador",
+          navHome: "Inicio",
+          navBooth: "Cabina de Interpretación",
+          navAcademy: "Academia y Masterclass",
+          navOrder: "Solicitar Traducción",
+          navAghilas: "Oferta Aghilas (-50%)",
+          navExam: "Test de Nivel MCER",
+          navAbout: "Sobre Nosotros",
+          chipAdmin: "🔒 Administración",
+          chipTranslator: "🎓 Traductor Jurado",
+          chipClient: "👤 Portal de Cliente",
+          chipStudent: "📚 Estudiantes",
+          chipEnthusiast: "💡 Estudiante de Idiomas",
+          orderPreviewBtn: "Vista Previa de Traducción en Vivo"
         },
         de: {
-          brandName: "Polylang Hub",
-          brandSub: "Plattform für beglaubigte Übersetzung & Konferenzdolmetschen",
-          heroHead: "Willkommen bei Polylang",
-          heroDesc: "Beglaubigte Übersetzung, Konferenzdolmetschen und professionelle Sprachkompetenz nach höchsten Qualitätsstandards.",
+          brandName: "Polylang Hub Offizielle Plattform",
+          brandSub: "Beglaubigte Übersetzungen, Dolmetscherkabinen & Masterclass",
+          heroHead: "Willkommen bei Polylang Hub",
+          heroDesc: "ISO 17100 zertifizierte beglaubigte Übersetzung, Konferenzdolmetscherkabinen und professionelle Sprachausbildung.",
           aboutBtn: "Über Uns",
-          audioTitle: "Live-Audiobegrüßung:",
+          audioTitle: "Audiobegrüßung:",
           reqTrans: "Übersetzung anfordern",
           academy: "Akademie & Kurse",
-          founder: "Gründerprofil"
+          founder: "Gründerprofil",
+          navHome: "Startseite",
+          navBooth: "Dolmetscherkabine",
+          navAcademy: "Sprachen & Masterclass",
+          navOrder: "Übersetzung beauftragen",
+          navAghilas: "Aghilas Rabatt (-50%)",
+          navExam: "CEFR Einstufungstest",
+          navAbout: "Über Uns & Gründer",
+          chipAdmin: "🔒 Admin-Bereich",
+          chipTranslator: "🎓 Vereidigter Übersetzer",
+          chipClient: "👤 Kundenportal",
+          chipStudent: "📚 Studentenbereich",
+          chipEnthusiast: "💡 Sprachlernende",
+          orderPreviewBtn: "Live-Vorschau der Übersetzung"
         },
         it: {
-          brandName: "Polylang Hub",
-          brandSub: "Piattaforma di Traduzione Giurata e Formazione",
-          heroHead: "Benvenuto su Polylang",
-          heroDesc: "Traduzione giurata, interpretariato di conferenza e padronanza linguistica certificata ai massimi standard.",
+          brandName: "Piattaforma Ufficiale Polylang Hub",
+          brandSub: "Traduzione Giurata, Cabine d'Interpretariato e Formazione",
+          heroHead: "Benvenuto su Polylang Hub",
+          heroDesc: "Traduzione giurata certificata ISO 17100, cabine per conferenze e formazione linguistica d'eccellenza.",
           aboutBtn: "Chi Siamo",
           audioTitle: "Saluto Audio:",
           reqTrans: "Richiedi Traduzione",
           academy: "Accademia e Corsi",
-          founder: "Profilo Fondatore"
+          founder: "Profilo Fondatore",
+          navHome: "Home",
+          navBooth: "Cabina Interpretariato",
+          navAcademy: "Accademia e Corsi",
+          navOrder: "Richiedi Traduzione",
+          navAghilas: "Offerta Aghilas (-50%)",
+          navExam: "Test di Livello QCER",
+          navAbout: "Chi Siamo & Fondatore",
+          chipAdmin: "🔒 Amministrazione",
+          chipTranslator: "🎓 Traduttore Giurato",
+          chipClient: "👤 Portale Clienti",
+          chipStudent: "📚 Laboratorio Studenti",
+          chipEnthusiast: "💡 Studente di Lingue",
+          orderPreviewBtn: "Anteprima Traduzione dal Vivo"
         },
         ru: {
-          brandName: "Polylang Hub",
-          brandSub: "Платформа сертифицированного перевода и синхронного тренинга",
-          heroHead: "Добро пожаловать в Polylang",
-          heroDesc: "Сертифицированный перевод, синхронный перевод конференций и профессиональное языковое мастерство.",
+          brandName: "Официальная Платформа Polylang Hub",
+          brandSub: "Сертифицированный перевод, кабины синхронного перевода и академия",
+          heroHead: "Добро пожаловать в Polylang Hub",
+          heroDesc: "Сертифицированный перевод ISO 17100, кабины синхронного перевода конференций и профессиональное обучение.",
           aboutBtn: "О Нас",
-          audioTitle: "Аудиоприветствие:",
+          audioTitle: "Голосовое приветствие:",
           reqTrans: "Заказать перевод",
           academy: "Академия и курсы",
-          founder: "Профиль основателя"
+          founder: "Профиль основателя",
+          navHome: "Главная",
+          navBooth: "Кабина синхронного перевода",
+          navAcademy: "Академия и мастер-классы",
+          navOrder: "Заказать перевод",
+          navAghilas: "Скидка Агилас (-50%)",
+          navExam: "Тест уровня CEFR",
+          navAbout: "О нас и основателе",
+          chipAdmin: "🔒 Панель администратора",
+          chipTranslator: "🎓 Присяжный переводчик",
+          chipClient: "👤 Клиентский портал",
+          chipStudent: "📚 Студенческая лаборатория",
+          chipEnthusiast: "💡 Изучение языков",
+          orderPreviewBtn: "Предпросмотр перевода"
         }
       };
 
       const t = dict[lang] || dict['ar'];
-      document.getElementById('i18n-brand-name').textContent = t.brandName;
-      document.getElementById('i18n-brand-sub').textContent = t.brandSub;
-      document.getElementById('i18n-hero-head').textContent = t.heroHead;
-      document.getElementById('i18n-hero-desc').textContent = t.heroDesc;
-      document.getElementById('i18n-about-btn').textContent = t.aboutBtn;
-      document.getElementById('i18n-audio-title').textContent = t.audioTitle;
-      document.getElementById('i18n-btn-req-trans').textContent = t.reqTrans;
-      document.getElementById('i18n-btn-academy').textContent = t.academy;
-      document.getElementById('i18n-btn-founder').textContent = t.founder;
+      const setEl = (id, val) => {
+        const el = document.getElementById(id);
+        if (el && val) el.textContent = val;
+      };
+
+      setEl('i18n-brand-name', t.brandName);
+      setEl('i18n-brand-sub', t.brandSub);
+      setEl('i18n-hero-head', t.heroHead);
+      setEl('i18n-hero-desc', t.heroDesc);
+      setEl('i18n-about-btn', t.aboutBtn);
+      setEl('i18n-audio-title', t.audioTitle);
+      setEl('i18n-btn-req-trans', t.reqTrans);
+      setEl('i18n-btn-academy', t.academy);
+      setEl('i18n-btn-founder', t.founder);
+
+      setEl('txt-nav-home', t.navHome);
+      setEl('txt-nav-booth', t.navBooth);
+      setEl('txt-nav-academy', t.navAcademy);
+      setEl('txt-nav-order', t.navOrder);
+      setEl('txt-nav-aghilas', t.navAghilas);
+      setEl('txt-nav-exam', t.navExam);
+      setEl('txt-nav-about', t.navAbout);
+
+      setEl('txt-chip-admin', t.chipAdmin);
+      setEl('txt-chip-translator', t.chipTranslator);
+      setEl('txt-chip-client', t.chipClient);
+      setEl('txt-chip-student', t.chipStudent);
+      setEl('txt-chip-enthusiast', t.chipEnthusiast);
+
+      setEl('order-preview-toggle-text', t.orderPreviewBtn);
     }
 
     // Init on DOM ready

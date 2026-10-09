@@ -315,22 +315,40 @@ fun HomeScreen(
                 testTag = "card_videos"
             )
 
-            // CARD 7: ألعاب تعليمية للغات والترجمة
+            // CARD 7: ألعاب تعليمية للغات والترجمة (8 Games)
             CleanTrainingCard(
                 icon = Icons.Default.SportsEsports,
                 iconBgColor = Color(0xFFFEF3C7),
                 iconTint = Color(0xFFD97706),
-                title = if (isArabic) "ألعاب تعليمية للغات والترجمة" else "Language Educational Games",
+                title = if (isArabic) "استوديو الألعاب التعليمية للترجمة (8 ألعاب)" else "Language & Translation Games (8 Games)",
                 description = if (isArabic)
-                    "ألعاب وتحديات تفاعلية: مطابقة المصطلحات السريعة، صائد الأصدقاء المزيفين، تركيب الجمل، وتحدي كابينة الفورية."
+                    "8 ألعاب تفاعلية: مطابقة المصطلحات، صائد الأصدقاء المزيفين، تركيب الجمل، كابينة الفورية، كاشف الأمثال، مفكك الاختصارات، والترجمة المنظورة."
                 else
-                    "Interactive language games: Speed Terminology Match, False Friends Detective, and Booth Reflex Rush.",
-                levelBadge = if (isArabic) "ألعاب لغوية" else "Language Games",
+                    "8 Interactive games: Speed Term Match, False Friends, Sentence Builder, Booth Reflex, Idioms, Acronyms, and Sight Translation.",
+                levelBadge = if (isArabic) "8 ألعاب لغوية" else "8 Games",
                 levelBadgeBg = Color(0xFFFEF3C7),
                 levelBadgeText = Color(0xFFB45309),
                 actionLabel = if (isArabic) "ابدأ التحدي واللعب ←" else "Play Games →",
                 onClick = { onNavigate(AppTab.ACADEMY) },
                 testTag = "card_games"
+            )
+
+            // CARD 8: ورشة وتدريبات الترجمة التحريرية والتخصصية
+            CleanTrainingCard(
+                icon = Icons.Default.EditNote,
+                iconBgColor = Color(0xFFDCFCE7),
+                iconTint = Color(0xFF16A34A),
+                title = if (isArabic) "تدريبات الترجمة التحريرية المعتمدة" else "Certified Translation Drills",
+                description = if (isArabic)
+                    "ورشات ونصوص تدريبية واقعية (قانونية، طبية، دبلوماسية، طاقوية) مع تحليل المصطلحات ومقارنة حية مع الصياغة المحلفة ISO 17100."
+                else
+                    "Real-world translation exercises with terminology verification and ISO 17100 certified model comparisons.",
+                levelBadge = if (isArabic) "تدريبات مكثفة" else "Intensive Drills",
+                levelBadgeBg = Color(0xFFDCFCE7),
+                levelBadgeText = Color(0xFF15803D),
+                actionLabel = if (isArabic) "بدء تدريبات الترجمة ←" else "Start Drills →",
+                onClick = { onNavigate(AppTab.ACADEMY) },
+                testTag = "card_drills"
             )
         }
 

@@ -8,6 +8,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -34,7 +35,10 @@ enum class GameType(val titleAr: String, val titleEn: String, val icon: String) 
     FALSE_FRIENDS("صائد الأصدقاء المزيفين", "False Friends Detective", "🕵️"),
     SENTENCE_BUILDER("تركيب الجملة المترجمة", "Sentence Builder", "🧩"),
     BOOTH_REFLEX("تحدي كابينة الفورية", "Booth Reflex Blitz", "🎙️"),
-    IDIOMS_MASTER("كاشف التعبيرات الاصطلاحية", "Idioms Decipherer", "💡")
+    IDIOMS_MASTER("كاشف التعبيرات الاصطلاحية", "Idioms Decipherer", "💡"),
+    ACRONYM_CRACKER("مفكك الاختصارات الدولية", "Acronyms Cracker", "🌐"),
+    SIGHT_TRANSLATION_SPRINT("تحدي الترجمة المنظورة", "Sight Sprint", "👁️"),
+    TERMINOLOGY_BATTLE("معركة المصطلحات المتخصصة", "Domain Battle", "⚔️")
 }
 
 @Composable
@@ -72,7 +76,7 @@ fun LanguageGamesView(
                         fontWeight = FontWeight.Bold
                     )
                     Text(
-                        text = if (isArabic) "5 ألعاب تفاعلية لترسيخ المعاجم القانونية والطبية والدبلوماسية وتفادي الأفخاخ" else "Gamify vocabulary retention and translation reflex",
+                        text = if (isArabic) "8 ألعاب تفاعلية لترسيخ المعاجم القانونية والطبية والدبلوماسية وتفادي الأفخاخ" else "8 Gamified language & translation reflex challenges",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -100,36 +104,39 @@ fun LanguageGamesView(
             }
         }
 
-        // Game Selection Chips (5 Games)
-        Row(
+        // Game Selection Chips (8 Games - Scrollable LazyRow for great ergonomics & aesthetics)
+        LazyRow(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(6.dp)
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            GameType.values().forEach { game ->
+            items(GameType.values().size) { idx ->
+                val game = GameType.values()[idx]
                 val isSelected = selectedGame == game
                 Surface(
                     modifier = Modifier
-                        .weight(1f)
-                        .clip(RoundedCornerShape(10.dp))
+                        .width(110.dp)
+                        .clip(RoundedCornerShape(12.dp))
                         .clickable { selectedGame = game }
                         .testTag("game_chip_${game.name}"),
-                    shape = RoundedCornerShape(10.dp),
-                    color = if (isSelected) RedPrimary else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f)
+                    shape = RoundedCornerShape(12.dp),
+                    color = if (isSelected) RedPrimary else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+                    border = if (isSelected) null else BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f))
                 ) {
                     Column(
-                        modifier = Modifier.padding(vertical = 8.dp, horizontal = 2.dp),
+                        modifier = Modifier.padding(vertical = 10.dp, horizontal = 6.dp),
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center
                     ) {
-                        Text(game.icon, fontSize = 16.sp)
-                        Spacer(modifier = Modifier.height(2.dp))
+                        Text(game.icon, fontSize = 20.sp)
+                        Spacer(modifier = Modifier.height(3.dp))
                         Text(
                             text = if (isArabic) game.titleAr else game.titleEn,
-                            fontSize = 8.5.sp,
+                            fontSize = 10.sp,
                             fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
                             color = if (isSelected) Color.White else MaterialTheme.colorScheme.onSurface,
                             textAlign = TextAlign.Center,
-                            maxLines = 2
+                            maxLines = 2,
+                            lineHeight = 13.sp
                         )
                     }
                 }
@@ -155,6 +162,18 @@ fun LanguageGamesView(
                 onAddScore = { totalGamerScore += it }
             )
             GameType.IDIOMS_MASTER -> IdiomsDeciphererGame(
+                isArabic = isArabic,
+                onAddScore = { totalGamerScore += it }
+            )
+            GameType.ACRONYM_CRACKER -> AcronymsCrackerGame(
+                isArabic = isArabic,
+                onAddScore = { totalGamerScore += it }
+            )
+            GameType.SIGHT_TRANSLATION_SPRINT -> SightTranslationSprintGame(
+                isArabic = isArabic,
+                onAddScore = { totalGamerScore += it }
+            )
+            GameType.TERMINOLOGY_BATTLE -> TerminologyBattleGame(
                 isArabic = isArabic,
                 onAddScore = { totalGamerScore += it }
             )
@@ -1243,6 +1262,582 @@ fun IdiomsDeciphererGame(
                     colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
                 ) {
                     Text(if (isArabic) "التعبير التالي ➔" else "Next Idiom ➔")
+                }
+            }
+        }
+    }
+}
+
+// -------------------------------------------------------------------------------------------------
+// GAME 6: INTERNATIONAL ACRONYMS CRACKER (مفكك الاختصارات الدولية)
+// -------------------------------------------------------------------------------------------------
+@Composable
+fun AcronymsCrackerGame(
+    isArabic: Boolean,
+    onAddScore: (Int) -> Unit
+) {
+    data class AcronymChallenge(
+        val acronym: String,
+        val fullEnglish: String,
+        val category: String,
+        val correctArabic: String,
+        val options: List<String>,
+        val explanation: String
+    )
+
+    val challenges = remember {
+        listOf(
+            AcronymChallenge(
+                acronym = "UNHCR",
+                fullEnglish = "United Nations High Commissioner for Refugees",
+                category = "دبلوماسية وإنسانية",
+                correctArabic = "المفوضية السامية للأمم المتحدة لشؤون اللاجئين",
+                options = listOf(
+                    "المفوضية السامية للأمم المتحدة لشؤون اللاجئين",
+                    "مجلس حقوق الإنسان التابع للأمم المتحدة",
+                    "منظمة الأمم المتحدة للتنمية الإنسانية"
+                ),
+                explanation = "تأسست المفوضية عام 1950 لحماية اللاجئين والنازحين قسراً ومقرها جنيف."
+            ),
+            AcronymChallenge(
+                acronym = "ICJ",
+                fullEnglish = "International Court of Justice",
+                category = "قانون دولي عام",
+                correctArabic = "محكمة العدل الدولية",
+                options = listOf(
+                    "المحكمة الجنائية الدولية",
+                    "محكمة العدل الدولية",
+                    "محكمة التحكيم الدائمة"
+                ),
+                explanation = "الجهاز القضائي الرئيسي للأمم المتحدة ومقرها لاهاي (قصر السلام)، وتفصل في النزاعات بين الدول."
+            ),
+            AcronymChallenge(
+                acronym = "IAEA",
+                fullEnglish = "International Atomic Energy Agency",
+                category = "طاقة وأمن دولي",
+                correctArabic = "الوكالة الدولية للطاقة الذرية",
+                options = listOf(
+                    "الوكالة الدولية للطاقة المتجددة",
+                    "الهيئة الدولية لحظر الأسلحة الكيميائية",
+                    "الوكالة الدولية للطاقة الذرية"
+                ),
+                explanation = "مركز عالمي للتعاون في المجال النووي والاستخدام السلمي للطاقة ومقرها فيينا."
+            ),
+            AcronymChallenge(
+                acronym = "WIPO",
+                fullEnglish = "World Intellectual Property Organization",
+                category = "ملكية فكرية وبراءات",
+                correctArabic = "المنظمة العالمية للملكية الفكرية (الويبو)",
+                options = listOf(
+                    "المنظمة العالمية للملكية الفكرية (الويبو)",
+                    "المنظمة الدولية للمواصفات والمقاييس",
+                    "الاتحاد الدولي للملكية الصناعية"
+                ),
+                explanation = "وكالة الأمم المتحدة المتخصصة في حماية براءات الاختراع والعلامات التجارية وحقوق المؤلف."
+            ),
+            AcronymChallenge(
+                acronym = "OPEC",
+                fullEnglish = "Organization of the Petroleum Exporting Countries",
+                category = "اقتصاد وطاقة",
+                correctArabic = "منظمة الدول المصدرة للنفط (أوبك)",
+                options = listOf(
+                    "منتدى الدول المصدرة للغاز الطبيعي",
+                    "منظمة الدول المصدرة للنفط (أوبك)",
+                    "الوكالة الدولية للطاقة"
+                ),
+                explanation = "منظمة حكومية دولية دائمة تأسست في بغداد عام 1960 لتوحيد السياسات النفطية."
+            ),
+            AcronymChallenge(
+                acronym = "WTO",
+                fullEnglish = "World Trade Organization",
+                category = "تجارة واقتصاد دولي",
+                correctArabic = "منظمة التجارة العالمية",
+                options = listOf(
+                    "منظمة السياحة العالمية",
+                    "منظمة العمل الدولية",
+                    "منظمة التجارة العالمية"
+                ),
+                explanation = "المنظمة العالمية الوحيدة التي تعنى بقواعد التجارة بين البلدان وتفض النزاعات الجمركية."
+            )
+        )
+    }
+
+    var currentIndex by remember { mutableIntStateOf(0) }
+    var selectedOption by remember { mutableStateOf<String?>(null) }
+    var isAnswered by remember { mutableStateOf(false) }
+
+    val current = challenges[currentIndex]
+
+    Card(
+        modifier = Modifier.fillMaxWidth().testTag("game_acronyms_cracker"),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth().padding(14.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "🌐 " + if (isArabic) "مفكك الاختصارات الدولية (${currentIndex + 1}/${challenges.size})" else "Acronyms Cracker (${currentIndex + 1}/${challenges.size})",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 13.sp,
+                    color = RedPrimary
+                )
+                Surface(
+                    shape = RoundedCornerShape(6.dp),
+                    color = MaterialTheme.colorScheme.surfaceVariant
+                ) {
+                    Text(
+                        text = current.category,
+                        fontSize = 10.5.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                    )
+                }
+            }
+
+            // Acronym Banner
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp),
+                color = RedPrimary.copy(alpha = 0.08f),
+                border = BorderStroke(1.dp, RedPrimary.copy(alpha = 0.3f))
+            ) {
+                Column(
+                    modifier = Modifier.padding(14.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = current.acronym,
+                        fontSize = 30.sp,
+                        fontWeight = FontWeight.ExtraBold,
+                        color = RedPrimary,
+                        letterSpacing = 2.sp
+                    )
+                    Spacer(Modifier.height(4.dp))
+                    Text(
+                        text = current.fullEnglish,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        textAlign = TextAlign.Center
+                    )
+                }
+            }
+
+            Text(
+                text = if (isArabic) "ما المقابل العربي المعتمد رسمياً في الأمم المتحدة؟" else "What is the official Arabic translation?",
+                fontSize = 11.5.sp,
+                fontWeight = FontWeight.SemiBold
+            )
+
+            // Options
+            current.options.forEach { opt ->
+                val isCorrect = opt == current.correctArabic
+                val isChosen = selectedOption == opt
+                val bg = when {
+                    !isAnswered -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)
+                    isCorrect -> SuccessGreen.copy(alpha = 0.2f)
+                    isChosen -> Color.Red.copy(alpha = 0.15f)
+                    else -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
+                }
+
+                Surface(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable(enabled = !isAnswered) {
+                            selectedOption = opt
+                            isAnswered = true
+                            if (isCorrect) onAddScore(30)
+                        },
+                    shape = RoundedCornerShape(10.dp),
+                    color = bg,
+                    border = if (isChosen) BorderStroke(1.5.dp, if (isCorrect) SuccessGreen else Color.Red) else null
+                ) {
+                    Text(
+                        text = opt,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(12.dp)
+                    )
+                }
+            }
+
+            if (isAnswered) {
+                Surface(
+                    shape = RoundedCornerShape(10.dp),
+                    color = GoldYellow.copy(alpha = 0.15f),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Column(modifier = Modifier.padding(10.dp)) {
+                        Text("💡 معلومة وثائقية:", fontWeight = FontWeight.Bold, fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurface)
+                        Text(current.explanation, fontSize = 11.sp, lineHeight = 15.sp)
+                    }
+                }
+
+                Button(
+                    onClick = {
+                        isAnswered = false
+                        selectedOption = null
+                        currentIndex = (currentIndex + 1) % challenges.size
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
+                ) {
+                    Text(if (isArabic) "الاختصار التالي ➔" else "Next Acronym ➔")
+                }
+            }
+        }
+    }
+}
+
+// -------------------------------------------------------------------------------------------------
+// GAME 7: SIGHT TRANSLATION SPRINT (تحدي الترجمة المنظورة السريعة)
+// -------------------------------------------------------------------------------------------------
+@Composable
+fun SightTranslationSprintGame(
+    isArabic: Boolean,
+    onAddScore: (Int) -> Unit
+) {
+    data class SprintCard(
+        val domain: String,
+        val sourceText: String,
+        val officialTranslation: String,
+        val keyKeywords: List<String>
+    )
+
+    val cards = remember {
+        listOf(
+            SprintCard(
+                domain = "مجلس الأمن والأمم المتحدة",
+                sourceText = "\"The Security Council, acting under Chapter VII of the Charter, decides to extend the mandate of the peacekeeping mission until 31 December.\"",
+                officialTranslation = "\"إن مجلس الأمن، إذ يتصرف بموجب الفصل السابع من الميثاق، يقرر تمديد ولاية بعثة حفظ السلام حتى 31 كانون الأول/ديسمبر.\"",
+                keyKeywords = listOf("الفصل السابع", "تمديد الولاية", "بعثة حفظ السلام")
+            ),
+            SprintCard(
+                domain = "التحكيم الدولي والاستثمار",
+                sourceText = "\"Any dispute arising out of or in connection with this contract shall be finally settled under the Rules of Arbitration of the ICC.\"",
+                officialTranslation = "\"تتم تسوية أي نزاع ينشأ عن هذا العقد أو يرتبط به بصفة نهائية وفقاً لقواعد التحكيم الصادرة عن غرفة التجارة الدولية.\"",
+                keyKeywords = listOf("تسوية نهائية", "قواعد التحكيم", "غرفة التجارة الدولية")
+            ),
+            SprintCard(
+                domain = "طب ومستحضرات صيدلانية",
+                sourceText = "\"Administer intramuscularly at a dose of 5 mg/kg every 12 hours. Contraindicated in patients with severe hepatic impairment.\"",
+                officialTranslation = "\"يُعطى عن طريق الحقن العضلي بجرعة 5 ملغ/كغ كل 12 ساعة. يُحظر استعماله للمرضى الذين يعانون من قصور كبدي حاد.\"",
+                keyKeywords = listOf("حقن عضلي", "يُحظر استعماله", "قصور كبدي حاد")
+            ),
+            SprintCard(
+                domain = "هندسة الطاقات المتجددة",
+                sourceText = "\"The photovoltaic plant integrates dual-axis solar trackers to optimize irradiance absorption and minimize grid curtailment losses.\"",
+                officialTranslation = "\"تدمج محطة الطاقة الكهروضوئية أجهزة تتبع شمسية ثنائية المحور لتحسين امتصاص الإشعاع والحد من خسائر التقليص على الشبكة.\"",
+                keyKeywords = listOf("طاقة كهروضوئية", "تتبع ثنائي المحور", "تقليص الشبكة")
+            )
+        )
+    }
+
+    var cardIdx by remember { mutableIntStateOf(0) }
+    var secondsLeft by remember { mutableIntStateOf(15) }
+    var isTimerRunning by remember { mutableStateOf(true) }
+    var showModelAnswer by remember { mutableStateOf(false) }
+
+    val currentCard = cards[cardIdx]
+
+    LaunchedEffect(cardIdx, isTimerRunning) {
+        if (isTimerRunning && secondsLeft > 0) {
+            while (secondsLeft > 0 && isTimerRunning) {
+                delay(1000)
+                secondsLeft--
+            }
+        }
+    }
+
+    Card(
+        modifier = Modifier.fillMaxWidth().testTag("game_sight_translation"),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth().padding(14.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "👁️ " + if (isArabic) "الترجمة المنظورة (${cardIdx + 1}/${cards.size})" else "Sight Translation Sprint",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 13.sp,
+                    color = RedPrimary
+                )
+                Surface(
+                    shape = RoundedCornerShape(8.dp),
+                    color = if (secondsLeft <= 5) Color.Red.copy(alpha = 0.2f) else SuccessGreen.copy(alpha = 0.2f)
+                ) {
+                    Text(
+                        text = "⏱️ $secondsLeft ثانية",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 11.sp,
+                        color = if (secondsLeft <= 5) Color.Red else SuccessGreen,
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                    )
+                }
+            }
+
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(10.dp),
+                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)
+            ) {
+                Column(modifier = Modifier.padding(12.dp)) {
+                    Text(
+                        text = "مقتطف النص المصدر [${currentCard.domain}]:",
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                    Spacer(Modifier.height(4.dp))
+                    Text(
+                        text = currentCard.sourceText,
+                        fontSize = 13.sp,
+                        lineHeight = 18.sp,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+            }
+
+            Text(
+                text = if (isArabic) "💡 ترجم فورياً بصوت مرتفع دون توقف ثم قارن مع الصياغة المحلفة:" else "Sight translate aloud now, then reveal model answer:",
+                fontSize = 11.sp,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            if (!showModelAnswer) {
+                Button(
+                    onClick = {
+                        showModelAnswer = true
+                        isTimerRunning = false
+                        val bonus = if (secondsLeft > 5) 40 else 25
+                        onAddScore(bonus)
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
+                ) {
+                    Icon(Icons.Default.Visibility, contentDescription = null, modifier = Modifier.size(16.dp))
+                    Spacer(Modifier.width(6.dp))
+                    Text(if (isArabic) "كشف الصياغة النموذجية المعتمدة (+نقاط)" else "Reveal Model Translation")
+                }
+            } else {
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(10.dp),
+                    color = SuccessGreen.copy(alpha = 0.12f),
+                    border = BorderStroke(1.dp, SuccessGreen.copy(alpha = 0.4f))
+                ) {
+                    Column(modifier = Modifier.padding(12.dp)) {
+                        Text(
+                            text = "✓ الصياغة النموذجية المحلفة (ISO 17100):",
+                            fontSize = 11.5.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = SuccessGreen
+                        )
+                        Spacer(Modifier.height(4.dp))
+                        Text(
+                            text = currentCard.officialTranslation,
+                            fontSize = 12.5.sp,
+                            fontWeight = FontWeight.Bold,
+                            lineHeight = 17.sp
+                        )
+                        Spacer(Modifier.height(6.dp))
+                        Text(
+                            text = "المصطلحات المفتاحية الواجب مراعاتها: " + currentCard.keyKeywords.joinToString(" • "),
+                            fontSize = 10.5.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
+
+                Button(
+                    onClick = {
+                        showModelAnswer = false
+                        secondsLeft = 15
+                        isTimerRunning = true
+                        cardIdx = (cardIdx + 1) % cards.size
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = ButtonDefaults.buttonColors(containerColor = RedDark)
+                ) {
+                    Text(if (isArabic) "النص التالي ➔" else "Next Text ➔")
+                }
+            }
+        }
+    }
+}
+
+// -------------------------------------------------------------------------------------------------
+// GAME 8: DOMAIN TERMINOLOGY BATTLE (معركة المصطلحات المتخصصة)
+// -------------------------------------------------------------------------------------------------
+@Composable
+fun TerminologyBattleGame(
+    isArabic: Boolean,
+    onAddScore: (Int) -> Unit
+) {
+    var selectedDomain by remember { mutableStateOf("قانون وعقود ⚖️") }
+
+    data class BattleItem(
+        val term: String,
+        val prompt: String,
+        val correct: String,
+        val options: List<String>,
+        val tip: String
+    )
+
+    val battleDatabase = remember {
+        mapOf(
+            "قانون وعقود ⚖️" to listOf(
+                BattleItem("Estoppel", "ما المقابل القانوني الدقيق للمصطلح اللاتيني-الإنكليزي في القانون الإنجلو-أمريكي؟", "الإغلاق الحكمي / المنع من الادعاء", listOf("الإغلاق الحكمي / المنع من الادعاء", "التوقف عن الدفع", "الإعفاء من الالتزام"), "مبدأ يمنع الشخص من اتخاذ موقف يناقض ما أقر به سابقاً وألحق ضرراً بالغير."),
+                BattleItem("Without prejudice", "توضع في المراسلات التسووية بين المحامين وتعني:", "دون إخلال بالحقوق والمراكز القانونية", listOf("دون إخلال بالحقوق والمراكز القانونية", "دون تحيز أو تعصب", "بشكل نهائي وقاطع"), "تضمن عدم استخدام المراسلات كإقرار قضائي في حال فشل المفاوضات الودية.")
+            ),
+            "طب وصحة 🩺" to listOf(
+                BattleItem("Idiopathic", "تُطلق على الحالات والأمراض وتعني:", "مجهول السبب / مجهول المنشأ", listOf("مجهول السبب / مجهول المنشأ", "شديد العدوى", "مرض وراثي مزمن"), "من اليونانية idios (خاص/مستقل) وpathos (مرض) أي مرض ينشأ ذاتياً دون سبب خارجي معروف."),
+                BattleItem("Prognosis", "الفرق الجوهري بينها وبين Diagnosis:", "التكهن بالمآل وسير المرض المتوقع", listOf("التكهن بالمآل وسير المرض المتوقع", "التشخيص المخبري الدقيق", "العلاج الجراحي"), "Diagnosis هو تشخيص المرض الحالي، بينما Prognosis هو التنبؤ بمستقبل حالة المريض واستجابته.")
+            ),
+            "مالية واقتصاد 💹" to listOf(
+                BattleItem("Liquidity ratio", "مؤشر مالي هام للشركات والمصارف:", "نسبة السيولة النقدية وسرعة الوفاء", listOf("نسبة السيولة النقدية وسرعة الوفاء", "معدل دوران المخزون السلعي", "نسبة الأرباح الرأسمالية"), "يقيس قدرة المؤسسة على الوفاء بالتزاماتها المالية قصيرة الأجل فور استحقاقها."),
+                BattleItem("Bear market", "حالة السوق المالي عندما تنخفض الأسعار:", "السوق الهابطة (سوق الدببة)", listOf("السوق الهابطة (سوق الدببة)", "السوق الصاعدة (سوق الثيران)", "السوق الراكدة المستقرة"), "سوق يتسم بتشاؤم المستثمرين وهبوط المؤشرات بنسبة 20% فأكثر.")
+            ),
+            "طاقة وهندسة ⚡" to listOf(
+                BattleItem("Upstream vs Downstream", "في الصناعة البترولية تعني:", "الاستكشاف والإنتاج مقابل التكرير والتوزيع", listOf("الاستكشاف والإنتاج مقابل التكرير والتوزيع", "التدفق العلوي مقابل التدفق السفلي", "خطوط الأنابيب البرية مقابل البحرية"), "Upstream تشمل التنقيب والاستخراج، وDownstream تشمل التكرير والتسويق للمستهلك."),
+                BattleItem("Carbon sequestration", "تقنية حيوية لمكافحة تغير المناخ:", "احتجاز وتخزين الكربون", listOf("احتجاز وتخزين الكربون", "حرق النفايات الكربونية", "عزل الانبعاثات بالترشيح"), "احتجاز غاز ثاني أكسيد الكربون من المصادر الصناعية وتخزينه في تكوينات جيولوجية عميقة.")
+            )
+        )
+    }
+
+    val currentItems = battleDatabase[selectedDomain] ?: emptyList()
+    var currentItemIdx by remember { mutableIntStateOf(0) }
+    var selectedAns by remember { mutableStateOf<String?>(null) }
+    var isAnswered by remember { mutableStateOf(false) }
+
+    val item = currentItems.getOrNull(currentItemIdx % currentItems.size) ?: return
+
+    Card(
+        modifier = Modifier.fillMaxWidth().testTag("game_terminology_battle"),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth().padding(14.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Text(
+                text = "⚔️ " + if (isArabic) "معركة المصطلحات المتخصصة" else "Domain Terminology Battle",
+                fontWeight = FontWeight.Bold,
+                fontSize = 13.sp,
+                color = RedPrimary
+            )
+
+            // Domain Tabs
+            LazyRow(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(6.dp)
+            ) {
+                items(battleDatabase.keys.toList().size) { idx ->
+                    val domainKey = battleDatabase.keys.toList()[idx]
+                    val isSel = selectedDomain == domainKey
+                    FilterChip(
+                        selected = isSel,
+                        onClick = {
+                            selectedDomain = domainKey
+                            currentItemIdx = 0
+                            selectedAns = null
+                            isAnswered = false
+                        },
+                        label = { Text(domainKey, fontSize = 10.5.sp, fontWeight = if (isSel) FontWeight.Bold else FontWeight.Normal) }
+                    )
+                }
+            }
+
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(10.dp),
+                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+            ) {
+                Column(modifier = Modifier.padding(12.dp)) {
+                    Text(
+                        text = "المصطلح: ${item.term}",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.ExtraBold,
+                        color = RedPrimary
+                    )
+                    Spacer(Modifier.height(4.dp))
+                    Text(
+                        text = item.prompt,
+                        fontSize = 11.5.sp,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                }
+            }
+
+            // Options
+            item.options.forEach { opt ->
+                val isCorrect = opt == item.correct
+                val isChosen = selectedAns == opt
+                val bg = when {
+                    !isAnswered -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f)
+                    isCorrect -> SuccessGreen.copy(alpha = 0.2f)
+                    isChosen -> Color.Red.copy(alpha = 0.15f)
+                    else -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.25f)
+                }
+
+                Surface(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable(enabled = !isAnswered) {
+                            selectedAns = opt
+                            isAnswered = true
+                            if (isCorrect) onAddScore(35)
+                        },
+                    shape = RoundedCornerShape(10.dp),
+                    color = bg,
+                    border = if (isChosen) BorderStroke(1.5.dp, if (isCorrect) SuccessGreen else Color.Red) else null
+                ) {
+                    Text(
+                        text = opt,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(12.dp)
+                    )
+                }
+            }
+
+            if (isAnswered) {
+                Surface(
+                    shape = RoundedCornerShape(10.dp),
+                    color = GoldYellow.copy(alpha = 0.15f),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Column(modifier = Modifier.padding(10.dp)) {
+                        Text("💡 الفائدة الاصطلاحية التخصصية:", fontWeight = FontWeight.Bold, fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurface)
+                        Text(item.tip, fontSize = 11.sp, lineHeight = 15.sp)
+                    }
+                }
+
+                Button(
+                    onClick = {
+                        isAnswered = false
+                        selectedAns = null
+                        currentItemIdx = (currentItemIdx + 1) % currentItems.size
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
+                ) {
+                    Text(if (isArabic) "التحدي التالي ➔" else "Next Battle ➔")
                 }
             }
         }

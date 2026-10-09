@@ -51,9 +51,10 @@ object AdminEmailNotifier {
                 conn.requestMethod = "POST"
                 conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8")
                 conn.setRequestProperty("Accept", "application/json")
+                conn.setRequestProperty("User-Agent", "PolylangHub-Android/2.0")
                 conn.doOutput = true
-                conn.connectTimeout = 7000
-                conn.readTimeout = 7000
+                conn.connectTimeout = 8000
+                conn.readTimeout = 8000
 
                 val writer = OutputStreamWriter(conn.outputStream, "UTF-8")
                 writer.use {
