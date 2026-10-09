@@ -59,14 +59,85 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { max-width: 100%; overflow-x: hidden; }
+    html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
+
+    /* Animations & Visual Glamour */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.04); opacity: 0.9; }
+    }
+    @keyframes cardShimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+    @keyframes pulseSoft {
+      0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(229,57,53,0.3); }
+      50% { transform: scale(1.02); box-shadow: 0 8px 25px rgba(229,57,53,0.5); }
+    }
+    @keyframes shimmerGold {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Glamorous Hover & Transition Effects */
+    .content-box {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+    }
+    .content-box:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+    .hero-welcome-card {
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .hero-welcome-card:hover {
+      box-shadow: 0 12px 32px rgba(229, 57, 53, 0.12);
+      border-color: rgba(229, 57, 53, 0.3);
+    }
+    .sub-nav-btn {
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .sub-nav-btn:hover {
+      transform: translateY(-2px);
+    }
+    .role-chip {
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .role-chip:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+    .btn-primary-red {
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .btn-primary-red:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px var(--crimson-glow);
+    }
+    .btn-outline-action {
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .btn-outline-action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
     body {
       font-family: var(--font-ar);
       background-color: var(--bg-body);
       color: var(--text-main);
       line-height: 1.6;
       min-height: 100vh;
-      transition: background-color 0.2s, color 0.2s;
+      transition: background-color 0.25s, color 0.25s;
       -webkit-font-smoothing: antialiased;
     }
     html[dir="ltr"] body { font-family: var(--font-en); }
@@ -1110,13 +1181,13 @@
           <!-- Hero Actions Buttons (Clean & Organized) -->
           <div class="hero-actions-row">
             <button class="btn-primary-red" onclick="switchRole('student'); switchStudentTab('booth');" style="background:linear-gradient(135deg, #1d4ed8, #1e3a8a); box-shadow:0 4px 15px rgba(29, 78, 216, 0.35);">
-              <span>🎙️</span> <span>دخول مقصورة ومحاكي الترجمة</span>
+              <span>🎙️</span> <span id="hero-btn-booth">دخول مقصورة ومحاكي الترجمة</span>
             </button>
             <button class="btn-outline-action" onclick="switchRole('enthusiast')" style="font-weight:800;">
-              <span>🎓</span> <span>مكتبة اللغات والماستركلاس</span>
+              <span>🎓</span> <span id="hero-btn-academy">مكتبة اللغات والماستركلاس</span>
             </button>
             <button class="btn-outline-action" onclick="openModal('orderModal')" style="font-weight:800;">
-              <span>⚖️</span> <span>طلب ترجمة معتمدة</span>
+              <span>⚖️</span> <span id="hero-btn-order">طلب ترجمة معتمدة</span>
             </button>
           </div>
 
@@ -1627,12 +1698,16 @@
           </div>
         </div>
 
-        <!-- Game Selector Tabs -->
+        <!-- Game Selector Tabs (8 Exciting Games) -->
         <div style="display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap;">
           <button class="nav-pill active" id="btn-game-match" onclick="switchLanguageGame('match')">⚡ مطابقة المصطلحات السريعة</button>
           <button class="nav-pill" id="btn-game-false" onclick="switchLanguageGame('false_friends')">🕵️ صائد الأصدقاء المزيفين</button>
           <button class="nav-pill" id="btn-game-syntax" onclick="switchLanguageGame('syntax')">🧩 تركيب الجملة المترجمة</button>
           <button class="nav-pill" id="btn-game-reflex" onclick="switchLanguageGame('reflex')">🎙️ تحدي كابينة الفورية</button>
+          <button class="nav-pill" id="btn-game-idioms" onclick="switchLanguageGame('idioms')">🎭 فك شفرة الأمثال والتعبيرات</button>
+          <button class="nav-pill" id="btn-game-acronyms" onclick="switchLanguageGame('acronyms')">🌐 كاسر الاختصارات الدولية</button>
+          <button class="nav-pill" id="btn-game-sight" onclick="switchLanguageGame('sight')">⚡ سبرينت الترجمة بالنظر</button>
+          <button class="nav-pill" id="btn-game-battle" onclick="switchLanguageGame('battle')">⚔️ معركة المصطلحات المتخصصة</button>
         </div>
 
         <!-- GAME CONTAINER 1: SPEED TERMINOLOGY MATCH -->
@@ -1707,6 +1782,70 @@
             </div>
 
             <div id="booth-game-container" style="background:var(--bg-card); border:1px solid var(--border-line); border-radius:10px; padding:16px; margin-bottom:14px;">
+              <!-- Populated via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- GAME CONTAINER 5: IDIOMS DECIPHERER -->
+        <div id="game-panel-idioms" style="display:none;">
+          <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:12px; padding:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div>
+                <h4 style="font-size:14px; font-weight:800; margin:0 0 4px;">🎭 فك شفرة الأمثال والتعبيرات المجازية (Idioms Decipherer)</h4>
+                <div style="font-size:12px; color:var(--text-dim);">تجاوز الترجمة الحرفية واكتشف المقابل البلاغي التراثي المعتمد في الثقافة المستهدفة.</div>
+              </div>
+              <span id="idioms-progress-text" style="font-size:12px; font-weight:800; color:var(--crimson);">المثل 1 من 6</span>
+            </div>
+            <div id="idioms-game-container" style="background:var(--bg-card); border:1px solid var(--border-line); border-radius:10px; padding:16px; margin-bottom:14px;">
+              <!-- Populated via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- GAME CONTAINER 6: INTERNATIONAL ACRONYMS CRACKER -->
+        <div id="game-panel-acronyms" style="display:none;">
+          <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:12px; padding:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div>
+                <h4 style="font-size:14px; font-weight:800; margin:0 0 4px;">🌐 كاسر الاختصارات الدولية والأممية (Acronyms Cracker)</h4>
+                <div style="font-size:12px; color:var(--text-dim);">فك اختصارات الأمم المتحدة والمحاكم والمنظمات العالمية دون ارتباك.</div>
+              </div>
+              <span id="acronyms-progress-text" style="font-size:12px; font-weight:800; color:var(--crimson);">الاختصار 1 من 6</span>
+            </div>
+            <div id="acronyms-game-container" style="background:var(--bg-card); border:1px solid var(--border-line); border-radius:10px; padding:16px; margin-bottom:14px;">
+              <!-- Populated via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- GAME CONTAINER 7: SIGHT TRANSLATION SPRINT -->
+        <div id="game-panel-sight" style="display:none;">
+          <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:12px; padding:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div>
+                <h4 style="font-size:14px; font-weight:800; margin:0 0 4px;">⚡ سبرينت الترجمة بالنظر (Sight Translation Sprint)</h4>
+                <div style="font-size:12px; color:var(--text-dim);">القراءة الفورية لنص رسمي واستنباط المعنى الفوري في ثوانٍ معدودة.</div>
+              </div>
+              <span id="sight-progress-text" style="font-size:12px; font-weight:800; color:var(--crimson);">المقطع 1 من 4</span>
+            </div>
+            <div id="sight-game-container" style="background:var(--bg-card); border:1px solid var(--border-line); border-radius:10px; padding:16px; margin-bottom:14px;">
+              <!-- Populated via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- GAME CONTAINER 8: DOMAIN TERMINOLOGY BATTLE -->
+        <div id="game-panel-battle" style="display:none;">
+          <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:12px; padding:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div>
+                <h4 style="font-size:14px; font-weight:800; margin:0 0 4px;">⚔️ معركة المصطلحات التخصصية (Domain Terminology Battle)</h4>
+                <div style="font-size:12px; color:var(--text-dim);">تحدي المعاجم في القانون الدولي، الطب، الصفقات العمومية، والدبلوماسية.</div>
+              </div>
+              <span id="battle-progress-text" style="font-size:12px; font-weight:800; color:var(--crimson);">المصطلح 1 من 6</span>
+            </div>
+            <div id="battle-game-container" style="background:var(--bg-card); border:1px solid var(--border-line); border-radius:10px; padding:16px; margin-bottom:14px;">
               <!-- Populated via JS -->
             </div>
           </div>
@@ -2562,7 +2701,7 @@
     function viewOrderInvoice(id) {
       const o = ordersList.find(item => item.id === id);
       if (!o) return;
-      alert(`📄 فاتورة رسمية رقم: ${o.id}\nالمشروع: ${o.title}\nالمبلغ: ${formatCurrency(o.price)}\nالحالة: ${o.status}\nمنصة بوليلانغ للترجمة المعتمدة - الأستاذ جودي مداني.`);
+      alert(`📄 فاتورة رسمية رقم: ${o.id}\nالمشروع: ${o.title}\nالمبلغ: ${formatCurrency(o.price)}\nالحالة: ${o.status}\nمجمع بوليلانغ الدولي للترجمة المعتمدة (ISO 17100:2015).`);
     }
 
     // Calculator
@@ -2633,9 +2772,12 @@
     }
 
     function switchLanguageGame(gameId) {
-      ['match', 'false_friends', 'syntax', 'reflex'].forEach(g => {
+      const allGames = ['match', 'false_friends', 'syntax', 'reflex', 'idioms', 'acronyms', 'sight', 'battle'];
+      allGames.forEach(g => {
         const panel = document.getElementById('game-panel-' + g);
-        const btn = document.getElementById('btn-game-' + (g === 'syntax' ? 'syntax' : (g === 'reflex' ? 'reflex' : (g === 'false_friends' ? 'false' : 'match'))));
+        let btnId = 'btn-game-' + g;
+        if (g === 'false_friends') btnId = 'btn-game-false';
+        const btn = document.getElementById(btnId);
         if (panel) panel.style.display = (g === gameId) ? 'block' : 'none';
         if (btn) btn.classList.toggle('active', g === gameId);
       });
@@ -2644,6 +2786,10 @@
       } else {
         stopBoothReflexTimer();
       }
+      if (gameId === 'idioms') renderIdiomsGame();
+      if (gameId === 'acronyms') renderAcronymsGame();
+      if (gameId === 'sight') renderSightGame();
+      if (gameId === 'battle') renderBattleGame();
     }
 
     // GAME 1: SPEED TERMINOLOGY MATCH
@@ -2653,7 +2799,11 @@
       { id: 3, foreign: "Subpoena", arabic: "مذكرة إحضار قضائية", domain: "قانون جنائي" },
       { id: 4, foreign: "Décalage", arabic: "الفارق الزمني في الكابينة", domain: "ترجمة فورية" },
       { id: 5, foreign: "Indemnity", arabic: "تعويض وإبراء ذمة", domain: "قانون مقارن" },
-      { id: 6, foreign: "Mutatis Mutandis", arabic: "مع مراعاة الفوارق اللازمة", domain: "صياغة لاتينية" }
+      { id: 6, foreign: "Mutatis Mutandis", arabic: "مع مراعاة الفوارق اللازمة", domain: "صياغة لاتينية" },
+      { id: 7, foreign: "Ultra Vires", arabic: "تجاوز الصلاحيات القانونية", domain: "قانون إداري ودستوري" },
+      { id: 8, foreign: "Exclusion Clause", arabic: "بند الإعفاء من المسؤولية", domain: "عقود دولية" },
+      { id: 9, foreign: "Bilateral Treaty", arabic: "معاهدة ثنائية الأطراف", domain: "علاقات دولية" },
+      { id: 10, foreign: "Affidavit", arabic: "إفادة خطية مشفوعة بيمين", domain: "توثيق قضائي" }
     ];
 
     let matchSelectedForeign = null;
@@ -3123,6 +3273,375 @@
       currentBoothIndex = (currentBoothIndex + 1) % BOOTH_REFLEX_TASKS.length;
       renderBoothReflexGame();
       startBoothReflexTimer();
+    }
+
+    // ==========================================
+    // GAME 5: IDIOMS DECIPHERER (فك شفرة الأمثال)
+    // ==========================================
+    const IDIOMS_GAME_DATA = [
+      {
+        source: "Bite the bullet",
+        literal: "عض على الرصاصة ❌",
+        correct: "تجرع الغُصّة / واجه الأمر بشجاعة ✔️",
+        origin: "تعبير إنجليزي يعود لجراحة الميدان قديماً حين كان الجريح يعض على رصاصة لتحمل الألم الشديد."
+      },
+      {
+        source: "Break the ice",
+        literal: "كسر الجليد حرفياً ❌",
+        correct: "إزالة الحواجز النفسية وبدء الحديث بود ✔️",
+        origin: "تعبير مجازي شهير في العلاقات والمؤتمرات الدبلوماسية لتمهيد الحوار الإيجابي."
+      },
+      {
+        source: "Burn the midnight oil",
+        literal: "حرق زيت منتصف الليل ❌",
+        correct: "السهر في الكدّ والاجتهاد / كابَدَ الدجى ✔️",
+        origin: "كناية عن الدراسة والعمل المضني حتى ساعات الصباح الأولى على ضوء القنديل."
+      },
+      {
+        source: "Cost an arm and a leg",
+        literal: "يكلف ذراعاً وساقاً ❌",
+        correct: "باهظ الثمن جداً / كلفه الغالي والنفيس ✔️",
+        origin: "كناية شعبية عن التكلفة الفاحشة غير المعقولة لشيء معين."
+      },
+      {
+        source: "Coup de foudre (الفرنسية)",
+        literal: "ضربة صاعقة ❌",
+        correct: "حب من النظرة الأولى / ذهول مفاجئ ✔️",
+        origin: "تعبير بلاغي فرنسي يصف الشعور الفوري الجارف بالمحبة أو الذهول الاستثنائي."
+      },
+      {
+        source: "A rolling stone gathers no moss",
+        literal: "الحجر المتدحرج لا يجمع الطحالب ❌",
+        correct: "كثير الترحال لا يُحصّل استقراراً / من شبّ على شيء شاب عليه ✔️",
+        origin: "مثل تراثي يحذر من كثرة التقلب وعدم التركيز في مسار محدد."
+      }
+    ];
+    let currentIdiomIdx = 0;
+    let idiomAnswered = false;
+
+    function renderIdiomsGame() {
+      const container = document.getElementById('idioms-game-container');
+      const progress = document.getElementById('idioms-progress-text');
+      if (!container) return;
+
+      const q = IDIOMS_GAME_DATA[currentIdiomIdx];
+      idiomAnswered = false;
+      if (progress) progress.textContent = `المثل ${currentIdiomIdx + 1} من ${IDIOMS_GAME_DATA.length}`;
+
+      container.innerHTML = `
+        <div style="background:var(--bg-body); border-radius:8px; padding:12px; margin-bottom:12px;">
+          <div style="font-size:16px; font-weight:900; color:var(--crimson); margin-bottom:4px;">التعبير المصدر: "${q.source}"</div>
+          <div style="font-size:12px; color:var(--text-dim);">اختر المقابل البلاغي المعتمد في الثقافة المستهدفة:</div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
+          <button class="nav-pill" id="idiom-btn-correct" style="padding:10px; font-size:12px; font-weight:700; text-align:center; white-space:normal; border-radius:8px;" onclick="chooseIdiomOption(true)">
+            ${q.correct}
+          </button>
+          <button class="nav-pill" id="idiom-btn-literal" style="padding:10px; font-size:12px; font-weight:700; text-align:center; white-space:normal; border-radius:8px;" onclick="chooseIdiomOption(false)">
+            ${q.literal}
+          </button>
+        </div>
+
+        <div id="idiom-result-box" style="display:none; background:#ecfdf5; border:1px solid #10b981; border-radius:8px; padding:12px; margin-bottom:10px; font-size:12px; line-height:1.6; color:#065f46;">
+          <div style="font-weight:800; margin-bottom:3px;">💡 التحليل الثقافي والتأصيل:</div>
+          <div>${q.origin}</div>
+        </div>
+
+        <button id="idiom-next-btn" class="btn-primary-red" style="display:none; width:100%; font-size:12px;" onclick="nextIdiomQuestion()">
+          التعبير التالي ➔
+        </button>
+      `;
+    }
+
+    function chooseIdiomOption(isCorrect) {
+      if (idiomAnswered) return;
+      idiomAnswered = true;
+      const res = document.getElementById('idiom-result-box');
+      const nextBtn = document.getElementById('idiom-next-btn');
+      const bCor = document.getElementById('idiom-btn-correct');
+      const bLit = document.getElementById('idiom-btn-literal');
+
+      if (bCor) {
+        bCor.style.background = '#ecfdf5';
+        bCor.style.borderColor = '#10b981';
+        bCor.style.color = '#065f46';
+      }
+      if (bLit && !isCorrect) {
+        bLit.style.background = '#fef2f2';
+        bLit.style.borderColor = '#ef4444';
+        bLit.style.color = '#991b1b';
+      }
+
+      if (isCorrect) addGameScore(25);
+      if (res) res.style.display = 'block';
+      if (nextBtn) nextBtn.style.display = 'block';
+    }
+
+    function nextIdiomQuestion() {
+      currentIdiomIdx = (currentIdiomIdx + 1) % IDIOMS_GAME_DATA.length;
+      renderIdiomsGame();
+    }
+
+    // ==========================================
+    // GAME 6: INTERNATIONAL ACRONYMS CRACKER
+    // ==========================================
+    const ACRONYMS_GAME_DATA = [
+      { acronym: "UNHCR", correct: "المفوضية السامية للأمم المتحدة لشؤون اللاجئين", domain: "الأمم المتحدة", opts: ["منظمة الطيران المدني الدولي", "المفوضية السامية للأمم المتحدة لشؤون اللاجئين", "صندوق النقد العربي", "محكمة العدل الدولية"] },
+      { acronym: "ICJ", correct: "محكمة العدل الدولية (لاهاي)", domain: "القضاء الدولي", opts: ["المحكمة الجنائية الدولية", "محكمة العدل الدولية (لاهاي)", "مجلس السلم والأمن الإفريقي", "منظمة التجارة العالمية"] },
+      { acronym: "IAEA", correct: "الوكالة الدولية للطاقة الذرية", domain: "المنظمات الدولية", opts: ["الوكالة الدولية للطاقة المتجددة", "الوكالة الدولية للطاقة الذرية", "منظمة العمل الدولية", "الاتحاد الدولي للاتصالات"] },
+      { acronym: "WTO", correct: "منظمة التجارة العالمية", domain: "الاقتصاد والتجارة", opts: ["منظمة السياحة العالمية", "منظمة التجارة العالمية", "منظمة الجمارك العالمية", "بنك التسويات الدولية"] },
+      { acronym: "WHO", correct: "منظمة الصحة العالمية", domain: "الصحة العامة", opts: ["منظمة الصحة العالمية", "المنظمة العالمية للملكية الفكرية", "منظمة العمل الدولية", "برنامج الأمم المتحدة للبيئة"] },
+      { acronym: "WIPO", correct: "المنظمة العالمية للملكية الفكرية", domain: "القانون والابتكار", opts: ["المنظمة البحرية الدولية", "المنظمة العالمية للملكية الفكرية", "المنظمة العالمية للأرصاد الجوية", "اتحاد البريد العالمي"] }
+    ];
+    let currentAcronymIdx = 0;
+    let acronymAnswered = false;
+
+    function renderAcronymsGame() {
+      const container = document.getElementById('acronyms-game-container');
+      const progress = document.getElementById('acronyms-progress-text');
+      if (!container) return;
+
+      const q = ACRONYMS_GAME_DATA[currentAcronymIdx];
+      acronymAnswered = false;
+      if (progress) progress.textContent = `الاختصار ${currentAcronymIdx + 1} من ${ACRONYMS_GAME_DATA.length}`;
+
+      container.innerHTML = `
+        <div style="background:var(--bg-body); border-radius:8px; padding:12px; margin-bottom:12px; text-align:center;">
+          <div style="font-size:24px; font-weight:900; letter-spacing:1px; color:var(--crimson); margin-bottom:4px;">${q.acronym}</div>
+          <div style="font-size:12px; color:var(--text-dim); font-weight:700;">المجال: ${q.domain}</div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr; gap:8px; margin-bottom:12px;">
+          ${q.opts.map((opt, idx) => `
+            <button class="nav-pill" id="acronym-opt-${idx}" style="padding:10px 14px; font-size:12.5px; font-weight:700; text-align:start; white-space:normal; border-radius:8px; justify-content:flex-start;" onclick="chooseAcronymOption('${opt.replace(/'/g, "\\'")}', ${idx})">
+              📌 ${opt}
+            </button>
+          `).join('')}
+        </div>
+
+        <div id="acronym-feedback" style="display:none; font-size:12.5px; font-weight:800; margin-bottom:10px; padding:10px; border-radius:8px;"></div>
+        <button id="acronym-next-btn" class="btn-primary-red" style="display:none; width:100%; font-size:12px;" onclick="nextAcronymQuestion()">
+          الاختصار التالي ➔
+        </button>
+      `;
+    }
+
+    function chooseAcronymOption(chosen, idx) {
+      if (acronymAnswered) return;
+      acronymAnswered = true;
+      const q = ACRONYMS_GAME_DATA[currentAcronymIdx];
+      const feedback = document.getElementById('acronym-feedback');
+      const nextBtn = document.getElementById('acronym-next-btn');
+      const isCorrect = chosen === q.correct;
+
+      if (feedback) {
+        feedback.style.display = 'block';
+        if (isCorrect) {
+          feedback.style.background = '#ecfdf5';
+          feedback.style.color = '#065f46';
+          feedback.innerHTML = `🎉 إجابة صحيحة ومطابقة للمعجم الدبلوماسي (+25 نقطة)!`;
+          addGameScore(25);
+        } else {
+          feedback.style.background = '#fef2f2';
+          feedback.style.color = '#991b1b';
+          feedback.innerHTML = `❌ الإجابة المعتمدة: ${q.correct}`;
+        }
+      }
+      if (nextBtn) nextBtn.style.display = 'block';
+    }
+
+    function nextAcronymQuestion() {
+      currentAcronymIdx = (currentAcronymIdx + 1) % ACRONYMS_GAME_DATA.length;
+      renderAcronymsGame();
+    }
+
+    // ==========================================
+    // GAME 7: SIGHT TRANSLATION SPRINT
+    // ==========================================
+    const SIGHT_GAME_DATA = [
+      {
+        source: "The defendant entered a plea of not guilty to all counts of the indictment.",
+        correct: "دفع المدعى عليه ببراءته من جميع التهم الموجهة إليه في لائحة الاتهام",
+        domain: "قانون جنائي ومحاكم",
+        options: [
+          "اعترف المتهم بالذنب في بعض بنود الدعوى",
+          "دفع المدعى عليه ببراءته من جميع التهم الموجهة إليه في لائحة الاتهام",
+          "طلب محامي الدفاع تأجيل المرافعة لأجل غير مسمى",
+          "قرر القاضي توقيف الإجراءات لعدم كفاية الأدلة"
+        ]
+      },
+      {
+        source: "The patient presents with acute myocardial infarction requiring emergency angioplasty.",
+        correct: "يعاني المريض من احتشاء حاد في عضلة القلب يستدعي رأب الأوعية الدموية الإسعافي",
+        domain: "طب وجراحة قلب",
+        options: [
+          "أصيب المريض بالتهاب رئوي يستوجب المضادات الحيوية",
+          "يعاني المريض من احتشاء حاد في عضلة القلب يستدعي رأب الأوعية الدموية الإسعافي",
+          "فحص روتيني للقلب دون علامات خطر",
+          "صدمة تحسسية حادة ناتجة عن دواء"
+        ]
+      },
+      {
+        source: "The Parties reiterate their unwavering commitment to upholding regional peace and security.",
+        correct: "تجدد الأطراف التزامها الراسخ بصون السلم والأمن الإقليميين",
+        domain: "بيان دبلوماسي أممي",
+        options: [
+          "تجدد الأطراف التزامها الراسخ بصون السلم والأمن الإقليميين",
+          "أعلنت الدول استئناف المحادثات بعد توقف طويل",
+          "رفضت الدول توقيع البروتوكول الإضافي",
+          "دعت الهيئة الأممية إلى وقف مشروط للنزاع"
+        ]
+      },
+      {
+        source: "The tenderer must submit an unconditional bank guarantee covering the performance bond.",
+        correct: "يتعين على مقدم العطاء تقديم كفالة مصرفية غير مشروطة لتغطية ضمان حسن التنفيذ",
+        domain: "مناقصات وصفقات عمومية",
+        options: [
+          "يُعفى صاحب الصفقة من أي ضمانات بنكية",
+          "يتعين على مقدم العطاء تقديم كفالة مصرفية غير مشروطة لتغطية ضمان حسن التنفيذ",
+          "سحب العرض المالي قبل موعد فتح الأظرفة",
+          "طلب تمديد فترة إنجاز المشروع المتفق عليها"
+        ]
+      }
+    ];
+    let currentSightIdx = 0;
+    let sightAnswered = false;
+
+    function renderSightGame() {
+      const container = document.getElementById('sight-game-container');
+      const progress = document.getElementById('sight-progress-text');
+      if (!container) return;
+
+      const q = SIGHT_GAME_DATA[currentSightIdx];
+      sightAnswered = false;
+      if (progress) progress.textContent = `المقطع ${currentSightIdx + 1} من ${SIGHT_GAME_DATA.length}`;
+
+      container.innerHTML = `
+        <div style="background:var(--bg-body); border-radius:8px; padding:14px; margin-bottom:12px; border-right:4px solid var(--crimson);">
+          <div style="font-size:11px; font-weight:800; color:var(--text-dim); margin-bottom:4px;">النص المصدر للقراءة الفورية بالنظر (${q.domain}):</div>
+          <div style="font-size:14.5px; font-weight:800; line-height:1.6; color:var(--text-main);">"${q.source}"</div>
+        </div>
+
+        <div style="font-size:12px; font-weight:800; margin-bottom:8px;">اختر الترجمة الفورية الدقيقة المطابقة للأسلوب الرسمي المعتمد:</div>
+        <div style="display:grid; grid-template-columns:1fr; gap:8px; margin-bottom:12px;">
+          ${q.options.map((opt, idx) => `
+            <button class="nav-pill" style="padding:10px 14px; font-size:12px; font-weight:700; text-align:start; white-space:normal; border-radius:8px; justify-content:flex-start;" onclick="chooseSightOption('${opt.replace(/'/g, "\\'")}')">
+              ⚡ ${opt}
+            </button>
+          `).join('')}
+        </div>
+
+        <div id="sight-feedback" style="display:none; font-size:12.5px; font-weight:800; margin-bottom:10px; padding:10px; border-radius:8px;"></div>
+        <button id="sight-next-btn" class="btn-primary-red" style="display:none; width:100%; font-size:12px;" onclick="nextSightQuestion()">
+          المقطع التالي ➔
+        </button>
+      `;
+    }
+
+    function chooseSightOption(chosen) {
+      if (sightAnswered) return;
+      sightAnswered = true;
+      const q = SIGHT_GAME_DATA[currentSightIdx];
+      const feedback = document.getElementById('sight-feedback');
+      const nextBtn = document.getElementById('sight-next-btn');
+      const isCorrect = chosen === q.correct;
+
+      if (feedback) {
+        feedback.style.display = 'block';
+        if (isCorrect) {
+          feedback.style.background = '#ecfdf5';
+          feedback.style.color = '#065f46';
+          feedback.innerHTML = `🎉 ممتازة! سرعة بديهة وترجمة شفهية بالنظر غاية في الدقة (+30 نقطة).`;
+          addGameScore(30);
+        } else {
+          feedback.style.background = '#fef2f2';
+          feedback.style.color = '#991b1b';
+          feedback.innerHTML = `❌ الترجمة الصحيحة: ${q.correct}`;
+        }
+      }
+      if (nextBtn) nextBtn.style.display = 'block';
+    }
+
+    function nextSightQuestion() {
+      currentSightIdx = (currentSightIdx + 1) % SIGHT_GAME_DATA.length;
+      renderSightGame();
+    }
+
+    // ==========================================
+    // GAME 8: DOMAIN TERMINOLOGY BATTLE
+    // ==========================================
+    const BATTLE_GAME_DATA = [
+      { term: "Ipso facto", domain: "لاتينية قانونية", correct: "بحكم الواقع نفسه / بحكم الواقع ذاته", opts: ["بحكم القانون المعمول به", "بحكم الواقع نفسه / بحكم الواقع ذاته", "إلى أجل غير محدد", "بأثر رجعي فوري"] },
+      { term: "Locus standi", domain: "إجراءات التقاضي", correct: "الصفة والأهلية القانونية للتقاضي", opts: ["مكان وقوع الجريمة", "الصفة والأهلية القانونية للتقاضي", "شهادة حسن السيرة", "أمر التكليف بالحضور"] },
+      { term: "Pro bono", domain: "العمل القضائي", correct: "خدمة قانونية تطوعية مجانية للصالح العام", opts: ["رسوم قضائية مستعجلة", "خدمة قانونية تطوعية مجانية للصالح العام", "عقد وساطة تجارية", "حكم ابتدائي قابل للاستئناف"] },
+      { term: "Ad hoc", domain: "دبلوماسية وقانون", correct: "مخصص لغرض محدد / مؤقت واستثنائي", opts: ["دائم ومستمر", "مخصص لغرض محدد / مؤقت واستثنائي", "ملزم لجميع الأطراف", "غير قابل للإلغاء"] },
+      { term: "Double jeopardy", domain: "قانون جنائي مقارن", correct: "حظر محاكمة الشخص عن الجرم ذاته مرتين", opts: ["الخطر الداهم في النقل", "حظر محاكمة الشخص عن الجرم ذاته مرتين", "العقوبة المزدوجة", "المسؤولية التقصيرية"] },
+      { term: "In camera", domain: "جلسات المحاكم", correct: "في جلسة سرية / خلف الأبواب المغلقة", opts: ["جلسة مصورة تلفزيونياً", "في جلسة سرية / خلف الأبواب المغلقة", "أمام هيئة المحلفين", "بحضور ممثلي الصحافة"] }
+    ];
+    let currentBattleIdx = 0;
+    let battleAnswered = false;
+
+    function renderBattleGame() {
+      const container = document.getElementById('battle-game-container');
+      const progress = document.getElementById('battle-progress-text');
+      if (!container) return;
+
+      const q = BATTLE_GAME_DATA[currentBattleIdx];
+      battleAnswered = false;
+      if (progress) progress.textContent = `المصطلح ${currentBattleIdx + 1} من ${BATTLE_GAME_DATA.length}`;
+
+      container.innerHTML = `
+        <div style="background:var(--bg-body); border-radius:8px; padding:12px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div style="font-size:18px; font-weight:900; color:var(--crimson);">${q.term}</div>
+            <div style="font-size:11.5px; color:var(--text-dim);">الميدان: ${q.domain}</div>
+          </div>
+          <span class="badge-gold" style="font-size:11px;">⚔️ معركة المعاجم</span>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr; gap:8px; margin-bottom:12px;">
+          ${q.opts.map((opt, idx) => `
+            <button class="nav-pill" style="padding:10px 14px; font-size:12px; font-weight:700; text-align:start; white-space:normal; border-radius:8px; justify-content:flex-start;" onclick="chooseBattleOption('${opt.replace(/'/g, "\\'")}')">
+              🗡️ ${opt}
+            </button>
+          `).join('')}
+        </div>
+
+        <div id="battle-feedback" style="display:none; font-size:12.5px; font-weight:800; margin-bottom:10px; padding:10px; border-radius:8px;"></div>
+        <button id="battle-next-btn" class="btn-primary-red" style="display:none; width:100%; font-size:12px;" onclick="nextBattleQuestion()">
+          المصطلح التالي ➔
+        </button>
+      `;
+    }
+
+    function chooseBattleOption(chosen) {
+      if (battleAnswered) return;
+      battleAnswered = true;
+      const q = BATTLE_GAME_DATA[currentBattleIdx];
+      const feedback = document.getElementById('battle-feedback');
+      const nextBtn = document.getElementById('battle-next-btn');
+      const isCorrect = chosen === q.correct;
+
+      if (feedback) {
+        feedback.style.display = 'block';
+        if (isCorrect) {
+          feedback.style.background = '#ecfdf5';
+          feedback.style.color = '#065f46';
+          feedback.innerHTML = `🎉 إجابة ناصعة! كسبت الجولة في معركة المعاجم (+30 نقطة).`;
+          addGameScore(30);
+        } else {
+          feedback.style.background = '#fef2f2';
+          feedback.style.color = '#991b1b';
+          feedback.innerHTML = `❌ المقابل المعتمد: ${q.correct}`;
+        }
+      }
+      if (nextBtn) nextBtn.style.display = 'block';
+    }
+
+    function nextBattleQuestion() {
+      currentBattleIdx = (currentBattleIdx + 1) % BATTLE_GAME_DATA.length;
+      renderBattleGame();
     }
 
     // ==========================================
@@ -5413,6 +5932,9 @@
           reqTrans: "طلب ترجمة معتمدة",
           academy: "الأكاديمية والمساقات",
           founder: "نبذة عن المؤسس",
+          heroBoothBtn: "دخول مقصورة ومحاكي الترجمة",
+          heroAcademyBtn: "مكتبة اللغات والماستركلاس",
+          heroOrderBtn: "طلب ترجمة معتمدة",
           navHome: "الرئيسية",
           navBooth: "مقصورة الترجمة الفورية",
           navAcademy: "مكتبة اللغات والماستركلاس",
@@ -5437,6 +5959,9 @@
           reqTrans: "Request Certified Translation",
           academy: "Academy & Courses",
           founder: "Founder Profile",
+          heroBoothBtn: "Enter Interpretation Booth Simulator",
+          heroAcademyBtn: "Languages Library & Masterclasses",
+          heroOrderBtn: "Request Certified Translation",
           navHome: "Home",
           navBooth: "Interpretation Booth",
           navAcademy: "Languages & Masterclasses",
@@ -5461,6 +5986,9 @@
           reqTrans: "Demander une Traduction",
           academy: "Académie & Formations",
           founder: "Profil du Fondateur",
+          heroBoothBtn: "Simulateur Cabine d'Interprétation",
+          heroAcademyBtn: "Bibliothèque de Langues & Masterclass",
+          heroOrderBtn: "Demander une Traduction Assermentée",
           navHome: "Accueil",
           navBooth: "Cabine d'Interprétation",
           navAcademy: "Langues & Masterclass",
@@ -5485,6 +6013,9 @@
           reqTrans: "Solicitar Traducción",
           academy: "Academia y Cursos",
           founder: "Perfil del Fundador",
+          heroBoothBtn: "Simulador de Cabina de Interpretación",
+          heroAcademyBtn: "Biblioteca de Idiomas y Masterclass",
+          heroOrderBtn: "Solicitar Traducción Jurada",
           navHome: "Inicio",
           navBooth: "Cabina de Interpretación",
           navAcademy: "Academia y Masterclass",
@@ -5509,6 +6040,9 @@
           reqTrans: "Übersetzung anfordern",
           academy: "Akademie & Kurse",
           founder: "Gründerprofil",
+          heroBoothBtn: "Dolmetscherkabinen-Simulator",
+          heroAcademyBtn: "Sprachbibliothek & Masterclass",
+          heroOrderBtn: "Beglaubigte Übersetzung beauftragen",
           navHome: "Startseite",
           navBooth: "Dolmetscherkabine",
           navAcademy: "Sprachen & Masterclass",
@@ -5533,6 +6067,9 @@
           reqTrans: "Richiedi Traduzione",
           academy: "Accademia e Corsi",
           founder: "Profilo Fondatore",
+          heroBoothBtn: "Simulatore Cabina Interpretariato",
+          heroAcademyBtn: "Libreria Linguistica & Masterclass",
+          heroOrderBtn: "Richiedi Traduzione Giurata",
           navHome: "Home",
           navBooth: "Cabina Interpretariato",
           navAcademy: "Accademia e Corsi",
@@ -5557,6 +6094,9 @@
           reqTrans: "Заказать перевод",
           academy: "Академия и курсы",
           founder: "Профиль основателя",
+          heroBoothBtn: "Симулятор кабины синхронного перевода",
+          heroAcademyBtn: "Библиотека языков и мастер-классы",
+          heroOrderBtn: "Заказать сертифицированный перевод",
           navHome: "Главная",
           navBooth: "Кабина синхронного перевода",
           navAcademy: "Академия и мастер-классы",
@@ -5588,6 +6128,10 @@
       setEl('i18n-btn-req-trans', t.reqTrans);
       setEl('i18n-btn-academy', t.academy);
       setEl('i18n-btn-founder', t.founder);
+
+      setEl('hero-btn-booth', t.heroBoothBtn);
+      setEl('hero-btn-academy', t.heroAcademyBtn);
+      setEl('hero-btn-order', t.heroOrderBtn);
 
       setEl('txt-nav-home', t.navHome);
       setEl('txt-nav-booth', t.navBooth);
