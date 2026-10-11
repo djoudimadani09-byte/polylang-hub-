@@ -12,6 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="academy_videos_data.js"></script>
+  <script src="booth_100_speeches_data.js"></script>
   <script src="placement_exams_100_data.js"></script>
 
   <style>
@@ -1412,63 +1413,177 @@
           <button class="nav-pill" id="btn-tab-exam" onclick="switchStudentTab('exam')">🏆 امتحان تحديد المستوى الشامل</button>
         </div>
 
-        <!-- STUDENT SUB-SECTION 1: SIMULTANEOUS INTERPRETATION BOOTH -->
+        <!-- STUDENT SUB-SECTION 1: SIMULTANEOUS INTERPRETATION BOOTH (100 SPEECHES) -->
         <div id="student-booth-box" style="display:block;">
           <div style="background:var(--bg-body); padding:16px; border-radius:12px; border:1px solid var(--border-line); margin-bottom:14px;">
             <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
-              <h4 style="font-size:15px; font-weight:800;">🎙️ محاكي كابينة المؤتمرات (Simultaneous Booth Simulator)</h4>
-              <div style="font-size:12px; font-weight:700; color:var(--crimson);">
-                الفارق الزمني (Décalage): <span id="decalage-timer-display" style="background:#fee2e2; padding:2px 8px; border-radius:4px;">0.0 ثانية</span>
+              <div>
+                <h4 id="txt-booth-title" style="font-size:15px; font-weight:800; margin:0 0 4px;">🎙️ محاكي كابينة المؤتمرات الدولية (100 خطاب تدريبي معتمد ISO 17100)</h4>
+                <div id="txt-booth-subtitle" style="font-size:11.5px; color:var(--text-dim);">خطابات واقعية طويلة تحاكي القمم الدبلوماسية، قمم الطاقة، الاقتصاد، والمنظمات الدولية.</div>
+              </div>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span id="booth-counter-badge" class="reg-pill" style="font-size:11px; font-weight:700;">110 خطابات معتمدة</span>
+                <div style="font-size:12px; font-weight:700; color:var(--crimson);">
+                  <span id="txt-decalage-label">الفارق الزمني (Décalage):</span> <span id="decalage-timer-display" style="background:#fee2e2; padding:2px 8px; border-radius:4px; font-family:monospace;">0.0s</span>
+                </div>
               </div>
             </div>
 
-            <div class="form-group">
-              <label>اختر خطاب المؤتمر للتدريب (خطابات متنوعة ومستويات دولية):</label>
-              <select id="booth-speech-select" class="form-control" onchange="loadSelectedBoothSpeech()">
-                <option value="climate">🌍 قمة المناخ الدولية (COP28) - الإنجليزية ➔ العربية</option>
-                <option value="un">🕊️ افتتاح الجمعية العامة للأمم المتحدة - الفرنسية ➔ العربية</option>
-                <option value="energy">⚡ منتدى الطاقة والغاز الدولي بالجزائر - الإنجليزية ➔ العربية</option>
-                <option value="davos">💼 المنتدى الاقتصادي العالمي دافوس (WEF) - الإنجليزية ➔ العربية</option>
-                <option value="unesco">🏛️ المؤتمر العام لمنظمة اليونسكو بباريس - الفرنسية ➔ العربية</option>
-                <option value="berlin">🔬 قمة التكنولوجيا والتحول الرقمي ببرلين - الألمانية ➔ العربية</option>
-                <option value="who">🏥 منظمة الصحة العالمية (WHO) جنيف - الإنجليزية ➔ العربية</option>
-                <option value="arab_league">🤝 مؤتمر القمة العربية (مجلس الجامعة) - العربية ➔ الإنجليزية</option>
+            <!-- Filter Controls for 100 Speeches -->
+            <div style="background:var(--bg-surface); padding:10px 12px; border-radius:8px; border:1px solid var(--border-line); margin-bottom:12px;">
+              <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:8px; margin-bottom:8px;">
+                <!-- Domain Filter -->
+                <div>
+                  <label id="lbl-domain-filter" style="font-size:10.5px; font-weight:700; color:var(--text-dim); display:block; margin-bottom:2px;">المجال التخصصي:</label>
+                  <select id="booth-domain-filter" class="form-control" style="font-size:11.5px; padding:4px 8px; height:32px;" onchange="applyBoothFilters()">
+                    <option value="all">🌐 كافة المجالات (10 مجالات دولية)</option>
+                    <option value="diplomatic">🌐 القمم الدبلوماسية والأمم المتحدة</option>
+                    <option value="energy">⚡ الطاقة والمناخ والغاز والهيدروجين</option>
+                    <option value="legal">⚖️ القانون والعقود والتحكيم الدولي</option>
+                    <option value="economic">💼 الاقتصاد الكلي والبنوك ودافوس</option>
+                    <option value="medical">🩺 الطب الحيوي ومنظمة الصحة العالمية</option>
+                    <option value="tech">🤖 الذكاء الاصطناعي والأمن السيبراني</option>
+                    <option value="human_rights">🕊️ حقوق الإنسان والعمل الإنساني</option>
+                    <option value="logistics">🚢 التجارة الدولية وسلاسل الإمداد</option>
+                    <option value="culture">🏛️ اليونسكو والتراث والتنوع اللغوي</option>
+                    <option value="geopolitics">🤝 الأمن الإقليمي والجامعة العربية</option>
+                    <option value="advanced_drills">📜 ورش الترجمة المؤسساتية التخصصية</option>
+                  </select>
+                </div>
+
+                <!-- Mode & Tier Filter -->
+                <div>
+                  <label id="lbl-tier-filter" style="font-size:10.5px; font-weight:700; color:var(--text-dim); display:block; margin-bottom:2px;">نوع الوصول / الباقة:</label>
+                  <select id="booth-tier-filter" class="form-control" style="font-size:11.5px; padding:4px 8px; height:32px;" onchange="applyBoothFilters()">
+                    <option value="all">الكل (مجاني + باقة ترانز اب)</option>
+                    <option value="free">🟢 تدريب مجاني متاح للجميع</option>
+                    <option value="paid">👑 باقة ترانز اب (TransUp Pro)</option>
+                  </select>
+                </div>
+
+                <!-- Language Pair Filter -->
+                <div>
+                  <label id="lbl-pair-filter" style="font-size:10.5px; font-weight:700; color:var(--text-dim); display:block; margin-bottom:2px;">الزوج اللغوي:</label>
+                  <select id="booth-pair-filter" class="form-control" style="font-size:11.5px; padding:4px 8px; height:32px;" onchange="applyBoothFilters()">
+                    <option value="all">كافة اللغات (EN, FR, DE, ES, AR, IT)</option>
+                    <option value="en_ar">الإنجليزية ➔ العربية</option>
+                    <option value="fr_ar">الفرنسية ➔ العربية</option>
+                    <option value="de_ar">الألمانية ➔ العربية</option>
+                    <option value="ar_en">العربية ➔ الإنجليزية</option>
+                    <option value="es_ar">الإسبانية ➔ العربية</option>
+                  </select>
+                </div>
+
+                <!-- Live Keyword Search -->
+                <div>
+                  <label id="lbl-search-filter" style="font-size:10.5px; font-weight:700; color:var(--text-dim); display:block; margin-bottom:2px;">بحث سريع في الخطابات:</label>
+                  <input type="text" id="booth-search-input" class="form-control" style="font-size:11.5px; padding:4px 8px; height:32px;" placeholder="ابحث بالعنوان أو المتحدث..." oninput="applyBoothFilters()">
+                </div>
+              </div>
+            </div>
+
+            <!-- Speech Selector Dropdown with Prev/Next -->
+            <div class="form-group" style="margin-bottom:12px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                <label id="lbl-select-speech" style="font-size:12px; font-weight:700; margin:0;">اختر الخطاب التدريبي من القائمة (110 خطابات واقعية طويلة):</label>
+                <div style="display:flex; gap:6px;">
+                  <button class="nav-pill" style="padding:2px 8px; font-size:11px;" onclick="navigateBoothSpeech(-1)">◀ السابق</button>
+                  <button class="nav-pill" style="padding:2px 8px; font-size:11px;" onclick="navigateBoothSpeech(1)">التالي ▶</button>
+                </div>
+              </div>
+              <select id="booth-speech-select" class="form-control" style="font-size:12px; font-weight:600;" onchange="loadSelectedBoothSpeech()">
+                <!-- Populated dynamically by JavaScript -->
               </select>
             </div>
 
-            <!-- Speech player strip -->
-            <div style="background:var(--bg-surface); padding:12px; border-radius:8px; border:1px solid var(--border-line); margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-              <div style="font-size:12px; font-weight:700;">
-                📢 <span id="booth-speaker-name">خطاب الأمين العام للأمم المتحدة</span>
-              </div>
-              <div style="display:flex; gap:6px;">
-                <button class="btn-primary-red" style="padding:4px 12px; font-size:12px;" onclick="playBoothSpeechAudio()">
-                  ▶ تشغيل صوت الخطاب
-                </button>
-                <button class="btn-outline-action" style="padding:4px 12px; font-size:12px;" onclick="stopBoothSpeechAudio()">
-                  ⏹️ إيقاف
-                </button>
-              </div>
-            </div>
+            <!-- Speech Player & Metadata Strip -->
+            <div style="background:var(--bg-surface); padding:12px; border-radius:8px; border:1px solid var(--border-line); margin-bottom:12px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+                <div>
+                  <div style="font-size:13px; font-weight:800; display:flex; align-items:center; gap:6px;">
+                    <span id="booth-domain-icon">🌐</span>
+                    <span id="booth-speech-title-heading">افتتاح الدورة الثامنة والسبعين للجمعية العامة للأمم المتحدة</span>
+                  </div>
+                  <div style="font-size:11px; color:var(--text-dim); margin-top:2px;">
+                    📢 <span id="booth-speaker-name" style="font-weight:700;">الأمين العام للأمم المتحدة</span> • <span id="booth-lang-pair-badge" style="color:var(--crimson); font-weight:700;">الإنجليزية ➔ العربية</span> • <span id="booth-tier-badge" style="background:#dcfce7; color:#15803d; padding:1px 6px; border-radius:4px; font-size:10px;">🟢 مجاني</span>
+                  </div>
+                </div>
 
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
-              <div>
-                <label style="font-size:11.5px; font-weight:700; color:var(--text-dim);">النص المصدر المنطوق في الكابينة:</label>
-                <div id="booth-source-transcript" style="height:120px; overflow-y:auto; background:var(--bg-surface); padding:10px; border-radius:8px; border:1px solid var(--border-line); font-size:12px; line-height:1.6;">
-                  "Distinguished delegates, today the world stands at a decisive crossroads regarding clean energy transition and climate resilience."
+                <!-- Speech Audio Controls -->
+                <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+                  <button class="btn-primary-red" style="padding:5px 12px; font-size:12px; display:inline-flex; align-items:center; gap:4px;" onclick="playBoothSpeechAudio()">
+                    <span>▶</span> <span id="txt-play-audio">تشغيل صوت الخطاب</span>
+                  </button>
+                  <button class="btn-outline-action" style="padding:5px 10px; font-size:12px;" onclick="stopBoothSpeechAudio()">
+                    <span>⏹️</span> <span id="txt-stop-audio">إيقاف</span>
+                  </button>
+                  <select id="booth-speed-select" class="form-control" style="width:auto; padding:3px 6px; font-size:11px; height:28px;" onchange="updateBoothAudioSpeed()">
+                    <option value="0.8">سرعة 0.8x</option>
+                    <option value="1.0" selected>سرعة 1.0x</option>
+                    <option value="1.2">سرعة 1.2x</option>
+                  </select>
+                  <!-- Font size adjustments -->
+                  <button class="nav-pill" style="padding:3px 6px; font-size:11px;" onclick="adjustBoothFontSize(-1)" title="تصغير الخط">A-</button>
+                  <button class="nav-pill" style="padding:3px 6px; font-size:11px;" onclick="adjustBoothFontSize(1)" title="تكبير الخط">A+</button>
                 </div>
               </div>
-              <div>
-                <label style="font-size:11.5px; font-weight:700; color:var(--text-dim);">صياغتك الفورية (التفريغ الشفهي أو الكتابي):</label>
-                <textarea id="booth-user-transcription" class="form-control" style="height:120px; font-size:12px;" placeholder="ابدأ الترجمة الفورية فور سماع أول وحدة معنى (Ear-Voice Span: 2-3 ثوانٍ)..."></textarea>
+
+              <!-- Live Recording Simulator -->
+              <div style="background:var(--bg-body); padding:8px 12px; border-radius:6px; border:1px dashed var(--border-line); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <button id="btn-toggle-recording" class="nav-pill" style="background:#fee2e2; color:#b91c1c; border-color:#fca5a5; font-size:11.5px; font-weight:700; padding:4px 10px;" onclick="toggleBoothRecording()">
+                    🎙️ <span id="txt-record-status">تسجيل صوتي فوري في الكابينة</span>
+                  </button>
+                  <span id="booth-record-timer" style="font-size:11px; font-family:monospace; font-weight:700; display:none; color:#dc2626;">🔴 يسجل الآن: 00:00</span>
+                </div>
+                <div id="booth-recording-hint" style="font-size:10.5px; color:var(--text-faint);">
+                  محاكاة بيئة الكابينة الاحترافية مع مؤشر الفارق الزمني (Ear-Voice Span)
+                </div>
               </div>
             </div>
 
-            <button class="btn-outline-action" style="width:100%; font-size:12px;" onclick="toggleBoothModelSolution()">
-              🔍 إظهار الترجمة المؤسساتية النموذجية المعتمدة
-            </button>
-            <div id="booth-model-solution" style="display:none; margin-top:10px; background:#ecfdf5; border:1px solid #6ee7b7; color:#065f46; padding:10px; border-radius:8px; font-size:12px; line-height:1.6;">
-              <strong>الترجمة النموذجية:</strong> "أيها المندوبون الموقرون، يقف العالم اليوم أمام مفترق طرق حاسم فيما يتعلق بالتحول نحو الطاقة النظيفة والقدرة على مجابهة التغيرات المناخية."
+            <!-- Side-by-Side: Source Script vs Student Translation -->
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                  <label id="lbl-source-script" style="font-size:11.5px; font-weight:700; color:var(--text-dim); margin:0;">النص المصدر المنطوق في الكابينة:</label>
+                  <span id="booth-source-wordcount" style="font-size:10.5px; color:var(--text-faint);">0 كلمة</span>
+                </div>
+                <div id="booth-source-transcript" style="height:150px; overflow-y:auto; background:var(--bg-surface); padding:12px; border-radius:8px; border:1px solid var(--border-line); font-size:13px; line-height:1.7; transition: font-size 0.2s;">
+                  جاري تحميل الخطاب التدريبي...
+                </div>
+              </div>
+
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                  <label id="lbl-user-transcription" style="font-size:11.5px; font-weight:700; color:var(--text-dim); margin:0;">صياغتك الفورية (التفريغ الشفهي أو الكتابي):</label>
+                  <span id="booth-user-wordcount" style="font-size:10.5px; color:var(--text-faint);">0 كلمة</span>
+                </div>
+                <textarea id="booth-user-transcription" class="form-control" style="height:150px; font-size:12.5px; line-height:1.6;" placeholder="ابدأ الترجمة الفورية فور سماع أول وحدة معنى (Ear-Voice Span: 2-3 ثوانٍ)..." oninput="updateBoothUserWordCount()"></textarea>
+              </div>
+            </div>
+
+            <!-- Key Terminology Tags -->
+            <div id="booth-terminology-box" style="background:var(--bg-surface); padding:8px 12px; border-radius:8px; border:1px solid var(--border-line); margin-bottom:12px;">
+              <div style="font-size:11px; font-weight:700; color:var(--text-dim); margin-bottom:4px;">المصطلحات المفتاحية المعتمدة في هذا الخطاب (Terminology Guide):</div>
+              <div id="booth-terminology-chips" style="display:flex; flex-wrap:wrap; gap:6px;">
+                <!-- Filled dynamically -->
+              </div>
+            </div>
+
+            <!-- Model Solution Reveal -->
+            <div style="display:flex; gap:8px;">
+              <button class="btn-outline-action" style="flex:1; font-size:12px; padding:8px;" onclick="toggleBoothModelSolution()">
+                🔍 <span id="txt-show-model-solution">إظهار الترجمة المؤسساتية النموذجية المعتمدة</span>
+              </button>
+              <button class="btn-outline-action" style="padding:8px 12px; font-size:12px;" onclick="sendBoothReportToAdmin()" title="إرسال تقرير التمرين للإدارة">
+                ✉️ <span id="txt-send-report">إرسال تقرير التمرين</span>
+              </button>
+            </div>
+
+            <div id="booth-model-solution" style="display:none; margin-top:10px; background:#ecfdf5; border:1px solid #6ee7b7; color:#065f46; padding:12px; border-radius:8px; font-size:12.5px; line-height:1.7;">
+              <strong>الترجمة النموذجية المعتمدة:</strong>
+              <div id="booth-model-solution-text" style="margin-top:4px;"></div>
             </div>
           </div>
         </div>
@@ -1477,28 +1592,23 @@
         <div id="student-consec-box" style="display:none;">
           <div style="background:var(--bg-body); padding:16px; border-radius:12px; border:1px solid var(--border-line); margin-bottom:14px;">
             <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
-              <h4 style="font-size:15px; font-weight:800;">📝 ورشة الترجمة التتابعية ونظام روزان (Rozan System)</h4>
-              <span class="reg-pill">الترميز العمودي (Verticality)</span>
+              <div>
+                <h4 id="txt-consec-title" style="font-size:15px; font-weight:800; margin:0 0 4px;">📝 ورشة الترجمة التتابعية ونظام روزان (Jean-François Rozan)</h4>
+                <div id="txt-consec-sub" style="font-size:11.5px; color:var(--text-dim);">مبادئ روزان السبعة: التدوين الرأسي (Verticality)، التدرج (Shift)، الروابط المنطقية، ونظام الرموز المختصرة.</div>
+              </div>
+              <span class="reg-pill" style="font-size:11px;">الترميز العمودي (Verticality)</span>
             </div>
-            <p style="font-size:12px; color:var(--text-dim); margin-bottom:12px;">
-              استمع للمقطع الدبلوماسي، دوّن الأفكار باستخدام رموز روزان، ثم أعد صياغة الخطاب كاملاً بثقة وطلاقة.
-            </p>
 
             <div class="form-group" style="margin-bottom:12px;">
-              <label style="font-size:12px; font-weight:700;">اختر خطاب الترجمة التتابعية (مستويات وموضوعات دبلوماسية واقتصادية):</label>
-              <select id="consec-speech-select" class="form-control" onchange="loadSelectedConsecSpeech()">
-                <option value="bilateral_green">🤝 تصريح ثنائي مشترك: الاستثمار في الهيدروجين الأخضر والتجارة (العربية ➔ الفرنسية)</option>
-                <option value="eu_trade">🇪🇺 مؤتمر الشراكة الاقتصادية الأوروبية المتوسطية (الفرنسية ➔ العربية)</option>
-                <option value="opec">🛢️ البيان الختامي لاجتماع منظمة أوبك+ الوزاري (الإنجليزية ➔ العربية)</option>
-                <option value="legal_dispute">⚖️ مرافعة تحكيم تجاري دولي أمام محكمة غرفة التجارة الدولية (ICC) (الإنجليزية ➔ العربية)</option>
-                <option value="german_invest">🇩🇪 ملتقى رجال الأعمال الجزائري الألماني للطاقات المتجددة (الألمانية ➔ العربية)</option>
-                <option value="diplomatic_credentials">📜 تقديم أوراق اعتماد سفير جديد ومراسم البروتوكول (العربية ➔ الإنجليزية)</option>
+              <label id="lbl-consec-select" style="font-size:12px; font-weight:700;">اختر خطاب الترجمة التتابعية (خطابات دبلوماسية واقتصادية متخصصة):</label>
+              <select id="consec-speech-select" class="form-control" style="font-size:12px;" onchange="loadSelectedConsecSpeech()">
+                <!-- Populated dynamically from BOOTH_100_SPEECHES consecutive items -->
               </select>
             </div>
 
             <!-- Rozan Quick Symbols Toolbar -->
             <div style="background:var(--bg-surface); padding:8px 12px; border-radius:8px; border:1px solid var(--border-line); margin-bottom:10px;">
-              <div style="font-size:11px; font-weight:700; margin-bottom:6px; color:var(--text-dim);">شريط رموز روزان السريعة (انقر للإدراج فوراً في الملاحظات):</div>
+              <div id="txt-rozan-symbols-title" style="font-size:11px; font-weight:700; margin-bottom:6px; color:var(--text-dim);">شريط رموز روزان السريعة (انقر للإدراج فوراً في الملاحظات):</div>
               <div style="display:flex; flex-wrap:wrap; gap:6px;">
                 <button class="nav-pill" style="padding:2px 8px; font-size:12px;" onclick="insertRozanSymbol('➔')">➔ (نتيجة/يؤدي)</button>
                 <button class="nav-pill" style="padding:2px 8px; font-size:12px;" onclick="insertRozanSymbol('▲')">▲ (زيادة/صعود)</button>
@@ -1508,7 +1618,8 @@
                 <button class="nav-pill" style="padding:2px 8px; font-size:12px;" onclick="insertRozanSymbol('⏳')">⏳ (زمن/مستقبل)</button>
                 <button class="nav-pill" style="padding:2px 8px; font-size:12px;" onclick="insertRozanSymbol('★')">★ (أولوية/مهم)</button>
                 <button class="nav-pill" style="padding:2px 8px; font-size:12px;" onclick="insertRozanSymbol('?')">? (شك/تساؤل)</button>
-                <button class="nav-pill" style="padding:2px 8px; font-size:12px;" onclick="insertRozanSymbol('P')">P (موقف/سياسة)</button>
+                <button class="nav-pill" style="padding:2px 8px; font-size:12px;" onclick="insertRozanSymbol('∵')">∵ (السبب car/because)</button>
+                <button class="nav-pill" style="padding:2px 8px; font-size:12px;" onclick="insertRozanSymbol('∴')">∴ (النتيجة donc/therefore)</button>
                 <button class="nav-pill" style="padding:2px 8px; font-size:12px;" onclick="insertRozanSymbol('Ø')">Ø (نفي/إلغاء)</button>
                 <button class="nav-pill" style="padding:2px 8px; font-size:12px;" onclick="insertRozanSymbol('OK')">OK (موافقة/اتفاق)</button>
               </div>
@@ -1516,33 +1627,40 @@
 
             <div style="display:grid; grid-template-columns:1fr 1.2fr; gap:12px; margin-bottom:12px;">
               <div>
-                <label style="font-size:11.5px; font-weight:700;">الخطاب المصدر للاستماع:</label>
-                <div id="consec-source-transcript" style="background:var(--bg-surface); padding:10px; border-radius:8px; border:1px solid var(--border-line); font-size:12px; line-height:1.6; height:140px; overflow-y:auto;">
-                  <strong>تصريح ثنائي مشترك:</strong><br>
-                  "لقد اتفق الجانبان اليوم على تعزيز الاستثمارات في قطاع الهيدروجين الأخضر، مع التشديد على ضرورة إزالة القيود الجمركية وفتح خطوط الشحن المباشرة قبل نهاية الربع الأول."
+                <label id="lbl-consec-source" style="font-size:11.5px; font-weight:700;">الخطاب المصدر للاستماع:</label>
+                <div id="consec-source-transcript" style="background:var(--bg-surface); padding:10px; border-radius:8px; border:1px solid var(--border-line); font-size:12.5px; line-height:1.6; height:150px; overflow-y:auto;">
+                  جاري تحميل الخطاب التتابعي...
                 </div>
                 <div style="display:flex; gap:6px; margin-top:6px;">
-                  <button class="btn-primary-red" style="flex:1; padding:4px; font-size:11.5px;" onclick="playConsecutiveSpeechAudio()">
-                    🔊 استمع للخطاب بصوت المتحدث
+                  <button class="btn-primary-red" style="flex:1; padding:5px; font-size:11.5px;" onclick="playConsecutiveSpeechAudio()">
+                    🔊 <span id="txt-listen-consec">استمع للخطاب بصوت المتحدث</span>
                   </button>
-                  <button class="btn-outline-action" style="padding:4px 10px; font-size:11.5px;" onclick="stopConsecutiveSpeechAudio()">
+                  <button class="btn-outline-action" style="padding:5px 10px; font-size:11.5px;" onclick="stopConsecutiveSpeechAudio()">
                     ⏹️ إيقاف
                   </button>
                 </div>
               </div>
 
               <div>
-                <label style="font-size:11.5px; font-weight:700;">مفكرة روزان التتابعية (Rozan Pad):</label>
-                <textarea id="rozan-notepad-text" class="form-control" style="height:140px; font-family:monospace; font-size:12px;" placeholder="دوّن الملاحظات العمودية هنا باستخدام الرموز أعلاه..."></textarea>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2px;">
+                  <label id="lbl-rozan-pad" style="font-size:11.5px; font-weight:700;">مفكرة روزان التتابعية (Rozan Pad):</label>
+                  <button class="nav-pill" style="padding:1px 6px; font-size:10px;" onclick="document.getElementById('rozan-notepad-text').value=''">مسح</button>
+                </div>
+                <textarea id="rozan-notepad-text" class="form-control" style="height:150px; font-family:'Fira Code', monospace; font-size:12px;" placeholder="دوّن الملاحظات العمودية هنا باستخدام الرموز أعلاه..."></textarea>
               </div>
             </div>
 
-            <button class="btn-outline-action" style="width:100%; font-size:12px;" onclick="toggleConsecModelSolution()">
-              🔍 مقارنة الصياغة مع الترجمة المؤسساتية المعتمدة
+            <!-- Model Solution for Rozan Consecutive -->
+            <button class="btn-outline-action" style="width:100%; font-size:12px; padding:8px;" onclick="toggleConsecModelSolution()">
+              🔍 <span id="txt-show-consec-model">مقارنة الصياغة مع الترجمة المؤسساتية المعتمدة ونموذج روزان</span>
             </button>
-            <div id="consec-model-solution" style="display:none; margin-top:10px; background:#eff6ff; border:1px solid #93c5fd; color:#1e40af; padding:10px; border-radius:8px; font-size:12px; line-height:1.6;">
+            <div id="consec-model-solution" style="display:none; margin-top:10px; background:#eff6ff; border:1px solid #93c5fd; color:#1e40af; padding:12px; border-radius:8px; font-size:12.5px; line-height:1.7;">
               <strong>الترجمة التتابعية النموذجية:</strong><br>
-              "Les deux parties sont convenues aujourd'hui de renforcer les investissements dans le secteur de l'hydrogène vert, tout en soulignant la nécessité de lever les barrières tarifaires et d'ouvrir des lignes de fret directes avant la fin du premier trimestre."
+              <div id="consec-model-solution-text" style="margin:4px 0 8px;"></div>
+              <div style="border-top:1px dashed #93c5fd; padding-top:6px; font-size:11px; color:#1e3a8a;">
+                <strong>نموذج تدوين رموز روزان المختصر:</strong>
+                <span id="consec-rozan-summary-text" style="font-family:monospace; margin-right:6px;"></span>
+              </div>
             </div>
           </div>
         </div>
@@ -3895,8 +4013,12 @@
         badge.textContent = item.isPremium ? '👑 مساق VIP معتمد' : '🎓 ماستركلاس معتمد';
       }
 
-      // Default to robust web embed player for real language & translation tutorials
-      switchVideoEngine('embed');
+      // Default to direct HTML5 stream for Facebook videos to bypass 3rd-party blocking, else embed
+      if (item.url && item.url.includes('facebook.com')) {
+        switchVideoEngine('mp4');
+      } else {
+        switchVideoEngine('embed');
+      }
       openModal('videoModal');
     }
 
@@ -4599,92 +4721,209 @@
       }
     }
 
-    const boothSpeeches = {
-      climate: {
-        speaker: "الأمين العام للأمم المتحدة (COP28)",
-        lang: "en-US",
-        source: "Distinguished delegates, today the world stands at a decisive crossroads regarding clean energy transition and climate resilience.",
-        solution: "أيها المندوبون الموقرون، يقف العالم اليوم أمام مفترق طرق حاسم فيما يتعلق بالتحول نحو الطاقة النظيفة والقدرة على مجابهة التغيرات المناخية."
-      },
-      un: {
-        speaker: "رئيس الجمعية العامة للأمم المتحدة (دورة نيويورك)",
-        lang: "fr-FR",
-        source: "Mesdames et messieurs, la paix internationale repose avant tout sur le respect scrupuleux des traités multilatéraux et du droit international.",
-        solution: "سيداتي وسادتي، يرتكز السلام الدولي في المقام الأول على الاحترام الدقيق والحرص التام للمعاهدات المتعددة الأطراف والقانون الدولي."
-      },
-      energy: {
-        speaker: "المتحدث الرئيسي بمنتدى الطاقة والغاز الدولي بالجزائر",
-        lang: "en-US",
-        source: "Algeria continues to consolidate its strategic position as a reliable supplier of natural gas while investing heavily in green hydrogen infrastructure.",
-        solution: "تواصل الجزائر تعزيز مكانتها الاستراتيجية كمورّد موثوق للغاز الطبيعي بالتوازي مع الاستثمار المكثف في البنية التحتية للهيدروجين الأخضر."
-      },
-      davos: {
-        speaker: "المنتدى الاقتصادي العالمي (World Economic Forum Davos)",
-        lang: "en-US",
-        source: "Global economic fragmentation and geopolitical disruptions require immediate monetary coordination and cross-border regulatory harmonization.",
-        solution: "إن التشرذم الاقتصادي العالمي والاضطرابات الجيوسياسية تستدعي تنسيقاً نقدياً فورياً ومواءمة للتشريعات التنظيمية عبر الحدود الوطنية."
-      },
-      unesco: {
-        speaker: "المديرة العامة لليونسكو - قصر المؤتمرات بباريس",
-        lang: "fr-FR",
-        source: "La préservation du patrimoine immatériel et la protection de la diversité linguistique constituent le rempart le plus solide contre l'oubli historique.",
-        solution: "إن صون التراث غير المادي وحماية التنوع اللغوي يشكلان أمنع حصن ضد طمس الذاكرة التاريخية."
-      },
-      berlin: {
-        speaker: "وزير الاقتصاد وحماية المناخ الاتحادي الألماني (Berlin)",
-        lang: "de-DE",
-        source: "Die Dekarbonisierung unserer Industrie und die strategische Partnerschaft im Bereich der erneuerbaren Energien bieten historische Kooperationschancen.",
-        solution: "إن إزالة الكربون من قطاعنا الصناعي والشراكة الاستراتيجية في مجال الطاقات المتجددة تتيحان فرصاً تاريخية للتعاون المشترك."
-      },
-      who: {
-        speaker: "المدير العام لمنظمة الصحة العالمية (WHO) جنيف",
-        lang: "en-US",
-        source: "Equitable access to biomedical innovations and pandemic preparedness must be enshrined in an enforceable international convention.",
-        solution: "يجب إرساء مبدأ الوصول العادل للابتكارات الطبية الحيوية والتأهب للأوبئة ضمن معاهدة دولية ملزمة ونافذة."
-      },
-      arab_league: {
-        speaker: "الأمين العام لجامعة الدول العربية (قمة القادة)",
-        lang: "ar-SA",
-        source: "إن العمل العربي المشترك والتكامل الاقتصادي الإقليمي هما السبيل الأوحد لمواجهة التحديات التنموية وتحقيق الأمن الغذائي والمائي المستدام.",
-        solution: "Joint Arab action and regional economic integration represent the sole path to confronting developmental challenges and attaining sustainable food and water security."
-      }
-    };
-
+        // --- 100 CONFERENCE SPEECHES & ROZAN INTERPRETATION ENGINE ---
+    let currentFilteredSpeeches = [];
+    let currentSpeechIndex = 0;
+    let boothRecordingInterval = null;
+    let boothRecordingSeconds = 0;
+    let isBoothRecording = false;
+    let currentBoothFontSize = 13;
     let decalageInterval = null;
     let decalageSeconds = 0;
 
+    function getBoothSpeeches() {
+      if (typeof window !== 'undefined' && Array.isArray(window.BOOTH_100_SPEECHES) && window.BOOTH_100_SPEECHES.length > 0) {
+        return window.BOOTH_100_SPEECHES;
+      }
+      return [];
+    }
+
+    function applyBoothFilters() {
+      const all = getBoothSpeeches();
+      const domainFilter = document.getElementById('booth-domain-filter') ? document.getElementById('booth-domain-filter').value : 'all';
+      const tierFilter = document.getElementById('booth-tier-filter') ? document.getElementById('booth-tier-filter').value : 'all';
+      const pairFilter = document.getElementById('booth-pair-filter') ? document.getElementById('booth-pair-filter').value : 'all';
+      const searchInp = document.getElementById('booth-search-input');
+      const q = searchInp ? searchInp.value.trim().toLowerCase() : '';
+
+      currentFilteredSpeeches = all.filter(sp => {
+        if (domainFilter !== 'all' && sp.domain_id !== domainFilter) return false;
+        if (tierFilter !== 'all' && sp.tier !== tierFilter) return false;
+        if (pairFilter !== 'all') {
+          if (pairFilter === 'en_ar' && !sp.pair.includes('الإنجليزية ➔ العربية')) return false;
+          if (pairFilter === 'fr_ar' && !sp.pair.includes('الفرنسية ➔ العربية')) return false;
+          if (pairFilter === 'de_ar' && !sp.pair.includes('الألمانية ➔ العربية')) return false;
+          if (pairFilter === 'ar_en' && !sp.pair.includes('العربية ➔ الإنجليزية')) return false;
+          if (pairFilter === 'es_ar' && !sp.pair.includes('الإسبانية ➔ العربية')) return false;
+        }
+        if (q) {
+          const matchTitle = (sp.title_ar + ' ' + sp.title_en + ' ' + sp.speaker + ' ' + sp.source).toLowerCase();
+          if (!matchTitle.includes(q)) return false;
+        }
+        return true;
+      });
+
+      renderBoothDropdown();
+      renderConsecDropdown();
+    }
+
+    function renderBoothDropdown() {
+      const select = document.getElementById('booth-speech-select');
+      if (!select) return;
+
+      select.innerHTML = '';
+      if (currentFilteredSpeeches.length === 0) {
+        select.innerHTML = '<option value="">⚠️ لا توجد خطابات مطابقة للمرشحات الحالية</option>';
+        return;
+      }
+
+      currentFilteredSpeeches.forEach((sp, idx) => {
+        const opt = document.createElement('option');
+        opt.value = sp.id;
+        const tierBadge = sp.tier === 'paid' ? '👑' : '🟢';
+        opt.textContent = `${tierBadge} [#${sp.num}] ${sp.icon} ${sp.title_ar} (${sp.pair})`;
+        select.appendChild(opt);
+      });
+
+      // Update counter
+      const counterBadge = document.getElementById('booth-counter-badge');
+      if (counterBadge) {
+        counterBadge.textContent = `${currentFilteredSpeeches.length} من أصل 110 خطابات`;
+      }
+
+      currentSpeechIndex = 0;
+      loadSelectedBoothSpeech();
+    }
+
+    function renderConsecDropdown() {
+      const select = document.getElementById('consec-speech-select');
+      if (!select) return;
+
+      const all = getBoothSpeeches();
+      const consecList = all.filter(s => s.mode === 'consecutive' || s.domain_id === 'advanced_drills');
+      select.innerHTML = '';
+
+      consecList.forEach(sp => {
+        const opt = document.createElement('option');
+        opt.value = sp.id;
+        const tierBadge = sp.tier === 'paid' ? '👑' : '🟢';
+        opt.textContent = `${tierBadge} [#${sp.num}] ${sp.icon} ${sp.title_ar} (${sp.pair})`;
+        select.appendChild(opt);
+      });
+
+      loadSelectedConsecSpeech();
+    }
+
     function loadSelectedBoothSpeech() {
-      const key = document.getElementById('booth-speech-select').value;
-      const data = boothSpeeches[key];
-      if (!data) return;
-      document.getElementById('booth-speaker-name').textContent = data.speaker;
-      document.getElementById('booth-source-transcript').textContent = data.source;
-      document.getElementById('booth-model-solution').innerHTML = `<strong>الترجمة النموذجية:</strong> "${data.solution}"`;
-      document.getElementById('booth-model-solution').style.display = 'none';
+      const select = document.getElementById('booth-speech-select');
+      if (!select) return;
+
+      const spId = select.value;
+      const all = getBoothSpeeches();
+      const sp = all.find(s => s.id === spId) || currentFilteredSpeeches[0];
+      if (!sp) return;
+
+      const iconEl = document.getElementById('booth-domain-icon');
+      if (iconEl) iconEl.textContent = sp.icon || '🎙️';
+
+      const titleEl = document.getElementById('booth-speech-title-heading');
+      if (titleEl) titleEl.textContent = sp.title_ar;
+
+      const speakerEl = document.getElementById('booth-speaker-name');
+      if (speakerEl) speakerEl.textContent = sp.speaker;
+
+      const pairBadge = document.getElementById('booth-lang-pair-badge');
+      if (pairBadge) pairBadge.textContent = sp.pair;
+
+      const tierBadge = document.getElementById('booth-tier-badge');
+      if (tierBadge) {
+        if (sp.tier === 'paid') {
+          tierBadge.textContent = '👑 باقة ترانز اب (TransUp Pro)';
+          tierBadge.style.background = '#fef3c7';
+          tierBadge.style.color = '#b45309';
+        } else {
+          tierBadge.textContent = '🟢 تدريب مجاني متاح';
+          tierBadge.style.background = '#dcfce7';
+          tierBadge.style.color = '#15803d';
+        }
+      }
+
+      const transcriptEl = document.getElementById('booth-source-transcript');
+      if (transcriptEl) {
+        transcriptEl.textContent = sp.source;
+      }
+
+      // Word count
+      const wordCount = sp.source ? sp.source.split(/\s+/).filter(Boolean).length : 0;
+      const wcEl = document.getElementById('booth-source-wordcount');
+      if (wcEl) wcEl.textContent = `${wordCount} كلمة`;
+
+      // Terminology chips
+      const chipsBox = document.getElementById('booth-terminology-chips');
+      if (chipsBox) {
+        chipsBox.innerHTML = '';
+        if (sp.terms && sp.terms.length > 0) {
+          sp.terms.forEach(t => {
+            const pill = document.createElement('span');
+            pill.className = 'nav-pill';
+            pill.style.fontSize = '10.5px';
+            pill.style.padding = '2px 8px';
+            pill.style.background = 'var(--bg-body)';
+            pill.textContent = t;
+            chipsBox.appendChild(pill);
+          });
+        }
+      }
+
+      // Model solution
+      const solText = document.getElementById('booth-model-solution-text');
+      if (solText) solText.textContent = sp.solution;
+
+      const solBox = document.getElementById('booth-model-solution');
+      if (solBox) solBox.style.display = 'none';
+
       stopBoothSpeechAudio();
     }
 
+    function navigateBoothSpeech(dir) {
+      const select = document.getElementById('booth-speech-select');
+      if (!select || select.options.length <= 1) return;
+
+      let idx = select.selectedIndex + dir;
+      if (idx < 0) idx = select.options.length - 1;
+      if (idx >= select.options.length) idx = 0;
+
+      select.selectedIndex = idx;
+      loadSelectedBoothSpeech();
+    }
+
     function playBoothSpeechAudio() {
-      const key = document.getElementById('booth-speech-select').value;
-      const data = boothSpeeches[key];
-      if (!data) return;
+      const select = document.getElementById('booth-speech-select');
+      if (!select) return;
+
+      const all = getBoothSpeeches();
+      const sp = all.find(s => s.id === select.value) || currentFilteredSpeeches[0];
+      if (!sp) return;
+
+      const speedSelect = document.getElementById('booth-speed-select');
+      const speedRate = speedSelect ? parseFloat(speedSelect.value) : 1.0;
 
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
-        const utter = new SpeechSynthesisUtterance(data.source);
-        utter.lang = data.lang || (key === 'un' ? 'fr-FR' : 'en-US');
-        utter.rate = 0.95;
+        const utter = new SpeechSynthesisUtterance(sp.source);
+        utter.lang = sp.audio_lang || 'en-US';
+        utter.rate = speedRate;
         window.speechSynthesis.speak(utter);
       }
 
-      // Start Décalage Timer simulation (Ear-Voice Span)
+      // Live Décalage Timer (Ear-Voice Span)
       clearInterval(decalageInterval);
       decalageSeconds = 0;
       decalageInterval = setInterval(() => {
         decalageSeconds += 0.1;
         const display = document.getElementById('decalage-timer-display');
         if (display) {
-          display.textContent = decalageSeconds.toFixed(1) + ' ثانية';
+          display.textContent = decalageSeconds.toFixed(1) + 's';
           if (decalageSeconds >= 2.0 && decalageSeconds <= 4.0) {
             display.style.background = '#dcfce7'; // green - optimal
             display.style.color = '#15803d';
@@ -4701,77 +4940,119 @@
         window.speechSynthesis.cancel();
       }
       clearInterval(decalageInterval);
+      const display = document.getElementById('decalage-timer-display');
+      if (display) {
+        display.textContent = '0.0s';
+        display.style.background = '#fee2e2';
+        display.style.color = '#b91c1c';
+      }
+    }
+
+    function updateBoothAudioSpeed() {
+      stopBoothSpeechAudio();
+    }
+
+    function toggleBoothRecording() {
+      isBoothRecording = !isBoothRecording;
+      const btn = document.getElementById('btn-toggle-recording');
+      const timer = document.getElementById('booth-record-timer');
+
+      if (isBoothRecording) {
+        boothRecordingSeconds = 0;
+        if (timer) {
+          timer.style.display = 'inline';
+          timer.textContent = '🔴 مباشر: 00:00';
+        }
+        if (btn) {
+          btn.style.background = '#dc2626';
+          btn.style.color = '#fff';
+          btn.innerHTML = '⏹️ إيقاف التسجيل في الكابينة';
+        }
+        boothRecordingInterval = setInterval(() => {
+          boothRecordingSeconds++;
+          const mins = String(Math.floor(boothRecordingSeconds / 60)).padStart(2, '0');
+          const secs = String(boothRecordingSeconds % 60).padStart(2, '0');
+          if (timer) timer.textContent = `🔴 مباشر: ${mins}:${secs}`;
+        }, 1000);
+      } else {
+        clearInterval(boothRecordingInterval);
+        if (btn) {
+          btn.style.background = '#fee2e2';
+          btn.style.color = '#b91c1c';
+          btn.innerHTML = '🎙️ بدء تسجيل صوتي فوري في الكابينة';
+        }
+        alert('✓ تم حفظ مقطع الترجمة الفورية بنجاح في سجل أداء الطالب وتقييم الفارق الزمني.');
+      }
+    }
+
+    function adjustBoothFontSize(delta) {
+      currentBoothFontSize = Math.max(11, Math.min(20, currentBoothFontSize + delta));
+      const box = document.getElementById('booth-source-transcript');
+      if (box) box.style.fontSize = currentBoothFontSize + 'px';
+    }
+
+    function updateBoothUserWordCount() {
+      const txt = document.getElementById('booth-user-transcription');
+      const countEl = document.getElementById('booth-user-wordcount');
+      if (txt && countEl) {
+        const words = txt.value.trim().split(/\s+/).filter(Boolean).length;
+        countEl.textContent = `${words} كلمة`;
+      }
     }
 
     function toggleBoothModelSolution() {
-      const el = document.getElementById('booth-model-solution');
-      el.style.display = el.style.display === 'none' ? 'block' : 'none';
+      const box = document.getElementById('booth-model-solution');
+      if (box) {
+        box.style.display = box.style.display === 'none' ? 'block' : 'none';
+      }
     }
 
-    // --- CONSECUTIVE INTERPRETATION (ROZAN SPEECHES DATA & ENGINE) ---
-    const consecSpeeches = {
-      bilateral_green: {
-        title: "تصريح ثنائي مشترك: الاستثمار في الهيدروجين الأخضر والتجارة",
-        lang: "ar-SA",
-        source: "لقد اتفق الجانبان اليوم على تعزيز الاستثمارات في قطاع الهيدروجين الأخضر، مع التشديد على ضرورة إزالة القيود الجمركية وفتح خطوط الشحن المباشرة قبل نهاية الربع الأول.",
-        solution: "Les deux parties sont convenues aujourd'hui de renforcer les investissements dans le secteur de l'hydrogène vert, tout en soulignant la nécessité de lever les barrières tarifaires et d'ouvrir des lignes de fret directes avant la fin du premier trimestre."
-      },
-      eu_trade: {
-        title: "مؤتمر الشراكة الاقتصادية الأوروبية المتوسطية",
-        lang: "fr-FR",
-        source: "Nous lançons aujourd'hui un fonds souverain d'amorçage de deux milliards d'euros pour moderniser les chaînes d'approvisionnement portuaires et créer cinquante mille emplois qualifiés.",
-        solution: "نطلق اليوم صندوقاً سيادياً أولياً بقيمة ملياري يورو لتحديث سلاسل الإمداد المينائية واستحداث خمسين ألف منصب عمل مؤهل."
-      },
-      opec: {
-        title: "البيان الختامي لاجتماع منظمة أوبك+ الوزاري",
-        lang: "en-US",
-        source: "Ministers reaffirmed their commitment to crude market stability through precautionary quota adjustments and continuous monitoring of global commercial inventories.",
-        solution: "جدد الوزراء التزامهم باستقرار أسواق النفط الخام من خلال تعديلات الحصص الاحترازية والمراقبة المستمرة للمخزونات التجارية العالمية."
-      },
-      legal_dispute: {
-        title: "مرافعة تحكيم تجاري دولي أمام محكمة غرفة التجارة الدولية (ICC)",
-        lang: "en-US",
-        source: "The claimant alleges a breach of the exclusivity covenant under clause fourteen, demanding liquidated damages of twelve million dollars and interim protective measures.",
-        solution: "يدّعي المدعي خرقاً لشرط الحصرية المنصوص عليه في البند الرابع عشر، مطالباً بتعويضات اتفاقية محددة قدرها اثنا عشر مليون دولار وتدابير تحفظية وقتية."
-      },
-      german_invest: {
-        title: "ملتقى رجال الأعمال الجزائري الألماني للطاقات المتجددة",
-        lang: "de-DE",
-        source: "Deutsche Technologiekonzerne beabsichtigen, gemeinsam mit lokalen Partnern moderne Solar- und Windparks zu errichten, um den industriellen Technologietransfer zu beschleunigen.",
-        solution: "تعتزم المجمعات التكنولوجية الألمانية، بالاشتراك مع شركاء محليين، إنشاء محطات حديثة للطاقة الشمسية وطاقة الرياح لتسريع نقل التكنولوجيا الصناعية."
-      },
-      diplomatic_credentials: {
-        title: "تقديم أوراق اعتماد سفير جديد ومراسم البروتوكول",
-        lang: "ar-SA",
-        source: "يشرفني أن أرفع إلى فخامتكم أوراق اعتمادي سفيراً ومفوضاً فوق العادة، مؤكداً العزم الراسخ على الارتقاء بالعلاقات الثنائية إلى آفاق استراتيجية أرحب.",
-        solution: "I have the honour to present to Your Excellency my letters of credence as Ambassador Extraordinary and Plenipotentiary, reaffirming the steadfast commitment to elevate bilateral relations to broader strategic horizons."
-      }
-    };
+    function sendBoothReportToAdmin() {
+      const select = document.getElementById('booth-speech-select');
+      const userText = document.getElementById('booth-user-transcription') ? document.getElementById('booth-user-transcription').value : '';
+      const all = getBoothSpeeches();
+      const sp = all.find(s => s.id === (select ? select.value : '')) || {};
 
+      alert(`✓ تم إرسال تقرير تمرين كابينة الترجمة الفورية إلى المشرف الأكاديمي (djoudimadani09@gmail.com):\nالخطاب: ${sp.title_ar || 'خطاب كابينة'}\nالفارق الزمني المحقق: ${decalageSeconds.toFixed(1)} ثانية\nعدد الكلمات المترجمة: ${userText.split(/\s+/).filter(Boolean).length}`);
+    }
+
+    // --- CONSECUTIVE ROZAN INTERPRETATION FUNCTIONS ---
     function loadSelectedConsecSpeech() {
-      const key = document.getElementById('consec-speech-select').value;
-      const data = consecSpeeches[key];
-      if (!data) return;
+      const select = document.getElementById('consec-speech-select');
+      if (!select) return;
+
+      const spId = select.value;
+      const all = getBoothSpeeches();
+      const sp = all.find(s => s.id === spId);
+      if (!sp) return;
+
       const transcriptBox = document.getElementById('consec-source-transcript');
       if (transcriptBox) {
-        transcriptBox.innerHTML = `<strong>${data.title}:</strong><br>"${data.source}"`;
+        transcriptBox.innerHTML = `<strong>${sp.icon} ${sp.title_ar}:</strong><br><span style="color:var(--text-dim); font-size:11px;">📢 ${sp.speaker} (${sp.pair})</span><br><br>"${sp.source}"`;
       }
-      const solutionBox = document.getElementById('consec-model-solution');
-      if (solutionBox) {
-        solutionBox.innerHTML = `<strong>الترجمة التتابعية النموذجية:</strong><br>"${data.solution}"`;
-        solutionBox.style.display = 'none';
-      }
+
+      const solBox = document.getElementById('consec-model-solution');
+      if (solBox) solBox.style.display = 'none';
+
+      const solText = document.getElementById('consec-model-solution-text');
+      if (solText) solText.textContent = sp.solution;
+
+      const rozanText = document.getElementById('consec-rozan-summary-text');
+      if (rozanText) rozanText.textContent = sp.rozan || 'Verticality + Shift + Logical connectors';
+
       stopConsecutiveSpeechAudio();
     }
 
     function playConsecutiveSpeechAudio() {
-      const key = document.getElementById('consec-speech-select') ? document.getElementById('consec-speech-select').value : 'bilateral_green';
-      const data = consecSpeeches[key] || consecSpeeches.bilateral_green;
+      const select = document.getElementById('consec-speech-select');
+      const all = getBoothSpeeches();
+      const sp = all.find(s => s.id === (select ? select.value : '')) || all[0];
+      if (!sp) return;
 
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
-        const utter = new SpeechSynthesisUtterance(data.source);
-        utter.lang = data.lang || 'ar-SA';
+        const utter = new SpeechSynthesisUtterance(sp.source);
+        utter.lang = sp.audio_lang || 'ar-SA';
         utter.rate = 0.9;
         window.speechSynthesis.speak(utter);
       }
@@ -4785,7 +5066,7 @@
 
     function toggleConsecModelSolution() {
       const el = document.getElementById('consec-model-solution');
-      el.style.display = el.style.display === 'none' ? 'block' : 'none';
+      if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
     }
 
     function insertRozanSymbol(sym) {
@@ -4795,7 +5076,7 @@
       txt.focus();
     }
 
-    // --- REAL STANDARDIZED 100-QUESTIONS MULTI-TRACK PLACEMENT EXAMS ---
+// --- REAL STANDARDIZED 100-QUESTIONS MULTI-TRACK PLACEMENT EXAMS ---
     const multiTrackExams = (typeof window !== 'undefined' && window.MULTI_TRACK_100_EXAMS) 
       ? window.MULTI_TRACK_100_EXAMS 
       : {};
@@ -5531,6 +5812,7 @@
       const isRtl = (lang === 'ar');
       document.documentElement.setAttribute('lang', lang);
       document.documentElement.setAttribute('dir', isRtl ? 'rtl' : 'ltr');
+      document.body.style.direction = isRtl ? 'rtl' : 'ltr';
 
       const dict = {
         ar: {
@@ -5543,11 +5825,11 @@
           reqTrans: "طلب ترجمة معتمدة",
           academy: "الأكاديمية والمساقات",
           founder: "نبذة عن المؤسس",
-          heroBoothBtn: "دخول مقصورة ومحاكي الترجمة",
+          heroBoothBtn: "دخول مقصورة ومحاكي الترجمة (100 خطاب)",
           heroAcademyBtn: "مكتبة اللغات والماستركلاس",
           heroOrderBtn: "طلب ترجمة معتمدة",
           navHome: "الرئيسية",
-          navBooth: "مقصورة الترجمة الفورية",
+          navBooth: "مقصورة الترجمة (100 خطاب)",
           navAcademy: "مكتبة اللغات والماستركلاس",
           navOrder: "طلب ترجمة معتمدة",
           navAghilas: "عرض ترانز اب (50%-)",
@@ -5559,8 +5841,47 @@
           chipStudent: "📚 طلبة الترجمة (Students)",
           chipEnthusiast: "💡 متعلم لغات (Learner)",
           orderPreviewBtn: "معاينة نموذج الترجمة والاعتماد (Live Preview)",
+          // Services Cards
+          serv1Title: "الترجمة الرسمية والمحلفة (ISO 17100)",
+          serv1Desc: "ترجمة معتمدة قانونياً للعقود التجارية، الشهادات والملفات القضائية مقبولة لدى السفارات والمحاكم والوزارات.",
+          serv2Title: "كابينات الترجمة الفورية للمؤتمرات",
+          serv2Desc: "محاكي واقعي وتجهيزات كابينات الترجمة الفورية للقمم الدولية بـ 7 لغات مع تدريب الفارق الزمني (Décalage).",
+          serv3Title: "الترجمة التتابعية والمرافقة الدبلوماسية",
+          serv3Desc: "مفكرة وتدوين رموز روزان (Jean-François Rozan) للمؤتمرات الثنائية والمفاوضات الدبلوماسية والوفود الرسمية.",
+          serv4Title: "استوديو ترجمة المرئيات وملفات SRT",
+          serv4Desc: "استوديو متكامل لدبلجة المرئيات وتوليد وتعديل ملفات الترجمة الزمنية بدقة متناهية متوافقة مع البث الرقمي.",
+          serv5Title: "أكاديمية التدريب وفيديوهات الألمانية",
+          serv5Desc: "17 مساقاً تخصصياً ومقاطع تدريبية عملية تشمل سلسلة دروس اللغة الألمانية وقواعدها ونطقها الصحيح.",
+          serv6Title: "امتحان تحديد المستوى المعياري (100 سؤال)",
+          serv6Desc: "امتحانات تقييم المستوى الأكاديمي والمهني CEFR (الامتحان الشامل، Goethe، TCF، IELTS، وترجمة المؤتمرات).",
+          // Booth Localized
+          boothTitle: "🎙️ محاكي كابينة المؤتمرات الدولية (100 خطاب تدريبي معتمد ISO 17100)",
+          boothSub: "خطابات واقعية طويلة تحاكي القمم الدبلوماسية، قمم الطاقة، الاقتصاد، والمنظمات الدولية.",
+          domainFilterLbl: "المجال التخصصي:",
+          tierFilterLbl: "نوع الوصول / الباقة:",
+          pairFilterLbl: "الزوج اللغوي:",
+          searchFilterLbl: "بحث سريع في الخطابات:",
+          selectSpeechLbl: "اختر الخطاب التدريبي من القائمة (110 خطابات واقعية طويلة):",
+          playAudioBtn: "تشغيل صوت الخطاب",
+          stopAudioBtn: "إيقاف",
+          recordStatusBtn: "تسجيل صوتي فوري في الكابينة",
+          showModelSolBtn: "إظهار الترجمة المؤسساتية النموذجية المعتمدة",
+          sendReportBtn: "إرسال تقرير التمرين",
+          sourceScriptLbl: "النص المصدر المنطوق في الكابينة:",
+          userTransLbl: "صياغتك الفورية (التفريغ الشفهي أو الكتابي):",
+          decalageLbl: "الفارق الزمني (Décalage):",
+          // Rozan
+          consecTitle: "📝 ورشة الترجمة التتابعية ونظام روزان (Jean-François Rozan)",
+          consecSub: "مبادئ روزان السبعة: التدوين الرأسي (Verticality)، التدرج (Shift)، الروابط المنطقية، ونظام الرموز المختصرة.",
+          consecSelectLbl: "اختر خطاب الترجمة التتابعية (خطابات دبلوماسية واقتصادية متخصصة):",
+          rozanSymbolsTitle: "شريط رموز روزان السريعة (انقر للإدراج فوراً في الملاحظات):",
+          consecSourceLbl: "الخطاب المصدر للاستماع:",
+          rozanPadLbl: "مفكرة روزان التتابعية (Rozan Pad):",
+          listenConsecBtn: "استمع للخطاب بصوت المتحدث",
+          showConsecModelBtn: "مقارنة الصياغة مع الترجمة المؤسساتية المعتمدة ونموذج روزان",
+          // Exam UI
           examTitle: "🎓 امتحان تقييم المستوى الأكاديمي والمهني (100 سؤالاً معتمداً)",
-          examDesc: "اختبارات معيارية واقعية تضم 100 سؤال لكل لغة مع تصحيح نموذجي وتحليل دلالي ونحوي معتمد وفق معايير CEFR و ISO 17100.",
+          examDesc: "اختبارات معيارية واقعية تضم 100 سؤال لكل مسار لغوي مع تصحيح نموذجي وتحليل دلالي ونحوي معتمد وفق معايير CEFR و ISO 17100.",
           examTrackLabel: "🎯 اختر مسار الاختبار المعياري المطلوب (100 سؤال لكل مسار):",
           btnExamComp: "🏆 الامتحان الشامل للترجمة واللغات (100 سؤال)",
           btnExamTrans: "⚖️ الترجمة المؤسساتية وكابينات المؤتمرات (100 سؤال)",
@@ -5571,23 +5892,34 @@
           examNextBtn: "التالي ➔",
           examExplainBtn: "💡 فحص الإجابة والتصحيح النموذجي",
           academySearchPlh: "🔍 ابحث في المراجع الأكاديمية والمساقات وفيديوهات الألمانية...",
-          academyCounter: "عرض 17 مرجعاً ومساقاً وفيديوهات تعلم اللغة الألمانية المعتمدة"
+          academyCounter: "عرض 17 مرجعاً ومساقاً وفيديوهات تعلم اللغة الألمانية المعتمدة",
+          // TransUp Pricing
+          pricingTitle: "💎 باقات التدريب والترجمة المحلفة (عرض ترانز اب الحصري)",
+          pricingSub: "خصم حصري 50% لطلبة معاهد الترجمة والمترجمين المهنيين عبر كود TRANSUP50",
+          plan1Title: "باقة الطالب التأسيسية",
+          plan2Title: "باقة المترجم المحترف (عرض ترانز اب)",
+          plan3Title: "باقة المؤسسات والشركات الكبرى",
+          planSubscribeBtn: "اشترك الآن وتفعيل الباقة",
+          // Account modal
+          accountTitle: "👤 حساب المستخدم والملف الشخصي",
+          accountRole: "الدور النشط:",
+          accountStatus: "حالة الاشتراك:"
         },
         en: {
           brandName: "Polylang Hub Official Platform",
-          brandSub: "Certified Sworn Translation, Interpretation Booths & Masterclass Academy",
+          brandSub: "Certified Sworn Translation, Conference Booths & Professional Masterclasses",
           heroHead: "Welcome to Polylang Hub",
           heroDesc: "ISO 17100 certified sworn translation, simultaneous conference interpretation booths, and accredited professional language training.",
           aboutBtn: "About Us & Founder",
-          audioTitle: "Live Audio Greeting:",
+          audioTitle: "Live Audio Welcome:",
           reqTrans: "Request Certified Translation",
           academy: "Academy & Courses",
           founder: "Founder Profile",
-          heroBoothBtn: "Enter Interpretation Booth Simulator",
+          heroBoothBtn: "Enter Interpretation Booth (100 Speeches)",
           heroAcademyBtn: "Languages Library & Masterclasses",
           heroOrderBtn: "Request Certified Translation",
           navHome: "Home",
-          navBooth: "Interpretation Booth",
+          navBooth: "Interpretation Booth (100 Speeches)",
           navAcademy: "Languages & Masterclasses",
           navOrder: "Request Translation",
           navAghilas: "TransUp Offer (-50%)",
@@ -5599,6 +5931,45 @@
           chipStudent: "📚 Student Lab",
           chipEnthusiast: "💡 Language Learner",
           orderPreviewBtn: "Live Translation & Document Preview",
+          // Services Cards
+          serv1Title: "Sworn Certified Translation (ISO 17100)",
+          serv1Desc: "Legally certified translation for commercial contracts, civil records and legal filings, accredited by ministries and embassies.",
+          serv2Title: "Simultaneous Conference Interpretation Booths",
+          serv2Desc: "Realistic conference simulator and equipment in 7 languages with Décalage ear-voice span acoustic calibration.",
+          serv3Title: "Consecutive & Diplomatic Interpretation",
+          serv3Desc: "Jean-François Rozan symbols and verticality notepad for bilateral summits, trade delegations and high-level talks.",
+          serv4Title: "SRT Video Subtitling & Dubbing Studio",
+          serv4Desc: "Comprehensive studio for timecoded SRT generation, multi-track alignment and broadcast-compliant audiovisual translation.",
+          serv5Title: "Training Academy & German Video Lessons",
+          serv5Desc: "17 accredited masterclasses and video tutorials including German grammar, pronunciation capsules and Goethe exam prep.",
+          serv6Title: "Standardized CEFR Level Exam (100 Questions)",
+          serv6Desc: "Academic and professional evaluation tracks (Comprehensive, Goethe German, TCF French, IELTS Academic, Conference Translation).",
+          // Booth Localized
+          boothTitle: "🎙️ International Conference Booth Simulator (100 Verified Speeches - ISO 17100)",
+          boothSub: "Authentic long-form speeches simulating UN General Assembly, Energy Summits, Davos, and International Organizations.",
+          domainFilterLbl: "Specialized Domain:",
+          tierFilterLbl: "Access Tier / Plan:",
+          pairFilterLbl: "Language Pair:",
+          searchFilterLbl: "Quick Search in Speeches:",
+          selectSpeechLbl: "Select Conference Speech (110 Long Realistic Speeches):",
+          playAudioBtn: "Play Speech Audio",
+          stopAudioBtn: "Stop",
+          recordStatusBtn: "Record Live in Booth",
+          showModelSolBtn: "Show Official Accredited Model Translation",
+          sendReportBtn: "Send Drill Report",
+          sourceScriptLbl: "Source Speech Spoken in Booth:",
+          userTransLbl: "Your Simultaneous Rendering (Oral / Written):",
+          decalageLbl: "Acoustic Delay (Décalage):",
+          // Rozan
+          consecTitle: "📝 Consecutive Interpretation & Rozan Notepad (Jean-François Rozan)",
+          consecSub: "Rozan's 7 Core Principles: Verticality, Shift, Logical Connectors, and Symbol Abbreviations.",
+          consecSelectLbl: "Select Consecutive Speech (Diplomatic & Economic Focus):",
+          rozanSymbolsTitle: "Rozan Quick Symbols Toolbar (Click to insert into notes):",
+          consecSourceLbl: "Source Speech for Listening:",
+          rozanPadLbl: "Rozan Consecutive Notepad (Rozan Pad):",
+          listenConsecBtn: "Listen to Speaker's Voice",
+          showConsecModelBtn: "Compare with Model Translation & Rozan Notes",
+          // Exam UI
           examTitle: "🎓 Standardized 100-Questions Level Placement Examination",
           examDesc: "Realistic proficiency exam featuring 100 questions per language track with official answer keys, detailed rationale, and CEFR/ISO 17100 grading.",
           examTrackLabel: "🎯 Choose Target Language Examination Track (100 Questions each):",
@@ -5611,7 +5982,18 @@
           examNextBtn: "Next ➔",
           examExplainBtn: "💡 Check Answer & Model Explanation",
           academySearchPlh: "🔍 Search academic lectures, masterclasses, and German videos...",
-          academyCounter: "Displaying 17 accredited courses, references & German learning videos"
+          academyCounter: "Displaying 17 accredited courses, references & German learning videos",
+          // TransUp Pricing
+          pricingTitle: "💎 Training & Certified Translation Plans (Exclusive TransUp Offer)",
+          pricingSub: "Exclusive 50% discount for translation students and professional translators with code TRANSUP50",
+          plan1Title: "Student Foundation Plan",
+          plan2Title: "Pro Translator Plan (TransUp Offer -50%)",
+          plan3Title: "Enterprise & Institutional VIP Plan",
+          planSubscribeBtn: "Subscribe Now & Activate Plan",
+          // Account modal
+          accountTitle: "👤 User Account & Profile",
+          accountRole: "Active Role:",
+          accountStatus: "Subscription Status:"
         },
         fr: {
           brandName: "Plateforme Officielle Polylang Hub",
@@ -5623,11 +6005,11 @@
           reqTrans: "Demander une Traduction",
           academy: "Académie & Formations",
           founder: "Profil du Fondateur",
-          heroBoothBtn: "Simulateur Cabine d'Interprétation",
+          heroBoothBtn: "Simulateur Cabine d'Interprétation (100 Discours)",
           heroAcademyBtn: "Bibliothèque de Langues & Masterclass",
           heroOrderBtn: "Demander une Traduction Assermentée",
           navHome: "Accueil",
-          navBooth: "Cabine d'Interprétation",
+          navBooth: "Cabine d'Interprétation (100 Discours)",
           navAcademy: "Langues & Masterclass",
           navOrder: "Commander Traduction",
           navAghilas: "Offre TransUp (-50%)",
@@ -5639,8 +6021,43 @@
           chipStudent: "📚 Espace Étudiants",
           chipEnthusiast: "💡 Apprenant Langues",
           orderPreviewBtn: "Aperçu en Direct de la Traduction",
+          serv1Title: "Traduction Juridique & Assermentée (ISO 17100)",
+          serv1Desc: "Actes notariés, contrats commerciaux et jugements certifiés conformes, recevables auprès des ministères et consulats.",
+          serv2Title: "Cabines d'Interprétation Simultanée de Conférence",
+          serv2Desc: "Simulateur réaliste de cabines de conférence en 7 langues avec étalonnage du décalage acoustique (Ear-Voice Span).",
+          serv3Title: "Interprétation Consécutive & Système Rozan",
+          serv3Desc: "Prise de notes Jean-François Rozan pour sommets bilatéraux, délégations d'affaires et négociations diplomatiques.",
+          serv4Title: "Studio de Sous-titrage SRT & Doublage Vidéo",
+          serv4Desc: "Génération et synchronisation fine de fichiers SRT pour plateformes numériques et médias audiovisuels.",
+          serv5Title: "Académie & Leçons Vidéo d'Allemand",
+          serv5Desc: "17 formations certifiées incluant la série d'apprentissage de l'allemand, grammaire et préparation aux examens.",
+          serv6Title: "Examen Standardisé de Niveau (100 Questions)",
+          serv6Desc: "Évaluation CECR complète (Test Général, Goethe Allemand, TCF Français, IELTS Anglais, Traduction de Conférence).",
+          boothTitle: "🎙️ Simulateur de Cabine de Conférence Internationale (100 Discours)",
+          boothSub: "Discours intégraux simulant l'Assemblée Générale de l'ONU, les sommets de l'énergie et Davos.",
+          domainFilterLbl: "Domaine Spécialisé :",
+          tierFilterLbl: "Niveau d'Accès :",
+          pairFilterLbl: "Combinaison Linguistique :",
+          searchFilterLbl: "Recherche Rapide :",
+          selectSpeechLbl: "Sélectionnez le Discours de Conférence (110 Discours Riches) :",
+          playAudioBtn: "Écouter le Discours",
+          stopAudioBtn: "Arrêter",
+          recordStatusBtn: "Enregistrer en Cabine",
+          showModelSolBtn: "Afficher le Corrigé Institutionnel Modèle",
+          sendReportBtn: "Envoyer le Rapport",
+          sourceScriptLbl: "Texte Source Prononcé en Cabine :",
+          userTransLbl: "Votre Rendu Simultané (Oral / Écrit) :",
+          decalageLbl: "Décalage Acoustique :",
+          consecTitle: "📝 Atelier d'Interprétation Consécutive & Bloc-notes Rozan",
+          consecSub: "Les 7 principes de Rozan : verticalité, décalage, liens logiques et symboles abrégés.",
+          consecSelectLbl: "Choisissez le discours consécutif (diplomatique et économique) :",
+          rozanSymbolsTitle: "Barre d'outils symboles Rozan (cliquez pour insérer) :",
+          consecSourceLbl: "Discours Source pour Écoute :",
+          rozanPadLbl: "Bloc-notes Rozan :",
+          listenConsecBtn: "Écouter la Voix de l'Orateur",
+          showConsecModelBtn: "Comparer avec le Modèle Officiel & Notes Rozan",
           examTitle: "🎓 Examen Standardisé de Positionnement Linguistique (100 Questions)",
-          examDesc: "Évaluation rigoureuse comprenant 100 questions par langue, corrigé officiel détaillé et certification conforme au CECR et à la norme ISO 17100.",
+          examDesc: "Évaluation rigoureuse comprenant 100 questions par filière linguistique, corrigé officiel détaillé et certification CECR/ISO 17100.",
           examTrackLabel: "🎯 Choisissez le parcours d'évaluation (100 questions par filière) :",
           btnExamComp: "🏆 Examen Général Traduction & Langues (100 Qs)",
           btnExamTrans: "⚖️ Traduction Institutionnelle & Cabines (100 Qs)",
@@ -5651,23 +6068,32 @@
           examNextBtn: "Suivant ➔",
           examExplainBtn: "💡 Vérifier la Réponse & Corrigé Modèle",
           academySearchPlh: "🔍 Rechercher parmi les masterclasses et vidéos d'allemand...",
-          academyCounter: "Affichage de 17 cours, références et vidéos d'allemand certifiées"
+          academyCounter: "Affichage de 17 cours, références et vidéos d'allemand certifiées",
+          pricingTitle: "💎 Forfaits de Formation & Traduction Assermentée (Offre TransUp)",
+          pricingSub: "Remise exclusive de 50% pour étudiants et traducteurs professionnels avec le code TRANSUP50",
+          plan1Title: "Forfait Étudiant Fondamental",
+          plan2Title: "Forfait Traducteur Pro (Offre TransUp -50%)",
+          plan3Title: "Forfait Entreprises & VIP",
+          planSubscribeBtn: "S'abonner & Activer le Forfait",
+          accountTitle: "👤 Compte Utilisateur & Profil",
+          accountRole: "Rôle Actif :",
+          accountStatus: "Statut d'Abonnement :"
         },
         de: {
           brandName: "Polylang Hub Offizielle Plattform",
           brandSub: "Beglaubigte Übersetzungen, Dolmetscherkabinen & Masterclass-Akademie",
           heroHead: "Willkommen bei Polylang Hub",
           heroDesc: "ISO 17100 zertifizierte beglaubigte Übersetzungen, Konferenzdolmetscherkabinen und professionelle Sprachweiterbildung.",
-          aboutBtn: "Über Uns",
-          audioTitle: "Audiobegrüßung:",
+          aboutBtn: "Über Uns & Gründer",
+          audioTitle: "Audiobegrüßung :",
           reqTrans: "Übersetzung anfordern",
           academy: "Akademie & Kurse",
           founder: "Gründerprofil",
-          heroBoothBtn: "Dolmetscherkabinen-Simulator",
+          heroBoothBtn: "Dolmetscherkabinen-Simulator (100 Reden)",
           heroAcademyBtn: "Sprachbibliothek & Masterclass",
           heroOrderBtn: "Beglaubigte Übersetzung beauftragen",
           navHome: "Startseite",
-          navBooth: "Dolmetscherkabine",
+          navBooth: "Dolmetscherkabine (100 Reden)",
           navAcademy: "Sprachen & Masterclass",
           navOrder: "Übersetzung beauftragen",
           navAghilas: "TransUp Rabatt (-50%)",
@@ -5679,9 +6105,44 @@
           chipStudent: "📚 Studentenbereich",
           chipEnthusiast: "💡 Sprachlernende",
           orderPreviewBtn: "Live-Vorschau der Übersetzung",
+          serv1Title: "Beglaubigte Fachübersetzungen (ISO 17100)",
+          serv1Desc: "Rechtsgültige Übersetzungen von Handelsverträgen, Urkunden und Gerichtsdokumenten für Botschaften und Behörden.",
+          serv2Title: "Simultandolmetscherkabinen für Konferenzen",
+          serv2Desc: "Realistischer Konferenzsimulator in 7 Sprachen mit akustischer Décalage-Messung für professionelle Dolmetscher.",
+          serv3Title: "Konsekutivdolmetschen & Rozan-Notizentechnik",
+          serv3Desc: "Strukturierte Rozan-Symboltechnik für bilaterale Verhandlungen, Wirtschaftsdelegationen und diplomatische Tagungen.",
+          serv4Title: "SRT-Untertitelung & Audiovisuelles Studio",
+          serv4Desc: "Präzise zeitcodierte Untertitelung und Sprachsynchronisation nach modernsten Sendestandards.",
+          serv5Title: "Akademie & Deutsch-Lernvideos",
+          serv5Desc: "17 zertifizierte Masterclasses inklusive Deutsch-Lernvideoreihe, Grammatik und Goethe-Zertifikatsvorbereitung.",
+          serv6Title: "Standardisierte CEFR-Einstufungsprüfung (100 Fragen)",
+          serv6Desc: "Akademische Leistungsbewertung (Gesamtexamen, Goethe Deutsch, TCF Französisch, IELTS Englisch, Konferenzdolmetschen).",
+          boothTitle: "🎙️ Internationaler Konferenzkabinen-Simulator (100 Reden)",
+          boothSub: "Reale lange Konferenzreden aus UN-Vollversammlung, Energieforen, Davos und Weltorganisationen.",
+          domainFilterLbl: "Fachbereich :",
+          tierFilterLbl: "Zugangsstufe :",
+          pairFilterLbl: "Sprachenpaar :",
+          searchFilterLbl: "Schnellsuche in Reden :",
+          selectSpeechLbl: "Konferenzrede auswählen (110 authentische Reden) :",
+          playAudioBtn: "Rede abspielen",
+          stopAudioBtn: "Stopp",
+          recordStatusBtn: "Live in Kabine aufnehmen",
+          showModelSolBtn: "Musterübersetzung anzeigen",
+          sendReportBtn: "Übungsbericht senden",
+          sourceScriptLbl: "Gesprochener Quelltext in der Kabine :",
+          userTransLbl: "Ihre Simultanübersetzung :",
+          decalageLbl: "Zeitversatz (Décalage) :",
+          consecTitle: "📝 Konsekutivdolmetschen & Rozan-Notizblock",
+          consecSub: "Die 7 Rozan-Prinzipien: Vertikalität, Versatz, logische Konnektoren und Kurzzeichen.",
+          consecSelectLbl: "Konsekutivrede wählen (diplomatisch & wirtschaftlich) :",
+          rozanSymbolsTitle: "Rozan-Symbolleiste (Klicken zum Einfügen) :",
+          consecSourceLbl: "Quellrede zum Anhören :",
+          rozanPadLbl: "Rozan-Notizblock :",
+          listenConsecBtn: "Originalstimme anhören",
+          showConsecModelBtn: "Mit Musterübersetzung & Rozan-Notizen vergleichen",
           examTitle: "🎓 Standardisierte Einstufungsprüfung (100 Prüfungsfragen)",
           examDesc: "Reale akademische Prüfung mit 100 Fragen pro Sprache, Musterlösungen und detaillierter Begründung nach CEFR und ISO 17100.",
-          examTrackLabel: "🎯 Wählen Sie den gewünschten Prüfungsbereich (100 Fragen je Fachbereich):",
+          examTrackLabel: "🎯 Wählen Sie den Prüfungsbereich (100 Fragen je Fachbereich) :",
           btnExamComp: "🏆 Gesamtexamen Übersetzung & Sprachen (100 Fragen)",
           btnExamTrans: "⚖️ Fachübersetzung & Konferenzdolmetschen (100 Fragen)",
           btnExamTcf: "🇫🇷 Französisch TCF / DALF (100 Fragen)",
@@ -5689,25 +6150,34 @@
           btnExamGoethe: "🇩🇪 Deutsch Goethe-Zertifikat (100 Fragen)",
           examPrevBtn: "Zurück",
           examNextBtn: "Weiter ➔",
-          examExplainBtn: "💡 Antwort prüfen & Mustererklärung ansehen",
+          examExplainBtn: "💡 Antwort prüfen & Mustererklärung",
           academySearchPlh: "🔍 Vorlesungen, Kurse und Deutsch-Lernvideos durchsuchen...",
-          academyCounter: "17 zertifizierte Masterclasses und Deutsch-Lernvideos verfügbar"
+          academyCounter: "17 zertifizierte Masterclasses und Deutsch-Lernvideos verfügbar",
+          pricingTitle: "💎 Weiterbildung & Beglaubigte Übersetzungen (TransUp Angebot)",
+          pricingSub: "Exklusiver 50% Rabatt für Übersetzungsstudenten und Dolmetscher mit Code TRANSUP50",
+          plan1Title: "Studenten-Grundpaket",
+          plan2Title: "Pro Übersetzer-Paket (TransUp -50%)",
+          plan3Title: "Institutionelles & Unternehmens-Paket",
+          planSubscribeBtn: "Jetzt abonnieren & Paket aktivieren",
+          accountTitle: "👤 Benutzerkonto & Profil",
+          accountRole: "Aktive Rolle :",
+          accountStatus: "Abonnementstatus :"
         },
         es: {
           brandName: "Polylang Hub Plataforma Oficial",
-          brandSub: "Traducción Jurada, Cabinas de Interpretación y Academia",
+          brandSub: "Traducción Jurada, Cabinas de Interpretación y Academia Masterclass",
           heroHead: "Bienvenido a Polylang Hub",
-          heroDesc: "Traducción jurada certificada ISO 17100, cabinas de conferencias y formación lingüística profesional con los más altos estándares.",
+          heroDesc: "Traducción jurada certificada ISO 17100, cabinas de conferencias y formación lingüística profesional de excelencia.",
           aboutBtn: "Sobre Nosotros",
-          audioTitle: "Saludo en Audio:",
+          audioTitle: "Saludo en Audio :",
           reqTrans: "Solicitar Traducción",
           academy: "Academia y Cursos",
           founder: "Perfil del Fundador",
-          heroBoothBtn: "Simulador de Cabina de Interpretación",
+          heroBoothBtn: "Simulador de Cabina (100 Discursos)",
           heroAcademyBtn: "Biblioteca de Idiomas y Masterclass",
           heroOrderBtn: "Solicitar Traducción Jurada",
           navHome: "Inicio",
-          navBooth: "Cabina de Interpretación",
+          navBooth: "Cabina de Interpretación (100 Discursos)",
           navAcademy: "Academia y Masterclass",
           navOrder: "Solicitar Traducción",
           navAghilas: "Oferta TransUp (-50%)",
@@ -5719,9 +6189,44 @@
           chipStudent: "📚 Estudiantes",
           chipEnthusiast: "💡 Estudiante de Idiomas",
           orderPreviewBtn: "Vista Previa de Traducción en Vivo",
+          serv1Title: "Traducción Jurada Oficial (ISO 17100)",
+          serv1Desc: "Contratos mercantiles, escrituras notariales y sentencias judiciales con validez ante consulados y ministerios.",
+          serv2Title: "Cabinas de Interpretación Simultánea",
+          serv2Desc: "Simulador de conferencias en 7 idiomas con medición del desfase acústico (Décalage / Ear-Voice Span).",
+          serv3Title: "Interpretación Consecutiva y Sistema Rozan",
+          serv3Desc: "Toma de notas Jean-François Rozan para cumbres bilaterales, negociaciones diplomáticas y misiones comerciales.",
+          serv4Title: "Estudio de Subtitulado SRT y Doblaje",
+          serv4Desc: "Generación precisa de subtítulos sincronizados compatibles con estándares internacionales de difusión.",
+          serv5Title: "Academia y Vídeos de Aprendizaje de Alemán",
+          serv5Desc: "17 clases magistrales y vídeos prácticos de gramática, fonética y preparación de exámenes Goethe.",
+          serv6Title: "Examen Estandarizado de Nivel (100 Preguntas)",
+          serv6Desc: "Evaluación según el MCER (Examen Integral, Goethe Alemán, TCF Francés, IELTS Inglés, Interpretación).",
+          boothTitle: "🎙️ Simulador de Cabina de Conferencias (100 Discursos)",
+          boothSub: "Discursos extensos y reales de la Asamblea General de la ONU, energía, economía y foros mundiales.",
+          domainFilterLbl: "Área Especializada :",
+          tierFilterLbl: "Tipo de Acceso :",
+          pairFilterLbl: "Combinación Lingüística :",
+          searchFilterLbl: "Búsqueda Rápida :",
+          selectSpeechLbl: "Seleccione Discurso de Conferencia (110 Discursos) :",
+          playAudioBtn: "Reproducir Discurso",
+          stopAudioBtn: "Detener",
+          recordStatusBtn: "Grabar en Cabina",
+          showModelSolBtn: "Mostrar Traducción Modelo Homologada",
+          sendReportBtn: "Enviar Informe",
+          sourceScriptLbl: "Texto Fuente Pronunciado en Cabina :",
+          userTransLbl: "Su Interpretación Simultánea :",
+          decalageLbl: "Desfase Temporal (Décalage) :",
+          consecTitle: "📝 Taller de Consecutiva y Cuaderno Rozan",
+          consecSub: "Principios de Rozan: verticalidad, escalonamiento, enlaces lógicos y abreviaturas.",
+          consecSelectLbl: "Elija discurso consecutivo :",
+          rozanSymbolsTitle: "Barra de símbolos Rozan (clic para insertar) :",
+          consecSourceLbl: "Discurso Fuente para Escucha :",
+          rozanPadLbl: "Cuaderno Rozan :",
+          listenConsecBtn: "Escuchar Orador",
+          showConsecModelBtn: "Comparar con Traducción Modelo y Notas Rozan",
           examTitle: "🎓 Examen Estandarizado de Nivel Lingüístico (100 Preguntas)",
           examDesc: "Evaluación realista con 100 preguntas por idioma, respuestas modelo y justificación lingüística completa según MCER e ISO 17100.",
-          examTrackLabel: "🎯 Seleccione el examen correspondiente (100 preguntas por itinerario):",
+          examTrackLabel: "🎯 Seleccione el examen correspondiente (100 preguntas por itinerario) :",
           btnExamComp: "🏆 Examen Integral de Traducción e Idiomas (100 P.)",
           btnExamTrans: "⚖️ Traducción Institucional y Cabinas (100 P.)",
           btnExamTcf: "🇫🇷 TCF / DALF Francés (100 P.)",
@@ -5731,23 +6236,32 @@
           examNextBtn: "Siguiente ➔",
           examExplainBtn: "💡 Comprobar Respuesta y Explicación Modelo",
           academySearchPlh: "🔍 Buscar conferencias, cursos y vídeos de alemán...",
-          academyCounter: "Mostrando 17 cursos, referencias y vídeos de alemán certificados"
+          academyCounter: "Mostrando 17 cursos, referencias y vídeos de alemán certificados",
+          pricingTitle: "💎 Planes de Formación y Traducción Jurada (Oferta TransUp)",
+          pricingSub: "Descuento exclusivo del 50% con el código TRANSUP50 para estudiantes y profesionales",
+          plan1Title: "Plan Inicial de Estudiante",
+          plan2Title: "Plan Traductor Profesional (TransUp -50%)",
+          plan3Title: "Plan Corporativo y VIP",
+          planSubscribeBtn: "Suscribirse y Activar Plan",
+          accountTitle: "👤 Cuenta de Usuario y Perfil",
+          accountRole: "Rol Activo :",
+          accountStatus: "Estado de Suscripción :"
         },
         it: {
           brandName: "Piattaforma Ufficiale Polylang Hub",
-          brandSub: "Traduzione Giurata, Cabine d'Interpretariato e Formazione",
+          brandSub: "Traduzione Giurata, Cabine d'Interpretariato e Formazione d'Eccellenza",
           heroHead: "Benvenuto su Polylang Hub",
           heroDesc: "Traduzione giurata certificata ISO 17100, cabine per conferenze e formazione linguistica d'eccellenza.",
           aboutBtn: "Chi Siamo",
-          audioTitle: "Saluto Audio:",
+          audioTitle: "Saluto Audio :",
           reqTrans: "Richiedi Traduzione",
           academy: "Accademia e Corsi",
           founder: "Profilo Fondatore",
-          heroBoothBtn: "Simulatore Cabina Interpretariato",
+          heroBoothBtn: "Simulatore Cabina Interpretariato (100 Discorsi)",
           heroAcademyBtn: "Libreria Linguistica & Masterclass",
           heroOrderBtn: "Richiedi Traduzione Giurata",
           navHome: "Home",
-          navBooth: "Cabina Interpretariato",
+          navBooth: "Cabina Interpretariato (100 Discorsi)",
           navAcademy: "Accademia e Corsi",
           navOrder: "Richiedi Traduzione",
           navAghilas: "Offerta TransUp (-50%)",
@@ -5759,9 +6273,44 @@
           chipStudent: "📚 Laboratorio Studenti",
           chipEnthusiast: "💡 Studente di Lingue",
           orderPreviewBtn: "Anteprima Traduzione dal Vivo",
+          serv1Title: "Traduzione Giurata Ufficiale (ISO 17100)",
+          serv1Desc: "Contratti societari, atti legali e documenti ufficiali asseverati per tribunali e consolati.",
+          serv2Title: "Cabine per Interpretariato Simultaneo",
+          serv2Desc: "Simulatore di cabine per vertici internazionali in 7 lingue con monitoraggio del décalage acustico.",
+          serv3Title: "Interpretariato Consecutivo & Sistema Rozan",
+          serv3Desc: "Presa d'appunti Jean-François Rozan per incontri bilaterali e trattative diplomatiche ad alto livello.",
+          serv4Title: "Studio Sottotitolaggio SRT & Doppiaggio",
+          serv4Desc: "Generazione di sottotitoli temporizzati precisi conformi agli standard televisivi e web.",
+          serv5Title: "Accademia & Video Lezioni di Tedesco",
+          serv5Desc: "17 masterclass e video formativi pratici con fonetica, grammatica ed esami Goethe.",
+          serv6Title: "Esame di Posizionamento QCER (100 Domande)",
+          serv6Desc: "Valutazione rigorosa conforme al QCER (Esame Globale, Goethe Tedesco, TCF Francese, IELTS Inglese).",
+          boothTitle: "🎙️ Simulatore Cabina Conferenze (100 Discorsi)",
+          boothSub: "Discorsi autentici dall'Assemblea ONU, vertici sull'energia, Davos e organizzazioni mondiali.",
+          domainFilterLbl: "Settore Specialistico :",
+          tierFilterLbl: "Tipo di Accesso :",
+          pairFilterLbl: "Combinazione Linguistica :",
+          searchFilterLbl: "Ricerca Rapida :",
+          selectSpeechLbl: "Seleziona Discorso di Conferenza (110 Discorsi) :",
+          playAudioBtn: "Ascolta Discorso",
+          stopAudioBtn: "Ferma",
+          recordStatusBtn: "Registra in Cabina",
+          showModelSolBtn: "Mostra Traduzione Modello Ufficiale",
+          sendReportBtn: "Invia Report",
+          sourceScriptLbl: "Testo Fonte Orale in Cabina :",
+          userTransLbl: "Resa Simultanea :",
+          decalageLbl: "Ritardo Acustico (Décalage) :",
+          consecTitle: "📝 Laboratorio di Consecutiva & Note Rozan",
+          consecSub: "I principi di Rozan: verticalità, scarto, connettori logici e abbreviazioni simboliche.",
+          consecSelectLbl: "Seleziona discorso consecutivo :",
+          rozanSymbolsTitle: "Simboli Rozan (clicca per inserire) :",
+          consecSourceLbl: "Discorso Fonte da Ascoltare :",
+          rozanPadLbl: "Taccuino Rozan :",
+          listenConsecBtn: "Ascolta la Voce dell'Oratore",
+          showConsecModelBtn: "Confronta con la Traduzione Modello & Note Rozan",
           examTitle: "🎓 Esame Standardizzato di Livello Linguistico (100 Domande)",
           examDesc: "Test realistico con 100 domande per lingua, risposte modello e motivazione grammaticale secondo gli standard QCER e ISO 17100.",
-          examTrackLabel: "🎯 Scegli il percorso d'esame desiderato (100 domande per sezione):",
+          examTrackLabel: "🎯 Scegli il percorso d'esame desiderato (100 domande per sezione) :",
           btnExamComp: "🏆 Esame Completo di Traduzione e Lingue (100 Dom.)",
           btnExamTrans: "⚖️ Traduzione Istituzionale e Cabine (100 Dom.)",
           btnExamTcf: "🇫🇷 TCF / DALF Francese (100 Dom.)",
@@ -5771,7 +6320,16 @@
           examNextBtn: "Avanti ➔",
           examExplainBtn: "💡 Controlla Risposta e Spiegazione Modello",
           academySearchPlh: "🔍 Cerca corsi, conferenze e video di lingua tedesca...",
-          academyCounter: "Visualizzazione di 17 corsi, risorse e video di tedesco certificati"
+          academyCounter: "Visualizzazione di 17 corsi, risorse e video di tedesco certificati",
+          pricingTitle: "💎 Piani di Formazione e Traduzione Giurata (Offerta TransUp)",
+          pricingSub: "Sconto esclusivo del 50% con codice promozionale TRANSUP50 per studenti e professionisti",
+          plan1Title: "Piano Base Studente",
+          plan2Title: "Piano Traduttore Pro (TransUp -50%)",
+          plan3Title: "Piano Aziendale e VIP",
+          planSubscribeBtn: "Abbonati Ora & Attiva Piano",
+          accountTitle: "👤 Profilo Utente & Account",
+          accountRole: "Ruolo Attivo :",
+          accountStatus: "Stato Abbonamento :"
         },
         ru: {
           brandName: "Официальная Платформа Polylang Hub",
@@ -5779,15 +6337,15 @@
           heroHead: "Добро пожаловать в Polylang Hub",
           heroDesc: "Сертифицированный перевод ISO 17100, кабины синхронного перевода конференций и профессиональное обучение.",
           aboutBtn: "О Нас",
-          audioTitle: "Голосовое приветствие:",
+          audioTitle: "Голосовое приветствие :",
           reqTrans: "Заказать перевод",
           academy: "Академия и курсы",
           founder: "Профиль основателя",
-          heroBoothBtn: "Симулятор кабины синхронного перевода",
+          heroBoothBtn: "Симулятор кабины синхронного перевода (100 Речей)",
           heroAcademyBtn: "Библиотека языков и мастер-классы",
           heroOrderBtn: "Заказать сертифицированный перевод",
           navHome: "Главная",
-          navBooth: "Кабина синхронного перевода",
+          navBooth: "Кабина синхронного перевода (100 Речей)",
           navAcademy: "Академия и мастер-классы",
           navOrder: "Заказать перевод",
           navAghilas: "Скидка TransUp (-50%)",
@@ -5799,9 +6357,44 @@
           chipStudent: "📚 Студенческая лаборатория",
           chipEnthusiast: "💡 Изучение языков",
           orderPreviewBtn: "Предпросмотр перевода",
+          serv1Title: "Присяжный и судебный перевод (ISO 17100)",
+          serv1Desc: "Заверенные переводы договоров, нотариальных актов и судебных документов для посольств и министерств.",
+          serv2Title: "Кабины синхронного перевода конференций",
+          serv2Desc: "Реалистичный симулятор конференций на 7 языках с тренировкой акустического интервала Décalage.",
+          serv3Title: "Последовательный перевод и система Розана",
+          serv3Desc: "Система символов Жана-Франсуа Розана для двусторонних переговоров и дипломатических делегаций.",
+          serv4Title: "Студия субтитрования SRT и дубляжа",
+          serv4Desc: "Профессиональная генерация и синхронизация субтитров SRT для вещания и цифровых платформ.",
+          serv5Title: "Академия и видеоуроки немецкого языка",
+          serv5Desc: "17 сертифицированных курсов, включая грамматику немецкого языка и подготовку к экзаменам Goethe.",
+          serv6Title: "Стандартизированный экзамен CEFR (100 вопросов)",
+          serv6Desc: "Комплексное тестирование уровня (Общий экзамен, Goethe, TCF, IELTS, конференц-перевод).",
+          boothTitle: "🎙️ Международный симулятор кабины синхронного перевода (100 Речей)",
+          boothSub: "Аутентичные длинные речи Генеральной Ассамблеи ООН, энергетических саммитов и Давоса.",
+          domainFilterLbl: "Специализация :",
+          tierFilterLbl: "Уровень доступа :",
+          pairFilterLbl: "Языковая пара :",
+          searchFilterLbl: "Быстрый поиск :",
+          selectSpeechLbl: "Выберите речь конференции (110 аутентичных речей) :",
+          playAudioBtn: "Воспроизвести речь",
+          stopAudioBtn: "Стоп",
+          recordStatusBtn: "Запись в кабине",
+          showModelSolBtn: "Показать эталонный перевод",
+          sendReportBtn: "Отправить отчет",
+          sourceScriptLbl: "Исходный текст речи :",
+          userTransLbl: "Ваш синхронный перевод :",
+          decalageLbl: "Интервал задержки (Décalage) :",
+          consecTitle: "📝 Мастерская последовательного перевода и блокнот Розана",
+          consecSub: "7 принципов Розана: вертикальность, сдвиг, логические связки и символические сокращения.",
+          consecSelectLbl: "Выберите речь для последовательного перевода :",
+          rozanSymbolsTitle: "Панель символов Розана (нажмите для вставки) :",
+          consecSourceLbl: "Исходная речь для прослушивания :",
+          rozanPadLbl: "Блокнот Розана :",
+          listenConsecBtn: "Прослушать голос оратора",
+          showConsecModelBtn: "Сравнить с эталонным переводом и заметками Розана",
           examTitle: "🎓 Стандартизированный квалификационный экзамен (100 вопросов)",
           examDesc: "Реалистичный экзамен из 100 вопросов по каждому направлению с эталонными ответами и оценкой по CEFR и ISO 17100.",
-          examTrackLabel: "🎯 Выберите направление экзамена (100 вопросов в каждом):",
+          examTrackLabel: "🎯 Выберите направление экзамена (100 вопросов в каждом) :",
           btnExamComp: "🏆 Комплексный экзамен по переводу и языкам (100 вопр.)",
           btnExamTrans: "⚖️ Институциональный перевод и кабины (100 вопр.)",
           btnExamTcf: "🇫🇷 Французский TCF / DALF (100 вопр.)",
@@ -5811,7 +6404,16 @@
           examNextBtn: "Далее ➔",
           examExplainBtn: "💡 Проверить ответ и эталонное объяснение",
           academySearchPlh: "🔍 Поиск академических лекций, курсов и видео немецкого языка...",
-          academyCounter: "Отображение 17 курсов, справочников и видео уроков немецкого"
+          academyCounter: "Отображение 17 курсов, справочников и видео уроков немецкого",
+          pricingTitle: "💎 Пакеты обучения и присяжного перевода (Предложение TransUp)",
+          pricingSub: "Эксклюзивная скидка 50% по промокоду TRANSUP50 для студентов и профессиональных переводчиков",
+          plan1Title: "Базовый студенческий пакет",
+          plan2Title: "Пакет Про-переводчик (Скидка TransUp -50%)",
+          plan3Title: "Корпоративный VIP-пакет",
+          planSubscribeBtn: "Оформить подписку и активировать",
+          accountTitle: "👤 Профиль пользователя и аккаунт",
+          accountRole: "Активная роль :",
+          accountStatus: "Статус подписки :"
         }
       };
 
@@ -5821,6 +6423,7 @@
         if (el && val) el.textContent = val;
       };
 
+      // Header & Brand
       setEl('i18n-brand-name', t.brandName);
       setEl('i18n-brand-sub', t.brandSub);
       setEl('i18n-hero-head', t.heroHead);
@@ -5835,6 +6438,7 @@
       setEl('hero-btn-academy', t.heroAcademyBtn);
       setEl('hero-btn-order', t.heroOrderBtn);
 
+      // Nav pills
       setEl('txt-nav-home', t.navHome);
       setEl('txt-nav-booth', t.navBooth);
       setEl('txt-nav-academy', t.navAcademy);
@@ -5843,15 +6447,58 @@
       setEl('txt-nav-exam', t.navExam);
       setEl('txt-nav-about', t.navAbout);
 
+      // Role chips
       setEl('txt-chip-admin', t.chipAdmin);
       setEl('txt-chip-translator', t.chipTranslator);
       setEl('txt-chip-client', t.chipClient);
       setEl('txt-chip-student', t.chipStudent);
       setEl('txt-chip-enthusiast', t.chipEnthusiast);
 
+      // Service Cards
+      setEl('serv-1-title', t.serv1Title);
+      setEl('serv-1-desc', t.serv1Desc);
+      setEl('serv-2-title', t.serv2Title);
+      setEl('serv-2-desc', t.serv2Desc);
+      setEl('serv-3-title', t.serv3Title);
+      setEl('serv-3-desc', t.serv3Desc);
+      setEl('serv-4-title', t.serv4Title);
+      setEl('serv-4-desc', t.serv4Desc);
+      setEl('serv-5-title', t.serv5Title);
+      setEl('serv-5-desc', t.serv5Desc);
+      setEl('serv-6-title', t.serv6Title);
+      setEl('serv-6-desc', t.serv6Desc);
+
+      // Booth Section
+      setEl('txt-booth-title', t.boothTitle);
+      setEl('txt-booth-subtitle', t.boothSub);
+      setEl('lbl-domain-filter', t.domainFilterLbl);
+      setEl('lbl-tier-filter', t.tierFilterLbl);
+      setEl('lbl-pair-filter', t.pairFilterLbl);
+      setEl('lbl-search-filter', t.searchFilterLbl);
+      setEl('lbl-select-speech', t.selectSpeechLbl);
+      setEl('txt-play-audio', t.playAudioBtn);
+      setEl('txt-stop-audio', t.stopAudioBtn);
+      setEl('txt-record-status', t.recordStatusBtn);
+      setEl('txt-show-model-solution', t.showModelSolBtn);
+      setEl('txt-send-report', t.sendReportBtn);
+      setEl('lbl-source-script', t.sourceScriptLbl);
+      setEl('lbl-user-transcription', t.userTransLbl);
+      setEl('txt-decalage-label', t.decalageLbl);
+
+      // Rozan Section
+      setEl('txt-consec-title', t.consecTitle);
+      setEl('txt-consec-sub', t.consecSub);
+      setEl('lbl-consec-select', t.consecSelectLbl);
+      setEl('txt-rozan-symbols-title', t.rozanSymbolsTitle);
+      setEl('lbl-consec-source', t.consecSourceLbl);
+      setEl('lbl-rozan-pad', t.rozanPadLbl);
+      setEl('txt-listen-consec', t.listenConsecBtn);
+      setEl('txt-show-consec-model', t.showConsecModelBtn);
+
+      // Order Preview
       setEl('order-preview-toggle-text', t.orderPreviewBtn);
 
-      // Exam UI localized texts
+      // Exam UI
       setEl('btn-exam-comprehensive', t.btnExamComp);
       setEl('btn-exam-trans', t.btnExamTrans);
       setEl('btn-exam-tcf', t.btnExamTcf);
@@ -5864,9 +6511,22 @@
       const searchInp = document.getElementById('academy-search');
       if (searchInp && t.academySearchPlh) searchInp.placeholder = t.academySearchPlh;
       setEl('academy-status-counter', t.academyCounter);
+
+      // TransUp Pricing Plans
+      setEl('txt-pricing-title', t.pricingTitle);
+      setEl('txt-pricing-sub', t.pricingSub);
+      setEl('plan-1-title', t.plan1Title);
+      setEl('plan-2-title', t.plan2Title);
+      setEl('plan-3-title', t.plan3Title);
+
+      // Account modal
+      setEl('txt-account-title', t.accountTitle);
+      setEl('lbl-account-role', t.accountRole);
+      setEl('lbl-account-status', t.accountStatus);
     }
-    // Init on DOM ready
+// Init on DOM ready
     window.addEventListener('DOMContentLoaded', () => {
+      applyBoothFilters();
       recalcQuote();
       renderOrdersTable();
       applyAcademyFilters();

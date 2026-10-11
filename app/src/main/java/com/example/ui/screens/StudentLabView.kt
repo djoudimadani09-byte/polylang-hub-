@@ -103,45 +103,31 @@ private fun InterpretationBoothComponent(
 ) {
     var isRecording by remember { mutableStateOf(false) }
     var recordTimer by remember { mutableIntStateOf(0) }
-    var selectedSpeed by remember { mutableStateOf("1.0x") }
-    var showSourceScript by remember { mutableStateOf(false) }
+    var showSourceScript by remember { mutableStateOf(true) }
+    var showModelSolution by remember { mutableStateOf(false) }
+    var selectedDomain by remember { mutableStateOf("all") }
+    var selectedTier by remember { mutableStateOf("all") }
     var selectedSpeechIndex by remember { mutableIntStateOf(0) }
     var dispatchStatus by remember { mutableStateOf<String?>(null) }
+    var userTranscriptionDraft by remember { mutableStateOf("") }
 
-    val speeches = listOf(
-        Pair(
-            "🌍 قمة المناخ الدولية (COP28) - الإنجليزية ➔ العربية",
-            "Mr. President, distinguished delegates, and esteemed colleagues: today our planet stands at an unprecedented inflection point where incremental pledges are no longer sufficient to arrest global temperature rise. As extreme weather events multiply across vulnerable coastal regions and arid basins, the transition toward carbon neutrality requires genuine technology transfer, climate finance mobilization, and a binding multilateral commitment that safeguards future generations without impeding developing nations' sustainable industrialization."
-        ),
-        Pair(
-            "🕊️ افتتاح الجمعية العامة للأمم المتحدة - الفرنسية ➔ العربية",
-            "Monsieur le Président, Excellences, Mesdames et Messieurs les délégués : au moment où notre organisation célèbre les principes fondateurs de sa Charte, nous constatons avec une vive inquiétude la multiplication des foyers de tension et l'affaiblissement progressif des mécanismes traditionnels de sécurité collective. La paix durable ne saurait être édifiée sur des rapports de force éphémères, mais requiert impérativement le respect scrupuleux de la souveraineté des États, le règlement pacifique des différends et une refonte équitable des institutions multilatérales de gouvernance."
-        ),
-        Pair(
-            "⚡ منتدى الطاقة والغاز الدولي بالجزائر - الإنجليزية ➔ العربية",
-            "Excellencies, ministers, and captains of the global energy industry: natural gas remains an indispensable bridge fuel that anchors grid reliability and supports the global transition toward decarbonized energy systems. Algeria has continually proven its credentials as a dependable, long-term strategic energy partner for Europe and global markets, underpinned by massive capital investments in upstream exploration, subsea pipeline infrastructure, and cutting-edge green hydrogen pilot projects designed to meet the demands of the 21st century."
-        ),
-        Pair(
-            "💼 المنتدى الاقتصادي العالمي دافوس (WEF) - الإنجليزية ➔ العربية",
-            "Distinguished participants, global economic governance is facing structural headwinds marked by supply chain reshoring, persistent inflationary pressures, and severe sovereign debt distress across emerging markets. To avert a prolonged era of low growth and geo-economic fragmentation, central banks and fiscal authorities must calibrate coordinated monetary frameworks, dismantle arbitrary non-tariff barriers, and promote inclusive digital trade corridors."
-        ),
-        Pair(
-            "🏛️ المؤتمر العام لمنظمة اليونسكو بباريس - الفرنسية ➔ العربية",
-            "Madame la Directrice générale, éminents représentants des États membres : la préservation de notre patrimoine culturel immatériel et la vitalité des langues autochtones ne sont pas de simples hommages au passé, mais les garants les plus sûrs de notre créativité collective et de notre résistance face à l'uniformisation culturelle. Dans un monde façonné par les algorithmes et l'intelligence artificielle, l'éducation humaniste et le multilinguisme demeurent les fondations indispensables d'une citoyenneté éclairée et fraternelle."
-        ),
-        Pair(
-            "🇩🇪 قمة التكنولوجيا والتحول الرقمي ببرلين - الألمانية ➔ العربية",
-            "Sehr geehrte Damen und Herren, geschätzte Delegierte: Die tiefgreifende Transformation unserer industriellen Wertschöpfungsketten hin zu vollständiger Klimaneutralität ist die größte ökonomische und technologische Herausforderung unserer Epoche. Die Bundesrepublik Deutschland setzt auf strategische Energiepartnerschaften mit Nordafrika, um den Aufbau einer robusten Wasserstoffwirtschaft voranzutreiben, technologische Standards zu harmonisieren und zukunftsfähige Industriearbeitsplätze auf beiden Seiten des Mittelmeers zu sichern."
-        ),
-        Pair(
-            "🏥 منظمة الصحة العالمية (WHO) جنيف - الإنجليزية ➔ العربية",
-            "Director-General, ministers of health, and distinguished delegates: pathogen genomic surveillance, equitable distribution of biomedical countermeasures, and universal health coverage represent the three pillars of global biosecurity. We cannot permit a recurrence of the vaccine inequities that paralyzed the developing world; health resilience must be treated as an indivisible global public good, governed by legally binding pandemic accords that guarantee swift technological access to all sovereign nations."
-        ),
-        Pair(
-            "🤝 مؤتمر القمة العربية (مجلس الجامعة) - العربية ➔ الإنجليزية",
-            "معالي الأمين العام، أصحاب المعالي والسعادة: إن جسامة الرهانات الجيوسياسية والاقتصادية التي تطوق أمتنا اليوم تقتضي مغادرة مقاربات التسيير الظرفي، والارتقاء بالتضامن العربي إلى مستوى الاندماج الهيكلي الفعلي. إن صيانة الأمن القومي بمفهومه الشامل، وتحقيق الاكتفاء الذاتي في ميادين الغذاء والطاقة والمياه، وتفعيل السوق العربية المشتركة، لم تعد مجرد تطلعات مؤجلة، بل غدت شروط بقاء لا مناص من تجسيدها في عالم يتشكل من جديد."
-        )
-    )
+    val allSpeeches = remember { com.example.BoothSpeechesBank.allSpeeches }
+    val filteredSpeeches = remember(selectedDomain, selectedTier) {
+        allSpeeches.filter { sp ->
+            val matchDomain = selectedDomain == "all" || sp.domainId == selectedDomain
+            val matchTier = when (selectedTier) {
+                "free" -> !sp.isPaid
+                "paid" -> sp.isPaid
+                else -> true
+            }
+            matchDomain && matchTier
+        }
+    }
+
+    val currentSpeech = remember(filteredSpeeches, selectedSpeechIndex) {
+        if (filteredSpeeches.isEmpty()) allSpeeches.first()
+        else filteredSpeeches[selectedSpeechIndex.coerceIn(0, filteredSpeeches.size - 1)]
+    }
 
     LaunchedEffect(isRecording) {
         if (isRecording) {
@@ -170,18 +156,25 @@ private fun InterpretationBoothComponent(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text(
-                            text = if (isArabic) "مقصورة المحاكاة للمؤتمرات (Simultaneous Booth)" else "Interpretation Booth",
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 13.sp,
-                            color = RedPrimary
-                        )
+                        Column {
+                            Text(
+                                text = if (isArabic) "مقصورة المحاكاة للمؤتمرات (100 خطاب معتمد)" else "Interpretation Booth (100 Speeches)",
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 13.sp,
+                                color = RedPrimary
+                            )
+                            Text(
+                                text = if (isArabic) "مكتبة ضخمة تضم 110 خطابات واقعية طويلة معتمدة ISO 17100" else "110 authentic conference speeches ISO 17100",
+                                fontSize = 10.sp,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
                         Surface(
                             shape = RoundedCornerShape(6.dp),
                             color = if (isRecording) RedPrimary else SuccessGreen.copy(alpha = 0.2f)
                         ) {
                             Text(
-                                text = if (isRecording) "🔴 مباشر: ${recordTimer}s" else "جاهز للتسجيل",
+                                text = if (isRecording) "🔴 مباشر: ${recordTimer}s" else (if (isArabic) "جاهز للتسجيل" else "Ready"),
                                 modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp),
                                 fontSize = 10.sp,
                                 fontWeight = FontWeight.Bold,
@@ -190,31 +183,170 @@ private fun InterpretationBoothComponent(
                         }
                     }
 
-                    Text(
-                        text = if (isArabic) "اختر الخطاب التدريبي وابدأ التسجيل الفوري لمحاكاة بيئة الكابينة الحقيقية:" else "Select speech and record your simultaneous rendering:",
-                        fontSize = 11.5.sp,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
+                    // Domain Filter Chips
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
+                        FilterChip(
+                            selected = selectedDomain == "all",
+                            onClick = { selectedDomain = "all"; selectedSpeechIndex = 0 },
+                            label = { Text(if (isArabic) "🌐 الكل" else "All", fontSize = 10.sp) },
+                            modifier = Modifier.weight(1f)
+                        )
+                        FilterChip(
+                            selected = selectedDomain == "diplomatic",
+                            onClick = { selectedDomain = "diplomatic"; selectedSpeechIndex = 0 },
+                            label = { Text(if (isArabic) "🌐 قمم" else "Diplo", fontSize = 10.sp) },
+                            modifier = Modifier.weight(1f)
+                        )
+                        FilterChip(
+                            selected = selectedDomain == "energy",
+                            onClick = { selectedDomain = "energy"; selectedSpeechIndex = 0 },
+                            label = { Text(if (isArabic) "⚡ طاقة" else "Energy", fontSize = 10.sp) },
+                            modifier = Modifier.weight(1f)
+                        )
+                        FilterChip(
+                            selected = selectedDomain == "legal",
+                            onClick = { selectedDomain = "legal"; selectedSpeechIndex = 0 },
+                            label = { Text(if (isArabic) "⚖️ قانون" else "Legal", fontSize = 10.sp) },
+                            modifier = Modifier.weight(1f)
+                        )
+                        FilterChip(
+                            selected = selectedDomain == "economic",
+                            onClick = { selectedDomain = "economic"; selectedSpeechIndex = 0 },
+                            label = { Text(if (isArabic) "💼 دافوس" else "Econ", fontSize = 10.sp) },
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
 
-                    // Speech selector
-                    speeches.forEachIndexed { idx, item ->
-                        Surface(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable { selectedSpeechIndex = idx },
-                            shape = RoundedCornerShape(8.dp),
-                            color = if (selectedSpeechIndex == idx) RedPrimary.copy(alpha = 0.1f) else MaterialTheme.colorScheme.surface,
-                            border = androidx.compose.foundation.BorderStroke(
-                                1.dp,
-                                if (selectedSpeechIndex == idx) RedPrimary else MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
-                            )
-                        ) {
-                            Text(
-                                text = item.first,
-                                modifier = Modifier.padding(10.dp),
-                                fontSize = 12.sp,
-                                fontWeight = if (selectedSpeechIndex == idx) FontWeight.Bold else FontWeight.Normal
-                            )
+                    // Secondary Filter Row: Tech, Medical, Free/Paid
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
+                        FilterChip(
+                            selected = selectedDomain == "tech",
+                            onClick = { selectedDomain = "tech"; selectedSpeechIndex = 0 },
+                            label = { Text(if (isArabic) "🤖 ذكاء اصطناعي" else "AI", fontSize = 10.sp) },
+                            modifier = Modifier.weight(1.2f)
+                        )
+                        FilterChip(
+                            selected = selectedDomain == "medical",
+                            onClick = { selectedDomain = "medical"; selectedSpeechIndex = 0 },
+                            label = { Text(if (isArabic) "🩺 صحة" else "Health", fontSize = 10.sp) },
+                            modifier = Modifier.weight(1f)
+                        )
+                        FilterChip(
+                            selected = selectedTier == "free",
+                            onClick = { selectedTier = if (selectedTier == "free") "all" else "free"; selectedSpeechIndex = 0 },
+                            label = { Text(if (isArabic) "🟢 مجاني" else "Free", fontSize = 10.sp) },
+                            modifier = Modifier.weight(1f)
+                        )
+                        FilterChip(
+                            selected = selectedTier == "paid",
+                            onClick = { selectedTier = if (selectedTier == "paid") "all" else "paid"; selectedSpeechIndex = 0 },
+                            label = { Text(if (isArabic) "👑 ترانز اب" else "TransUp", fontSize = 10.sp) },
+                            modifier = Modifier.weight(1.1f)
+                        )
+                    }
+
+                    // Active Speech Navigation Card
+                    Surface(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(10.dp),
+                        color = MaterialTheme.colorScheme.surface,
+                        border = androidx.compose.foundation.BorderStroke(1.dp, RedPrimary.copy(alpha = 0.3f))
+                    ) {
+                        Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                                    Text(currentSpeech.icon, fontSize = 16.sp)
+                                    Text(
+                                        text = "[#${currentSpeech.num}] " + (if (isArabic) currentSpeech.titleAr else currentSpeech.titleEn),
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = 12.sp,
+                                        color = MaterialTheme.colorScheme.onSurface,
+                                        maxLines = 1
+                                    )
+                                }
+                                Surface(
+                                    shape = RoundedCornerShape(4.dp),
+                                    color = if (currentSpeech.isPaid) Color(0xFFFEF3C7) else Color(0xFFDCFCE7)
+                                ) {
+                                    Text(
+                                        text = if (currentSpeech.isPaid) (if (isArabic) "👑 باقة ترانز اب" else "TransUp Pro") else (if (isArabic) "🟢 مجاني" else "Free"),
+                                        color = if (currentSpeech.isPaid) Color(0xFFB45309) else Color(0xFF15803D),
+                                        fontSize = 9.5.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                                    )
+                                }
+                            }
+
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    text = "📢 ${currentSpeech.speaker} • ${currentSpeech.langPair}",
+                                    fontSize = 11.sp,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                                Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                                    TextButton(
+                                        onClick = {
+                                            if (selectedSpeechIndex > 0) selectedSpeechIndex--
+                                            else selectedSpeechIndex = filteredSpeeches.size - 1
+                                        },
+                                        modifier = Modifier.height(28.dp)
+                                    ) {
+                                        Text("◀", fontSize = 11.sp)
+                                    }
+                                    Text(
+                                        text = "${selectedSpeechIndex + 1} / ${filteredSpeeches.size}",
+                                        fontSize = 10.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = RedPrimary,
+                                        modifier = Modifier.align(Alignment.CenterVertically)
+                                    )
+                                    TextButton(
+                                        onClick = {
+                                            if (selectedSpeechIndex < filteredSpeeches.size - 1) selectedSpeechIndex++
+                                            else selectedSpeechIndex = 0
+                                        },
+                                        modifier = Modifier.height(28.dp)
+                                    ) {
+                                        Text("▶", fontSize = 11.sp)
+                                    }
+                                }
+                            }
+
+                            // Key Terminology Chips
+                            if (currentSpeech.terms.isNotEmpty()) {
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+                                ) {
+                                    currentSpeech.terms.take(2).forEach { term ->
+                                        Surface(
+                                            shape = RoundedCornerShape(4.dp),
+                                            color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f)
+                                        ) {
+                                            Text(
+                                                text = term,
+                                                fontSize = 9.sp,
+                                                modifier = Modifier.padding(horizontal = 5.dp, vertical = 2.dp)
+                                            )
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
 
@@ -232,7 +364,7 @@ private fun InterpretationBoothComponent(
                         ) {
                             Icon(if (isRecording) Icons.Default.Stop else Icons.Default.Mic, contentDescription = null, modifier = Modifier.size(16.dp))
                             Spacer(modifier = Modifier.width(6.dp))
-                            Text(if (isRecording) (if (isArabic) "إيقاف التسجيل" else "Stop") else (if (isArabic) "بدء الترجمة الفورية" else "Record"), fontSize = 11.5.sp)
+                            Text(if (isRecording) (if (isArabic) "إيقاف التسجيل" else "Stop") else (if (isArabic) "بدء الترجمة الفورية" else "Record Live"), fontSize = 11.5.sp)
                         }
 
                         OutlinedButton(
@@ -240,37 +372,19 @@ private fun InterpretationBoothComponent(
                             shape = RoundedCornerShape(8.dp),
                             modifier = Modifier.weight(1f)
                         ) {
-                            Text(if (showSourceScript) "إخفاء النص" else "إظهار النص", fontSize = 11.sp)
+                            Text(if (showSourceScript) (if (isArabic) "إخفاء النص" else "Hide Script") else (if (isArabic) "إظهار النص" else "Show Script"), fontSize = 11.sp)
+                        }
+
+                        OutlinedButton(
+                            onClick = { showModelSolution = !showModelSolution },
+                            shape = RoundedCornerShape(8.dp),
+                            modifier = Modifier.weight(1.1f)
+                        ) {
+                            Text(if (showModelSolution) (if (isArabic) "إخفاء النموذج" else "Hide Model") else (if (isArabic) "🔍 الحل النموذجي" else "🔍 Solution"), fontSize = 11.sp)
                         }
                     }
 
-                    OutlinedButton(
-                        onClick = {
-                            AdminEmailNotifier.dispatch(
-                                eventType = "تقرير تمرين كابينة الترجمة الفورية",
-                                userName = userName,
-                                userEmail = userEmail,
-                                details = mapOf(
-                                    "speech" to speeches[selectedSpeechIndex].first,
-                                    "recordDurationSeconds" to "$recordTimer ثانية",
-                                    "adminEmail" to AdminEmailNotifier.ADMIN_EMAIL
-                                )
-                            ) { success, _ ->
-                                dispatchStatus = if (success) "✓ تم إرسال تقرير تدريبك بنجاح إلى الإدارة (djoudimadani09@gmail.com)" else "تم التوثيق بنجاح"
-                            }
-                        },
-                        shape = RoundedCornerShape(8.dp),
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Icon(Icons.Default.Send, contentDescription = null, modifier = Modifier.size(14.dp), tint = RedPrimary)
-                        Spacer(modifier = Modifier.width(6.dp))
-                        Text(if (isArabic) "إرسال تقرير التدريب إلى الإدارة (djoudimadani09@gmail.com)" else "Send Report to Admin (djoudimadani09@gmail.com)", fontSize = 11.sp)
-                    }
-
-                    if (dispatchStatus != null) {
-                        Text(text = dispatchStatus!!, fontSize = 11.sp, color = SuccessGreen, fontWeight = FontWeight.Bold)
-                    }
-
+                    // Source Script
                     if (showSourceScript) {
                         Surface(
                             modifier = Modifier.fillMaxWidth(),
@@ -279,11 +393,73 @@ private fun InterpretationBoothComponent(
                             border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
                         ) {
                             Column(modifier = Modifier.padding(10.dp)) {
-                                Text("النص الأصلي (Source Script):", fontWeight = FontWeight.Bold, fontSize = 11.sp, color = RedPrimary)
+                                Text(
+                                    text = if (isArabic) "النص الأصلي المنطوق في الكابينة:" else "Source Speech Spoken in Booth:",
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 11.sp,
+                                    color = RedPrimary
+                                )
                                 Spacer(modifier = Modifier.height(4.dp))
-                                Text(speeches[selectedSpeechIndex].second, fontSize = 12.sp, lineHeight = 18.sp)
+                                Text(currentSpeech.sourceText, fontSize = 12.sp, lineHeight = 18.sp)
                             }
                         }
+                    }
+
+                    // User Transcription/Draft
+                    OutlinedTextField(
+                        value = userTranscriptionDraft,
+                        onValueChange = { userTranscriptionDraft = it },
+                        modifier = Modifier.fillMaxWidth().height(100.dp),
+                        placeholder = { Text(if (isArabic) "صياغتك الفورية (التفريغ الشفهي أو الكتابي)..." else "Your simultaneous rendering here...") },
+                        shape = RoundedCornerShape(8.dp)
+                    )
+
+                    // Model Solution
+                    if (showModelSolution) {
+                        Surface(
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(8.dp),
+                            color = SuccessGreen.copy(alpha = 0.12f),
+                            border = androidx.compose.foundation.BorderStroke(1.dp, SuccessGreen)
+                        ) {
+                            Column(modifier = Modifier.padding(10.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                Text(
+                                    text = if (isArabic) "الترجمة المؤسساتية النموذجية المعتمدة:" else "Official Model Interpretation:",
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = SuccessGreen
+                                )
+                                Text(currentSpeech.modelSolution, fontSize = 12.sp, lineHeight = 18.sp)
+                            }
+                        }
+                    }
+
+                    OutlinedButton(
+                        onClick = {
+                            AdminEmailNotifier.dispatch(
+                                eventType = "تقرير تمرين كابينة الترجمة الفورية (100 خطاب)",
+                                userName = userName,
+                                userEmail = userEmail,
+                                details = mapOf(
+                                    "speechId" to currentSpeech.id,
+                                    "speechTitle" to currentSpeech.titleAr,
+                                    "recordDurationSeconds" to "$recordTimer ثانية",
+                                    "adminEmail" to AdminEmailNotifier.ADMIN_EMAIL
+                                )
+                            ) { success, _ ->
+                                dispatchStatus = if (success) (if (isArabic) "✓ تم إرسال تقرير تدريبك بنجاح إلى الإدارة" else "Report sent successfully") else (if (isArabic) "تم التوثيق محلياً" else "Documented locally")
+                            }
+                        },
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Icon(Icons.Default.Send, contentDescription = null, modifier = Modifier.size(14.dp), tint = RedPrimary)
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text(if (isArabic) "إرسال تقرير التدريب إلى الإدارة" else "Send Drill Report to Admin", fontSize = 11.sp)
+                    }
+
+                    if (dispatchStatus != null) {
+                        Text(text = dispatchStatus!!, fontSize = 11.sp, color = SuccessGreen, fontWeight = FontWeight.Bold)
                     }
                 }
             }
@@ -302,38 +478,14 @@ private fun RozanNotebookComponent(
     var showSolution by remember { mutableStateOf(false) }
     var rozanDispatchStatus by remember { mutableStateOf<String?>(null) }
 
-    val consecSpeeches = listOf(
-        Triple(
-            "🤝 تصريح ثنائي مشترك: الاستثمار في الهيدروجين الأخضر والتجارة (العربية ➔ الفرنسية)",
-            "لقد اتفق الجانبان اليوم، بعد جولة محادثات معمقة في العاصمة، على تدشين شراكة استراتيجية بعيدة المدى في مجال إنتاج ونقل الهيدروجين الأخضر ومشتقاته. وقد شدد الوفدان على ضرورة تفكيك العوائق الجمركية غير المبررة، وتسهيل إصدار التأشيرات لرجال الأعمال والخبراء التقنيين، وتدشين خط ملاحي بحري مباشر لنقل البضائع قبل نهاية الربع الأول من العام الجاري.",
-            "Les deux parties sont convenues aujourd'hui, à l'issue de pourparlers approfondis dans la capitale, de lancer un partenariat stratégique de long terme dans le domaine de la production et de l'acheminement de l'hydrogène vert et de ses dérivés. Les deux délégations ont souligné la nécessité impérieuse de lever les barrières tarifaires injustifiées, de faciliter la délivrance des visas pour les chefs d'entreprise et les experts techniques, et d'inaugurer une ligne maritime directe de fret avant la fin du premier trimestre de l'année en cours."
-        ),
-        Triple(
-            "🇪🇺 مؤتمر الشراكة الاقتصادية الأوروبية المتوسطية (الفرنسية ➔ العربية)",
-            "Mesdames et Messieurs, face aux bouleversements logistiques mondiaux, nous annonçons la mise en place d'un fonds souverain conjoint de deux milliards d'euros dédié à la modernisation des infrastructures portuaires et au développement d'écosystèmes logistiques intégrés. Ce programme d'envergure permettra de créer plus de cinquante mille emplois hautement qualifiés et de réduire de quarante pour cent les délais de transit des marchandises entre les deux rives de la Méditerranée.",
-            "سيداتي وسادتي، في مواجهة الاضطرابات اللوجستية العالمية، نعلن اليوم عن إنشاء صندوق سيادي مشترك بقيمة ملياري يورو مخصص لتحديث البنى التحتية المينائية وتطوير منظومات لوجستية متكاملة. سيمكن هذا البرنامج الطموح من استحداث أكثر من خمسين ألف منصب عمل عالي التأهيل، وتقليص آجال عبور السلع بين ضفتي البحر الأبيض المتوسط بنسبة أربعين بالمئة."
-        ),
-        Triple(
-            "🛢️ البيان الختامي لاجتماع منظمة أوبك+ الوزاري (الإنجليزية ➔ العربية)",
-            "The ministerial committee concluded its deliberations by reaffirming its unwavering commitment to stabilizing world petroleum markets amidst macroeconomic volatility. Through targeted precautionary quota reductions, robust compliance mechanisms, and proactive monitoring of commercial crude inventories across consumer nations, the participating countries remain resolved to balance supply and demand fundamentals while ensuring energy security.",
-            "اختتمت اللجنة الوزارية مداولاتها بالتأكيد مجدداً على التزامها الثابت والراسخ بتحقيق استقرار أسواق البترول العالمية في ظل التقلبات الاقتصادية الكلية. ومن خلال تخفيضات الحصص الاحترازية الموجهة، وآليات الامتثال الصارمة، والمراقبة الاستباقية للمخزونات التجارية من النفط الخام لدى الدول المستهلكة، تظل الدول المشاركة عازمة على موازنة أساسيات العرض والطلب مع ضمان أمن الطاقة."
-        ),
-        Triple(
-            "⚖️ مرافعة تحكيم تجاري دولي أمام محكمة غرفة التجارة الدولية (ICC) (الإنجليزية ➔ العربية)",
-            "Mr. Sole Arbitrator, the claimant formally submits that the respondent acted in bad faith by unilaterally repudiating the exclusive distribution covenant set forth under Article Fourteen of the Master Concession Agreement. Consequently, the claimant seeks liquidated damages amounting to twelve point five million US dollars, pre-award statutory interest, and immediate interim injunctive relief to restrain any third-party assignment of territorial intellectual property rights.",
-            "سيادة المحكّم الفرد، يدفع المدعي رسمياً بأن المدعى عليه قد تصرف بسوء نية عندما أقدم من جانب واحد على فسخ شرط التوزيع الحصري المنصوص عليه في المادة الرابعة عشرة من اتفاقية الامتياز الرئيسية. وبناءً على ذلك، يلتمس المدعي الحكم بتعويضات اتفاقية محددة قدرها اثنا عشر مليوناً وخمسمائة ألف دولار أمريكي، مضافاً إليها الفوائد القانونية السابقة على صدور الحكم، مع إصدار تدابير تحفظية وقتية فورية لمنع أي تنازل للغير عن حقوق الملكية الفكرية الإقليمية."
-        ),
-        Triple(
-            "🇩🇪 ملتقى رجال الأعمال الجزائري الألماني للطاقات المتجددة (الألمانية ➔ العربية)",
-            "Deutsche Industrie- und Technologiekonzerne beabsichtigen, im Schulterschluss mit ihren algerischen Partnern richtungsweisende Großprojekte in den Bereichen Photovoltaik, Windkraft und industrielle Wasserstoffelektrolyse zu realisieren. Ein zentraler Eckpfeiler dieser Kooperation ist der nachhaltige Technologietransfer sowie die akademische und berufliche Qualifizierung junger Ingenieure vor Ort, um eine wettbewerbsfähige grüne Wertschöpfungskette aufzubauen.",
-            "تعتزم المجمعات الصناعية والتكنولوجية الألمانية، بالتعاون الوثيق مع شركائها الجزائريين، تجسيد مشاريع كبرى رائدة في مجالات الطاقة الشمسية الكهروضوئية، وطاقة الرياح، والتحليل الكهربائي الصناعي لإنتاج الهيدروجين. ويُعد النقل المستدام للتكنولوجيا والتأهيل الأكاديمي والمهني للمهندسين الشباب محلياً حجر الزاوية في هذا التعاون لبناء سلسلة قيمة خضراء تنافسية."
-        ),
-        Triple(
-            "📜 تقديم أوراق اعتماد سفير جديد ومراسم البروتوكول (العربية ➔ الإنجليزية)",
-            "يشرفني بالغ الشرف أن أرفع إلى فخامتكم أوراق اعتمادي سفيراً ومفوضاً فوق العادة لبلادي، ناقلاً إليكم أسمى تحيات رئيس الجمهورية وتمنياته الخالصة لفخامتكم ولشعبكم الصديق بمزيد من الرقي والازدهار. وإنني لعلى يقين تام بأن التوجيهات السامية لقيادتي بلدينا ستشكل نبراساً لمهمتي الدبلوماسية، بغية تعميق الحوار السياسي وتوسيع المبادلات الاقتصادية والثقافية بما يخدم المصالح الاستراتيجية المشتركة.",
-            "I have the utmost honour to present to Your Excellency my letters of credence accrediting me as Ambassador Extraordinary and Plenipotentiary of my country, conveying the highest regards of the President of the Republic and his sincere wishes for Your Excellency and your friendly people for continued progress and prosperity. I am fully confident that the supreme guidance of our two nations' leadership will guide my diplomatic mission to deepen political dialogue and expand economic and cultural exchanges in service of our shared strategic interests."
-        )
-    )
+    val consecSpeeches = remember {
+        com.example.BoothSpeechesBank.allSpeeches.filter { it.mode == "consecutive" || it.domainId == "advanced_drills" }
+    }
+
+    val currentConsec = remember(consecSpeeches, selectedConsecIndex) {
+        if (consecSpeeches.isEmpty()) com.example.BoothSpeechesBank.allSpeeches.first()
+        else consecSpeeches[selectedConsecIndex.coerceIn(0, consecSpeeches.size - 1)]
+    }
 
     val rozanSymbols = listOf(
         Pair("∵", "السبب (car / because)"),
@@ -372,27 +524,54 @@ private fun RozanNotebookComponent(
                     )
 
                     // Speech selector
-                    Text(if (isArabic) "اختر خطاب التدريب التتابعي:" else "Select consecutive speech:", fontSize = 11.sp, fontWeight = FontWeight.Bold)
-                    consecSpeeches.forEachIndexed { idx, item ->
-                        Surface(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable {
-                                    selectedConsecIndex = idx
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(if (isArabic) "اختر خطاب التدريب التتابعي (${selectedConsecIndex + 1}/${consecSpeeches.size}):" else "Select consecutive speech (${selectedConsecIndex + 1}/${consecSpeeches.size}):", fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                        Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                            TextButton(
+                                onClick = {
+                                    if (selectedConsecIndex > 0) selectedConsecIndex--
+                                    else selectedConsecIndex = consecSpeeches.size - 1
                                     showSolution = false
                                 },
-                            shape = RoundedCornerShape(8.dp),
-                            color = if (selectedConsecIndex == idx) RedPrimary.copy(alpha = 0.1f) else MaterialTheme.colorScheme.surface,
-                            border = androidx.compose.foundation.BorderStroke(
-                                1.dp,
-                                if (selectedConsecIndex == idx) RedPrimary else MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
-                            )
-                        ) {
+                                modifier = Modifier.height(28.dp)
+                            ) {
+                                Text("◀ السابق", fontSize = 10.5.sp)
+                            }
+                            TextButton(
+                                onClick = {
+                                    if (selectedConsecIndex < consecSpeeches.size - 1) selectedConsecIndex++
+                                    else selectedConsecIndex = 0
+                                    showSolution = false
+                                },
+                                modifier = Modifier.height(28.dp)
+                            ) {
+                                Text("التالي ▶", fontSize = 10.5.sp)
+                            }
+                        }
+                    }
+
+                    // Active speech display card
+                    Surface(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(8.dp),
+                        color = MaterialTheme.colorScheme.surface,
+                        border = androidx.compose.foundation.BorderStroke(1.dp, RedPrimary.copy(alpha = 0.3f))
+                    ) {
+                        Column(modifier = Modifier.padding(10.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                             Text(
-                                text = item.first,
-                                modifier = Modifier.padding(10.dp),
-                                fontSize = 11.5.sp,
-                                fontWeight = if (selectedConsecIndex == idx) FontWeight.Bold else FontWeight.Normal
+                                text = "${currentConsec.icon} [#${currentConsec.num}] " + (if (isArabic) currentConsec.titleAr else currentConsec.titleEn),
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 12.sp,
+                                color = RedPrimary
+                            )
+                            Text(
+                                text = "📢 ${currentConsec.speaker} • ${currentConsec.langPair}",
+                                fontSize = 10.5.sp,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
                     }
@@ -405,8 +584,8 @@ private fun RozanNotebookComponent(
                         border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f))
                     ) {
                         Column(modifier = Modifier.padding(10.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                            Text(if (isArabic) "النص المصدر للتدوين:" else "Source text:", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = RedPrimary)
-                            Text(consecSpeeches[selectedConsecIndex].second, fontSize = 12.sp, lineHeight = 18.sp)
+                            Text(if (isArabic) "النص المصدر للتدوين:" else "Source text for notation:", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = RedPrimary)
+                            Text(currentConsec.sourceText, fontSize = 12.sp, lineHeight = 18.sp)
                         }
                     }
 
@@ -462,7 +641,7 @@ private fun RozanNotebookComponent(
                                 userName = userName,
                                 userEmail = userEmail,
                                 details = mapOf(
-                                    "speechTitle" to consecSpeeches[selectedConsecIndex].first,
+                                    "speechTitle" to currentConsec.titleAr,
                                     "studentNotes" to notesText.ifBlank { "لم يدون ملاحظات" },
                                     "adminEmail" to AdminEmailNotifier.ADMIN_EMAIL
                                 )
@@ -491,7 +670,7 @@ private fun RozanNotebookComponent(
                         ) {
                             Column(modifier = Modifier.padding(10.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                                 Text("الترجمة النموذجية المعتمدة:", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = SuccessGreen)
-                                Text(consecSpeeches[selectedConsecIndex].third, fontSize = 12.sp, lineHeight = 18.sp)
+                                Text(currentConsec.modelSolution, fontSize = 12.sp, lineHeight = 18.sp)
                             }
                         }
                     }
