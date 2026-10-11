@@ -90,7 +90,7 @@ fun DashboardScreen(
                     // Role Badge
                     SuggestionChip(
                         onClick = onOpenAuthDialog,
-                        label = { Text(userRole.labelAr, fontSize = 11.sp, fontWeight = FontWeight.Bold) },
+                        label = { Text(if (isArabic) userRole.labelAr else userRole.labelEn, fontSize = 11.sp, fontWeight = FontWeight.Bold) },
                         colors = SuggestionChipDefaults.suggestionChipColors(
                             containerColor = when (userRole) {
                                 UserRole.ADMIN -> GoldYellow.copy(alpha = 0.2f)
@@ -192,9 +192,9 @@ fun DashboardScreen(
 
                         Text(
                             text = if (isArabic)
-                                "تدرب على الترجمة الفورية والتتابعية عبر مقصورة المحاكاة، واستخدم دفتر رموز روزان، واختبر مستواك في امتحان الترجمة الأكاديمي الشامل (30 سؤالاً متدرجاً)."
+                                "تدرب على الترجمة الفورية والتتابعية عبر مقصورة المحاكاة، واستخدم دفتر رموز روزان، واختبر مستواك في امتحان الترجمة الأكاديمي الشامل (100 سؤالاً معتمداً)."
                             else
-                                "Practice simultaneous & consecutive interpretation, utilize Rozan notation symbols, and take the 30-question placement exam.",
+                                "Practice simultaneous & consecutive interpretation, utilize Rozan notation symbols, and take the 100-question placement exam.",
                             fontSize = 12.sp,
                             lineHeight = 17.sp,
                             color = MaterialTheme.colorScheme.onSurfaceVariant

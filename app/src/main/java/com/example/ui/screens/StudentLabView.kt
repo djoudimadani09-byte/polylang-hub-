@@ -111,35 +111,35 @@ private fun InterpretationBoothComponent(
     val speeches = listOf(
         Pair(
             "🌍 قمة المناخ الدولية (COP28) - الإنجليزية ➔ العربية",
-            "Distinguished delegates, today the world stands at a decisive crossroads regarding clean energy transition and climate resilience."
+            "Mr. President, distinguished delegates, and esteemed colleagues: today our planet stands at an unprecedented inflection point where incremental pledges are no longer sufficient to arrest global temperature rise. As extreme weather events multiply across vulnerable coastal regions and arid basins, the transition toward carbon neutrality requires genuine technology transfer, climate finance mobilization, and a binding multilateral commitment that safeguards future generations without impeding developing nations' sustainable industrialization."
         ),
         Pair(
             "🕊️ افتتاح الجمعية العامة للأمم المتحدة - الفرنسية ➔ العربية",
-            "Monsieur le Président, Mesdames et Messieurs les délégués, la paix mondiale exige un engagement multilatéral inébranlable et le respect du droit international."
+            "Monsieur le Président, Excellences, Mesdames et Messieurs les délégués : au moment où notre organisation célèbre les principes fondateurs de sa Charte, nous constatons avec une vive inquiétude la multiplication des foyers de tension et l'affaiblissement progressif des mécanismes traditionnels de sécurité collective. La paix durable ne saurait être édifiée sur des rapports de force éphémères, mais requiert impérativement le respect scrupuleux de la souveraineté des États, le règlement pacifique des différends et une refonte équitable des institutions multilatérales de gouvernance."
         ),
         Pair(
             "⚡ منتدى الطاقة والغاز الدولي بالجزائر - الإنجليزية ➔ العربية",
-            "Algeria continues to consolidate its strategic position as a reliable supplier of natural gas while investing heavily in green hydrogen infrastructure."
+            "Excellencies, ministers, and captains of the global energy industry: natural gas remains an indispensable bridge fuel that anchors grid reliability and supports the global transition toward decarbonized energy systems. Algeria has continually proven its credentials as a dependable, long-term strategic energy partner for Europe and global markets, underpinned by massive capital investments in upstream exploration, subsea pipeline infrastructure, and cutting-edge green hydrogen pilot projects designed to meet the demands of the 21st century."
         ),
         Pair(
             "💼 المنتدى الاقتصادي العالمي دافوس (WEF) - الإنجليزية ➔ العربية",
-            "Global economic fragmentation and geopolitical disruptions require immediate monetary coordination and cross-border regulatory harmonization."
+            "Distinguished participants, global economic governance is facing structural headwinds marked by supply chain reshoring, persistent inflationary pressures, and severe sovereign debt distress across emerging markets. To avert a prolonged era of low growth and geo-economic fragmentation, central banks and fiscal authorities must calibrate coordinated monetary frameworks, dismantle arbitrary non-tariff barriers, and promote inclusive digital trade corridors."
         ),
         Pair(
             "🏛️ المؤتمر العام لمنظمة اليونسكو بباريس - الفرنسية ➔ العربية",
-            "La préservation du patrimoine immatériel et la protection de la diversité linguistique constituent le rempart le plus solide contre l'oubli historique."
+            "Madame la Directrice générale, éminents représentants des États membres : la préservation de notre patrimoine culturel immatériel et la vitalité des langues autochtones ne sont pas de simples hommages au passé, mais les garants les plus sûrs de notre créativité collective et de notre résistance face à l'uniformisation culturelle. Dans un monde façonné par les algorithmes et l'intelligence artificielle, l'éducation humaniste et le multilinguisme demeurent les fondations indispensables d'une citoyenneté éclairée et fraternelle."
         ),
         Pair(
             "🇩🇪 قمة التكنولوجيا والتحول الرقمي ببرلين - الألمانية ➔ العربية",
-            "Die Dekarbonisierung unserer Industrie und die strategische Partnerschaft im Bereich der erneuerbaren Energien bieten historische Kooperationschancen."
+            "Sehr geehrte Damen und Herren, geschätzte Delegierte: Die tiefgreifende Transformation unserer industriellen Wertschöpfungsketten hin zu vollständiger Klimaneutralität ist die größte ökonomische und technologische Herausforderung unserer Epoche. Die Bundesrepublik Deutschland setzt auf strategische Energiepartnerschaften mit Nordafrika, um den Aufbau einer robusten Wasserstoffwirtschaft voranzutreiben, technologische Standards zu harmonisieren und zukunftsfähige Industriearbeitsplätze auf beiden Seiten des Mittelmeers zu sichern."
         ),
         Pair(
             "🏥 منظمة الصحة العالمية (WHO) جنيف - الإنجليزية ➔ العربية",
-            "Equitable access to biomedical innovations and pandemic preparedness must be enshrined in an enforceable international convention."
+            "Director-General, ministers of health, and distinguished delegates: pathogen genomic surveillance, equitable distribution of biomedical countermeasures, and universal health coverage represent the three pillars of global biosecurity. We cannot permit a recurrence of the vaccine inequities that paralyzed the developing world; health resilience must be treated as an indivisible global public good, governed by legally binding pandemic accords that guarantee swift technological access to all sovereign nations."
         ),
         Pair(
             "🤝 مؤتمر القمة العربية (مجلس الجامعة) - العربية ➔ الإنجليزية",
-            "إن العمل العربي المشترك والتكامل الاقتصادي الإقليمي هما السبيل الأوحد لمواجهة التحديات التنموية وتحقيق الأمن الغذائي والمائي المستدام."
+            "معالي الأمين العام، أصحاب المعالي والسعادة: إن جسامة الرهانات الجيوسياسية والاقتصادية التي تطوق أمتنا اليوم تقتضي مغادرة مقاربات التسيير الظرفي، والارتقاء بالتضامن العربي إلى مستوى الاندماج الهيكلي الفعلي. إن صيانة الأمن القومي بمفهومه الشامل، وتحقيق الاكتفاء الذاتي في ميادين الغذاء والطاقة والمياه، وتفعيل السوق العربية المشتركة، لم تعد مجرد تطلعات مؤجلة، بل غدت شروط بقاء لا مناص من تجسيدها في عالم يتشكل من جديد."
         )
     )
 
@@ -305,33 +305,33 @@ private fun RozanNotebookComponent(
     val consecSpeeches = listOf(
         Triple(
             "🤝 تصريح ثنائي مشترك: الاستثمار في الهيدروجين الأخضر والتجارة (العربية ➔ الفرنسية)",
-            "لقد اتفق الجانبان اليوم على تعزيز الاستثمارات في قطاع الهيدروجين الأخضر، مع التشديد على ضرورة إزالة القيود الجمركية وفتح خطوط الشحن المباشرة قبل نهاية الربع الأول.",
-            "Les deux parties sont convenues aujourd'hui de renforcer les investissements dans le secteur de l'hydrogène vert, tout en soulignant la nécessité de lever les barrières tarifaires et d'ouvrir des lignes de fret directes avant la fin du premier trimestre."
+            "لقد اتفق الجانبان اليوم، بعد جولة محادثات معمقة في العاصمة، على تدشين شراكة استراتيجية بعيدة المدى في مجال إنتاج ونقل الهيدروجين الأخضر ومشتقاته. وقد شدد الوفدان على ضرورة تفكيك العوائق الجمركية غير المبررة، وتسهيل إصدار التأشيرات لرجال الأعمال والخبراء التقنيين، وتدشين خط ملاحي بحري مباشر لنقل البضائع قبل نهاية الربع الأول من العام الجاري.",
+            "Les deux parties sont convenues aujourd'hui, à l'issue de pourparlers approfondis dans la capitale, de lancer un partenariat stratégique de long terme dans le domaine de la production et de l'acheminement de l'hydrogène vert et de ses dérivés. Les deux délégations ont souligné la nécessité impérieuse de lever les barrières tarifaires injustifiées, de faciliter la délivrance des visas pour les chefs d'entreprise et les experts techniques, et d'inaugurer une ligne maritime directe de fret avant la fin du premier trimestre de l'année en cours."
         ),
         Triple(
             "🇪🇺 مؤتمر الشراكة الاقتصادية الأوروبية المتوسطية (الفرنسية ➔ العربية)",
-            "Nous lançons aujourd'hui un fonds souverain d'amorçage de deux milliards d'euros pour moderniser les chaînes d'approvisionnement portuaires et créer cinquante mille emplois qualifiés.",
-            "نطلق اليوم صندوقاً سيادياً أولياً بقيمة ملياري يورو لتحديث سلاسل الإمداد المينائية واستحداث خمسين ألف منصب عمل مؤهل."
+            "Mesdames et Messieurs, face aux bouleversements logistiques mondiaux, nous annonçons la mise en place d'un fonds souverain conjoint de deux milliards d'euros dédié à la modernisation des infrastructures portuaires et au développement d'écosystèmes logistiques intégrés. Ce programme d'envergure permettra de créer plus de cinquante mille emplois hautement qualifiés et de réduire de quarante pour cent les délais de transit des marchandises entre les deux rives de la Méditerranée.",
+            "سيداتي وسادتي، في مواجهة الاضطرابات اللوجستية العالمية، نعلن اليوم عن إنشاء صندوق سيادي مشترك بقيمة ملياري يورو مخصص لتحديث البنى التحتية المينائية وتطوير منظومات لوجستية متكاملة. سيمكن هذا البرنامج الطموح من استحداث أكثر من خمسين ألف منصب عمل عالي التأهيل، وتقليص آجال عبور السلع بين ضفتي البحر الأبيض المتوسط بنسبة أربعين بالمئة."
         ),
         Triple(
             "🛢️ البيان الختامي لاجتماع منظمة أوبك+ الوزاري (الإنجليزية ➔ العربية)",
-            "Ministers reaffirmed their commitment to crude market stability through precautionary quota adjustments and continuous monitoring of global commercial inventories.",
-            "جدد الوزراء التزامهم باستقرار أسواق النفط الخام من خلال تعديلات الحصص الاحترازية والمراقبة المستمرة للمخزونات التجارية العالمية."
+            "The ministerial committee concluded its deliberations by reaffirming its unwavering commitment to stabilizing world petroleum markets amidst macroeconomic volatility. Through targeted precautionary quota reductions, robust compliance mechanisms, and proactive monitoring of commercial crude inventories across consumer nations, the participating countries remain resolved to balance supply and demand fundamentals while ensuring energy security.",
+            "اختتمت اللجنة الوزارية مداولاتها بالتأكيد مجدداً على التزامها الثابت والراسخ بتحقيق استقرار أسواق البترول العالمية في ظل التقلبات الاقتصادية الكلية. ومن خلال تخفيضات الحصص الاحترازية الموجهة، وآليات الامتثال الصارمة، والمراقبة الاستباقية للمخزونات التجارية من النفط الخام لدى الدول المستهلكة، تظل الدول المشاركة عازمة على موازنة أساسيات العرض والطلب مع ضمان أمن الطاقة."
         ),
         Triple(
             "⚖️ مرافعة تحكيم تجاري دولي أمام محكمة غرفة التجارة الدولية (ICC) (الإنجليزية ➔ العربية)",
-            "The claimant alleges a breach of the exclusivity covenant under clause fourteen, demanding liquidated damages of twelve million dollars and interim protective measures.",
-            "يدّعي المدعي خرقاً لشرط الحصرية المنصوص عليه في البند الرابع عشر، مطالباً بتعويضات اتفاقية محددة قدرها اثنا عشر مليون دولار وتدابير تحفظية وقتية."
+            "Mr. Sole Arbitrator, the claimant formally submits that the respondent acted in bad faith by unilaterally repudiating the exclusive distribution covenant set forth under Article Fourteen of the Master Concession Agreement. Consequently, the claimant seeks liquidated damages amounting to twelve point five million US dollars, pre-award statutory interest, and immediate interim injunctive relief to restrain any third-party assignment of territorial intellectual property rights.",
+            "سيادة المحكّم الفرد، يدفع المدعي رسمياً بأن المدعى عليه قد تصرف بسوء نية عندما أقدم من جانب واحد على فسخ شرط التوزيع الحصري المنصوص عليه في المادة الرابعة عشرة من اتفاقية الامتياز الرئيسية. وبناءً على ذلك، يلتمس المدعي الحكم بتعويضات اتفاقية محددة قدرها اثنا عشر مليوناً وخمسمائة ألف دولار أمريكي، مضافاً إليها الفوائد القانونية السابقة على صدور الحكم، مع إصدار تدابير تحفظية وقتية فورية لمنع أي تنازل للغير عن حقوق الملكية الفكرية الإقليمية."
         ),
         Triple(
             "🇩🇪 ملتقى رجال الأعمال الجزائري الألماني للطاقات المتجددة (الألمانية ➔ العربية)",
-            "Deutsche Technologiekonzerne beabsichtigen, gemeinsam mit lokalen Partnern moderne Solar- und Windparks zu errichten, um den industriellen Technologietransfer zu beschleunigen.",
-            "تعتزم المجمعات التكنولوجية الألمانية، بالاشتراك مع شركاء محليين، إنشاء محطات حديثة للطاقة الشمسية وطاقة الرياح لتسريع نقل التكنولوجيا الصناعية."
+            "Deutsche Industrie- und Technologiekonzerne beabsichtigen, im Schulterschluss mit ihren algerischen Partnern richtungsweisende Großprojekte in den Bereichen Photovoltaik, Windkraft und industrielle Wasserstoffelektrolyse zu realisieren. Ein zentraler Eckpfeiler dieser Kooperation ist der nachhaltige Technologietransfer sowie die akademische und berufliche Qualifizierung junger Ingenieure vor Ort, um eine wettbewerbsfähige grüne Wertschöpfungskette aufzubauen.",
+            "تعتزم المجمعات الصناعية والتكنولوجية الألمانية، بالتعاون الوثيق مع شركائها الجزائريين، تجسيد مشاريع كبرى رائدة في مجالات الطاقة الشمسية الكهروضوئية، وطاقة الرياح، والتحليل الكهربائي الصناعي لإنتاج الهيدروجين. ويُعد النقل المستدام للتكنولوجيا والتأهيل الأكاديمي والمهني للمهندسين الشباب محلياً حجر الزاوية في هذا التعاون لبناء سلسلة قيمة خضراء تنافسية."
         ),
         Triple(
             "📜 تقديم أوراق اعتماد سفير جديد ومراسم البروتوكول (العربية ➔ الإنجليزية)",
-            "يشرفني أن أرفع إلى فخامتكم أوراق اعتمادي سفيراً ومفوضاً فوق العادة، مؤكداً العزم الراسخ على الارتقاء بالعلاقات الثنائية إلى آفاق استراتيجية أرحب.",
-            "I have the honour to present to Your Excellency my letters of credence as Ambassador Extraordinary and Plenipotentiary, reaffirming the steadfast commitment to elevate bilateral relations to broader strategic horizons."
+            "يشرفني بالغ الشرف أن أرفع إلى فخامتكم أوراق اعتمادي سفيراً ومفوضاً فوق العادة لبلادي، ناقلاً إليكم أسمى تحيات رئيس الجمهورية وتمنياته الخالصة لفخامتكم ولشعبكم الصديق بمزيد من الرقي والازدهار. وإنني لعلى يقين تام بأن التوجيهات السامية لقيادتي بلدينا ستشكل نبراساً لمهمتي الدبلوماسية، بغية تعميق الحوار السياسي وتوسيع المبادلات الاقتصادية والثقافية بما يخدم المصالح الاستراتيجية المشتركة.",
+            "I have the utmost honour to present to Your Excellency my letters of credence accrediting me as Ambassador Extraordinary and Plenipotentiary of my country, conveying the highest regards of the President of the Republic and his sincere wishes for Your Excellency and your friendly people for continued progress and prosperity. I am fully confident that the supreme guidance of our two nations' leadership will guide my diplomatic mission to deepen political dialogue and expand economic and cultural exchanges in service of our shared strategic interests."
         )
     )
 

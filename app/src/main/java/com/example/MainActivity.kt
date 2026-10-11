@@ -252,7 +252,7 @@ fun PolylangHubApp() {
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 TextButton(onClick = { currentTab = AppTab.SERVICES }) {
-                                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                                    Icon(Icons.Default.ArrowBack, contentDescription = "Back")
                                     Spacer(modifier = Modifier.width(4.dp))
                                     Text(if (isArabic) "العودة للخدمات" else "Back to Services", fontWeight = FontWeight.Bold)
                                 }
