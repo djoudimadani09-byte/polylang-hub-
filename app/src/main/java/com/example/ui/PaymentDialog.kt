@@ -38,9 +38,17 @@ fun PaymentDialog(
     var selectedMethod by remember { mutableStateOf("baridi") }
     var cardNumber by remember { mutableStateOf("") }
     var cardHolder by remember { mutableStateOf(userName) }
-    var couponInput by remember { mutableStateOf("AGHILAS3M50") }
+    var couponInput by remember { mutableStateOf("TRANSUP50") }
     var isCouponActive by remember { mutableStateOf(true) }
     var isSubmitting by remember { mutableStateOf(false) }
+
+    fun checkPromoCode(code: String): Boolean {
+        val clean = code.trim()
+        return clean.equals("TRANSUP50", ignoreCase = true) ||
+                clean.equals("TRANSUP", ignoreCase = true) ||
+                clean.equals("TRANSUP-DZ", ignoreCase = true) ||
+                clean.equals("AGHILAS3M50", ignoreCase = true)
+    }
 
     val activePrice = if (isCouponActive) (priceDzd * 0.5).toInt() else priceDzd
 
@@ -112,7 +120,7 @@ fun PaymentDialog(
                                     modifier = Modifier.padding(top = 4.dp)
                                 ) {
                                     Text(
-                                        text = "خصم 50% (عرض أغيلاس AGHILAS3M50)",
+                                        text = "خصم 50% (عرض ترانز اب TRANSUP50)",
                                         fontSize = 10.sp,
                                         fontWeight = FontWeight.Bold,
                                         color = Color(0xFF15803D),
@@ -151,7 +159,7 @@ fun PaymentDialog(
                         value = couponInput,
                         onValueChange = {
                             couponInput = it
-                            isCouponActive = it.trim().equals("AGHILAS3M50", ignoreCase = true) || it.trim().equals("AGHILAS-DZ", ignoreCase = true)
+                            isCouponActive = checkPromoCode(it)
                         },
                         label = { Text(if (isArabic) "كود الخصم (Promo Code)" else "Promo Code") },
                         modifier = Modifier.weight(1f),
@@ -160,7 +168,7 @@ fun PaymentDialog(
                     )
                     Button(
                         onClick = {
-                            isCouponActive = couponInput.trim().equals("AGHILAS3M50", ignoreCase = true) || couponInput.trim().equals("AGHILAS-DZ", ignoreCase = true)
+                            isCouponActive = checkPromoCode(couponInput)
                         },
                         shape = RoundedCornerShape(10.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = if (isCouponActive) Color(0xFF16A34A) else Color(0xFF2563EB))
@@ -267,7 +275,7 @@ fun PaymentDialog(
                     onClick = {
                         isSubmitting = true
                         AdminEmailNotifier.dispatch(
-                            eventType = "اشتراك وترقية باقة (عرض أغيلاس)",
+                            eventType = "اشتراك وترقية باقة (عرض ترانز اب)",
                             userName = userName,
                             userEmail = userEmail,
                             details = mapOf(
@@ -275,7 +283,7 @@ fun PaymentDialog(
                                 "price" to "$activePrice DZD",
                                 "originalPrice" to "$priceDzd DZD",
                                 "couponCode" to if (isCouponActive) couponInput.trim() else "None",
-                                "offerReference" to "AGHILAS-DZ",
+                                "offerReference" to "TRANSUP-DZ",
                                 "paymentMethod" to selectedMethod,
                                 "holder" to cardHolder,
                                 "transactionNumber" to cardNumber

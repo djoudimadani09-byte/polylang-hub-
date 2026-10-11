@@ -30,7 +30,8 @@ fun ServicesScreen(
     isArabic: Boolean,
     currency: AppCurrency,
     onOpenOrderDialog: (serviceType: String) -> Unit,
-    onOpenTermbase: () -> Unit
+    onOpenTermbase: () -> Unit,
+    onOpenSubtitling: () -> Unit = {}
 ) {
     var quickWordCount by remember { mutableStateOf(1000) }
     val quickEstimateDzd = remember(quickWordCount) { (quickWordCount * 3.5).toInt() }
@@ -218,6 +219,56 @@ fun ServicesScreen(
                         }
                     }
                 }
+            }
+        }
+
+        // Dedicated Card for SRT Subtitling Studio
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(16.dp))
+                .clickable { onOpenSubtitling() }
+                .testTag("services_open_subtitling_card"),
+            shape = RoundedCornerShape(16.dp),
+            colors = CardDefaults.cardColors(containerColor = Color(0xFF1E1B4B)),
+            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(44.dp)
+                            .clip(CircleShape)
+                            .background(Color(0xFF6366F1)),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(Icons.Default.Subtitles, contentDescription = null, tint = Color.White, modifier = Modifier.size(24.dp))
+                    }
+                    Column {
+                        Text(
+                            text = if (isArabic) "استوديو ترجمة المرئيات (SRT Studio)" else "SRT Subtitling Studio",
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White,
+                            fontSize = 14.sp
+                        )
+                        Text(
+                            text = if (isArabic) "محرر التوقيت الزمني، ترجمة الفيديوهات، وتصدير ملفات SRT" else "Timestamp editor, video subtitle translation & export",
+                            color = Color(0xFFC7D2FE),
+                            fontSize = 11.sp
+                        )
+                    }
+                }
+                Icon(Icons.Default.ArrowForward, contentDescription = null, tint = Color.White, modifier = Modifier.size(20.dp))
             }
         }
     }

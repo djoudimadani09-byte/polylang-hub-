@@ -51,7 +51,7 @@ fun HomeScreen(
             .padding(horizontal = 16.dp, vertical = 14.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        // --- 1. GOINTERPREP AGHILAS SPECIAL OFFER HERO BANNER ---
+        // --- 1. TRANSUP SPECIAL OFFER HERO BANNER ---
         Card(
             modifier = Modifier
                 .fillMaxWidth()
@@ -78,7 +78,7 @@ fun HomeScreen(
                         color = Color(0xFFFEF08A)
                     ) {
                         Text(
-                            text = if (isArabic) "🔥 عرض أغيلاس الحصري • AGHILAS-DZ" else "🔥 Exclusive Aghilas Offer",
+                            text = if (isArabic) "🔥 عرض ترانز اب الحصري • TRANSUP" else "🔥 Exclusive TransUp Offer",
                             modifier = Modifier.padding(horizontal = 12.dp, vertical = 5.dp),
                             fontSize = 11.5.sp,
                             fontWeight = FontWeight.ExtraBold,
@@ -101,7 +101,7 @@ fun HomeScreen(
                 }
 
                 Text(
-                    text = if (isArabic) "منصة تدريب المترجمين الذكية (عرض أغيلاس الخاص)" else "Smart Interpreter Training Platform (Aghilas Special)",
+                    text = if (isArabic) "منصة تدريب المترجمين الذكية (عرض ترانز اب)" else "Smart Interpreter Training Platform (TransUp Special)",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.ExtraBold,
                     color = Color.White
@@ -109,32 +109,39 @@ fun HomeScreen(
 
                 Text(
                     text = if (isArabic)
-                        "تدرّب على الترجمة الفورية، التتابعية، والتظليل الصوتي بأحدث بيئات المحاكاة. كود التخفيض: AGHILAS3M50"
+                        "تدرّب على الترجمة الفورية، التتابعية، والتظليل الصوتي بأحدث بيئات المحاكاة. كود التخفيض: TRANSUP50"
                     else
-                        "Practice simultaneous, consecutive, and speech shadowing. Use promo code: AGHILAS3M50",
+                        "Practice simultaneous, consecutive, and speech shadowing. Use promo code: TRANSUP50",
                     fontSize = 12.5.sp,
                     color = Color(0xFFDBEAFE),
                     lineHeight = 18.sp
                 )
 
-                Button(
-                    onClick = { onNavigate(AppTab.PRICING) },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(46.dp)
-                        .testTag("banner_upgrade_btn"),
-                    shape = RoundedCornerShape(12.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2563EB))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center
+                        horizontalArrangement = Arrangement.spacedBy(6.dp)
                     ) {
-                        Icon(Icons.Default.LocalOffer, contentDescription = null, tint = Color.White, modifier = Modifier.size(16.dp))
-                        Spacer(modifier = Modifier.width(6.dp))
+                        Icon(Icons.Default.LocalOffer, contentDescription = null, tint = Color(0xFFFEF08A), modifier = Modifier.size(16.dp))
                         Text(
-                            text = if (isArabic) "الاستفادة من عرض 50% وتصفح الباقات ←" else "Claim 50% Offer & View Plans →",
-                            fontSize = 13.5.sp,
+                            text = if (isArabic) "كود الكوبون: TRANSUP50" else "Promo: TRANSUP50",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFFFEF08A)
+                        )
+                    }
+                    Surface(
+                        shape = RoundedCornerShape(8.dp),
+                        color = Color(0xFF2563EB)
+                    ) {
+                        Text(
+                            text = if (isArabic) "تصفح الباقات ←" else "View Plans →",
+                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
+                            fontSize = 12.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color.White
                         )
@@ -143,14 +150,80 @@ fun HomeScreen(
             }
         }
 
-        // --- 2. SECTION HEADER (Clean & Minimal) ---
+        // --- ACCOUNT REGISTRATION / WELCOME HERO CARD (For visitors opening accounts) ---
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(18.dp))
+                .clickable { onOpenAuthDialog() }
+                .testTag("home_create_account_card"),
+            shape = RoundedCornerShape(18.dp),
+            colors = CardDefaults.cardColors(containerColor = Color(0xFFEFF6FF)),
+            border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFBFDBFE))
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(14.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(42.dp)
+                            .clip(CircleShape)
+                            .background(Color(0xFF2563EB)),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.PersonAdd,
+                            contentDescription = null,
+                            tint = Color.White,
+                            modifier = Modifier.size(22.dp)
+                        )
+                    }
+                    Column {
+                        Text(
+                            text = if (isArabic) "افتح حسابك الأكاديمي أو المهني الآن" else "Open Your Free Account Today",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 13.5.sp,
+                            color = Color(0xFF1E3A8A)
+                        )
+                        Text(
+                            text = if (isArabic) "انضم للمنصة للوصول إلى شهادات CEFR ومساقات الماستركلاس" else "Join to access CEFR certification & Masterclasses",
+                            fontSize = 11.sp,
+                            color = Color(0xFF3B82F6)
+                        )
+                    }
+                }
+                Surface(
+                    shape = RoundedCornerShape(8.dp),
+                    color = Color(0xFF2563EB)
+                ) {
+                    Text(
+                        text = if (isArabic) "تسجيل ←" else "Sign Up →",
+                        fontSize = 11.5.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White,
+                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)
+                    )
+                }
+            }
+        }
+
+        // --- 2. SECTION HEADER (Clean & Practical) ---
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.Start
         ) {
             Text(
-                text = if (isArabic) "أنماط تدريب المترجم الشفهي" else "Interpreter Training Modes",
-                fontSize = 19.sp,
+                text = if (isArabic) "مسارات تدريب وتأهيل المترجم" else "Interpreter Training Tracks",
+                fontSize = 18.sp,
                 fontWeight = FontWeight.ExtraBold,
                 color = Color(0xFF0F172A)
             )
@@ -456,20 +529,23 @@ private fun CleanTrainingCard(
                 lineHeight = 18.sp
             )
 
-            // Direct Action CTA Button
-            Button(
-                onClick = onClick,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(42.dp),
-                shape = RoundedCornerShape(10.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF1F5F9))
+            // Sleek interactive indicator row (card is directly tapable)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
                     text = actionLabel,
                     fontSize = 12.5.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color(0xFF1E293B)
+                    color = Color(0xFF2563EB)
+                )
+                Icon(
+                    imageVector = Icons.Default.ArrowForward,
+                    contentDescription = null,
+                    tint = Color(0xFF2563EB),
+                    modifier = Modifier.size(16.dp)
                 )
             }
         }

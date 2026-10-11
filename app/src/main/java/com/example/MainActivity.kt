@@ -2,6 +2,7 @@ package com.example
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.tween
@@ -168,52 +169,44 @@ fun PolylangHubApp() {
                 containerColor = MaterialTheme.colorScheme.surface,
                 modifier = Modifier.testTag("main_bottom_nav")
             ) {
-                // Home
+                // 1. Home
                 NavigationBarItem(
                     selected = currentTab == AppTab.HOME,
                     onClick = { currentTab = AppTab.HOME },
                     icon = { Icon(Icons.Default.Home, contentDescription = null) },
-                    label = { Text(if (isArabic) "الرئيسية" else "Home", fontSize = 10.sp) },
+                    label = { Text(if (isArabic) "الرئيسية" else "Home", fontSize = 11.5.sp, fontWeight = if (currentTab == AppTab.HOME) FontWeight.Bold else FontWeight.Normal) },
                     modifier = Modifier.testTag("nav_home")
                 )
-                // Services
+                // 2. Services
                 NavigationBarItem(
-                    selected = currentTab == AppTab.SERVICES,
+                    selected = currentTab == AppTab.SERVICES || currentTab == AppTab.SUBTITLING,
                     onClick = { currentTab = AppTab.SERVICES },
                     icon = { Icon(Icons.Default.Translate, contentDescription = null) },
-                    label = { Text(if (isArabic) "الخدمات" else "Services", fontSize = 10.sp) },
+                    label = { Text(if (isArabic) "الخدمات" else "Services", fontSize = 11.5.sp, fontWeight = if (currentTab == AppTab.SERVICES) FontWeight.Bold else FontWeight.Normal) },
                     modifier = Modifier.testTag("nav_services")
                 )
-                // Subtitles
-                NavigationBarItem(
-                    selected = currentTab == AppTab.SUBTITLING,
-                    onClick = { currentTab = AppTab.SUBTITLING },
-                    icon = { Icon(Icons.Default.Subtitles, contentDescription = null) },
-                    label = { Text(if (isArabic) "SRT مرئية" else "SRT Studio", fontSize = 10.sp) },
-                    modifier = Modifier.testTag("nav_subtitles")
-                )
-                // Academy
+                // 3. Academy
                 NavigationBarItem(
                     selected = currentTab == AppTab.ACADEMY,
                     onClick = { currentTab = AppTab.ACADEMY },
                     icon = { Icon(Icons.Default.School, contentDescription = null) },
-                    label = { Text(if (isArabic) "الأكاديمية" else "Academy", fontSize = 10.sp) },
+                    label = { Text(if (isArabic) "الأكاديمية" else "Academy", fontSize = 11.5.sp, fontWeight = if (currentTab == AppTab.ACADEMY) FontWeight.Bold else FontWeight.Normal) },
                     modifier = Modifier.testTag("nav_academy")
                 )
-                // Pricing
+                // 4. Pricing
                 NavigationBarItem(
                     selected = currentTab == AppTab.PRICING,
                     onClick = { currentTab = AppTab.PRICING },
                     icon = { Icon(Icons.Default.Sell, contentDescription = null) },
-                    label = { Text(if (isArabic) "الأسعار" else "Pricing", fontSize = 10.sp) },
+                    label = { Text(if (isArabic) "الأسعار" else "Pricing", fontSize = 11.5.sp, fontWeight = if (currentTab == AppTab.PRICING) FontWeight.Bold else FontWeight.Normal) },
                     modifier = Modifier.testTag("nav_pricing")
                 )
-                // Dashboard
+                // 5. Dashboard
                 NavigationBarItem(
                     selected = currentTab == AppTab.DASHBOARD,
                     onClick = { currentTab = AppTab.DASHBOARD },
                     icon = { Icon(Icons.Default.Person, contentDescription = null) },
-                    label = { Text(if (isArabic) "حسابي" else "Profile", fontSize = 10.sp) },
+                    label = { Text(if (isArabic) "حسابي" else "Profile", fontSize = 11.5.sp, fontWeight = if (currentTab == AppTab.DASHBOARD) FontWeight.Bold else FontWeight.Normal) },
                     modifier = Modifier.testTag("nav_dashboard")
                 )
             }
@@ -246,19 +239,37 @@ fun PolylangHubApp() {
                             initialOrderServiceType = service
                             showOrderDialog = true
                         },
-                        onOpenTermbase = { showTermbaseDialog = true }
+                        onOpenTermbase = { showTermbaseDialog = true },
+                        onOpenSubtitling = { currentTab = AppTab.SUBTITLING }
                     )
-                    AppTab.SUBTITLING -> SubtitlingScreen(
-                        isArabic = isArabic,
-                        cues = subtitleCues,
-                        onExportSrt = {
-                            coroutineScope.launch {
-                                snackbarHostState.showSnackbar(
-                                    message = if (isArabic) "✓ تم تجهيز وتصدير ملف Subtitles.srt بنجاح" else "✓ Subtitles.srt successfully exported"
-                                )
+                    AppTab.SUBTITLING -> {
+                        BackHandler { currentTab = AppTab.SERVICES }
+                        Column(modifier = Modifier.fillMaxSize()) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 16.dp, vertical = 6.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                TextButton(onClick = { currentTab = AppTab.SERVICES }) {
+                                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                                    Spacer(modifier = Modifier.width(4.dp))
+                                    Text(if (isArabic) "العودة للخدمات" else "Back to Services", fontWeight = FontWeight.Bold)
+                                }
                             }
+                            SubtitlingScreen(
+                                isArabic = isArabic,
+                                cues = subtitleCues,
+                                onExportSrt = {
+                                    coroutineScope.launch {
+                                        snackbarHostState.showSnackbar(
+                                            message = if (isArabic) "✓ تم تجهيز وتصدير ملف Subtitles.srt بنجاح" else "✓ Subtitles.srt successfully exported"
+                                        )
+                                    }
+                                }
+                            )
                         }
-                    )
+                    }
                     AppTab.ACADEMY -> AcademyScreen(
                         isArabic = isArabic,
                         courses = allCourses,

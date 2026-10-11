@@ -33,9 +33,9 @@ fun PricingScreen(
     currency: AppCurrency,
     onSelectPlan: (planName: String, priceDzd: Int) -> Unit
 ) {
-    var promoCodeInput by remember { mutableStateOf("AGHILAS3M50") }
-    var isPromoApplied by remember { mutableStateOf(true) } // Pre-applied by default for AGHILAS offer!
-    var promoMessage by remember { mutableStateOf(if (isArabic) "تم تفعيل خصم 50% عبر كود AGHILAS3M50 (عرض أغيلاس)" else "50% discount active via code AGHILAS3M50 (Aghilas Offer)") }
+    var promoCodeInput by remember { mutableStateOf("TRANSUP50") }
+    var isPromoApplied by remember { mutableStateOf(true) } // Pre-applied by default for TransUp offer!
+    var promoMessage by remember { mutableStateOf(if (isArabic) "تم تفعيل خصم 50% عبر كود TRANSUP50 (عرض ترانز اب)" else "50% discount active via code TRANSUP50 (TransUp Offer)") }
 
     val discountMultiplier = if (isPromoApplied) 0.5f else 1.0f
 
@@ -47,11 +47,11 @@ fun PricingScreen(
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        // --- 1. SPECIAL OFFER HERO BANNER (GoInterPrep / AGHILAS3M50) ---
+        // --- 1. SPECIAL OFFER HERO BANNER (TransUp / TRANSUP50) ---
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .testTag("pricing_aghilas_offer_banner"),
+                .testTag("pricing_transup_offer_banner"),
             shape = RoundedCornerShape(20.dp),
             colors = CardDefaults.cardColors(containerColor = Color(0xFF1E3A8A)),
             elevation = CardDefaults.cardElevation(defaultElevation = 3.dp)
@@ -72,7 +72,7 @@ fun PricingScreen(
                         color = Color(0xFFFEF08A)
                     ) {
                         Text(
-                            text = if (isArabic) "🔥 عرض أغيلاس الخاص (AGHILAS-DZ)" else "🔥 Special Aghilas Offer",
+                            text = if (isArabic) "🔥 عرض ترانز اب الخاص (TRANSUP)" else "🔥 Special TransUp Offer",
                             modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
                             fontSize = 11.5.sp,
                             fontWeight = FontWeight.ExtraBold,
@@ -95,7 +95,7 @@ fun PricingScreen(
                 }
 
                 Text(
-                    text = if (isArabic) "منصة تدريب المترجمين الذكية (عرض أغيلاس الخاص)" else "Smart Interpreter Training Platform (Aghilas Special)",
+                    text = if (isArabic) "منصة تدريب المترجمين الذكية (عرض ترانز اب)" else "Smart Interpreter Training Platform (TransUp Special)",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.White
@@ -103,9 +103,9 @@ fun PricingScreen(
 
                 Text(
                     text = if (isArabic)
-                        "استفد من خصم 50% الحصري لطلاب معاهد الترجمة والمترجمين في الجزائر باستخدام كوبون AGHILAS3M50."
+                        "استفد من خصم 50% الحصري لطلاب معاهد الترجمة والمترجمين في الجزائر باستخدام كوبون TRANSUP50."
                     else
-                        "Enjoy 50% exclusive discount for translation students and practitioners using coupon AGHILAS3M50.",
+                        "Enjoy 50% exclusive discount for translation students and practitioners using coupon TRANSUP50.",
                     fontSize = 12.5.sp,
                     color = Color(0xFFDBEAFE),
                     lineHeight = 18.sp
@@ -128,7 +128,7 @@ fun PricingScreen(
                         Icon(Icons.Default.ConfirmationNumber, contentDescription = null, tint = Color(0xFFFEF08A), modifier = Modifier.size(20.dp))
                         Column {
                             Text(
-                                text = "AGHILAS3M50",
+                                text = "TRANSUP50",
                                 fontSize = 14.sp,
                                 fontWeight = FontWeight.ExtraBold,
                                 color = Color.White
@@ -235,7 +235,7 @@ fun PricingScreen(
         CleanPlanCard(
             isArabic = isArabic,
             title = if (isArabic) "باقة المترجم المحترف (Interpreter Pro)" else "Interpreter Pro Pass",
-            badge = if (isArabic) "الأكثر طلباً - مع كود أغيلاس" else "Best Value with AGHILAS",
+            badge = if (isArabic) "الأكثر طلباً - مع كود ترانز اب" else "Best Value with TRANSUP",
             badgeColor = Color(0xFFB45309),
             originalPriceDzd = p2Orig,
             finalPriceDzd = p2Final,
