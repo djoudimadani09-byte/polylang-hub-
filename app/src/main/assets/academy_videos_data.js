@@ -159,13 +159,19 @@ const ACADEMY_100_VIDEOS = [
     format: "Facebook Video",
     formatIcon: "🇩🇪",
     url: "https://www.facebook.com/share/v/1BtueGUSXV/",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
     language: "de",
     langLabel: "الألمانية / Deutsch",
     duration: "فيديو تدريبي تفاعلي",
     level: "A1 - A2 تأسيسي",
     isPremium: false,
     verifiedBadge: "✓ درس ألماني معتمد",
-    desc: "شرح مبسط ومباشر لبناء الجملة الأساسية في اللغة الألمانية وتصريف الأفعال الشائعة مع تدريب على النطق ومخارج الحروف السليمة لمتعلمي اللغات."
+    desc: "شرح مبسط ومباشر لبناء الجملة الأساسية في اللغة الألمانية وتصريف الأفعال الشائعة مع تدريب على النطق ومخارج الحروف السليمة لمتعلمي اللغات.",
+    keyPoints: [
+      "Subjekt + Prädikat + Objekt (Satzstruktur im Hauptsatz)",
+      "Vergangenheit: Perfekt mit haben / sein",
+      "W-Fragen: Wie, Wo, Wann, Warum, Wer"
+    ]
   },
   {
     id: "res_german_fb_2_dl41",
@@ -174,14 +180,20 @@ const ACADEMY_100_VIDEOS = [
     categoryLabel: "تعلم اللغة الألمانية 🇩🇪",
     format: "Facebook Reel",
     formatIcon: "🇩🇪",
-    url: "https://www.facebook.com/share/r/1DL41mc34o/ ",
+    url: "https://www.facebook.com/share/r/1DL41mc34o/",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
     language: "de",
     langLabel: "الألمانية / Deutsch",
     duration: "مقطع تدريبي سريع (Reel)",
     level: "A1 للمبتدئين",
     isPremium: false,
     verifiedBadge: "✓ كبسولة نطق يومية",
-    desc: "تدريب مكثف على العبارات اليومية والمواقف الحياتية في الشارع والمطعم والمطار بألمانيا وكيفية الرد التلقائي دون تردد."
+    desc: "تدريب مكثف على العبارات اليومية والمواقف الحياتية في الشارع والمطعم والمطار بألمانيا وكيفية الرد التلقائي دون تردد.",
+    keyPoints: [
+      "Alltagsfloskeln: Guten Tag, Auf Wiedersehen, Bitte schön",
+      "Sich vorstellen: Ich heiße, Ich komme aus, Freut mich sehr",
+      "Höflichkeit: Könnten Sie mir bitte helfen?"
+    ]
   },
   {
     id: "res_german_fb_3_14ux",
@@ -191,13 +203,19 @@ const ACADEMY_100_VIDEOS = [
     format: "Facebook Reel",
     formatIcon: "🇩🇪",
     url: "https://www.facebook.com/share/r/14ux22YaTvK/",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
     language: "de",
     langLabel: "الألمانية / Deutsch",
     duration: "درس قواعد مركز (Reel)",
     level: "A2 - B1 متوسط",
     isPremium: false,
     verifiedBadge: "✓ قواعد نحوية موثقة",
-    desc: "تفكيك عقدة أدوات التعريف (der, die, das) وحالات الإعراب الألمانية (Nominativ, Akkusativ, Dativ) عبر أمثلة عملية سريعة الحفظ والتطبيق."
+    desc: "تفكيك عقدة أدوات التعريف (der, die, das) وحالات الإعراب الألمانية (Nominativ, Akkusativ, Dativ) عبر أمثلة عملية سريعة الحفظ والتطبيق.",
+    keyPoints: [
+      "Bestimmte Artikel: der, die, das -> den, dem, des",
+      "Wechselpräpositionen: an, auf, in, über, unter, vor, hinter, neben, zwischen",
+      "Wohin? (Akkusativ) vs. Wo? (Dativ)"
+    ]
   },
   {
     id: "res_german_fb_4_ho4u",
@@ -207,13 +225,19 @@ const ACADEMY_100_VIDEOS = [
     format: "Facebook Reel",
     formatIcon: "🇩🇪",
     url: "https://www.facebook.com/share/r/1Ho4u33jNk/",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
     language: "de",
     langLabel: "الألمانية / Deutsch",
     duration: "مقطع دلالي ولساني (Reel)",
     level: "B1 - B2 متقدم",
     isPremium: false,
     verifiedBadge: "✓ فروق لغوية معتمدة",
-    desc: "التمييز بين الأفعال المركبة الألمانية واللواحق والتعبيرات الاصطلاحية وتفادي أخطاء الترجمة الحرفية بين العربية والألمانية."
+    desc: "التمييز بين الأفعال المركبة الألمانية واللواحق والتعبيرات الاصطلاحية وتفادي أخطاء الترجمة الحرفية بين العربية والألمانية.",
+    keyPoints: [
+      "Trennbare Verben: aufstehen, mitkommen, vorbereiten",
+      "Nuancen: kennen vs. wissen vs. erkennen",
+      "Falsche Freunde im Deutschen für Übersetzer"
+    ]
   },
   {
     id: "res_german_fb_5_cem7",
@@ -223,13 +247,19 @@ const ACADEMY_100_VIDEOS = [
     format: "Facebook Reel",
     formatIcon: "🇩🇪",
     url: "https://www.facebook.com/share/r/1CEm7LEw8Y/",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
     language: "de",
     langLabel: "الألمانية / Deutsch",
     duration: "تمرين استماع تطبيقي (Reel)",
     level: "A2 - B1 متوسط",
     isPremium: false,
     verifiedBadge: "✓ محاكاة الاستماع B1",
-    desc: "تقنيات تدريب الأذن على النبرة الألمانية وسرعة المتحدثين الأصليين واستخراج المعلومات الأساسية من الحوارات الشفهية لاجتياز اختبارات Goethe وTelc."
+    desc: "تقنيات تدريب الأذن على النبرة الألمانية وسرعة المتحدثين الأصليين واستخراج المعلومات الأساسية من الحوارات الشفهية لاجتياز اختبارات Goethe وTelc.",
+    keyPoints: [
+      "Selektives Hören: Schlüsselwörter erfassen",
+      "Intonation & Betonung im deutschen Satz",
+      "Zahlen, Uhrzeiten & Mengenangaben im Flug"
+    ]
   },
   {
     id: "res_german_fb_6_f6ur",
@@ -239,13 +269,19 @@ const ACADEMY_100_VIDEOS = [
     format: "Facebook Reel",
     formatIcon: "🇩🇪",
     url: "https://www.facebook.com/share/r/1F6uREvqc5/",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyBlazes.mp4",
     language: "de",
     langLabel: "الألمانية / Deutsch",
     duration: "مقطع عملي ومهني (Reel)",
     level: "B1 - B2 للمحترفين",
     isPremium: false,
     verifiedBadge: "✓ سياق مهني ورسمي",
-    desc: "صيغ الاحترام والمخاطبة الرسمية في بيئة العمل الألمانية، وكتابة الرسائل الإدارية، وإجراء المقابلات الشفهية والاجتماعات بنجاح."
+    desc: "صيغ الاحترام والمخاطبة الرسمية في بيئة العمل الألمانية، وكتابة الرسائل الإدارية، وإجراء المقابلات الشفهية والاجتماعات بنجاح.",
+    keyPoints: [
+      "Sehr geehrte Damen und Herren / Mit freundlichen Grüßen",
+      "Terminvereinbarung & geschäftliche Telefonate",
+      "Konjunktiv II für höfliche Bitten: Ich hätte gern, Ich würde vorschlagen"
+    ]
   },
   {
     id: "res_german_fb_7_hpwc",
@@ -255,13 +291,19 @@ const ACADEMY_100_VIDEOS = [
     format: "Facebook Video",
     formatIcon: "🇩🇪",
     url: "https://www.facebook.com/share/v/1Hpwcf1i38/",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
     language: "de",
     langLabel: "الألمانية / Deutsch",
     duration: "محاضرة تفاعلية كاملة",
     level: "A1 إلى B2 شامل",
     isPremium: false,
     verifiedBadge: "✓ مساق شامل للطلاقة",
-    desc: "محاضرة توجيهية شاملة تشرح استراتيجيات بناء الحصيلة اللغوية، وتنظيم وقت المذاكرة اليومي، وتطبيق أسلوب التظليل الصوتي (Shadowing) في إتقان اللغة الألمانية."
+    desc: "محاضرة توجيهية شاملة تشرح استراتيجيات بناء الحصيلة اللغوية، وتنظيم وقت المذاكرة اليومي، وتطبيق أسلوب التظليل الصوتي (Shadowing) في إتقان اللغة الألمانية.",
+    keyPoints: [
+      "Sprechblockaden abbauen: Spontanität vor Perfektion",
+      "Wortschatzaufbau: Kollokationen statt isolierter Vokabeln",
+      "Shadowing-Methode für fehlerfreie Phonetik"
+    ]
   },
   {
     id: "res_german_fb_8_14un",
@@ -271,13 +313,19 @@ const ACADEMY_100_VIDEOS = [
     format: "Facebook Reel",
     formatIcon: "🇩🇪",
     url: "https://www.facebook.com/share/r/14uNxRvyKVQ/",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
     language: "de",
     langLabel: "الألمانية / Deutsch",
     duration: "ملخص تطبيقي مركز (Reel)",
     level: "A2 - B1 شامل",
     isPremium: false,
     verifiedBadge: "✓ ملخص القواعد والنطق",
-    desc: "دليل سريع لتصحيح الأخطاء الشائعة بين المبتدئين في مخارج حروف (ch, st, sp, ä, ö, ü) وتثبيت صيغ الماضي (Perfekt و Präteritum) بثقة واحتراف."
+    desc: "دليل سريع لتصحيح الأخطاء الشائعة بين المبتدئين في مخارج حروف (ch, st, sp, ä, ö, ü) وتثبيت صيغ الماضي (Perfekt و Präteritum) بثقة واحتراف.",
+    keyPoints: [
+      "Ausspracheregeln: ch (ich-Laut vs. ach-Laut)",
+      "Umlaute richtig artikulieren: ä, ö, ü",
+      "Stolperfallen bei unregelmäßigen Verben vermeiden"
+    ]
   }
 ];
 

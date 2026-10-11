@@ -45,22 +45,42 @@ fun CourseViewerDialog(
     var selectedQuizOption by remember { mutableStateOf<Int?>(null) }
     var quizSubmitted by remember { mutableStateOf(false) }
 
+    val isGerman = course.category.contains("الألمانية") || course.title.contains("Deutsch") || course.title.contains("الألمانية")
+
     val courseModules = remember(course.id) {
-        listOf(
-            Triple(1, if (isArabic) "المقدمة والأسس النظرية للمساق" else "Introduction & Theoretical Fundamentals", "07:15"),
-            Triple(2, if (isArabic) "المصطلحات المحلفة والمعايير المعتمدة" else "Sworn Terminology & International Standards", "11:30"),
-            Triple(3, if (isArabic) "ورشة التطبيق العملي والمحاكاة الحية" else "Live Practical Workshop & Simulation", "14:40"),
-            Triple(4, if (isArabic) "مراجعة الجودة وضوابط معيار ISO 17100" else "Quality Review & ISO 17100 Compliance", "08:55")
-        )
+        if (isGerman) {
+            listOf(
+                Triple(1, if (isArabic) "بناء الجملة الألمانية وتصريف الأفعال (Satzstruktur & Verben)" else "Sentence Structure & Verbs", "08:20"),
+                Triple(2, if (isArabic) "حالات الإعراب: Akkusativ و Dativ وضبط الأدوات" else "Akkusativ, Dativ & Articles", "12:15"),
+                Triple(3, if (isArabic) "كبسولة المحادثة والنطق الصوتي السليم (Phonetik & Aussprache)" else "Conversation & Phonetics", "10:45"),
+                Triple(4, if (isArabic) "الأفعال المنفصلة وتراكيب الماضي (Perfekt & Trennbare Verben)" else "Perfekt & Separable Verbs", "14:10")
+            )
+        } else {
+            listOf(
+                Triple(1, if (isArabic) "المقدمة والأسس النظرية للمساق" else "Introduction & Theoretical Fundamentals", "07:15"),
+                Triple(2, if (isArabic) "المصطلحات المحلفة والمعايير المعتمدة" else "Sworn Terminology & International Standards", "11:30"),
+                Triple(3, if (isArabic) "ورشة التطبيق العملي والمحاكاة الحية" else "Live Practical Workshop & Simulation", "14:40"),
+                Triple(4, if (isArabic) "مراجعة الجودة وضوابط معيار ISO 17100" else "Quality Review & ISO 17100 Compliance", "08:55")
+            )
+        }
     }
 
     val glossaryTerms = remember(course.id) {
-        listOf(
-            Pair("Force Majeure", if (isArabic) "القوة القاهرة / الإعفاء التعاقدي الفجائي" else "Force Majeure / Contractual Exemption"),
-            Pair("Indemnity & Hold Harmless", if (isArabic) "التعويض وإبراء الذمة وحماية المتعاقد" else "Indemnity & Hold Harmless"),
-            Pair("Simultaneous Décalage", if (isArabic) "الفارق الزمني في كابينة الترجمة الفورية" else "Acoustic Delay in Booth"),
-            Pair("ISO 17100:2015", if (isArabic) "المعيار الدولي لخدمات الترجمة التحريرية والتدقيق" else "International Translation Service Standard")
-        )
+        if (isGerman) {
+            listOf(
+                Pair("der / die / das", if (isArabic) "أدوات التعريف الثلاث في الألمانية (مذكر، مؤنث، محايد)" else "German Definite Articles (Masc, Fem, Neut)"),
+                Pair("der Akkusativ", if (isArabic) "حالة النصب / المفعول به المباشر (den, die, das)" else "Direct Object Accusative Case"),
+                Pair("der Dativ", if (isArabic) "حالة الجر / المفعول غير المباشر (dem, der, dem)" else "Indirect Object Dative Case"),
+                Pair("das Perfekt", if (isArabic) "صيغة الماضي التام المستخدمة في المحادثة اليومية" else "Spoken Conversational Past Tense")
+            )
+        } else {
+            listOf(
+                Pair("Force Majeure", if (isArabic) "القوة القاهرة / الإعفاء التعاقدي الفجائي" else "Force Majeure / Contractual Exemption"),
+                Pair("Indemnity & Hold Harmless", if (isArabic) "التعويض وإبراء الذمة وحماية المتعاقد" else "Indemnity & Hold Harmless"),
+                Pair("Simultaneous Décalage", if (isArabic) "الفارق الزمني في كابينة الترجمة الفورية" else "Acoustic Delay in Booth"),
+                Pair("ISO 17100:2015", if (isArabic) "المعيار الدولي لخدمات الترجمة التحريرية والتدقيق" else "International Translation Service Standard")
+            )
+        }
     }
 
     Dialog(
@@ -290,13 +310,14 @@ fun CourseViewerDialog(
 
                 val uriHandler = LocalUriHandler.current
                 if (course.videoUrl.isNotBlank()) {
+                    val isFb = course.videoUrl.contains("facebook.com")
                     Button(
                         onClick = {
                             try {
                                 uriHandler.openUri(course.videoUrl)
                             } catch (_: Exception) {}
                         },
-                        colors = ButtonDefaults.buttonColors(containerColor = RedPrimary),
+                        colors = ButtonDefaults.buttonColors(containerColor = if (isFb) Color(0xFF1877F2) else RedPrimary),
                         modifier = Modifier
                             .fillMaxWidth()
                             .testTag("open_verified_url_btn"),
@@ -305,7 +326,10 @@ fun CourseViewerDialog(
                         Icon(Icons.Default.OpenInNew, contentDescription = null, modifier = Modifier.size(16.dp))
                         Spacer(Modifier.width(6.dp))
                         Text(
-                            text = if (isArabic) "🔗 فتح الرابط الأكاديمي المعتمد للمحاضرة / المستند" else "🔗 Open Verified Lecture / Academic Document",
+                            text = when {
+                                isFb -> if (isArabic) "▶ فتح وتشغيل مباشر على Facebook Watch ↗" else "▶ Watch Directly on Facebook ↗"
+                                else -> if (isArabic) "🔗 فتح الرابط الأكاديمي المعتمد للمحاضرة / المستند" else "🔗 Open Verified Lecture / Academic Document"
+                            },
                             fontWeight = FontWeight.Bold,
                             fontSize = 12.sp
                         )

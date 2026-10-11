@@ -507,249 +507,15 @@ private fun LevelPlacementExamComponent(
     userName: String,
     userEmail: String
 ) {
-    val questions = remember {
-        listOf(
-            ExamQuestion(
-                1,
-                "ما هي الترجمة الدقيقة لمصطلح 'Without prejudice to' في العقود الرسمية؟",
-                "What is the precise rendering of 'Without prejudice to' in legal contracts?",
-                listOf("دون المساس بـ / مع عدم الإخلال بـ", "مع تحيز كامل ضد", "بما يتعارض مع", "دون الحاجة إلى إشعار"),
-                0,
-                "الترجمة القانونية المعتمدة هي 'دون المساس بـ' أو 'مع عدم الإخلال بأحكام...'"
-            ),
-            ExamQuestion(
-                2,
-                "في معايير ترجمة الشاشة (Subtitling)، ما هو الحد الأقصى الموصى به لعدد الأحرف في السطر الواحد (CPL) وفق نتفليكس؟",
-                "What is the Netflix standard characters per line (CPL) for subtitles?",
-                listOf("42 حرفاً (Characters)", "65 حرفاً", "20 حرفاً", "80 حرفاً"),
-                0,
-                "معيار الصناعة لترجمة الشاشة اللاتينية والعربية يتراوح بين 37 و 42 CPL لتفادي حجب المشهد."
-            ),
-            ExamQuestion(
-                3,
-                "ما هو الفرق بين الترجمة الفورية (Simultaneous) والتتابعية (Consecutive)؟",
-                "What is the difference between simultaneous and consecutive interpretation?",
-                listOf("الفورية تتطلب كابينة ومزامنة صوتية بينما التتابعية تعتمد على تدوين رؤوس الأقلام بعد توقف المتحدث", "الفورية تكون دائماً تحريرية والتتابعية شفوية", "لا يوجد فرق عملي بينهما", "الفورية تستخدم فقط في المحاكم"),
-                0,
-                "الترجمة الفورية تتم بشكل متزامن من داخل الكابينة، بينما التتابعية تتطلب الاستماع وتدوين رموز روزان ثم الإلقاء."
-            ),
-            ExamQuestion(
-                4,
-                "في نظرية الترجمة، ماذا يُقصد بظاهرة 'False Friends' (Faux Amis)؟",
-                "What is meant by 'False Friends' in translation?",
-                listOf("كلمات تتشابه في الرسم بين لغتين وتختلف في المعنى والدلالة", "مترجمون غير موثوقين", "نصوص غير قابلة للترجمة", "أخطاء مطبعية ناتجة عن برامج OCR"),
-                0,
-                "الأصدقاء المزيفون مثل 'eventually' بالإنجليزية التي تعني 'في نهاية المطاف' وليس 'ربما/eventuellement'."
-            ),
-            ExamQuestion(
-                5,
-                "ما هو المعيار الدولي المعتمد لإدارة جودة خدمات الترجمة التحريرية؟",
-                "Which international standard governs translation service quality?",
-                listOf("ISO 17100:2015", "ISO 9001 فقط", "IEEE 802.11", "RFC 2616"),
-                0,
-                "المعيار ISO 17100 هو المعيار الذهبي المخصص حصراً لمتطلبات خدمات الترجمة والمترجمين المحلفين."
-            ),
-            ExamQuestion(
-                6,
-                "عند ترجمة مصطلح 'Force Majeure' في القانون الجزائري والمغاربي، ما هو المقابل الدقيق؟",
-                "What is the legal equivalent of 'Force Majeure' in Algerian law?",
-                listOf("القوة القاهرة", "القوة العسكرية", "القدر المحتوم فقط", "الظروف الطارئة المخففة"),
-                0,
-                "القوة القاهرة هي المصطلح القانوني المقنن في القانون المدني للالتزامات الخارجة عن إرادة المتعاقدين."
-            ),
-            ExamQuestion(
-                7,
-                "ما هي وظيفة ذاكرة الترجمة (Translation Memory - TM) في أدوات CAT Tools؟",
-                "What is the function of a Translation Memory (TM)?",
-                listOf("تخزين أزواج المقاطع (Segments) المترجمة لإعادة استخدامها وزيادة التناسق", "الترجمة الآلية بدون مراجعة بشرية", "تصميم صفحات الغلاف للمستندات", "تعديل مقاطع الفيديو"),
-                0,
-                "ذاكرة الترجمة TM تحفظ الوحدات النصية المترجمة (Source & Target) لمنع تكرار الجهد وضمان الدقة."
-            ),
-            ExamQuestion(
-                8,
-                "وفق تقنية روزان، ما هي أفضل طريقة لتدوين الأرقام الكبيرة مثل 'ثلاثة ملايين دولار'؟",
-                "According to Rozan, how should large numbers like '3 million dollars' be noted?",
-                listOf("3 M $", "كتابتها كاملة بالحروف: ثلاثة ملايين", "وضع نقطتين فقط", "تجاهل الأرقام"),
-                0,
-                "الاختزال بالرموز القياسية (3 M $) يوفر زمناً حاسماً للمترجم التتابعي."
-            ),
-            ExamQuestion(
-                9,
-                "ماذا يعني مصطلح 'Décalage' في الترجمة الفورية؟",
-                "What is 'Décalage' (ear-voice span) in simultaneous interpretation?",
-                listOf("الفارق الزمني القصير بين سماع صوت المتحدث وبدء نطق الترجمة", "عطل في ميكروفون الكابينة", "طلب المترجم استراحة", "انقطاع التيار الكهربائي"),
-                0,
-                "الديكالاج هو الفاصل الزمني الذهني الضروري لفهم الفكرة وبناء الجملة باللغة الهدف."
-            ),
-            ExamQuestion(
-                10,
-                "أي من العبارات التالية تعبر بدقة عن 'Certified Sworn Translation'؟",
-                "Which phrase represents 'Certified Sworn Translation' accurately?",
-                listOf("ترجمة رسمية معتمدة ومحلفة ذات حجية قانونية", "ترجمة مجانية غير رسمية", "ترجمة بالذكاء الاصطناعي بدون ختم", "مسودة ترجمة أولية"),
-                0,
-                "الترجمة المحلفة المعتمدة الصادرة عن مترجم رسمي مختوم ومعين ومسجل لدى الجهات القضائية."
-            ),
-            ExamQuestion(
-                11,
-                "ما المقابل العربي المعتمد للعبارة القانونية اللاتينية 'Mutatis Mutandis' في نصوص المعاهدات؟",
-                "What is the official Arabic equivalent of the Latin phrase 'Mutatis Mutandis'?",
-                listOf("مع مراعاة التعديلات اللازمة / مع ما يقتضيه الفارق", "إلى أجل غير مسمى وبدون شروط", "بحسن نية مطلقة بين المتعاقدين", "بأثر رجعي فوري دون استثناء"),
-                0,
-                "تستخدم في العقود والمعاهدات للإحالة إلى شروط سابقة مع تكييفها حسب الظروف الجديدة."
-            ),
-            ExamQuestion(
-                12,
-                "ما هي الترجمة الدبلوماسية المؤسساتية لمصطلح 'Plenipotentiary' في الاتفاقيات الدولية؟",
-                "What is the diplomatic translation of 'Plenipotentiary' in treaties?",
-                listOf("مفوض فوق العادة ومطلق الصلاحية", "مبعوث استطلاعي مؤقت", "ملحق ثقافي ومستشار إعلامي", "مندوب بروتوكولي شرفي"),
-                0,
-                "المفوض فوق العادة ومطلق الصلاحية يحمل تفويضاً رسمياً كاملاً لتوقيع المعاهدات باسم دولته."
-            ),
-            ExamQuestion(
-                13,
-                "في عقود التجارة الدولية، ما الفرق الجوهري بين شرط 'Hardship' وشرط 'Force Majeure'؟",
-                "What is the core distinction between 'Hardship' and 'Force Majeure' clauses?",
-                listOf("Force Majeure تجعل التنفيذ مستحيلاً كلياً بينما Hardship تجعله مرهقاً ومختلاً اقتصادياً بصورة غير متوقعة", "كلاهما يؤدي لإلغاء العقد فوراً دون تعويض", "Hardship تطبق فقط في الجرائم البحرية", "Force Majeure تتطلب خطأ مقصوداً من أحد الطرفين"),
-                0,
-                "الظروف المرهقة (Hardship) تتيح إعادة التفاوض على العقد بينما القوة القاهرة تعفي من الالتزام تماماً."
-            ),
-            ExamQuestion(
-                14,
-                "في معايير ترجمة الشاشة، ما هو المعدل الموصى به لسرعة القراءة (CPS - Characters Per Second)؟",
-                "In subtitling standards, what is the recommended reading speed (CPS)?",
-                listOf("بين 17 و 20 حرفاً في الثانية (CPS) لضمان القراءة المريحة دون إجهاد", "أكثر من 45 حرفاً في الثانية", "حرف واحد في الثانية فقط", "لا توجد قيود على سرعة القراءة"),
-                0,
-                "تحديد 17-20 CPS يسمح للمشاهد بقراءة الترجمة واستيعاب الصورة البصرية في آن واحد."
-            ),
-            ExamQuestion(
-                15,
-                "ما هو الفرق الجوهري بين قاعدة المصطلحات (Termbase - TB) وذاكرة الترجمة (TM)؟",
-                "What is the difference between a Termbase (TB) and a Translation Memory (TM)?",
-                listOf("TB تخزن مصطلحات ومفردات مفردة مع سياقها بينما TM تحفظ جملاً ومقاطع كاملة مترجمة", "TB مخصصة للصور بينما TM للنصوص", "لا يوجد فرق بينهما فهما نفس الملف", "TM تعمل فقط دون اتصال بالإنترنت"),
-                0,
-                "قاعدة المصطلحات بنك معجمي للمفردات الدقيقة، بينما ذاكرة الترجمة مخزن لأزواج الجمل المترجمة."
-            ),
-            ExamQuestion(
-                16,
-                "وفق مبادئ جان فرنسوا روزان (Rozan)، ما هي وظيفة التدوين العمودي (Verticality) في الترجمة التتابعية؟",
-                "According to Rozan, what is the role of verticality in consecutive interpretation notes?",
-                listOf("ترتيب عناصر الجملة رأسياً لإبراز الفاعل والفعل والروابط المنطقية بنظرة واحدة", "توفير مساحة الورقة لتقليل استهلاك الدفاتر", "إخفاء الملاحظات عن الجمهور الحاضر", "كتابة الحروف بخط كبير"),
-                0,
-                "العمودية والانزياح (Décalage/Shift) يمنحان المترجم رؤية فورية للبنية المنطقية دون قراءة أفقية مشتتة."
-            ),
-            ExamQuestion(
-                17,
-                "في اللغة الإنجليزية القانونية، أي التراكيب التالية يعبر عن الشرط المعكوس الرسمي (Inverted Conditional)؟",
-                "Which structure represents a formal inverted conditional in legal English?",
-                listOf("Had the contractor completed the works on schedule, no penalties would have applied.", "If the contractor finished yesterday, he gets money.", "Should the contractor had done, they were happy.", "Unless the contractor did not delay, we paid."),
-                0,
-                "الصيغة المعكوسة 'Had + Subject + Past Participle' هي الأسلوب الأكاديمي والقانوني الأرقى للشرط."
-            ),
-            ExamQuestion(
-                18,
-                "في الفرنسية الأكاديمية: 'Bien qu'il _______ son devoir, le comité a rejeté sa demande.' أي صيغة تناسب الفراغ؟",
-                "In formal French, which verb form correctly completes the sentence after 'Bien que'?",
-                listOf("ait accompli (Subjonctif passé)", "a accompli (Indicatif passé composé)", "accomplissait (Imparfait)", "aura accompli (Futur antérieur)"),
-                0,
-                "حرف الربط 'Bien que' يتطلب وجوباً صيغة المنصوب (Subjonctif) للتعبير عن التنازل والمفارقة."
-            ),
-            ExamQuestion(
-                19,
-                "في الألمانية المتخصصة، ما هو بديل المبني للمجهول الصحيح للجملة: 'Dieser Bericht muss überprüft werden'؟",
-                "In specialized German, which passive alternative correctly replaces the sentence?",
-                listOf("Dieser Bericht ist zu überprüfen. (sein + zu + Infinitiv)", "Dieser Bericht lässt überprüfen.", "Dieser Bericht hat überprüft.", "Dieser Bericht wird überprüfen."),
-                0,
-                "التركيب 'sein + zu + Infinitiv' هو الصيغة الإدارية والأكاديمية المعتمدة للمجهول الدال على الوجوب."
-            ),
-            ExamQuestion(
-                20,
-                "ما هو التحوط الأكاديمي (Hedging) في الترجمة التحريرية للنصوص العلمية والدبلوماسية؟",
-                "What is 'Hedging' in the translation of scientific and diplomatic texts?",
-                listOf("استخدام أسلوب التلطيف والاحتراس الدلالي (مثل: may suggest, tends to) لتفادي الجزم المطلق", "حذف الفقرات الصعبة من النص", "إضافة تعليقات المترجم داخل المتن", "ترجمة النص مرتين"),
-                0,
-                "التحوط يعكس الدقة العلمية والموضوعية الرصينة في تقديم النتائج والتقارير الدبلوماسية."
-            ),
-            ExamQuestion(
-                21,
-                "ما هي الغاية الأساسية من الترجمة العكسية (Back-Translation) في التجارب السريرية والدوائية؟",
-                "What is the primary purpose of Back-Translation in clinical trials?",
-                listOf("التحقق من التطابق التام للمعنى والجرعات بسلامة مطلقة عبر مترجم مستقل لم يرَ النص الأصلي", "زيادة تكلفة المشروع على العميل", "تدريب المترجمين المبتدئين", "ترجمة الوثيقة إلى لغات غير مطلوبة"),
-                0,
-                "الترجمة العكسية إلزامية من الهيئات الدوائية العالمية (FDA/EMA) لضمان عدم وجود أي التباس يهدد حياة المرضى."
-            ),
-            ExamQuestion(
-                22,
-                "في مهام التحرير اللاحق للترجمة الآلية (MTPE)، ما الفرق بين Light MTPE و Full MTPE؟",
-                "In MTPE, what is the core difference between Light MTPE and Full MTPE?",
-                listOf("Light يركز على الفهم الأساسي وتصحيح المعنى الجسيم، بينما Full يضمن جودة بشرية كاملة وسلاسة بلاغية", "Light يستخدم برامج مجانية بينما Full برامج مدفوعة", "لا يوجد فرق بينهما", "Light مخصص للفيديو فقط"),
-                0,
-                "التحرير الكامل (Full MTPE) يطابق معايير ISO 18587 لإنتاج نص مكافئ للترجمة البشرية الاحترافية."
-            ),
-            ExamQuestion(
-                23,
-                "في كابينات المؤتمرات الدولية، ما هو الحد الزمني الأقصى لتناوب المترجمين الفوريين في الكابينة الواحدة؟",
-                "In conference interpretation booths, what is the standard rotation interval per interpreter?",
-                listOf("20 إلى 30 دقيقة لكل مترجم لتفادي الإجهاد الذهني وتدهور الأداء السمعي", "ساعتان متواصلتان دون انقطاع", "5 دقائق فقط", "يوم كامل دون تبديل"),
-                0,
-                "معيار AIIC الدولي يفرض تناوب مترجمين اثنين كل 20-30 دقيقة للحفاظ على التركيز ودقة نقل الأفكار."
-            ),
-            ExamQuestion(
-                24,
-                "ما هي المعايير الدولية (مثل ISO 2603 و ISO 4043) المحددة لمقصورات الترجمة الفورية؟",
-                "What do ISO 2603 and ISO 4043 standards specify for interpretation booths?",
-                listOf("العزل الصوتي، زوايا الرؤية المباشرة للمنصة، أنظمة التهوية الصامتة وحماية الأذن من الصدمة الصوتية", "ألوان الستائر والديكور فقط", "سرعة شبكة الإنترنت اللاسلكية", "أنواع المأكولات المقدمة للمترجمين"),
-                0,
-                "تضمن هذه المعايير بيئة عمل صحية تمنع الإرهاق الصوتي وتتيح للمترجم الرؤية البصرية المباشرة للمتحدثين."
-            ),
-            ExamQuestion(
-                25,
-                "في البروتوكول الدبلوماسي الدولي، ماذا تعني وثيقة 'Agréation' (الموافقة المسبقة)؟",
-                "In diplomatic protocol, what does 'Agréation' signify?",
-                listOf("موافقة الدولة المستقبلة المسبقة على اعتماد رئيس البعثة الدبلوماسية (السفير) المقترح", "طلب الحصول على تأشيرة سياحية عادية", "اتفاقية تجارية لإلغاء الجمارك", "مذكرة احتجاج رسمية"),
-                0,
-                "الاستمزاج أو الموافقة المسبقة (Agréation) إجراء سيادي إلزامي قبل إيفاد السفير رسمياً."
-            ),
-            ExamQuestion(
-                26,
-                "ما المعنى القضائي الدقيق للعبارة اللاتينية 'Prima Facie' في الدعاوى والمرافعات؟",
-                "What is the precise legal meaning of the Latin phrase 'Prima Facie'?",
-                listOf("ظاهر الأمر / الأدلة المبدئية الكافية للإثبات ما لم يُقدَّم دليل ينقضها", "حكم نهائي بات غير قابل للطعن", "إفلاس مالي مؤكد", "شهادة زور معلنة"),
-                0,
-                "تعني كفاية الأدلة الظاهرة لتأسيس حق قانوني إلى أن يثبت الطرف الآخر العكس."
-            ),
-            ExamQuestion(
-                27,
-                "في الترجمة المصرفية والمالية، ما المقابل الدقيق لمصطلح 'Letter of Credit (L/C)'؟",
-                "In banking and financial translation, what is 'Letter of Credit (L/C)'?",
-                listOf("خطاب الاعتماد المستندي لضمان الوفاء المالي بين بنك المستورد والمصدر", "شيك بنكي سياحي غير مؤكد", "بطاقة ائتمان شخصية", "إشعار تحويل مصرفي عادي"),
-                0,
-                "الاعتماد المستندي وسيلة الدفع الأضمن عالمياً في التجارة الدولية لتقليل مخاطر عدم السداد."
-            ),
-            ExamQuestion(
-                28,
-                "في التحكيم التجاري الدولي، ما معنى تفويض المحكمين للحكم وفق مبدأ 'Ex Aequo et Bono'؟",
-                "In international arbitration, what does deciding 'Ex Aequo et Bono' mean?",
-                listOf("الفصل في النزاع استناداً لمبادئ العدالة والإنصاف والضمير دون التقيد الحرفي بالقواعد القانونية الصارمة", "تطبيق القانون الجنائي حصراً", "تأجيل القضية إلى محكمة أخرى", "إلزام الطرفين بالصلح دون تعويض"),
-                0,
-                "تفويض الصلح والإنصاف يمنح هيئة التحكيم مرونة تحقيق العدالة الموضوعية للمتعاقدين."
-            ),
-            ExamQuestion(
-                29,
-                "وفق ميثاق الشرف الأخلاقي للمترجمين، ما هو الالتزام الأكثر صرامة فيما يخص وثائق العملاء؟",
-                "According to the professional code of ethics, what is the most stringent obligation regarding client documents?",
-                listOf("السرية المهنية المطلقة (Strict Confidentiality & NDA) وعدم الإفصاح عن أي مداولات أو بيانات", "مشاركة الوثائق على وسائل التواصل الاجتماعي للدعاية", "الاحتفاظ بالنسخ الأصلية كرهينة", "بيع البيانات لشركات الإعلان"),
-                0,
-                "السرية المهنية حجر الزاوية لمصداقية المترجم المحلف والمترجم الفوري في المؤتمرات الحساسة."
-            ),
-            ExamQuestion(
-                30,
-                "في الترجمة السمعية البصرية، ما هي استراتيجية 'Domestication' (التوطين) في معالجة الأمثال الثقافية؟",
-                "In audiovisual translation, what is the 'Domestication' strategy for cultural idioms?",
-                listOf("تكييف المثل أو الدعابة بالاستعاضة عنها بما يقابلها في ثقافة المتلقي لتسهيل الفهم والوقع النفسي", "الترجمة الحرفية كلمة بكلمة حتى وإن فقدت المعنى", "حذف الجملة تماماً من شريط السبتاتل", "نطق الكلمة باللغة الأصلية دون كتابة"),
-                0,
-                "التوطين (وفق لورنس فينوتي) يقرب النص من عوالم المشاهد ويحقق الأثر الدلالي والفكاهي المستهدف."
-            )
-        )
+    var activeTrack by remember { mutableStateOf("comprehensive") }
+    val questions = remember(activeTrack) {
+        when (activeTrack) {
+            "goethe" -> com.example.PlacementExamBanks.goetheQuestions
+            "tcf" -> com.example.PlacementExamBanks.tcfQuestions
+            "ielts" -> com.example.PlacementExamBanks.ieltsQuestions
+            "trans" -> com.example.PlacementExamBanks.transQuestions
+            else -> com.example.PlacementExamBanks.comprehensiveQuestions
+        }
     }
 
     var selectedAnswers by remember { mutableStateOf(mutableMapOf<Int, Int>()) }
@@ -759,15 +525,56 @@ private fun LevelPlacementExamComponent(
     var examDispatchStatus by remember { mutableStateOf<String?>(null) }
 
     val answeredCount = selectedAnswers.size
-    val score = remember(examSubmitted) {
+    val score = remember(examSubmitted, selectedAnswers, questions) {
         if (!examSubmitted) 0
         else questions.count { q -> selectedAnswers[q.id] == q.correctIndex }
+    }
+    val scorePercentage = remember(score, questions.size) {
+        if (questions.isNotEmpty()) (score * 100) / questions.size else 0
     }
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
+        item {
+            // Track Switcher Row
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                FilterChip(
+                    selected = activeTrack == "comprehensive",
+                    onClick = { activeTrack = "comprehensive"; selectedAnswers = mutableMapOf(); examSubmitted = false },
+                    label = { Text("🏆 الشامل", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                    modifier = Modifier.weight(1f)
+                )
+                FilterChip(
+                    selected = activeTrack == "goethe",
+                    onClick = { activeTrack = "goethe"; selectedAnswers = mutableMapOf(); examSubmitted = false },
+                    label = { Text("🇩🇪 Goethe", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                    modifier = Modifier.weight(1f)
+                )
+                FilterChip(
+                    selected = activeTrack == "tcf",
+                    onClick = { activeTrack = "tcf"; selectedAnswers = mutableMapOf(); examSubmitted = false },
+                    label = { Text("🇫🇷 TCF", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                    modifier = Modifier.weight(1f)
+                )
+                FilterChip(
+                    selected = activeTrack == "ielts",
+                    onClick = { activeTrack = "ielts"; selectedAnswers = mutableMapOf(); examSubmitted = false },
+                    label = { Text("🇬🇧 IELTS", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                    modifier = Modifier.weight(1f)
+                )
+                FilterChip(
+                    selected = activeTrack == "trans",
+                    onClick = { activeTrack = "trans"; selectedAnswers = mutableMapOf(); examSubmitted = false },
+                    label = { Text("⚖️ ترجمة", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                    modifier = Modifier.weight(1f)
+                )
+            }
+        }
         item {
             Card(
                 modifier = Modifier.fillMaxWidth(),
@@ -812,9 +619,9 @@ private fun LevelPlacementExamComponent(
 
                     Text(
                         text = if (isArabic)
-                            "اختبار تقييمي معياري شامل يتكون من 30 سؤالاً تخصصياً يغطي: الصياغة القانونية والدبلوماسية، المعاهدات الدولية، تقنيات كابينات المؤتمرات، الديكالاج، رموز روزان، المصطلحات المالية والطبية، ومعايير ISO 17100."
+                            "اختبارات تقييمية معيارية واقعية تضم 100 سؤال لكل لغة مع تصحيح نموذجي معتمد وتحليل دلالي ونحوي وفق معايير CEFR و ISO 17100:2015."
                         else
-                            "Comprehensive 30-question standardized exam covering legal, diplomatic treaties, conference booth techniques, décalage, Rozan notation, financial/medical terms, and ISO 17100 standards.",
+                            "Standardized 100-question exam per language track with official model answers and CEFR / ISO 17100 evaluation.",
                         fontSize = 11.5.sp,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         lineHeight = 17.sp
@@ -833,7 +640,7 @@ private fun LevelPlacementExamComponent(
                             color = if (answeredCount == questions.size) SuccessGreen else MaterialTheme.colorScheme.onSurface
                         )
                         LinearProgressIndicator(
-                            progress = { answeredCount.toFloat() / questions.size.toFloat() },
+                            progress = { if (questions.isNotEmpty()) answeredCount.toFloat() / questions.size.toFloat() else 0f },
                             modifier = Modifier.width(130.dp).height(8.dp).clip(RoundedCornerShape(4.dp)),
                             color = RedPrimary,
                             trackColor = MaterialTheme.colorScheme.surfaceVariant
@@ -844,8 +651,8 @@ private fun LevelPlacementExamComponent(
                         Surface(
                             modifier = Modifier.fillMaxWidth(),
                             shape = RoundedCornerShape(12.dp),
-                            color = if (score >= 8) SuccessGreen.copy(alpha = 0.12f) else if (score >= 5) GoldYellow.copy(alpha = 0.15f) else RedPrimary.copy(alpha = 0.12f),
-                            border = androidx.compose.foundation.BorderStroke(1.5.dp, if (score >= 8) SuccessGreen else if (score >= 5) GoldYellow else RedPrimary)
+                            color = if (scorePercentage >= 70) SuccessGreen.copy(alpha = 0.12f) else if (scorePercentage >= 50) GoldYellow.copy(alpha = 0.15f) else RedPrimary.copy(alpha = 0.12f),
+                            border = androidx.compose.foundation.BorderStroke(1.5.dp, if (scorePercentage >= 70) SuccessGreen else if (scorePercentage >= 50) GoldYellow else RedPrimary)
                         ) {
                             Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                                 Row(
@@ -854,20 +661,20 @@ private fun LevelPlacementExamComponent(
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
                                     Text(
-                                        text = "الدرجة المحققة: $score / ${questions.size} (${score * 10}%)",
+                                        text = "الدرجة المحققة: $score / ${questions.size} ($scorePercentage%)",
                                         fontWeight = FontWeight.Black,
                                         fontSize = 15.sp,
-                                        color = if (score >= 8) SuccessGreen else if (score >= 5) RedPrimary else RedPrimary
+                                        color = if (scorePercentage >= 70) SuccessGreen else if (scorePercentage >= 50) RedPrimary else RedPrimary
                                     )
                                     Surface(
                                         shape = RoundedCornerShape(6.dp),
-                                        color = if (score >= 8) SuccessGreen else if (score >= 5) GoldYellow else RedPrimary
+                                        color = if (scorePercentage >= 70) SuccessGreen else if (scorePercentage >= 50) GoldYellow else RedPrimary
                                     ) {
                                         Text(
                                             text = when {
-                                                score >= 9 -> "C2 خبير"
-                                                score >= 7 -> "C1 متقدم"
-                                                score >= 5 -> "B2 متوسط مرتفع"
+                                                scorePercentage >= 85 -> "C2 خبير"
+                                                scorePercentage >= 70 -> "C1 متقدم"
+                                                scorePercentage >= 50 -> "B2 متوسط مرتفع"
                                                 else -> "B1 تأسيسي"
                                             },
                                             modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
@@ -880,9 +687,9 @@ private fun LevelPlacementExamComponent(
 
                                 Text(
                                     text = when {
-                                        score >= 9 -> "🏆 المستوى المستحق C2: مترجم محترف خبير ومؤهل لكابينات المؤتمرات والترجمة المحلفة المعتمدة."
-                                        score >= 7 -> "🎓 المستوى المستحق C1: كفاءة مهنية عالية ومترجم مؤتمرات متقدم قادر على التعامل مع النصوص المعقدة."
-                                        score >= 5 -> "📘 المستوى المستحق B2: طالب وممارس واعد، يُوصى بحضور مساقات الماستركلاس وممارسة كابينة المحاكاة."
+                                        scorePercentage >= 85 -> "🏆 المستوى المستحق C2: أداء استثنائي متمرس ومؤهل لكابينات المؤتمرات والترجمة المحلفة المعتمدة."
+                                        scorePercentage >= 70 -> "🎓 المستوى المستحق C1: كفاءة مهنية عالية ومترجم مؤتمرات متقدم قادر على التعامل مع النصوص المعقدة."
+                                        scorePercentage >= 50 -> "📘 المستوى المستحق B2: طالب وممارس واعد، يُوصى بحضور مساقات الماستركلاس وممارسة كابينة المحاكاة."
                                         else -> "📗 المستوى المستحق B1: بداية المسار الأكاديمي، يُنصح بالبدء بدورات المصطلحات التأسيسية وقواعد روزان."
                                     },
                                     fontWeight = FontWeight.SemiBold,
@@ -899,7 +706,7 @@ private fun LevelPlacementExamComponent(
                                     color = RedPrimary
                                 )
                                 Text(
-                                    text = "• 9 - 10 نقاط: C2 (مترجم محترف معتمد / خبير مؤتمرات)\n• 7 - 8 نقاط: C1 (مترجم متقدم / صياغة قانونية متخصصة)\n• 5 - 6 نقاط: B2 (مستوى فوق المتوسط / مؤهل لمخبر التدريب)\n• أقل من 5: B1 (مستوى تأسيسي بحاجة لتمارين مكثفة)",
+                                    text = "• 85% - 100%: C2 (مترجم محترف معتمد / خبير مؤتمرات)\n• 70% - 84%: C1 (مترجم متقدم / صياغة قانونية متخصصة)\n• 50% - 69%: B2 (مستوى فوق المتوسط / كفاءة مستقلة)\n• أقل من 50%: B1 (مستوى تأسيسي بحاجة لتمارين مكثفة)",
                                     fontSize = 10.5.sp,
                                     lineHeight = 15.sp,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -993,21 +800,22 @@ private fun LevelPlacementExamComponent(
                         onClick = {
                             examSubmitted = true
                             val levelTier = when {
-                                score >= 9 -> "C2 خبير ومترجم مؤتمرات"
-                                score >= 7 -> "C1 متقدم وصياغة قانونية"
-                                score >= 5 -> "B2 متوسط مرتفع"
+                                scorePercentage >= 85 -> "C2 خبير ومترجم مؤتمرات"
+                                scorePercentage >= 70 -> "C1 متقدم وصياغة قانونية"
+                                scorePercentage >= 50 -> "B2 متوسط مرتفع"
                                 else -> "B1 تأسيسي"
                             }
                             val finalName = if (studentNameInput.isNotBlank()) studentNameInput else userName
                             val finalEmail = if (studentEmailInput.isNotBlank()) studentEmailInput else userEmail
 
                             AdminEmailNotifier.dispatch(
-                                eventType = "تسليم امتحان تحديد المستوى",
+                                eventType = "تسليم امتحان تحديد المستوى (100 سؤال)",
                                 userName = finalName,
                                 userEmail = finalEmail,
                                 details = mapOf(
+                                    "track" to activeTrack,
                                     "score" to "$score / ${questions.size}",
-                                    "percentage" to "${score * 10}%",
+                                    "percentage" to "$scorePercentage%",
                                     "level" to levelTier,
                                     "answeredCount" to "$answeredCount من ${questions.size}",
                                     "targetEmail" to AdminEmailNotifier.ADMIN_EMAIL
