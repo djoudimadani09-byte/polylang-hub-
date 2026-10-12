@@ -51,8 +51,14 @@ data class TranslationOrder(
     val langPair: String,
     val wordCount: Int,
     val priceDzd: Int,
-    val status: String,
-    val isInterpretation: Boolean = false
+    var status: String,
+    val isInterpretation: Boolean = false,
+    val clientName: String = "كريم حمداوي",
+    val clientEmail: String = "karim@polylang.dz",
+    val clientPhone: String = "+213 555 12 34 56",
+    val attachedFileName: String = "document.pdf",
+    val date: String = "2026-10-12",
+    val notes: String = "يرجى اعتماد الختم الرسمي وفق معيار ISO 17100"
 )
 
 data class SrtCue(

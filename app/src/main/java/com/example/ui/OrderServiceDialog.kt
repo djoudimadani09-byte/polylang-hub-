@@ -561,7 +561,13 @@ fun OrderServiceDialog(
                             wordCount = wordCount,
                             priceDzd = estimatedDzd,
                             status = if (isArabic) "قيد المراجعة والتدقيق" else "Under Review",
-                            isInterpretation = isInterp
+                            isInterpretation = isInterp,
+                            clientName = finalSenderName,
+                            clientEmail = finalSenderEmail,
+                            clientPhone = if (clientContact.contains("@")) "+213 555 12 34 56" else clientContact,
+                            attachedFileName = attachedPdfName ?: "وثيقة_رسمية.pdf",
+                            date = "2026-10-12",
+                            notes = "طلب ترجمة معتمدة رسمي مع إرفاق وثيقة التحقق."
                         )
 
                         // 3. EFFECTIVE DISPATCH TO djoudimadani09@gmail.com

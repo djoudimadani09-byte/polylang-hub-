@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
@@ -58,9 +59,54 @@ fun PolylangHubApp() {
     val allCourses = remember { CourseData.sampleCourses }
     val orders = remember {
         mutableStateListOf(
-            TranslationOrder("PL-8421", "عقد امتياز واستثمار دولي", "قانونية ورسمية", "الإنجليزية ⇄ العربية", 2400, 8400, "قيد التدقيق المحلف", false),
-            TranslationOrder("PL-9032", "كتيب مواصفات توربينات الغاز", "تقنية وهندسية", "الفرنسية ⇄ العربية", 1850, 7030, "مكتمل وتم التسليم", false),
-            TranslationOrder("PL-3114", "كابينة الترجمة لقمة الطاقة بالجزائر", "ترجمة فورية للمؤتمرات", "الإنجليزية ⇄ الفرنسية", 0, 45000, "مؤكد ومجدول", true)
+            TranslationOrder(
+                id = "PL-8421",
+                title = "عقد امتياز واستثمار دولي",
+                category = "قانونية ورسمية",
+                langPair = "الإنجليزية ⇄ العربية",
+                wordCount = 2400,
+                priceDzd = 8400,
+                status = "قيد التدقيق المحلف",
+                isInterpretation = false,
+                clientName = "كريم حمداوي",
+                clientEmail = "karim@polylang.dz",
+                clientPhone = "+213 555 12 34 56",
+                attachedFileName = "Concession_Agreement_2026.pdf",
+                date = "2026-10-11",
+                notes = "عقد امتياز استثماري دولي مع شركة سوناطراك وشركاء أجانب."
+            ),
+            TranslationOrder(
+                id = "PL-9032",
+                title = "كتيب مواصفات توربينات الغاز",
+                category = "تقنية وهندسية",
+                langPair = "الفرنسية ⇄ العربية",
+                wordCount = 1850,
+                priceDzd = 7030,
+                status = "مكتمل وتم التسليم",
+                isInterpretation = false,
+                clientName = "شركة المقاولات والأشغال الكبرى",
+                clientEmail = "algeria.projects@tp-dz.com",
+                clientPhone = "+213 550 44 33 22",
+                attachedFileName = "Turbine_Specs_Rev3.pdf",
+                date = "2026-10-09",
+                notes = "مواصفات هندسية دقيقة."
+            ),
+            TranslationOrder(
+                id = "PL-3114",
+                title = "كابينة الترجمة لقمة الطاقة بالجزائر",
+                category = "ترجمة فورية للمؤتمرات",
+                langPair = "الإنجليزية ⇄ الفرنسية",
+                wordCount = 0,
+                priceDzd = 45000,
+                status = "مؤكد ومجدول",
+                isInterpretation = true,
+                clientName = "وزارة الطاقة والمناجم",
+                clientEmail = "energy.summit@algeria.gov.dz",
+                clientPhone = "+213 21 66 77 88",
+                attachedFileName = "Agenda_Summit_2026.pdf",
+                date = "2026-10-08",
+                notes = "توفير مترجمين فوريين معتمدين لكابينة القاعة الكبرى."
+            )
         )
     }
 
@@ -212,11 +258,62 @@ fun PolylangHubApp() {
             }
         }
     ) { innerPadding ->
-        Box(
+        Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
+            // Tribute to Scientific Club "نادي الأمل" at University of Algiers 2
+            Surface(
+                color = Color(0xFF7F1D1D),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag("top_el_amel_banner")
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 14.dp, vertical = 7.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Text("🎓", fontSize = 16.sp)
+                        Text(
+                            text = if (isArabic)
+                                "تحية طيبة وفخر واعتزاز لأعضاء النادي العلمي «نادي الأمل» بجامعة الجزائر 2 وفريق «ترانز - TransUp» ✨"
+                            else
+                                "Warm greetings & tribute to Scientific Club 'El-Amel' at Univ Algiers 2 & the 'TransUp' team ✨",
+                            color = Color.White,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            maxLines = 1
+                        )
+                    }
+                    Surface(
+                        shape = RoundedCornerShape(10.dp),
+                        color = Color(0xFFFEF08A)
+                    ) {
+                        Text(
+                            text = if (isArabic) "جامعة الجزائر 2 • ترانز اب" else "Univ Algiers 2 • TransUp",
+                            modifier = Modifier.padding(horizontal = 7.dp, vertical = 2.dp),
+                            fontSize = 9.5.sp,
+                            fontWeight = FontWeight.ExtraBold,
+                            color = Color(0xFF78350F)
+                        )
+                    }
+                }
+            }
+
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .weight(1f)
+            ) {
             Crossfade(
                 targetState = currentTab,
                 animationSpec = tween(280),
@@ -312,6 +409,7 @@ fun PolylangHubApp() {
             }
         }
     }
+}
 
     // 1. Auth Dialog (Sign In / Register)
     if (showAuthDialog) {

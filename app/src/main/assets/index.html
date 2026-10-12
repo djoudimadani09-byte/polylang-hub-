@@ -1008,6 +1008,32 @@
   <!-- TOP NAVIGATION HEADER -->
   <header class="top-navbar">
     <div class="app-container">
+
+    <!-- SCIENTIFIC CLUB EL-AMEL TRIBUTE BANNER (جامعة الجزائر 2 - بوزريعة) -->
+    <div class="el-amel-club-banner" style="background: linear-gradient(135deg, #7f1d1d, #991b1b, #1e3a8a); border-radius: 16px; padding: 14px 22px; margin-bottom: 20px; color: #fff; box-shadow: 0 8px 20px rgba(153, 27, 27, 0.25); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; border: 1.5px solid rgba(254, 240, 138, 0.45);">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <div style="width:46px; height:46px; border-radius:50%; background:rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center; font-size:24px; border:2px solid #fef08a; flex-shrink:0;">
+          🎓
+        </div>
+        <div>
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+            <span style="background:#fef08a; color:#78350f; font-size:11px; font-weight:800; padding:2px 10px; border-radius:12px;">تحية أكاديمية خاصة ✨</span>
+            <span style="font-size:11.5px; color:#fef3c7; font-weight:700;">جامعة الجزائر 2 - بوزريعة</span>
+          </div>
+          <h4 style="margin:0 0 3px; font-size:16px; font-weight:900; color:#fff;">
+            تحية فخر وتقدير لأعضاء النادي العلمي «نادي الأمل» بجامعة الجزائر 2 🌟
+          </h4>
+          <p style="margin:0; font-size:12.5px; color:#e2e8f0; line-height:1.5;">
+            روّاد اللغات والترجمة الفورية وصنّاع الأثر المعرفي.. مرحباً بكم في منصتكم التخصصية الرائدة!
+          </p>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span style="background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.35); color:#fff; font-size:12px; font-weight:800; padding:7px 14px; border-radius:20px; display:inline-flex; align-items:center; gap:6px;">
+          🤝 شريك التميز الأكاديمي
+        </span>
+      </div>
+    </div>
       <div class="nav-primary-row">
         
         <!-- Brand & Logo -->
@@ -1308,8 +1334,8 @@
       <div class="content-box">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
           <div>
-            <h3 style="font-size:17px; font-weight:800;">سجل المشاريع والطلبات الحالية</h3>
-            <span style="font-size:12px; color:var(--text-dim);">بيانات مباشرة مسجلة في قاعدة بيانات PostgreSQL (Neon Cloud)</span>
+            <h3 style="font-size:17px; font-weight:800;">📋 سجل طلباتي ومشاريعي الخاصة</h3>
+            <span style="font-size:12px; color:var(--text-dim);">تظهر لك هنا فقط الطلبات الخاصة بحسابك ومتابعة مراحل اعتمادها خطوة بخطوة</span>
           </div>
           <button class="btn-primary-red" style="padding:6px 14px; font-size:12px;" onclick="openModal('orderModal')">
             + طلب ترجمة جديد
@@ -1341,7 +1367,133 @@
 
     <!-- DYNAMIC VIEW 2: TRANSLATOR & SRT STUDIO -->
     <div id="view-translator" class="view-panel">
-      <div class="content-box">
+      
+      <!-- SWORN TRANSLATOR PROFESSIONAL HEADER -->
+      <div class="content-box" style="border-right: 4px solid var(--crimson); background: linear-gradient(to left, var(--bg-card), var(--crimson-light));">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:4px;">
+              <h3 style="font-size:19px; font-weight:900; margin:0; color:var(--text-main);">⚖️ بوابة المترجم المحلف والمعتمد (Sworn Translator Hub)</h3>
+              <span class="badge-iso-green" style="background:#10b981; color:#fff; font-size:11px;">ISO 17100:2015</span>
+              <span class="badge-gold" style="font-size:11px;">الاعتماد: DZ-TRANS-8842</span>
+            </div>
+            <p style="margin:0; font-size:12.5px; color:var(--text-dim); line-height:1.6;">
+              تظهر لك هنا <strong>جميع طلبات ومشاريع العملاء الواردة</strong> لمراجعتها، استلامها، واعتماد الترجمة بالختم الرسمي المعترف به.
+            </p>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span class="reg-pill" style="background:#f0fdf4; border:1px solid #bbf7d0; color:#15803d; font-weight:800; font-size:11.5px; display:inline-flex; align-items:center; gap:4px;">
+              🔏 الختم الرسمي الرقمي: ساري ومفعل
+            </span>
+          </div>
+        </div>
+
+        <!-- TRANSLATOR KPI SUMMARY CARDS -->
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap:10px; margin-top:14px;">
+          <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:10px 14px; text-align:center;">
+            <div style="font-size:11px; color:var(--text-dim); font-weight:700;">إجمالي طلبات العملاء</div>
+            <div id="trans-stat-total" style="font-size:18px; font-weight:900; color:var(--crimson); margin-top:2px;">3</div>
+          </div>
+          <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:10px 14px; text-align:center;">
+            <div style="font-size:11px; color:var(--text-dim); font-weight:700;">بانتظار الاستلام</div>
+            <div id="trans-stat-pending" style="font-size:18px; font-weight:900; color:#d97706; margin-top:2px;">1</div>
+          </div>
+          <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:10px 14px; text-align:center;">
+            <div style="font-size:11px; color:var(--text-dim); font-weight:700;">قيد الترجمة والختم</div>
+            <div id="trans-stat-progress" style="font-size:18px; font-weight:900; color:#2563eb; margin-top:2px;">1</div>
+          </div>
+          <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:10px 14px; text-align:center;">
+            <div style="font-size:11px; color:var(--text-dim); font-weight:700;">أتعاب ومستحقات الترجمة</div>
+            <div id="trans-stat-fees" style="font-size:16px; font-weight:900; color:#059669; margin-top:2px;">60,430 د.ج</div>
+          </div>
+        </div>
+
+        <!-- SUB-TAB SWITCHER FOR TRANSLATOR -->
+        <div style="display:flex; gap:8px; margin-top:16px; flex-wrap:wrap;">
+          <button class="nav-pill active" id="btn-trans-tab-orders" onclick="switchTranslatorSubTab('orders')" style="font-size:12px; padding:6px 14px; font-weight:800; cursor:pointer;">
+            📋 مشاريع وطلبات جميع العملاء
+          </button>
+          <button class="nav-pill" id="btn-trans-tab-srt" onclick="switchTranslatorSubTab('srt')" style="font-size:12px; padding:6px 14px; font-weight:800; cursor:pointer;">
+            🎬 استوديو ومحرر SRT ومزامنة الفيديو
+          </button>
+          <button class="nav-pill" id="btn-trans-tab-stamp" onclick="switchTranslatorSubTab('stamp')" style="font-size:12px; padding:6px 14px; font-weight:800; cursor:pointer;">
+            🔏 سجل الأختام والاعتماد الرسمي (ISO 17100)
+          </button>
+        </div>
+      </div>
+
+      <!-- TRANSLATOR PANEL 1: ALL CLIENT ORDERS PIPELINE -->
+      <div id="trans-panel-orders" class="content-box">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+          <div>
+            <h3 style="font-size:17px; font-weight:800; margin:0 0 3px;">قائمة طلبات ومشاريع جميع العملاء (All Client Requests)</h3>
+            <span style="font-size:12px; color:var(--text-dim);">إمكانية استلام المشاريع، فحص المستند المرفق، واعتماد الترجمة بالختم الرسمي</span>
+          </div>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <button class="nav-pill active" id="filter-all" onclick="filterTranslatorOrders('ALL')" style="font-size:11px; padding:4px 10px;">الكل</button>
+            <button class="nav-pill" id="filter-pending" onclick="filterTranslatorOrders('PENDING')" style="font-size:11px; padding:4px 10px;">بانتظار الاستلام</button>
+            <button class="nav-pill" id="filter-progress" onclick="filterTranslatorOrders('PROGRESS')" style="font-size:11px; padding:4px 10px;">قيد العمل</button>
+            <button class="nav-pill" id="filter-completed" onclick="filterTranslatorOrders('COMPLETED')" style="font-size:11px; padding:4px 10px;">مكتمل ومختوم</button>
+          </div>
+        </div>
+
+        <div class="table-scroll">
+          <table class="app-table">
+            <thead>
+              <tr>
+                <th>رقم الطلب</th>
+                <th>العميل والاتصال</th>
+                <th>المشروع / الملف المرفق</th>
+                <th>التخصص</th>
+                <th>اللغات</th>
+                <th>الكلمات</th>
+                <th>الأتعاب</th>
+                <th>الحالة</th>
+                <th>إجراءات المترجم المحلف</th>
+              </tr>
+            </thead>
+            <tbody id="translator-orders-tbody">
+              <!-- Populated via JS with ALL client requests -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TRANSLATOR PANEL 3: STAMPS & ISO 17100 CERTIFICATION REGISTRY -->
+      <div id="trans-panel-stamp" class="content-box" style="display:none;">
+        <div class="section-title-wrap">
+          <h3>سجل الأختام والاعتماد القانوني للمترجم المحلف 🔏</h3>
+          <p>نموذج الختم الرسمي الرقمي الصادر وفق معيار ISO 17100:2015 والمعترف به أمام الهيئات الرسمية والقضائية.</p>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:18px; align-items:center;">
+          <div style="background:#fff; border:2px dashed #991b1b; border-radius:14px; padding:20px; text-align:center; box-shadow:0 4px 15px rgba(0,0,0,0.05);">
+            <div style="width:100px; height:100px; margin:0 auto 12px; border:3px solid #991b1b; border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#991b1b; padding:6px;">
+              <span style="font-size:10px; font-weight:800;">الجمهورية الجزائرية</span>
+              <span style="font-size:20px; margin:2px 0;">⚖️</span>
+              <span style="font-size:9px; font-weight:800;">مترجم محلف معتمد</span>
+            </div>
+            <h4 style="margin:0 0 4px; color:#1e293b; font-size:15px; font-weight:800;">الختم المحلف الرقمي الرسمي</h4>
+            <div style="font-size:11.5px; color:#64748b; margin-bottom:8px;">رقم القيد الوزاري: DZ-TRANS-8842 • ISO 17100 Certified</div>
+            <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:8px; font-size:11px; color:#334155; line-height:1.5;">
+              يُشهد المترجم المحلف بأن الترجمة مطابقة كلياً وصادقة ودقيقة للوثيقة الأصلية المرفقة، وتحمل كود التحقق الرقمي المشفر.
+            </div>
+          </div>
+
+          <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:14px; padding:18px;">
+            <h4 style="margin:0 0 8px; font-size:14px; font-weight:800; color:var(--crimson);">ضوابط الاعتماد المعتمدة دولياً:</h4>
+            <ul style="margin:0; padding-inline-start:20px; font-size:12px; color:var(--text-dim); line-height:1.8;">
+              <li>التدقيق المزدوج (Four-Eyes Principle) وفق بنود ISO 17100:2015.</li>
+              <li>توثيق اسم المترجم وتوقيعه وخاتمه الرسمي على كافة الصفحات.</li>
+              <li>تضمين باركود التحقق الرقمي الفوري لمنع التزوير.</li>
+              <li>إرسال نسخة رقمية مشفرة ونسخة ورقية مصدقة للعميل.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRANSLATOR PANEL 2: SRT SUBTITLING STUDIO (Existing Tool) -->
+      <div id="trans-panel-srt" class="content-box" style="display:none;">
         <div class="section-title-wrap">
           <h3>استوديو ومحرر SRT ومزامنة الترجمة المرئية 🎬</h3>
           <p>أداة ترجمة مرئية متوافقة مع معايير Netflix العالمية (20 CPS / 42 CPL).</p>
@@ -2834,40 +2986,253 @@
       renderOrdersTable();
     }
 
-    // Orders Data Store
+    // Comprehensive Real-World Orders Store
     let ordersList = [
-      { id: "PL-8421", title: "عقد امتياز واستثمار دولي", service: "قانونية ورسمية", langs: "الإنجليزية ⇄ العربية", words: 2400, price: 8400, status: "قيد التدقيق المحلف" },
-      { id: "PL-9032", title: "كتيب مواصفات توربينات الغاز", service: "تقنية وهندسية", langs: "الفرنسية ⇄ العربية", words: 1850, price: 7030, status: "مكتمل وتم التسليم" },
-      { id: "PL-3114", title: "كابينة الترجمة لقمة الطاقة بالجزائر", service: "ترجمة فورية للمؤتمرات", langs: "الإنجليزية ⇄ الفرنسية", words: 0, price: 45000, status: "مؤكد ومجدول" }
+      {
+        id: "PL-8421",
+        clientName: "كريم حمداوي",
+        clientEmail: "karim.hamdaoui@client.dz",
+        clientPhone: "+213 555 12 34 56",
+        title: "عقد امتياز واستثمار دولي",
+        service: "قانونية ورسمية",
+        langs: "الإنجليزية ⇄ العربية",
+        words: 2400,
+        price: 8400,
+        status: "قيد التدقيق المحلف",
+        attachedFile: "Concession_Agreement_2026.pdf",
+        date: "2026-10-11",
+        notes: "يرجى اعتماد الختم الرسمي وترجمة البنود التحكيمية وفق معايير المحكمة العليا."
+      },
+      {
+        id: "PL-9032",
+        clientName: "شركة المقاولات والأشغال الكبرى",
+        clientEmail: "algeria.projects@tp-dz.com",
+        clientPhone: "+213 550 44 33 22",
+        title: "كتيب مواصفات توربينات الغاز",
+        service: "تقنية وهندسية",
+        langs: "الفرنسية ⇄ العربية",
+        words: 1850,
+        price: 7030,
+        status: "مكتمل وتم التسليم",
+        attachedFile: "Turbine_Specs_Rev3.pdf",
+        date: "2026-10-09",
+        notes: "مصطلحات هندسية معقدة ومطابقة كود الصيانة."
+      },
+      {
+        id: "PL-3114",
+        clientName: "وزارة الطاقة والمناجم",
+        clientEmail: "energy.summit@algeria.gov.dz",
+        clientPhone: "+213 21 66 77 88",
+        title: "كابينة الترجمة لقمة الطاقة بالجزائر",
+        service: "ترجمة فورية للمؤتمرات",
+        langs: "الإنجليزية ⇄ الفرنسية",
+        words: 0,
+        price: 45000,
+        status: "مؤكد ومجدول",
+        attachedFile: "Agenda_Summit_2026.pdf",
+        date: "2026-10-08",
+        notes: "كابينة صوتية بمترجمين فوريين معتمدين AIIC."
+      }
     ];
 
+    let currentTranslatorFilter = 'ALL';
+
     function renderOrdersTable() {
+      renderClientOrdersTable();
+      renderTranslatorOrdersTable();
+    }
+
+    // 1. CLIENT ORDERS TABLE: ONLY shows the logged-in client's own requests!
+    function renderClientOrdersTable() {
       const tbody = document.getElementById('client-orders-tbody');
+      if (!tbody) return;
       tbody.innerHTML = '';
-      ordersList.forEach(o => {
+
+      // Determine client orders: match email or name, or default demo client if visitor
+      const clientOrders = ordersList.filter(o => {
+        if (currentUserEmail === ADMIN_EMAIL || currentUserEmail === 'admin@polylang.dz') return true;
+        if (currentUserEmail && currentUserEmail !== 'guest@polylang.dz') {
+          return o.clientEmail.toLowerCase() === currentUserEmail.toLowerCase() || o.clientName === currentUserName;
+        }
+        // Visitor default view
+        return o.clientEmail.includes('karim') || o.clientName.includes('كريم');
+      });
+
+      if (clientOrders.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="8" style="text-align:center; padding:28px; color:var(--text-dim);">
+              <div style="font-size:26px; margin-bottom:6px;">📭</div>
+              <strong style="display:block; font-size:14px; margin-bottom:4px;">لا توجد لديك طلبات ترجمة مسجلة بعد</strong>
+              <span style="font-size:12px;">انقر على زر "+ طلب ترجمة جديد" لإرسال وثيقتك الأولى وسيقوم المترجم المحلف باستلامها فوراً.</span>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      clientOrders.forEach(o => {
         const tr = document.createElement('tr');
         let badge = 'badge-review';
         if (o.status.includes('مكتمل')) badge = 'badge-done';
-        if (o.status.includes('مؤكد')) badge = 'badge-scheduled';
+        else if (o.status.includes('مؤكد') || o.status.includes('قيد')) badge = 'badge-scheduled';
 
         tr.innerHTML = `
           <td><strong>${o.id}</strong></td>
-          <td>${o.title}</td>
+          <td>
+            <div style="font-weight:700;">${o.title}</div>
+            <div style="font-size:11px; color:var(--text-dim);">📎 ${o.attachedFile || 'مستند_رسمي.pdf'}</div>
+          </td>
           <td>${o.service}</td>
           <td>${o.langs}</td>
           <td>${o.words > 0 ? o.words.toLocaleString() : 'نظام يوم كامل'}</td>
           <td style="font-weight:800; color:var(--crimson);">${formatCurrency(o.price)}</td>
           <td><span class="status-badge ${badge}">${o.status}</span></td>
-          <td><button class="nav-pill" style="padding:2px 8px; font-size:11px;" onclick="viewOrderInvoice('${o.id}')">الفاتورة</button></td>
+          <td>
+            <div style="display:flex; gap:4px; flex-wrap:wrap;">
+              <button class="nav-pill" style="padding:2px 8px; font-size:11px;" onclick="inspectOrderDetails('${o.id}')">تفاصيل</button>
+              <button class="nav-pill" style="padding:2px 8px; font-size:11px;" onclick="viewOrderInvoice('${o.id}')">الفاتورة</button>
+            </div>
+          </td>
         `;
         tbody.appendChild(tr);
       });
     }
 
+    // 2. TRANSLATOR ORDERS TABLE: Shows ALL client requests with full management tools!
+    function renderTranslatorOrdersTable() {
+      const tbody = document.getElementById('translator-orders-tbody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      // Update Translator KPIs
+      const statTotal = document.getElementById('trans-stat-total');
+      const statPending = document.getElementById('trans-stat-pending');
+      const statProgress = document.getElementById('trans-stat-progress');
+      const statFees = document.getElementById('trans-stat-fees');
+
+      const pendingCount = ordersList.filter(o => o.status.includes('مراجعة') || o.status.includes('تدقيق')).length;
+      const progressCount = ordersList.filter(o => o.status.includes('قيد') || o.status.includes('مؤكد')).length;
+      const totalFees = ordersList.reduce((acc, cur) => acc + (cur.price || 0), 0);
+
+      if (statTotal) statTotal.textContent = ordersList.length;
+      if (statPending) statPending.textContent = pendingCount;
+      if (statProgress) statProgress.textContent = progressCount;
+      if (statFees) statFees.textContent = formatCurrency(totalFees);
+
+      // Filtered orders
+      let filtered = ordersList;
+      if (currentTranslatorFilter === 'PENDING') {
+        filtered = ordersList.filter(o => o.status.includes('مراجعة') || o.status.includes('تدقيق'));
+      } else if (currentTranslatorFilter === 'PROGRESS') {
+        filtered = ordersList.filter(o => o.status.includes('قيد') || o.status.includes('مؤكد'));
+      } else if (currentTranslatorFilter === 'COMPLETED') {
+        filtered = ordersList.filter(o => o.status.includes('مكتمل'));
+      }
+
+      filtered.forEach(o => {
+        const tr = document.createElement('tr');
+        let badge = 'badge-review';
+        if (o.status.includes('مكتمل')) badge = 'badge-done';
+        else if (o.status.includes('مؤكد') || o.status.includes('قيد')) badge = 'badge-scheduled';
+
+        let actionButtons = '';
+        if (!o.status.includes('مكتمل')) {
+          if (!o.status.includes('قيد')) {
+            actionButtons += `<button class="btn-primary-red" style="padding:3px 8px; font-size:11px;" onclick="claimOrderAsTranslator('${o.id}')">✅ استلام المشروع</button> `;
+          } else {
+            actionButtons += `<button class="btn-primary-red" style="padding:3px 8px; font-size:11px; background:#10b981;" onclick="certifyAndSealOrder('${o.id}')">✍️ ختم واعتماد</button> `;
+          }
+        }
+        actionButtons += `
+          <button class="nav-pill" style="padding:3px 8px; font-size:11px;" onclick="inspectOrderDetails('${o.id}')">👁️ فحص</button>
+          <button class="nav-pill" style="padding:3px 8px; font-size:11px;" onclick="contactClientForOrder('${o.id}')">💬 تواصل</button>
+          <button class="nav-pill" style="padding:3px 8px; font-size:11px;" onclick="viewOrderInvoice('${o.id}')">🧾 فاتورة</button>
+        `;
+
+        tr.innerHTML = `
+          <td><strong>${o.id}</strong><br><span style="font-size:10px; color:var(--text-dim);">${o.date || '2026-10-12'}</span></td>
+          <td>
+            <strong>${o.clientName || 'عميل معتمد'}</strong><br>
+            <span style="font-size:11px; color:var(--text-dim);">${o.clientEmail || 'contact@client.dz'}</span>
+          </td>
+          <td>
+            <div style="font-weight:700;">${o.title}</div>
+            <div style="font-size:11px; color:#10b981;">📎 ${o.attachedFile || 'وثيقة_مرفقة.pdf'}</div>
+          </td>
+          <td>${o.service}</td>
+          <td>${o.langs}</td>
+          <td>${o.words > 0 ? o.words.toLocaleString() : 'نظام يوم كامل'}</td>
+          <td style="font-weight:800; color:#059669;">${formatCurrency(o.price)}</td>
+          <td><span class="status-badge ${badge}">${o.status}</span></td>
+          <td>
+            <div style="display:flex; gap:4px; flex-wrap:wrap; align-items:center;">
+              ${actionButtons}
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function filterTranslatorOrders(filter) {
+      currentTranslatorFilter = filter;
+      document.querySelectorAll('#trans-panel-orders .nav-pill').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById('filter-' + filter.toLowerCase());
+      if (activeBtn) activeBtn.classList.add('active');
+      renderTranslatorOrdersTable();
+    }
+
+    function switchTranslatorSubTab(tab) {
+      document.getElementById('trans-panel-orders').style.display = (tab === 'orders') ? 'block' : 'none';
+      document.getElementById('trans-panel-srt').style.display = (tab === 'srt') ? 'block' : 'none';
+      document.getElementById('trans-panel-stamp').style.display = (tab === 'stamp') ? 'block' : 'none';
+
+      document.getElementById('btn-trans-tab-orders').classList.toggle('active', tab === 'orders');
+      document.getElementById('btn-trans-tab-srt').classList.toggle('active', tab === 'srt');
+      document.getElementById('btn-trans-tab-stamp').classList.toggle('active', tab === 'stamp');
+    }
+
+    function claimOrderAsTranslator(id) {
+      const o = ordersList.find(item => item.id === id);
+      if (!o) return;
+      o.status = "قيد الترجمة والختم الرسمي";
+      renderOrdersTable();
+      showAppToast(`✓ تم استلام المشروع #${o.id} وبدء الترجمة المحلفة.`);
+    }
+
+    function certifyAndSealOrder(id) {
+      const o = ordersList.find(item => item.id === id);
+      if (!o) return;
+      o.status = "مكتمل وتم وضع الختم الرسمي";
+      renderOrdersTable();
+      showAppToast(`✓ تم اعتماد الوثيقة #${o.id} وتطبيق الختم المحلف الرسمي (ISO 17100) بنجاح!`);
+    }
+
+    function contactClientForOrder(id) {
+      const o = ordersList.find(item => item.id === id);
+      if (!o) return;
+      alert(`📞 بيانات الاتصال المباشر بالعميل:\nالاسم: ${o.clientName}\nالبريد الإلكتروني: ${o.clientEmail}\nالهاتف: ${o.clientPhone || '+213 555 12 34 56'}\nالمشروع: ${o.title}\n\nتم إرسال إشعار تحديث الحالة فوري إلى بريد العميل.`);
+    }
+
+    function inspectOrderDetails(id) {
+      const o = ordersList.find(item => item.id === id);
+      if (!o) return;
+      document.getElementById('inspect-order-id').textContent = o.id;
+      document.getElementById('inspect-order-client').textContent = `${o.clientName} (${o.clientEmail} • ${o.clientPhone || '+213 555 12 34 56'})`;
+      document.getElementById('inspect-order-title').textContent = o.title;
+      document.getElementById('inspect-order-file').textContent = o.attachedFile || 'مستند_رسمي.pdf';
+      document.getElementById('inspect-order-service').textContent = `${o.service} (${o.langs})`;
+      document.getElementById('inspect-order-words').textContent = `${o.words > 0 ? o.words.toLocaleString() : 'نظام يوم كامل'} كلمة • الأتعاب: ${formatCurrency(o.price)}`;
+      document.getElementById('inspect-order-status').textContent = o.status;
+      document.getElementById('inspect-order-notes').textContent = o.notes || 'طلب ترجمة معتمد وفق معايير الجودة العالمية ISO 17100.';
+      openModal('inspectOrderModal');
+    }
+
     function viewOrderInvoice(id) {
       const o = ordersList.find(item => item.id === id);
       if (!o) return;
-      alert(`📄 فاتورة رسمية رقم: ${o.id}\nالمشروع: ${o.title}\nالمبلغ: ${formatCurrency(o.price)}\nالحالة: ${o.status}\nمجمع بوليلانغ الدولي للترجمة المعتمدة (ISO 17100:2015).`);
+      alert(`📄 فاتورة رسمية رقم: ${o.id}\nالعميل: ${o.clientName || 'عميل معتمد'}\nالمشروع: ${o.title}\nالمبلغ الإجمالي: ${formatCurrency(o.price)}\nالحالة: ${o.status}\nمجمع بوليلانغ الدولي للترجمة المعتمدة (ISO 17100:2015).`);
     }
 
     // Calculator
@@ -2963,6 +3328,8 @@
         enthusiast: "Language Learner & Training Hub (أكاديمية اللغات وعلم الترجمة)"
       };
       document.getElementById('active-role-title').textContent = titles[role] || "Portal";
+      if (role === 'client') renderClientOrdersTable();
+      if (role === 'translator') renderTranslatorOrdersTable();
     }
 
     // ==========================================
@@ -4679,6 +5046,8 @@
         switchRole('client');
       }
 
+      renderOrdersTable();
+
       // Notify admin email asynchronously
       fetch(`https://formsubmit.co/ajax/${ADMIN_EMAIL}`, {
         method: "POST",
@@ -5773,7 +6142,63 @@
           <script>
             window.onload = function() { window.print(); }
           <\/script>
-        </body>
+        
+  <!-- 15. INSPECT ORDER DETAILS MODAL (Real-World Project Inspection) -->
+  <div id="inspectOrderModal" class="modal-backdrop">
+    <div class="modal-sheet" style="max-width:580px;">
+      <div class="modal-close-x" onclick="closeModal('inspectOrderModal')">✕</div>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+        <h3 style="font-size:18px; font-weight:900; margin:0; color:var(--crimson);">
+          📋 تفاصيل المعاملة رقم <span id="inspect-order-id"></span>
+        </h3>
+        <span class="badge-iso-green">ISO 17100 معتمد</span>
+      </div>
+
+      <!-- Client Info Box -->
+      <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:12px; margin-bottom:10px;">
+        <div style="font-size:11px; font-weight:800; color:var(--crimson); margin-bottom:4px;">👤 بيانات العميل:</div>
+        <div id="inspect-order-client" style="font-size:13px; font-weight:700;"></div>
+      </div>
+
+      <!-- Document & Specs Box -->
+      <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:12px; margin-bottom:10px;">
+        <div style="font-size:11px; font-weight:800; color:var(--crimson); margin-bottom:4px;">📄 المستند والملف المرفق:</div>
+        <div id="inspect-order-title" style="font-size:13.5px; font-weight:800; margin-bottom:2px;"></div>
+        <div style="font-size:11.5px; color:#10b981; font-weight:700;">الملف: 📎 <span id="inspect-order-file"></span></div>
+        <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-dim); margin-top:6px; flex-wrap:wrap;">
+          <span id="inspect-order-service"></span>
+          <span id="inspect-order-words" style="font-weight:700; color:var(--text-main);"></span>
+        </div>
+      </div>
+
+      <!-- Timeline & Accreditation Tracker -->
+      <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:10px; padding:12px; margin-bottom:12px;">
+        <div style="font-size:11.5px; font-weight:800; color:#15803d; margin-bottom:6px;">
+          مسار التدقيق والختم المحلف (ISO 17100:2015):
+        </div>
+        <div style="font-size:11.5px; color:#166534; line-height:1.7;">
+          <div>✓ الخطوة 1: استلام الوثيقة الأصلية ومطابقة كشف المصطلحات</div>
+          <div>✓ الخطوة 2: الترجمة التخصصية والتدقيق المزدوج (Four-Eyes Principle)</div>
+          <div>⚖️ الخطوة 3: تطبيق الختم الرقمي للمترجم المحلف والباركود المعتمد</div>
+          <div>📦 الخطوة 4: التسليم النهائي للعميل مع شهادة المطابقة</div>
+        </div>
+      </div>
+
+      <!-- Client Notes -->
+      <div style="background:var(--bg-card); border:1px solid var(--border-line); border-radius:8px; padding:10px; font-size:11.5px; margin-bottom:14px;">
+        <span style="font-weight:800; color:var(--text-dim);">ملاحظات العميل:</span>
+        <span id="inspect-order-notes"></span>
+      </div>
+
+      <div style="display:flex; gap:8px;">
+        <button class="btn-primary-red" style="flex:1; justify-content:center;" onclick="closeModal('inspectOrderModal')">
+          إغلاق النافذة
+        </button>
+      </div>
+    </div>
+  </div>
+
+</body>
         </html>
       `);
       printWin.document.close();
@@ -5870,12 +6295,18 @@
       const newId = "PL-" + Math.floor(1000 + Math.random() * 9000);
       ordersList.unshift({
         id: newId,
+        clientName: name || currentUserName,
+        clientEmail: email || currentUserEmail,
+        clientPhone: phone || "+213 555 12 34 56",
         title: service + (currentOrderPdfName ? ` (${currentOrderPdfName})` : ''),
         service: service,
         langs: langs,
         words: 1200,
         price: 4200,
-        status: "قيد التدقيق المحلف"
+        status: "قيد التدقيق المحلف",
+        attachedFile: currentOrderPdfName || "وثيقة_رسمية.pdf",
+        date: new Date().toISOString().slice(0, 10),
+        notes: notes || "طلب ترجمة معتمدة رسمي مع اعتماد الختم المحلف."
       });
       renderOrdersTable();
 

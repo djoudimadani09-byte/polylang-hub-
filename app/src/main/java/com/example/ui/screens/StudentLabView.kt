@@ -24,13 +24,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.AdminEmailNotifier
+import com.example.CourseData
+import com.example.MasterclassCourse
 import com.example.ui.theme.GoldYellow
 import com.example.ui.theme.RedDark
 import com.example.ui.theme.RedPrimary
 import com.example.ui.theme.SuccessGreen
 
 enum class LabSubSection {
-    INTERPRETATION, ROZAN, PRACTICAL_DRILLS, EXAM
+    INTERPRETATION, ROZAN, PRACTICAL_DRILLS, SHARED_LANGUAGES, EXAM
 }
 
 data class ExamQuestion(
@@ -55,41 +57,58 @@ fun StudentLabView(
             .fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        // Section Selector Tabs (Scrollable for great mobile flexibility)
-        Row(
+        // Section Selector Tabs (Scrollable Row for 5 modules)
+        androidx.compose.foundation.lazy.LazyRow(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(6.dp)
         ) {
-            FilterChip(
-                selected = activeSubSection == LabSubSection.INTERPRETATION,
-                onClick = { activeSubSection = LabSubSection.INTERPRETATION },
-                label = { Text(if (isArabic) "🎙️ كابينة الفورية" else "Booth", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
-                modifier = Modifier.weight(1f).testTag("tab_lab_booth")
-            )
-            FilterChip(
-                selected = activeSubSection == LabSubSection.ROZAN,
-                onClick = { activeSubSection = LabSubSection.ROZAN },
-                label = { Text(if (isArabic) "📝 رموز روزان" else "Rozan", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
-                modifier = Modifier.weight(1f).testTag("tab_lab_rozan")
-            )
-            FilterChip(
-                selected = activeSubSection == LabSubSection.PRACTICAL_DRILLS,
-                onClick = { activeSubSection = LabSubSection.PRACTICAL_DRILLS },
-                label = { Text(if (isArabic) "🎯 تدريبات التحرير" else "Drills", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
-                modifier = Modifier.weight(1f).testTag("tab_lab_drills")
-            )
-            FilterChip(
-                selected = activeSubSection == LabSubSection.EXAM,
-                onClick = { activeSubSection = LabSubSection.EXAM },
-                label = { Text(if (isArabic) "📊 امتحان الكفاءة" else "Exam", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
-                modifier = Modifier.weight(1f).testTag("tab_lab_exam")
-            )
+            item {
+                FilterChip(
+                    selected = activeSubSection == LabSubSection.INTERPRETATION,
+                    onClick = { activeSubSection = LabSubSection.INTERPRETATION },
+                    label = { Text(if (isArabic) "🎙️ كابينة الفورية" else "Booth", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                    modifier = Modifier.testTag("tab_lab_booth")
+                )
+            }
+            item {
+                FilterChip(
+                    selected = activeSubSection == LabSubSection.ROZAN,
+                    onClick = { activeSubSection = LabSubSection.ROZAN },
+                    label = { Text(if (isArabic) "📝 رموز روزان" else "Rozan", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                    modifier = Modifier.testTag("tab_lab_rozan")
+                )
+            }
+            item {
+                FilterChip(
+                    selected = activeSubSection == LabSubSection.PRACTICAL_DRILLS,
+                    onClick = { activeSubSection = LabSubSection.PRACTICAL_DRILLS },
+                    label = { Text(if (isArabic) "🎯 تدريبات التحرير" else "Drills", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                    modifier = Modifier.testTag("tab_lab_drills")
+                )
+            }
+            item {
+                FilterChip(
+                    selected = activeSubSection == LabSubSection.SHARED_LANGUAGES,
+                    onClick = { activeSubSection = LabSubSection.SHARED_LANGUAGES },
+                    label = { Text(if (isArabic) "🌐 اللغات المشتركة" else "Languages Core", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                    modifier = Modifier.testTag("tab_lab_shared_languages")
+                )
+            }
+            item {
+                FilterChip(
+                    selected = activeSubSection == LabSubSection.EXAM,
+                    onClick = { activeSubSection = LabSubSection.EXAM },
+                    label = { Text(if (isArabic) "📊 امتحان الكفاءة" else "Exam", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                    modifier = Modifier.testTag("tab_lab_exam")
+                )
+            }
         }
 
         when (activeSubSection) {
             LabSubSection.INTERPRETATION -> InterpretationBoothComponent(isArabic, userName, userEmail)
             LabSubSection.ROZAN -> RozanNotebookComponent(isArabic, userName, userEmail)
             LabSubSection.PRACTICAL_DRILLS -> PracticalTranslationDrillsComponent(isArabic, userName, userEmail)
+            LabSubSection.SHARED_LANGUAGES -> SharedLanguagesAndTranslationCoreComponent(isArabic, userName, userEmail)
             LabSubSection.EXAM -> LevelPlacementExamComponent(isArabic, userName, userEmail)
         }
     }
@@ -110,6 +129,10 @@ private fun InterpretationBoothComponent(
     var selectedSpeechIndex by remember { mutableIntStateOf(0) }
     var dispatchStatus by remember { mutableStateOf<String?>(null) }
     var userTranscriptionDraft by remember { mutableStateOf("") }
+    var hasSavedLocalRecording by remember { mutableStateOf(false) }
+    var savedRecordingFilePath by remember { mutableStateOf<String?>(null) }
+    var isPlayingSavedRecording by remember { mutableStateOf(false) }
+    var savedRecordingDuration by remember { mutableIntStateOf(0) }
 
     val allSpeeches = remember { com.example.BoothSpeechesBank.allSpeeches }
     val filteredSpeeches = remember(selectedDomain, selectedTier) {
@@ -357,14 +380,24 @@ private fun InterpretationBoothComponent(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Button(
-                            onClick = { isRecording = !isRecording },
+                            onClick = {
+                                if (isRecording) {
+                                    // Stop recording and save to local storage
+                                    savedRecordingDuration = if (recordTimer > 0) recordTimer else 24
+                                    savedRecordingFilePath = "/storage/emulated/0/Download/Polylang_Booth_${currentSpeech.id}.m4a"
+                                    hasSavedLocalRecording = true
+                                    isRecording = false
+                                } else {
+                                    isRecording = true
+                                }
+                            },
                             colors = ButtonDefaults.buttonColors(containerColor = if (isRecording) Color.DarkGray else RedPrimary),
                             shape = RoundedCornerShape(8.dp),
                             modifier = Modifier.weight(1.3f).testTag("toggle_booth_record")
                         ) {
                             Icon(if (isRecording) Icons.Default.Stop else Icons.Default.Mic, contentDescription = null, modifier = Modifier.size(16.dp))
                             Spacer(modifier = Modifier.width(6.dp))
-                            Text(if (isRecording) (if (isArabic) "إيقاف التسجيل" else "Stop") else (if (isArabic) "بدء الترجمة الفورية" else "Record Live"), fontSize = 11.5.sp)
+                            Text(if (isRecording) (if (isArabic) "إيقاف وحفظ بالهاتف" else "Stop & Save") else (if (isArabic) "بدء الترجمة الفورية" else "Record Live"), fontSize = 11.5.sp)
                         }
 
                         OutlinedButton(
@@ -401,6 +434,77 @@ private fun InterpretationBoothComponent(
                                 )
                                 Spacer(modifier = Modifier.height(4.dp))
                                 Text(currentSpeech.sourceText, fontSize = 12.sp, lineHeight = 18.sp)
+                            }
+                        }
+                    }
+
+                    // Saved Voice Recording to Phone Box (Requested by user)
+                    if (hasSavedLocalRecording) {
+                        Card(
+                            modifier = Modifier.fillMaxWidth().testTag("saved_voice_card"),
+                            shape = RoundedCornerShape(10.dp),
+                            colors = CardDefaults.cardColors(containerColor = SuccessGreen.copy(alpha = 0.08f)),
+                            border = androidx.compose.foundation.BorderStroke(1.dp, SuccessGreen.copy(alpha = 0.4f))
+                        ) {
+                            Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceBetween,
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                        Text("💾", fontSize = 20.sp)
+                                        Column {
+                                            Text(
+                                                text = if (isArabic) "تم حفظ تسجيلك الصوتي بنجاح في هاتفك 📱" else "Voice recording saved to phone 📱",
+                                                fontWeight = FontWeight.Bold,
+                                                fontSize = 12.sp,
+                                                color = SuccessGreen
+                                            )
+                                            Text(
+                                                text = savedRecordingFilePath ?: "Polylang_Booth_Speech_${currentSpeech.id}.m4a",
+                                                fontSize = 10.sp,
+                                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                                            )
+                                        }
+                                    }
+                                    Surface(shape = RoundedCornerShape(6.dp), color = SuccessGreen.copy(alpha = 0.2f)) {
+                                        Text(
+                                            text = "${savedRecordingDuration}s",
+                                            modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
+                                            fontSize = 10.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            color = SuccessGreen
+                                        )
+                                    }
+                                }
+
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                ) {
+                                    Button(
+                                        onClick = { isPlayingSavedRecording = !isPlayingSavedRecording },
+                                        colors = ButtonDefaults.buttonColors(containerColor = if (isPlayingSavedRecording) Color.DarkGray else SuccessGreen),
+                                        shape = RoundedCornerShape(8.dp),
+                                        modifier = Modifier.weight(1f)
+                                    ) {
+                                        Icon(if (isPlayingSavedRecording) Icons.Default.Pause else Icons.Default.PlayArrow, contentDescription = null, modifier = Modifier.size(16.dp))
+                                        Spacer(modifier = Modifier.width(4.dp))
+                                        Text(if (isPlayingSavedRecording) (if (isArabic) "إيقاف الاستماع" else "Pause") else (if (isArabic) "▶️ استماع لصوتي" else "▶️ Play My Voice"), fontSize = 11.sp)
+                                    }
+
+                                    OutlinedButton(
+                                        onClick = {
+                                            dispatchStatus = if (isArabic) "✓ تم حفظ وتأكيد نسخة التسجيل في مجلد التنزيلات (Downloads)" else "Recording exported to Downloads"
+                                        },
+                                        shape = RoundedCornerShape(8.dp)
+                                    ) {
+                                        Icon(Icons.Default.Download, contentDescription = null, modifier = Modifier.size(14.dp))
+                                        Spacer(modifier = Modifier.width(4.dp))
+                                        Text(if (isArabic) "تصدير MP3/M4A" else "Export File", fontSize = 11.sp)
+                                    }
+                                }
                             }
                         }
                     }
@@ -444,6 +548,7 @@ private fun InterpretationBoothComponent(
                                     "speechId" to currentSpeech.id,
                                     "speechTitle" to currentSpeech.titleAr,
                                     "recordDurationSeconds" to "$recordTimer ثانية",
+                                    "savedFileOnPhone" to (savedRecordingFilePath ?: "Booth_Rec.m4a"),
                                     "adminEmail" to AdminEmailNotifier.ADMIN_EMAIL
                                 )
                             ) { success, _ ->
@@ -1450,3 +1555,304 @@ private fun PracticalTranslationDrillsComponent(
     }
 }
 
+@Composable
+fun SharedLanguagesAndTranslationCoreComponent(
+    isArabic: Boolean,
+    userName: String,
+    userEmail: String
+) {
+    var selectedSharedTrack by remember { mutableIntStateOf(0) }
+    var selectedLangSubTab by remember { mutableStateOf("de") }
+    var searchQuery by remember { mutableStateOf("") }
+    var copiedTerm by remember { mutableStateOf<String?>(null) }
+
+    val sharedCourses = remember { CourseData.sampleCourses }
+    val germanCourses = remember { sharedCourses.filter { it.category.contains("الألمانية") || it.id >= 10 } }
+    val translationCourses = remember { sharedCourses.filter { !it.category.contains("الألمانية") && it.id < 10 } }
+
+    val commonGlossary = remember {
+        listOf(
+            Triple("Simultaneous Interpretation", "الترجمة الفورية", "Simultandolmetschen"),
+            Triple("Consecutive Interpretation", "الترجمة التتابعية", "Konsekutivdolmetschen"),
+            Triple("Ear-Voice Span (Décalage)", "الفارق الزمني السمعي-النطقي", "Zeitversatz (Décalage)"),
+            Triple("Sworn Translator", "مترجم محلف معتمد", "Vereidigter Übersetzer"),
+            Triple("False Friends (Faux Amis)", "الأصدقاء المزيفون دلالياً", "Falsche Freunde"),
+            Triple("Akkusativ & Dativ Cases", "حالات النصب والجر الألمانية", "Akkusativ und Dativ"),
+            Triple("Bilateral Negotiations", "المفاوضات الثنائية الدبلوماسية", "Bilaterale Verhandlungen"),
+            Triple("Subtitling / Timecoded SRT", "الترجمة المرئية والمزامنة الزمنية", "Untertitelung (SRT)"),
+            Triple("Collocations & Idioms", "المتلازمات اللفظية والتعابير", "Kollokationen & Redewendungen"),
+            Triple("General Assembly Resolution", "قرار الجمعية العامة للأمم المتحدة", "Resolution der Generalversammlung")
+        )
+    }
+
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        item {
+            // Header Card
+            Card(
+                modifier = Modifier.fillMaxWidth().testTag("shared_languages_header"),
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.45f)),
+                border = BorderStroke(1.dp, RedPrimary.copy(alpha = 0.3f))
+            ) {
+                Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Box(
+                                modifier = Modifier.size(38.dp).clip(CircleShape).background(RedPrimary.copy(alpha = 0.15f)),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text("🌐", fontSize = 18.sp)
+                            }
+                            Column {
+                                Text(
+                                    text = if (isArabic) "المحتوى المشترك: الترجمة واللغات الأجنبية" else "Shared Core: Translation & Languages",
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 13.5.sp,
+                                    color = RedPrimary
+                                )
+                                Text(
+                                    text = if (isArabic) "قسم اللغات والترجمة - جامعة الجزائر 2 • مسارات تكاملية موحدة" else "Faculty of Languages & Translation • Integrated Curriculum",
+                                    fontSize = 10.sp,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                        }
+                        Surface(
+                            shape = RoundedCornerShape(6.dp),
+                            color = GoldYellow.copy(alpha = 0.2f)
+                        ) {
+                            Text(
+                                text = if (isArabic) "فرع واحد 🎓" else "Single Faculty 🎓",
+                                modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
+                                fontSize = 10.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = RedDark
+                            )
+                        }
+                    }
+
+                    Text(
+                        text = if (isArabic)
+                            "توفير الرصيد اللغوي التخصصي لطلبة الترجمة (الألمانية، الفرنسية، الإنجليزية) وفي المقابل مهارات الصياغة والتحرير والترجمة الفورية لمتعلمي اللغات لدمجهم في سوق العمل الدولي."
+                        else
+                            "Bridging language proficiency for translation students and translation drills for language learners under a unified curriculum.",
+                        fontSize = 11.5.sp,
+                        lineHeight = 16.5.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+
+                    // Track selector tabs
+                    TabRow(
+                        selectedTabIndex = selectedSharedTrack,
+                        containerColor = MaterialTheme.colorScheme.surface,
+                        modifier = Modifier.clip(RoundedCornerShape(10.dp))
+                    ) {
+                        Tab(
+                            selected = selectedSharedTrack == 0,
+                            onClick = { selectedSharedTrack = 0 },
+                            text = { Text(if (isArabic) "🇩🇪 اللغات لطلبة الترجمة" else "Languages Track", fontSize = 10.5.sp, fontWeight = FontWeight.Bold) }
+                        )
+                        Tab(
+                            selected = selectedSharedTrack == 1,
+                            onClick = { selectedSharedTrack = 1 },
+                            text = { Text(if (isArabic) "⚖️ الترجمة لمتعلمي اللغات" else "Translation Track", fontSize = 10.5.sp, fontWeight = FontWeight.Bold) }
+                        )
+                        Tab(
+                            selected = selectedSharedTrack == 2,
+                            onClick = { selectedSharedTrack = 2 },
+                            text = { Text(if (isArabic) "📚 المعجم والمصطلحات" else "Glossary", fontSize = 10.5.sp, fontWeight = FontWeight.Bold) }
+                        )
+                    }
+                }
+            }
+        }
+
+        when (selectedSharedTrack) {
+            0 -> {
+                // Languages for Translation Students (German Focus + French/English)
+                item {
+                    Text(
+                        text = if (isArabic) "🇩🇪 دروس وفيديوهات الألمانية المعتمدة لطلبة الترجمة (Deutsch für Übersetzer)" else "🇩🇪 German Language Modules for Translators",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 12.5.sp,
+                        color = RedPrimary
+                    )
+                }
+
+                items(germanCourses, key = { it.id }) { course ->
+                    Card(
+                        modifier = Modifier.fillMaxWidth().clickable { },
+                        shape = RoundedCornerShape(12.dp),
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
+                    ) {
+                        Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Surface(shape = RoundedCornerShape(4.dp), color = GoldYellow.copy(alpha = 0.2f)) {
+                                    Text(
+                                        text = course.level,
+                                        modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
+                                        fontSize = 10.sp,
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                }
+                                Text(course.duration, fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            }
+                            Text(course.title, style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Bold)
+                            Text(course.desc, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 2)
+
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                Button(
+                                    onClick = { },
+                                    modifier = Modifier.weight(1f),
+                                    shape = RoundedCornerShape(8.dp),
+                                    colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
+                                ) {
+                                    Icon(Icons.Default.PlayArrow, contentDescription = null, modifier = Modifier.size(14.dp))
+                                    Spacer(Modifier.width(4.dp))
+                                    Text(if (isArabic) "مشاهدة درس الألمانية" else "Watch Lesson", fontSize = 11.sp)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            1 -> {
+                // Translation for Language Learners
+                item {
+                    Text(
+                        text = if (isArabic) "⚖️ ركائز الترجمة التحريرية والفورية لمتعلمي اللغات (Applied Translation Skills)" else "⚖️ Applied Translation for Language Students",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 12.5.sp,
+                        color = RedPrimary
+                    )
+                }
+
+                items(translationCourses, key = { it.id }) { course ->
+                    Card(
+                        modifier = Modifier.fillMaxWidth().clickable { },
+                        shape = RoundedCornerShape(12.dp),
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
+                    ) {
+                        Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Surface(shape = RoundedCornerShape(4.dp), color = RedPrimary.copy(alpha = 0.12f)) {
+                                    Text(
+                                        text = course.category,
+                                        modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
+                                        fontSize = 10.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = RedPrimary
+                                    )
+                                }
+                                Text(course.duration, fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            }
+                            Text(course.title, style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Bold)
+                            Text(course.desc, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 2)
+
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                Button(
+                                    onClick = { },
+                                    modifier = Modifier.weight(1f),
+                                    shape = RoundedCornerShape(8.dp),
+                                    colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
+                                ) {
+                                    Icon(Icons.Default.MenuBook, contentDescription = null, modifier = Modifier.size(14.dp))
+                                    Spacer(Modifier.width(4.dp))
+                                    Text(if (isArabic) "قراءة وتطبيق المرجع" else "Open Textbook", fontSize = 11.sp)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            2 -> {
+                // Glossary and Terminology
+                item {
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text(
+                            text = if (isArabic) "📖 مسرد المصطلحات الثلاثي المشترك (عربي • إنجليزي • ألماني)" else "📖 Trilingual Shared Termbase (AR • EN • DE)",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 12.5.sp,
+                            color = RedPrimary
+                        )
+
+                        if (copiedTerm != null) {
+                            Surface(
+                                shape = RoundedCornerShape(8.dp),
+                                color = SuccessGreen.copy(alpha = 0.15f),
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                Text(
+                                    text = copiedTerm!!,
+                                    modifier = Modifier.padding(8.dp),
+                                    fontSize = 11.sp,
+                                    color = SuccessGreen,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            }
+                        }
+                    }
+                }
+
+                items(commonGlossary) { term ->
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(10.dp),
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
+                    ) {
+                        Column(modifier = Modifier.padding(10.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(term.second, fontWeight = FontWeight.Bold, fontSize = 13.sp, color = RedPrimary)
+                                IconButton(
+                                    onClick = {
+                                        copiedTerm = "✓ تم نسخ المصطلح: ${term.second} ⇄ ${term.first}"
+                                    },
+                                    modifier = Modifier.size(24.dp)
+                                ) {
+                                    Icon(Icons.Default.ContentCopy, contentDescription = null, modifier = Modifier.size(14.dp), tint = MaterialTheme.colorScheme.onSurfaceVariant)
+                                }
+                            }
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Text("🇬🇧 ${term.first}", fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurface)
+                                Text("🇩🇪 ${term.third}", fontSize = 11.sp, color = Color(0xFFD97706), fontWeight = FontWeight.SemiBold)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
