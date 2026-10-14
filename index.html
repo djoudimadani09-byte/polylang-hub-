@@ -1851,6 +1851,357 @@
               <div style="font-size:12px; font-weight:800; margin-bottom:8px; color:var(--crimson);">
                 🎯 اختر مسار الاختبار المعياري المطلوب:
               </div>
+
+        <!-- STUDENT SUB-SECTION 4: SHARED LINGUISTICS & TRANSLATION SCIENCE LIBRARY (المكتبة المشتركة الكاملة) -->
+        <div id="student-languages-box" style="display:none;">
+          <div style="background:var(--bg-body); padding:18px; border-radius:12px; border:1px solid var(--border-line);">
+            
+            <!-- Header Banner -->
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+              <div>
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px; flex-wrap:wrap;">
+                  <span class="badge-gold" style="font-size:11px;">📚 مكتبة مشتركة لطلبة الترجمة واللغات</span>
+                  <span class="badge-iso-green" style="font-size:11px;">✓ مراجع موثقة ISO 17100</span>
+                  <span style="background:rgba(239,68,68,0.12); color:var(--crimson); font-size:11px; font-weight:800; padding:2px 8px; border-radius:6px;">إشراف: الأستاذ جودي مداني</span>
+                  <span style="background:rgba(59,130,246,0.12); color:#1d4ed8; font-size:11px; font-weight:800; padding:2px 8px; border-radius:6px;">جامعة الجزائر 2 • ترانز اب</span>
+                </div>
+                <h3 style="font-size:20px; font-weight:900; margin:0 0 6px;" id="txt-shared-lib-title">مكتبة علم اللغة والترجمة المشتركة الشاملة 🎓</h3>
+                <p style="font-size:12.5px; color:var(--text-dim); margin:0; line-height:1.6; max-width:760px;" id="txt-shared-lib-desc">
+                  منصة أكاديمية ومرجعية متكاملة ومفتوحة لطلبة معاهد الترجمة وممارسي المهنة ومتعلمي اللغات. تجمع بين أمهات نظريات ومدارس علم الترجمة واللسانيات، مساقات الألمانية الكاملة (8 مساقات فيديو معتمدة)، المراجع والوثائق الأكاديمية (PDF / PPTX)، دورات المنصات والشهادات الجامعية الدولية، ومعجم المصطلحات المتخصص ثلاثي اللغات مع النطق الصوتي الحي.
+                </p>
+              </div>
+              <div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
+                <span class="reg-pill" style="font-weight:800; font-size:11.5px; color:var(--crimson);">17 مرجعاً ومساقاً معتمداً</span>
+              </div>
+            </div>
+
+            <!-- Library Sub-Section Tabs Switcher -->
+            <div style="display:flex; gap:6px; margin-bottom:16px; flex-wrap:wrap; border-bottom:1px solid var(--border-line); padding-bottom:10px;">
+              <button class="nav-pill active" id="pill-shared-tab-all" onclick="switchSharedLibrarySection('all')">🌐 جميع المراجع والمساقات (17)</button>
+              <button class="nav-pill" id="pill-shared-tab-theories" onclick="switchSharedLibrarySection('theories')">🧠 نظريات ومدارس علم الترجمة</button>
+              <button class="nav-pill" id="pill-shared-tab-german" onclick="switchSharedLibrarySection('german')">🇩🇪 مساقات الألمانية (8 فيديوهات)</button>
+              <button class="nav-pill" id="pill-shared-tab-glossary" onclick="switchSharedLibrarySection('glossary')">📖 المعجم الصوتي التخصصي</button>
+              <button class="nav-pill" id="pill-shared-tab-standards" onclick="switchSharedLibrarySection('standards')">⚖️ دليل المترجم المحلف و ISO 17100</button>
+            </div>
+
+            <!-- Search & Filters Toolbar -->
+            <div id="student-shared-filters-toolbar" style="background:var(--bg-surface); padding:12px 14px; border-radius:10px; border:1px solid var(--border-line); margin-bottom:16px;">
+              <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px;">
+                <div style="flex:1; min-width:260px; position:relative;">
+                  <input type="text" id="student-shared-search" class="form-control" placeholder="🔍 ابحث في المراجع الأكاديمية، النظريات، المساقات والمصطلحات..." oninput="handleStudentSharedFilterChange()">
+                </div>
+                <select id="student-shared-category-filter" class="form-control" style="width:auto; min-width:160px;" onchange="handleStudentSharedFilterChange()">
+                  <option value="all">📂 جميع الفئات والتخصصات</option>
+                  <option value="german_learning">🇩🇪 مساقات تعلم الألمانية (8 فيديوهات)</option>
+                  <option value="academic_lectures">📄 محاضرات أكاديمية (PDF)</option>
+                  <option value="studies_books">📖 دراسات ومراجع علم الترجمة</option>
+                  <option value="series_lessons">🎓 سلاسل دروس الترجمة</option>
+                  <option value="university_slides">📊 عروض تقديمية (PPTX)</option>
+                  <option value="online_courses">🌐 دورات Coursera</option>
+                  <option value="academic_degrees">📜 شهادات جامعية دولية</option>
+                  <option value="postgraduate">🏛️ ماجستير ودراسات عليا</option>
+                  <option value="pro_platforms">⭐ منصات تدريب مهنية</option>
+                </select>
+                <select id="student-shared-level-filter" class="form-control" style="width:auto; min-width:140px;" onchange="handleStudentSharedFilterChange()">
+                  <option value="all">📊 جميع المستويات الأكاديمية</option>
+                  <option value="تأسيسي وأكاديمي">تأسيسي وأكاديمي</option>
+                  <option value="جامعي وتخصصي">جامعي وتخصصي</option>
+                  <option value="دراسات عليا متقدمة">دراسات عليا متقدمة</option>
+                  <option value="شهادة مهنية احترافية">شهادة مهنية احترافية</option>
+                </select>
+              </div>
+
+              <!-- Category Filter Chips -->
+              <div style="display:flex; gap:6px; flex-wrap:wrap;" id="student-cat-chips-container">
+                <button class="nav-pill active" onclick="setStudentCategoryFilter('all', this)">الكل (17)</button>
+                <button class="nav-pill" style="border-color:#f59e0b; background:rgba(245,158,11,0.1); color:#b45309; font-weight:800;" onclick="setStudentCategoryFilter('german_learning', this)">🇩🇪 مساقات الألمانية (8)</button>
+                <button class="nav-pill" onclick="setStudentCategoryFilter('academic_lectures', this)">📄 محاضرات أكاديمية PDF</button>
+                <button class="nav-pill" onclick="setStudentCategoryFilter('studies_books', this)">📖 كتب ودراسات</button>
+                <button class="nav-pill" onclick="setStudentCategoryFilter('series_lessons', this)">🎓 سلاسل الدروس</button>
+                <button class="nav-pill" onclick="setStudentCategoryFilter('university_slides', this)">📊 عروض PPTX</button>
+                <button class="nav-pill" onclick="setStudentCategoryFilter('online_courses', this)">🌐 Coursera</button>
+                <button class="nav-pill" onclick="setStudentCategoryFilter('academic_degrees', this)">📜 شهادات دولية</button>
+                <button class="nav-pill" onclick="setStudentCategoryFilter('postgraduate', this)">🏛️ ماجستير</button>
+                <button class="nav-pill" onclick="setStudentCategoryFilter('pro_platforms', this)">⭐ منصات مهنية</button>
+              </div>
+            </div>
+
+            <!-- Status Counter -->
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:14px; padding:6px 0; border-bottom:1px solid var(--border-line);">
+              <div style="font-size:12px; font-weight:800; color:var(--crimson);" id="student-shared-status-counter">
+                عرض 17 مرجعاً ومساقاً أكاديمياً ولغوياً معتمداً
+              </div>
+              <div style="font-size:11px; color:var(--text-dim);">
+                ✓ جميع الروابط مباشرة ومفتوحة لطلبة الترجمة والمتدربين
+              </div>
+            </div>
+
+            <!-- SECTION 1: VERIFIED ACADEMIC & LANGUAGE COURSES GRID -->
+            <div id="student-shared-courses-section" style="display:block; margin-bottom:20px;">
+              <div class="courses-grid" id="student-academy-cards-container">
+                <!-- Dynamically populated via renderStudentSharedLibrary -->
+              </div>
+            </div>
+
+            <!-- SECTION 2: THEORIES & SCHOOLS OF TRANSLATION STUDIES (أمهات نظريات الترجمة) -->
+            <div id="student-shared-theories-section" style="display:block; margin-bottom:24px;">
+              <div style="background:var(--bg-card); border:1px solid var(--border-line); border-radius:12px; padding:18px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:14px;">
+                  <div>
+                    <h4 style="font-size:16px; font-weight:900; margin:0 0 4px; color:var(--text-main);">🧠 أمهات نظريات ومدارس علم الترجمة واللسانيات (Translation Studies Foundations)</h4>
+                    <p style="font-size:12px; color:var(--text-dim); margin:0;">الملخص المنهجي النظري المعتمد في معاهد وكليات الترجمة لتمكين الباحثين والطلبة.</p>
+                  </div>
+                  <span class="badge-iso-green" style="font-size:11px;">مقرر معتمد لطلبة الترجمة</span>
+                </div>
+
+                <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(290px, 1fr)); gap:12px;">
+                  
+                  <!-- Theory 1: Nida Equivalence -->
+                  <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:14px; border-top:3px solid #3b82f6;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                      <span style="font-size:11px; font-weight:800; color:#1d4ed8;">نظرية التكافؤ (Equivalence)</span>
+                      <span style="font-size:10px; background:#dbeafe; color:#1e40af; padding:2px 6px; border-radius:4px; font-weight:700;">Eugene Nida</span>
+                    </div>
+                    <div style="font-size:13px; font-weight:800; margin-bottom:6px;">التكافؤ الشكلي (Formal) مقابل التكافؤ الديناميكي (Dynamic)</div>
+                    <p style="font-size:11.5px; color:var(--text-dim); line-height:1.55; margin-bottom:8px;">
+                      يميز نايدا بين التكافؤ الشكلي الذي يلتزم بحرفية بنية النص المصدر، والتكافؤ الديناميكي الذي يهدف إلى خلق نفس الأثر الاستجابي والنفسي لدى المتلقي في اللغة الهدف (Equivalent Effect).
+                    </p>
+                    <div style="font-size:10.5px; background:var(--bg-card); padding:6px 8px; border-radius:6px; border:1px dashed var(--border-line); color:var(--text-main);">
+                      💡 <strong>التطبيق العملي:</strong> التكافؤ الشكلي مناسب للعقود والشهادات، بينما الديناميكي ضروري للأمثال والخطابات الدبلوماسية.
+                    </div>
+                  </div>
+
+                  <!-- Theory 2: Skopos Theory -->
+                  <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:14px; border-top:3px solid #10b981;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                      <span style="font-size:11px; font-weight:800; color:#059669;">نظرية الغاية / السكوبوس (Skopos)</span>
+                      <span style="font-size:10px; background:#d1fae5; color:#065f46; padding:2px 6px; border-radius:4px; font-weight:700;">Hans Vermeer & K. Reiß</span>
+                    </div>
+                    <div style="font-size:13px; font-weight:800; margin-bottom:6px;">الترجمة كفعل تواصلي هادف تحكمه الغاية (Skopos)</div>
+                    <p style="font-size:11.5px; color:var(--text-dim); line-height:1.55; margin-bottom:8px;">
+                      تعتبر هذه النظرية الألمانية أن النص المترجم محكوم أساساً بالغرض المستهدف (Skopos) والجمهور المتلقي، وليس بالالتزام الصارم بشكل النص المصدر. الغاية تحدد الاستراتيجية.
+                    </p>
+                    <div style="font-size:10.5px; background:var(--bg-card); padding:6px 8px; border-radius:6px; border:1px dashed var(--border-line); color:var(--text-main);">
+                      💡 <strong>التطبيق العملي:</strong> دليل استخدام لمنتج تجاري يترجم بأسلوب مباشر ومبسط مهما كان النص الأصلي أكاديمياً.
+                    </div>
+                  </div>
+
+                  <!-- Theory 3: Venuti Domestication -->
+                  <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:14px; border-top:3px solid #8b5cf6;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                      <span style="font-size:11px; font-weight:800; color:#6d28d9;">التوطين والتغريب</span>
+                      <span style="font-size:10px; background:#ede9fe; color:#5b21b6; padding:2px 6px; border-radius:4px; font-weight:700;">Lawrence Venuti</span>
+                    </div>
+                    <div style="font-size:13px; font-weight:800; margin-bottom:6px;">Domestication vs Foreignization ومقاومة الاختفاء</div>
+                    <p style="font-size:11.5px; color:var(--text-dim); line-height:1.55; margin-bottom:8px;">
+                      يحذر فينوتي من إفراط التوطين الذي يطمس الخصوصية الثقافية للمؤلف الأصلي، ويدعو للتغريب (Foreignization) لجعل القارئ يشعر بالاختلاف الثقافي ويدرك حضور المترجم.
+                    </p>
+                    <div style="font-size:10.5px; background:var(--bg-card); padding:6px 8px; border-radius:6px; border:1px dashed var(--border-line); color:var(--text-main);">
+                      💡 <strong>التطبيق العملي:</strong> الاحتفاظ بالمصطلح الثقافي أو الجغرافي مع حاشية توضيحية بدل استبداله بمقابل محلي هجين.
+                    </div>
+                  </div>
+
+                  <!-- Theory 4: Seleskovitch Paris School -->
+                  <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:14px; border-top:3px solid var(--crimson);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                      <span style="font-size:11px; font-weight:800; color:var(--crimson);">النظرية التأويلية (Théorie du Sens)</span>
+                      <span style="font-size:10px; background:#fee2e2; color:#991b1b; padding:2px 6px; border-radius:4px; font-weight:700;">ESIT Paris - Seleskovitch</span>
+                    </div>
+                    <div style="font-size:13px; font-weight:800; margin-bottom:6px;">المراحل الثلاث: الفهم ➔ كسر اللفظية (Déverbalisation) ➔ إعادة الصياغة</div>
+                    <p style="font-size:11.5px; color:var(--text-dim); line-height:1.55; margin-bottom:8px;">
+                      ركيزة الترجمة الفورية في مدرسة باريس: لا ينبغي للمترجم ترجمة الكلمات، بل نزع القالب اللفظي والاحتفاظ بالمعنى الذهني الخالص، ثم التعبير عنه باللغة الهدف بتلقائية وفصاحة.
+                    </p>
+                    <div style="font-size:10.5px; background:var(--bg-card); padding:6px 8px; border-radius:6px; border:1px dashed var(--border-line); color:var(--text-main);">
+                      💡 <strong>التطبيق العملي:</strong> تجنب الترجمة كلمة بكلمة في كابينة المؤتمرات لتفادي تعثر الفارق الزمني (Décalage).
+                    </div>
+                  </div>
+
+                  <!-- Theory 5: Pragmatics & Speech Acts -->
+                  <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:14px; border-top:3px solid #f59e0b;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                      <span style="font-size:11px; font-weight:800; color:#b45309;">اللسانيات التداولية (Pragmatics)</span>
+                      <span style="font-size:10px; background:#fef3c7; color:#92400e; padding:2px 6px; border-radius:4px; font-weight:700;">Austin & Searle</span>
+                    </div>
+                    <div style="font-size:13px; font-weight:800; margin-bottom:6px;">أفعال الكلام (Speech Acts) والمعنى الإنجازي وسياق الخطاب</div>
+                    <p style="font-size:11.5px; color:var(--text-dim); line-height:1.55; margin-bottom:8px;">
+                      تركز التداولية على ما يقصده المتكلم من وراء العبارة (القوة الإنجازية Illocutionary Force) ومراعاة السياق الظرفي، والأعراف الدبلوماسية، والكياسة اللغوية (Politeness Theory).
+                    </p>
+                    <div style="font-size:10.5px; background:var(--bg-card); padding:6px 8px; border-radius:6px; border:1px dashed var(--border-line); color:var(--text-main);">
+                      💡 <strong>التطبيق العملي:</strong> ترجمة عبارات التحفظ الدبلوماسي ("The delegation takes note") بنبرتها التداولية الدقيقة.
+                    </div>
+                  </div>
+
+                  <!-- Theory 6: Subtitling Standards -->
+                  <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:14px; border-top:3px solid #06b6d4;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                      <span style="font-size:11px; font-weight:800; color:#0891b2;">المعايير القياسية للترجمة المرئية</span>
+                      <span style="font-size:10px; background:#cffafe; color:#155e75; padding:2px 6px; border-radius:4px; font-weight:700;">EBU & Netflix Timed Text</span>
+                    </div>
+                    <div style="font-size:13px; font-weight:800; margin-bottom:6px;">ضوابط السرعة القرائية (CPS/CPL) والتكثيف الدلالي</div>
+                    <p style="font-size:11.5px; color:var(--text-dim); line-height:1.55; margin-bottom:8px;">
+                      في الترجمة المرئية، لا تتسع الشاشة للنص كاملاً. يجب الالتزام بحد أقصى 20 حرفاً في الثانية (20 CPS) و42 حرفاً للسطر الواحد (42 CPL)، وسطرين كحد أقصى مع التزامن الزمني الدقيق.
+                    </p>
+                    <div style="font-size:10.5px; background:var(--bg-card); padding:6px 8px; border-radius:6px; border:1px dashed var(--border-line); color:var(--text-main);">
+                      💡 <strong>التطبيق العملي:</strong> حذف الكلمات الزائدة وإعادة الصياغة الموجزة دون المساس بجوهر الرسالة والحوار.
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- SECTION 3: GERMAN INTENSIVE LANGUAGE CORNER (مساقات وقواعد الألمانية المكثفة) -->
+            <div id="student-shared-german-section" style="display:block; margin-bottom:24px;">
+              <div style="background:var(--bg-card); border:1px solid var(--border-line); border-radius:12px; padding:18px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:14px;">
+                  <div>
+                    <h4 style="font-size:16px; font-weight:900; margin:0 0 4px; color:#b45309;">🇩🇪 ركن التمكين اللغوي للغة الألمانية (Deutsch lernen für Übersetzer)</h4>
+                    <p style="font-size:12px; color:var(--text-dim); margin:0;">8 مساقات فيديو كاملة معتمدة تغطي المستويات من A1 إلى B2 مع ملخص القواعد والجداول الإعرابية.</p>
+                  </div>
+                  <button class="btn-primary-red" style="font-size:11px; padding:4px 10px;" onclick="openVideoPlayer('res_de_01_basics')">▶ بدء أول درس في الألمانية</button>
+                </div>
+
+                <!-- German Grammar Quick Cases Matrix -->
+                <div style="overflow-x:auto; margin-bottom:14px;">
+                  <table style="width:100%; border-collapse:collapse; font-size:11.5px; background:var(--bg-body); border-radius:8px; overflow:hidden; border:1px solid var(--border-line);">
+                    <thead>
+                      <tr style="background:var(--bg-surface); text-align:start; border-bottom:1px solid var(--border-line);">
+                        <th style="padding:8px 10px;">الحالة الإعرابية (Kasus)</th>
+                        <th style="padding:8px 10px;">المذكر (Maskulin)</th>
+                        <th style="padding:8px 10px;">المؤنث (Feminin)</th>
+                        <th style="padding:8px 10px;">المحايد (Neutral)</th>
+                        <th style="padding:8px 10px;">الجمع (Plural)</th>
+                        <th style="padding:8px 10px;">الوظيفة النحوية</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr style="border-bottom:1px solid var(--border-line);">
+                        <td style="padding:8px 10px; font-weight:800; color:#1d4ed8;">Nominativ (الرفع)</td>
+                        <td style="padding:8px 10px;">der / ein</td>
+                        <td style="padding:8px 10px;">die / eine</td>
+                        <td style="padding:8px 10px;">das / ein</td>
+                        <td style="padding:8px 10px;">die / -</td>
+                        <td style="padding:8px 10px; color:var(--text-dim);">الفاعل الرئيسي للجملة (Subjekt)</td>
+                      </tr>
+                      <tr style="border-bottom:1px solid var(--border-line);">
+                        <td style="padding:8px 10px; font-weight:800; color:#059669;">Akkusativ (النصب)</td>
+                        <td style="padding:8px 10px; font-weight:bold; color:#ef4444;">den / einen</td>
+                        <td style="padding:8px 10px;">die / eine</td>
+                        <td style="padding:8px 10px;">das / ein</td>
+                        <td style="padding:8px 10px;">die / -</td>
+                        <td style="padding:8px 10px; color:var(--text-dim);">المفعول به المباشر (Direktes Objekt)</td>
+                      </tr>
+                      <tr style="border-bottom:1px solid var(--border-line);">
+                        <td style="padding:8px 10px; font-weight:800; color:#d97706;">Dativ (الجر / القابل)</td>
+                        <td style="padding:8px 10px; font-weight:bold; color:#d97706;">dem / einem</td>
+                        <td style="padding:8px 10px; font-weight:bold; color:#d97706;">der / einer</td>
+                        <td style="padding:8px 10px; font-weight:bold; color:#d97706;">dem / einem</td>
+                        <td style="padding:8px 10px; font-weight:bold; color:#d97706;">den (+n) / -</td>
+                        <td style="padding:8px 10px; color:var(--text-dim);">المفعول به غير المباشر وحروف الجر</td>
+                      </tr>
+                      <tr>
+                        <td style="padding:8px 10px; font-weight:800; color:#7c3aed;">Genitiv (الإضافة)</td>
+                        <td style="padding:8px 10px;">des (+es/s)</td>
+                        <td style="padding:8px 10px;">der</td>
+                        <td style="padding:8px 10px;">des (+es/s)</td>
+                        <td style="padding:8px 10px;">der</td>
+                        <td style="padding:8px 10px; color:var(--text-dim);">الملكية والإضافة الرسمية والقانونية</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- 8 German Video Courses Quick Launcher -->
+                <div style="font-size:12px; font-weight:800; margin-bottom:8px; color:var(--text-main);">قائمة فيديوهات ومحاضرات الألمانية الكاملة المتاحة للتشغيل الفوري:</div>
+                <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)); gap:8px;">
+                  <button type="button" class="btn-outline-action" style="padding:8px 10px; text-align:start; justify-content:flex-start; font-size:11.5px; border-radius:8px;" onclick="openVideoPlayer('res_de_01_basics')">
+                    🇩🇪 1. الدرس التأسيسي: تراكيب الجملة والمحادثة
+                  </button>
+                  <button type="button" class="btn-outline-action" style="padding:8px 10px; text-align:start; justify-content:flex-start; font-size:11.5px; border-radius:8px;" onclick="openVideoPlayer('res_de_02_conversation')">
+                    🇩🇪 2. كبسولة المحادثة الألمانية السريعة والنطق
+                  </button>
+                  <button type="button" class="btn-outline-action" style="padding:8px 10px; text-align:start; justify-content:flex-start; font-size:11.5px; border-radius:8px;" onclick="openVideoPlayer('res_de_03_grammar_cases')">
+                    🇩🇪 3. قواعد الألمانية: ضبط Dativ و Akkusativ
+                  </button>
+                  <button type="button" class="btn-outline-action" style="padding:8px 10px; text-align:start; justify-content:flex-start; font-size:11.5px; border-radius:8px;" onclick="openVideoPlayer('res_de_04_vocab_nuances')">
+                    🇩🇪 4. المصطلحات الألمانية للمترجمين والفروق
+                  </button>
+                  <button type="button" class="btn-outline-action" style="padding:8px 10px; text-align:start; justify-content:flex-start; font-size:11.5px; border-radius:8px;" onclick="openVideoPlayer('res_de_05_listening_mastery')">
+                    🇩🇪 5. مهارة الاستماع والاستيعاب Hörverstehen
+                  </button>
+                  <button type="button" class="btn-outline-action" style="padding:8px 10px; text-align:start; justify-content:flex-start; font-size:11.5px; border-radius:8px;" onclick="openVideoPlayer('res_de_06_business_german')">
+                    🇩🇪 6. محادثات العمل والمراسلات Geschäftsdeutsch
+                  </button>
+                  <button type="button" class="btn-outline-action" style="padding:8px 10px; text-align:start; justify-content:flex-start; font-size:11.5px; border-radius:8px;" onclick="openVideoPlayer('res_de_07_fluency_secrets')">
+                    🇩🇪 7. محاضرة الطلاقة وتجاوز حواجز التحدث
+                  </button>
+                  <button type="button" class="btn-outline-action" style="padding:8px 10px; text-align:start; justify-content:flex-start; font-size:11.5px; border-radius:8px;" onclick="openVideoPlayer('res_de_08_grammar_pronunciation_summary')">
+                    🇩🇪 8. خلاصة القواعد والنطق السليم وتفادي الأفخاخ
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- SECTION 4: TRILINGUAL AUDIO TERMINOLOGY GLOSSARY (المعجم الصوتي التخصصي) -->
+            <div id="student-shared-glossary-section" style="display:block; margin-bottom:24px;">
+              <div style="background:var(--bg-card); border:1px solid var(--border-line); border-radius:12px; padding:18px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+                  <div>
+                    <h4 style="font-size:16px; font-weight:900; margin:0 0 4px; color:var(--text-main);">📖 المعجم الصوتي للمصطلحات التخصصية (Trilingual Audio Glossary)</h4>
+                    <p style="font-size:12px; color:var(--text-dim); margin:0;">مصطلحات حية معتمدة باللغات العربية والإنجليزية والألمانية والفرنسية مع إمكانية النطق الصوتي الفوري والنسخ.</p>
+                  </div>
+                  <div style="display:flex; gap:6px;">
+                    <button class="nav-pill active" onclick="filterGlossaryDomain('all', this)">جميع المجالات</button>
+                    <button class="nav-pill" onclick="filterGlossaryDomain('diplomatic', this)">🏛️ دبلوماسي</button>
+                    <button class="nav-pill" onclick="filterGlossaryDomain('legal', this)">⚖️ قانوني ومحلف</button>
+                    <button class="nav-pill" onclick="filterGlossaryDomain('booth', this)">🎙️ كابينة فورية</button>
+                    <button class="nav-pill" onclick="filterGlossaryDomain('business', this)">💼 اقتصادي ومالي</button>
+                  </div>
+                </div>
+
+                <!-- Glossary Search -->
+                <div style="margin-bottom:12px;">
+                  <input type="text" id="glossary-term-search" class="form-control" placeholder="🔍 ابحث عن أي مصطلح بالعربية أو الإنجليزية أو الألمانية أو الفرنسية..." oninput="handleGlossarySearch()">
+                </div>
+
+                <!-- Glossary Grid Container -->
+                <div id="glossary-cards-container" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:10px;">
+                  <!-- Populated via JavaScript -->
+                </div>
+              </div>
+            </div>
+
+            <!-- SECTION 5: SWORN TRANSLATION & ISO 17100 QUALITY STANDARDS -->
+            <div id="student-shared-standards-section" style="display:block;">
+              <div style="background:var(--bg-card); border:1px solid var(--border-line); border-radius:12px; padding:18px; border-top:3px solid var(--crimson);">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+                  <h4 style="font-size:16px; font-weight:900; margin:0; color:var(--text-main);">⚖️ دليل المترجم المحلف والمعيار الدولي ISO 17100:2015</h4>
+                  <span class="badge-iso-green" style="font-size:11px;">معيار الجودة المعتمد دولياً</span>
+                </div>
+                <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)); gap:12px; font-size:12px;">
+                  <div style="background:var(--bg-body); padding:10px 12px; border-radius:8px; border:1px solid var(--border-line);">
+                    <div style="font-weight:800; color:var(--crimson); margin-bottom:4px;">1. الترجمة الأولية (Translation)</div>
+                    <div style="color:var(--text-dim); line-height:1.5;">النقل الأمين للنص بواسطة مترجم حاصل على مؤهل جامعي معتمد وخبرة موثقة في المجال.</div>
+                  </div>
+                  <div style="background:var(--bg-body); padding:10px 12px; border-radius:8px; border:1px solid var(--border-line);">
+                    <div style="font-weight:800; color:#1d4ed8; margin-bottom:4px;">2. الفحص الذاتي (Check)</div>
+                    <div style="color:var(--text-dim); line-height:1.5;">مراجعة المترجم لعمله للتأكد من عدم وجود إغفال أو أخطاء حسابية أو اصطلاحية.</div>
+                  </div>
+                  <div style="background:var(--bg-body); padding:10px 12px; border-radius:8px; border:1px solid var(--border-line);">
+                    <div style="font-weight:800; color:#059669; margin-bottom:4px;">3. المراجعة النظيرة (Revision)</div>
+                    <div style="color:var(--text-dim); line-height:1.5;">فحص مقارن للنص من قِبل مراجع مستقل خبير للتأكد من الملاءمة والأسلوب والغرض.</div>
+                  </div>
+                  <div style="background:var(--bg-body); padding:10px 12px; border-radius:8px; border:1px solid var(--border-line);">
+                    <div style="font-weight:800; color:#d97706; margin-bottom:4px;">4. التدقيق النهائي والختم الرسمي</div>
+                    <div style="color:var(--text-dim); line-height:1.5;">الاعتماد بختم المترجم المحلف الرسمي وإرفاق بيان المطابقة الرسمية للجهات القضائية.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
               <div style="display:flex; gap:8px; flex-wrap:wrap;" id="exam-track-buttons">
                 <button class="nav-pill active" id="btn-exam-comprehensive" onclick="switchExamTrack('comprehensive')">
                   🏆 الامتحان الشامل للترجمة واللغات (100 سؤال)
@@ -4400,25 +4751,337 @@
         return window.ACADEMY_100_VIDEOS;
       }
       return [
-        {
-          id: "res_cheni_fairouz_pdf",
-          title: "محاضرات في علم الترجمة: قضايا ومقاربات (PDF)",
-          category: "academic_lectures",
-          categoryLabel: "محاضرات أكاديمية (PDF)",
-          format: "PDF Document",
-          formatIcon: "📄",
-          url: "https://fac.umc.edu.dz/fll/images/cours/CHENI%20FAIROUZ.pdf",
-          language: "ar",
-          duration: "وثيقة أكاديمية معتمدة",
-          level: "جامعي وتخصصي",
-          desc: "محاضرات أكاديمية موثقة في علم الترجمة تتناول القضايا والمقاربات النظرية والتطبيقية، ومناهج التحليل والترجمة التخصصية لطلبة الدراسات العليا والمترجمين."
-        }
-      ];
-    }
+  {
+    id: "res_cheni_fairouz_pdf",
+    title: "محاضرات في علم الترجمة: قضايا ومقاربات (PDF)",
+    category: "academic_lectures",
+    categoryLabel: "محاضرات أكاديمية (PDF)",
+    format: "PDF Document",
+    formatIcon: "📄",
+    url: "https://fac.umc.edu.dz/fll/images/cours/CHENI%20FAIROUZ.pdf",
+    language: "ar",
+    langLabel: "العربية / اللغات الأجنبية",
+    duration: "وثيقة أكاديمية معتمدة",
+    level: "دراسات جامعية وتخصصية",
+    isPremium: false,
+    verifiedBadge: "✓ مرجع جامعي معتمد",
+    desc: "محاضرات أكاديمية موثقة في علم الترجمة تتناول القضايا والمقاربات النظرية والتطبيقية، ومناهج التحليل والترجمة التخصصية لطلبة الدراسات العليا والمترجمين."
+  },
+  {
+    id: "res_scribd_intro_translation",
+    title: "مدخل إلى علم الترجمة (ملف على Scribd)",
+    category: "studies_books",
+    categoryLabel: "دراسات ومراجع الترجمة",
+    format: "Scribd Document",
+    formatIcon: "📖",
+    url: "https://www.scribd.com/document/600337087/مدخل-إلى-علم-الترجمة",
+    language: "ar",
+    langLabel: "العربية",
+    duration: "مرجع دراسي تأصيلي",
+    level: "تأسيسي وأكاديمي",
+    isPremium: false,
+    verifiedBadge: "✓ دراسة مرجعية موثقة",
+    desc: "مرجع علمي تأسيسي يقدم مدخلاً مفصلاً لأسس ونظريات علم الترجمة والمدارس اللسانية والترجمية وتطبيقاتها العلمية في نقل النصوص بين الثقافات."
+  },
+  {
+    id: "res_facebook_translation_basics_1",
+    title: "الدرس الأول من سلسلة “أساسيات الترجمة”",
+    category: "series_lessons",
+    categoryLabel: "سلاسل دروس الترجمة",
+    format: "Interactive Lecture",
+    formatIcon: "🎓",
+    url: "https://www.facebook.com/kogee.elrishi/posts/8070308722982424",
+    language: "ar",
+    langLabel: "العربية / الإنجليزية",
+    duration: "درس تطبيقي منهجي",
+    level: "مبتدئ إلى متوسط",
+    isPremium: false,
+    verifiedBadge: "✓ درس تعليمي منهجي",
+    desc: "درس تطبيقي منهجي يشرح الركائز الأساسية لنقل المعنى وتفادي الترجمة الحرفية وضبط التراكيب النحوية والأسلوبية بين اللغات مع تدريبات عملية."
+  },
+  {
+    id: "res_ksu_pptx_intro",
+    title: "عرض تقديمي PowerPoint: مدخل إلى علم الترجمة (جامعة الملك سعود)",
+    category: "university_slides",
+    categoryLabel: "عروض تقديمية جامعية (PPTX)",
+    format: "PowerPoint PPTX",
+    formatIcon: "📊",
+    url: "https://fac.ksu.edu.sa/sites/default/files/_1.pptx",
+    language: "ar",
+    langLabel: "العربية / اللغات",
+    duration: "شرائح عرض أكاديمية",
+    level: "جامعي معتمد",
+    isPremium: false,
+    verifiedBadge: "✓ صادر عن كلية اللغات والترجمة (KSU)",
+    desc: "عرض تقديمي شامل ومفصل صادر عن كلية اللغات والترجمة بجامعة الملك سعود يوضح مفاهيم علم الترجمة، أدوات المترجم، واستراتيجيات المعالجة اللغوية."
+  },
+  {
+    id: "res_coursera_translation",
+    title: "دورات ترجمة مجانية عبر منصة Coursera",
+    category: "online_courses",
+    categoryLabel: "دورات عالمية عبر الإنترنت",
+    format: "Online University Courses",
+    formatIcon: "🌐",
+    url: "https://www.coursera.org/courses?query=translation",
+    language: "en",
+    langLabel: "الإنجليزية / متعدد اللغات",
+    duration: "مساقات متعددة مع شهادات",
+    level: "متعدد المستويات",
+    isPremium: false,
+    verifiedBadge: "✓ دورات جامعية دولية معتمدة",
+    desc: "باقة منتقاة من المساقات والورش التدريبية المتخصصة في الترجمة واللغات من جامعات دولية رائدة عبر منصة كورسيرا العالمية مع مسارات مجانية وخيارات شهادات إتمام."
+  },
+  {
+    id: "res_umass_amherst_cert",
+    title: "شهادة الترجمة والوساطة اللغوية – جامعة ماساتشوستس Amherst",
+    category: "academic_degrees",
+    categoryLabel: "شهادات جامعية دولية",
+    format: "University Certificate Program",
+    formatIcon: "📜",
+    url: "https://www.umass.edu/languages-literatures-cultures/academics/online-certificate-professional-translation-interpreting",
+    language: "en",
+    langLabel: "الإنجليزية / متعدد اللغات",
+    duration: "برنامج شهادة مهنية معتمد",
+    level: "شهادة مهنية احترافية",
+    isPremium: false,
+    verifiedBadge: "✓ University of Massachusetts Amherst",
+    desc: "برنامج أكاديمي ومهني معتمد عبر الإنترنت في الترجمة التحريرية والتفسير الشفوي والوساطة اللغوية من كلية الآداب بجامعة ماساتشوستس أمهرست."
+  },
+  {
+    id: "res_nyu_sps_ms",
+    title: "ماجستير في الترجمة والتفسير – جامعة نيويورك (NYU SPS)",
+    category: "postgraduate",
+    categoryLabel: "دراسات عليا وماجستير",
+    format: "Master of Science (MS)",
+    formatIcon: "🏛️",
+    url: "https://www.sps.nyu.edu/homepage/academics/masters-degrees/ms-in-translation.html",
+    language: "en",
+    langLabel: "الإنجليزية / لغات الأمم المتحدة",
+    duration: "درجة الماجستير المهني (MS)",
+    level: "دراسات عليا متقدمة",
+    isPremium: false,
+    verifiedBadge: "✓ New York University (NYU SPS)",
+    desc: "برنامج درجة الماجستير في علوم الترجمة التحريرية والفورية من كلية الدراسات المهنية بجامعة نيويورك، يؤهل للعمل الدبلوماسي والمؤسسات الدولية الكبرى."
+  },
+  {
+    id: "res_hunter_cuny_cert",
+    title: "شهادة دراسات الترجمة – كلية Hunter (CUNY)",
+    category: "academic_degrees",
+    categoryLabel: "شهادات جامعية دولية",
+    format: "Continuing Education Certificate",
+    formatIcon: "🎓",
+    url: "https://continuing-ed.hunter.cuny.edu/certificate-in-translation-studies/",
+    language: "en",
+    langLabel: "الإنجليزية / الإسبانية واللغات",
+    duration: "دبلوم مهني تطبيقي",
+    level: "دبلوم مهني متقدم",
+    isPremium: false,
+    verifiedBadge: "✓ City University of New York (CUNY)",
+    desc: "برنامج شهادة دراسات الترجمة من التعليم المستمر بكلية هانتر في جامعة مدينة نيويورك، يركز على مهارات الصياغة التحريرية والمعايير الاحترافية لقطاع الأعمال."
+  },
+  {
+    id: "res_translastars",
+    title: "منصة TranslaStars – دورات احترافية في الترجمة أونلاين",
+    category: "pro_platforms",
+    categoryLabel: "منصات تدريب احترافية",
+    format: "Professional Training Platform",
+    formatIcon: "⭐",
+    url: "https://www.translastars.com/",
+    language: "en",
+    langLabel: "متعدد اللغات (EN/ES/IT/FR)",
+    duration: "ورش ودورات مهنية متخصصة",
+    level: "مهني وتطبيقي",
+    isPremium: false,
+    verifiedBadge: "✓ TranslaStars Specialized Academy",
+    desc: "أكاديمية تدريب مهنية متخصصة تقدم دورات عملية للمترجمين في برامج الكات (CAT Tools) وترجمة الفيديو والدبلجة والترجمة الطبية والقانونية والتسويقية."
+  },
 
+  // =========================================================================
+  // مساقات وفيديوهات تعلم اللغة الألمانية المعتمدة (German Language Learning Series)
+  // =========================================================================
+  {
+    id: "res_german_fb_1_btue",
+    title: "الدرس التأسيسي في الألمانية: تراكيب الجملة والمحادثة اليومية (Deutsch lernen)",
+    category: "german_learning",
+    categoryLabel: "تعلم اللغة الألمانية 🇩🇪",
+    format: "Facebook Video",
+    formatIcon: "🇩🇪",
+    url: "https://www.facebook.com/share/v/1BtueGUSXV/",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+    language: "de",
+    langLabel: "الألمانية / Deutsch",
+    duration: "فيديو تدريبي تفاعلي",
+    level: "A1 - A2 تأسيسي",
+    isPremium: false,
+    verifiedBadge: "✓ درس ألماني معتمد",
+    desc: "شرح مبسط ومباشر لبناء الجملة الأساسية في اللغة الألمانية وتصريف الأفعال الشائعة مع تدريب على النطق ومخارج الحروف السليمة لمتعلمي اللغات.",
+    keyPoints: [
+      "Subjekt + Prädikat + Objekt (Satzstruktur im Hauptsatz)",
+      "Vergangenheit: Perfekt mit haben / sein",
+      "W-Fragen: Wie, Wo, Wann, Warum, Wer"
+    ]
+  },
+  {
+    id: "res_german_fb_2_dl41",
+    title: "كبسولة المحادثة الألمانية السريعة: العبارات الحيوية والنطق الأصيل",
+    category: "german_learning",
+    categoryLabel: "تعلم اللغة الألمانية 🇩🇪",
+    format: "Facebook Reel",
+    formatIcon: "🇩🇪",
+    url: "https://www.facebook.com/share/r/1DL41mc34o/",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+    language: "de",
+    langLabel: "الألمانية / Deutsch",
+    duration: "مقطع تدريبي سريع (Reel)",
+    level: "A1 للمبتدئين",
+    isPremium: false,
+    verifiedBadge: "✓ كبسولة نطق يومية",
+    desc: "تدريب مكثف على العبارات اليومية والمواقف الحياتية في الشارع والمطعم والمطار بألمانيا وكيفية الرد التلقائي دون تردد.",
+    keyPoints: [
+      "Alltagsfloskeln: Guten Tag, Auf Wiedersehen, Bitte schön",
+      "Sich vorstellen: Ich heiße, Ich komme aus, Freut mich sehr",
+      "Höflichkeit: Könnten Sie mir bitte helfen?"
+    ]
+  },
+  {
+    id: "res_german_fb_3_14ux",
+    title: "قواعد الألمانية ببساطة: ضبط أدوات التعريف وتراكيب الـ Dativ والـ Akkusativ",
+    category: "german_learning",
+    categoryLabel: "تعلم اللغة الألمانية 🇩🇪",
+    format: "Facebook Reel",
+    formatIcon: "🇩🇪",
+    url: "https://www.facebook.com/share/r/14ux22YaTvK/",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+    language: "de",
+    langLabel: "الألمانية / Deutsch",
+    duration: "درس قواعد مركز (Reel)",
+    level: "A2 - B1 متوسط",
+    isPremium: false,
+    verifiedBadge: "✓ قواعد نحوية موثقة",
+    desc: "تفكيك عقدة أدوات التعريف (der, die, das) وحالات الإعراب الألمانية (Nominativ, Akkusativ, Dativ) عبر أمثلة عملية سريعة الحفظ والتطبيق.",
+    keyPoints: [
+      "Bestimmte Artikel: der, die, das -> den, dem, des",
+      "Wechselpräpositionen: an, auf, in, über, unter, vor, hinter, neben, zwischen",
+      "Wohin? (Akkusativ) vs. Wo? (Dativ)"
+    ]
+  },
+  {
+    id: "res_german_fb_4_ho4u",
+    title: "المصطلحات الألمانية للمترجمين ومتعلمي اللغات: الفروق الدلالية الدقيقة",
+    category: "german_learning",
+    categoryLabel: "تعلم اللغة الألمانية 🇩🇪",
+    format: "Facebook Reel",
+    formatIcon: "🇩🇪",
+    url: "https://www.facebook.com/share/r/1Ho4u33jNk/",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+    language: "de",
+    langLabel: "الألمانية / Deutsch",
+    duration: "مقطع دلالي ولساني (Reel)",
+    level: "B1 - B2 متقدم",
+    isPremium: false,
+    verifiedBadge: "✓ فروق لغوية معتمدة",
+    desc: "التمييز بين الأفعال المركبة الألمانية واللواحق والتعبيرات الاصطلاحية وتفادي أخطاء الترجمة الحرفية بين العربية والألمانية.",
+    keyPoints: [
+      "Trennbare Verben: aufstehen, mitkommen, vorbereiten",
+      "Nuancen: kennen vs. wissen vs. erkennen",
+      "Falsche Freunde im Deutschen für Übersetzer"
+    ]
+  },
+  {
+    id: "res_german_fb_5_cem7",
+    title: "مهارة الاستماع والاستيعاب الشفهي في الألمانية (Hörverstehen Mastery)",
+    category: "german_learning",
+    categoryLabel: "تعلم اللغة الألمانية 🇩🇪",
+    format: "Facebook Reel",
+    formatIcon: "🇩🇪",
+    url: "https://www.facebook.com/share/r/1CEm7LEw8Y/",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+    language: "de",
+    langLabel: "الألمانية / Deutsch",
+    duration: "تمرين استماع تطبيقي (Reel)",
+    level: "A2 - B1 متوسط",
+    isPremium: false,
+    verifiedBadge: "✓ محاكاة الاستماع B1",
+    desc: "تقنيات تدريب الأذن على النبرة الألمانية وسرعة المتحدثين الأصليين واستخراج المعلومات الأساسية من الحوارات الشفهية لاجتياز اختبارات Goethe وTelc.",
+    keyPoints: [
+      "Selektives Hören: Schlüsselwörter erfassen",
+      "Intonation & Betonung im deutschen Satz",
+      "Zahlen, Uhrzeiten & Mengenangaben im Flug"
+    ]
+  },
+  {
+    id: "res_german_fb_6_f6ur",
+    title: "محادثات العمل والمكاتب والمراسلات الرسمية بالألمانية (Geschäftsdeutsch)",
+    category: "german_learning",
+    categoryLabel: "تعلم اللغة الألمانية 🇩🇪",
+    format: "Facebook Reel",
+    formatIcon: "🇩🇪",
+    url: "https://www.facebook.com/share/r/1F6uREvqc5/",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyBlazes.mp4",
+    language: "de",
+    langLabel: "الألمانية / Deutsch",
+    duration: "مقطع عملي ومهني (Reel)",
+    level: "B1 - B2 للمحترفين",
+    isPremium: false,
+    verifiedBadge: "✓ سياق مهني ورسمي",
+    desc: "صيغ الاحترام والمخاطبة الرسمية في بيئة العمل الألمانية، وكتابة الرسائل الإدارية، وإجراء المقابلات الشفهية والاجتماعات بنجاح.",
+    keyPoints: [
+      "Sehr geehrte Damen und Herren / Mit freundlichen Grüßen",
+      "Terminvereinbarung & geschäftliche Telefonate",
+      "Konjunktiv II für höfliche Bitten: Ich hätte gern, Ich würde vorschlagen"
+    ]
+  },
+  {
+    id: "res_german_fb_7_hpwc",
+    title: "محاضرة الألمانية الشاملة: أسرار الطلاقة وتجاوز حواجز التحدث (Fließend Deutsch)",
+    category: "german_learning",
+    categoryLabel: "تعلم اللغة الألمانية 🇩🇪",
+    format: "Facebook Video",
+    formatIcon: "🇩🇪",
+    url: "https://www.facebook.com/share/v/1Hpwcf1i38/",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
+    language: "de",
+    langLabel: "الألمانية / Deutsch",
+    duration: "محاضرة تفاعلية كاملة",
+    level: "A1 إلى B2 شامل",
+    isPremium: false,
+    verifiedBadge: "✓ مساق شامل للطلاقة",
+    desc: "محاضرة توجيهية شاملة تشرح استراتيجيات بناء الحصيلة اللغوية، وتنظيم وقت المذاكرة اليومي، وتطبيق أسلوب التظليل الصوتي (Shadowing) في إتقان اللغة الألمانية.",
+    keyPoints: [
+      "Sprechblockaden abbauen: Spontanität vor Perfektion",
+      "Wortschatzaufbau: Kollokationen statt isolierter Vokabeln",
+      "Shadowing-Methode für fehlerfreie Phonetik"
+    ]
+  },
+  {
+    id: "res_german_fb_8_14un",
+    title: "خلاصة القواعد والنطق السليم في الألمانية: تجنب الأفخاخ الشائعة",
+    category: "german_learning",
+    categoryLabel: "تعلم اللغة الألمانية 🇩🇪",
+    format: "Facebook Reel",
+    formatIcon: "🇩🇪",
+    url: "https://www.facebook.com/share/r/14uNxRvyKVQ/",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
+    language: "de",
+    langLabel: "الألمانية / Deutsch",
+    duration: "ملخص تطبيقي مركز (Reel)",
+    level: "A2 - B1 شامل",
+    isPremium: false,
+    verifiedBadge: "✓ ملخص القواعد والنطق",
+    desc: "دليل سريع لتصحيح الأخطاء الشائعة بين المبتدئين في مخارج حروف (ch, st, sp, ä, ö, ü) وتثبيت صيغ الماضي (Perfekt و Präteritum) بثقة واحتراف.",
+    keyPoints: [
+      "Ausspracheregeln: ch (ich-Laut vs. ach-Laut)",
+      "Umlaute richtig artikulieren: ä, ö, ü",
+      "Stolperfallen bei unregelmäßigen Verben vermeiden"
+    ]
+  }
+];
+    }
+    
     function handleAcademyFilterChange() {
       currentAcademyPage = 1;
       applyAcademyFilters();
+      try { renderStudentSharedLibrary(); } catch(e){}
     }
 
     function setCategoryFilter(cat, btn) {
@@ -5450,7 +6113,7 @@
         renderExamQuestion();
       }
       if (tab === 'languages') {
-        renderStudentEmbeddedVideos();
+        renderStudentSharedLibrary();
       }
     }
 
@@ -7455,7 +8118,408 @@
       try { translateEntireDOM(lang); } catch (e) { console.error("i18n err:", e); }
     }
 // Init on DOM ready
-    window.addEventListener('DOMContentLoaded', () => {
+    
+    // ==============================================================
+    // SHARED LINGUISTICS & TRANSLATION SCIENCE LIBRARY CONTROLLER
+    // ==============================================================
+    let studentSharedCurrentCategory = 'all';
+    let studentSharedCurrentLevel = 'all';
+    let studentSharedSearchQuery = '';
+    let currentGlossaryDomain = 'all';
+
+    const TRILINGUAL_GLOSSARY_ITEMS = [
+      {
+        ar: "الترجمة الفورية للمؤتمرات",
+        en: "Simultaneous Conference Interpreting",
+        de: "Simultandolmetschen bei Konferenzen",
+        fr: "Interprétation simultanée de conférence",
+        domain: "booth",
+        domainLabel: "كابينة فورية",
+        context: "نقل الخطاب شفهياً بالتزامن مع المتحدث من داخل الكابينة الصوتية العازلة."
+      },
+      {
+        ar: "الترجمة التتابعية ونظام روزان",
+        en: "Consecutive Interpreting & Rozan System",
+        de: "Konsekutivdolmetschen und Rozan-System",
+        fr: "Interprétation consécutive et système Rozan",
+        domain: "booth",
+        domainLabel: "كابينة فورية",
+        context: "تدوين رؤوس الأقلام عمودياً والترجمة بعد انتهاء المتكلم من مقطعه."
+      },
+      {
+        ar: "الفارق الزمني السمعي-النطقي (Décalage)",
+        en: "Ear-Voice Span (EVS / Décalage)",
+        de: "Zeitversatz / Hör-Sprech-Spanne (Décalage)",
+        fr: "Décalage audio-vocal (EVS)",
+        domain: "booth",
+        domainLabel: "كابينة فورية",
+        context: "الفارق الزمني بين سماع المترجم للفكرة وبداية نطقه للترجمة (2-4 ثوانٍ)."
+      },
+      {
+        ar: "مترجم محلف رسمي معتمد",
+        en: "Sworn / Certified Translator",
+        de: "Allgemein beeidigter / ermächtigter Übersetzer",
+        fr: "Traducteur assermenté agréé",
+        domain: "legal",
+        domainLabel: "قانوني ومحلف",
+        context: "مترجم يؤدي اليمين القانونية أمام المحكمة لاعتماد الوثائق والعقود الرسمية."
+      },
+      {
+        ar: "الأصدقاء المزيفون دلالياً (Faux Amis)",
+        en: "False Friends / Faux Amis",
+        de: "Falsche Freunde (Semantische Täuschung)",
+        fr: "Faux amis lexicaux",
+        domain: "diplomatic",
+        domainLabel: "دبلوماسي ولغوي",
+        context: "كلمات تتشابه في النطق والكتابة وتختلف جذرياً في المعنى (مثل actually و actuellement)."
+      },
+      {
+        ar: "قرار الجمعية العامة للأمم المتحدة",
+        en: "United Nations General Assembly Resolution",
+        de: "Resolution der UN-Generalversammlung",
+        fr: "Résolution de l'Assemblée générale de l'ONU",
+        domain: "diplomatic",
+        domainLabel: "دبلوماسي ولغوي",
+        context: "صيغة مؤسساتية رسمية تعتمد أفعال إنجازية مثل 'إذ يؤكد' و'يطالب' و'يعرب عن قلقه'."
+      },
+      {
+        ar: "حالات الإعراب في الألمانية (Kasus)",
+        en: "German Grammatical Cases (Cases)",
+        de: "Deutsche grammatische Fälle (Die vier Kasus)",
+        fr: "Les cas grammaticaux allemands",
+        domain: "diplomatic",
+        domainLabel: "لغوي وتأسيسي",
+        context: "الرفع (Nominativ)، النصب (Akkusativ)، الجر (Dativ)، والإضافة (Genitiv)."
+      },
+      {
+        ar: "الترجمة التناظرية والترجمة التتابعية",
+        en: "Relay & Retour Interpretation",
+        de: "Relaisdolmetschen und Retour-Dolmetschen",
+        fr: "Interprétation en relais et retour",
+        domain: "booth",
+        domainLabel: "كابينة فورية",
+        context: "الترجمة من كابينة وسيطة لغة أخرى (Relay) أو الترجمة إلى اللغة غير الأم (Retour)."
+      },
+      {
+        ar: "عقد تأسيس الشركات والنظام الأساسي",
+        en: "Articles of Association & Bylaws",
+        de: "Gesellschaftsvertrag und Satzung",
+        fr: "Statuts de la société et acte constitutif",
+        domain: "legal",
+        domainLabel: "قانوني ومحلف",
+        context: "وثيقة قانونية تأسيسية للشركات التجارية تتطلب ترجمة قانونية محلفة معتمدة."
+      },
+      {
+        ar: "الترجمة بالنظر (Sight Translation)",
+        en: "Sight Translation (Traduction à vue)",
+        de: "Stegreifübersetzen / Vom-Blatt-Übersetzen",
+        fr: "Traduction à vue",
+        domain: "booth",
+        domainLabel: "كابينة فورية",
+        context: "قراءة نص مكتوب وترجمته شفهياً فورياً دون تحضير كتابي مسبق."
+      },
+      {
+        ar: "تعديل الموازنة العمومية والسيولة النقدية",
+        en: "Balance Sheet Adjustment & Cash Liquidity",
+        de: "Bilanzanpassung und Barliquidität",
+        fr: "Ajustement du bilan et liquidités",
+        domain: "business",
+        domainLabel: "اقتصادي ومالي",
+        context: "مصطلحات التقارير المالية والتدقيق المحاسبي وميزانيات الشركات متعددة الجنسيات."
+      },
+      {
+        ar: "التكثيف الدلالي والسرعة القرائية (CPS)",
+        en: "Semantic Condensation & Characters Per Second",
+        de: "Semantische Verdichtung & Zeichen pro Sekunde (CPS)",
+        fr: "Condensation sémantique et caractères par seconde",
+        domain: "booth",
+        domainLabel: "ترجمة مرئية",
+        context: "معيار ترجمة الأفلام والمؤتمرات: 20 CPS و 42 CPL كحد أقصى لراحة القارئ."
+      }
+    ];
+
+    function renderStudentSharedLibrary() {
+      applyStudentSharedFilters();
+      renderGlossaryCards();
+    }
+
+    function applyStudentSharedFilters() {
+      const container = document.getElementById('student-academy-cards-container');
+      const counterEl = document.getElementById('student-shared-status-counter');
+      if (!container) return;
+
+      const all = typeof getAllAcademyVideos === 'function' ? getAllAcademyVideos() : [];
+      const searchInput = document.getElementById('student-shared-search');
+      const q = searchInput ? searchInput.value.trim().toLowerCase() : '';
+      const catEl = document.getElementById('student-shared-category-filter');
+      const cat = catEl ? catEl.value : studentSharedCurrentCategory;
+      const levelEl = document.getElementById('student-shared-level-filter');
+      const level = levelEl ? levelEl.value : studentSharedCurrentLevel;
+
+      const filtered = all.filter(item => {
+        if (q) {
+          const matchTitle = (item.title || '').toLowerCase().includes(q);
+          const matchDesc = (item.desc || '').toLowerCase().includes(q);
+          const matchCat = (item.categoryLabel || item.category || '').toLowerCase().includes(q);
+          if (!matchTitle && !matchDesc && !matchCat) return false;
+        }
+        if (cat !== 'all' && item.category !== cat) return false;
+        if (level !== 'all' && item.level !== level) return false;
+        return true;
+      });
+
+      if (counterEl) {
+        counterEl.textContent = `عرض ${filtered.length} من أصل ${all.length} مرجعاً ومساقاً أكاديمياً ولغوياً معتمداً`;
+      }
+
+      container.innerHTML = '';
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column:1/-1; text-align:center; padding:35px 20px; background:var(--bg-body); border-radius:12px; border:1px dashed var(--border-line);">
+            <div style="font-size:32px; margin-bottom:8px;">🔍</div>
+            <h4 style="font-size:15px; font-weight:800; margin-bottom:6px;">لم يتم العثور على مراجع مطابقة</h4>
+            <p style="font-size:12px; color:var(--text-dim); margin-bottom:12px;">جرب تغيير كلمة البحث أو تصفير الفلاتر.</p>
+            <button class="btn-outline-action" onclick="resetStudentSharedFilters()">إعادة ضبط الفلاتر 🔄</button>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'course-card';
+        card.style.cssText = 'display:flex; flex-direction:column; justify-content:space-between; background:var(--bg-card); border:1px solid var(--border-line); border-radius:12px; padding:14px;';
+        const formatIcon = item.formatIcon || '📖';
+        card.innerHTML = `
+          <div>
+            <!-- Banner Header -->
+            <div onclick="openVideoPlayer('${item.id}')" style="cursor:pointer; background:linear-gradient(135deg, #1e293b, #0f172a); border-radius:10px; padding:16px 14px; color:#fff; position:relative; overflow:hidden; margin-bottom:10px; box-shadow:0 3px 10px rgba(0,0,0,0.12);">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-size:26px;">${formatIcon}</span>
+                <span style="background:rgba(255,255,255,0.18); color:#fff; font-size:10px; font-weight:800; padding:2px 8px; border-radius:4px;">
+                  ${item.format || 'مرجع أكاديمي'}
+                </span>
+              </div>
+              <div style="font-size:11px; color:#38bdf8; font-weight:700; margin-bottom:3px;">
+                ${item.categoryLabel || 'علم الترجمة'}
+              </div>
+              <div style="font-size:13.5px; font-weight:900; line-height:1.4; color:#fff;">
+                ${item.title}
+              </div>
+            </div>
+
+            <!-- Meta Tags -->
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; flex-wrap:wrap; gap:4px;">
+              <span style="font-size:10.5px; font-weight:800; color:var(--crimson);">${item.categoryLabel || item.category || 'مساق تخصصي'}</span>
+              <span style="font-size:10px; color:var(--text-dim); background:var(--bg-body); padding:2px 6px; border-radius:4px;">${item.level || 'معتمد'}</span>
+            </div>
+            <div style="display:inline-block; font-size:10.5px; color:#059669; font-weight:800; background:#ecfdf5; padding:2px 6px; border-radius:4px; margin-bottom:8px;">
+              ${item.verifiedBadge || '✓ رابط أكاديمي موثق'}
+            </div>
+            <p style="font-size:12px; color:var(--text-dim); line-height:1.55; margin:0 0 12px;">
+              ${item.desc}
+            </p>
+          </div>
+
+          <!-- Bottom Action Buttons -->
+          <div style="display:flex; gap:6px; border-top:1px solid var(--border-line); padding-top:10px;">
+            <button class="btn-primary-red" style="flex:1; padding:6px 10px; font-size:11px; display:inline-flex; align-items:center; justify-content:center; gap:4px;" onclick="openVideoPlayer('${item.id}')">
+              <span>▶ تشغيل في المنصة</span>
+            </button>
+            <button class="btn-outline-action" style="padding:6px 10px; font-size:11px;" onclick="${item.url ? `openResourceLink('${item.url}')` : `openVideoPlayer('${item.id}')`}">
+              <span>${item.url && item.url.includes('facebook') ? '🔗 فيسبوك ↗' : '🔗 الرابط المباشر ↗'}</span>
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function handleStudentSharedFilterChange() {
+      const catEl = document.getElementById('student-shared-category-filter');
+      if (catEl) studentSharedCurrentCategory = catEl.value;
+      const lvlEl = document.getElementById('student-shared-level-filter');
+      if (lvlEl) studentSharedCurrentLevel = lvlEl.value;
+      applyStudentSharedFilters();
+    }
+
+    function setStudentCategoryFilter(cat, btn) {
+      studentSharedCurrentCategory = cat;
+      const catEl = document.getElementById('student-shared-category-filter');
+      if (catEl) catEl.value = cat;
+      if (btn && btn.parentElement) {
+        btn.parentElement.querySelectorAll('.nav-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+      applyStudentSharedFilters();
+    }
+
+    function resetStudentSharedFilters() {
+      const search = document.getElementById('student-shared-search');
+      if (search) search.value = '';
+      const cat = document.getElementById('student-shared-category-filter');
+      if (cat) cat.value = 'all';
+      const lvl = document.getElementById('student-shared-level-filter');
+      if (lvl) lvl.value = 'all';
+      studentSharedCurrentCategory = 'all';
+      studentSharedCurrentLevel = 'all';
+      document.querySelectorAll('#student-cat-chips-container .nav-pill').forEach((b, i) => b.classList.toggle('active', i === 0));
+      applyStudentSharedFilters();
+    }
+
+    function switchSharedLibrarySection(sec) {
+      const sCourses = document.getElementById('student-shared-courses-section');
+      const sTheories = document.getElementById('student-shared-theories-section');
+      const sGerman = document.getElementById('student-shared-german-section');
+      const sGlossary = document.getElementById('student-shared-glossary-section');
+      const sStandards = document.getElementById('student-shared-standards-section');
+      const sFilters = document.getElementById('student-shared-filters-toolbar');
+
+      const tabs = ['all', 'theories', 'german', 'glossary', 'standards'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('pill-shared-tab-' + t);
+        if (btn) btn.classList.toggle('active', t === sec);
+      });
+
+      if (sec === 'all') {
+        if (sCourses) sCourses.style.display = 'block';
+        if (sTheories) sTheories.style.display = 'block';
+        if (sGerman) sGerman.style.display = 'block';
+        if (sGlossary) sGlossary.style.display = 'block';
+        if (sStandards) sStandards.style.display = 'block';
+        if (sFilters) sFilters.style.display = 'block';
+      } else if (sec === 'theories') {
+        if (sCourses) sCourses.style.display = 'none';
+        if (sTheories) sTheories.style.display = 'block';
+        if (sGerman) sGerman.style.display = 'none';
+        if (sGlossary) sGlossary.style.display = 'none';
+        if (sStandards) sStandards.style.display = 'none';
+        if (sFilters) sFilters.style.display = 'none';
+      } else if (sec === 'german') {
+        if (sCourses) sCourses.style.display = 'block';
+        if (sTheories) sTheories.style.display = 'none';
+        if (sGerman) sGerman.style.display = 'block';
+        if (sGlossary) sGlossary.style.display = 'none';
+        if (sStandards) sStandards.style.display = 'none';
+        if (sFilters) sFilters.style.display = 'block';
+        setStudentCategoryFilter('german_learning', null);
+      } else if (sec === 'glossary') {
+        if (sCourses) sCourses.style.display = 'none';
+        if (sTheories) sTheories.style.display = 'none';
+        if (sGerman) sGerman.style.display = 'none';
+        if (sGlossary) sGlossary.style.display = 'block';
+        if (sStandards) sStandards.style.display = 'none';
+        if (sFilters) sFilters.style.display = 'none';
+      } else if (sec === 'standards') {
+        if (sCourses) sCourses.style.display = 'none';
+        if (sTheories) sTheories.style.display = 'none';
+        if (sGerman) sGerman.style.display = 'none';
+        if (sGlossary) sGlossary.style.display = 'none';
+        if (sStandards) sStandards.style.display = 'block';
+        if (sFilters) sFilters.style.display = 'none';
+      }
+    }
+
+    function renderGlossaryCards() {
+      const container = document.getElementById('glossary-cards-container');
+      if (!container) return;
+
+      const searchInput = document.getElementById('glossary-term-search');
+      const q = searchInput ? searchInput.value.trim().toLowerCase() : '';
+
+      const items = TRILINGUAL_GLOSSARY_ITEMS.filter(it => {
+        if (currentGlossaryDomain !== 'all' && it.domain !== currentGlossaryDomain) return false;
+        if (q) {
+          const mAr = it.ar.toLowerCase().includes(q);
+          const mEn = it.en.toLowerCase().includes(q);
+          const mDe = it.de.toLowerCase().includes(q);
+          const mFr = it.fr.toLowerCase().includes(q);
+          const mCtx = it.context.toLowerCase().includes(q);
+          if (!mAr && !mEn && !mDe && !mFr && !mCtx) return false;
+        }
+        return true;
+      });
+
+      container.innerHTML = '';
+      if (items.length === 0) {
+        container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:20px; font-size:12px; color:var(--text-dim);">لم يتم العثور على مصطلحات مطابقة للبحث.</div>';
+        return;
+      }
+
+      items.forEach(it => {
+        const card = document.createElement('div');
+        card.style.cssText = 'background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:12px; display:flex; flex-direction:column; justify-content:space-between; gap:6px;';
+        card.innerHTML = `
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+              <span style="font-size:10px; background:var(--bg-surface); padding:2px 6px; border-radius:4px; font-weight:700; color:var(--crimson);">${it.domainLabel}</span>
+              <button class="nav-pill" style="padding:2px 6px; font-size:10px;" onclick="copyGlossaryTerm('${escapeHtml(it.en)} | ${escapeHtml(it.ar)}', this)">📋 نسخ</button>
+            </div>
+            <div style="font-size:13.5px; font-weight:900; color:var(--text-main); margin-bottom:4px;">${it.ar}</div>
+            
+            <div style="font-size:11.5px; color:#1d4ed8; font-weight:700; display:flex; align-items:center; justify-content:space-between;">
+              <span>🇬🇧 ${it.en}</span>
+              <button onclick="playGlossaryTermAudio('${escapeHtml(it.en)}', 'en-US')" style="background:none; border:none; cursor:pointer; font-size:13px;" title="استماع للنطق">🔊</button>
+            </div>
+            
+            <div style="font-size:11.5px; color:#b45309; font-weight:700; display:flex; align-items:center; justify-content:space-between;">
+              <span>🇩🇪 ${it.de}</span>
+              <button onclick="playGlossaryTermAudio('${escapeHtml(it.de)}', 'de-DE')" style="background:none; border:none; cursor:pointer; font-size:13px;" title="استماع للنطق بالألمانية">🔊</button>
+            </div>
+
+            <div style="font-size:11px; color:#475569; font-weight:600; display:flex; align-items:center; justify-content:space-between;">
+              <span>🇫🇷 ${it.fr}</span>
+              <button onclick="playGlossaryTermAudio('${escapeHtml(it.fr)}', 'fr-FR')" style="background:none; border:none; cursor:pointer; font-size:13px;" title="استماع للنطق بالفرنسية">🔊</button>
+            </div>
+          </div>
+          <div style="font-size:10.5px; color:var(--text-dim); background:var(--bg-card); padding:5px 8px; border-radius:6px; line-height:1.45; border-top:1px dashed var(--border-line);">
+            ${it.context}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterGlossaryDomain(domain, btn) {
+      currentGlossaryDomain = domain;
+      if (btn && btn.parentElement) {
+        btn.parentElement.querySelectorAll('.nav-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+      renderGlossaryCards();
+    }
+
+    function handleGlossarySearch() {
+      renderGlossaryCards();
+    }
+
+    function playGlossaryTermAudio(text, lang) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const ut = new SpeechSynthesisUtterance(text);
+        ut.lang = lang || 'en-US';
+        ut.rate = 0.9;
+        window.speechSynthesis.speak(ut);
+      } else {
+        alert('ميزة النطق الصوتي تتطلب متصفحاً يدعم Web Speech Synthesis.');
+      }
+    }
+
+    function copyGlossaryTerm(term, btn) {
+      navigator.clipboard.writeText(term).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = '✓ تم النسخ';
+        btn.style.color = '#10b981';
+        setTimeout(() => {
+          btn.textContent = orig;
+          btn.style.color = '';
+        }, 1500);
+      }).catch(() => {
+        alert('تم النسخ: ' + term);
+      });
+    }
+
+window.addEventListener('DOMContentLoaded', () => {
       applyBoothFilters();
       recalcQuote();
       renderOrdersTable();
