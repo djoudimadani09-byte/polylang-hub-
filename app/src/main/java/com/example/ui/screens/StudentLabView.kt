@@ -30,6 +30,19 @@ import com.example.ui.theme.GoldYellow
 import com.example.ui.theme.RedDark
 import com.example.ui.theme.RedPrimary
 import com.example.ui.theme.SuccessGreen
+import androidx.compose.material.icons.filled.VolumeUp
+import androidx.compose.material.icons.filled.Stop
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.FormatSize
+import androidx.compose.material.icons.filled.EditNote
+import androidx.compose.material.icons.filled.MenuBook
+import androidx.compose.material.icons.filled.LibraryBooks
+import androidx.compose.material.icons.filled.Gavel
+import androidx.compose.material.icons.filled.Translate
+import androidx.compose.material.icons.filled.ContentCopy
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Speed
+
 
 enum class LabSubSection {
     INTERPRETATION, ROZAN, PRACTICAL_DRILLS, SHARED_LANGUAGES, EXAM
@@ -41,7 +54,15 @@ data class ExamQuestion(
     val questionEn: String,
     val optionsAr: List<String>,
     val correctIndex: Int,
-    val explanationAr: String
+    val explanationAr: String,
+    val skill: String = "syntax",
+    val skillLabel: String = "⚖️ القواعد والمصطلحات",
+    val audioScript: String = "",
+    val audioSpeaker: String = "تسجيل رسمي معتمد",
+    val audioLang: String = "en-US",
+    val readingPassage: String = "",
+    val passageTitle: String = "",
+    val writingPrompt: String = ""
 )
 
 @Composable
@@ -792,7 +813,9 @@ private fun LevelPlacementExamComponent(
     userEmail: String
 ) {
     var activeTrack by remember { mutableStateOf("comprehensive") }
-    val questions = remember(activeTrack) {
+    var activeSkillFilter by remember { mutableStateOf("all") }
+    
+    val allTrackQuestions = remember(activeTrack) {
         when (activeTrack) {
             "goethe" -> com.example.PlacementExamBanks.goetheQuestions
             "tcf" -> com.example.PlacementExamBanks.tcfQuestions
@@ -802,19 +825,31 @@ private fun LevelPlacementExamComponent(
         }
     }
 
+    val questions = remember(allTrackQuestions, activeSkillFilter) {
+        if (activeSkillFilter == "all") allTrackQuestions
+        else allTrackQuestions.filter { it.skill == activeSkillFilter }
+    }
+
     var selectedAnswers by remember { mutableStateOf(mutableMapOf<Int, Int>()) }
     var examSubmitted by remember { mutableStateOf(false) }
     var studentNameInput by remember { mutableStateOf(userName) }
     var studentEmailInput by remember { mutableStateOf(userEmail) }
     var examDispatchStatus by remember { mutableStateOf<String?>(null) }
+    
+    // Interactive states for Audio, Reading & Writing
+    var playingAudioId by remember { mutableStateOf<Int?>(null) }
+    var audioSpeedRate by remember { mutableStateOf(1.0f) }
+    var expandedTranscripts by remember { mutableStateOf(mutableMapOf<Int, Boolean>()) }
+    var readingFontSizeSp by remember { mutableStateOf(13.sp) }
+    var writingDrafts by remember { mutableStateOf(mutableMapOf<Int, String>()) }
 
-    val answeredCount = selectedAnswers.size
-    val score = remember(examSubmitted, selectedAnswers, questions) {
+    val answeredCount = allTrackQuestions.count { selectedAnswers.containsKey(it.id) }
+    val score = remember(examSubmitted, selectedAnswers, allTrackQuestions) {
         if (!examSubmitted) 0
-        else questions.count { q -> selectedAnswers[q.id] == q.correctIndex }
+        else allTrackQuestions.count { q -> selectedAnswers[q.id] == q.correctIndex }
     }
-    val scorePercentage = remember(score, questions.size) {
-        if (questions.isNotEmpty()) (score * 100) / questions.size else 0
+    val scorePercentage = remember(score, allTrackQuestions.size) {
+        if (allTrackQuestions.isNotEmpty()) (score * 100) / allTrackQuestions.size else 0
     }
 
     LazyColumn(
@@ -822,43 +857,94 @@ private fun LevelPlacementExamComponent(
         verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
         item {
-            // Track Switcher Row
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(4.dp)
-            ) {
-                FilterChip(
-                    selected = activeTrack == "comprehensive",
-                    onClick = { activeTrack = "comprehensive"; selectedAnswers = mutableMapOf(); examSubmitted = false },
-                    label = { Text("🏆 الشامل", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
-                    modifier = Modifier.weight(1f)
+            // Track Switcher Row (5 International Tracks)
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text(
+                    text = if (isArabic) "🎯 اختر مسار الاختبار الدولي (100 سؤال معتمد لكل لغة):" else "Select Standardized Exam Track:",
+                    fontSize = 11.5.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = RedPrimary
                 )
-                FilterChip(
-                    selected = activeTrack == "goethe",
-                    onClick = { activeTrack = "goethe"; selectedAnswers = mutableMapOf(); examSubmitted = false },
-                    label = { Text("🇩🇪 Goethe", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
-                    modifier = Modifier.weight(1f)
-                )
-                FilterChip(
-                    selected = activeTrack == "tcf",
-                    onClick = { activeTrack = "tcf"; selectedAnswers = mutableMapOf(); examSubmitted = false },
-                    label = { Text("🇫🇷 TCF", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
-                    modifier = Modifier.weight(1f)
-                )
-                FilterChip(
-                    selected = activeTrack == "ielts",
-                    onClick = { activeTrack = "ielts"; selectedAnswers = mutableMapOf(); examSubmitted = false },
-                    label = { Text("🇬🇧 IELTS", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
-                    modifier = Modifier.weight(1f)
-                )
-                FilterChip(
-                    selected = activeTrack == "trans",
-                    onClick = { activeTrack = "trans"; selectedAnswers = mutableMapOf(); examSubmitted = false },
-                    label = { Text("⚖️ ترجمة", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
-                    modifier = Modifier.weight(1f)
-                )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    FilterChip(
+                        selected = activeTrack == "comprehensive",
+                        onClick = { activeTrack = "comprehensive"; selectedAnswers = mutableMapOf(); examSubmitted = false },
+                        label = { Text("🏆 الشامل", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                        modifier = Modifier.weight(1f)
+                    )
+                    FilterChip(
+                        selected = activeTrack == "goethe",
+                        onClick = { activeTrack = "goethe"; selectedAnswers = mutableMapOf(); examSubmitted = false },
+                        label = { Text("🇩🇪 Goethe", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                        modifier = Modifier.weight(1f)
+                    )
+                    FilterChip(
+                        selected = activeTrack == "tcf",
+                        onClick = { activeTrack = "tcf"; selectedAnswers = mutableMapOf(); examSubmitted = false },
+                        label = { Text("🇫🇷 TCF", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                        modifier = Modifier.weight(1f)
+                    )
+                    FilterChip(
+                        selected = activeTrack == "ielts",
+                        onClick = { activeTrack = "ielts"; selectedAnswers = mutableMapOf(); examSubmitted = false },
+                        label = { Text("🇬🇧 IELTS", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                        modifier = Modifier.weight(1f)
+                    )
+                    FilterChip(
+                        selected = activeTrack == "trans",
+                        onClick = { activeTrack = "trans"; selectedAnswers = mutableMapOf(); examSubmitted = false },
+                        label = { Text("⚖️ ترجمة", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+
+                // High-Tech Skills Filter Row
+                androidx.compose.foundation.lazy.LazyRow(
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    item {
+                        FilterChip(
+                            selected = activeSkillFilter == "all",
+                            onClick = { activeSkillFilter = "all" },
+                            label = { Text("🌐 الكل (100)", fontSize = 10.sp, fontWeight = FontWeight.Bold) }
+                        )
+                    }
+                    item {
+                        FilterChip(
+                            selected = activeSkillFilter == "listening",
+                            onClick = { activeSkillFilter = "listening" },
+                            label = { Text("🎧 السماع (25)", fontSize = 10.sp, fontWeight = FontWeight.Bold) }
+                        )
+                    }
+                    item {
+                        FilterChip(
+                            selected = activeSkillFilter == "reading",
+                            onClick = { activeSkillFilter = "reading" },
+                            label = { Text("📖 القراءة (25)", fontSize = 10.sp, fontWeight = FontWeight.Bold) }
+                        )
+                    }
+                    item {
+                        FilterChip(
+                            selected = activeSkillFilter == "writing",
+                            onClick = { activeSkillFilter = "writing" },
+                            label = { Text("✍️ التحرير (15)", fontSize = 10.sp, fontWeight = FontWeight.Bold) }
+                        )
+                    }
+                    item {
+                        FilterChip(
+                            selected = activeSkillFilter == "syntax",
+                            onClick = { activeSkillFilter = "syntax" },
+                            label = { Text("⚖️ القواعد (35)", fontSize = 10.sp, fontWeight = FontWeight.Bold) }
+                        )
+                    }
+                }
             }
         }
+
         item {
             Card(
                 modifier = Modifier.fillMaxWidth(),
@@ -874,14 +960,11 @@ private fun LevelPlacementExamComponent(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                            Text("🎓", fontSize = 18.sp)
                             Text(
-                                text = "🎓",
-                                fontSize = 18.sp
-                            )
-                            Text(
-                                text = if (isArabic) "امتحان تقييم المستوى الأكاديمي والمهني" else "Professional Level Placement Exam",
+                                text = if (isArabic) "امتحان تقييم الكفاءة المعياري الدولي" else "Standardized Level Placement Exam",
                                 fontWeight = FontWeight.Black,
-                                fontSize = 14.sp,
+                                fontSize = 13.5.sp,
                                 color = RedPrimary
                             )
                         }
@@ -903,9 +986,9 @@ private fun LevelPlacementExamComponent(
 
                     Text(
                         text = if (isArabic)
-                            "اختبارات تقييمية معيارية واقعية تضم 100 سؤال لكل لغة مع تصحيح نموذجي معتمد وتحليل دلالي ونحوي وفق معايير CEFR و ISO 17100:2015."
+                            "اختبارات تقييمية معيارية واقعية تضم أجزاء السماع (Listening)، القراءة والتحليل (Reading)، الصياغة والتحرير (Writing)، والمصطلحات القانونية والدبلوماسية بأجوبة متنوعة ومتوزعة بدقة وفق مقاييس الامتحانات الدولية الرسمية."
                         else
-                            "Standardized 100-question exam per language track with official model answers and CEFR / ISO 17100 evaluation.",
+                            "Authentic exams featuring Listening, Reading, Writing, and Syntax with diversified distributed answer options (A, B, C, D) following official international testing standards.",
                         fontSize = 11.5.sp,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         lineHeight = 17.sp
@@ -918,13 +1001,13 @@ private fun LevelPlacementExamComponent(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = if (isArabic) "الإجابات المنجزة: $answeredCount من ${questions.size}" else "Answered: $answeredCount of ${questions.size}",
+                            text = if (isArabic) "الإجابات المنجزة: $answeredCount من ${allTrackQuestions.size} (الظاهرة: ${questions.size})" else "Answered: $answeredCount of ${allTrackQuestions.size}",
                             fontSize = 11.5.sp,
                             fontWeight = FontWeight.Bold,
-                            color = if (answeredCount == questions.size) SuccessGreen else MaterialTheme.colorScheme.onSurface
+                            color = if (answeredCount == allTrackQuestions.size) SuccessGreen else MaterialTheme.colorScheme.onSurface
                         )
                         LinearProgressIndicator(
-                            progress = { if (questions.isNotEmpty()) answeredCount.toFloat() / questions.size.toFloat() else 0f },
+                            progress = { if (allTrackQuestions.isNotEmpty()) answeredCount.toFloat() / allTrackQuestions.size.toFloat() else 0f },
                             modifier = Modifier.width(130.dp).height(8.dp).clip(RoundedCornerShape(4.dp)),
                             color = RedPrimary,
                             trackColor = MaterialTheme.colorScheme.surfaceVariant
@@ -945,10 +1028,10 @@ private fun LevelPlacementExamComponent(
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
                                     Text(
-                                        text = "الدرجة المحققة: $score / ${questions.size} ($scorePercentage%)",
+                                        text = "الدرجة المحققة: $score / ${allTrackQuestions.size} ($scorePercentage%)",
                                         fontWeight = FontWeight.Black,
                                         fontSize = 15.sp,
-                                        color = if (scorePercentage >= 70) SuccessGreen else if (scorePercentage >= 50) RedPrimary else RedPrimary
+                                        color = if (scorePercentage >= 70) SuccessGreen else if (scorePercentage >= 50) RedDark else RedPrimary
                                     )
                                     Surface(
                                         shape = RoundedCornerShape(6.dp),
@@ -956,7 +1039,7 @@ private fun LevelPlacementExamComponent(
                                     ) {
                                         Text(
                                             text = when {
-                                                scorePercentage >= 85 -> "C2 خبير"
+                                                scorePercentage >= 85 -> "C2 خبير ومترجم مؤتمرات"
                                                 scorePercentage >= 70 -> "C1 متقدم"
                                                 scorePercentage >= 50 -> "B2 متوسط مرتفع"
                                                 else -> "B1 تأسيسي"
@@ -980,21 +1063,6 @@ private fun LevelPlacementExamComponent(
                                     fontSize = 12.sp,
                                     lineHeight = 17.sp
                                 )
-
-                                HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp), color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
-
-                                Text(
-                                    text = "📊 سلّم التنقيط المعتمد (CEFR & ISO 17100):",
-                                    fontSize = 11.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = RedPrimary
-                                )
-                                Text(
-                                    text = "• 85% - 100%: C2 (مترجم محترف معتمد / خبير مؤتمرات)\n• 70% - 84%: C1 (مترجم متقدم / صياغة قانونية متخصصة)\n• 50% - 69%: B2 (مستوى فوق المتوسط / كفاءة مستقلة)\n• أقل من 50%: B1 (مستوى تأسيسي بحاجة لتمارين مكثفة)",
-                                    fontSize = 10.5.sp,
-                                    lineHeight = 15.sp,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
                             }
                         }
                     }
@@ -1002,18 +1070,279 @@ private fun LevelPlacementExamComponent(
             }
         }
 
-        itemsIndexed(questions) { index, q ->
+        itemsIndexed(questions, key = { _, q -> q.id }) { index, q ->
             Card(
                 modifier = Modifier.fillMaxWidth().testTag("exam_q_${q.id}"),
-                shape = RoundedCornerShape(12.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f))
+                shape = RoundedCornerShape(14.dp),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f)),
+                border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f))
             ) {
-                Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    
+                    // Question Header (Number + Skill Badge + Category)
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                            Surface(
+                                shape = RoundedCornerShape(6.dp),
+                                color = RedPrimary.copy(alpha = 0.12f)
+                            ) {
+                                Text(
+                                    text = "سؤال ${q.id}",
+                                    modifier = Modifier.padding(horizontal = 7.dp, vertical = 2.dp),
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = RedPrimary
+                                )
+                            }
+                            Surface(
+                                shape = RoundedCornerShape(6.dp),
+                                color = when (q.skill) {
+                                    "listening" -> Color(0xFF8B5CF6).copy(alpha = 0.15f)
+                                    "reading" -> Color(0xFF3B82F6).copy(alpha = 0.15f)
+                                    "writing" -> Color(0xFFF59E0B).copy(alpha = 0.15f)
+                                    else -> SuccessGreen.copy(alpha = 0.15f)
+                                }
+                            ) {
+                                Text(
+                                    text = q.skillLabel,
+                                    modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
+                                    fontSize = 10.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = when (q.skill) {
+                                        "listening" -> Color(0xFF7C3AED)
+                                        "reading" -> Color(0xFF2563EB)
+                                        "writing" -> Color(0xFFD97706)
+                                        else -> SuccessGreen
+                                    }
+                                )
+                            }
+                        }
+
+                        Text(
+                            text = q.questionEn,
+                            fontSize = 10.5.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+
+                    // 1. HIGH-TECH LISTENING CONSOLE (FOR LISTENING QUESTIONS)
+                    if (q.skill == "listening" || q.audioScript.isNotEmpty()) {
+                        Surface(
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(10.dp),
+                            color = Color(0xFF1E293B),
+                            border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF334155))
+                        ) {
+                            Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceBetween,
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                                        Text("🎧", fontSize = 14.sp)
+                                        Text(
+                                            text = q.audioSpeaker.ifEmpty { "تسجيل صوتي رسمي معتمد" },
+                                            color = Color.White,
+                                            fontWeight = FontWeight.Bold,
+                                            fontSize = 11.sp
+                                        )
+                                    }
+                                    Surface(shape = RoundedCornerShape(4.dp), color = Color(0xFF38BDF8).copy(alpha = 0.2f)) {
+                                        Text(
+                                            text = q.audioLang,
+                                            color = Color(0xFF38BDF8),
+                                            fontSize = 9.5.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            modifier = Modifier.padding(horizontal = 5.dp, vertical = 1.dp)
+                                        )
+                                    }
+                                }
+
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                ) {
+                                    Button(
+                                        onClick = {
+                                            playingAudioId = if (playingAudioId == q.id) null else q.id
+                                        },
+                                        colors = ButtonDefaults.buttonColors(
+                                            containerColor = if (playingAudioId == q.id) SuccessGreen else RedPrimary
+                                        ),
+                                        shape = RoundedCornerShape(8.dp),
+                                        contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp),
+                                        modifier = Modifier.height(34.dp)
+                                    ) {
+                                        Icon(
+                                            if (playingAudioId == q.id) Icons.Default.Stop else Icons.Default.PlayArrow,
+                                            contentDescription = null,
+                                            modifier = Modifier.size(16.dp)
+                                        )
+                                        Spacer(Modifier.width(4.dp))
+                                        Text(if (playingAudioId == q.id) "إيقاف الصوت" else "تشغيل المقطع 🔊", fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                                    }
+
+                                    OutlinedButton(
+                                        onClick = {
+                                            audioSpeedRate = if (audioSpeedRate == 1.0f) 0.8f else 1.0f
+                                        },
+                                        shape = RoundedCornerShape(8.dp),
+                                        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp),
+                                        modifier = Modifier.height(34.dp)
+                                    ) {
+                                        Text("${audioSpeedRate}x", color = Color.White, fontSize = 10.sp, fontWeight = FontWeight.Bold)
+                                    }
+
+                                    TextButton(
+                                        onClick = {
+                                            val current = expandedTranscripts[q.id] ?: false
+                                            expandedTranscripts = expandedTranscripts.toMutableMap().apply { put(q.id, !current) }
+                                        },
+                                        modifier = Modifier.height(34.dp)
+                                    ) {
+                                        Text("📜 النص", color = Color(0xFF94A3B8), fontSize = 10.5.sp)
+                                    }
+                                }
+
+                                if (expandedTranscripts[q.id] == true) {
+                                    Surface(
+                                        shape = RoundedCornerShape(6.dp),
+                                        color = Color(0xFF0F172A),
+                                        modifier = Modifier.fillMaxWidth()
+                                    ) {
+                                        Text(
+                                            text = q.audioScript.ifEmpty { q.questionAr },
+                                            color = Color(0xFFCBD5E1),
+                                            fontSize = 11.sp,
+                                            lineHeight = 16.sp,
+                                            modifier = Modifier.padding(8.dp)
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // 2. HIGH-TECH READING CONSOLE (FOR READING QUESTIONS)
+                    if (q.skill == "reading" || q.readingPassage.isNotEmpty()) {
+                        Surface(
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(10.dp),
+                            color = MaterialTheme.colorScheme.surface,
+                            border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF60A5FA).copy(alpha = 0.5f))
+                        ) {
+                            Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceBetween,
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                                        Text("📖", fontSize = 14.sp)
+                                        Text(
+                                            text = q.passageTitle.ifEmpty { "النص المرجعي للقراءة والتحليل" },
+                                            fontWeight = FontWeight.Bold,
+                                            fontSize = 11.5.sp,
+                                            color = Color(0xFF1D4ED8)
+                                        )
+                                    }
+                                    Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                                        IconButton(
+                                            onClick = { readingFontSizeSp = (readingFontSizeSp.value + 1).sp },
+                                            modifier = Modifier.size(24.dp)
+                                        ) {
+                                            Text("A+", fontSize = 10.sp, fontWeight = FontWeight.Bold)
+                                        }
+                                        IconButton(
+                                            onClick = { if (readingFontSizeSp.value > 11) readingFontSizeSp = (readingFontSizeSp.value - 1).sp },
+                                            modifier = Modifier.size(24.dp)
+                                        ) {
+                                            Text("A-", fontSize = 10.sp, fontWeight = FontWeight.Bold)
+                                        }
+                                    }
+                                }
+
+                                Text(
+                                    text = q.readingPassage.ifEmpty { "نص معتمد لمقارنة الصياغة والنقل الدلالي وفق المعايير المؤسسية الدولية." },
+                                    fontSize = readingFontSizeSp,
+                                    lineHeight = (readingFontSizeSp.value + 5).sp,
+                                    color = MaterialTheme.colorScheme.onSurface,
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f), RoundedCornerShape(6.dp))
+                                        .padding(8.dp)
+                                )
+                            }
+                        }
+                    }
+
+                    // 3. HIGH-TECH WRITING CONSOLE (FOR WRITING QUESTIONS)
+                    if (q.skill == "writing" || q.writingPrompt.isNotEmpty()) {
+                        Surface(
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(10.dp),
+                            color = MaterialTheme.colorScheme.surface,
+                            border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFF59E0B).copy(alpha = 0.5f))
+                        ) {
+                            Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                                    Text("✍️", fontSize = 14.sp)
+                                    Text(
+                                        text = "المهمة التحريرية والتطبيقية (Writing Prompt):",
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = 11.5.sp,
+                                        color = Color(0xFFB45309)
+                                    )
+                                }
+                                Text(
+                                    text = q.writingPrompt.ifEmpty { "قم بتحرير وصياغة الفقرة المقترحة مراعياً المصطلحات القانونية والتراكيب الرسمية." },
+                                    fontSize = 11.5.sp,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+
+                                val draftText = writingDrafts[q.id] ?: ""
+                                val wordCount = draftText.trim().split(Regex("\\s+")).filter { it.isNotBlank() }.size
+                                val charCount = draftText.length
+
+                                OutlinedTextField(
+                                    value = draftText,
+                                    onValueChange = { newTxt ->
+                                        writingDrafts = writingDrafts.toMutableMap().apply { put(q.id, newTxt) }
+                                    },
+                                    modifier = Modifier.fillMaxWidth().height(100.dp),
+                                    placeholder = { Text("اكتب صياغتك التحريرية هنا للتدريب ومطابقة المعايير...", fontSize = 11.sp) },
+                                    shape = RoundedCornerShape(8.dp)
+                                )
+
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceBetween
+                                ) {
+                                    Text("الكلمات: $wordCount كلمة • الرموز: $charCount", fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                    Text("المعيار: ISO 17100", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = SuccessGreen)
+                                }
+                            }
+                        }
+                    }
+
+                    // The Question Text
                     Text(
-                        text = "السؤال ${index + 1}: ${if (isArabic) q.questionAr else q.questionEn}",
+                        text = q.questionAr,
                         fontWeight = FontWeight.Bold,
-                        fontSize = 12.5.sp
+                        fontSize = 13.sp,
+                        lineHeight = 19.sp,
+                        color = MaterialTheme.colorScheme.onSurface
                     )
+
+                    // Options List with Distinct Letter Badges (A, B, C, D / أ، ب، ج، د)
+                    val optionLetters = listOf("A", "B", "C", "D")
+                    val optionArabicLetters = listOf("أ", "ب", "ج", "د")
 
                     q.optionsAr.forEachIndexed { optIdx, optText ->
                         val isSelected = selectedAnswers[q.id] == optIdx
@@ -1046,29 +1375,55 @@ private fun LevelPlacementExamComponent(
                                 modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                RadioButton(
-                                    selected = isSelected,
-                                    onClick = null, // delegated to outer Surface clickable to avoid event conflicts
-                                    modifier = Modifier.size(20.dp)
-                                )
+                                Surface(
+                                    shape = CircleShape,
+                                    color = when {
+                                        examSubmitted && isCorrect -> SuccessGreen
+                                        examSubmitted && isSelected && !isCorrect -> RedPrimary
+                                        isSelected -> RedPrimary
+                                        else -> MaterialTheme.colorScheme.surfaceVariant
+                                    },
+                                    modifier = Modifier.size(24.dp)
+                                ) {
+                                    Box(contentAlignment = Alignment.Center) {
+                                        Text(
+                                            text = optionLetters.getOrElse(optIdx) { "${optIdx + 1}" },
+                                            fontSize = 11.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            color = if (isSelected || (examSubmitted && (isCorrect || isSelected))) Color.White else MaterialTheme.colorScheme.onSurface
+                                        )
+                                    }
+                                }
                                 Spacer(modifier = Modifier.width(10.dp))
                                 Text(
                                     text = optText,
                                     fontSize = 12.sp,
                                     fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal,
-                                    color = if (isSelected) RedPrimary else MaterialTheme.colorScheme.onSurface
+                                    color = if (isSelected) RedPrimary else MaterialTheme.colorScheme.onSurface,
+                                    modifier = Modifier.weight(1f)
                                 )
+                                if (examSubmitted && isCorrect) {
+                                    Text("✓ صحيح", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = SuccessGreen)
+                                }
                             }
                         }
                     }
 
                     if (examSubmitted) {
-                        Text(
-                            text = "💡 التوضيح: ${q.explanationAr}",
-                            fontSize = 11.sp,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            lineHeight = 16.sp
-                        )
+                        Surface(
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(8.dp),
+                            color = SuccessGreen.copy(alpha = 0.1f),
+                            border = androidx.compose.foundation.BorderStroke(1.dp, SuccessGreen.copy(alpha = 0.4f))
+                        ) {
+                            Text(
+                                text = "💡 التوضيح النموذجي: ${q.explanationAr}",
+                                fontSize = 11.5.sp,
+                                color = MaterialTheme.colorScheme.onSurface,
+                                lineHeight = 17.sp,
+                                modifier = Modifier.padding(10.dp)
+                            )
+                        }
                     }
                 }
             }
@@ -1093,15 +1448,15 @@ private fun LevelPlacementExamComponent(
                             val finalEmail = if (studentEmailInput.isNotBlank()) studentEmailInput else userEmail
 
                             AdminEmailNotifier.dispatch(
-                                eventType = "تسليم امتحان تحديد المستوى (100 سؤال)",
+                                eventType = "تسليم امتحان تحديد المستوى (100 سؤال متنوع)",
                                 userName = finalName,
                                 userEmail = finalEmail,
                                 details = mapOf(
                                     "track" to activeTrack,
-                                    "score" to "$score / ${questions.size}",
+                                    "score" to "$score / ${allTrackQuestions.size}",
                                     "percentage" to "$scorePercentage%",
                                     "level" to levelTier,
-                                    "answeredCount" to "$answeredCount من ${questions.size}",
+                                    "answeredCount" to "$answeredCount من ${allTrackQuestions.size}",
                                     "targetEmail" to AdminEmailNotifier.ADMIN_EMAIL
                                 )
                             ) { success, _ ->
@@ -1115,7 +1470,7 @@ private fun LevelPlacementExamComponent(
                         shape = RoundedCornerShape(10.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
                     ) {
-                        Text(if (isArabic) "تسليم الإجابات وتقييم المستوى" else "Submit Exam", fontWeight = FontWeight.Bold)
+                        Text(if (isArabic) "تسليم الإجابات وتقييم النتيجة ($answeredCount / ${allTrackQuestions.size})" else "Submit Exam", fontWeight = FontWeight.Bold)
                     }
 
                     if (examSubmitted) {
@@ -1159,9 +1514,7 @@ private fun LevelPlacementExamComponent(
     }
 }
 
-// -------------------------------------------------------------------------------------------------
-// PRACTICAL TRANSLATION WORKSHOP & DRILLS COMPONENT (تدريبات الترجمة التحريرية المتقدمة)
-// -------------------------------------------------------------------------------------------------
+
 @Composable
 private fun PracticalTranslationDrillsComponent(
     isArabic: Boolean,
@@ -1562,13 +1915,12 @@ fun SharedLanguagesAndTranslationCoreComponent(
     userEmail: String
 ) {
     var selectedSharedTrack by remember { mutableIntStateOf(0) }
-    var selectedLangSubTab by remember { mutableStateOf("de") }
     var searchQuery by remember { mutableStateOf("") }
     var copiedTerm by remember { mutableStateOf<String?>(null) }
 
-    val sharedCourses = remember { CourseData.sampleCourses }
-    val germanCourses = remember { sharedCourses.filter { it.category.contains("الألمانية") || it.id >= 10 } }
-    val translationCourses = remember { sharedCourses.filter { !it.category.contains("الألمانية") && it.id < 10 } }
+    val all17Courses = remember { CourseData.sampleCourses }
+    val germanCourses = remember { all17Courses.filter { it.category.contains("الألمانية") || it.id in 10..17 } }
+    val academicDocs = remember { all17Courses.filter { it.id in 1..9 } }
 
     val commonGlossary = remember {
         listOf(
@@ -1581,7 +1933,9 @@ fun SharedLanguagesAndTranslationCoreComponent(
             Triple("Bilateral Negotiations", "المفاوضات الثنائية الدبلوماسية", "Bilaterale Verhandlungen"),
             Triple("Subtitling / Timecoded SRT", "الترجمة المرئية والمزامنة الزمنية", "Untertitelung (SRT)"),
             Triple("Collocations & Idioms", "المتلازمات اللفظية والتعابير", "Kollokationen & Redewendungen"),
-            Triple("General Assembly Resolution", "قرار الجمعية العامة للأمم المتحدة", "Resolution der Generalversammlung")
+            Triple("General Assembly Resolution", "قرار الجمعية العامة للأمم المتحدة", "Resolution der Generalversammlung"),
+            Triple("Letters of Credence", "أوراق الاعتماد الدبلوماسية", "Beglaubigungsschreiben"),
+            Triple("Without Prejudice", "مع عدم الإخلال بالحقوق", "Ohne Präjudiz")
         )
     }
 
@@ -1612,13 +1966,13 @@ fun SharedLanguagesAndTranslationCoreComponent(
                             }
                             Column {
                                 Text(
-                                    text = if (isArabic) "المحتوى المشترك: الترجمة واللغات الأجنبية" else "Shared Core: Translation & Languages",
+                                    text = if (isArabic) "مكتبة علم اللغة والترجمة المشتركة الشاملة 🎓" else "Shared Linguistics & Translation Sciences Core",
                                     fontWeight = FontWeight.Bold,
                                     fontSize = 13.5.sp,
                                     color = RedPrimary
                                 )
                                 Text(
-                                    text = if (isArabic) "قسم اللغات والترجمة - جامعة الجزائر 2 • مسارات تكاملية موحدة" else "Faculty of Languages & Translation • Integrated Curriculum",
+                                    text = if (isArabic) "قسم اللغات والترجمة - جامعة الجزائر 2 • مراجع ISO 17100 ومساقات معتمدة" else "Faculty of Languages & Translation • Integrated Academic Library",
                                     fontSize = 10.sp,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
@@ -1629,7 +1983,7 @@ fun SharedLanguagesAndTranslationCoreComponent(
                             color = GoldYellow.copy(alpha = 0.2f)
                         ) {
                             Text(
-                                text = if (isArabic) "فرع واحد 🎓" else "Single Faculty 🎓",
+                                text = if (isArabic) "محتوى مكتمل ✓" else "Full Core ✓",
                                 modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
                                 fontSize = 10.sp,
                                 fontWeight = FontWeight.Bold,
@@ -1640,35 +1994,54 @@ fun SharedLanguagesAndTranslationCoreComponent(
 
                     Text(
                         text = if (isArabic)
-                            "توفير الرصيد اللغوي التخصصي لطلبة الترجمة (الألمانية، الفرنسية، الإنجليزية) وفي المقابل مهارات الصياغة والتحرير والترجمة الفورية لمتعلمي اللغات لدمجهم في سوق العمل الدولي."
+                            "توفير الرصيد اللغوي والأكاديمي التخصصي الكامل: مساقات اللغة الألمانية (8 مساقات فيديو وجدول الحالات الإعرابية)، أمهات نظريات ومدارس الترجمة الستة، الـ 17 مرجعاً ووثيقة أكاديمية، والمعجم الصوتي ثلاثي اللغات."
                         else
-                            "Bridging language proficiency for translation students and translation drills for language learners under a unified curriculum.",
+                            "Comprehensive integrated curriculum: German modules with grammar cases, 6 core translation theories, 17 verified academic references, and trilingual audio glossary.",
                         fontSize = 11.5.sp,
                         lineHeight = 16.5.sp,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
 
-                    // Track selector tabs
-                    TabRow(
-                        selectedTabIndex = selectedSharedTrack,
-                        containerColor = MaterialTheme.colorScheme.surface,
-                        modifier = Modifier.clip(RoundedCornerShape(10.dp))
+                    // 5 Sub-Tabs Row
+                    androidx.compose.foundation.lazy.LazyRow(
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        modifier = Modifier.fillMaxWidth()
                     ) {
-                        Tab(
-                            selected = selectedSharedTrack == 0,
-                            onClick = { selectedSharedTrack = 0 },
-                            text = { Text(if (isArabic) "🇩🇪 اللغات لطلبة الترجمة" else "Languages Track", fontSize = 10.5.sp, fontWeight = FontWeight.Bold) }
-                        )
-                        Tab(
-                            selected = selectedSharedTrack == 1,
-                            onClick = { selectedSharedTrack = 1 },
-                            text = { Text(if (isArabic) "⚖️ الترجمة لمتعلمي اللغات" else "Translation Track", fontSize = 10.5.sp, fontWeight = FontWeight.Bold) }
-                        )
-                        Tab(
-                            selected = selectedSharedTrack == 2,
-                            onClick = { selectedSharedTrack = 2 },
-                            text = { Text(if (isArabic) "📚 المعجم والمصطلحات" else "Glossary", fontSize = 10.5.sp, fontWeight = FontWeight.Bold) }
-                        )
+                        item {
+                            FilterChip(
+                                selected = selectedSharedTrack == 0,
+                                onClick = { selectedSharedTrack = 0 },
+                                label = { Text("🇩🇪 الألمانية (8 مساقات)", fontSize = 10.5.sp, fontWeight = FontWeight.Bold) }
+                            )
+                        }
+                        item {
+                            FilterChip(
+                                selected = selectedSharedTrack == 1,
+                                onClick = { selectedSharedTrack = 1 },
+                                label = { Text("⚖️ نظريات الترجمة (6)", fontSize = 10.5.sp, fontWeight = FontWeight.Bold) }
+                            )
+                        }
+                        item {
+                            FilterChip(
+                                selected = selectedSharedTrack == 2,
+                                onClick = { selectedSharedTrack = 2 },
+                                label = { Text("📄 المراجع الأكاديمية (17)", fontSize = 10.5.sp, fontWeight = FontWeight.Bold) }
+                            )
+                        }
+                        item {
+                            FilterChip(
+                                selected = selectedSharedTrack == 3,
+                                onClick = { selectedSharedTrack = 3 },
+                                label = { Text("📚 المعجم الصوتي", fontSize = 10.5.sp, fontWeight = FontWeight.Bold) }
+                            )
+                        }
+                        item {
+                            FilterChip(
+                                selected = selectedSharedTrack == 4,
+                                onClick = { selectedSharedTrack = 4 },
+                                label = { Text("📜 معايير ISO 17100", fontSize = 10.5.sp, fontWeight = FontWeight.Bold) }
+                            )
+                        }
                     }
                 }
             }
@@ -1676,19 +2049,44 @@ fun SharedLanguagesAndTranslationCoreComponent(
 
         when (selectedSharedTrack) {
             0 -> {
-                // Languages for Translation Students (German Focus + French/English)
+                // German modules + Grammar Table
                 item {
                     Text(
-                        text = if (isArabic) "🇩🇪 دروس وفيديوهات الألمانية المعتمدة لطلبة الترجمة (Deutsch für Übersetzer)" else "🇩🇪 German Language Modules for Translators",
+                        text = if (isArabic) "🇩🇪 دروس وفيديوهات الألمانية المعتمدة (8 مساقات كاملة)" else "🇩🇪 8 Certified German Language Masterclasses",
                         fontWeight = FontWeight.Bold,
                         fontSize = 12.5.sp,
                         color = RedPrimary
                     )
                 }
 
+                // German Cases Table Card
+                item {
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(12.dp),
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                        border = BorderStroke(1.dp, GoldYellow.copy(alpha = 0.5f))
+                    ) {
+                        Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                            Text(
+                                text = "📊 جدول الحالات الإعرابية الألمانية وقواعدها (German Cases Grammar):",
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 11.5.sp,
+                                color = RedDark
+                            )
+                            Text(
+                                text = "• Nominativ (الرفع): الفاعل الرئيسي (der / die / das / die) - مثال: Der Übersetzer arbeitet.\n• Akkusativ (النصب): المفعول به المباشر وحروف (durch, für, gegen, ohne, um) - يتغير المذكر فقط إلى den / einen.\n• Dativ (الجر / القابل): المفعول به غير المباشر وحروف (aus, bei, mit, nach, seit, von, zu) - يتغير إلى (dem / der / dem / den + n).\n• Genitiv (الإضافة والملكية): المضاف إليه وحروف (während, wegen, trotz, statt) - يتغير إلى (des + s / der / des + s / der).",
+                                fontSize = 11.sp,
+                                lineHeight = 16.sp,
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
+                        }
+                    }
+                }
+
                 items(germanCourses, key = { it.id }) { course ->
                     Card(
-                        modifier = Modifier.fillMaxWidth().clickable { },
+                        modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp),
                         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                         border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
@@ -1724,7 +2122,7 @@ fun SharedLanguagesAndTranslationCoreComponent(
                                 ) {
                                     Icon(Icons.Default.PlayArrow, contentDescription = null, modifier = Modifier.size(14.dp))
                                     Spacer(Modifier.width(4.dp))
-                                    Text(if (isArabic) "مشاهدة درس الألمانية" else "Watch Lesson", fontSize = 11.sp)
+                                    Text(if (isArabic) "مشاهدة المساق التعليمي 🎬" else "Watch Course", fontSize = 11.sp)
                                 }
                             }
                         }
@@ -1733,19 +2131,63 @@ fun SharedLanguagesAndTranslationCoreComponent(
             }
 
             1 -> {
-                // Translation for Language Learners
+                // 6 Core Translation Theories
                 item {
                     Text(
-                        text = if (isArabic) "⚖️ ركائز الترجمة التحريرية والفورية لمتعلمي اللغات (Applied Translation Skills)" else "⚖️ Applied Translation for Language Students",
+                        text = if (isArabic) "⚖️ أمهات نظريات ومدارس علم الترجمة واللسانيات (Core Theories)" else "⚖️ 6 Classical Translation & Linguistic Theories",
                         fontWeight = FontWeight.Bold,
                         fontSize = 12.5.sp,
                         color = RedPrimary
                     )
                 }
 
-                items(translationCourses, key = { it.id }) { course ->
+                val theories = listOf(
+                    Triple("نظرية التكافؤ (Equivalence Theory)", "يوجين نايدا (Eugene Nida)", "التمييز الجوهري بين التكافؤ الشكلي (Formal Equivalence) الذي يحاكي بناء النص الأصلي، والتكافؤ الديناميكي (Dynamic Equivalence) الذي يستهدف إحداث نفس الأثر الاستجابي لدى المتلقي في الثقافة المستهدفة."),
+                    Triple("نظرية الغاية والسكوبوس (Skopos Theory)", "هانز فيرمير وكاتارينا رايس (Hans Vermeer)", "الغاية والوظيفة التواصلية للنص المستهدف (Skopos) هي الحاكم الأعلى لاستراتيجية المترجم. الترجمة ليست مجرد نقل، بل إنتاج لنص هادف يخدم غرض العميل والجمهور المستهدف."),
+                    Triple("التوطين والتغريب (Domestication vs Foreignization)", "لورانس فينوتي (Lawrence Venuti)", "التوطين يجعل النص سلساً ومألوفاً للقارئ وكأنه كتب بلغته الأصلية، بينما التغريب يحافظ على الخصوصية الثقافية الأجنبية للنص الأصلي ويقاوم الهيمنة اللغوية الاستيعابية."),
+                    Triple("النظرية التأويلية لمدرسة باريس (ESIT Paris)", "دانيكا سيليسكوفيتش (Danica Seleskovitch)", "كسر القالب اللفظي (Déverbalisation): إدراك المعنى الخالص في الذاكرة قصيرة المدى ثم إعادة صياغته حراً وطبيعياً باللغة الهدف دون التقيد بالتراكيب الحرفية."),
+                    Triple("اللسانيات التداولية وأفعال الكلام (Pragmatics)", "أوستن وسيرل (Austin & Searle)", "نظرية أفعال الكلام (Speech Acts) والقوة الإنجازية (Illocutionary Force) ومبادئ غرايس للتعاون، لضمان نقل مقاصد المتكلم الضمنية بدقة تامة في المؤتمرات الدبلوماسية."),
+                    Triple("معايير الترجمة المرئية (Audiovisual Subtitling)", "معايير EBU و Netflix العالمية", "ضوابط الترجمة السمعية البصرية: حد أقصى 42 حرفاً لكل سطر (CPL)، وسرعة قرائية معيارية لا تتجاوز 17 إلى 20 حرفاً في الثانية (CPS) لضمان راحة المشاهد ومطابقة التوقيت.")
+                )
+
+                items(theories) { theory ->
                     Card(
-                        modifier = Modifier.fillMaxWidth().clickable { },
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(12.dp),
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                        border = BorderStroke(1.dp, RedPrimary.copy(alpha = 0.25f))
+                    ) {
+                        Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(theory.first, fontWeight = FontWeight.Bold, fontSize = 12.5.sp, color = RedPrimary)
+                                Surface(shape = RoundedCornerShape(4.dp), color = RedPrimary.copy(alpha = 0.1f)) {
+                                    Text(theory.second, modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp), fontSize = 9.5.sp, fontWeight = FontWeight.Bold, color = RedPrimary)
+                                }
+                            }
+                            Text(theory.third, fontSize = 11.5.sp, lineHeight = 16.5.sp, color = MaterialTheme.colorScheme.onSurface)
+                        }
+                    }
+                }
+            }
+
+            2 -> {
+                // 17 Verified Academic References
+                item {
+                    Text(
+                        text = if (isArabic) "📄 المراجع والمصادر والمساقات الأكاديمية المعتمدة (17 مرجعاً)" else "📄 17 Verified Academic References & Courses",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 12.5.sp,
+                        color = RedPrimary
+                    )
+                }
+
+                items(all17Courses, key = { it.id }) { course ->
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp),
                         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                         border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
@@ -1782,7 +2224,7 @@ fun SharedLanguagesAndTranslationCoreComponent(
                                 ) {
                                     Icon(Icons.Default.MenuBook, contentDescription = null, modifier = Modifier.size(14.dp))
                                     Spacer(Modifier.width(4.dp))
-                                    Text(if (isArabic) "قراءة وتطبيق المرجع" else "Open Textbook", fontSize = 11.sp)
+                                    Text(if (isArabic) "فتح المرجع المعتمد 📄" else "Open Reference", fontSize = 11.sp)
                                 }
                             }
                         }
@@ -1790,12 +2232,12 @@ fun SharedLanguagesAndTranslationCoreComponent(
                 }
             }
 
-            2 -> {
+            3 -> {
                 // Glossary and Terminology
                 item {
                     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Text(
-                            text = if (isArabic) "📖 مسرد المصطلحات الثلاثي المشترك (عربي • إنجليزي • ألماني)" else "📖 Trilingual Shared Termbase (AR • EN • DE)",
+                            text = if (isArabic) "📖 مسرد المصطلحات الثلاثي التخصصي (عربي • إنجليزي • ألماني)" else "📖 Trilingual Specialized Termbase (AR • EN • DE)",
                             fontWeight = FontWeight.Bold,
                             fontSize = 12.5.sp,
                             color = RedPrimary
@@ -1849,6 +2291,36 @@ fun SharedLanguagesAndTranslationCoreComponent(
                                 Text("🇬🇧 ${term.first}", fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurface)
                                 Text("🇩🇪 ${term.third}", fontSize = 11.sp, color = Color(0xFFD97706), fontWeight = FontWeight.SemiBold)
                             }
+                        }
+                    }
+                }
+            }
+
+            4 -> {
+                // ISO 17100:2015 Standards Workflow
+                item {
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(14.dp),
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                        border = BorderStroke(1.dp, SuccessGreen.copy(alpha = 0.4f))
+                    ) {
+                        Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                                Text("📜", fontSize = 18.sp)
+                                Text(
+                                    text = if (isArabic) "ميثاق معيار الجودة الدولي للترجمة ISO 17100:2015" else "ISO 17100:2015 Quality Standard Charter",
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 12.5.sp,
+                                    color = SuccessGreen
+                                )
+                            }
+                            Text(
+                                text = "مراحل دورة الترجمة المحلفة المعتمدة:\n1. الترجمة (Translation): نقل النص وفق الكفاءة الثقافية واللغوية.\n2. التحقق الذاتي (Check): مراجعة المترجم الأول الشاملة.\n3. المراجعة الثنائية (Revision): مراجعة لغوية مستقلة بمقارنة الأصل بالهدف.\n4. التدقيق التخصصي (Review): فحص المصطلحات القانونية أو التقنية من خبير معتمد.\n5. القراءة الختامية (Proofreading): ضبط الطباعة والإخراج والتنسيق.\n6. الإقرار النهائي والتسليم (Final Verification): تصديق المترجم المحلف والختم الرسمي.",
+                                fontSize = 11.sp,
+                                lineHeight = 16.5.sp,
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
                         }
                     }
                 }

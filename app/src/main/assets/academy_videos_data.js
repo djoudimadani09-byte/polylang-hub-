@@ -1,3 +1,4 @@
+window.ACADEMY_100_VIDEOS = (typeof ACADEMY_100_VIDEOS !== "undefined") ? ACADEMY_100_VIDEOS : [];
 // Polylang Hub - Verified Translation Science & Academic Resources Library
 // Authentic academic references, research lectures, university certificate programs & accredited platforms
 // Titles strictly preserved without instructor personal names. Direct access links verified.

@@ -1852,6 +1852,216 @@
                 🎯 اختر مسار الاختبار المعياري المطلوب:
               </div>
 
+        <div style="display:flex; gap:8px; flex-wrap:wrap;" id="exam-track-buttons">
+                <button class="nav-pill active" id="btn-exam-comprehensive" onclick="switchExamTrack('comprehensive')">
+                  🏆 الامتحان الشامل للترجمة واللغات (100 سؤال)
+                </button>
+                <button class="nav-pill" id="btn-exam-trans" onclick="switchExamTrack('trans')">
+                  ⚖️ الترجمة المؤسساتية وكابينات المؤتمرات (100 سؤال)
+                </button>
+                <button class="nav-pill" id="btn-exam-tcf" onclick="switchExamTrack('tcf')">
+                  🇫🇷 TCF / DALF (الفرنسية - 100 سؤال)
+                </button>
+                <button class="nav-pill" id="btn-exam-ielts" onclick="switchExamTrack('ielts')">
+                  🇬🇧 IELTS Academic (الإنجليزية - 100 سؤال)
+                </button>
+                <button class="nav-pill" id="btn-exam-goethe" onclick="switchExamTrack('goethe')">
+                  🇩🇪 Goethe-Zertifikat (الألمانية - 100 سؤال)
+                </button>
+              </div>
+            </div>
+
+            <!-- High-Tech Exam Skills Filter Bar -->
+            <div id="exam-section-filter-bar" style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px; align-items:center;">
+              <span style="font-size:11.5px; font-weight:800; color:var(--text-dim); margin-left:4px;">المهارات المقيمة:</span>
+              <button type="button" class="nav-pill active" onclick="filterExamBySkill('all', this)">🌐 جميع الأسئلة (100)</button>
+              <button type="button" class="nav-pill" onclick="filterExamBySkill('listening', this)">🎧 فهم المسموع (Listening)</button>
+              <button type="button" class="nav-pill" onclick="filterExamBySkill('reading', this)">📖 فهم المقروء (Reading)</button>
+              <button type="button" class="nav-pill" onclick="filterExamBySkill('syntax', this)">⚖️ القواعد والمصطلحات</button>
+              <button type="button" class="nav-pill" style="background:rgba(239,68,68,0.12); color:var(--crimson); border-color:var(--crimson); font-weight:800;" onclick="openWritingStudioModal()">✍️ استوديو الإنتاج الكتابي والتحرير</button>
+            </div>
+
+            <!-- 1. HIGH-TECH AUDIO LISTENING CONSOLE (فهم المسموع) -->
+            <div id="exam-audio-console" style="display:none; background:linear-gradient(135deg, #1e1e2d 0%, #111827 100%); color:#fff; border-radius:12px; padding:16px; margin-bottom:14px; border:1px solid #374151; box-shadow:0 4px 14px rgba(0,0,0,0.2);">
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span style="background:var(--crimson); color:#fff; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:800;">🎧 اختبار فهم المسموع</span>
+                  <span id="exam-audio-speaker" style="font-size:12px; color:#9ca3af; font-weight:600;">تسجيل صوتي رسمي معتمد</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <span id="exam-audio-plays-counter" style="font-size:11px; color:#fbbf24; font-weight:700; background:rgba(251,191,36,0.15); padding:2px 8px; border-radius:6px;">الاستماع: 0 من 2 (رسمي)</span>
+                </div>
+              </div>
+
+              <!-- Audio Player Controls -->
+              <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; background:rgba(255,255,255,0.06); padding:10px 14px; border-radius:10px;">
+                <button type="button" id="btn-play-exam-audio" class="btn-primary-red" onclick="togglePlayExamAudio()" style="padding:6px 16px; font-size:12.5px; border-radius:8px; display:inline-flex; align-items:center; gap:6px;">
+                  <span>▶ تشغيل التسجيل الصوتي</span>
+                </button>
+                <button type="button" class="btn-outline-action" onclick="stopExamAudio()" style="padding:6px 12px; font-size:12px; color:#fff; border-color:#4b5563; background:transparent;">
+                  ⏹️ إيقاف
+                </button>
+
+                <!-- Speed Switcher -->
+                <div style="display:flex; align-items:center; gap:4px; margin-right:auto;">
+                  <span style="font-size:11px; color:#9ca3af;">السرعة:</span>
+                  <button type="button" class="nav-pill" style="padding:2px 8px; font-size:10px; color:#fff; border-color:#4b5563;" onclick="setExamAudioSpeed(0.8, this)">0.8x</button>
+                  <button type="button" class="nav-pill active" style="padding:2px 8px; font-size:10px; color:#fff; border-color:var(--crimson);" onclick="setExamAudioSpeed(1.0, this)">1.0x</button>
+                  <button type="button" class="nav-pill" style="padding:2px 8px; font-size:10px; color:#fff; border-color:#4b5563;" onclick="setExamAudioSpeed(1.2, this)">1.2x</button>
+                </div>
+
+                <button type="button" class="btn-outline-action" onclick="toggleExamTranscript()" style="padding:4px 10px; font-size:11px; color:#93c5fd; border-color:#3b82f6; background:transparent;">
+                  📜 التفريغ النصي
+                </button>
+              </div>
+
+              <!-- Waveform Animation -->
+              <div id="exam-wave-container" style="display:flex; align-items:center; justify-content:center; gap:4px; height:24px; margin-top:10px;">
+                <div class="audio-wave-bar" style="height:6px; width:4px; background:#ef4444; border-radius:2px; transition:height 0.2s;"></div>
+                <div class="audio-wave-bar" style="height:12px; width:4px; background:#ef4444; border-radius:2px; transition:height 0.2s;"></div>
+                <div class="audio-wave-bar" style="height:18px; width:4px; background:#ef4444; border-radius:2px; transition:height 0.2s;"></div>
+                <div class="audio-wave-bar" style="height:10px; width:4px; background:#ef4444; border-radius:2px; transition:height 0.2s;"></div>
+                <div class="audio-wave-bar" style="height:20px; width:4px; background:#ef4444; border-radius:2px; transition:height 0.2s;"></div>
+                <div class="audio-wave-bar" style="height:14px; width:4px; background:#ef4444; border-radius:2px; transition:height 0.2s;"></div>
+                <div class="audio-wave-bar" style="height:8px; width:4px; background:#ef4444; border-radius:2px; transition:height 0.2s;"></div>
+              </div>
+
+              <!-- Transcript Box (Hidden by default) -->
+              <div id="exam-audio-transcript-box" style="display:none; margin-top:10px; padding:10px; background:rgba(0,0,0,0.4); border-radius:8px; font-size:12px; color:#d1d5db; line-height:1.6; border:1px dashed #4b5563;">
+              </div>
+            </div>
+
+            <!-- 2. HIGH-TECH READING COMPREHENSION CONSOLE (فهم المقروء) -->
+            <div id="exam-reading-console" style="display:none; background:var(--bg-surface); border:1px solid #93c5fd; border-radius:12px; padding:16px; margin-bottom:14px; box-shadow:0 2px 10px rgba(59,130,246,0.08);">
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px; border-bottom:1px solid var(--border-line); padding-bottom:8px;">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span style="background:#2563eb; color:#fff; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:800;">📖 نص القراءة والتحليل</span>
+                  <span id="exam-reading-title" style="font-size:13px; font-weight:800; color:var(--text-main);">النص المرجعي للقراءة والتحليل</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:4px;">
+                  <span style="font-size:11px; color:var(--text-dim);">الخط:</span>
+                  <button type="button" class="nav-pill" style="padding:2px 8px; font-size:11px;" onclick="changeReadingFontSize(1)">A+</button>
+                  <button type="button" class="nav-pill" style="padding:2px 8px; font-size:11px;" onclick="changeReadingFontSize(-1)">A-</button>
+                  <button type="button" class="nav-pill" style="padding:2px 8px; font-size:11px;" onclick="toggleReadingHighlight()">🖍️ تمييز الكلمات</button>
+                </div>
+              </div>
+
+              <div id="exam-reading-text-body" style="font-size:13px; line-height:1.8; color:var(--text-main); max-height:220px; overflow-y:auto; padding:10px 12px; background:var(--bg-body); border-radius:8px; border:1px solid var(--border-line);">
+              </div>
+            </div>
+
+            <!-- Exam Container -->
+            <div id="exam-card-container">
+              <!-- Progress Bar & Palette Toggle -->
+              <div style="margin-bottom:12px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; font-size:11.5px; margin-bottom:6px;">
+                  <span id="exam-progress-counter-text" style="font-weight:700; color:var(--text-dim);">تمت الإجابة: 0 من 100 سؤال</span>
+                  <button class="nav-pill" id="exam-palette-toggle-btn" style="padding:2px 10px; font-size:11px;" onclick="toggleExamPalette()">
+                    🔢 لوحة التنقل بين الأسئلة (1-100) ▼
+                  </button>
+                </div>
+                <div style="width:100%; height:6px; background:#e2e8f0; border-radius:3px; overflow:hidden;">
+                  <div id="exam-progress-bar-fill" style="width:1%; height:100%; background:var(--crimson); transition:width 0.3s ease;"></div>
+                </div>
+              </div>
+
+              <!-- Question Palette Grid (1-100 buttons) -->
+              <div id="exam-palette-grid" style="display:none; max-height:160px; overflow-y:auto; padding:8px; background:var(--bg-surface); border:1px solid var(--border-line); border-radius:8px; margin-bottom:12px;">
+                <!-- Generated dynamically via JS -->
+              </div>
+
+              <div style="background:var(--bg-surface); padding:16px; border-radius:10px; border:1px solid var(--border-line); margin-bottom:14px; box-shadow:0 2px 8px rgba(0,0,0,0.03);">
+                <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                  <span style="font-size:12.5px; font-weight:800; color:var(--crimson);" id="exam-q-number">السؤال 1 من 100</span>
+                  <span style="font-size:11.5px; color:var(--text-dim); background:var(--bg-body); padding:2px 8px; border-radius:4px;" id="exam-q-category">المعجم الدبلوماسي والدولي</span>
+                </div>
+                <h5 style="font-size:14.5px; font-weight:800; margin-bottom:14px; line-height:1.5;" id="exam-q-text">ما هي الترجمة المؤسساتية الدقيقة لمصطلح 'Plenipotentiary' في المعاهدات الدولية؟</h5>
+
+                <div id="exam-options-list" style="display:flex; flex-direction:column; gap:8px;">
+                  <!-- Populated via JS -->
+                </div>
+
+                <!-- Instant Model Correction & Explanation Box -->
+                <div id="exam-instant-explanation-box" style="display:none; margin-top:14px; background:#f0fdf4; border:1px solid #86efac; border-radius:8px; padding:12px; font-size:12px; line-height:1.6;">
+                  <!-- Injected via JS -->
+                </div>
+              </div>
+
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                <button class="btn-outline-action" id="exam-prev-btn" onclick="prevExamQuestion()" disabled>السابق</button>
+                <button class="btn-outline-action" id="exam-instant-explain-btn" onclick="toggleInstantExplanation()" style="font-size:11.5px; background:var(--bg-surface); border-color:#d1d5db;">
+                  💡 فحص الإجابة والتصحيح النموذجي
+                </button>
+                <button class="btn-primary-red" id="exam-next-btn" onclick="nextExamQuestion()">التالي ➔</button>
+              </div>
+            </div>
+
+            <!-- Exam Results Box (Hidden by default) -->
+            <div id="exam-result-box" style="display:none; text-align:center; padding:20px; background:var(--bg-surface); border-radius:12px; border:2px solid var(--crimson);">
+              <div style="font-size:40px; margin-bottom:10px;">🎓</div>
+              <h3 style="font-size:18px; font-weight:900; margin-bottom:6px;">شهادة تقييم المستوى المعتمدة من بوليلانغ</h3>
+              <p style="font-size:12px; color:var(--text-dim); margin-bottom:14px;">تم احتساب نتيجتك بنجاح وفق المعايير المؤسساتية العالمية وسلّم CEFR و ISO 17100:2015</p>
+
+              <div style="display:inline-block; background:var(--bg-body); padding:16px 28px; border-radius:12px; border:1px solid var(--border-line); margin-bottom:16px; box-shadow:0 4px 12px rgba(0,0,0,0.06);">
+                <div style="font-size:12px; color:var(--text-dim); margin-bottom:4px;">المستوى الأكاديمي والمهني المستحق:</div>
+                <div style="font-size:26px; font-weight:900; color:var(--crimson);" id="exam-level-grade">C1 - مترجم مؤتمرات متقدم</div>
+                <div style="font-size:14px; font-weight:800; margin-top:4px;" id="exam-score-percent">الدرجة: 90% (9/10)</div>
+              </div>
+
+              <!-- Real Grading Scale (سلم التنقيط المعتمد) -->
+              <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:12px; max-width:640px; margin:0 auto 16px; text-align:start;">
+                <div style="font-size:12px; font-weight:800; color:var(--crimson); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                  <span>📊 سلّم التنقيط والمعايير المعتمدة (Grading Scale):</span>
+                  <span id="exam-rubric-status-pill" style="font-size:11px; padding:2px 8px; border-radius:12px; font-weight:700;"></span>
+                </div>
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:6px; font-size:11px; margin-bottom:10px;">
+                  <div id="scale-c2" style="padding:6px; border-radius:6px; background:var(--bg-surface); border:1px solid var(--border-line);">
+                    <strong>85% - 100%</strong>: خبير متمرس (C2/Expert)
+                  </div>
+                  <div id="scale-c1" style="padding:6px; border-radius:6px; background:var(--bg-surface); border:1px solid var(--border-line);">
+                    <strong>70% - 84%</strong>: متقدم مستقل (C1/Very Good)
+                  </div>
+                  <div id="scale-b2" style="padding:6px; border-radius:6px; background:var(--bg-surface); border:1px solid var(--border-line);">
+                    <strong>50% - 69%</strong>: فوق المتوسط (B2/Competent)
+                  </div>
+                  <div id="scale-b1" style="padding:6px; border-radius:6px; background:var(--bg-surface); border:1px solid var(--border-line);">
+                    <strong>أقل من 50%</strong>: متوسط تأسيسي (B1/Developing)
+                  </div>
+                </div>
+
+                <!-- Detailed Competencies Breakdown -->
+                <div style="font-size:11.5px; font-weight:800; margin-bottom:6px;">تفصيل تقييم المهارات والمحاور (Competencies Breakdown):</div>
+                <div id="exam-categories-breakdown" style="display:flex; flex-direction:column; gap:6px; font-size:11.5px;">
+                  <!-- Injected via JavaScript -->
+                </div>
+              </div>
+
+              <p style="font-size:12.5px; line-height:1.7; max-width:600px; margin:0 auto 16px; color:var(--text-dim); text-align:start; background:var(--bg-body); padding:10px 14px; border-radius:8px; border:1px solid var(--border-line);" id="exam-feedback-text">
+                أداء متميز في استيعاب التراكيب المؤسساتية والتعابير الدبلوماسية الدقيقة. نوصيك بمواصلة تدريبات الفارق الزمني (Décalage) بكابينات المؤتمرات.
+              </p>
+
+              <!-- Question by Question Review -->
+              <div style="max-width:640px; margin:0 auto 16px; text-align:start;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                  <span style="font-size:12px; font-weight:800;">مراجعة الأسئلة وتصحيح الإجابات:</span>
+                  <button class="nav-pill" style="padding:2px 8px; font-size:11px;" onclick="toggleExamAnswersReview()">👁️ إظهار/إخفاء التحليل التفصيلي</button>
+                </div>
+                <div id="exam-detailed-review" style="display:none; max-height:260px; overflow-y:auto; background:var(--bg-body); padding:10px; border-radius:8px; border:1px solid var(--border-line); font-size:11.5px; line-height:1.6;">
+                  <!-- Injected via JavaScript -->
+                </div>
+              </div>
+
+              <div style="display:flex; justify-content:center; gap:8px;">
+                <button class="btn-primary-red" onclick="restartExam()">إعادة الامتحان 🔄</button>
+                <button class="btn-outline-action" onclick="printExamCertificate()">طباعة / حفظ الشهادة الرسمية 📥</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
         <!-- STUDENT SUB-SECTION 4: SHARED LINGUISTICS & TRANSLATION SCIENCE LIBRARY (المكتبة المشتركة الكاملة) -->
         <div id="student-languages-box" style="display:none;">
           <div style="background:var(--bg-body); padding:18px; border-radius:12px; border:1px solid var(--border-line);">
@@ -2202,136 +2412,6 @@
           </div>
         </div>
 
-              <div style="display:flex; gap:8px; flex-wrap:wrap;" id="exam-track-buttons">
-                <button class="nav-pill active" id="btn-exam-comprehensive" onclick="switchExamTrack('comprehensive')">
-                  🏆 الامتحان الشامل للترجمة واللغات (100 سؤال)
-                </button>
-                <button class="nav-pill" id="btn-exam-trans" onclick="switchExamTrack('trans')">
-                  ⚖️ الترجمة المؤسساتية وكابينات المؤتمرات (100 سؤال)
-                </button>
-                <button class="nav-pill" id="btn-exam-tcf" onclick="switchExamTrack('tcf')">
-                  🇫🇷 TCF / DALF (الفرنسية - 100 سؤال)
-                </button>
-                <button class="nav-pill" id="btn-exam-ielts" onclick="switchExamTrack('ielts')">
-                  🇬🇧 IELTS Academic (الإنجليزية - 100 سؤال)
-                </button>
-                <button class="nav-pill" id="btn-exam-goethe" onclick="switchExamTrack('goethe')">
-                  🇩🇪 Goethe-Zertifikat (الألمانية - 100 سؤال)
-                </button>
-              </div>
-            </div>
-
-            <!-- Exam Container -->
-            <div id="exam-card-container">
-              <!-- Progress Bar & Palette Toggle -->
-              <div style="margin-bottom:12px;">
-                <div style="display:flex; justify-content:space-between; align-items:center; font-size:11.5px; margin-bottom:6px;">
-                  <span id="exam-progress-counter-text" style="font-weight:700; color:var(--text-dim);">تمت الإجابة: 0 من 100 سؤال</span>
-                  <button class="nav-pill" id="exam-palette-toggle-btn" style="padding:2px 10px; font-size:11px;" onclick="toggleExamPalette()">
-                    🔢 لوحة التنقل بين الأسئلة (1-100) ▼
-                  </button>
-                </div>
-                <div style="width:100%; height:6px; background:#e2e8f0; border-radius:3px; overflow:hidden;">
-                  <div id="exam-progress-bar-fill" style="width:1%; height:100%; background:var(--crimson); transition:width 0.3s ease;"></div>
-                </div>
-              </div>
-
-              <!-- Question Palette Grid (1-100 buttons) -->
-              <div id="exam-palette-grid" style="display:none; max-height:160px; overflow-y:auto; padding:8px; background:var(--bg-surface); border:1px solid var(--border-line); border-radius:8px; margin-bottom:12px;">
-                <!-- Generated dynamically via JS -->
-              </div>
-
-              <div style="background:var(--bg-surface); padding:16px; border-radius:10px; border:1px solid var(--border-line); margin-bottom:14px; box-shadow:0 2px 8px rgba(0,0,0,0.03);">
-                <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-                  <span style="font-size:12.5px; font-weight:800; color:var(--crimson);" id="exam-q-number">السؤال 1 من 100</span>
-                  <span style="font-size:11.5px; color:var(--text-dim); background:var(--bg-body); padding:2px 8px; border-radius:4px;" id="exam-q-category">المعجم الدبلوماسي والدولي</span>
-                </div>
-                <h5 style="font-size:14.5px; font-weight:800; margin-bottom:14px; line-height:1.5;" id="exam-q-text">ما هي الترجمة المؤسساتية الدقيقة لمصطلح 'Plenipotentiary' في المعاهدات الدولية؟</h5>
-
-                <div id="exam-options-list" style="display:flex; flex-direction:column; gap:8px;">
-                  <!-- Populated via JS -->
-                </div>
-
-                <!-- Instant Model Correction & Explanation Box -->
-                <div id="exam-instant-explanation-box" style="display:none; margin-top:14px; background:#f0fdf4; border:1px solid #86efac; border-radius:8px; padding:12px; font-size:12px; line-height:1.6;">
-                  <!-- Injected via JS -->
-                </div>
-              </div>
-
-              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-                <button class="btn-outline-action" id="exam-prev-btn" onclick="prevExamQuestion()" disabled>السابق</button>
-                <button class="btn-outline-action" id="exam-instant-explain-btn" onclick="toggleInstantExplanation()" style="font-size:11.5px; background:var(--bg-surface); border-color:#d1d5db;">
-                  💡 فحص الإجابة والتصحيح النموذجي
-                </button>
-                <button class="btn-primary-red" id="exam-next-btn" onclick="nextExamQuestion()">التالي ➔</button>
-              </div>
-            </div>
-
-            <!-- Exam Results Box (Hidden by default) -->
-            <div id="exam-result-box" style="display:none; text-align:center; padding:20px; background:var(--bg-surface); border-radius:12px; border:2px solid var(--crimson);">
-              <div style="font-size:40px; margin-bottom:10px;">🎓</div>
-              <h3 style="font-size:18px; font-weight:900; margin-bottom:6px;">شهادة تقييم المستوى المعتمدة من بوليلانغ</h3>
-              <p style="font-size:12px; color:var(--text-dim); margin-bottom:14px;">تم احتساب نتيجتك بنجاح وفق المعايير المؤسساتية العالمية وسلّم CEFR و ISO 17100:2015</p>
-
-              <div style="display:inline-block; background:var(--bg-body); padding:16px 28px; border-radius:12px; border:1px solid var(--border-line); margin-bottom:16px; box-shadow:0 4px 12px rgba(0,0,0,0.06);">
-                <div style="font-size:12px; color:var(--text-dim); margin-bottom:4px;">المستوى الأكاديمي والمهني المستحق:</div>
-                <div style="font-size:26px; font-weight:900; color:var(--crimson);" id="exam-level-grade">C1 - مترجم مؤتمرات متقدم</div>
-                <div style="font-size:14px; font-weight:800; margin-top:4px;" id="exam-score-percent">الدرجة: 90% (9/10)</div>
-              </div>
-
-              <!-- Real Grading Scale (سلم التنقيط المعتمد) -->
-              <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:12px; max-width:640px; margin:0 auto 16px; text-align:start;">
-                <div style="font-size:12px; font-weight:800; color:var(--crimson); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
-                  <span>📊 سلّم التنقيط والمعايير المعتمدة (Grading Scale):</span>
-                  <span id="exam-rubric-status-pill" style="font-size:11px; padding:2px 8px; border-radius:12px; font-weight:700;"></span>
-                </div>
-                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:6px; font-size:11px; margin-bottom:10px;">
-                  <div id="scale-c2" style="padding:6px; border-radius:6px; background:var(--bg-surface); border:1px solid var(--border-line);">
-                    <strong>85% - 100%</strong>: خبير متمرس (C2/Expert)
-                  </div>
-                  <div id="scale-c1" style="padding:6px; border-radius:6px; background:var(--bg-surface); border:1px solid var(--border-line);">
-                    <strong>70% - 84%</strong>: متقدم مستقل (C1/Very Good)
-                  </div>
-                  <div id="scale-b2" style="padding:6px; border-radius:6px; background:var(--bg-surface); border:1px solid var(--border-line);">
-                    <strong>50% - 69%</strong>: فوق المتوسط (B2/Competent)
-                  </div>
-                  <div id="scale-b1" style="padding:6px; border-radius:6px; background:var(--bg-surface); border:1px solid var(--border-line);">
-                    <strong>أقل من 50%</strong>: متوسط تأسيسي (B1/Developing)
-                  </div>
-                </div>
-
-                <!-- Detailed Competencies Breakdown -->
-                <div style="font-size:11.5px; font-weight:800; margin-bottom:6px;">تفصيل تقييم المهارات والمحاور (Competencies Breakdown):</div>
-                <div id="exam-categories-breakdown" style="display:flex; flex-direction:column; gap:6px; font-size:11.5px;">
-                  <!-- Injected via JavaScript -->
-                </div>
-              </div>
-
-              <p style="font-size:12.5px; line-height:1.7; max-width:600px; margin:0 auto 16px; color:var(--text-dim); text-align:start; background:var(--bg-body); padding:10px 14px; border-radius:8px; border:1px solid var(--border-line);" id="exam-feedback-text">
-                أداء متميز في استيعاب التراكيب المؤسساتية والتعابير الدبلوماسية الدقيقة. نوصيك بمواصلة تدريبات الفارق الزمني (Décalage) بكابينات المؤتمرات.
-              </p>
-
-              <!-- Question by Question Review -->
-              <div style="max-width:640px; margin:0 auto 16px; text-align:start;">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                  <span style="font-size:12px; font-weight:800;">مراجعة الأسئلة وتصحيح الإجابات:</span>
-                  <button class="nav-pill" style="padding:2px 8px; font-size:11px;" onclick="toggleExamAnswersReview()">👁️ إظهار/إخفاء التحليل التفصيلي</button>
-                </div>
-                <div id="exam-detailed-review" style="display:none; max-height:260px; overflow-y:auto; background:var(--bg-body); padding:10px; border-radius:8px; border:1px solid var(--border-line); font-size:11.5px; line-height:1.6;">
-                  <!-- Injected via JavaScript -->
-                </div>
-              </div>
-
-              <div style="display:flex; justify-content:center; gap:8px;">
-                <button class="btn-primary-red" onclick="restartExam()">إعادة الامتحان 🔄</button>
-                <button class="btn-outline-action" onclick="printExamCertificate()">طباعة / حفظ الشهادة الرسمية 📥</button>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
     </div>
 
     <!-- DYNAMIC VIEW 3: ENTHUSIAST & LANGUAGE GAMES + ACADEMIC LIBRARY -->
