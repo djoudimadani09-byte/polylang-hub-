@@ -14,8 +14,8 @@
 - **المدير العام والمترجم المحلف المعتمد**: الأستاذ جودي مداني (Djoudi Madani)
 - **البريد الإلكتروني الرسمي للإشعارات الفورية**: `djoudimadani09@gmail.com`
 - **قاعدة البيانات السحابية (Backend & Database)**:
-  - متصل بقاعدة بيانات **PostgreSQL (Neon Cloud)**:
-    `postgresql://neondb_owner:***@ep-little-brook-a52mrgvy-pooler.us-east-2.aws.neon.tech/neondb`
+  - متصل بقاعدة بيانات **PostgreSQL (Neon Cloud)** عبر المتغيرات البيئية المشفرة (`DATABASE_URL`).
+  - يتم إدارة بيانات الاتصال حصرياً عبر لوحة الأسرار (Secrets Panel) لتأمين الاعتمادات وفق المعايير القياسية.
   - جداول متزامنة: `orders` (الطلبات), `users` (المستخدمون), `certificates` (الشهادات المعتمدة), `termbase` (المصطلحات).
 
 ## 🚀 النشر على GitHub Pages:

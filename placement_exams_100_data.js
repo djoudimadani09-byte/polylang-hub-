@@ -1,4 +1,4 @@
-// placement_exams_100_data.js - Standardized 100-Questions Placement Exams
+// placement_exams_100_data.js - Standardized 100-Questions Placement Exams (Enriched with Audio, Reading & Writing Studio)
 // Platform: Polylang Hub | Accredited by ISO 17100:2015
 
 const MULTI_TRACK_100_EXAMS = {
@@ -10,73 +10,103 @@ const MULTI_TRACK_100_EXAMS = {
         "q": "ما هي الترجمة المؤسساتية المعتمدة لمصطلح 'Plenipotentiary' في المعاهدات والاتفاقيات الدولية؟",
         "cat": "المعجم الدبلوماسي والدولي",
         "options": [
-          "مفوض فوق العادة ومطلق الصلاحية",
           "وزير مفوض مؤقت",
           "مبعوث استطلاعي خاص",
+          "مفوض فوق العادة ومطلق الصلاحية",
           "ملحق ثقافي معتمد"
         ],
-        "answer": 0,
-        "explanation": "اللقب الدبلوماسي الرسمي 'Plenipotentiary' يترجم حصراً بـ 'مفوض فوق العادة ومطلق الصلاحية'."
+        "answer": 2,
+        "explanation": "اللقب الدبلوماسي الرسمي 'Plenipotentiary' يترجم حصراً بـ 'مفوض فوق العادة ومطلق الصلاحية'.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-US",
+        "audioSpeaker": "مؤتمر دولي / حوار تخصصي",
+        "audioScript": "Listen to this diplomatic conference statement: ما هي الترجمة المؤسساتية المعتمدة لمصطلح 'Plenipotentiary' في المعاهدات والاتفاقيات الدولية؟ Select the verified official rendering."
       },
       {
         "q": "في العقود التجارية الدولية، ما الفرق الجوهري الدقيق بين 'Force Majeure' و 'Hardship'؟",
         "cat": "الصياغة القانونية والعقود",
         "options": [
-          "Force Majeure تجعل التنفيذ مستحيلاً تماماً، بينما Hardship تجعله مرهقاً ومختلاً اقتصادياً بصورة غير متوقعة",
           "Hardship تطبق فقط في النزاعات الجنائية",
+          "Force Majeure تجعل التنفيذ مستحيلاً تماماً، بينما Hardship تجعله مرهقاً ومختلاً اقتصادياً بصورة غير متوقعة",
           "كلاهما يعني دفع غرامة تأخير بدون إعفاء",
           "Force Majeure تشترط خطأ أحد الأطراف"
         ],
-        "answer": 0,
-        "explanation": "القوة القاهرة تعدم إمكانية التنفيذ، بينما الظروف الطارئة (Hardship) تخل بالتوازن الاقتصادي دون استحالته."
+        "answer": 1,
+        "explanation": "القوة القاهرة تعدم إمكانية التنفيذ، بينما الظروف الطارئة (Hardship) تخل بالتوازن الاقتصادي دون استحالته.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-US",
+        "audioSpeaker": "مؤتمر دولي / حوار تخصصي",
+        "audioScript": "Listen to this diplomatic conference statement: في العقود التجارية الدولية، ما الفرق الجوهري الدقيق بين 'Force Majeure' و 'Hardship'؟ Select the verified official rendering."
       },
       {
         "q": "ما المقابل العربي الأدق للعبارة القانونية اللاتينية 'Mutatis Mutandis' في نصوص المراسيم والاتفاقيات؟",
         "cat": "المصطلحات القانونية اللاتينية",
         "options": [
-          "مع مراعاة التعديلات اللازمة / مع ما يقتضيه الفارق",
           "إلى الأبد وبدون قيد أو شرط",
           "بحسن نية مطلقة",
-          "بأثر رجعي فوري"
+          "بأثر رجعي فوري",
+          "مع مراعاة التعديلات اللازمة / مع ما يقتضيه الفارق"
         ],
-        "answer": 0,
-        "explanation": "العبارة اللاتينية تعني تطبيق نفس الأحكام مع إجراء التغييرات الطفيفة اللازمة لاختلاف السياق."
+        "answer": 3,
+        "explanation": "العبارة اللاتينية تعني تطبيق نفس الأحكام مع إجراء التغييرات الطفيفة اللازمة لاختلاف السياق.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-US",
+        "audioSpeaker": "مؤتمر دولي / حوار تخصصي",
+        "audioScript": "Listen to this diplomatic conference statement: ما المقابل العربي الأدق للعبارة القانونية اللاتينية 'Mutatis Mutandis' في نصوص المراسيم والاتفاقيات؟ Select the verified official rendering."
       },
       {
         "q": "ما هو المدلول القانوني الدقيق لمصطلح 'Ultra Vires' في ممارسات الهيئات الإدارية؟",
         "cat": "القانون الإداري والمؤسساتي",
         "options": [
-          "تجاوز حدود الاختصاص والسلطة المخولة قانوناً (مما يبطل التصرف)",
           "التصرف بحسن نية كاملة",
           "تفويض الصلاحيات لموظف أدنى",
-          "المصادقة الإجماعية على القرار"
+          "المصادقة الإجماعية على القرار",
+          "تجاوز حدود الاختصاص والسلطة المخولة قانوناً (مما يبطل التصرف)"
         ],
-        "answer": 0,
-        "explanation": "التصرف 'Ultra Vires' هو عمل يقع خارج النطاق القانوني أو الدستوري الممنوح للمؤسسة ويعد باطلاً."
+        "answer": 3,
+        "explanation": "التصرف 'Ultra Vires' هو عمل يقع خارج النطاق القانوني أو الدستوري الممنوح للمؤسسة ويعد باطلاً.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-US",
+        "audioSpeaker": "مؤتمر دولي / حوار تخصصي",
+        "audioScript": "Listen to this diplomatic conference statement: ما هو المدلول القانوني الدقيق لمصطلح 'Ultra Vires' في ممارسات الهيئات الإدارية؟ Select the verified official rendering."
       },
       {
         "q": "ما المقابل العربي الرسمي لمصطلح 'Letters of Credence' في التمثيل الخارجي؟",
         "cat": "البروتوكول الدبلوماسي",
         "options": [
-          "أوراق الاعتماد",
           "رسائل التوصية",
+          "أوراق الاعتماد",
           "جوازات السفر الدبلوماسية",
           "وثائق المعاهدات"
         ],
-        "answer": 0,
-        "explanation": "أوراق الاعتماد هي الوثيقة الرسمية التي يقدمها السفير الجديد لرئيس الدولة المعتمد لديها."
+        "answer": 1,
+        "explanation": "أوراق الاعتماد هي الوثيقة الرسمية التي يقدمها السفير الجديد لرئيس الدولة المعتمد لديها.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-US",
+        "audioSpeaker": "مؤتمر دولي / حوار تخصصي",
+        "audioScript": "Listen to this diplomatic conference statement: ما المقابل العربي الرسمي لمصطلح 'Letters of Credence' في التمثيل الخارجي؟ Select the verified official rendering."
       },
       {
         "q": "ما الفرق في الصياغة القانونية الإنجليزية بين 'Shall' و 'May'؟",
         "cat": "الصياغة التشريعية الإنجليزية",
         "options": [
-          "Shall تفيد الوجوب والإلزام الصارم، بينما May تفيد الجواز والإذن التقديري",
           "Shall تفيد المستقبل البسيط فقط",
+          "Shall تفيد الوجوب والإلزام الصارم، بينما May تفيد الجواز والإذن التقديري",
           "كلاهما متطابق في القوة الإلزامية",
           "May تستخدم فقط للأفراد و Shall للدول"
         ],
-        "answer": 0,
-        "explanation": "في العقود الدولية: Shall تفرض التزاماً قانونياً واجباً، و May تمنح خياراً أو رخصة جوازية."
+        "answer": 1,
+        "explanation": "في العقود الدولية: Shall تفرض التزاماً قانونياً واجباً، و May تمنح خياراً أو رخصة جوازية.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-US",
+        "audioSpeaker": "مؤتمر دولي / حوار تخصصي",
+        "audioScript": "Listen to this diplomatic conference statement: ما الفرق في الصياغة القانونية الإنجليزية بين 'Shall' و 'May'؟ Select the verified official rendering."
       },
       {
         "q": "ما هي الترجمة القانونية الصحيحة لمصطلح 'Without Prejudice' في المراسلات القضائية والتسويات؟",
@@ -88,43 +118,63 @@ const MULTI_TRACK_100_EXAMS = {
           "وفقاً للعرف السائد"
         ],
         "answer": 0,
-        "explanation": "عبارة 'دون إخلال' تحمي حقوق الطرف المفاوض وتمنع استخدام التنازلات المقترحة كإقرار إدانة ضده أمام المحكمة."
+        "explanation": "عبارة 'دون إخلال' تحمي حقوق الطرف المفاوض وتمنع استخدام التنازلات المقترحة كإقرار إدانة ضده أمام المحكمة.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-US",
+        "audioSpeaker": "مؤتمر دولي / حوار تخصصي",
+        "audioScript": "Listen to this diplomatic conference statement: ما هي الترجمة القانونية الصحيحة لمصطلح 'Without Prejudice' في المراسلات القضائية والتسويات؟ Select the verified official rendering."
       },
       {
         "q": "ما معنى مصطلح 'Persona non grata' في العلاقات الدبلوماسية الدولية؟",
         "cat": "الأعراف الدبلوماسية",
         "options": [
-          "شخص غير مرغوب فيه (يطلب مغادرته لأراضي الدولة المعتمد لديها)",
           "دبلوماسي ذو حصانة مطلقة",
+          "شخص غير مرغوب فيه (يطلب مغادرته لأراضي الدولة المعتمد لديها)",
           "مترجم كابينة معتمد",
           "رئيس بعثة استثنائي"
         ],
-        "answer": 0,
-        "explanation": "إجراء بموجب اتفاقية فيينا للعلاقات الدبلوماسية تطلب بموجبه الدولة المستقبلة طرد الدبلوماسي دون إبداء الأسباب."
+        "answer": 1,
+        "explanation": "إجراء بموجب اتفاقية فيينا للعلاقات الدبلوماسية تطلب بموجبه الدولة المستقبلة طرد الدبلوماسي دون إبداء الأسباب.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-US",
+        "audioSpeaker": "مؤتمر دولي / حوار تخصصي",
+        "audioScript": "Listen to this diplomatic conference statement: ما معنى مصطلح 'Persona non grata' في العلاقات الدبلوماسية الدولية؟ Select the verified official rendering."
       },
       {
         "q": "ما المقابل الدقيق لمصطلح 'Ipso Facto' في القرارات التعاقدية؟",
         "cat": "المصطلحات اللاتينية",
         "options": [
-          "بحكم الواقع ذاته / تلقائياً بمجرد وقوع الفعل",
           "بأثر رجعي مدته سنة",
+          "بحكم الواقع ذاته / تلقائياً بمجرد وقوع الفعل",
           "وفقاً لرغبة الطرفين",
           "بعد موافقة المحكمة"
         ],
-        "answer": 0,
-        "explanation": "العبارة تعني حدوث النتيجة القانونية تلقائياً بقوة الواقعة نفسها دون حاجة لإجراء إضافي."
+        "answer": 1,
+        "explanation": "العبارة تعني حدوث النتيجة القانونية تلقائياً بقوة الواقعة نفسها دون حاجة لإجراء إضافي.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-US",
+        "audioSpeaker": "مؤتمر دولي / حوار تخصصي",
+        "audioScript": "Listen to this diplomatic conference statement: ما المقابل الدقيق لمصطلح 'Ipso Facto' في القرارات التعاقدية؟ Select the verified official rendering."
       },
       {
         "q": "في المعاهدات الدولية، ما الفرق بين 'Ratification' و 'Accession'؟",
         "cat": "قانون المعاهدات الدولية",
         "options": [
-          "Ratification مصادقة دولة موقعة سابقاً، بينما Accession انضمام دولة لم تكن موقعة أصلاً على نص المعاهدة",
           "كلاهما يعني رفض المعاهدة",
+          "Ratification مصادقة دولة موقعة سابقاً، بينما Accession انضمام دولة لم تكن موقعة أصلاً على نص المعاهدة",
           "Ratification للتحالفات العسكرية فقط",
           "لا يوجد أي فرق"
         ],
-        "answer": 0,
-        "explanation": "المصادقة تكون لمن وقع النص خلال مهلة التوقيع، بينما الانضمام لدولة لم توقع مسبقاً وتلتحق بالمعاهدة لاحقاً."
+        "answer": 1,
+        "explanation": "المصادقة تكون لمن وقع النص خلال مهلة التوقيع، بينما الانضمام لدولة لم توقع مسبقاً وتلتحق بالمعاهدة لاحقاً.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-US",
+        "audioSpeaker": "مؤتمر دولي / حوار تخصصي",
+        "audioScript": "Listen to this diplomatic conference statement: في المعاهدات الدولية، ما الفرق بين 'Ratification' و 'Accession'؟ Select the verified official rendering."
       },
       {
         "q": "ما الترجمة المعتمدة لمصطلح 'Jus Cogens' في القانون الدولي العام؟",
@@ -136,19 +186,29 @@ const MULTI_TRACK_100_EXAMS = {
           "أحكام المحاكم الابتدائية"
         ],
         "answer": 0,
-        "explanation": "Jus Cogens هي القواعد الدولية الآمرة القطعية (مثل حظر الإبادة الجماعية والقرصنة والرق)."
+        "explanation": "Jus Cogens هي القواعد الدولية الآمرة القطعية (مثل حظر الإبادة الجماعية والقرصنة والرق).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-US",
+        "audioSpeaker": "مؤتمر دولي / حوار تخصصي",
+        "audioScript": "Listen to this diplomatic conference statement: ما الترجمة المعتمدة لمصطلح 'Jus Cogens' في القانون الدولي العام؟ Select the verified official rendering."
       },
       {
         "q": "ما هي الترجمة القانونية الصحيحة لمصطلح 'Liquidated Damages' في عقود الفيدك (FIDIC)؟",
         "cat": "عقود الإنشاءات والمقاولات",
         "options": [
-          "التعويضات الاتفاقية المحددة مسبقاً / الشرط الجزائي المتفق عليه",
           "تصفية الأصول المفلسة",
           "أضرار بيئية غير مباشرة",
-          "تكاليف الشحن البحري"
+          "تكاليف الشحن البحري",
+          "التعويضات الاتفاقية المحددة مسبقاً / الشرط الجزائي المتفق عليه"
         ],
-        "answer": 0,
-        "explanation": "التعويض المقدر سلفاً في العقد عن كل يوم أو أسبوع تأخير في إنجاز المشروع دون حاجة لإثبات الضرر."
+        "answer": 3,
+        "explanation": "التعويض المقدر سلفاً في العقد عن كل يوم أو أسبوع تأخير في إنجاز المشروع دون حاجة لإثبات الضرر.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-US",
+        "audioSpeaker": "مؤتمر دولي / حوار تخصصي",
+        "audioScript": "Listen to this diplomatic conference statement: ما هي الترجمة القانونية الصحيحة لمصطلح 'Liquidated Damages' في عقود الفيدك (FIDIC)؟ Select the verified official rendering."
       },
       {
         "q": "ما معنى عبارة 'Ad Referendum' عند توقيع المفاوض على مسودة اتفاقية؟",
@@ -160,43 +220,63 @@ const MULTI_TRACK_100_EXAMS = {
           "توقيع سري غير معلن"
         ],
         "answer": 0,
-        "explanation": "التوقيع بشرط الرجوع للسلطة السياسية للتثبت من عدم تجاوز صلاحيات الوفد المفاوض."
+        "explanation": "التوقيع بشرط الرجوع للسلطة السياسية للتثبت من عدم تجاوز صلاحيات الوفد المفاوض.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-US",
+        "audioSpeaker": "مؤتمر دولي / حوار تخصصي",
+        "audioScript": "Listen to this diplomatic conference statement: ما معنى عبارة 'Ad Referendum' عند توقيع المفاوض على مسودة اتفاقية؟ Select the verified official rendering."
       },
       {
         "q": "ما هو المقابل الاصطلاحي العربي لمصطلح 'De Facto' مقابل 'De Jure'؟",
         "cat": "المصطلحات المؤسساتية",
         "options": [
-          "بحكم الأمر الواقع مقابل بحكم القانون والشرعية الرسمية",
           "سري مقابل علني",
+          "بحكم الأمر الواقع مقابل بحكم القانون والشرعية الرسمية",
           "مؤقت مقابل دائم",
           "محلي مقابل دولي"
         ],
-        "answer": 0,
-        "explanation": "De Facto هو الواقع الفعلي المفروض، بينما De Jure هو الوضع الشرعي المعترف به قانوناً."
+        "answer": 1,
+        "explanation": "De Facto هو الواقع الفعلي المفروض، بينما De Jure هو الوضع الشرعي المعترف به قانوناً.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-US",
+        "audioSpeaker": "مؤتمر دولي / حوار تخصصي",
+        "audioScript": "Listen to this diplomatic conference statement: ما هو المقابل الاصطلاحي العربي لمصطلح 'De Facto' مقابل 'De Jure'؟ Select the verified official rendering."
       },
       {
         "q": "ما الترجمة الدقيقة لمصطلح 'Joint and Several Liability' في المعاملات المالية؟",
         "cat": "المسؤولية القانونية",
         "options": [
-          "المسؤولية التضامنية والتكافلية (كل طرف مسؤول عن الكل وعن نصيبه)",
           "المسؤولية المحدودة بالأسهم فقط",
+          "المسؤولية التضامنية والتكافلية (كل طرف مسؤول عن الكل وعن نصيبه)",
           "المسؤولية الجزائية المشروطة",
           "انعدام المسؤولية المالية"
         ],
-        "answer": 0,
-        "explanation": "تضامن المدينين بحيث يحق للدائن مطالبة أي طرف بكامل الدين أو مطالبة الجميع مجتمعين."
+        "answer": 1,
+        "explanation": "تضامن المدينين بحيث يحق للدائن مطالبة أي طرف بكامل الدين أو مطالبة الجميع مجتمعين.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-US",
+        "audioSpeaker": "مؤتمر دولي / حوار تخصصي",
+        "audioScript": "Listen to this diplomatic conference statement: ما الترجمة الدقيقة لمصطلح 'Joint and Several Liability' في المعاملات المالية؟ Select the verified official rendering."
       },
       {
         "q": "ما المقصود بـ 'Expressed Warranty' في عقود البيع التجاري الدولي؟",
         "cat": "الضمانات العقدية",
         "options": [
-          "الضمان الصريح المنصوص عليه بوضوح في بنود العقد",
           "الضمان الضمني المفترض عرفاً",
+          "الضمان الصريح المنصوص عليه بوضوح في بنود العقد",
           "الضمان الشفهي غير المسجل",
           "الضمان المنتهي الصلاحية"
         ],
-        "answer": 0,
-        "explanation": "الضمان الصريح هو التعهد التعاقدي المكتوب بوضوح خلافاً للضمان الضمني (Implied Warranty)."
+        "answer": 1,
+        "explanation": "الضمان الصريح هو التعهد التعاقدي المكتوب بوضوح خلافاً للضمان الضمني (Implied Warranty).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-US",
+        "audioSpeaker": "مؤتمر دولي / حوار تخصصي",
+        "audioScript": "Listen to this diplomatic conference statement: ما المقصود بـ 'Expressed Warranty' في عقود البيع التجاري الدولي؟ Select the verified official rendering."
       },
       {
         "q": "ما المعنى الدقيق لعبارة 'Inter Alia' في التقارير الدولية؟",
@@ -208,31 +288,46 @@ const MULTI_TRACK_100_EXAMS = {
           "في نهاية الجلسة"
         ],
         "answer": 0,
-        "explanation": "عبارة تفيد التمثيل لا الحصر، أي أن القائمة المذكورة ليست على سبيل الإحاطة التامة."
+        "explanation": "عبارة تفيد التمثيل لا الحصر، أي أن القائمة المذكورة ليست على سبيل الإحاطة التامة.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-US",
+        "audioSpeaker": "مؤتمر دولي / حوار تخصصي",
+        "audioScript": "Listen to this diplomatic conference statement: ما المعنى الدقيق لعبارة 'Inter Alia' في التقارير الدولية؟ Select the verified official rendering."
       },
       {
         "q": "ما المقابل العربي لمصطلح 'Indemnification Clause' في عقود الاستثمار؟",
         "cat": "شروط التعويض",
         "options": [
-          "بند التعويض ودرء الضرر / بند جبر الخسائر",
           "بند الفائدة المصرفية",
           "بند تسليم البضائع",
-          "بند الإعفاء الضريبي"
+          "بند الإعفاء الضريبي",
+          "بند التعويض ودرء الضرر / بند جبر الخسائر"
         ],
-        "answer": 0,
-        "explanation": "البند الذي يلزم أحد الطرفين بتعويض الآخر والدفاع عنه ضد أي مطالبات أو خسائر ناتجة عن خرق العقد."
+        "answer": 3,
+        "explanation": "البند الذي يلزم أحد الطرفين بتعويض الآخر والدفاع عنه ضد أي مطالبات أو خسائر ناتجة عن خرق العقد.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-US",
+        "audioSpeaker": "مؤتمر دولي / حوار تخصصي",
+        "audioScript": "Listen to this diplomatic conference statement: ما المقابل العربي لمصطلح 'Indemnification Clause' في عقود الاستثمار؟ Select the verified official rendering."
       },
       {
         "q": "ما الترجمة المعتمدة لمصطلح 'Arbitration Clause' في النزاعات العابرة للحدود؟",
         "cat": "التحكيم الدولي",
         "options": [
-          "شرط التحكيم (إحالة أي نزاع لمحكمين بدلاً من القضاء الوطني)",
           "شرط الوساطة الودية فقط",
           "شرط الصلح الجنائي",
-          "شرط مراجعة الأسعار"
+          "شرط مراجعة الأسعار",
+          "شرط التحكيم (إحالة أي نزاع لمحكمين بدلاً من القضاء الوطني)"
         ],
-        "answer": 0,
-        "explanation": "بند بموجبه يتفق المتعاقدون على حل الخلافات عبر هيئات التحكيم الدولية (مثل ICC أو LCIA)."
+        "answer": 3,
+        "explanation": "بند بموجبه يتفق المتعاقدون على حل الخلافات عبر هيئات التحكيم الدولية (مثل ICC أو LCIA).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-US",
+        "audioSpeaker": "مؤتمر دولي / حوار تخصصي",
+        "audioScript": "Listen to this diplomatic conference statement: ما الترجمة المعتمدة لمصطلح 'Arbitration Clause' في النزاعات العابرة للحدود؟ Select the verified official rendering."
       },
       {
         "q": "ما المدلول الدقيق لـ 'Ex Gratia Payment' في التعويضات المالية؟",
@@ -244,43 +339,63 @@ const MULTI_TRACK_100_EXAMS = {
           "غرامة تهرب جمركي"
         ],
         "answer": 0,
-        "explanation": "دفعة تسوية تُمنح تفضلاً من الدولة أو الشركة لجبر خواطر المتضررين دون الاعتراف بالذنب قانوناً."
+        "explanation": "دفعة تسوية تُمنح تفضلاً من الدولة أو الشركة لجبر خواطر المتضررين دون الاعتراف بالذنب قانوناً.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-US",
+        "audioSpeaker": "مؤتمر دولي / حوار تخصصي",
+        "audioScript": "Listen to this diplomatic conference statement: ما المدلول الدقيق لـ 'Ex Gratia Payment' في التعويضات المالية؟ Select the verified official rendering."
       },
       {
         "q": "ما المقابل الرسمي لمصطلح 'Procès-Verbal' في الاجتماعات والتحقيقات الرسمية؟",
         "cat": "المصطلحات التوثيقية",
         "options": [
-          "محضر اجتماع رسمي / محضر ضبط قضائي",
           "تقرير مالي ختامي",
+          "محضر اجتماع رسمي / محضر ضبط قضائي",
           "دعوة لحضور مؤتمر",
           "جدول الأعمال المقترح"
         ],
-        "answer": 0,
-        "explanation": "الوثيقة الإجرائية الموثقة لوقائع جلسة رسمية أو ضبط مخالفة قانونية."
+        "answer": 1,
+        "explanation": "الوثيقة الإجرائية الموثقة لوقائع جلسة رسمية أو ضبط مخالفة قانونية.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-US",
+        "audioSpeaker": "مؤتمر دولي / حوار تخصصي",
+        "audioScript": "Listen to this diplomatic conference statement: ما المقابل الرسمي لمصطلح 'Procès-Verbal' في الاجتماعات والتحقيقات الرسمية؟ Select the verified official rendering."
       },
       {
         "q": "ما الترجمة المعتمدة لمصطلح 'Sovereign Immunity' في القانون الدولي؟",
         "cat": "الحصانة الدولية",
         "options": [
-          "الحصانة السيادية للدول (عدم خضوع الدولة وقضائها لمحاكم دولة أخرى)",
           "الحصانة الجمركية للركاب",
           "حق الفيتو في مجلس الأمن",
-          "الحق في إعلان الحرب"
+          "الحق في إعلان الحرب",
+          "الحصانة السيادية للدول (عدم خضوع الدولة وقضائها لمحاكم دولة أخرى)"
         ],
-        "answer": 0,
-        "explanation": "المبدأ الذي يمنع مقاضاة دولة ذات سيادة أو مصادرة أصولها في المحاكم المحلية لدولة أجنبية."
+        "answer": 3,
+        "explanation": "المبدأ الذي يمنع مقاضاة دولة ذات سيادة أو مصادرة أصولها في المحاكم المحلية لدولة أجنبية.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-US",
+        "audioSpeaker": "مؤتمر دولي / حوار تخصصي",
+        "audioScript": "Listen to this diplomatic conference statement: ما الترجمة المعتمدة لمصطلح 'Sovereign Immunity' في القانون الدولي؟ Select the verified official rendering."
       },
       {
         "q": "ما المعنى الدقيق لمصطلح 'Bilateral Agreement'؟",
         "cat": "أنواع الاتفاقيات",
         "options": [
-          "اتفاقية ثنائية (بين طرفين أو دولتين فقط)",
           "اتفاقية ثلاثية الأطراف",
           "معاهدة دولية مفتوحة لجميع الأمم",
+          "اتفاقية ثنائية (بين طرفين أو دولتين فقط)",
           "عقد عمل فردي"
         ],
-        "answer": 0,
-        "explanation": "الاتفاق الثنائي المبرم بين كيانين أو دولتين متعاقدتين فقط."
+        "answer": 2,
+        "explanation": "الاتفاق الثنائي المبرم بين كيانين أو دولتين متعاقدتين فقط.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-US",
+        "audioSpeaker": "مؤتمر دولي / حوار تخصصي",
+        "audioScript": "Listen to this diplomatic conference statement: ما المعنى الدقيق لمصطلح 'Bilateral Agreement'؟ Select the verified official rendering."
       },
       {
         "q": "ما معنى مصطلح 'Subpoena' في النظام القضائي الأنجلو-أمريكي (Common Law)؟",
@@ -292,55 +407,77 @@ const MULTI_TRACK_100_EXAMS = {
           "مذكرة دفاع استئنافية"
         ],
         "answer": 0,
-        "explanation": "أمر تصدره المحكمة يلزم الشخص بالشهادة أو إبراز مستندات تحت طائلة تهمة ازدراء المحكمة."
+        "explanation": "أمر تصدره المحكمة يلزم الشخص بالشهادة أو إبراز مستندات تحت طائلة تهمة ازدراء المحكمة.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-US",
+        "audioSpeaker": "مؤتمر دولي / حوار تخصصي",
+        "audioScript": "Listen to this diplomatic conference statement: ما معنى مصطلح 'Subpoena' في النظام القضائي الأنجلو-أمريكي (Common Law)؟ Select the verified official rendering."
       },
       {
         "q": "ما المقابل العربي الدقيق لعبارة 'In Witness Whereof' التي تسبق تواقيع العقود؟",
         "cat": "خواتيم العقود القانونية",
         "options": [
-          "وإثباتاً لما تقدم / وإشهاداً على ما تقدم (وقع الطرفان)",
           "بناءً على طلب القاضي",
+          "وإثباتاً لما تقدم / وإشهاداً على ما تقدم (وقع الطرفان)",
           "مع فائق التقدير والاحترام",
           "حسب الشريعة والقانون"
         ],
-        "answer": 0,
-        "explanation": "الصيغة البروتوكولية الختامية المعتمدة تاريخياً قبل تواقيع الأطراف والشهود في العقود والاتفاقيات."
+        "answer": 1,
+        "explanation": "الصيغة البروتوكولية الختامية المعتمدة تاريخياً قبل تواقيع الأطراف والشهود في العقود والاتفاقيات.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-US",
+        "audioSpeaker": "مؤتمر دولي / حوار تخصصي",
+        "audioScript": "Listen to this diplomatic conference statement: ما المقابل العربي الدقيق لعبارة 'In Witness Whereof' التي تسبق تواقيع العقود؟ Select the verified official rendering."
       },
       {
         "q": "ما الأداة الصحيحة للاسم المذكر في حالة المفعول به (Akkusativ)؟ 'Ich kaufe ___ Tisch.'",
         "cat": "أدوات التعريف والإعراب",
         "options": [
-          "den",
           "der",
+          "den",
           "das",
           "dem"
         ],
-        "answer": 0,
-        "explanation": "الاسم Tisch مذكر (der Tisch)، وفي حالة النصب (Akkusativ) تتحول der إلى den."
+        "answer": 1,
+        "explanation": "الاسم Tisch مذكر (der Tisch)، وفي حالة النصب (Akkusativ) تتحول der إلى den.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "نص القراءة المعتمد: مناهج الترجمة الفورية وتحليل الخطاب الدبلوماسي",
+        "readingPassage": "[1] تقتضي الترجمة في القمم الدولية إلماماً واسعاً بالبروتوكول والأعراف السياسية المعتمدة لدى الجمعية العامة للأمم المتحدة.\n[2] إن مراعاة القوة الإنجازية للتراكيب وتجنب الأفخاخ الدلالية يشكلان الفارق الحقيقي بين الهواية والاحتراف المؤسساتي."
       },
       {
         "q": "اختر التصريف الصحيح للفعل 'haben' مع الضمير 'ihr':",
         "cat": "تصريف الأفعال الأساسية",
         "options": [
-          "habt",
           "haben",
           "hast",
+          "habt",
           "hat"
         ],
-        "answer": 0,
-        "explanation": "تصريف فعل haben مع ضمير الجمع المخاطب ihr هو habt."
+        "answer": 2,
+        "explanation": "تصريف فعل haben مع ضمير الجمع المخاطب ihr هو habt.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "نص القراءة المعتمد: مناهج الترجمة الفورية وتحليل الخطاب الدبلوماسي",
+        "readingPassage": "[1] تقتضي الترجمة في القمم الدولية إلماماً واسعاً بالبروتوكول والأعراف السياسية المعتمدة لدى الجمعية العامة للأمم المتحدة.\n[2] إن مراعاة القوة الإنجازية للتراكيب وتجنب الأفخاخ الدلالية يشكلان الفارق الحقيقي بين الهواية والاحتراف المؤسساتي."
       },
       {
         "q": "ما هو حرف الجر المناسب للوقت: 'Der Unterricht beginnt ___ 9:00 Uhr.'؟",
         "cat": "حروف الجر الزمنية",
         "options": [
-          "um",
           "am",
           "im",
-          "an"
+          "an",
+          "um"
         ],
-        "answer": 0,
-        "explanation": "مع الساعات المحددة نستخدم دائماً حرف الجر um (um 9 Uhr)."
+        "answer": 3,
+        "explanation": "مع الساعات المحددة نستخدم دائماً حرف الجر um (um 9 Uhr).",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "نص القراءة المعتمد: مناهج الترجمة الفورية وتحليل الخطاب الدبلوماسي",
+        "readingPassage": "[1] تقتضي الترجمة في القمم الدولية إلماماً واسعاً بالبروتوكول والأعراف السياسية المعتمدة لدى الجمعية العامة للأمم المتحدة.\n[2] إن مراعاة القوة الإنجازية للتراكيب وتجنب الأفخاخ الدلالية يشكلان الفارق الحقيقي بين الهواية والاحتراف المؤسساتي."
       },
       {
         "q": "ما هو حرف الجر المناسب للأيام: 'Ich habe einen Termin ___ Montag.'؟",
@@ -352,31 +489,43 @@ const MULTI_TRACK_100_EXAMS = {
           "in"
         ],
         "answer": 0,
-        "explanation": "مع أيام الأسبوع وأوقات اليوم نستخدم حرف الجر am (am Montag)."
+        "explanation": "مع أيام الأسبوع وأوقات اليوم نستخدم حرف الجر am (am Montag).",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "نص القراءة المعتمد: مناهج الترجمة الفورية وتحليل الخطاب الدبلوماسي",
+        "readingPassage": "[1] تقتضي الترجمة في القمم الدولية إلماماً واسعاً بالبروتوكول والأعراف السياسية المعتمدة لدى الجمعية العامة للأمم المتحدة.\n[2] إن مراعاة القوة الإنجازية للتراكيب وتجنب الأفخاخ الدلالية يشكلان الفارق الحقيقي بين الهواية والاحتراف المؤسساتي."
       },
       {
         "q": "أي الجمل التالية تحتوي على فعل منفصل (Trennbares Verb) مركب بشكل صحيح؟",
         "cat": "الأفعال المنفصلة",
         "options": [
-          "Er steht jeden Tag um 7 Uhr auf.",
           "Er aufsteht jeden Tag um 7 Uhr.",
+          "Er steht jeden Tag um 7 Uhr auf.",
           "Er steht auf jeden Tag um 7 Uhr.",
           "Er jeden Tag um 7 Uhr aufsteht."
         ],
-        "answer": 0,
-        "explanation": "في الجملة الرئيسية، يُصرّف أصل الفعل في الموقع الثاني وتذهب السابقة (auf) إلى نهاية الجملة."
+        "answer": 1,
+        "explanation": "في الجملة الرئيسية، يُصرّف أصل الفعل في الموقع الثاني وتذهب السابقة (auf) إلى نهاية الجملة.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "نص القراءة المعتمد: مناهج الترجمة الفورية وتحليل الخطاب الدبلوماسي",
+        "readingPassage": "[1] تقتضي الترجمة في القمم الدولية إلماماً واسعاً بالبروتوكول والأعراف السياسية المعتمدة لدى الجمعية العامة للأمم المتحدة.\n[2] إن مراعاة القوة الإنجازية للتراكيب وتجنب الأفخاخ الدلالية يشكلان الفارق الحقيقي بين الهواية والاحتراف المؤسساتي."
       },
       {
         "q": "في صيغة الماضي (Perfekt)، ما الفعل المساعد المناسب مع فعل الحركة 'fahren'؟",
         "cat": "صيغة الماضي التام Perfekt",
         "options": [
-          "sein (ist gefahren)",
           "haben (hat gefahren)",
           "werden (wird gefahren)",
+          "sein (ist gefahren)",
           "tun (tut gefahren)"
         ],
-        "answer": 0,
-        "explanation": "أفعال الحركة والانتقال المكاني تأخذ الفعل المساعد sein في الماضي التام Perfekt."
+        "answer": 2,
+        "explanation": "أفعال الحركة والانتقال المكاني تأخذ الفعل المساعد sein في الماضي التام Perfekt.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "نص القراءة المعتمد: مناهج الترجمة الفورية وتحليل الخطاب الدبلوماسي",
+        "readingPassage": "[1] تقتضي الترجمة في القمم الدولية إلماماً واسعاً بالبروتوكول والأعراف السياسية المعتمدة لدى الجمعية العامة للأمم المتحدة.\n[2] إن مراعاة القوة الإنجازية للتراكيب وتجنب الأفخاخ الدلالية يشكلان الفارق الحقيقي بين الهواية والاحتراف المؤسساتي."
       },
       {
         "q": "ما هي أداة الاستفهام الصحيحة للسؤال عن المكان الثابت (Wo)؟ '___ wohnst du?'",
@@ -388,7 +537,11 @@ const MULTI_TRACK_100_EXAMS = {
           "Wann"
         ],
         "answer": 0,
-        "explanation": "للسؤال عن موقع السكن أو التواجد نستخدم Wo (أين؟)."
+        "explanation": "للسؤال عن موقع السكن أو التواجد نستخدم Wo (أين؟).",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "نص القراءة المعتمد: مناهج الترجمة الفورية وتحليل الخطاب الدبلوماسي",
+        "readingPassage": "[1] تقتضي الترجمة في القمم الدولية إلماماً واسعاً بالبروتوكول والأعراف السياسية المعتمدة لدى الجمعية العامة للأمم المتحدة.\n[2] إن مراعاة القوة الإنجازية للتراكيب وتجنب الأفخاخ الدلالية يشكلان الفارق الحقيقي بين الهواية والاحتراف المؤسساتي."
       },
       {
         "q": "ما هو جمع كلمة 'das Buch' (الكتاب) بالألمانية؟",
@@ -400,79 +553,107 @@ const MULTI_TRACK_100_EXAMS = {
           "die Buchs"
         ],
         "answer": 0,
-        "explanation": "جمع كلمة das Buch هو die Bücher مع إضافة أوملاوت ولحقة er."
+        "explanation": "جمع كلمة das Buch هو die Bücher مع إضافة أوملاوت ولحقة er.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "نص القراءة المعتمد: مناهج الترجمة الفورية وتحليل الخطاب الدبلوماسي",
+        "readingPassage": "[1] تقتضي الترجمة في القمم الدولية إلماماً واسعاً بالبروتوكول والأعراف السياسية المعتمدة لدى الجمعية العامة للأمم المتحدة.\n[2] إن مراعاة القوة الإنجازية للتراكيب وتجنب الأفخاخ الدلالية يشكلان الفارق الحقيقي بين الهواية والاحتراف المؤسساتي."
       },
       {
         "q": "اختر النهاية الصحيحة للصفة بعد أداة التنكير في الرفع المذكر: 'Das ist ein neu___ Wagen.'",
         "cat": "نهايات الصفات Adjektivdeklination",
         "options": [
-          "neuer",
           "neues",
           "neuen",
+          "neuer",
           "neuem"
         ],
-        "answer": 0,
-        "explanation": "بعد ein في الرفع المذكر تأخذ الصفة النهاية -er لتدل على جنس الاسم (ein neuer Wagen)."
+        "answer": 2,
+        "explanation": "بعد ein في الرفع المذكر تأخذ الصفة النهاية -er لتدل على جنس الاسم (ein neuer Wagen).",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "نص القراءة المعتمد: مناهج الترجمة الفورية وتحليل الخطاب الدبلوماسي",
+        "readingPassage": "[1] تقتضي الترجمة في القمم الدولية إلماماً واسعاً بالبروتوكول والأعراف السياسية المعتمدة لدى الجمعية العامة للأمم المتحدة.\n[2] إن مراعاة القوة الإنجازية للتراكيب وتجنب الأفخاخ الدلالية يشكلان الفارق الحقيقي بين الهواية والاحتراف المؤسساتي."
       },
       {
         "q": "ما الأداة المناسبة للاسم 'die Frau' في حالة المجرور (Dativ)؟ 'Ich helfe ___ Frau.'",
         "cat": "حالة المجرور Dativ",
         "options": [
-          "der",
           "die",
+          "der",
           "den",
           "dem"
         ],
-        "answer": 0,
-        "explanation": "تتحول أداة المؤنث die في حالة Dativ إلى der."
+        "answer": 1,
+        "explanation": "تتحول أداة المؤنث die في حالة Dativ إلى der.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "نص القراءة المعتمد: مناهج الترجمة الفورية وتحليل الخطاب الدبلوماسي",
+        "readingPassage": "[1] تقتضي الترجمة في القمم الدولية إلماماً واسعاً بالبروتوكول والأعراف السياسية المعتمدة لدى الجمعية العامة للأمم المتحدة.\n[2] إن مراعاة القوة الإنجازية للتراكيب وتجنب الأفخاخ الدلالية يشكلان الفارق الحقيقي بين الهواية والاحتراف المؤسساتي."
       },
       {
         "q": "أي فعل من الأفعال التالية يطلب دائماً حالة المجرور (Dativ)؟",
         "cat": "أفعال تطلب Dativ",
         "options": [
-          "helfen",
           "sehen",
           "kaufen",
-          "fragen"
+          "fragen",
+          "helfen"
         ],
-        "answer": 0,
-        "explanation": "الفعل helfen يطلب مفعولاً به مجروراً بالـ Dativ (Ich helfe dir)."
+        "answer": 3,
+        "explanation": "الفعل helfen يطلب مفعولاً به مجروراً بالـ Dativ (Ich helfe dir).",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "نص القراءة المعتمد: مناهج الترجمة الفورية وتحليل الخطاب الدبلوماسي",
+        "readingPassage": "[1] تقتضي الترجمة في القمم الدولية إلماماً واسعاً بالبروتوكول والأعراف السياسية المعتمدة لدى الجمعية العامة للأمم المتحدة.\n[2] إن مراعاة القوة الإنجازية للتراكيب وتجنب الأفخاخ الدلالية يشكلان الفارق الحقيقي بين الهواية والاحتراف المؤسساتي."
       },
       {
         "q": "ما الضمير الملكي للمخاطب الرسمي (Sie): 'Ist das ___ Pass?'",
         "cat": "ضمائر الملكية",
         "options": [
-          "Ihr",
           "ihr",
           "dein",
+          "Ihr",
           "sein"
         ],
-        "answer": 0,
-        "explanation": "ضمير الملكية للمخاطب بصيغة الاحترام Sie هو Ihr بحرف كبير."
+        "answer": 2,
+        "explanation": "ضمير الملكية للمخاطب بصيغة الاحترام Sie هو Ihr بحرف كبير.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "نص القراءة المعتمد: مناهج الترجمة الفورية وتحليل الخطاب الدبلوماسي",
+        "readingPassage": "[1] تقتضي الترجمة في القمم الدولية إلماماً واسعاً بالبروتوكول والأعراف السياسية المعتمدة لدى الجمعية العامة للأمم المتحدة.\n[2] إن مراعاة القوة الإنجازية للتراكيب وتجنب الأفخاخ الدلالية يشكلان الفارق الحقيقي بين الهواية والاحتراف المؤسساتي."
       },
       {
         "q": "كيف تصاغ صيغة المقارنة (Komparativ) من الصفة 'schnell'؟",
         "cat": "المقارنة والتفضيل",
         "options": [
-          "schneller",
           "am schnellsten",
           "mehr schnell",
-          "schnellste"
+          "schnellste",
+          "schneller"
         ],
-        "answer": 0,
-        "explanation": "يصاغ اسم التفضيل والمقارنة بإضافة اللاحقة -er للصفة (schneller)."
+        "answer": 3,
+        "explanation": "يصاغ اسم التفضيل والمقارنة بإضافة اللاحقة -er للصفة (schneller).",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "نص القراءة المعتمد: مناهج الترجمة الفورية وتحليل الخطاب الدبلوماسي",
+        "readingPassage": "[1] تقتضي الترجمة في القمم الدولية إلماماً واسعاً بالبروتوكول والأعراف السياسية المعتمدة لدى الجمعية العامة للأمم المتحدة.\n[2] إن مراعاة القوة الإنجازية للتراكيب وتجنب الأفخاخ الدلالية يشكلان الفارق الحقيقي بين الهواية والاحتراف المؤسساتي."
       },
       {
         "q": "ما هو نفي الجملة التالية باستخدام 'nicht': 'Er arbeitet heute.'؟",
         "cat": "قواعد النفي",
         "options": [
-          "Er arbeitet heute nicht.",
           "Er nicht arbeitet heute.",
           "Er arbeitet nicht heute.",
+          "Er arbeitet heute nicht.",
           "Er arbeitet kein heute."
         ],
-        "answer": 0,
-        "explanation": "توضع nicht في نهاية الجملة لنفي الفعل بالكامل (Er arbeitet heute nicht)."
+        "answer": 2,
+        "explanation": "توضع nicht في نهاية الجملة لنفي الفعل بالكامل (Er arbeitet heute nicht).",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "نص القراءة المعتمد: مناهج الترجمة الفورية وتحليل الخطاب الدبلوماسي",
+        "readingPassage": "[1] تقتضي الترجمة في القمم الدولية إلماماً واسعاً بالبروتوكول والأعراف السياسية المعتمدة لدى الجمعية العامة للأمم المتحدة.\n[2] إن مراعاة القوة الإنجازية للتراكيب وتجنب الأفخاخ الدلالية يشكلان الفارق الحقيقي بين الهواية والاحتراف المؤسساتي."
       },
       {
         "q": "متى نستخدم أداة النفي 'kein' بدلاً من 'nicht'؟",
@@ -484,43 +665,59 @@ const MULTI_TRACK_100_EXAMS = {
           "لنفي الجمل الاستفهامية فقط"
         ],
         "answer": 0,
-        "explanation": "تُستخدم kein لنفي الأسماء النكرة أو الأسماء المجردة من الأدوات."
+        "explanation": "تُستخدم kein لنفي الأسماء النكرة أو الأسماء المجردة من الأدوات.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "نص القراءة المعتمد: مناهج الترجمة الفورية وتحليل الخطاب الدبلوماسي",
+        "readingPassage": "[1] تقتضي الترجمة في القمم الدولية إلماماً واسعاً بالبروتوكول والأعراف السياسية المعتمدة لدى الجمعية العامة للأمم المتحدة.\n[2] إن مراعاة القوة الإنجازية للتراكيب وتجنب الأفخاخ الدلالية يشكلان الفارق الحقيقي بين الهواية والاحتراف المؤسساتي."
       },
       {
         "q": "اختر التصريف الصحيح لفعل 'können' مع 'er':",
         "cat": "أفعال الكيفية Modalverben",
         "options": [
-          "kann",
           "könnt",
           "kannst",
+          "kann",
           "können"
         ],
-        "answer": 0,
-        "explanation": "في أفعال الكيفية، يتطابق تصريف المفرد الغائب (er) مع المتكلم (ich): ich kann, er kann."
+        "answer": 2,
+        "explanation": "في أفعال الكيفية، يتطابق تصريف المفرد الغائب (er) مع المتكلم (ich): ich kann, er kann.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "نص القراءة المعتمد: مناهج الترجمة الفورية وتحليل الخطاب الدبلوماسي",
+        "readingPassage": "[1] تقتضي الترجمة في القمم الدولية إلماماً واسعاً بالبروتوكول والأعراف السياسية المعتمدة لدى الجمعية العامة للأمم المتحدة.\n[2] إن مراعاة القوة الإنجازية للتراكيب وتجنب الأفخاخ الدلالية يشكلان الفارق الحقيقي بين الهواية والاحتراف المؤسساتي."
       },
       {
         "q": "ما المعنى الدقيق لفعل الكيفية 'müssen'؟",
         "cat": "أفعال الكيفية",
         "options": [
-          "الإلزام والضرورة المطلقة",
           "القدرة والاستطاعة",
           "الرغبة والإرادة",
-          "السماح والإذن"
+          "السماح والإذن",
+          "الإلزام والضرورة المطلقة"
         ],
-        "answer": 0,
-        "explanation": "الفعل müssen يعبر عن الوجوب والضرورة الحتمية الخارجية."
+        "answer": 3,
+        "explanation": "الفعل müssen يعبر عن الوجوب والضرورة الحتمية الخارجية.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "نص القراءة المعتمد: مناهج الترجمة الفورية وتحليل الخطاب الدبلوماسي",
+        "readingPassage": "[1] تقتضي الترجمة في القمم الدولية إلماماً واسعاً بالبروتوكول والأعراف السياسية المعتمدة لدى الجمعية العامة للأمم المتحدة.\n[2] إن مراعاة القوة الإنجازية للتراكيب وتجنب الأفخاخ الدلالية يشكلان الفارق الحقيقي بين الهواية والاحتراف المؤسساتي."
       },
       {
         "q": "ما هو حرف الجر المناسب للسؤال عن جهة القدوم: 'Ich komme ___ Algerien.'؟",
         "cat": "حروف الجر المكانية",
         "options": [
-          "aus",
           "nach",
           "in",
-          "von"
+          "von",
+          "aus"
         ],
-        "answer": 0,
-        "explanation": "للدلالة على الانحدار أو القدوم من دولة أو مدينة نستخدم aus."
+        "answer": 3,
+        "explanation": "للدلالة على الانحدار أو القدوم من دولة أو مدينة نستخدم aus.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "نص القراءة المعتمد: مناهج الترجمة الفورية وتحليل الخطاب الدبلوماسي",
+        "readingPassage": "[1] تقتضي الترجمة في القمم الدولية إلماماً واسعاً بالبروتوكول والأعراف السياسية المعتمدة لدى الجمعية العامة للأمم المتحدة.\n[2] إن مراعاة القوة الإنجازية للتراكيب وتجنب الأفخاخ الدلالية يشكلان الفارق الحقيقي بين الهواية والاحتراف المؤسساتي."
       },
       {
         "q": "مع الدول المؤنثة مثل 'die Schweiz'، كيف نقول 'أنا مسافر إلى سويسرا'؟",
@@ -532,103 +729,135 @@ const MULTI_TRACK_100_EXAMS = {
           "aus die Schweiz"
         ],
         "answer": 0,
-        "explanation": "الدول ذات الأدوات لا تأخذ nach بل تأخذ حرف الجر in مع حالة النصب Akkusativ (in die Schweiz)."
+        "explanation": "الدول ذات الأدوات لا تأخذ nach بل تأخذ حرف الجر in مع حالة النصب Akkusativ (in die Schweiz).",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "نص القراءة المعتمد: مناهج الترجمة الفورية وتحليل الخطاب الدبلوماسي",
+        "readingPassage": "[1] تقتضي الترجمة في القمم الدولية إلماماً واسعاً بالبروتوكول والأعراف السياسية المعتمدة لدى الجمعية العامة للأمم المتحدة.\n[2] إن مراعاة القوة الإنجازية للتراكيب وتجنب الأفخاخ الدلالية يشكلان الفارق الحقيقي بين الهواية والاحتراف المؤسساتي."
       },
       {
         "q": "اختر الضمير المتصل المناسب: 'Siehst du ___ (هو في حالة النصب)؟'",
         "cat": "ضمائر المفعول به",
         "options": [
-          "ihn",
           "ihm",
           "er",
+          "ihn",
           "sein"
         ],
-        "answer": 0,
-        "explanation": "ضمير الغائب المذكر er يصبح ihn في حالة النصب Akkusativ."
+        "answer": 2,
+        "explanation": "ضمير الغائب المذكر er يصبح ihn في حالة النصب Akkusativ.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "نص القراءة المعتمد: مناهج الترجمة الفورية وتحليل الخطاب الدبلوماسي",
+        "readingPassage": "[1] تقتضي الترجمة في القمم الدولية إلماماً واسعاً بالبروتوكول والأعراف السياسية المعتمدة لدى الجمعية العامة للأمم المتحدة.\n[2] إن مراعاة القوة الإنجازية للتراكيب وتجنب الأفخاخ الدلالية يشكلان الفارق الحقيقي بين الهواية والاحتراف المؤسساتي."
       },
       {
         "q": "ما معنى الرابط 'weil' وموقعه في الجملة؟",
         "cat": "الروابط الثانوية Nebensätze",
         "options": [
-          "يعني 'لأن' ويُرسل الفعل المصرف إلى نهاية الجملة",
           "يعني 'لكن' ولا يغير ترتيب الجملة",
           "يعني 'أو' ويأتي في الموقع الأول",
+          "يعني 'لأن' ويُرسل الفعل المصرف إلى نهاية الجملة",
           "يعني 'لذلك' ويأتي بعده الفعل مباشرة"
         ],
-        "answer": 0,
-        "explanation": "الرابط weil يربط جملة سببية ثانوية ويرسل الفعل المصرف إلى آخر الجملة تماماً."
+        "answer": 2,
+        "explanation": "الرابط weil يربط جملة سببية ثانوية ويرسل الفعل المصرف إلى آخر الجملة تماماً.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "نص القراءة المعتمد: مناهج الترجمة الفورية وتحليل الخطاب الدبلوماسي",
+        "readingPassage": "[1] تقتضي الترجمة في القمم الدولية إلماماً واسعاً بالبروتوكول والأعراف السياسية المعتمدة لدى الجمعية العامة للأمم المتحدة.\n[2] إن مراعاة القوة الإنجازية للتراكيب وتجنب الأفخاخ الدلالية يشكلان الفارق الحقيقي بين الهواية والاحتراف المؤسساتي."
       },
       {
         "q": "أي الجمل التالية صحيحة مع الرابط 'dass' (أنّ)؟",
         "cat": "الروابط الثانوية",
         "options": [
-          "Ich weiß, dass er Deutsch lernt.",
           "Ich weiß, dass er lernt Deutsch.",
+          "Ich weiß, dass er Deutsch lernt.",
           "Ich weiß, dass lernt er Deutsch.",
           "Ich weiß, er lernt dass Deutsch."
         ],
-        "answer": 0,
-        "explanation": "في الجمل الثانوية بعد dass يذهب الفعل المصرف (lernt) إلى نهاية الجملة."
+        "answer": 1,
+        "explanation": "في الجمل الثانوية بعد dass يذهب الفعل المصرف (lernt) إلى نهاية الجملة.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "نص القراءة المعتمد: مناهج الترجمة الفورية وتحليل الخطاب الدبلوماسي",
+        "readingPassage": "[1] تقتضي الترجمة في القمم الدولية إلماماً واسعاً بالبروتوكول والأعراف السياسية المعتمدة لدى الجمعية العامة للأمم المتحدة.\n[2] إن مراعاة القوة الإنجازية للتراكيب وتجنب الأفخاخ الدلالية يشكلان الفارق الحقيقي بين الهواية والاحتراف المؤسساتي."
       },
       {
         "q": "ما تصريف الفعل 'werden' في الماضي البسيط (Präteritum) مع 'wir'؟",
         "cat": "الماضي البسيط Präteritum",
         "options": [
-          "wurden",
           "worden",
           "wurde",
-          "würden"
+          "würden",
+          "wurden"
         ],
-        "answer": 0,
-        "explanation": "تصريف فعل werden في الماضي البسيط Präteritum مع wir هو wurden."
+        "answer": 3,
+        "explanation": "تصريف فعل werden في الماضي البسيط Präteritum مع wir هو wurden.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "نص القراءة المعتمد: مناهج الترجمة الفورية وتحليل الخطاب الدبلوماسي",
+        "readingPassage": "[1] تقتضي الترجمة في القمم الدولية إلماماً واسعاً بالبروتوكول والأعراف السياسية المعتمدة لدى الجمعية العامة للأمم المتحدة.\n[2] إن مراعاة القوة الإنجازية للتراكيب وتجنب الأفخاخ الدلالية يشكلان الفارق الحقيقي بين الهواية والاحتراف المؤسساتي."
       },
       {
         "q": "ما هو الترتيب الصحيح للجملة: 'Morgen / ich / nach Berlin / fahre'؟",
         "cat": "بنية الجملة Satzbau",
         "options": [
-          "Morgen fahre ich nach Berlin.",
           "Morgen ich fahre nach Berlin.",
           "Ich morgen fahre nach Berlin.",
-          "Fahre morgen ich nach Berlin."
+          "Fahre morgen ich nach Berlin.",
+          "Morgen fahre ich nach Berlin."
         ],
-        "answer": 0,
-        "explanation": "القاعدة الذهبية في اللغة الألمانية: الفعل المصرف يحتل دائماً الموقع الثاني (Position 2)."
+        "answer": 3,
+        "explanation": "القاعدة الذهبية في اللغة الألمانية: الفعل المصرف يحتل دائماً الموقع الثاني (Position 2).",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "نص القراءة المعتمد: مناهج الترجمة الفورية وتحليل الخطاب الدبلوماسي",
+        "readingPassage": "[1] تقتضي الترجمة في القمم الدولية إلماماً واسعاً بالبروتوكول والأعراف السياسية المعتمدة لدى الجمعية العامة للأمم المتحدة.\n[2] إن مراعاة القوة الإنجازية للتراكيب وتجنب الأفخاخ الدلالية يشكلان الفارق الحقيقي بين الهواية والاحتراف المؤسساتي."
       },
       {
         "q": "اختر صيغة الأمر المناسبة للمخاطب المفرد (du) من فعل 'lesen':",
         "cat": "صيغة الأمر Imperativ",
         "options": [
-          "Lies!",
           "Lese!",
           "Liest!",
-          "Lesen!"
+          "Lesen!",
+          "Lies!"
         ],
-        "answer": 0,
-        "explanation": "الأفعال التي يتغير أصلها من e إلى ie تحتفظ بهذا التغيير في صيغة الأمر للمفرد (Lies!)."
+        "answer": 3,
+        "explanation": "الأفعال التي يتغير أصلها من e إلى ie تحتفظ بهذا التغيير في صيغة الأمر للمفرد (Lies!).",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "نص القراءة المعتمد: مناهج الترجمة الفورية وتحليل الخطاب الدبلوماسي",
+        "readingPassage": "[1] تقتضي الترجمة في القمم الدولية إلماماً واسعاً بالبروتوكول والأعراف السياسية المعتمدة لدى الجمعية العامة للأمم المتحدة.\n[2] إن مراعاة القوة الإنجازية للتراكيب وتجنب الأفخاخ الدلالية يشكلان الفارق الحقيقي بين الهواية والاحتراف المؤسساتي."
       },
       {
         "q": "Choisissez l'article défini contracté correct: 'Je vais ___ cinéma ce soir.'",
         "cat": "Articles contractés",
         "options": [
-          "au",
           "à le",
+          "au",
           "du",
           "en"
         ],
-        "answer": 0,
-        "explanation": "La préposition 'à' fusionne avec l'article masculin 'le' pour former 'au' (à + le = au)."
+        "answer": 1,
+        "explanation": "La préposition 'à' fusionne avec l'article masculin 'le' pour former 'au' (à + le = au).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quelle est la conjugaison correcte du verbe 'avoir' avec 'nous' au présent?",
         "cat": "Conjugaison du présent",
         "options": [
-          "avons",
           "avez",
           "ont",
+          "avons",
           "sommes"
         ],
-        "answer": 0,
-        "explanation": "Au présent de l'indicatif, le verbe avoir se conjugue: nous avons."
+        "answer": 2,
+        "explanation": "Au présent de l'indicatif, le verbe avoir se conjugue: nous avons.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Choisissez la préposition correcte pour un pays féminin: 'Elle habite ___ France.'",
@@ -640,115 +869,135 @@ const MULTI_TRACK_100_EXAMS = {
           "dans"
         ],
         "answer": 0,
-        "explanation": "Devant les noms de pays féminins se terminant par un 'e', on utilise la préposition 'en'."
+        "explanation": "Devant les noms de pays féminins se terminant par un 'e', on utilise la préposition 'en'.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quelle est la forme du féminin de l'adjectif 'heureux'?",
         "cat": "Féminin des adjectifs",
         "options": [
-          "heureuse",
           "heureusse",
           "heureux",
+          "heureuse",
           "heureue"
         ],
-        "answer": 0,
-        "explanation": "Les adjectifs masculins se terminant par -eux font leur féminin en -euse."
+        "answer": 2,
+        "explanation": "Les adjectifs masculins se terminant par -eux font leur féminin en -euse.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quel auxiliaire utilise-t-on au passé composé pour le verbe 'aller'?",
         "cat": "Passé composé",
         "options": [
-          "être (est allé)",
           "avoir (a allé)",
           "faire (fait allé)",
-          "aller (va aller)"
+          "aller (va aller)",
+          "être (est allé)"
         ],
-        "answer": 0,
-        "explanation": "Le verbe 'aller' fait partie des verbes de mouvement qui se conjuguent avec l'auxiliaire être."
+        "answer": 3,
+        "explanation": "Le verbe 'aller' fait partie des verbes de mouvement qui se conjuguent avec l'auxiliaire être.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Choisissez l'accord correct du participe passé: 'Les lettres que j'ai ___.'",
         "cat": "Accord du participe passé",
         "options": [
-          "écrites",
           "écrit",
+          "écrites",
           "écrite",
           "écrits"
         ],
-        "answer": 0,
-        "explanation": "Avec l'auxiliaire avoir, le participe passé s'accorde avec le COD placé avant (les lettres = fém. pluriel)."
+        "answer": 1,
+        "explanation": "Avec l'auxiliaire avoir, le participe passé s'accorde avec le COD placé avant (les lettres = fém. pluriel).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quelle phrase exprime correctement la négation au présent?",
         "cat": "La négation",
         "options": [
-          "Il ne mange pas de viande.",
           "Il ne mange point la viande pas.",
           "Il mange ne pas de viande.",
-          "Il pas mange de viande."
+          "Il pas mange de viande.",
+          "Il ne mange pas de viande."
         ],
-        "answer": 0,
-        "explanation": "La structure de négation standard entoure le verbe conjugué: ne + verbe + pas."
+        "answer": 3,
+        "explanation": "La structure de négation standard entoure le verbe conjugué: ne + verbe + pas.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quel est le pronom personnel COD remplaçant 'le livre': 'Tu lis le livre? - Oui, je ___ lis.'",
         "cat": "Pronoms COD",
         "options": [
-          "le",
           "lui",
           "en",
-          "y"
+          "y",
+          "le"
         ],
-        "answer": 0,
-        "explanation": "Le nom masculin singulier 'le livre' est un COD direct remplacé par le pronom 'le'."
+        "answer": 3,
+        "explanation": "Le nom masculin singulier 'le livre' est un COD direct remplacé par le pronom 'le'.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quel est le pronom possessif correct: 'C'est la voiture de Marie. C'est ___ voiture.'",
         "cat": "Adjectifs possessifs",
         "options": [
-          "sa",
           "son",
           "ses",
+          "sa",
           "leur"
         ],
-        "answer": 0,
-        "explanation": "Devant un nom féminin singulier commençant par une consonne, on utilise 'sa'."
+        "answer": 2,
+        "explanation": "Devant un nom féminin singulier commençant par une consonne, on utilise 'sa'.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quelle est l'interrogation correcte avec inversion du sujet?",
         "cat": "Structure interrogative",
         "options": [
-          "Parlez-vous français?",
           "Vous parlez français-vous?",
           "Est-ce vous parlez français?",
+          "Parlez-vous français?",
           "Parlez vous-le français?"
         ],
-        "answer": 0,
-        "explanation": "L'inversion formelle du sujet place le verbe suivi d'un trait d'union et du pronom personnel."
+        "answer": 2,
+        "explanation": "L'inversion formelle du sujet place le verbe suivi d'un trait d'union et du pronom personnel.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Choisissez l'adjectif démonstratif devant un mot masculin débutant par une voyelle: '___ arbre est grand.'",
         "cat": "Adjectifs démonstratifs",
         "options": [
-          "Cet",
           "Ce",
           "Cette",
+          "Cet",
           "Ces"
         ],
-        "answer": 0,
-        "explanation": "Devant un nom masculin commençant par une voyelle ou un h muet, on emploie 'cet'."
+        "answer": 2,
+        "explanation": "Devant un nom masculin commençant par une voyelle ou un h muet, on emploie 'cet'.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quelle est la forme correcte du futur proche pour 'partir' avec 'ils'?",
         "cat": "Futur proche",
         "options": [
-          "ils vont partir",
           "ils partent",
+          "ils vont partir",
           "ils partiront",
           "ils sont partis"
         ],
-        "answer": 0,
-        "explanation": "Le futur proche se forme avec le verbe aller au présent + infinitif (vont partir)."
+        "answer": 1,
+        "explanation": "Le futur proche se forme avec le verbe aller au présent + infinitif (vont partir).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quel est le pluriel du mot 'le journal'?",
@@ -760,67 +1009,79 @@ const MULTI_TRACK_100_EXAMS = {
           "les journauxes"
         ],
         "answer": 0,
-        "explanation": "La plupart des noms masculins en -al forment leur pluriel en -aux."
+        "explanation": "La plupart des noms masculins en -al forment leur pluriel en -aux.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Choisissez la préposition d'heure correcte: 'Le train part ___ 14 heures.'",
         "cat": "Prépositions temporelles",
         "options": [
-          "à",
           "en",
+          "à",
           "dans",
           "vers"
         ],
-        "answer": 0,
-        "explanation": "On utilise la préposition 'à' pour indiquer une heure précise."
+        "answer": 1,
+        "explanation": "On utilise la préposition 'à' pour indiquer une heure précise.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quelle est la forme correcte de l'impératif pour 'prendre' avec 'tu'?",
         "cat": "Mode impératif",
         "options": [
-          "Prends!",
           "Prend!",
           "Prennes!",
+          "Prends!",
           "Prenez!"
         ],
-        "answer": 0,
-        "explanation": "À la 2e personne du singulier des verbes du 3e groupe en -dre, la terminaison conserve le -s (Prends)."
+        "answer": 2,
+        "explanation": "À la 2e personne du singulier des verbes du 3e groupe en -dre, la terminaison conserve le -s (Prends).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Comment dit-on 'yesterday' en français?",
         "cat": "Vocabulaire temporel",
         "options": [
-          "hier",
           "demain",
           "aujourd'hui",
-          "maintenant"
+          "maintenant",
+          "hier"
         ],
-        "answer": 0,
-        "explanation": "'Hier' signifie le jour précédant aujourd'hui."
+        "answer": 3,
+        "explanation": "'Hier' signifie le jour précédant aujourd'hui.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quel est le contraire de 'toujours' dans une phrase négative?",
         "cat": "Négation complexe",
         "options": [
-          "ne ... jamais",
           "ne ... rien",
           "ne ... plus",
+          "ne ... jamais",
           "ne ... personne"
         ],
-        "answer": 0,
-        "explanation": "L'antonyme négatif de 'toujours' ou 'souvent' est 'ne ... jamais'."
+        "answer": 2,
+        "explanation": "L'antonyme négatif de 'toujours' ou 'souvent' est 'ne ... jamais'.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Choisissez la préposition correcte: 'Je viens ___ Algérie.'",
         "cat": "Prépositions de provenance",
         "options": [
-          "d'",
           "de l'",
           "du",
+          "d'",
           "en"
         ],
-        "answer": 0,
-        "explanation": "Devant un nom de pays féminin commençant par une voyelle, la provenance s'exprime par 'd''."
+        "answer": 2,
+        "explanation": "Devant un nom de pays féminin commençant par une voyelle, la provenance s'exprime par 'd''.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quelle phrase exprime une obligation impersonnelle?",
@@ -832,67 +1093,79 @@ const MULTI_TRACK_100_EXAMS = {
           "Nous voulons étudier."
         ],
         "answer": 0,
-        "explanation": "'Il faut' + infinitif exprime une obligation générale et impersonnelle."
+        "explanation": "'Il faut' + infinitif exprime une obligation générale et impersonnelle.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quel est le participe passé du verbe 'faire'?",
         "cat": "Participe passé",
         "options": [
-          "fait",
           "fais",
+          "fait",
           "faisant",
           "faites"
         ],
-        "answer": 0,
-        "explanation": "Le participe passé du verbe irrégulier faire est 'fait'."
+        "answer": 1,
+        "explanation": "Le participe passé du verbe irrégulier faire est 'fait'.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Choisissez le pronom tonique convenable: 'Ce cadeau est pour ___ (je).' ",
         "cat": "Pronoms toniques",
         "options": [
-          "moi",
           "je",
           "me",
+          "moi",
           "m'"
         ],
-        "answer": 0,
-        "explanation": "Après une préposition (pour, avec, sans), on emploie les pronoms toniques (moi, toi, lui...)."
+        "answer": 2,
+        "explanation": "Après une préposition (pour, avec, sans), on emploie les pronoms toniques (moi, toi, lui...).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quelle forme exprime la durée terminée dans le passé?",
         "cat": "Expressions de temps",
         "options": [
-          "pendant 3 ans",
           "depuis 3 ans",
           "en 3 ans",
-          "dans 3 ans"
+          "dans 3 ans",
+          "pendant 3 ans"
         ],
-        "answer": 0,
-        "explanation": "'Pendant' indique une durée complètement délimitée et achevée dans le passé."
+        "answer": 3,
+        "explanation": "'Pendant' indique une durée complètement délimitée et achevée dans le passé.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quelle expression exprime une action continue dans le présent qui a débuté dans le passé?",
         "cat": "Expressions de temps",
         "options": [
-          "depuis deux ans",
           "pendant deux ans",
           "pour deux ans",
-          "dans deux ans"
+          "dans deux ans",
+          "depuis deux ans"
         ],
-        "answer": 0,
-        "explanation": "'Depuis' indique une action qui a commencé dans le passé et se poursuit dans le présent."
+        "answer": 3,
+        "explanation": "'Depuis' indique une action qui a commencé dans le passé et se poursuit dans le présent.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quel est le comparatif de supériorité de l'adjectif 'bon'?",
         "cat": "Comparatifs irréguliers",
         "options": [
-          "meilleur",
           "plus bon",
           "mieux",
+          "meilleur",
           "le bon"
         ],
-        "answer": 0,
-        "explanation": "Le comparatif de supériorité de l'adjectif 'bon' est l'adjectif irrégulier 'meilleur'."
+        "answer": 2,
+        "explanation": "Le comparatif de supériorité de l'adjectif 'bon' est l'adjectif irrégulier 'meilleur'.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quelle est la terminaison de l'imparfait pour 'ils / elles'?",
@@ -904,19 +1177,23 @@ const MULTI_TRACK_100_EXAMS = {
           "-èrent"
         ],
         "answer": 0,
-        "explanation": "La désinence de l'imparfait pour la 3e personne du pluriel est invariablement -aient."
+        "explanation": "La désinence de l'imparfait pour la 3e personne du pluriel est invariablement -aient.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Choose the correct verb form: 'By the time the delegates arrived, the keynote speech ___.'",
         "cat": "Past Perfect and Narrative Tenses",
         "options": [
-          "had already concluded",
           "has already concluded",
           "was already concluded",
-          "already concluded"
+          "already concluded",
+          "had already concluded"
         ],
-        "answer": 0,
-        "explanation": "The past perfect (had concluded) expresses an action completed before another past event (delegates arrived)."
+        "answer": 3,
+        "explanation": "The past perfect (had concluded) expresses an action completed before another past event (delegates arrived).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Select the correct preposition: 'The research committee is composed ___ seven distinguished scholars.'",
@@ -928,7 +1205,9 @@ const MULTI_TRACK_100_EXAMS = {
           "by"
         ],
         "answer": 0,
-        "explanation": "The standard academic adjective collocation is 'composed of' (consisting of)."
+        "explanation": "The standard academic adjective collocation is 'composed of' (consisting of).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Which sentence correctly utilizes the first conditional for academic forecasting?",
@@ -940,7 +1219,9 @@ const MULTI_TRACK_100_EXAMS = {
           "If investment declines, unemployment would rise."
         ],
         "answer": 0,
-        "explanation": "First conditional standard pattern: If + present simple -> will + base verb."
+        "explanation": "First conditional standard pattern: If + present simple -> will + base verb.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Choose the accurate passive form: 'Scientists are currently investigating the environmental impact.'",
@@ -952,19 +1233,23 @@ const MULTI_TRACK_100_EXAMS = {
           "The environmental impact was currently being investigated."
         ],
         "answer": 0,
-        "explanation": "Present continuous passive requires: is/are + being + past participle (is currently being investigated)."
+        "explanation": "Present continuous passive requires: is/are + being + past participle (is currently being investigated).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Select the appropriate quantifier: 'There is ___ evidence to support this theoretical claim.'",
         "cat": "Quantifiers in Academic Prose",
         "options": [
-          "little (meaning scarce/insufficient)",
           "few",
           "many",
+          "little (meaning scarce/insufficient)",
           "a few"
         ],
-        "answer": 0,
-        "explanation": "'Evidence' is an uncountable noun; 'little' indicates a scarce or negative degree."
+        "answer": 2,
+        "explanation": "'Evidence' is an uncountable noun; 'little' indicates a scarce or negative degree.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Identify the correctly formed indirect question:",
@@ -976,55 +1261,65 @@ const MULTI_TRACK_100_EXAMS = {
           "Could you clarify that what the proposed methodology entails?"
         ],
         "answer": 0,
-        "explanation": "In embedded questions, standard subject-verb word order is maintained without auxiliary inversion."
+        "explanation": "In embedded questions, standard subject-verb word order is maintained without auxiliary inversion.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Which modal verb accurately expresses a logical deduction based on clear evidence?",
         "cat": "Modal Verbs of Deduction",
         "options": [
-          "The experimental results must be valid, given the rigorous controls.",
           "The results should to be valid.",
           "The results can to be valid.",
-          "The results must to be valid."
+          "The results must to be valid.",
+          "The experimental results must be valid, given the rigorous controls."
         ],
-        "answer": 0,
-        "explanation": "'Must' followed by bare infinitive expresses strong logical certainty or deduction."
+        "answer": 3,
+        "explanation": "'Must' followed by bare infinitive expresses strong logical certainty or deduction.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Choose the correct relative pronoun: 'The university, ___ reputation is worldwide, announced new grants.'",
         "cat": "Relative Clauses",
         "options": [
-          "whose",
           "which",
           "whom",
+          "whose",
           "that"
         ],
-        "answer": 0,
-        "explanation": "'Whose' denotes possession for both people and institutional entities in non-defining clauses."
+        "answer": 2,
+        "explanation": "'Whose' denotes possession for both people and institutional entities in non-defining clauses.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Select the appropriate linking word indicating a contrasting perspective:",
         "cat": "Discourse Markers of Contrast",
         "options": [
-          "However",
           "Furthermore",
+          "However",
           "Consequently",
           "Similarly"
         ],
-        "answer": 0,
-        "explanation": "'However' introduces a counter-argument or contrastive observation."
+        "answer": 1,
+        "explanation": "'However' introduces a counter-argument or contrastive observation.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Choose the correct gerund/infinitive pattern: 'The committee decided ___ the publication until further review.'",
         "cat": "Verb Complementation",
         "options": [
-          "to postpone",
           "postponing",
           "postpone",
+          "to postpone",
           "for postponing"
         ],
-        "answer": 0,
-        "explanation": "The verb 'decide' takes a to-infinitive complement (decided to postpone)."
+        "answer": 2,
+        "explanation": "The verb 'decide' takes a to-infinitive complement (decided to postpone).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Identify the correct form for expressing regret about an unfulfilled past action:",
@@ -1036,31 +1331,40 @@ const MULTI_TRACK_100_EXAMS = {
           "We should had consulted the legal department earlier."
         ],
         "answer": 0,
-        "explanation": "'Should have + past participle' expresses unfulfilled obligation or retrospective criticism."
+        "explanation": "'Should have + past participle' expresses unfulfilled obligation or retrospective criticism.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Which sentence demonstrates correct subject-verb agreement with a collective subject?",
         "cat": "Subject-Verb Agreement",
         "options": [
-          "The majority of participants were satisfied with the workshop.",
           "The majority of participants was being satisfied.",
+          "The majority of participants were satisfied with the workshop.",
           "The majority of participants is satisfied.",
           "The majority of participants has satisfied."
         ],
-        "answer": 0,
-        "explanation": "When followed by an 'of + plural noun' phrase, collective quantifiers like 'majority' take plural agreement."
+        "answer": 1,
+        "explanation": "When followed by an 'of + plural noun' phrase, collective quantifiers like 'majority' take plural agreement.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Choose the accurate academic collocation for 'carry out': 'The laboratory will ___ an extensive trial.'",
         "cat": "Academic Collocations",
         "options": [
-          "conduct",
           "make",
           "commit",
+          "conduct",
           "fabricate"
         ],
-        "answer": 0,
-        "explanation": "In formal academic writing, 'conduct a trial/study/survey' is the preferred standard collocation."
+        "answer": 2,
+        "explanation": "In formal academic writing, 'conduct a trial/study/survey' is the preferred standard collocation.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Select the correct comparative structure:",
@@ -1072,7 +1376,10 @@ const MULTI_TRACK_100_EXAMS = {
           "The second hypothesis is plausible than the first."
         ],
         "answer": 0,
-        "explanation": "'Far more + adjective + than' is the accurate modifier for emphatic comparison."
+        "explanation": "'Far more + adjective + than' is the accurate modifier for emphatic comparison.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Identify the accurate preposition: 'The economic crisis resulted ___ severe budgetary cuts.'",
@@ -1084,19 +1391,25 @@ const MULTI_TRACK_100_EXAMS = {
           "to"
         ],
         "answer": 0,
-        "explanation": "'Result in' signifies 'lead to / cause', whereas 'result from' indicates origin/cause."
+        "explanation": "'Result in' signifies 'lead to / cause', whereas 'result from' indicates origin/cause.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Choose the correct adverbial placement: 'The findings ___ confirm previous clinical observations.'",
         "cat": "Adverb Position in Sentences",
         "options": [
-          "clearly",
           "clear",
           "clarity",
+          "clearly",
           "clearness"
         ],
-        "answer": 0,
-        "explanation": "Adverbs of manner placed between subject and main verb modify the assertion (clearly confirm)."
+        "answer": 2,
+        "explanation": "Adverbs of manner placed between subject and main verb modify the assertion (clearly confirm).",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Select the appropriate conjunction indicating unexpected concession:",
@@ -1108,79 +1421,100 @@ const MULTI_TRACK_100_EXAMS = {
           "Because the sample size was modest."
         ],
         "answer": 0,
-        "explanation": "'Although' introduces a subordinate clause containing a finite verb (was modest)."
+        "explanation": "'Although' introduces a subordinate clause containing a finite verb (was modest).",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Which sentence correctly employs the third conditional?",
         "cat": "Hypothetical Conditionals",
         "options": [
-          "If the data had been verified earlier, the error would have been averted.",
           "If the data was verified earlier, the error would be averted.",
           "If the data had been verified, the error will be averted.",
-          "If the data would have been verified, the error had been averted."
+          "If the data would have been verified, the error had been averted.",
+          "If the data had been verified earlier, the error would have been averted."
         ],
-        "answer": 0,
-        "explanation": "Third conditional structure: If + had + past participle -> would have + past participle."
+        "answer": 3,
+        "explanation": "Third conditional structure: If + had + past participle -> would have + past participle.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Choose the correct phrase expressing tentative hedging in research:",
         "cat": "Hedging in Academic Writing",
         "options": [
-          "The figures appear to indicate a downward trend.",
           "The figures definitely prove beyond all doubt.",
           "The figures always show without error.",
-          "The figures never fail to prove."
+          "The figures never fail to prove.",
+          "The figures appear to indicate a downward trend."
         ],
-        "answer": 0,
-        "explanation": "Hedging verbs such as 'appear to indicate / tend to suggest' soften claims to maintain academic rigor."
+        "answer": 3,
+        "explanation": "Hedging verbs such as 'appear to indicate / tend to suggest' soften claims to maintain academic rigor.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Select the correct noun form: 'The ___ of the treaty took several months of negotiation.'",
         "cat": "Nominalization in Academic Style",
         "options": [
-          "ratification",
           "ratify",
+          "ratification",
           "ratified",
           "ratifyingly"
         ],
-        "answer": 0,
-        "explanation": "Nominalization transforms verbal actions into abstract noun concepts (ratification)."
+        "answer": 1,
+        "explanation": "Nominalization transforms verbal actions into abstract noun concepts (ratification).",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Identify the correct preposition: 'She is renowned ___ her pioneering work in sociolinguistics.'",
         "cat": "Adjective Prepositions",
         "options": [
-          "for",
           "with",
+          "for",
           "about",
           "by"
         ],
-        "answer": 0,
-        "explanation": "The adjective 'renowned' collocates with the preposition 'for' (famous for)."
+        "answer": 1,
+        "explanation": "The adjective 'renowned' collocates with the preposition 'for' (famous for).",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Which sentence correctly avoids a comma splice?",
         "cat": "Punctuation in Academic English",
         "options": [
-          "The report was finished; therefore, the team adjourned the meeting.",
           "The report was finished, therefore the team adjourned the meeting.",
+          "The report was finished; therefore, the team adjourned the meeting.",
           "The report was finished therefore, the team adjourned.",
           "The report was finished, and therefore the team adjourned."
         ],
-        "answer": 0,
-        "explanation": "Two independent clauses linked by a conjunctive adverb require a semicolon before and a comma after."
+        "answer": 1,
+        "explanation": "Two independent clauses linked by a conjunctive adverb require a semicolon before and a comma after.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Choose the antonym of 'superficial' in an academic analysis:",
         "cat": "Academic Vocabulary",
         "options": [
-          "profound / in-depth",
           "shallow",
           "cursory",
-          "trivial"
+          "trivial",
+          "profound / in-depth"
         ],
-        "answer": 0,
-        "explanation": "'Profound' or 'in-depth' denotes deep, thorough analytical rigor, contrary to 'superficial'."
+        "answer": 3,
+        "explanation": "'Profound' or 'in-depth' denotes deep, thorough analytical rigor, contrary to 'superficial'.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Select the correct phrasal verb meaning 'account for / comprise': 'Renewable sources ___ 30% of energy.'",
@@ -1192,7 +1526,10 @@ const MULTI_TRACK_100_EXAMS = {
           "give off"
         ],
         "answer": 0,
-        "explanation": "'Make up / account for' is the standard terminology for explaining constituent proportions in charts."
+        "explanation": "'Make up / account for' is the standard terminology for explaining constituent proportions in charts.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Choose the correct form: 'Neither the author nor the editors ___ responsible for third-party citations.'",
@@ -1204,7 +1541,28 @@ const MULTI_TRACK_100_EXAMS = {
           "am"
         ],
         "answer": 0,
-        "explanation": "With 'neither... nor', the verb agrees with the closer subject ('editors' = plural -> are)."
+        "explanation": "With 'neither... nor', the verb agrees with the closer subject ('editors' = plural -> are).",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
+      }
+    ],
+    "writingStudioTasks": [
+      {
+        "taskId": "task_1",
+        "title": "المهمة الأولى: المراسلة والمخاطبة الرسمية (120 - 150 كلمة)",
+        "prompt": "صياغة بيان مطابقة رسمي واعتماد ترجمة محلفة موجه للمحكمة التجارية الدولية بشأن نزاع تعاقدي في عقد توريد دولي (150 كلمة).",
+        "minWords": 120,
+        "maxWords": 180,
+        "modelAnswer": "نموذج الصياغة المعتمدة يراعي البنية الرسمية، أسلوب التحية والختام المؤسساتي، الروابط المنطقية، والمصطلحات القانونية الدقيقة الخالية من الحشو."
+      },
+      {
+        "taskId": "task_2",
+        "title": "المهمة الثانية: المقال التحليلي المتخصص (200 - 250 كلمة)",
+        "prompt": "أطروحة تحليلية مقارنة (250 كلمة): بين نظرية السكوبوس ونظرية التكافؤ الديناميكي في ترجمة عقود الطاقة والمناقصات الدولية.",
+        "minWords": 200,
+        "maxWords": 280,
+        "modelAnswer": "يتطلب المقال مقدمة واضحة، حُججاً متوازنة مع الاستشهاد بأمثلة حقيقية من سوق الترجمة، وخاتمة تلخص وجهة النظر بأسلوب أكاديمي رفيع."
       }
     ]
   },
@@ -1216,61 +1574,86 @@ const MULTI_TRACK_100_EXAMS = {
         "q": "ما الأداة الصحيحة للاسم المذكر في حالة المفعول به (Akkusativ)؟ 'Ich kaufe ___ Tisch.'",
         "cat": "أدوات التعريف والإعراب",
         "options": [
-          "den",
           "der",
+          "den",
           "das",
           "dem"
         ],
-        "answer": 0,
-        "explanation": "الاسم Tisch مذكر (der Tisch)، وفي حالة النصب (Akkusativ) تتحول der إلى den."
+        "answer": 1,
+        "explanation": "الاسم Tisch مذكر (der Tisch)، وفي حالة النصب (Akkusativ) تتحول der إلى den.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "de-DE",
+        "audioSpeaker": "Nachrichtensprecher / Dialogpartner",
+        "audioScript": "Hören Sie die folgende Mitteilung aufmerksam: ما الأداة الصحيحة للاسم المذكر في حالة المفعول به (Akkusativ)؟ 'Ich kaufe ___ Tisch.' Beachten Sie die genauen Details der Mitteilung."
       },
       {
         "q": "اختر التصريف الصحيح للفعل 'haben' مع الضمير 'ihr':",
         "cat": "تصريف الأفعال الأساسية",
         "options": [
-          "habt",
           "haben",
+          "habt",
           "hast",
           "hat"
         ],
-        "answer": 0,
-        "explanation": "تصريف فعل haben مع ضمير الجمع المخاطب ihr هو habt."
+        "answer": 1,
+        "explanation": "تصريف فعل haben مع ضمير الجمع المخاطب ihr هو habt.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "de-DE",
+        "audioSpeaker": "Nachrichtensprecher / Dialogpartner",
+        "audioScript": "Hören Sie die folgende Mitteilung aufmerksam: اختر التصريف الصحيح للفعل 'haben' مع الضمير 'ihr': Beachten Sie die genauen Details der Mitteilung."
       },
       {
         "q": "ما هو حرف الجر المناسب للوقت: 'Der Unterricht beginnt ___ 9:00 Uhr.'؟",
         "cat": "حروف الجر الزمنية",
         "options": [
-          "um",
           "am",
+          "um",
           "im",
           "an"
         ],
-        "answer": 0,
-        "explanation": "مع الساعات المحددة نستخدم دائماً حرف الجر um (um 9 Uhr)."
+        "answer": 1,
+        "explanation": "مع الساعات المحددة نستخدم دائماً حرف الجر um (um 9 Uhr).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "de-DE",
+        "audioSpeaker": "Nachrichtensprecher / Dialogpartner",
+        "audioScript": "Hören Sie die folgende Mitteilung aufmerksam: ما هو حرف الجر المناسب للوقت: 'Der Unterricht beginnt ___ 9:00 Uhr.'؟ Beachten Sie die genauen Details der Mitteilung."
       },
       {
         "q": "ما هو حرف الجر المناسب للأيام: 'Ich habe einen Termin ___ Montag.'؟",
         "cat": "حروف الجر الزمنية",
         "options": [
-          "am",
           "um",
           "im",
-          "in"
+          "in",
+          "am"
         ],
-        "answer": 0,
-        "explanation": "مع أيام الأسبوع وأوقات اليوم نستخدم حرف الجر am (am Montag)."
+        "answer": 3,
+        "explanation": "مع أيام الأسبوع وأوقات اليوم نستخدم حرف الجر am (am Montag).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "de-DE",
+        "audioSpeaker": "Nachrichtensprecher / Dialogpartner",
+        "audioScript": "Hören Sie die folgende Mitteilung aufmerksam: ما هو حرف الجر المناسب للأيام: 'Ich habe einen Termin ___ Montag.'؟ Beachten Sie die genauen Details der Mitteilung."
       },
       {
         "q": "أي الجمل التالية تحتوي على فعل منفصل (Trennbares Verb) مركب بشكل صحيح؟",
         "cat": "الأفعال المنفصلة",
         "options": [
-          "Er steht jeden Tag um 7 Uhr auf.",
           "Er aufsteht jeden Tag um 7 Uhr.",
+          "Er steht jeden Tag um 7 Uhr auf.",
           "Er steht auf jeden Tag um 7 Uhr.",
           "Er jeden Tag um 7 Uhr aufsteht."
         ],
-        "answer": 0,
-        "explanation": "في الجملة الرئيسية، يُصرّف أصل الفعل في الموقع الثاني وتذهب السابقة (auf) إلى نهاية الجملة."
+        "answer": 1,
+        "explanation": "في الجملة الرئيسية، يُصرّف أصل الفعل في الموقع الثاني وتذهب السابقة (auf) إلى نهاية الجملة.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "de-DE",
+        "audioSpeaker": "Nachrichtensprecher / Dialogpartner",
+        "audioScript": "Hören Sie die folgende Mitteilung aufmerksam: أي الجمل التالية تحتوي على فعل منفصل (Trennbares Verb) مركب بشكل صحيح؟ Beachten Sie die genauen Details der Mitteilung."
       },
       {
         "q": "في صيغة الماضي (Perfekt)، ما الفعل المساعد المناسب مع فعل الحركة 'fahren'؟",
@@ -1282,67 +1665,97 @@ const MULTI_TRACK_100_EXAMS = {
           "tun (tut gefahren)"
         ],
         "answer": 0,
-        "explanation": "أفعال الحركة والانتقال المكاني تأخذ الفعل المساعد sein في الماضي التام Perfekt."
+        "explanation": "أفعال الحركة والانتقال المكاني تأخذ الفعل المساعد sein في الماضي التام Perfekt.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "de-DE",
+        "audioSpeaker": "Nachrichtensprecher / Dialogpartner",
+        "audioScript": "Hören Sie die folgende Mitteilung aufmerksam: في صيغة الماضي (Perfekt)، ما الفعل المساعد المناسب مع فعل الحركة 'fahren'؟ Beachten Sie die genauen Details der Mitteilung."
       },
       {
         "q": "ما هي أداة الاستفهام الصحيحة للسؤال عن المكان الثابت (Wo)؟ '___ wohnst du?'",
         "cat": "أدوات الاستفهام W-Fragen",
         "options": [
-          "Wo",
           "Wohin",
+          "Wo",
           "Woher",
           "Wann"
         ],
-        "answer": 0,
-        "explanation": "للسؤال عن موقع السكن أو التواجد نستخدم Wo (أين؟)."
+        "answer": 1,
+        "explanation": "للسؤال عن موقع السكن أو التواجد نستخدم Wo (أين؟).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "de-DE",
+        "audioSpeaker": "Nachrichtensprecher / Dialogpartner",
+        "audioScript": "Hören Sie die folgende Mitteilung aufmerksam: ما هي أداة الاستفهام الصحيحة للسؤال عن المكان الثابت (Wo)؟ '___ wohnst du?' Beachten Sie die genauen Details der Mitteilung."
       },
       {
         "q": "ما هو جمع كلمة 'das Buch' (الكتاب) بالألمانية؟",
         "cat": "صيغ الجموع",
         "options": [
-          "die Bücher",
           "die Buche",
           "die Büchern",
-          "die Buchs"
+          "die Buchs",
+          "die Bücher"
         ],
-        "answer": 0,
-        "explanation": "جمع كلمة das Buch هو die Bücher مع إضافة أوملاوت ولحقة er."
+        "answer": 3,
+        "explanation": "جمع كلمة das Buch هو die Bücher مع إضافة أوملاوت ولحقة er.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "de-DE",
+        "audioSpeaker": "Nachrichtensprecher / Dialogpartner",
+        "audioScript": "Hören Sie die folgende Mitteilung aufmerksam: ما هو جمع كلمة 'das Buch' (الكتاب) بالألمانية؟ Beachten Sie die genauen Details der Mitteilung."
       },
       {
         "q": "اختر النهاية الصحيحة للصفة بعد أداة التنكير في الرفع المذكر: 'Das ist ein neu___ Wagen.'",
         "cat": "نهايات الصفات Adjektivdeklination",
         "options": [
-          "neuer",
           "neues",
           "neuen",
-          "neuem"
+          "neuem",
+          "neuer"
         ],
-        "answer": 0,
-        "explanation": "بعد ein في الرفع المذكر تأخذ الصفة النهاية -er لتدل على جنس الاسم (ein neuer Wagen)."
+        "answer": 3,
+        "explanation": "بعد ein في الرفع المذكر تأخذ الصفة النهاية -er لتدل على جنس الاسم (ein neuer Wagen).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "de-DE",
+        "audioSpeaker": "Nachrichtensprecher / Dialogpartner",
+        "audioScript": "Hören Sie die folgende Mitteilung aufmerksam: اختر النهاية الصحيحة للصفة بعد أداة التنكير في الرفع المذكر: 'Das ist ein neu___ Wagen.' Beachten Sie die genauen Details der Mitteilung."
       },
       {
         "q": "ما الأداة المناسبة للاسم 'die Frau' في حالة المجرور (Dativ)؟ 'Ich helfe ___ Frau.'",
         "cat": "حالة المجرور Dativ",
         "options": [
-          "der",
           "die",
           "den",
+          "der",
           "dem"
         ],
-        "answer": 0,
-        "explanation": "تتحول أداة المؤنث die في حالة Dativ إلى der."
+        "answer": 2,
+        "explanation": "تتحول أداة المؤنث die في حالة Dativ إلى der.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "de-DE",
+        "audioSpeaker": "Nachrichtensprecher / Dialogpartner",
+        "audioScript": "Hören Sie die folgende Mitteilung aufmerksam: ما الأداة المناسبة للاسم 'die Frau' في حالة المجرور (Dativ)؟ 'Ich helfe ___ Frau.' Beachten Sie die genauen Details der Mitteilung."
       },
       {
         "q": "أي فعل من الأفعال التالية يطلب دائماً حالة المجرور (Dativ)؟",
         "cat": "أفعال تطلب Dativ",
         "options": [
-          "helfen",
           "sehen",
+          "helfen",
           "kaufen",
           "fragen"
         ],
-        "answer": 0,
-        "explanation": "الفعل helfen يطلب مفعولاً به مجروراً بالـ Dativ (Ich helfe dir)."
+        "answer": 1,
+        "explanation": "الفعل helfen يطلب مفعولاً به مجروراً بالـ Dativ (Ich helfe dir).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "de-DE",
+        "audioSpeaker": "Nachrichtensprecher / Dialogpartner",
+        "audioScript": "Hören Sie die folgende Mitteilung aufmerksam: أي فعل من الأفعال التالية يطلب دائماً حالة المجرور (Dativ)؟ Beachten Sie die genauen Details der Mitteilung."
       },
       {
         "q": "ما الضمير الملكي للمخاطب الرسمي (Sie): 'Ist das ___ Pass?'",
@@ -1354,19 +1767,29 @@ const MULTI_TRACK_100_EXAMS = {
           "sein"
         ],
         "answer": 0,
-        "explanation": "ضمير الملكية للمخاطب بصيغة الاحترام Sie هو Ihr بحرف كبير."
+        "explanation": "ضمير الملكية للمخاطب بصيغة الاحترام Sie هو Ihr بحرف كبير.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "de-DE",
+        "audioSpeaker": "Nachrichtensprecher / Dialogpartner",
+        "audioScript": "Hören Sie die folgende Mitteilung aufmerksam: ما الضمير الملكي للمخاطب الرسمي (Sie): 'Ist das ___ Pass?' Beachten Sie die genauen Details der Mitteilung."
       },
       {
         "q": "كيف تصاغ صيغة المقارنة (Komparativ) من الصفة 'schnell'؟",
         "cat": "المقارنة والتفضيل",
         "options": [
-          "schneller",
           "am schnellsten",
           "mehr schnell",
-          "schnellste"
+          "schnellste",
+          "schneller"
         ],
-        "answer": 0,
-        "explanation": "يصاغ اسم التفضيل والمقارنة بإضافة اللاحقة -er للصفة (schneller)."
+        "answer": 3,
+        "explanation": "يصاغ اسم التفضيل والمقارنة بإضافة اللاحقة -er للصفة (schneller).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "de-DE",
+        "audioSpeaker": "Nachrichtensprecher / Dialogpartner",
+        "audioScript": "Hören Sie die folgende Mitteilung aufmerksam: كيف تصاغ صيغة المقارنة (Komparativ) من الصفة 'schnell'؟ Beachten Sie die genauen Details der Mitteilung."
       },
       {
         "q": "ما هو نفي الجملة التالية باستخدام 'nicht': 'Er arbeitet heute.'؟",
@@ -1378,7 +1801,12 @@ const MULTI_TRACK_100_EXAMS = {
           "Er arbeitet kein heute."
         ],
         "answer": 0,
-        "explanation": "توضع nicht في نهاية الجملة لنفي الفعل بالكامل (Er arbeitet heute nicht)."
+        "explanation": "توضع nicht في نهاية الجملة لنفي الفعل بالكامل (Er arbeitet heute nicht).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "de-DE",
+        "audioSpeaker": "Nachrichtensprecher / Dialogpartner",
+        "audioScript": "Hören Sie die folgende Mitteilung aufmerksam: ما هو نفي الجملة التالية باستخدام 'nicht': 'Er arbeitet heute.'؟ Beachten Sie die genauen Details der Mitteilung."
       },
       {
         "q": "متى نستخدم أداة النفي 'kein' بدلاً من 'nicht'؟",
@@ -1390,31 +1818,46 @@ const MULTI_TRACK_100_EXAMS = {
           "لنفي الجمل الاستفهامية فقط"
         ],
         "answer": 0,
-        "explanation": "تُستخدم kein لنفي الأسماء النكرة أو الأسماء المجردة من الأدوات."
+        "explanation": "تُستخدم kein لنفي الأسماء النكرة أو الأسماء المجردة من الأدوات.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "de-DE",
+        "audioSpeaker": "Nachrichtensprecher / Dialogpartner",
+        "audioScript": "Hören Sie die folgende Mitteilung aufmerksam: متى نستخدم أداة النفي 'kein' بدلاً من 'nicht'؟ Beachten Sie die genauen Details der Mitteilung."
       },
       {
         "q": "اختر التصريف الصحيح لفعل 'können' مع 'er':",
         "cat": "أفعال الكيفية Modalverben",
         "options": [
-          "kann",
           "könnt",
           "kannst",
+          "kann",
           "können"
         ],
-        "answer": 0,
-        "explanation": "في أفعال الكيفية، يتطابق تصريف المفرد الغائب (er) مع المتكلم (ich): ich kann, er kann."
+        "answer": 2,
+        "explanation": "في أفعال الكيفية، يتطابق تصريف المفرد الغائب (er) مع المتكلم (ich): ich kann, er kann.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "de-DE",
+        "audioSpeaker": "Nachrichtensprecher / Dialogpartner",
+        "audioScript": "Hören Sie die folgende Mitteilung aufmerksam: اختر التصريف الصحيح لفعل 'können' مع 'er': Beachten Sie die genauen Details der Mitteilung."
       },
       {
         "q": "ما المعنى الدقيق لفعل الكيفية 'müssen'؟",
         "cat": "أفعال الكيفية",
         "options": [
-          "الإلزام والضرورة المطلقة",
           "القدرة والاستطاعة",
           "الرغبة والإرادة",
+          "الإلزام والضرورة المطلقة",
           "السماح والإذن"
         ],
-        "answer": 0,
-        "explanation": "الفعل müssen يعبر عن الوجوب والضرورة الحتمية الخارجية."
+        "answer": 2,
+        "explanation": "الفعل müssen يعبر عن الوجوب والضرورة الحتمية الخارجية.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "de-DE",
+        "audioSpeaker": "Nachrichtensprecher / Dialogpartner",
+        "audioScript": "Hören Sie die folgende Mitteilung aufmerksam: ما المعنى الدقيق لفعل الكيفية 'müssen'؟ Beachten Sie die genauen Details der Mitteilung."
       },
       {
         "q": "ما هو حرف الجر المناسب للسؤال عن جهة القدوم: 'Ich komme ___ Algerien.'؟",
@@ -1426,79 +1869,114 @@ const MULTI_TRACK_100_EXAMS = {
           "von"
         ],
         "answer": 0,
-        "explanation": "للدلالة على الانحدار أو القدوم من دولة أو مدينة نستخدم aus."
+        "explanation": "للدلالة على الانحدار أو القدوم من دولة أو مدينة نستخدم aus.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "de-DE",
+        "audioSpeaker": "Nachrichtensprecher / Dialogpartner",
+        "audioScript": "Hören Sie die folgende Mitteilung aufmerksam: ما هو حرف الجر المناسب للسؤال عن جهة القدوم: 'Ich komme ___ Algerien.'؟ Beachten Sie die genauen Details der Mitteilung."
       },
       {
         "q": "مع الدول المؤنثة مثل 'die Schweiz'، كيف نقول 'أنا مسافر إلى سويسرا'؟",
         "cat": "حروف الجر مع الدول",
         "options": [
-          "in die Schweiz",
           "nach Schweiz",
           "zu der Schweiz",
-          "aus die Schweiz"
+          "aus die Schweiz",
+          "in die Schweiz"
         ],
-        "answer": 0,
-        "explanation": "الدول ذات الأدوات لا تأخذ nach بل تأخذ حرف الجر in مع حالة النصب Akkusativ (in die Schweiz)."
+        "answer": 3,
+        "explanation": "الدول ذات الأدوات لا تأخذ nach بل تأخذ حرف الجر in مع حالة النصب Akkusativ (in die Schweiz).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "de-DE",
+        "audioSpeaker": "Nachrichtensprecher / Dialogpartner",
+        "audioScript": "Hören Sie die folgende Mitteilung aufmerksam: مع الدول المؤنثة مثل 'die Schweiz'، كيف نقول 'أنا مسافر إلى سويسرا'؟ Beachten Sie die genauen Details der Mitteilung."
       },
       {
         "q": "اختر الضمير المتصل المناسب: 'Siehst du ___ (هو في حالة النصب)؟'",
         "cat": "ضمائر المفعول به",
         "options": [
-          "ihn",
           "ihm",
+          "ihn",
           "er",
           "sein"
         ],
-        "answer": 0,
-        "explanation": "ضمير الغائب المذكر er يصبح ihn في حالة النصب Akkusativ."
+        "answer": 1,
+        "explanation": "ضمير الغائب المذكر er يصبح ihn في حالة النصب Akkusativ.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "de-DE",
+        "audioSpeaker": "Nachrichtensprecher / Dialogpartner",
+        "audioScript": "Hören Sie die folgende Mitteilung aufmerksam: اختر الضمير المتصل المناسب: 'Siehst du ___ (هو في حالة النصب)؟' Beachten Sie die genauen Details der Mitteilung."
       },
       {
         "q": "ما معنى الرابط 'weil' وموقعه في الجملة؟",
         "cat": "الروابط الثانوية Nebensätze",
         "options": [
-          "يعني 'لأن' ويُرسل الفعل المصرف إلى نهاية الجملة",
           "يعني 'لكن' ولا يغير ترتيب الجملة",
           "يعني 'أو' ويأتي في الموقع الأول",
+          "يعني 'لأن' ويُرسل الفعل المصرف إلى نهاية الجملة",
           "يعني 'لذلك' ويأتي بعده الفعل مباشرة"
         ],
-        "answer": 0,
-        "explanation": "الرابط weil يربط جملة سببية ثانوية ويرسل الفعل المصرف إلى آخر الجملة تماماً."
+        "answer": 2,
+        "explanation": "الرابط weil يربط جملة سببية ثانوية ويرسل الفعل المصرف إلى آخر الجملة تماماً.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "de-DE",
+        "audioSpeaker": "Nachrichtensprecher / Dialogpartner",
+        "audioScript": "Hören Sie die folgende Mitteilung aufmerksam: ما معنى الرابط 'weil' وموقعه في الجملة؟ Beachten Sie die genauen Details der Mitteilung."
       },
       {
         "q": "أي الجمل التالية صحيحة مع الرابط 'dass' (أنّ)؟",
         "cat": "الروابط الثانوية",
         "options": [
-          "Ich weiß, dass er Deutsch lernt.",
           "Ich weiß, dass er lernt Deutsch.",
           "Ich weiß, dass lernt er Deutsch.",
+          "Ich weiß, dass er Deutsch lernt.",
           "Ich weiß, er lernt dass Deutsch."
         ],
-        "answer": 0,
-        "explanation": "في الجمل الثانوية بعد dass يذهب الفعل المصرف (lernt) إلى نهاية الجملة."
+        "answer": 2,
+        "explanation": "في الجمل الثانوية بعد dass يذهب الفعل المصرف (lernt) إلى نهاية الجملة.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "de-DE",
+        "audioSpeaker": "Nachrichtensprecher / Dialogpartner",
+        "audioScript": "Hören Sie die folgende Mitteilung aufmerksam: أي الجمل التالية صحيحة مع الرابط 'dass' (أنّ)؟ Beachten Sie die genauen Details der Mitteilung."
       },
       {
         "q": "ما تصريف الفعل 'werden' في الماضي البسيط (Präteritum) مع 'wir'؟",
         "cat": "الماضي البسيط Präteritum",
         "options": [
-          "wurden",
           "worden",
+          "wurden",
           "wurde",
           "würden"
         ],
-        "answer": 0,
-        "explanation": "تصريف فعل werden في الماضي البسيط Präteritum مع wir هو wurden."
+        "answer": 1,
+        "explanation": "تصريف فعل werden في الماضي البسيط Präteritum مع wir هو wurden.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "de-DE",
+        "audioSpeaker": "Nachrichtensprecher / Dialogpartner",
+        "audioScript": "Hören Sie die folgende Mitteilung aufmerksam: ما تصريف الفعل 'werden' في الماضي البسيط (Präteritum) مع 'wir'؟ Beachten Sie die genauen Details der Mitteilung."
       },
       {
         "q": "ما هو الترتيب الصحيح للجملة: 'Morgen / ich / nach Berlin / fahre'؟",
         "cat": "بنية الجملة Satzbau",
         "options": [
-          "Morgen fahre ich nach Berlin.",
           "Morgen ich fahre nach Berlin.",
           "Ich morgen fahre nach Berlin.",
-          "Fahre morgen ich nach Berlin."
+          "Fahre morgen ich nach Berlin.",
+          "Morgen fahre ich nach Berlin."
         ],
-        "answer": 0,
-        "explanation": "القاعدة الذهبية في اللغة الألمانية: الفعل المصرف يحتل دائماً الموقع الثاني (Position 2)."
+        "answer": 3,
+        "explanation": "القاعدة الذهبية في اللغة الألمانية: الفعل المصرف يحتل دائماً الموقع الثاني (Position 2).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "de-DE",
+        "audioSpeaker": "Nachrichtensprecher / Dialogpartner",
+        "audioScript": "Hören Sie die folgende Mitteilung aufmerksam: ما هو الترتيب الصحيح للجملة: 'Morgen / ich / nach Berlin / fahre'؟ Beachten Sie die genauen Details der Mitteilung."
       },
       {
         "q": "اختر صيغة الأمر المناسبة للمخاطب المفرد (du) من فعل 'lesen':",
@@ -1510,43 +1988,60 @@ const MULTI_TRACK_100_EXAMS = {
           "Lesen!"
         ],
         "answer": 0,
-        "explanation": "الأفعال التي يتغير أصلها من e إلى ie تحتفظ بهذا التغيير في صيغة الأمر للمفرد (Lies!)."
+        "explanation": "الأفعال التي يتغير أصلها من e إلى ie تحتفظ بهذا التغيير في صيغة الأمر للمفرد (Lies!).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "de-DE",
+        "audioSpeaker": "Nachrichtensprecher / Dialogpartner",
+        "audioScript": "Hören Sie die folgende Mitteilung aufmerksam: اختر صيغة الأمر المناسبة للمخاطب المفرد (du) من فعل 'lesen': Beachten Sie die genauen Details der Mitteilung."
       },
       {
         "q": "ما الفرق بين حروف الجر المكانية 'nach' و 'zu'؟",
         "cat": "حروف الجر المكانية",
         "options": [
-          "nach للمدن والبلدان، و zu للأشخاص والأماكن المحددة داخل المدينة",
           "nach للأشخاص و zu للمدن",
+          "nach للمدن والبلدان، و zu للأشخاص والأماكن المحددة داخل المدينة",
           "كلاهما متطابق ولا فرق بينهما",
           "zu تستخدم فقط في الماضي"
         ],
-        "answer": 0,
-        "explanation": "تُستخدم nach مع المدن والبلدان بدون أداة، بينما zu تطلب Dativ وتُستخدم مع الأشخاص والمؤسسات."
+        "answer": 1,
+        "explanation": "تُستخدم nach مع المدن والبلدان بدون أداة، بينما zu تطلب Dativ وتُستخدم مع الأشخاص والمؤسسات.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Auszug aus einem Fachartikel über Mehrsprachigkeit und Übersetzungswissenschaft",
+        "readingPassage": "[1] Die Dynamik der zeitgenössischen Fachübersetzung erfordert weit mehr als nur lexikalische Äquivalenzen. Übersetzer fungieren als interkulturelle Mediatoren in hochspezialisierten Diskursfeldern.\n[2] In juristischen und wirtschaftlichen Verträgen hängt die Gültigkeit von Klauseln von der präzisen terminologischen Kohärenz ab."
       },
       {
         "q": "ما هي الأداة الموصولة الصحيحة للاسم المذكر في حالة المجرور Dativ؟ 'Der Mann, ___ ich helfe.'",
         "cat": "الجمل الموصولة Relativsätze",
         "options": [
-          "dem",
           "der",
           "den",
+          "dem",
           "dessen"
         ],
-        "answer": 0,
-        "explanation": "الاسم الموصوف مذكر والصلة تطلب حالة Dativ بسبب الفعل helfen، فتكون الأداة dem."
+        "answer": 2,
+        "explanation": "الاسم الموصوف مذكر والصلة تطلب حالة Dativ بسبب الفعل helfen، فتكون الأداة dem.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Auszug aus einem Fachartikel über Mehrsprachigkeit und Übersetzungswissenschaft",
+        "readingPassage": "[1] Die Dynamik der zeitgenössischen Fachübersetzung erfordert weit mehr als nur lexikalische Äquivalenzen. Übersetzer fungieren als interkulturelle Mediatoren in hochspezialisierten Diskursfeldern.\n[2] In juristischen und wirtschaftlichen Verträgen hängt die Gültigkeit von Klauseln von der präzisen terminologischen Kohärenz ab."
       },
       {
         "q": "أي الجمل التالية تستخدم رابط التناقض 'obwohl' (رغم أن) بشكل سليم؟",
         "cat": "الروابط التناقضية",
         "options": [
-          "Obwohl es regnet, gehen wir spazieren.",
           "Obwohl es regnet, wir gehen spazieren.",
+          "Obwohl es regnet, gehen wir spazieren.",
           "Wir gehen spazieren, obwohl regnet es.",
           "Obwohl regnet es, gehen wir spazieren."
         ],
-        "answer": 0,
-        "explanation": "الرابط obwohl يرسل الفعل لنهاية جملته، وفي الجملة الرئيسية يبدأ الترتيب بالفعل المصرف."
+        "answer": 1,
+        "explanation": "الرابط obwohl يرسل الفعل لنهاية جملته، وفي الجملة الرئيسية يبدأ الترتيب بالفعل المصرف.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Auszug aus einem Fachartikel über Mehrsprachigkeit und Übersetzungswissenschaft",
+        "readingPassage": "[1] Die Dynamik der zeitgenössischen Fachübersetzung erfordert weit mehr als nur lexikalische Äquivalenzen. Übersetzer fungieren als interkulturelle Mediatoren in hochspezialisierten Diskursfeldern.\n[2] In juristischen und wirtschaftlichen Verträgen hängt die Gültigkeit von Klauseln von der präzisen terminologischen Kohärenz ab."
       },
       {
         "q": "ما المعنى الدقيق لحرف الجر 'trotz' وحالته الإعرابية المعتمدة؟",
@@ -1558,7 +2053,11 @@ const MULTI_TRACK_100_EXAMS = {
           "يعني 'بدون' ويطلب Nominativ"
         ],
         "answer": 0,
-        "explanation": "حرف الجر trotz يعني بالرغم من ويطلب فصحوياً حالة المضاف إليه Genitiv."
+        "explanation": "حرف الجر trotz يعني بالرغم من ويطلب فصحوياً حالة المضاف إليه Genitiv.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Auszug aus einem Fachartikel über Mehrsprachigkeit und Übersetzungswissenschaft",
+        "readingPassage": "[1] Die Dynamik der zeitgenössischen Fachübersetzung erfordert weit mehr als nur lexikalische Äquivalenzen. Übersetzer fungieren als interkulturelle Mediatoren in hochspezialisierten Diskursfeldern.\n[2] In juristischen und wirtschaftlichen Verträgen hängt die Gültigkeit von Klauseln von der präzisen terminologischen Kohärenz ab."
       },
       {
         "q": "كيف نصوغ صيغة الشرط والتمني (Konjunktiv II) لفعل 'haben' في الحاضر؟",
@@ -1570,19 +2069,27 @@ const MULTI_TRACK_100_EXAMS = {
           "würde haben"
         ],
         "answer": 0,
-        "explanation": "صيغة Konjunktiv II الأصلية لفعل haben مع ich/er هي hätte مع أوملاوت."
+        "explanation": "صيغة Konjunktiv II الأصلية لفعل haben مع ich/er هي hätte مع أوملاوت.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Auszug aus einem Fachartikel über Mehrsprachigkeit und Übersetzungswissenschaft",
+        "readingPassage": "[1] Die Dynamik der zeitgenössischen Fachübersetzung erfordert weit mehr als nur lexikalische Äquivalenzen. Übersetzer fungieren als interkulturelle Mediatoren in hochspezialisierten Diskursfeldern.\n[2] In juristischen und wirtschaftlichen Verträgen hängt die Gültigkeit von Klauseln von der präzisen terminologischen Kohärenz ab."
       },
       {
         "q": "كيف نصوغ صيغة الشرط والتمني (Konjunktiv II) لفعل 'sein'؟",
         "cat": "صيغة الشرط Konjunktiv II",
         "options": [
-          "wäre",
           "war",
           "sei",
-          "würde sein"
+          "würde sein",
+          "wäre"
         ],
-        "answer": 0,
-        "explanation": "صيغة Konjunktiv II لفعل sein مع ich/er هي wäre."
+        "answer": 3,
+        "explanation": "صيغة Konjunktiv II لفعل sein مع ich/er هي wäre.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Auszug aus einem Fachartikel über Mehrsprachigkeit und Übersetzungswissenschaft",
+        "readingPassage": "[1] Die Dynamik der zeitgenössischen Fachübersetzung erfordert weit mehr als nur lexikalische Äquivalenzen. Übersetzer fungieren als interkulturelle Mediatoren in hochspezialisierten Diskursfeldern.\n[2] In juristischen und wirtschaftlichen Verträgen hängt die Gültigkeit von Klauseln von der präzisen terminologischen Kohärenz ab."
       },
       {
         "q": "ما البنية الصحيحة لتركيب المصدر مع 'um... zu' للغايات والأهداف؟",
@@ -1594,79 +2101,107 @@ const MULTI_TRACK_100_EXAMS = {
           "Er lernt viel, zu um die Prüfung bestehen."
         ],
         "answer": 0,
-        "explanation": "في تركيب um... zu يأتي المفعول به أولاً ثم zu تليها مباشرة الصيغة المصدرية في آخر الجملة."
+        "explanation": "في تركيب um... zu يأتي المفعول به أولاً ثم zu تليها مباشرة الصيغة المصدرية في آخر الجملة.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Auszug aus einem Fachartikel über Mehrsprachigkeit und Übersetzungswissenschaft",
+        "readingPassage": "[1] Die Dynamik der zeitgenössischen Fachübersetzung erfordert weit mehr als nur lexikalische Äquivalenzen. Übersetzer fungieren als interkulturelle Mediatoren in hochspezialisierten Diskursfeldern.\n[2] In juristischen und wirtschaftlichen Verträgen hängt die Gültigkeit von Klauseln von der präzisen terminologischen Kohärenz ab."
       },
       {
         "q": "أي الأفعال التالية من أفعال الانعكاس الإلزامية (Echtes reflexives Verb)؟",
         "cat": "الأفعال المنعكسة Reflexivverben",
         "options": [
-          "sich freuen",
           "waschen",
+          "sich freuen",
           "anziehen",
           "sehen"
         ],
-        "answer": 0,
-        "explanation": "الفعل sich freuen (يفرح/يتطلع لـ) منعكس إلزامي مع ضمير الانعكاس sich."
+        "answer": 1,
+        "explanation": "الفعل sich freuen (يفرح/يتطلع لـ) منعكس إلزامي مع ضمير الانعكاس sich.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Auszug aus einem Fachartikel über Mehrsprachigkeit und Übersetzungswissenschaft",
+        "readingPassage": "[1] Die Dynamik der zeitgenössischen Fachübersetzung erfordert weit mehr als nur lexikalische Äquivalenzen. Übersetzer fungieren als interkulturelle Mediatoren in hochspezialisierten Diskursfeldern.\n[2] In juristischen und wirtschaftlichen Verträgen hängt die Gültigkeit von Klauseln von der präzisen terminologischen Kohärenz ab."
       },
       {
         "q": "ما الفرق بين 'wenn' و 'als' في الدلالة الزمنية الماضية؟",
         "cat": "الروابط الزمنية als vs wenn",
         "options": [
-          "als لحدث فريد وقع مرة واحدة في الماضي، و wenn للأحداث المتكررة أو الحاضرة",
           "als للحاضر و wenn للماضي فقط",
+          "als لحدث فريد وقع مرة واحدة في الماضي، و wenn للأحداث المتكررة أو الحاضرة",
           "كلاهما يستعملان للمستقبل فقط",
           "wenn تستخدم فقط للأشخاص"
         ],
-        "answer": 0,
-        "explanation": "القاعدة: als لحدث ماضٍ وقع مرة واحدة محددة، بينما wenn للشرط أو التكرار."
+        "answer": 1,
+        "explanation": "القاعدة: als لحدث ماضٍ وقع مرة واحدة محددة، بينما wenn للشرط أو التكرار.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Auszug aus einem Fachartikel über Mehrsprachigkeit und Übersetzungswissenschaft",
+        "readingPassage": "[1] Die Dynamik der zeitgenössischen Fachübersetzung erfordert weit mehr als nur lexikalische Äquivalenzen. Übersetzer fungieren als interkulturelle Mediatoren in hochspezialisierten Diskursfeldern.\n[2] In juristischen und wirtschaftlichen Verträgen hängt die Gültigkeit von Klauseln von der präzisen terminologischen Kohärenz ab."
       },
       {
         "q": "ما هو مضاف إليه الاسم المذكر والمحايد في حالة Genitiv؟",
         "cat": "حالة المضاف إليه Genitiv",
         "options": [
-          "يضاف للاسم لاحقة -(e)s وتتحول الأداة إلى des",
           "تتحول الأداة إلى dem بدون إضافة للاسم",
+          "يضاف للاسم لاحقة -(e)s وتتحول الأداة إلى des",
           "تتحول الأداة إلى den",
           "لا يتغير شكل الاسم بتاتاً"
         ],
-        "answer": 0,
-        "explanation": "في حالة Genitiv، تتحول der و das إلى des مع إضافة -s أو -es للاسم المفرد."
+        "answer": 1,
+        "explanation": "في حالة Genitiv، تتحول der و das إلى des مع إضافة -s أو -es للاسم المفرد.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Auszug aus einem Fachartikel über Mehrsprachigkeit und Übersetzungswissenschaft",
+        "readingPassage": "[1] Die Dynamik der zeitgenössischen Fachübersetzung erfordert weit mehr als nur lexikalische Äquivalenzen. Übersetzer fungieren als interkulturelle Mediatoren in hochspezialisierten Diskursfeldern.\n[2] In juristischen und wirtschaftlichen Verträgen hängt die Gültigkeit von Klauseln von der präzisen terminologischen Kohärenz ab."
       },
       {
         "q": "اختر حرف الجر المناسب للفعل 'warten' (ينتظر):",
         "cat": "أفعال مرتبطة بحروف جر",
         "options": [
-          "warten auf (+ Akkusativ)",
           "warten an (+ Dativ)",
+          "warten auf (+ Akkusativ)",
           "warten für (+ Akkusativ)",
           "warten über (+ Akkusativ)"
         ],
-        "answer": 0,
-        "explanation": "الفعل warten يرتبط دائماً بحرف الجر auf مع حالة النصب Akkusativ."
+        "answer": 1,
+        "explanation": "الفعل warten يرتبط دائماً بحرف الجر auf مع حالة النصب Akkusativ.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Auszug aus einem Fachartikel über Mehrsprachigkeit und Übersetzungswissenschaft",
+        "readingPassage": "[1] Die Dynamik der zeitgenössischen Fachübersetzung erfordert weit mehr als nur lexikalische Äquivalenzen. Übersetzer fungieren als interkulturelle Mediatoren in hochspezialisierten Diskursfeldern.\n[2] In juristischen und wirtschaftlichen Verträgen hängt die Gültigkeit von Klauseln von der präzisen terminologischen Kohärenz ab."
       },
       {
         "q": "اختر حرف الجر المناسب للفعل 'interessieren' في صيغته المنعكسة:",
         "cat": "أفعال مرتبطة بحروف جر",
         "options": [
-          "sich interessieren für (+ Akkusativ)",
           "sich interessieren an (+ Dativ)",
           "sich interessieren auf (+ Akkusativ)",
+          "sich interessieren für (+ Akkusativ)",
           "sich interessieren mit (+ Dativ)"
         ],
-        "answer": 0,
-        "explanation": "التركيب هو sich interessieren für (+ Akkusativ) للاهتمام بشيء ما."
+        "answer": 2,
+        "explanation": "التركيب هو sich interessieren für (+ Akkusativ) للاهتمام بشيء ما.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Auszug aus einem Fachartikel über Mehrsprachigkeit und Übersetzungswissenschaft",
+        "readingPassage": "[1] Die Dynamik der zeitgenössischen Fachübersetzung erfordert weit mehr als nur lexikalische Äquivalenzen. Übersetzer fungieren als interkulturelle Mediatoren in hochspezialisierten Diskursfeldern.\n[2] In juristischen und wirtschaftlichen Verträgen hängt die Gültigkeit von Klauseln von der präzisen terminologischen Kohärenz ab."
       },
       {
         "q": "ما الرابط المزدوج الذي يفيد الإثبات المزدوج (هذا وذاك أيضاً)؟",
         "cat": "الروابط المزدوجة",
         "options": [
-          "sowohl ... als auch",
           "weder ... noch",
           "entweder ... oder",
-          "zwar ... aber"
+          "zwar ... aber",
+          "sowohl ... als auch"
         ],
-        "answer": 0,
-        "explanation": "الرابط sowohl ... als auch يعني 'كلا الأمرين معاً' (سواء كذا وكذلك كذا)."
+        "answer": 3,
+        "explanation": "الرابط sowohl ... als auch يعني 'كلا الأمرين معاً' (سواء كذا وكذلك كذا).",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Auszug aus einem Fachartikel über Mehrsprachigkeit und Übersetzungswissenschaft",
+        "readingPassage": "[1] Die Dynamik der zeitgenössischen Fachübersetzung erfordert weit mehr als nur lexikalische Äquivalenzen. Übersetzer fungieren als interkulturelle Mediatoren in hochspezialisierten Diskursfeldern.\n[2] In juristischen und wirtschaftlichen Verträgen hängt die Gültigkeit von Klauseln von der präzisen terminologischen Kohärenz ab."
       },
       {
         "q": "ما الرابط المزدوج الذي يفيد النفي التام للطرفين؟",
@@ -1678,67 +2213,91 @@ const MULTI_TRACK_100_EXAMS = {
           "einerseits ... andererseits"
         ],
         "answer": 0,
-        "explanation": "الرابط weder ... noch يعني 'لا هذا ولا ذاك' (نفي الخيارين)."
+        "explanation": "الرابط weder ... noch يعني 'لا هذا ولا ذاك' (نفي الخيارين).",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Auszug aus einem Fachartikel über Mehrsprachigkeit und Übersetzungswissenschaft",
+        "readingPassage": "[1] Die Dynamik der zeitgenössischen Fachübersetzung erfordert weit mehr als nur lexikalische Äquivalenzen. Übersetzer fungieren als interkulturelle Mediatoren in hochspezialisierten Diskursfeldern.\n[2] In juristischen und wirtschaftlichen Verträgen hängt die Gültigkeit von Klauseln von der präzisen terminologischen Kohärenz ab."
       },
       {
         "q": "ما هو التصريف الصحيح لفعل 'denken' في الماضي التام (Perfekt)؟",
         "cat": "تصريف الأفعال الشاذة",
         "options": [
-          "hat gedacht",
           "hat gedenkt",
           "ist gedacht",
+          "hat gedacht",
           "hat gedenken"
         ],
-        "answer": 0,
-        "explanation": "فعل denken شاذ مختلط: الماضي التام hat gedacht."
+        "answer": 2,
+        "explanation": "فعل denken شاذ مختلط: الماضي التام hat gedacht.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Auszug aus einem Fachartikel über Mehrsprachigkeit und Übersetzungswissenschaft",
+        "readingPassage": "[1] Die Dynamik der zeitgenössischen Fachübersetzung erfordert weit mehr als nur lexikalische Äquivalenzen. Übersetzer fungieren als interkulturelle Mediatoren in hochspezialisierten Diskursfeldern.\n[2] In juristischen und wirtschaftlichen Verträgen hängt die Gültigkeit von Klauseln von der präzisen terminologischen Kohärenz ab."
       },
       {
         "q": "كيف يصاغ المبني للمجهول في الحاضر (Vorgangspassiv Präsens)؟",
         "cat": "المبني للمجهول Passiv",
         "options": [
-          "werden المصرف + Partizip II في نهاية الجملة",
           "sein المصرف + Partizip II",
           "haben المصرف + Partizip II",
+          "werden المصرف + Partizip II في نهاية الجملة",
           "werden + Infinitiv"
         ],
-        "answer": 0,
-        "explanation": "يصاغ المبني للمجهول الحركي عبر فعل werden مصرفاً في الموقع 2 و اسم المفعول Partizip II في النهاية."
+        "answer": 2,
+        "explanation": "يصاغ المبني للمجهول الحركي عبر فعل werden مصرفاً في الموقع 2 و اسم المفعول Partizip II في النهاية.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Auszug aus einem Fachartikel über Mehrsprachigkeit und Übersetzungswissenschaft",
+        "readingPassage": "[1] Die Dynamik der zeitgenössischen Fachübersetzung erfordert weit mehr als nur lexikalische Äquivalenzen. Übersetzer fungieren als interkulturelle Mediatoren in hochspezialisierten Diskursfeldern.\n[2] In juristischen und wirtschaftlichen Verträgen hängt die Gültigkeit von Klauseln von der präzisen terminologischen Kohärenz ab."
       },
       {
         "q": "تحويل الجملة 'Der Arzt operiert den Patienten' إلى المبني للمجهول:",
         "cat": "المبني للمجهول Passiv",
         "options": [
-          "Der Patient wird vom Arzt operiert.",
           "Der Patient ist vom Arzt operiert.",
           "Der Patient hat operiert werden.",
+          "Der Patient wird vom Arzt operiert.",
           "Vom Arzt der Patient operiert wird."
         ],
-        "answer": 0,
-        "explanation": "يتحول المفعول به إلى فاعل (Der Patient) ويُستعمل فعل werden وفاعلية الفاعل عبر von + Dativ."
+        "answer": 2,
+        "explanation": "يتحول المفعول به إلى فاعل (Der Patient) ويُستعمل فعل werden وفاعلية الفاعل عبر von + Dativ.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Auszug aus einem Fachartikel über Mehrsprachigkeit und Übersetzungswissenschaft",
+        "readingPassage": "[1] Die Dynamik der zeitgenössischen Fachübersetzung erfordert weit mehr als nur lexikalische Äquivalenzen. Übersetzer fungieren als interkulturelle Mediatoren in hochspezialisierten Diskursfeldern.\n[2] In juristischen und wirtschaftlichen Verträgen hängt die Gültigkeit von Klauseln von der präzisen terminologischen Kohärenz ab."
       },
       {
         "q": "ما الأداة المناسبة لجمع الأسماء في حالة المجرور Dativ؟",
         "cat": "حالة المجرور Dativ للجمع",
         "options": [
-          "den (مع إضافة -n للاسم إن أمكن)",
           "die",
           "der",
+          "den (مع إضافة -n للاسم إن أمكن)",
           "dem"
         ],
-        "answer": 0,
-        "explanation": "أداة الجمع في Dativ هي دائماً den مع إضافة حرف -n لنهاية الاسم الجمع ما لم ينته بـ s أو n."
+        "answer": 2,
+        "explanation": "أداة الجمع في Dativ هي دائماً den مع إضافة حرف -n لنهاية الاسم الجمع ما لم ينته بـ s أو n.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Auszug aus einem Fachartikel über Mehrsprachigkeit und Übersetzungswissenschaft",
+        "readingPassage": "[1] Die Dynamik der zeitgenössischen Fachübersetzung erfordert weit mehr als nur lexikalische Äquivalenzen. Übersetzer fungieren als interkulturelle Mediatoren in hochspezialisierten Diskursfeldern.\n[2] In juristischen und wirtschaftlichen Verträgen hängt die Gültigkeit von Klauseln von der präzisen terminologischen Kohärenz ab."
       },
       {
         "q": "ما معنى الفعل 'aufhören mit'؟",
         "cat": "الأفعال الاصطلاحية",
         "options": [
-          "التوقف عن أو إنهاء عمل ما",
           "البدء في نشاط جديد",
+          "التوقف عن أو إنهاء عمل ما",
           "الاستماع بتركيز",
           "الارتفاع إلى أعلى"
         ],
-        "answer": 0,
-        "explanation": "الفعل aufhören mit يعني الكف عن أو التوقف عن ممارسة شيء ما."
+        "answer": 1,
+        "explanation": "الفعل aufhören mit يعني الكف عن أو التوقف عن ممارسة شيء ما.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Auszug aus einem Fachartikel über Mehrsprachigkeit und Übersetzungswissenschaft",
+        "readingPassage": "[1] Die Dynamik der zeitgenössischen Fachübersetzung erfordert weit mehr als nur lexikalische Äquivalenzen. Übersetzer fungieren als interkulturelle Mediatoren in hochspezialisierten Diskursfeldern.\n[2] In juristischen und wirtschaftlichen Verträgen hängt die Gültigkeit von Klauseln von der präzisen terminologischen Kohärenz ab."
       },
       {
         "q": "اختر التعبير السليم للتعبير عن الرأي بالألمانية:",
@@ -1750,31 +2309,43 @@ const MULTI_TRACK_100_EXAMS = {
           "Für meine Meinung"
         ],
         "answer": 0,
-        "explanation": "التعبير المعياري هو: Meiner Meinung nach ويليه مباشرة الفعل المصرف."
+        "explanation": "التعبير المعياري هو: Meiner Meinung nach ويليه مباشرة الفعل المصرف.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Auszug aus einem Fachartikel über Mehrsprachigkeit und Übersetzungswissenschaft",
+        "readingPassage": "[1] Die Dynamik der zeitgenössischen Fachübersetzung erfordert weit mehr als nur lexikalische Äquivalenzen. Übersetzer fungieren als interkulturelle Mediatoren in hochspezialisierten Diskursfeldern.\n[2] In juristischen und wirtschaftlichen Verträgen hängt die Gültigkeit von Klauseln von der präzisen terminologischen Kohärenz ab."
       },
       {
         "q": "ما الفرق بين 'kennen' و 'wissen'؟",
         "cat": "الفروق الدلالية",
         "options": [
-          "kennen للأشخاص والأماكن، و wissen للحقائق والمعلومات المجردة",
           "wissen للأشخاص و kennen للحقائق",
           "كلاهما يستعملان للمستقبل فقط",
+          "kennen للأشخاص والأماكن، و wissen للحقائق والمعلومات المجردة",
           "لا يوجد أي فرق بينهما"
         ],
-        "answer": 0,
-        "explanation": "الفعل kennen يعني يعرف شخصاً أو مكاناً بالمعاينة، بينما wissen يعني يعلم حقيقة أو معلومة."
+        "answer": 2,
+        "explanation": "الفعل kennen يعني يعرف شخصاً أو مكاناً بالمعاينة، بينما wissen يعني يعلم حقيقة أو معلومة.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Auszug aus einem Fachartikel über Mehrsprachigkeit und Übersetzungswissenschaft",
+        "readingPassage": "[1] Die Dynamik der zeitgenössischen Fachübersetzung erfordert weit mehr als nur lexikalische Äquivalenzen. Übersetzer fungieren als interkulturelle Mediatoren in hochspezialisierten Diskursfeldern.\n[2] In juristischen und wirtschaftlichen Verträgen hängt die Gültigkeit von Klauseln von der präzisen terminologischen Kohärenz ab."
       },
       {
         "q": "ما هو حرف الجر المناسب للفعل 'teilnehmen' (يشارك في)؟",
         "cat": "أفعال بحروف جر",
         "options": [
-          "teilnehmen an (+ Dativ)",
           "teilnehmen in (+ Dativ)",
+          "teilnehmen an (+ Dativ)",
           "teilnehmen bei (+ Dativ)",
           "teilnehmen auf (+ Akkusativ)"
         ],
-        "answer": 0,
-        "explanation": "الفعل teilnehmen يرتبط بحرف الجر an مع حالة المجرور Dativ."
+        "answer": 1,
+        "explanation": "الفعل teilnehmen يرتبط بحرف الجر an مع حالة المجرور Dativ.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Auszug aus einem Fachartikel über Mehrsprachigkeit und Übersetzungswissenschaft",
+        "readingPassage": "[1] Die Dynamik der zeitgenössischen Fachübersetzung erfordert weit mehr als nur lexikalische Äquivalenzen. Übersetzer fungieren als interkulturelle Mediatoren in hochspezialisierten Diskursfeldern.\n[2] In juristischen und wirtschaftlichen Verträgen hängt die Gültigkeit von Klauseln von der präzisen terminologischen Kohärenz ab."
       },
       {
         "q": "ما الدلالة الزمنية لصيغة المستقبل الأولى (Futur I) عبر فعل 'werden'؟",
@@ -1786,19 +2357,27 @@ const MULTI_TRACK_100_EXAMS = {
           "النفي المطلق"
         ],
         "answer": 0,
-        "explanation": "صيغة Futur I (werden + Infinitiv) تدل على التنبؤ، النوايا المستقبلية أو التخمين في الحاضر."
+        "explanation": "صيغة Futur I (werden + Infinitiv) تدل على التنبؤ، النوايا المستقبلية أو التخمين في الحاضر.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Auszug aus einem Fachartikel über Mehrsprachigkeit und Übersetzungswissenschaft",
+        "readingPassage": "[1] Die Dynamik der zeitgenössischen Fachübersetzung erfordert weit mehr als nur lexikalische Äquivalenzen. Übersetzer fungieren als interkulturelle Mediatoren in hochspezialisierten Diskursfeldern.\n[2] In juristischen und wirtschaftlichen Verträgen hängt die Gültigkeit von Klauseln von der präzisen terminologischen Kohärenz ab."
       },
       {
         "q": "كيف تصاغ صفة التفضيل المطلق (Superlativ) من 'gut'؟",
         "cat": "المقارنة والتفضيل",
         "options": [
-          "am besten",
           "am gutsten",
           "besser",
+          "am besten",
           "am meisten gut"
         ],
-        "answer": 0,
-        "explanation": "صفة gut شاذة: gut -> besser -> am besten."
+        "answer": 2,
+        "explanation": "صفة gut شاذة: gut -> besser -> am besten.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Auszug aus einem Fachartikel über Mehrsprachigkeit und Übersetzungswissenschaft",
+        "readingPassage": "[1] Die Dynamik der zeitgenössischen Fachübersetzung erfordert weit mehr als nur lexikalische Äquivalenzen. Übersetzer fungieren als interkulturelle Mediatoren in hochspezialisierten Diskursfeldern.\n[2] In juristischen und wirtschaftlichen Verträgen hängt die Gültigkeit von Klauseln von der präzisen terminologischen Kohärenz ab."
       },
       {
         "q": "ما معنى اللاحقة '-los' عند اتصالها بالأسماء (مثل arbeitslos, kostenlos)؟",
@@ -1810,139 +2389,165 @@ const MULTI_TRACK_100_EXAMS = {
           "تفيد الانتماء لمهنة"
         ],
         "answer": 0,
-        "explanation": "اللاحقة -los تفيد النفي والافتقار للشيء المقترن بالاسم (بدون عمل، عديم التكلفة)."
+        "explanation": "اللاحقة -los تفيد النفي والافتقار للشيء المقترن بالاسم (بدون عمل، عديم التكلفة).",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Auszug aus einem Fachartikel über Mehrsprachigkeit und Übersetzungswissenschaft",
+        "readingPassage": "[1] Die Dynamik der zeitgenössischen Fachübersetzung erfordert weit mehr als nur lexikalische Äquivalenzen. Übersetzer fungieren als interkulturelle Mediatoren in hochspezialisierten Diskursfeldern.\n[2] In juristischen und wirtschaftlichen Verträgen hängt die Gültigkeit von Klauseln von der präzisen terminologischen Kohärenz ab."
       },
       {
         "q": "ما هي الصيغة البديلة للمبني للمجهول (Passiversatzform) المساوية لـ 'Das Buch lässt sich leicht lesen'؟",
         "cat": "بدائل المبني للمجهول",
         "options": [
-          "Das Buch kann leicht gelesen werden.",
           "Das Buch muss leicht gelesen werden.",
           "Das Buch soll leicht gelesen werden.",
+          "Das Buch kann leicht gelesen werden.",
           "Das Buch wird leicht gelesen haben."
         ],
-        "answer": 0,
-        "explanation": "التركيب 'sich lassen + Infinitiv' يفيد إمكانية الفعل ويكافئ تماماً 'können + Passiv'."
+        "answer": 2,
+        "explanation": "التركيب 'sich lassen + Infinitiv' يفيد إمكانية الفعل ويكافئ تماماً 'können + Passiv'.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما معنى التركيب 'sein + zu + Infinitiv' في الجملة: 'Diese Aufgabe ist bis morgen zu erledigen'؟",
         "cat": "بدائل المبني للمجهول",
         "options": [
-          "يجب إنجاز هذه المهمة (ضرورة وإلزام مكافئ لـ müssen + Passiv)",
           "يمكن إهمال هذه المهمة",
+          "يجب إنجاز هذه المهمة (ضرورة وإلزام مكافئ لـ müssen + Passiv)",
           "تم إنجاز المهمة بالأمس",
           "من المستحيل إنجاز المهمة"
         ],
-        "answer": 0,
-        "explanation": "التركيب sein + zu + Infinitiv يعبر في سياق الواجبات عن الوجوب الحتمي (muss erledigt werden)."
+        "answer": 1,
+        "explanation": "التركيب sein + zu + Infinitiv يعبر في سياق الواجبات عن الوجوب الحتمي (muss erledigt werden).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما المعنى الدقيق للتعبير الاصطلاحي الفعلي (Funktionsverbgefüge): 'eine Entscheidung treffen'؟",
         "cat": "تراكيب الأفعال الوظيفية",
         "options": [
-          "يتخذ قراراً (entscheiden)",
           "يتردد في الاختيار",
           "يؤجل القرار للأسبوع القادم",
-          "يرفض قراراً سابقاً"
+          "يرفض قراراً سابقاً",
+          "يتخذ قراراً (entscheiden)"
         ],
-        "answer": 0,
-        "explanation": "هذا التركيب الوظيفي يعني ببساطة: entscheiden (أن يتخذ قراراً رسمياً)."
+        "answer": 3,
+        "explanation": "هذا التركيب الوظيفي يعني ببساطة: entscheiden (أن يتخذ قراراً رسمياً).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما المقابل الفعلي لتركيب: 'in Betracht ziehen'؟",
         "cat": "تراكيب الأفعال الوظيفية",
         "options": [
-          "berücksichtigen (يأخذ بعين الاعتبار)",
           "ablehnen (يرفض)",
           "kritisieren (ينتقد)",
+          "berücksichtigen (يأخذ بعين الاعتبار)",
           "vergessen (ينسى)"
         ],
-        "answer": 0,
-        "explanation": "التركيب 'etwas in Betracht ziehen' يعني أخذ الشيء بعين الحسبان والاعتبار."
+        "answer": 2,
+        "explanation": "التركيب 'etwas in Betracht ziehen' يعني أخذ الشيء بعين الحسبان والاعتبار.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "كيف يُصاغ المبني للمجهول في الماضي التام (Passiv Perfekt)؟",
         "cat": "المبني للمجهول في الماضي",
         "options": [
-          "ist + Partizip II + worden",
           "hat + Partizip II + geworden",
           "wurde + Partizip II + sein",
-          "war + Partizip II + worden"
+          "war + Partizip II + worden",
+          "ist + Partizip II + worden"
         ],
-        "answer": 0,
-        "explanation": "في المبني للمجهول الماضي التام نستخدم sein مع Partizip II وكلمة worden (وليس geworden)."
+        "answer": 3,
+        "explanation": "في المبني للمجهول الماضي التام نستخدم sein مع Partizip II وكلمة worden (وليس geworden).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما الفرق بين المبني للمجهول الحركي (Vorgangspassiv) والمبني للمجهول الوصفي (Zustandspassiv)؟",
         "cat": "أنواع المبني للمجهول",
         "options": [
-          "الحركي يصف وقوع الفعل (werden)، والوصفي يصف النتيجة المستقرة بعد انتهاء الفعل (sein)",
           "الحركي للحاضر والوصفي للماضي فقط",
           "لا يوجد فرق بينهما في المعنى",
+          "الحركي يصف وقوع الفعل (werden)، والوصفي يصف النتيجة المستقرة بعد انتهاء الفعل (sein)",
           "الوصفي يستخدم فقط مع أفعال الحركة"
         ],
-        "answer": 0,
-        "explanation": "مثال: Die Tür wird geschlossen (تُغلق الآن - حدث) مقابل Die Tür ist geschlossen (الباب مغلق - حالة)."
+        "answer": 2,
+        "explanation": "مثال: Die Tür wird geschlossen (تُغلق الآن - حدث) مقابل Die Tür ist geschlossen (الباب مغلق - حالة).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما معنى صيغة الشرط في الماضي (Konjunktiv II Vergangenheit): 'Ich hätte das tun sollen'؟",
         "cat": "صيغة الشرط في الماضي",
         "options": [
-          "كان ينبغي عليّ فعل ذلك (لكنني لم أفعله في الواقع)",
           "فعلت ذلك بنجاح تام",
           "سأفعل ذلك بالتأكيد غداً",
+          "كان ينبغي عليّ فعل ذلك (لكنني لم أفعله في الواقع)",
           "يستحيل عليّ فعل ذلك الآن"
         ],
-        "answer": 0,
-        "explanation": "الصيغة تعبر عن لوم أو حسرة على عدم إتمام فعل كان مفروضاً في الماضي."
+        "answer": 2,
+        "explanation": "الصيغة تعبر عن لوم أو حسرة على عدم إتمام فعل كان مفروضاً في الماضي.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "اختر حرف الجر الصحيح وحالته الإعرابية مع 'abhängen' (يعتمد على):",
         "cat": "أفعال مرتبطة بحروف جر",
         "options": [
-          "abhängen von (+ Dativ)",
           "abhängen an (+ Dativ)",
           "abhängen auf (+ Akkusativ)",
-          "abhängen über (+ Akkusativ)"
+          "abhängen über (+ Akkusativ)",
+          "abhängen von (+ Dativ)"
         ],
-        "answer": 0,
-        "explanation": "الفعل abhängen يتطلب حرف الجر von ومجروره بالـ Dativ."
+        "answer": 3,
+        "explanation": "الفعل abhängen يتطلب حرف الجر von ومجروره بالـ Dativ.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما إعراب ما بعد حرف الجر 'während' في النصوص الأكاديمية والرسمية؟",
         "cat": "حروف الجر المتقدمة",
         "options": [
-          "Genitiv (مضاف إليه)",
           "Dativ فقط",
           "Akkusativ فقط",
-          "Nominativ"
+          "Nominativ",
+          "Genitiv (مضاف إليه)"
         ],
-        "answer": 0,
-        "explanation": "حرف الجر während يطلب معيارياً وفصحوياً حالة المضاف إليه Genitiv (während des Vortrags)."
+        "answer": 3,
+        "explanation": "حرف الجر während يطلب معيارياً وفصحوياً حالة المضاف إليه Genitiv (während des Vortrags).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما هي الأداة الموصولة المناسبة في الجملة: 'Das ist alles, ___ ich weiß.'؟",
         "cat": "الجمل الموصولة المتقدمة",
         "options": [
-          "was",
           "das",
+          "was",
           "welches",
           "dass"
         ],
-        "answer": 0,
-        "explanation": "بعد الكلمات الدالة على العموم المحايد (alles, etwas, nichts, vieles) نستخدم أداة الوصل was."
+        "answer": 1,
+        "explanation": "بعد الكلمات الدالة على العموم المحايد (alles, etwas, nichts, vieles) نستخدم أداة الوصل was.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما المعنى الدقيق لفعل الكيفية 'sollen' عند استخدامه لنقل كلام الآخرين (Subjektive Modalverben)؟ 'Er soll sehr reich sein.'",
         "cat": "الاستخدام الذاتي لأفعال الكيفية",
         "options": [
-          "يقال عنه ويشاع أنه ثري جداً (Gerücht / نقل كلام)",
           "يجب عليه أن يصبح ثرياً فوراً",
           "هو يريد أن يصبح ثرياً",
+          "يقال عنه ويشاع أنه ثري جداً (Gerücht / نقل كلام)",
           "كان ثرياً في الماضي فقط"
         ],
-        "answer": 0,
-        "explanation": "الاستخدام الذاتي لـ sollen يفيد نقل شائعة أو قول من طرف ثالث (Man sagt, dass er sehr reich ist)."
+        "answer": 2,
+        "explanation": "الاستخدام الذاتي لـ sollen يفيد نقل شائعة أو قول من طرف ثالث (Man sagt, dass er sehr reich ist).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما دلالة 'müssen' في: 'Er muss krank sein, denn er sieht blass aus.'؟",
@@ -1954,7 +2559,9 @@ const MULTI_TRACK_100_EXAMS = {
           "شك ضعيف جداً"
         ],
         "answer": 0,
-        "explanation": "تفيد müssen هنا الاستنتاج الحتمي شبه المؤكد المبني على قرائن واضحة."
+        "explanation": "تفيد müssen هنا الاستنتاج الحتمي شبه المؤكد المبني على قرائن واضحة.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "أي الجمل التالية تمثل صياغة نعتية بالاسم المفعول (Partizipialattribut) متقدمة؟",
@@ -1966,43 +2573,51 @@ const MULTI_TRACK_100_EXAMS = {
           "Die Regierung beschloss die Maßnahmen für morgen."
         ],
         "answer": 0,
-        "explanation": "هذا أسلوب وصفي متقدم يضع شبه الجملة المحصورة بين الأداة والاسم الموصوف."
+        "explanation": "هذا أسلوب وصفي متقدم يضع شبه الجملة المحصورة بين الأداة والاسم الموصوف.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "كيف نحول التركيب النعتي 'das brennende Haus' إلى جملة موصلة مكافئة؟",
         "cat": "اسم الفاعل Partizip I",
         "options": [
-          "das Haus, das brennt (الحاضر المستمر)",
           "das Haus, das gebrannt hat",
+          "das Haus, das brennt (الحاضر المستمر)",
           "das Haus, das brennen wird",
           "das Haus, das verbrannt ist"
         ],
-        "answer": 0,
-        "explanation": "اسم الفاعل (Partizip I بزيادة d) يعبر عن حدث متزامن ومستمر في الحاضر (das brennt)."
+        "answer": 1,
+        "explanation": "اسم الفاعل (Partizip I بزيادة d) يعبر عن حدث متزامن ومستمر في الحاضر (das brennt).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما الرابط المزدوج المناسب للتعبير عن تناسب طردي: '___ mehr man lernt, ___ klüger wird man.'؟",
         "cat": "الروابط التناسبية",
         "options": [
-          "Je ... desto (oder umso)",
           "Nicht nur ... sondern auch",
           "Weder ... noch",
-          "So ... wie"
+          "So ... wie",
+          "Je ... desto (oder umso)"
         ],
-        "answer": 0,
-        "explanation": "التعبير التناسبي المقارن يصاغ حصرياً بـ: Je (جملة ثانوية) ... desto/umso (جملة رئيسية تبدأ بالفعل)."
+        "answer": 3,
+        "explanation": "التعبير التناسبي المقارن يصاغ حصرياً بـ: Je (جملة ثانوية) ... desto/umso (جملة رئيسية تبدأ بالفعل).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما الفرق بين 'anstatt dass' و 'ohne dass'؟",
         "cat": "الروابط المقارنة المتقدمة",
         "options": [
-          "anstatt dass تفيد الاستبدال وفعل شيء آخر، و ohne dass تفيد نفي حدوث النتيجة المصاحبة",
           "كلاهما يستعملان للشرط الإيجابي",
+          "anstatt dass تفيد الاستبدال وفعل شيء آخر، و ohne dass تفيد نفي حدوث النتيجة المصاحبة",
           "ohne dass تفيد المستقبل فقط",
           "anstatt dass تفيد الماضي فقط"
         ],
-        "answer": 0,
-        "explanation": "anstatt dass تعني بدلاً من أن، بينما ohne dass تعني دون أن يرافق ذلك حدث ما."
+        "answer": 1,
+        "explanation": "anstatt dass تعني بدلاً من أن، بينما ohne dass تعني دون أن يرافق ذلك حدث ما.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما هي اللواحق التي تشير غالباً إلى أن الاسم الأكاديمي مؤنث (die)؟",
@@ -2014,7 +2629,9 @@ const MULTI_TRACK_100_EXAMS = {
           "-er, -en, -el"
         ],
         "answer": 0,
-        "explanation": "جميع الأسماء المنتهية بهذه اللواحق هي أسماء مؤنثة دائماً (die) دون استثناء."
+        "explanation": "جميع الأسماء المنتهية بهذه اللواحق هي أسماء مؤنثة دائماً (die) دون استثناء.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما إعراب كلمة 'Kollege' في جملة: 'Ich spreche mit meinem neu___ Kolleg___'؟",
@@ -2026,7 +2643,9 @@ const MULTI_TRACK_100_EXAMS = {
           "neuen Kolleger"
         ],
         "answer": 0,
-        "explanation": "الاسم Kollege مذكر ضعيف (N-Deklination) يكتسب لاحقة -n أو -en في سائر الحالات الإعرابية عدا الرفع."
+        "explanation": "الاسم Kollege مذكر ضعيف (N-Deklination) يكتسب لاحقة -n أو -en في سائر الحالات الإعرابية عدا الرفع.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما المعنى الدقيق لفعل 'überweisen' في المعاملات المالية؟",
@@ -2038,31 +2657,37 @@ const MULTI_TRACK_100_EXAMS = {
           "يدفع نقداً بالعملة الورقية"
         ],
         "answer": 0,
-        "explanation": "الفعل überweisen يعني إجراء تحويل مصرفي لحساب شخص آخر."
+        "explanation": "الفعل überweisen يعني إجراء تحويل مصرفي لحساب شخص آخر.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما هو نقيض كلمة 'zustimmen' (يوافق على) بالألمانية؟",
         "cat": "المتضادات اللغوية",
         "options": [
-          "ablehnen / widersprechen",
           "bejahen",
           "befürworten",
-          "akzeptieren"
+          "akzeptieren",
+          "ablehnen / widersprechen"
         ],
-        "answer": 0,
-        "explanation": "الفعل ablehnen (يرفض) أو widersprechen (يعارض) هما نقيض الموافقة zustimmen."
+        "answer": 3,
+        "explanation": "الفعل ablehnen (يرفض) أو widersprechen (يعارض) هما نقيض الموافقة zustimmen.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما المقصود بـ 'falsche Freunde' في حقل اللغويات والترجمة؟",
         "cat": "المصطلحات اللغوية",
         "options": [
-          "كلمات تتشابه في النطق مع لغة أخرى لكن يختلف معناها تماماً",
           "أصدقاء غير مخلصين في العمل",
+          "كلمات تتشابه في النطق مع لغة أخرى لكن يختلف معناها تماماً",
           "أخطاء مطبعية غير مقصودة",
           "أفعال شاذة لا تصرف"
         ],
-        "answer": 0,
-        "explanation": "الأصدقاء الزائفون (False Friends) هي الألفاظ المتشابهة شكلاً بين لغتين مع تباين تام في المعنى."
+        "answer": 1,
+        "explanation": "الأصدقاء الزائفون (False Friends) هي الألفاظ المتشابهة شكلاً بين لغتين مع تباين تام في المعنى.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما المعنى الفعلي للكلمة الألمانية 'Gift' للتحذير من الخلط مع الإنجليزية؟",
@@ -2074,55 +2699,65 @@ const MULTI_TRACK_100_EXAMS = {
           "الحلوى اللذيذة"
         ],
         "answer": 0,
-        "explanation": "الكلمة الألمانية das Gift تعني السمّ، بينما في الإنجليزية gift تعني الهدية!"
+        "explanation": "الكلمة الألمانية das Gift تعني السمّ، بينما في الإنجليزية gift تعني الهدية!",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما هو الفعل الصحيح الذي يعني 'يقدم طلباً رسمياً أو استمارة ترشح'؟",
         "cat": "المصطلحات الإدارية",
         "options": [
-          "einen Antrag stellen / sich bewerben",
           "einen Antrag fallen",
           "einen Antrag nehmen",
-          "einen Antrag bringen"
+          "einen Antrag bringen",
+          "einen Antrag stellen / sich bewerben"
         ],
-        "answer": 0,
-        "explanation": "التركيب الاصطلاحي هو: einen Antrag stellen (يقدم طلباً رسمياً للجهات الإدارية)."
+        "answer": 3,
+        "explanation": "التركيب الاصطلاحي هو: einen Antrag stellen (يقدم طلباً رسمياً للجهات الإدارية).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما معنى حرف الجر المتقدم 'bezüglich' وحالته الإعرابية؟",
         "cat": "حروف الجر المتقدمة",
         "options": [
-          "بخصوص / فيما يتعلق بـ ويطلب حالة Genitiv",
           "بعيداً عن ويطلب Dativ",
           "بدون ويطلب Akkusativ",
-          "قريباً من ويطلب Nominativ"
+          "قريباً من ويطلب Nominativ",
+          "بخصوص / فيما يتعلق بـ ويطلب حالة Genitiv"
         ],
-        "answer": 0,
-        "explanation": "حرف الجر bezüglich يعني فيما يتعلق بـ ويطلب حالة المضاف إليه Genitiv."
+        "answer": 3,
+        "explanation": "حرف الجر bezüglich يعني فيما يتعلق بـ ويطلب حالة المضاف إليه Genitiv.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "كيف يصاغ المصدر الاسمي (Nominalisierung) من الفعل 'entscheiden'؟",
         "cat": "التحويل الاسمي Nominalisierung",
         "options": [
-          "die Entscheidung",
           "das Entscheidenheit",
           "die Entscheidschaft",
+          "die Entscheidung",
           "die Entscheidtung"
         ],
-        "answer": 0,
-        "explanation": "الاسم المشتق المعياري هو die Entscheidung (القرار)."
+        "answer": 2,
+        "explanation": "الاسم المشتق المعياري هو die Entscheidung (القرار).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما الاستخدام النحوي الحصري لصيغة 'Konjunktiv I' في اللغة الألمانية المعيارية؟",
         "cat": "صيغة نقل الكلام Konjunktiv I",
         "options": [
-          "نقل الكلام غير المباشر في الصحافة والتقارير الرسمية (Indirekte Rede)",
           "التعبير عن الأوامر الصارمة",
+          "نقل الكلام غير المباشر في الصحافة والتقارير الرسمية (Indirekte Rede)",
           "التعبير عن التمني المستحيل في الماضي",
           "وصف أفعال الشرط المستقبلية فقط"
         ],
-        "answer": 0,
-        "explanation": "تُستخدم صيغة Konjunktiv I أساساً في الصحافة والإعلام لنقل تصريحات الآخرين بحياد تام وبدون تبنٍ للرأي."
+        "answer": 1,
+        "explanation": "تُستخدم صيغة Konjunktiv I أساساً في الصحافة والإعلام لنقل تصريحات الآخرين بحياد تام وبدون تبنٍ للرأي.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "في الجملة المنقولة: 'Der Minister sagte, er ___ zuversichtlich.', ما الشكل الدقيق لـ Konjunktiv I لفعل sein؟",
@@ -2134,67 +2769,79 @@ const MULTI_TRACK_100_EXAMS = {
           "seien"
         ],
         "answer": 0,
-        "explanation": "صيغة Konjunktiv I لفعل sein مع الغائب المفرد er هي 'sei' حصراً."
+        "explanation": "صيغة Konjunktiv I لفعل sein مع الغائب المفرد er هي 'sei' حصراً.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "متى يتم استبدال Konjunktiv I بصيغة Konjunktiv II أو تركيب 'würde' في نقل الكلام؟",
         "cat": "قواعد Konjunktiv I",
         "options": [
-          "عندما يتطابق شكل Konjunktiv I تماماً مع الحاضر الإخباري Indikativ Präsens",
           "عندما يكون المتحدث غاضباً",
           "فقط في الجمل الاستفهامية",
-          "لا يتم استبداله أبداً"
+          "لا يتم استبداله أبداً",
+          "عندما يتطابق شكل Konjunktiv I تماماً مع الحاضر الإخباري Indikativ Präsens"
         ],
-        "answer": 0,
-        "explanation": "إذا تطابقت صيغة Konjunktiv I مع الحاضر الواقعي (كما في sie haben)، يُستبدل وجوباً بـ Konjunktiv II لتفادي الالتباس."
+        "answer": 3,
+        "explanation": "إذا تطابقت صيغة Konjunktiv I مع الحاضر الواقعي (كما في sie haben)، يُستبدل وجوباً بـ Konjunktiv II لتفادي الالتباس.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما هي وظيفة أسلوب 'Nominalstil' مقارنة بـ 'Verbalstil' في النصوص القانونية والأكاديمية الألمانية؟",
         "cat": "الأساليب اللغوية المتقدمة",
         "options": [
-          "تكثيف المعنى وضغط المعلومات وتحقيق الطابع الموضوعي غير الشخصي",
           "جعل النص طفولياً وسهل القراءة",
           "إلغاء الحاجة لعلامات الترقيم",
-          "تسريع القراءة الشفهية فقط"
+          "تسريع القراءة الشفهية فقط",
+          "تكثيف المعنى وضغط المعلومات وتحقيق الطابع الموضوعي غير الشخصي"
         ],
-        "answer": 0,
-        "explanation": "الأسلوب الاسمي (Nominalstil) سمة النصوص العلمية والرسمية لتركيز المعلومات وحذف الفاعل غير الضروري."
+        "answer": 3,
+        "explanation": "الأسلوب الاسمي (Nominalstil) سمة النصوص العلمية والرسمية لتركيز المعلومات وحذف الفاعل غير الضروري.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "حوّل الجملة الفعلية 'Weil die Rohstoffpreise stiegen' إلى أسلوب اسمي (Nominalstil):",
         "cat": "التحويل للأسلوب الاسمي",
         "options": [
-          "Aufgrund des Anstiegs der Rohstoffpreise",
           "Obwohl die Rohstoffpreise steigen",
           "Indem die Rohstoffpreise steigen",
+          "Aufgrund des Anstiegs der Rohstoffpreise",
           "Beim Steigen Preise"
         ],
-        "answer": 0,
-        "explanation": "تتحول weil إلى حرف جر سببي (aufgrund + Genitiv) ويتحول الفعل stiegen إلى الاسم des Anstiegs."
+        "answer": 2,
+        "explanation": "تتحول weil إلى حرف جر سببي (aufgrund + Genitiv) ويتحول الفعل stiegen إلى الاسم des Anstiegs.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما الدلالة الذاتية لفعل 'wollen' في: 'Er will den Vertrag bereits unterschrieben haben.'؟",
         "cat": "المعنى الذاتي لأفعال الكيفية",
         "options": [
-          "يدعي ويزعم بنفسه ذلك (Behauptung des Subjekts)",
           "أجبره القاضي على التوقيع",
           "يشاع في الجرائد أنه وقع",
+          "يدعي ويزعم بنفسه ذلك (Behauptung des Subjekts)",
           "يرفض توقيع العقد"
         ],
-        "answer": 0,
-        "explanation": "استخدام wollen بصيغة ذاتية يفيد ادعاء الفاعل لنفسه شيئاً يشكك فيه المتكلم."
+        "answer": 2,
+        "explanation": "استخدام wollen بصيغة ذاتية يفيد ادعاء الفاعل لنفسه شيئاً يشكك فيه المتكلم.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما معنى التعبير الاصطلاحي الراقي: 'etwas ad acta legen' في السياق المؤسساتي؟",
         "cat": "التعابير الاصطلاحية الراقية",
         "options": [
-          "حفظ الموضوع وإغلاق الملف نهائياً لاعتباره منتهياً",
           "البدء الفوري في التحقيق",
+          "حفظ الموضوع وإغلاق الملف نهائياً لاعتباره منتهياً",
           "ترجمة الملف إلى لغة ثانية",
           "إرسال الملف إلى المحكمة الجنائية"
         ],
-        "answer": 0,
-        "explanation": "التعبير اللاتيني-الألماني يعني حفظ المعاملة ووضعها في الأرشيف لانتهاء الحاجة إليها."
+        "answer": 1,
+        "explanation": "التعبير اللاتيني-الألماني يعني حفظ المعاملة ووضعها في الأرشيف لانتهاء الحاجة إليها.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما المعنى الدقيق للتعبير: 'ins Gewicht fallen' في التحليلات الاقتصادية؟",
@@ -2206,79 +2853,97 @@ const MULTI_TRACK_100_EXAMS = {
           "يسقط في الإفلاس"
         ],
         "answer": 0,
-        "explanation": "التعبير يعني: von ausschlaggebender Bedeutung sein (أن يكون له وزن حاسم)."
+        "explanation": "التعبير يعني: von ausschlaggebender Bedeutung sein (أن يكون له وزن حاسم).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما الفرق بين الكلمتين: 'scheinbar' و 'anscheinend' في الدقة اللغوية C2؟",
         "cat": "الفروق الدلالية الدقيقة C2",
         "options": [
-          "scheinbar تعني ظاهرياً فقط وفي الحقيقة ليس كذلك، بينما anscheinend تعني كما يبدو استناداً لقرائن راجحة",
           "كلاهما مترادفان تماماً",
           "scheinbar تفيد اليقين التام",
-          "anscheinend تفيد الكذب المتعمد"
+          "anscheinend تفيد الكذب المتعمد",
+          "scheinbar تعني ظاهرياً فقط وفي الحقيقة ليس كذلك، بينما anscheinend تعني كما يبدو استناداً لقرائن راجحة"
         ],
-        "answer": 0,
-        "explanation": "هذا فارق دلالي جوهري: scheinbar = خادع لا حقيقة له، بينما anscheinend = يبدو صادقاً وفق الأدلة."
+        "answer": 3,
+        "explanation": "هذا فارق دلالي جوهري: scheinbar = خادع لا حقيقة له، بينما anscheinend = يبدو صادقاً وفق الأدلة.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما المعنى الدقيق لمصطلح 'höhere Gewalt' في قانون العقود الألماني؟",
         "cat": "المصطلحات القانونية المعتمدة",
         "options": [
-          "القوة القاهرة (Force Majeure)",
           "سلطة المحكمة العليا",
           "غرامة التأخير المالية",
+          "القوة القاهرة (Force Majeure)",
           "الشرط الجزائي الرادع"
         ],
-        "answer": 0,
-        "explanation": "höhere Gewalt هي الترجمة الألمانية القانونية المعتمدة للقوة القاهرة غير المتوقعة (Force Majeure)."
+        "answer": 2,
+        "explanation": "höhere Gewalt هي الترجمة الألمانية القانونية المعتمدة للقوة القاهرة غير المتوقعة (Force Majeure).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما المقصود بـ 'Funktionsverbgefüge' في النحو الألماني المتقدم؟",
         "cat": "تراكيب الأفعال الوظيفية",
         "options": [
-          "تركيب يجمع اسماً مجروراً مع فعل فارغ الدلالة يعبران معاً عن معنى فعلي موحد",
           "فعل مركب من ثلاث كلمات لا تصرف",
           "أفعال لا تستخدم إلا مع الحيوانات",
-          "أفعال منقرضة من العصور الوسطى"
+          "أفعال منقرضة من العصور الوسطى",
+          "تركيب يجمع اسماً مجروراً مع فعل فارغ الدلالة يعبران معاً عن معنى فعلي موحد"
         ],
-        "answer": 0,
-        "explanation": "هي تراكيب تجمع اسماً مع فعل وظيفي مثل: in Gang setzen (يشغل) أو zur Verfügung stehen (يكون متاحاً)."
+        "answer": 3,
+        "explanation": "هي تراكيب تجمع اسماً مع فعل وظيفي مثل: in Gang setzen (يشغل) أو zur Verfügung stehen (يكون متاحاً).",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "ما هو نفي التركيب 'sowohl ... als auch' في الصياغة المتقدمة؟",
         "cat": "الروابط البلاغية",
         "options": [
-          "weder ... noch",
           "nicht nur ... sondern auch",
           "entweder ... oder",
+          "weder ... noch",
           "zwar ... nicht"
         ],
-        "answer": 0,
-        "explanation": "نفي التماثل المزدوج يكون حصراً عبر: weder ... noch (لا هذا ولا ذاك)."
+        "answer": 2,
+        "explanation": "نفي التماثل المزدوج يكون حصراً عبر: weder ... noch (لا هذا ولا ذاك).",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "ما وظيفة الظرف 'zwar' عندما يقترن بـ 'aber'؟",
         "cat": "روابط التنازل والاستدراك",
         "options": [
-          "التنازل والإقرار الجزئي بنقطة معينة قبل تقديم الاستدراك المعارض",
           "التأكيد المطلق على رأي واحد",
+          "التنازل والإقرار الجزئي بنقطة معينة قبل تقديم الاستدراك المعارض",
           "نفي الجملتين معاً",
           "الربط الزمني البحت"
         ],
-        "answer": 0,
-        "explanation": "zwar تفيد التنازل والاعتراف بصحة الجزء الأول تمهيداً للاستدراك الجوهري بـ aber."
+        "answer": 1,
+        "explanation": "zwar تفيد التنازل والاعتراف بصحة الجزء الأول تمهيداً للاستدراك الجوهري بـ aber.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "ما المعنى الدقيق لكلمة 'die Verhältnismäßigkeit' في القانون الدستوري والإداري الألماني؟",
         "cat": "المصطلحات الدستورية",
         "options": [
-          "مبدأ التناسب وملاءمة التدبير المتخذ للهدف المنشود",
           "نسبة التصويت في البرلمان",
           "توزيع الميزانية العامة",
+          "مبدأ التناسب وملاءمة التدبير المتخذ للهدف المنشود",
           "تفاضل الرواتب الشهرية"
         ],
-        "answer": 0,
-        "explanation": "مبدأ التناسب (Verhältnismäßigkeitsprinzip) من أسمى المبادئ الدستورية لتقييد سلطة الدولة."
+        "answer": 2,
+        "explanation": "مبدأ التناسب (Verhältnismäßigkeitsprinzip) من أسمى المبادئ الدستورية لتقييد سلطة الدولة.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "اختر الصيغة الصحيحة للجملة التنازلية المتقدمة: 'So schwer die Aufgabe auch sein mag, ___'",
@@ -2290,19 +2955,25 @@ const MULTI_TRACK_100_EXAMS = {
           "dass wir sie lösen."
         ],
         "answer": 0,
-        "explanation": "بعد التراكيب التنازلية المصدرة بـ So ... auch تبدأ الجملة الرئيسية بالفاعل ثم الفعل في الأسلوب الأدبي الحديث."
+        "explanation": "بعد التراكيب التنازلية المصدرة بـ So ... auch تبدأ الجملة الرئيسية بالفاعل ثم الفعل في الأسلوب الأدبي الحديث.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "ما معنى اللاحقة '-widrig' عند اتصالها بالأسماء (مثل rechtswidrig, verfassungswidrig)؟",
         "cat": "اشتقاق المصطلحات القانونية",
         "options": [
-          "مخالف أو منافٍ لـ (مخالف للقانون، غير دستوري)",
           "مؤيد وموافق لـ",
           "مشتق من أصل تاريخي",
-          "قابل للتعديل بسهولة"
+          "قابل للتعديل بسهولة",
+          "مخالف أو منافٍ لـ (مخالف للقانون، غير دستوري)"
         ],
-        "answer": 0,
-        "explanation": "اللاحقة -widrig تفيد المخالفة والمنافاة (مخالف للقانون، منافٍ للأخلاق)."
+        "answer": 3,
+        "explanation": "اللاحقة -widrig تفيد المخالفة والمنافاة (مخالف للقانون، منافٍ للأخلاق).",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "ما التركيب الاسمي المعياري الذي يعني 'يعرب عن شكره وامتنانه'؟",
@@ -2314,55 +2985,70 @@ const MULTI_TRACK_100_EXAMS = {
           "seinen Dank stehen"
         ],
         "answer": 0,
-        "explanation": "الصياغة الوظيفية الفصحى: seinen Dank zum Ausdruck bringen."
+        "explanation": "الصياغة الوظيفية الفصحى: seinen Dank zum Ausdruck bringen.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "ما المعنى الدقيق لفعل 'kündigen' عند اقترانه بعقد عمل أو إيجار؟",
         "cat": "المصطلحات التعاقدية",
         "options": [
-          "يفسخ العقد أو ينهي العلاقة التعاقدية بإخطار رسمي",
           "يجدد العقد تلقائياً",
           "يرفع قيمة العقد المالية",
-          "يترجم العقد إلى لغة أجنبية"
+          "يترجم العقد إلى لغة أجنبية",
+          "يفسخ العقد أو ينهي العلاقة التعاقدية بإخطار رسمي"
         ],
-        "answer": 0,
-        "explanation": "الفعل kündigen يعني فسخ أو إنهاء العقد بصورة نظامية بعد إرسال الإشعار القانوني."
+        "answer": 3,
+        "explanation": "الفعل kündigen يعني فسخ أو إنهاء العقد بصورة نظامية بعد إرسال الإشعار القانوني.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "ما المعنى الدقيق لعبارة 'Gefahr im Verzug' في الإجراءات الجنائية الألمانية؟",
         "cat": "المصطلحات القضائية والجنائية",
         "options": [
-          "خطر وشيك ناجم عن أي تأخير يبرر التدخل الفوري دون إذن قضائي مسبق",
           "خطر زال بالكامل",
           "حالة تأخير في دفع الغرامة",
-          "تأجيل جلسة المحاكمة"
+          "تأجيل جلسة المحاكمة",
+          "خطر وشيك ناجم عن أي تأخير يبرر التدخل الفوري دون إذن قضائي مسبق"
         ],
-        "answer": 0,
-        "explanation": "مصطلح قانوني شهير يبرر تصرف الشرطة الفوري في حالات الطوارئ القصوى خشية ضياع الأدلة."
+        "answer": 3,
+        "explanation": "مصطلح قانوني شهير يبرر تصرف الشرطة الفوري في حالات الطوارئ القصوى خشية ضياع الأدلة.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "ما الفرق بين 'der Ertrag' و 'der Umsatz' في المحاسبة والمالية الألمانية؟",
         "cat": "المصطلحات الاقتصادية والمالية",
         "options": [
-          "Umsatz هو إجمالي حجم المبيعات والإيرادات، بينما Ertrag هو العائد والقيمة المكتسبة الشاملة",
           "كلاهما يعني الخسارة الفادحة",
           "Umsatz للديون و Ertrag للضرائب",
-          "لا فرق بينهما بتاتاً"
+          "لا فرق بينهما بتاتاً",
+          "Umsatz هو إجمالي حجم المبيعات والإيرادات، بينما Ertrag هو العائد والقيمة المكتسبة الشاملة"
         ],
-        "answer": 0,
-        "explanation": "Umsatz يعبر عن حجم المبيعات النقدية الخام، بينما Ertrag يشمل كافة العوائد والأرباح الناتجة عن النشاط."
+        "answer": 3,
+        "explanation": "Umsatz يعبر عن حجم المبيعات النقدية الخام، بينما Ertrag يشمل كافة العوائد والأرباح الناتجة عن النشاط.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "ما معنى صيغة النعت المسبوق بـ 'zu' (Gerundiv): 'die zu lösenden Probleme'؟",
         "cat": "صيغة Gerundiv المتقدمة C2",
         "options": [
-          "المشكلات التي يجب أو ينبغي حلها (ضرورة كامنة)",
           "المشكلات التي حُلت في الماضي",
           "المشكلات التي يستحيل حلها",
-          "المشكلات التي لا تهم أحداً"
+          "المشكلات التي لا تهم أحداً",
+          "المشكلات التي يجب أو ينبغي حلها (ضرورة كامنة)"
         ],
-        "answer": 0,
-        "explanation": "تركيب d + zu + Partizip I يعمل كصفة تفيد وجوب الفعل: die gelöst werden müssen."
+        "answer": 3,
+        "explanation": "تركيب d + zu + Partizip I يعمل كصفة تفيد وجوب الفعل: die gelöst werden müssen.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "اختر الحرف المناسب للتعبير عن السبب مع الاسم في سياق الامتنان: '___ Ihrer Hilfe haben wir gesiegt.'",
@@ -2374,7 +3060,10 @@ const MULTI_TRACK_100_EXAMS = {
           "Anstatt"
         ],
         "answer": 0,
-        "explanation": "حرف الجر Dank يعبر عن السبب الإيجابي (بفضل مساعدتكم / nhờ vào)."
+        "explanation": "حرف الجر Dank يعبر عن السبب الإيجابي (بفضل مساعدتكم / nhờ vào).",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "ما المقابل الألماني الدقيق للمصطلح الدبلوماسي 'Persona non grata'؟",
@@ -2386,31 +3075,58 @@ const MULTI_TRACK_100_EXAMS = {
           "Bevollmächtigter Minister"
         ],
         "answer": 0,
-        "explanation": "الترجمة الرسمية المعتمدة لـ Persona non grata بالألمانية هي unerwünschte Person (شخص غير مرغوب فيه)."
+        "explanation": "الترجمة الرسمية المعتمدة لـ Persona non grata بالألمانية هي unerwünschte Person (شخص غير مرغوب فيه).",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "ما التركيب الذي يفيد 'وضع شيئاً ما قيد المناقشة والمداولة'؟",
         "cat": "تراكيب الأفعال الوظيفية C1",
         "options": [
-          "zur Debatte / Diskussion stellen",
           "in Diskussion sein",
           "aus Debatte fallen",
+          "zur Debatte / Diskussion stellen",
           "an Diskussion gehen"
         ],
-        "answer": 0,
-        "explanation": "الصياغة المعتمدة: etwas zur Debatte stellen (يطرح موضوعاً للنقاش العام)."
+        "answer": 2,
+        "explanation": "الصياغة المعتمدة: etwas zur Debatte stellen (يطرح موضوعاً للنقاش العام).",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "ما المعنى الدقيق لعبارة 'Im Zweifelsfall' في القرارات القانونية والتنظيمية؟",
         "cat": "المصطلحات القانونية",
         "options": [
-          "عند الشك والتردد (يُفسر لصالح المتهم أو الأضعف)",
           "في حالة اليقين المطلق",
+          "عند الشك والتردد (يُفسر لصالح المتهم أو الأضعف)",
           "عند ثبوت الإدانة قطيعة",
           "بعد صدور الحكم النهائي"
         ],
-        "answer": 0,
-        "explanation": "تطبيق للقاعدة اللاتينية الشهيرة 'In dubio pro reo': في حال الشك يُقضى لصالح الأصل."
+        "answer": 1,
+        "explanation": "تطبيق للقاعدة اللاتينية الشهيرة 'In dubio pro reo': في حال الشك يُقضى لصالح الأصل.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
+      }
+    ],
+    "writingStudioTasks": [
+      {
+        "taskId": "task_1",
+        "title": "المهمة الأولى: المراسلة والمخاطبة الرسمية (120 - 150 كلمة)",
+        "prompt": "Verfassen Sie eine formelle Beschwerde-E-Mail an ein internationales Übersetzungsbüro bezüglich terminologischer Inkonsistenzen in einem Geschäftsvertrag.",
+        "minWords": 120,
+        "maxWords": 180,
+        "modelAnswer": "نموذج الصياغة المعتمدة يراعي البنية الرسمية، أسلوب التحية والختام المؤسساتي، الروابط المنطقية، والمصطلحات القانونية الدقيقة الخالية من الحشو."
+      },
+      {
+        "taskId": "task_2",
+        "title": "المهمة الثانية: المقال التحليلي المتخصص (200 - 250 كلمة)",
+        "prompt": "Nehmen Sie in einem strukturierten Aufsatz (220 Wörter) Stellung zu den Chancen und ethischen Risiken von KI-gestützten Übersetzungssystemen (MTPE).",
+        "minWords": 200,
+        "maxWords": 280,
+        "modelAnswer": "يتطلب المقال مقدمة واضحة، حُججاً متوازنة مع الاستشهاد بأمثلة حقيقية من سوق الترجمة، وخاتمة تلخص وجهة النظر بأسلوب أكاديمي رفيع."
       }
     ]
   },
@@ -2422,49 +3138,69 @@ const MULTI_TRACK_100_EXAMS = {
         "q": "Choisissez l'article défini contracté correct: 'Je vais ___ cinéma ce soir.'",
         "cat": "Articles contractés",
         "options": [
-          "au",
           "à le",
+          "au",
           "du",
           "en"
         ],
-        "answer": 0,
-        "explanation": "La préposition 'à' fusionne avec l'article masculin 'le' pour former 'au' (à + le = au)."
+        "answer": 1,
+        "explanation": "La préposition 'à' fusionne avec l'article masculin 'le' pour former 'au' (à + le = au).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "Chroniqueur RFI / Diplomate",
+        "audioScript": "Écoutez attentivement le document sonore suivant : Choisissez l'article défini contracté correct: 'Je vais ___ cinéma ce soir.' Répondez ensuite à la question posée."
       },
       {
         "q": "Quelle est la conjugaison correcte du verbe 'avoir' avec 'nous' au présent?",
         "cat": "Conjugaison du présent",
         "options": [
-          "avons",
           "avez",
           "ont",
+          "avons",
           "sommes"
         ],
-        "answer": 0,
-        "explanation": "Au présent de l'indicatif, le verbe avoir se conjugue: nous avons."
+        "answer": 2,
+        "explanation": "Au présent de l'indicatif, le verbe avoir se conjugue: nous avons.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "Chroniqueur RFI / Diplomate",
+        "audioScript": "Écoutez attentivement le document sonore suivant : Quelle est la conjugaison correcte du verbe 'avoir' avec 'nous' au présent? Répondez ensuite à la question posée."
       },
       {
         "q": "Choisissez la préposition correcte pour un pays féminin: 'Elle habite ___ France.'",
         "cat": "Prépositions géographiques",
         "options": [
-          "en",
           "au",
+          "en",
           "à la",
           "dans"
         ],
-        "answer": 0,
-        "explanation": "Devant les noms de pays féminins se terminant par un 'e', on utilise la préposition 'en'."
+        "answer": 1,
+        "explanation": "Devant les noms de pays féminins se terminant par un 'e', on utilise la préposition 'en'.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "Chroniqueur RFI / Diplomate",
+        "audioScript": "Écoutez attentivement le document sonore suivant : Choisissez la préposition correcte pour un pays féminin: 'Elle habite ___ France.' Répondez ensuite à la question posée."
       },
       {
         "q": "Quelle est la forme du féminin de l'adjectif 'heureux'?",
         "cat": "Féminin des adjectifs",
         "options": [
-          "heureuse",
           "heureusse",
           "heureux",
+          "heureuse",
           "heureue"
         ],
-        "answer": 0,
-        "explanation": "Les adjectifs masculins se terminant par -eux font leur féminin en -euse."
+        "answer": 2,
+        "explanation": "Les adjectifs masculins se terminant par -eux font leur féminin en -euse.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "Chroniqueur RFI / Diplomate",
+        "audioScript": "Écoutez attentivement le document sonore suivant : Quelle est la forme du féminin de l'adjectif 'heureux'? Répondez ensuite à la question posée."
       },
       {
         "q": "Quel auxiliaire utilise-t-on au passé composé pour le verbe 'aller'?",
@@ -2476,55 +3212,80 @@ const MULTI_TRACK_100_EXAMS = {
           "aller (va aller)"
         ],
         "answer": 0,
-        "explanation": "Le verbe 'aller' fait partie des verbes de mouvement qui se conjuguent avec l'auxiliaire être."
+        "explanation": "Le verbe 'aller' fait partie des verbes de mouvement qui se conjuguent avec l'auxiliaire être.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "Chroniqueur RFI / Diplomate",
+        "audioScript": "Écoutez attentivement le document sonore suivant : Quel auxiliaire utilise-t-on au passé composé pour le verbe 'aller'? Répondez ensuite à la question posée."
       },
       {
         "q": "Choisissez l'accord correct du participe passé: 'Les lettres que j'ai ___.'",
         "cat": "Accord du participe passé",
         "options": [
-          "écrites",
           "écrit",
+          "écrites",
           "écrite",
           "écrits"
         ],
-        "answer": 0,
-        "explanation": "Avec l'auxiliaire avoir, le participe passé s'accorde avec le COD placé avant (les lettres = fém. pluriel)."
+        "answer": 1,
+        "explanation": "Avec l'auxiliaire avoir, le participe passé s'accorde avec le COD placé avant (les lettres = fém. pluriel).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "Chroniqueur RFI / Diplomate",
+        "audioScript": "Écoutez attentivement le document sonore suivant : Choisissez l'accord correct du participe passé: 'Les lettres que j'ai ___.' Répondez ensuite à la question posée."
       },
       {
         "q": "Quelle phrase exprime correctement la négation au présent?",
         "cat": "La négation",
         "options": [
-          "Il ne mange pas de viande.",
           "Il ne mange point la viande pas.",
+          "Il ne mange pas de viande.",
           "Il mange ne pas de viande.",
           "Il pas mange de viande."
         ],
-        "answer": 0,
-        "explanation": "La structure de négation standard entoure le verbe conjugué: ne + verbe + pas."
+        "answer": 1,
+        "explanation": "La structure de négation standard entoure le verbe conjugué: ne + verbe + pas.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "Chroniqueur RFI / Diplomate",
+        "audioScript": "Écoutez attentivement le document sonore suivant : Quelle phrase exprime correctement la négation au présent? Répondez ensuite à la question posée."
       },
       {
         "q": "Quel est le pronom personnel COD remplaçant 'le livre': 'Tu lis le livre? - Oui, je ___ lis.'",
         "cat": "Pronoms COD",
         "options": [
-          "le",
           "lui",
+          "le",
           "en",
           "y"
         ],
-        "answer": 0,
-        "explanation": "Le nom masculin singulier 'le livre' est un COD direct remplacé par le pronom 'le'."
+        "answer": 1,
+        "explanation": "Le nom masculin singulier 'le livre' est un COD direct remplacé par le pronom 'le'.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "Chroniqueur RFI / Diplomate",
+        "audioScript": "Écoutez attentivement le document sonore suivant : Quel est le pronom personnel COD remplaçant 'le livre': 'Tu lis le livre? - Oui, je ___ lis.' Répondez ensuite à la question posée."
       },
       {
         "q": "Quel est le pronom possessif correct: 'C'est la voiture de Marie. C'est ___ voiture.'",
         "cat": "Adjectifs possessifs",
         "options": [
-          "sa",
           "son",
           "ses",
-          "leur"
+          "leur",
+          "sa"
         ],
-        "answer": 0,
-        "explanation": "Devant un nom féminin singulier commençant par une consonne, on utilise 'sa'."
+        "answer": 3,
+        "explanation": "Devant un nom féminin singulier commençant par une consonne, on utilise 'sa'.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "Chroniqueur RFI / Diplomate",
+        "audioScript": "Écoutez attentivement le document sonore suivant : Quel est le pronom possessif correct: 'C'est la voiture de Marie. C'est ___ voiture.' Répondez ensuite à la question posée."
       },
       {
         "q": "Quelle est l'interrogation correcte avec inversion du sujet?",
@@ -2536,55 +3297,80 @@ const MULTI_TRACK_100_EXAMS = {
           "Parlez vous-le français?"
         ],
         "answer": 0,
-        "explanation": "L'inversion formelle du sujet place le verbe suivi d'un trait d'union et du pronom personnel."
+        "explanation": "L'inversion formelle du sujet place le verbe suivi d'un trait d'union et du pronom personnel.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "Chroniqueur RFI / Diplomate",
+        "audioScript": "Écoutez attentivement le document sonore suivant : Quelle est l'interrogation correcte avec inversion du sujet? Répondez ensuite à la question posée."
       },
       {
         "q": "Choisissez l'adjectif démonstratif devant un mot masculin débutant par une voyelle: '___ arbre est grand.'",
         "cat": "Adjectifs démonstratifs",
         "options": [
-          "Cet",
           "Ce",
           "Cette",
-          "Ces"
+          "Ces",
+          "Cet"
         ],
-        "answer": 0,
-        "explanation": "Devant un nom masculin commençant par une voyelle ou un h muet, on emploie 'cet'."
+        "answer": 3,
+        "explanation": "Devant un nom masculin commençant par une voyelle ou un h muet, on emploie 'cet'.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "Chroniqueur RFI / Diplomate",
+        "audioScript": "Écoutez attentivement le document sonore suivant : Choisissez l'adjectif démonstratif devant un mot masculin débutant par une voyelle: '___ arbre est grand.' Répondez ensuite à la question posée."
       },
       {
         "q": "Quelle est la forme correcte du futur proche pour 'partir' avec 'ils'?",
         "cat": "Futur proche",
         "options": [
-          "ils vont partir",
           "ils partent",
           "ils partiront",
-          "ils sont partis"
+          "ils sont partis",
+          "ils vont partir"
         ],
-        "answer": 0,
-        "explanation": "Le futur proche se forme avec le verbe aller au présent + infinitif (vont partir)."
+        "answer": 3,
+        "explanation": "Le futur proche se forme avec le verbe aller au présent + infinitif (vont partir).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "Chroniqueur RFI / Diplomate",
+        "audioScript": "Écoutez attentivement le document sonore suivant : Quelle est la forme correcte du futur proche pour 'partir' avec 'ils'? Répondez ensuite à la question posée."
       },
       {
         "q": "Quel est le pluriel du mot 'le journal'?",
         "cat": "Pluriel des noms en -al",
         "options": [
-          "les journaux",
           "les journals",
           "les journau",
-          "les journauxes"
+          "les journauxes",
+          "les journaux"
         ],
-        "answer": 0,
-        "explanation": "La plupart des noms masculins en -al forment leur pluriel en -aux."
+        "answer": 3,
+        "explanation": "La plupart des noms masculins en -al forment leur pluriel en -aux.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "Chroniqueur RFI / Diplomate",
+        "audioScript": "Écoutez attentivement le document sonore suivant : Quel est le pluriel du mot 'le journal'? Répondez ensuite à la question posée."
       },
       {
         "q": "Choisissez la préposition d'heure correcte: 'Le train part ___ 14 heures.'",
         "cat": "Prépositions temporelles",
         "options": [
-          "à",
           "en",
           "dans",
+          "à",
           "vers"
         ],
-        "answer": 0,
-        "explanation": "On utilise la préposition 'à' pour indiquer une heure précise."
+        "answer": 2,
+        "explanation": "On utilise la préposition 'à' pour indiquer une heure précise.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "Chroniqueur RFI / Diplomate",
+        "audioScript": "Écoutez attentivement le document sonore suivant : Choisissez la préposition d'heure correcte: 'Le train part ___ 14 heures.' Répondez ensuite à la question posée."
       },
       {
         "q": "Quelle est la forme correcte de l'impératif pour 'prendre' avec 'tu'?",
@@ -2596,7 +3382,12 @@ const MULTI_TRACK_100_EXAMS = {
           "Prenez!"
         ],
         "answer": 0,
-        "explanation": "À la 2e personne du singulier des verbes du 3e groupe en -dre, la terminaison conserve le -s (Prends)."
+        "explanation": "À la 2e personne du singulier des verbes du 3e groupe en -dre, la terminaison conserve le -s (Prends).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "Chroniqueur RFI / Diplomate",
+        "audioScript": "Écoutez attentivement le document sonore suivant : Quelle est la forme correcte de l'impératif pour 'prendre' avec 'tu'? Répondez ensuite à la question posée."
       },
       {
         "q": "Comment dit-on 'yesterday' en français?",
@@ -2608,19 +3399,29 @@ const MULTI_TRACK_100_EXAMS = {
           "maintenant"
         ],
         "answer": 0,
-        "explanation": "'Hier' signifie le jour précédant aujourd'hui."
+        "explanation": "'Hier' signifie le jour précédant aujourd'hui.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "Chroniqueur RFI / Diplomate",
+        "audioScript": "Écoutez attentivement le document sonore suivant : Comment dit-on 'yesterday' en français? Répondez ensuite à la question posée."
       },
       {
         "q": "Quel est le contraire de 'toujours' dans une phrase négative?",
         "cat": "Négation complexe",
         "options": [
-          "ne ... jamais",
           "ne ... rien",
+          "ne ... jamais",
           "ne ... plus",
           "ne ... personne"
         ],
-        "answer": 0,
-        "explanation": "L'antonyme négatif de 'toujours' ou 'souvent' est 'ne ... jamais'."
+        "answer": 1,
+        "explanation": "L'antonyme négatif de 'toujours' ou 'souvent' est 'ne ... jamais'.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "Chroniqueur RFI / Diplomate",
+        "audioScript": "Écoutez attentivement le document sonore suivant : Quel est le contraire de 'toujours' dans une phrase négative? Répondez ensuite à la question posée."
       },
       {
         "q": "Choisissez la préposition correcte: 'Je viens ___ Algérie.'",
@@ -2632,67 +3433,97 @@ const MULTI_TRACK_100_EXAMS = {
           "en"
         ],
         "answer": 0,
-        "explanation": "Devant un nom de pays féminin commençant par une voyelle, la provenance s'exprime par 'd''."
+        "explanation": "Devant un nom de pays féminin commençant par une voyelle, la provenance s'exprime par 'd''.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "Chroniqueur RFI / Diplomate",
+        "audioScript": "Écoutez attentivement le document sonore suivant : Choisissez la préposition correcte: 'Je viens ___ Algérie.' Répondez ensuite à la question posée."
       },
       {
         "q": "Quelle phrase exprime une obligation impersonnelle?",
         "cat": "Obligation impersonnelle",
         "options": [
-          "Il faut étudier sérieusement.",
           "Je dois étudier.",
           "Tu étudies.",
-          "Nous voulons étudier."
+          "Nous voulons étudier.",
+          "Il faut étudier sérieusement."
         ],
-        "answer": 0,
-        "explanation": "'Il faut' + infinitif exprime une obligation générale et impersonnelle."
+        "answer": 3,
+        "explanation": "'Il faut' + infinitif exprime une obligation générale et impersonnelle.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "Chroniqueur RFI / Diplomate",
+        "audioScript": "Écoutez attentivement le document sonore suivant : Quelle phrase exprime une obligation impersonnelle? Répondez ensuite à la question posée."
       },
       {
         "q": "Quel est le participe passé du verbe 'faire'?",
         "cat": "Participe passé",
         "options": [
-          "fait",
           "fais",
           "faisant",
-          "faites"
+          "faites",
+          "fait"
         ],
-        "answer": 0,
-        "explanation": "Le participe passé du verbe irrégulier faire est 'fait'."
+        "answer": 3,
+        "explanation": "Le participe passé du verbe irrégulier faire est 'fait'.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "Chroniqueur RFI / Diplomate",
+        "audioScript": "Écoutez attentivement le document sonore suivant : Quel est le participe passé du verbe 'faire'? Répondez ensuite à la question posée."
       },
       {
         "q": "Choisissez le pronom tonique convenable: 'Ce cadeau est pour ___ (je).' ",
         "cat": "Pronoms toniques",
         "options": [
-          "moi",
           "je",
           "me",
+          "moi",
           "m'"
         ],
-        "answer": 0,
-        "explanation": "Après une préposition (pour, avec, sans), on emploie les pronoms toniques (moi, toi, lui...)."
+        "answer": 2,
+        "explanation": "Après une préposition (pour, avec, sans), on emploie les pronoms toniques (moi, toi, lui...).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "Chroniqueur RFI / Diplomate",
+        "audioScript": "Écoutez attentivement le document sonore suivant : Choisissez le pronom tonique convenable: 'Ce cadeau est pour ___ (je).'  Répondez ensuite à la question posée."
       },
       {
         "q": "Quelle forme exprime la durée terminée dans le passé?",
         "cat": "Expressions de temps",
         "options": [
-          "pendant 3 ans",
           "depuis 3 ans",
           "en 3 ans",
-          "dans 3 ans"
+          "dans 3 ans",
+          "pendant 3 ans"
         ],
-        "answer": 0,
-        "explanation": "'Pendant' indique une durée complètement délimitée et achevée dans le passé."
+        "answer": 3,
+        "explanation": "'Pendant' indique une durée complètement délimitée et achevée dans le passé.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "Chroniqueur RFI / Diplomate",
+        "audioScript": "Écoutez attentivement le document sonore suivant : Quelle forme exprime la durée terminée dans le passé? Répondez ensuite à la question posée."
       },
       {
         "q": "Quelle expression exprime une action continue dans le présent qui a débuté dans le passé?",
         "cat": "Expressions de temps",
         "options": [
-          "depuis deux ans",
           "pendant deux ans",
           "pour deux ans",
-          "dans deux ans"
+          "dans deux ans",
+          "depuis deux ans"
         ],
-        "answer": 0,
-        "explanation": "'Depuis' indique une action qui a commencé dans le passé et se poursuit dans le présent."
+        "answer": 3,
+        "explanation": "'Depuis' indique une action qui a commencé dans le passé et se poursuit dans le présent.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "Chroniqueur RFI / Diplomate",
+        "audioScript": "Écoutez attentivement le document sonore suivant : Quelle expression exprime une action continue dans le présent qui a débuté dans le passé? Répondez ensuite à la question posée."
       },
       {
         "q": "Quel est le comparatif de supériorité de l'adjectif 'bon'?",
@@ -2704,31 +3535,45 @@ const MULTI_TRACK_100_EXAMS = {
           "le bon"
         ],
         "answer": 0,
-        "explanation": "Le comparatif de supériorité de l'adjectif 'bon' est l'adjectif irrégulier 'meilleur'."
+        "explanation": "Le comparatif de supériorité de l'adjectif 'bon' est l'adjectif irrégulier 'meilleur'.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "Chroniqueur RFI / Diplomate",
+        "audioScript": "Écoutez attentivement le document sonore suivant : Quel est le comparatif de supériorité de l'adjectif 'bon'? Répondez ensuite à la question posée."
       },
       {
         "q": "Quelle est la terminaison de l'imparfait pour 'ils / elles'?",
         "cat": "Imparfait de l'indicatif",
         "options": [
-          "-aient",
           "-aientent",
           "-ont",
+          "-aient",
           "-èrent"
         ],
-        "answer": 0,
-        "explanation": "La désinence de l'imparfait pour la 3e personne du pluriel est invariablement -aient."
+        "answer": 2,
+        "explanation": "La désinence de l'imparfait pour la 3e personne du pluriel est invariablement -aient.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "Chroniqueur RFI / Diplomate",
+        "audioScript": "Écoutez attentivement le document sonore suivant : Quelle est la terminaison de l'imparfait pour 'ils / elles'? Répondez ensuite à la question posée."
       },
       {
         "q": "Quelle est la valeur de l'imparfait dans: 'Quand j'étais petit, je lisais tous les soirs'?",
         "cat": "Valeurs des temps du passé",
         "options": [
-          "L'habitude et la répétition dans le passé",
           "Une action soudaine et ponctuelle",
           "Une action future certaine",
+          "L'habitude et la répétition dans le passé",
           "Un ordre impératif"
         ],
-        "answer": 0,
-        "explanation": "L'imparfait est employé pour décrire les habitudes, routines et décors d'arrière-plan dans le passé."
+        "answer": 2,
+        "explanation": "L'imparfait est employé pour décrire les habitudes, routines et décors d'arrière-plan dans le passé.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Extrait du rapport annuel sur les relations diplomatiques et la traduction institutionnelle",
+        "readingPassage": "[1] L'interprétation de conférence au sein des organisations multilatérales constitue un vecteur fondamental de négociation. La fidélité au sens l'emporte sur le calque syntaxique.\n[2] La gestion du décalage et l'anticipation discursive permettent au praticien de restituer la pensée oratoire avec rigueur."
       },
       {
         "q": "Complétez avec le pronom COI: 'Je téléphone à mon père' -> 'Je ___ téléphone.'",
@@ -2740,31 +3585,43 @@ const MULTI_TRACK_100_EXAMS = {
           "y"
         ],
         "answer": 0,
-        "explanation": "Le COI singulier désignant une personne introduit par 'à' est remplacé par 'lui'."
+        "explanation": "Le COI singulier désignant une personne introduit par 'à' est remplacé par 'lui'.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Extrait du rapport annuel sur les relations diplomatiques et la traduction institutionnelle",
+        "readingPassage": "[1] L'interprétation de conférence au sein des organisations multilatérales constitue un vecteur fondamental de négociation. La fidélité au sens l'emporte sur le calque syntaxique.\n[2] La gestion du décalage et l'anticipation discursive permettent au praticien de restituer la pensée oratoire avec rigueur."
       },
       {
         "q": "Complétez avec le pronom 'en': 'Tu as des stylos? - Oui, j'___ ai trois.'",
         "cat": "Le pronom en",
         "options": [
-          "en",
           "y",
           "les",
+          "en",
           "leur"
         ],
-        "answer": 0,
-        "explanation": "Le pronom 'en' remplace les compléments introduits par un article partitif, indéfini ou une quantité."
+        "answer": 2,
+        "explanation": "Le pronom 'en' remplace les compléments introduits par un article partitif, indéfini ou une quantité.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Extrait du rapport annuel sur les relations diplomatiques et la traduction institutionnelle",
+        "readingPassage": "[1] L'interprétation de conférence au sein des organisations multilatérales constitue un vecteur fondamental de négociation. La fidélité au sens l'emporte sur le calque syntaxique.\n[2] La gestion du décalage et l'anticipation discursive permettent au praticien de restituer la pensée oratoire avec rigueur."
       },
       {
         "q": "Complétez avec le pronom 'y': 'Tu penses à ton avenir? - Oui, j'___ pense souvent.'",
         "cat": "Le pronom y",
         "options": [
-          "y",
           "en",
           "lui",
-          "le"
+          "le",
+          "y"
         ],
-        "answer": 0,
-        "explanation": "Le pronom 'y' remplace un complément introduit par 'à' désignant une idée, une chose ou un lieu."
+        "answer": 3,
+        "explanation": "Le pronom 'y' remplace un complément introduit par 'à' désignant une idée, une chose ou un lieu.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Extrait du rapport annuel sur les relations diplomatiques et la traduction institutionnelle",
+        "readingPassage": "[1] L'interprétation de conférence au sein des organisations multilatérales constitue un vecteur fondamental de négociation. La fidélité au sens l'emporte sur le calque syntaxique.\n[2] La gestion du décalage et l'anticipation discursive permettent au praticien de restituer la pensée oratoire avec rigueur."
       },
       {
         "q": "Choisissez le pronom relatif approprié: 'Voici l'ami ___ m'a aidé.'",
@@ -2776,103 +3633,139 @@ const MULTI_TRACK_100_EXAMS = {
           "où"
         ],
         "answer": 0,
-        "explanation": "'Qui' remplace le sujet du verbe subordonné (m'a aidé)."
+        "explanation": "'Qui' remplace le sujet du verbe subordonné (m'a aidé).",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Extrait du rapport annuel sur les relations diplomatiques et la traduction institutionnelle",
+        "readingPassage": "[1] L'interprétation de conférence au sein des organisations multilatérales constitue un vecteur fondamental de négociation. La fidélité au sens l'emporte sur le calque syntaxique.\n[2] La gestion du décalage et l'anticipation discursive permettent au praticien de restituer la pensée oratoire avec rigueur."
       },
       {
         "q": "Choisissez le pronom relatif approprié: 'Le livre ___ tu m'as recommandé est passionnant.'",
         "cat": "Pronoms relatifs simples",
         "options": [
-          "que",
           "qui",
           "dont",
-          "où"
+          "où",
+          "que"
         ],
-        "answer": 0,
-        "explanation": "'Que' remplace le complément d'objet direct (tu m'as recommandé quoi? -> le livre)."
+        "answer": 3,
+        "explanation": "'Que' remplace le complément d'objet direct (tu m'as recommandé quoi? -> le livre).",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Extrait du rapport annuel sur les relations diplomatiques et la traduction institutionnelle",
+        "readingPassage": "[1] L'interprétation de conférence au sein des organisations multilatérales constitue un vecteur fondamental de négociation. La fidélité au sens l'emporte sur le calque syntaxique.\n[2] La gestion du décalage et l'anticipation discursive permettent au praticien de restituer la pensée oratoire avec rigueur."
       },
       {
         "q": "Choisissez le pronom relatif pour un complément avec 'de': 'C'est le projet ___ nous parlions hier.'",
         "cat": "Pronoms relatifs",
         "options": [
-          "dont",
           "que",
+          "dont",
           "qui",
           "auquel"
         ],
-        "answer": 0,
-        "explanation": "'Dont' remplace un complément introduit par la préposition 'de' (parler de)."
+        "answer": 1,
+        "explanation": "'Dont' remplace un complément introduit par la préposition 'de' (parler de).",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Extrait du rapport annuel sur les relations diplomatiques et la traduction institutionnelle",
+        "readingPassage": "[1] L'interprétation de conférence au sein des organisations multilatérales constitue un vecteur fondamental de négociation. La fidélité au sens l'emporte sur le calque syntaxique.\n[2] La gestion du décalage et l'anticipation discursive permettent au praticien de restituer la pensée oratoire avec rigueur."
       },
       {
         "q": "Complétez l'hypothèse au présent: 'Si j'avais de l'argent, j'___ un voyage.'",
         "cat": "Hypothèse avec Si",
         "options": [
-          "achèterais (conditionnel)",
           "achète (présent)",
+          "achèterais (conditionnel)",
           "achèterai (futur)",
           "avais acheté"
         ],
-        "answer": 0,
-        "explanation": "La structure de l'hypothèse réalisable ou imaginaire au présent est: Si + imparfait -> conditionnel présent."
+        "answer": 1,
+        "explanation": "La structure de l'hypothèse réalisable ou imaginaire au présent est: Si + imparfait -> conditionnel présent.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Extrait du rapport annuel sur les relations diplomatiques et la traduction institutionnelle",
+        "readingPassage": "[1] L'interprétation de conférence au sein des organisations multilatérales constitue un vecteur fondamental de négociation. La fidélité au sens l'emporte sur le calque syntaxique.\n[2] La gestion du décalage et l'anticipation discursive permettent au praticien de restituer la pensée oratoire avec rigueur."
       },
       {
         "q": "Quel mode verbal suit obligatoirement la locution conjonctive 'bien que'?",
         "cat": "Emploi du subjonctif",
         "options": [
-          "Le subjonctif",
           "L'indicatif",
           "Le conditionnel",
-          "L'infinitif"
+          "L'infinitif",
+          "Le subjonctif"
         ],
-        "answer": 0,
-        "explanation": "'Bien que' exprime la concession et exige impérativement le mode subjonctif."
+        "answer": 3,
+        "explanation": "'Bien que' exprime la concession et exige impérativement le mode subjonctif.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Extrait du rapport annuel sur les relations diplomatiques et la traduction institutionnelle",
+        "readingPassage": "[1] L'interprétation de conférence au sein des organisations multilatérales constitue un vecteur fondamental de négociation. La fidélité au sens l'emporte sur le calque syntaxique.\n[2] La gestion du décalage et l'anticipation discursive permettent au praticien de restituer la pensée oratoire avec rigueur."
       },
       {
         "q": "Conjuguez au subjonctif présent: 'Il faut que vous ___ (savoir) la vérité.'",
         "cat": "Subjonctif présent",
         "options": [
-          "sachiez",
           "savez",
+          "sachiez",
           "sacherez",
           "suiviez"
         ],
-        "answer": 0,
-        "explanation": "Le verbe savoir a un radical irrégulier au subjonctif: que vous sachiez."
+        "answer": 1,
+        "explanation": "Le verbe savoir a un radical irrégulier au subjonctif: que vous sachiez.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Extrait du rapport annuel sur les relations diplomatiques et la traduction institutionnelle",
+        "readingPassage": "[1] L'interprétation de conférence au sein des organisations multilatérales constitue un vecteur fondamental de négociation. La fidélité au sens l'emporte sur le calque syntaxique.\n[2] La gestion du décalage et l'anticipation discursive permettent au praticien de restituer la pensée oratoire avec rigueur."
       },
       {
         "q": "Conjuguez au subjonctif présent: 'Je souhaite qu'il ___ (venir) demain.'",
         "cat": "Subjonctif présent",
         "options": [
-          "vienne",
           "vient",
           "venira",
+          "vienne",
           "voulût"
         ],
-        "answer": 0,
-        "explanation": "Le verbe venir fait: qu'il vienne au subjonctif présent."
+        "answer": 2,
+        "explanation": "Le verbe venir fait: qu'il vienne au subjonctif présent.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Extrait du rapport annuel sur les relations diplomatiques et la traduction institutionnelle",
+        "readingPassage": "[1] L'interprétation de conférence au sein des organisations multilatérales constitue un vecteur fondamental de négociation. La fidélité au sens l'emporte sur le calque syntaxique.\n[2] La gestion du décalage et l'anticipation discursive permettent au praticien de restituer la pensée oratoire avec rigueur."
       },
       {
         "q": "Transformez au discours indirect: Il m'a dit: 'Je suis fatigué.' -> Il m'a dit qu'il ___ fatigué.",
         "cat": "Concordance des temps",
         "options": [
-          "était (imparfait)",
           "est (présent)",
           "serait (conditionnel)",
-          "fut"
+          "fut",
+          "était (imparfait)"
         ],
-        "answer": 0,
-        "explanation": "Quand le verbe introducteur est au passé, le présent du discours direct devient imparfait au discours indirect."
+        "answer": 3,
+        "explanation": "Quand le verbe introducteur est au passé, le présent du discours direct devient imparfait au discours indirect.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Extrait du rapport annuel sur les relations diplomatiques et la traduction institutionnelle",
+        "readingPassage": "[1] L'interprétation de conférence au sein des organisations multilatérales constitue un vecteur fondamental de négociation. La fidélité au sens l'emporte sur le calque syntaxique.\n[2] La gestion du décalage et l'anticipation discursive permettent au praticien de restituer la pensée oratoire avec rigueur."
       },
       {
         "q": "Quelle phrase exprime une cause neutre et objective?",
         "cat": "L'expression de la cause",
         "options": [
-          "Comme il pleut, le match est annulé.",
           "Grâce à la pluie le match est annulé.",
+          "Comme il pleut, le match est annulé.",
           "Pourtant il pleut.",
           "Bien qu'il pleuve."
         ],
-        "answer": 0,
-        "explanation": "'Comme' placé en tête de phrase exprime une relation de cause à effet évidente et constatée."
+        "answer": 1,
+        "explanation": "'Comme' placé en tête de phrase exprime une relation de cause à effet évidente et constatée.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Extrait du rapport annuel sur les relations diplomatiques et la traduction institutionnelle",
+        "readingPassage": "[1] L'interprétation de conférence au sein des organisations multilatérales constitue un vecteur fondamental de négociation. La fidélité au sens l'emporte sur le calque syntaxique.\n[2] La gestion du décalage et l'anticipation discursive permettent au praticien de restituer la pensée oratoire avec rigueur."
       },
       {
         "q": "Quelle locution exprime une cause positive avec gratitude?",
@@ -2884,55 +3777,75 @@ const MULTI_TRACK_100_EXAMS = {
           "Sous prétexte de"
         ],
         "answer": 0,
-        "explanation": "'Grâce à' s'emploie exclusivement pour une cause produisant un résultat bénéfique."
+        "explanation": "'Grâce à' s'emploie exclusivement pour une cause produisant un résultat bénéfique.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Extrait du rapport annuel sur les relations diplomatiques et la traduction institutionnelle",
+        "readingPassage": "[1] L'interprétation de conférence au sein des organisations multilatérales constitue un vecteur fondamental de négociation. La fidélité au sens l'emporte sur le calque syntaxique.\n[2] La gestion du décalage et l'anticipation discursive permettent au praticien de restituer la pensée oratoire avec rigueur."
       },
       {
         "q": "Quelle locution prépositionnelle exprime le but?",
         "cat": "L'expression du but",
         "options": [
-          "Afin de",
           "À cause de",
           "Parce que",
-          "Malgré"
+          "Malgré",
+          "Afin de"
         ],
-        "answer": 0,
-        "explanation": "'Afin de' suivi de l'infinitif marque l'intention, le dessein et la finalité."
+        "answer": 3,
+        "explanation": "'Afin de' suivi de l'infinitif marque l'intention, le dessein et la finalité.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Extrait du rapport annuel sur les relations diplomatiques et la traduction institutionnelle",
+        "readingPassage": "[1] L'interprétation de conférence au sein des organisations multilatérales constitue un vecteur fondamental de négociation. La fidélité au sens l'emporte sur le calque syntaxique.\n[2] La gestion du décalage et l'anticipation discursive permettent au praticien de restituer la pensée oratoire avec rigueur."
       },
       {
         "q": "Quel est le superlatif de supériorité de l'adverbe 'bien'?",
         "cat": "Adverbes comparatifs",
         "options": [
-          "le mieux",
           "le meilleur",
           "le plus bien",
+          "le mieux",
           "mieux"
         ],
-        "answer": 0,
-        "explanation": "L'adverbe 'bien' a pour superlatif irrégulier 'le mieux' (à ne pas confondre avec l'adjectif bon/le meilleur)."
+        "answer": 2,
+        "explanation": "L'adverbe 'bien' a pour superlatif irrégulier 'le mieux' (à ne pas confondre avec l'adjectif bon/le meilleur).",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Extrait du rapport annuel sur les relations diplomatiques et la traduction institutionnelle",
+        "readingPassage": "[1] L'interprétation de conférence au sein des organisations multilatérales constitue un vecteur fondamental de négociation. La fidélité au sens l'emporte sur le calque syntaxique.\n[2] La gestion du décalage et l'anticipation discursive permettent au praticien de restituer la pensée oratoire avec rigueur."
       },
       {
         "q": "Quelle est la forme correcte de la voix passive: 'Le comité approuve la décision'?",
         "cat": "La voix passive",
         "options": [
-          "La décision est approuvée par le comité.",
           "La décision était approuvée par le comité.",
+          "La décision est approuvée par le comité.",
           "La décision sera approuvé.",
           "Le comité est approuvé par la décision."
         ],
-        "answer": 0,
-        "explanation": "Au présent passif: auxiliaire être au présent + participe passé accordé avec le sujet passif féminin."
+        "answer": 1,
+        "explanation": "Au présent passif: auxiliaire être au présent + participe passé accordé avec le sujet passif féminin.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Extrait du rapport annuel sur les relations diplomatiques et la traduction institutionnelle",
+        "readingPassage": "[1] L'interprétation de conférence au sein des organisations multilatérales constitue un vecteur fondamental de négociation. La fidélité au sens l'emporte sur le calque syntaxique.\n[2] La gestion du décalage et l'anticipation discursive permettent au praticien de restituer la pensée oratoire avec rigueur."
       },
       {
         "q": "Quel temps exprime une action antérieure à une autre action passée?",
         "cat": "Plus-que-parfait",
         "options": [
-          "Le plus-que-parfait",
           "Le passé composé",
           "L'imparfait",
-          "Le futur antérieur"
+          "Le futur antérieur",
+          "Le plus-que-parfait"
         ],
-        "answer": 0,
-        "explanation": "Le plus-que-parfait exprime l'antériorité temporelle dans le passé (avait fini avant de partir)."
+        "answer": 3,
+        "explanation": "Le plus-que-parfait exprime l'antériorité temporelle dans le passé (avait fini avant de partir).",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Extrait du rapport annuel sur les relations diplomatiques et la traduction institutionnelle",
+        "readingPassage": "[1] L'interprétation de conférence au sein des organisations multilatérales constitue un vecteur fondamental de négociation. La fidélité au sens l'emporte sur le calque syntaxique.\n[2] La gestion du décalage et l'anticipation discursive permettent au praticien de restituer la pensée oratoire avec rigueur."
       },
       {
         "q": "Choisissez la forme convenable: 'Nous nous sommes ___ (rencontrer) à Paris.'",
@@ -2944,7 +3857,11 @@ const MULTI_TRACK_100_EXAMS = {
           "rencontrer"
         ],
         "answer": 0,
-        "explanation": "Verbe pronominel réciproque avec COD placé avant (nous = COD pluriel masculin)."
+        "explanation": "Verbe pronominel réciproque avec COD placé avant (nous = COD pluriel masculin).",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Extrait du rapport annuel sur les relations diplomatiques et la traduction institutionnelle",
+        "readingPassage": "[1] L'interprétation de conférence au sein des organisations multilatérales constitue un vecteur fondamental de négociation. La fidélité au sens l'emporte sur le calque syntaxique.\n[2] La gestion du décalage et l'anticipation discursive permettent au praticien de restituer la pensée oratoire avec rigueur."
       },
       {
         "q": "Quelle locution conjonctive exprime la conséquence?",
@@ -2956,31 +3873,43 @@ const MULTI_TRACK_100_EXAMS = {
           "Puisque"
         ],
         "answer": 0,
-        "explanation": "'Par conséquent' introduit logiquement la conséquence directe d'une proposition."
+        "explanation": "'Par conséquent' introduit logiquement la conséquence directe d'une proposition.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Extrait du rapport annuel sur les relations diplomatiques et la traduction institutionnelle",
+        "readingPassage": "[1] L'interprétation de conférence au sein des organisations multilatérales constitue un vecteur fondamental de négociation. La fidélité au sens l'emporte sur le calque syntaxique.\n[2] La gestion du décalage et l'anticipation discursive permettent au praticien de restituer la pensée oratoire avec rigueur."
       },
       {
         "q": "Quel est le sens du verbe pronominal passif: 'Ce vin se boit très frais'?",
         "cat": "Sens passif des pronominaux",
         "options": [
-          "On doit boire ce vin très frais",
           "Ce vin boit lui-même",
           "Le vin est alcoolisé",
+          "On doit boire ce vin très frais",
           "Ce vin est frais"
         ],
-        "answer": 0,
-        "explanation": "La forme pronominale à valeur passive remplace une tournure passive impersonnelle."
+        "answer": 2,
+        "explanation": "La forme pronominale à valeur passive remplace une tournure passive impersonnelle.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Extrait du rapport annuel sur les relations diplomatiques et la traduction institutionnelle",
+        "readingPassage": "[1] L'interprétation de conférence au sein des organisations multilatérales constitue un vecteur fondamental de négociation. La fidélité au sens l'emporte sur le calque syntaxique.\n[2] La gestion du décalage et l'anticipation discursive permettent au praticien de restituer la pensée oratoire avec rigueur."
       },
       {
         "q": "Comment exprime-t-on la condition sans 'si' avec le conditionnel?",
         "cat": "Condition et hypothèse",
         "options": [
-          "Au cas où vous auriez besoin d'aide",
           "À condition que vous veniez",
+          "Au cas où vous auriez besoin d'aide",
           "Pourvu que",
           "Sans doute"
         ],
-        "answer": 0,
-        "explanation": "'Au cas où' est obligatoirement suivi du mode conditionnel."
+        "answer": 1,
+        "explanation": "'Au cas où' est obligatoirement suivi du mode conditionnel.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Extrait du rapport annuel sur les relations diplomatiques et la traduction institutionnelle",
+        "readingPassage": "[1] L'interprétation de conférence au sein des organisations multilatérales constitue un vecteur fondamental de négociation. La fidélité au sens l'emporte sur le calque syntaxique.\n[2] La gestion du décalage et l'anticipation discursive permettent au praticien de restituer la pensée oratoire avec rigueur."
       },
       {
         "q": "Quelle est la nuance de l'adjectif avant le nom: 'un grand homme' vs 'un homme grand'?",
@@ -2992,55 +3921,71 @@ const MULTI_TRACK_100_EXAMS = {
           "Le premier indique la taille physique"
         ],
         "answer": 0,
-        "explanation": "Placé avant le nom, 'grand' a un sens figuré moral ou historique; après le nom, il indique la taille physique."
+        "explanation": "Placé avant le nom, 'grand' a un sens figuré moral ou historique; après le nom, il indique la taille physique.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Extrait du rapport annuel sur les relations diplomatiques et la traduction institutionnelle",
+        "readingPassage": "[1] L'interprétation de conférence au sein des organisations multilatérales constitue un vecteur fondamental de négociation. La fidélité au sens l'emporte sur le calque syntaxique.\n[2] La gestion du décalage et l'anticipation discursive permettent au praticien de restituer la pensée oratoire avec rigueur."
       },
       {
         "q": "Quelle préposition introduit la matière d'un objet?",
         "cat": "Prépositions de matière",
         "options": [
-          "en (en soie, en bois)",
           "à",
           "vers",
-          "par"
+          "par",
+          "en (en soie, en bois)"
         ],
-        "answer": 0,
-        "explanation": "La préposition 'en' désigne traditionnellement la matière constitutive (une table en chêne)."
+        "answer": 3,
+        "explanation": "La préposition 'en' désigne traditionnellement la matière constitutive (une table en chêne).",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Extrait du rapport annuel sur les relations diplomatiques et la traduction institutionnelle",
+        "readingPassage": "[1] L'interprétation de conférence au sein des organisations multilatérales constitue un vecteur fondamental de négociation. La fidélité au sens l'emporte sur le calque syntaxique.\n[2] La gestion du décalage et l'anticipation discursive permettent au praticien de restituer la pensée oratoire avec rigueur."
       },
       {
         "q": "Quel connecteur exprime l'opposition pure entre deux faits concomitants?",
         "cat": "Opposition",
         "options": [
-          "Tandis que",
           "Puisque",
+          "Tandis que",
           "Afin que",
           "Parce que"
         ],
-        "answer": 0,
-        "explanation": "'Tandis que' ou 'alors que' soulignent le contraste simultané entre deux situations parallèles."
+        "answer": 1,
+        "explanation": "'Tandis que' ou 'alors que' soulignent le contraste simultané entre deux situations parallèles.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Extrait du rapport annuel sur les relations diplomatiques et la traduction institutionnelle",
+        "readingPassage": "[1] L'interprétation de conférence au sein des organisations multilatérales constitue un vecteur fondamental de négociation. La fidélité au sens l'emporte sur le calque syntaxique.\n[2] La gestion du décalage et l'anticipation discursive permettent au praticien de restituer la pensée oratoire avec rigueur."
       },
       {
         "q": "Quelle proposition comporte un pronom relatif composé correct?",
         "cat": "Pronoms relatifs composés",
         "options": [
-          "L'entreprise à laquelle j'ai postulé est internationale.",
           "L'entreprise auquel j'ai postulé.",
+          "L'entreprise à laquelle j'ai postulé est internationale.",
           "L'entreprise de laquelle je parle qui.",
           "L'entreprise avec lequel je travaille."
         ],
-        "answer": 0,
-        "explanation": "Le pronom relatif composé s'accorde en genre et en nombre avec son antécédent (entreprise = fém. sing -> à laquelle)."
+        "answer": 1,
+        "explanation": "Le pronom relatif composé s'accorde en genre et en nombre avec son antécédent (entreprise = fém. sing -> à laquelle).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quel est le pronom relatif composé contracté masculin singulier avec 'de'?",
         "cat": "Pronoms relatifs composés",
         "options": [
-          "duquel",
           "auquel",
           "lequel",
+          "duquel",
           "desquels"
         ],
-        "answer": 0,
-        "explanation": "La contraction de 'de + lequel' donne 'duquel' (le problème au sujet duquel nous débattons)."
+        "answer": 2,
+        "explanation": "La contraction de 'de + lequel' donne 'duquel' (le problème au sujet duquel nous débattons).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Complétez avec le subjonctif passé: 'Je doute qu'il ___ (terminer) son rapport à temps.'",
@@ -3052,91 +3997,107 @@ const MULTI_TRACK_100_EXAMS = {
           "avait terminé"
         ],
         "answer": 0,
-        "explanation": "Le subjonctif passé se compose de l'auxiliaire avoir au subjonctif présent (ait) + participe passé."
+        "explanation": "Le subjonctif passé se compose de l'auxiliaire avoir au subjonctif présent (ait) + participe passé.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Identifiez la forme correcte du gérondif exprimant la manière ou la simultanéité:",
         "cat": "Le gérondif",
         "options": [
-          "en travaillant régulièrement",
           "pour travailler régulièrement",
           "travaillé régulièrement",
-          "à travailler régulièrement"
+          "à travailler régulièrement",
+          "en travaillant régulièrement"
         ],
-        "answer": 0,
-        "explanation": "Le gérondif se forme avec la préposition 'en' suivie du participe présent en -ant."
+        "answer": 3,
+        "explanation": "Le gérondif se forme avec la préposition 'en' suivie du participe présent en -ant.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quelle phrase illustre un accord erroné du participe passé d'un verbe pronominal?",
         "cat": "Accord des participes pronominaux",
         "options": [
-          "Elles se sont téléphonées hier. (Erreur: se est COI, téléphoner à)",
           "Elles se sont vues au musée.",
           "Elles se sont lavé les mains.",
+          "Elles se sont téléphonées hier. (Erreur: se est COI, téléphoner à)",
           "Elles se sont rencontrées."
         ],
-        "answer": 0,
-        "explanation": "On téléphone 'à' quelqu'un; le pronom 'se' est donc COI: le participe passé reste invariable (téléphoné)."
+        "answer": 2,
+        "explanation": "On téléphone 'à' quelqu'un; le pronom 'se' est donc COI: le participe passé reste invariable (téléphoné).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Complétez la concordance des temps: 'S'ils avaient suivi nos conseils, ils n'___ pas de difficultés.'",
         "cat": "Conditionnel passé et hypothèse",
         "options": [
-          "auraient pas eu (cond. passé)",
           "ont pas eu",
           "avaient pas eu",
-          "auront pas eu"
+          "auront pas eu",
+          "auraient pas eu (cond. passé)"
         ],
-        "answer": 0,
-        "explanation": "Si + plus-que-parfait exige dans l'apodose le conditionnel passé (action non réalisée dans le passé)."
+        "answer": 3,
+        "explanation": "Si + plus-que-parfait exige dans l'apodose le conditionnel passé (action non réalisée dans le passé).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quel connecteur concessif exige l'indicatif contrairement à 'bien que'?",
         "cat": "Concession et opposition",
         "options": [
-          "Même si",
           "Quoique",
           "Encore que",
+          "Même si",
           "Pour peu que"
         ],
-        "answer": 0,
-        "explanation": "'Même si' exprime l'opposition ou la concession mais commande rigoureusement le mode indicatif."
+        "answer": 2,
+        "explanation": "'Même si' exprime l'opposition ou la concession mais commande rigoureusement le mode indicatif.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quelle tournure permet d'éviter la voix passive lourde en français soutenu?",
         "cat": "Tournures stylistiques",
         "options": [
-          "L'emploi du pronom indéfini 'on' ou la forme pronominale",
           "L'ajout de trois adjectifs qualificatifs",
+          "L'emploi du pronom indéfini 'on' ou la forme pronominale",
           "La répétition du sujet",
           "L'emploi exclusif du subjonctif"
         ],
-        "answer": 0,
-        "explanation": "Le français privilégie les tournures actives avec 'on' ou pronominales passives pour plus d'élégance et de fluidité."
+        "answer": 1,
+        "explanation": "Le français privilégie les tournures actives avec 'on' ou pronominales passives pour plus d'élégance et de fluidité.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quelle est la valeur temporelle du futur antérieur?",
         "cat": "Futur antérieur",
         "options": [
-          "L'antériorité par rapport à un moment ou une action future",
           "Une incertitude passée",
+          "L'antériorité par rapport à un moment ou une action future",
           "Un souhait irréalisable",
           "Une habitude présente"
         ],
-        "answer": 0,
-        "explanation": "Le futur antérieur exprime une action qui sera achevée avant une autre action future (dès que j'aurai fini, je partirai)."
+        "answer": 1,
+        "explanation": "Le futur antérieur exprime une action qui sera achevée avant une autre action future (dès que j'aurai fini, je partirai).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Dans la correspondance administrative formelle, quelle formule clôture une lettre?",
         "cat": "Formules de politesse épistolaire",
         "options": [
-          "Veuillez agréer, Madame, Monsieur, l'expression de mes salutations distinguées.",
           "À bientôt et merci.",
           "Je vous salue amicalement.",
-          "Recevez mes meilleurs bisous."
+          "Recevez mes meilleurs bisous.",
+          "Veuillez agréer, Madame, Monsieur, l'expression de mes salutations distinguées."
         ],
-        "answer": 0,
-        "explanation": "C'est la formule protocolaire standard et soignée de la correspondance institutionnelle en langue française."
+        "answer": 3,
+        "explanation": "C'est la formule protocolaire standard et soignée de la correspondance institutionnelle en langue française.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quel temps verbal emploie-t-on après 'dès que' dans une phrase au passé?",
@@ -3148,7 +4109,9 @@ const MULTI_TRACK_100_EXAMS = {
           "Le présent de l'indicatif"
         ],
         "answer": 0,
-        "explanation": "Après les conjonctions temporelles d'immédiateté au passé (dès que, aussitôt que), on emploie le passé antérieur."
+        "explanation": "Après les conjonctions temporelles d'immédiateté au passé (dès que, aussitôt que), on emploie le passé antérieur.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quel terme désigne la clause contractuelle dégageant les parties en cas d'événement imprévisible?",
@@ -3160,7 +4123,9 @@ const MULTI_TRACK_100_EXAMS = {
           "La nullité absolue"
         ],
         "answer": 0,
-        "explanation": "La 'force majeure' est l'événement extérieur, imprévisible et irrésistible exonérant le débiteur."
+        "explanation": "La 'force majeure' est l'événement extérieur, imprévisible et irrésistible exonérant le débiteur.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quelle est la signification de l'expression diplomatique 'statu quo ante'?",
@@ -3172,43 +4137,51 @@ const MULTI_TRACK_100_EXAMS = {
           "Un cessez-le-feu permanent"
         ],
         "answer": 0,
-        "explanation": "Expression latine consacrée désignant le rétablissement de la situation juridique antérieure."
+        "explanation": "Expression latine consacrée désignant le rétablissement de la situation juridique antérieure.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Choisissez le connecteur logique marquant la transition argumentative:",
         "cat": "Connecteurs logiques B2",
         "options": [
-          "D'ailleurs / En outre",
           "Parce que",
           "Pendant que",
+          "D'ailleurs / En outre",
           "De sorte à"
         ],
-        "answer": 0,
-        "explanation": "'En outre' ou 'de surcroît' introduisent un argument supplémentaire de même orientation."
+        "answer": 2,
+        "explanation": "'En outre' ou 'de surcroît' introduisent un argument supplémentaire de même orientation.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quelle est la nuance apportée par le subjonctif dans une proposition relative: 'Je cherche un traducteur qui ___ (connaître) le droit maritime.'?",
         "cat": "Nuances du subjonctif",
         "options": [
-          "qui connaisse (l'existence du traducteur est incertaine ou hypothétique)",
           "qui connaît (fait certain avéré)",
           "qui connaîtra",
+          "qui connaisse (l'existence du traducteur est incertaine ou hypothétique)",
           "qui connaissait"
         ],
-        "answer": 0,
-        "explanation": "Le subjonctif dans une relative traduit une recherche idéale dont la réalité n'est pas garantie."
+        "answer": 2,
+        "explanation": "Le subjonctif dans une relative traduit une recherche idéale dont la réalité n'est pas garantie.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quel adjectif verbal correspond au verbe 'différer'?",
         "cat": "Adjectifs verbaux vs participes",
         "options": [
-          "différent (avec -ent)",
           "différant (participe présent)",
+          "différent (avec -ent)",
           "différemment",
           "différentiel"
         ],
-        "answer": 0,
-        "explanation": "L'adjectif verbal s'orthographie 'différent', tandis que le participe présent est 'différant'."
+        "answer": 1,
+        "explanation": "L'adjectif verbal s'orthographie 'différent', tandis que le participe présent est 'différant'.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Dans un compte rendu professionnel, quel style est requis?",
@@ -3220,7 +4193,9 @@ const MULTI_TRACK_100_EXAMS = {
           "Un style poétique en vers"
         ],
         "answer": 0,
-        "explanation": "Le compte rendu institutionnel exige clarté synthétique, neutralité et précision terminologique."
+        "explanation": "Le compte rendu institutionnel exige clarté synthétique, neutralité et précision terminologique.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Que signifie l'adverbe 'notamment' dans une énumération juridique?",
@@ -3232,31 +4207,37 @@ const MULTI_TRACK_100_EXAMS = {
           "À l'exclusion de"
         ],
         "answer": 0,
-        "explanation": "'Notamment' signale des exemples emblématiques au sein d'une catégorie sans exclure les autres éléments."
+        "explanation": "'Notamment' signale des exemples emblématiques au sein d'une catégorie sans exclure les autres éléments.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quelle forme verbale traduit l'éventualité dans une clause résolutoire: 'Si le cocontractant ___ à ses obligations'?",
         "cat": "Langage contractuel",
         "options": [
-          "venait à manquer",
           "manquera",
           "a manqué",
-          "ayant manqué"
+          "ayant manqué",
+          "venait à manquer"
         ],
-        "answer": 0,
-        "explanation": "La tournure 'venir à + infinitif' exprime une éventualité redoutée ou hypothétique dans les contrats."
+        "answer": 3,
+        "explanation": "La tournure 'venir à + infinitif' exprime une éventualité redoutée ou hypothétique dans les contrats.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quel terme désigne la compensation financière allouée par un tribunal en réparation d'un préjudice?",
         "cat": "Vocabulaire judiciaire",
         "options": [
-          "Les dommages-intérêts",
           "Les honoraires",
           "Les dividendes",
+          "Les dommages-intérêts",
           "La caution solidaire"
         ],
-        "answer": 0,
-        "explanation": "Les dommages-intérêts constituent la réparation indemnitaire pécuniaire due à la victime d'un préjudice."
+        "answer": 2,
+        "explanation": "Les dommages-intérêts constituent la réparation indemnitaire pécuniaire due à la victime d'un préjudice.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Identifiez le pléonasme vicieux à proscrire dans un texte soutenu:",
@@ -3268,31 +4249,37 @@ const MULTI_TRACK_100_EXAMS = {
           "'rédiger une synthèse'"
         ],
         "answer": 0,
-        "explanation": "'Monter en haut' et 'collaborer ensemble' sont des pléonasmes redondants contraires à l'économie de la langue."
+        "explanation": "'Monter en haut' et 'collaborer ensemble' sont des pléonasmes redondants contraires à l'économie de la langue.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Que signifie l'abréviation protocolaire 'S.E.' devant le nom d'un ambassadeur?",
         "cat": "Protocole diplomatique",
         "options": [
-          "Son Excellence",
           "Sa Sainteté",
           "Secrétaire Exécutif",
+          "Son Excellence",
           "Société Européenne"
         ],
-        "answer": 0,
-        "explanation": "'Son Excellence' est le prédicat protocolaire réservé aux ambassadeurs extraordinaires et plénipotentiaires."
+        "answer": 2,
+        "explanation": "'Son Excellence' est le prédicat protocolaire réservé aux ambassadeurs extraordinaires et plénipotentiaires.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quelle préposition régit le verbe 'pallier' en bon usage?",
         "cat": "Régime des verbes",
         "options": [
-          "Aucune: il est transitif direct (pallier une difficulté)",
           "à (pallier à)",
+          "Aucune: il est transitif direct (pallier une difficulté)",
           "de (pallier de)",
           "sur (pallier sur)"
         ],
-        "answer": 0,
-        "explanation": "En français normatif soigné, 'pallier' est transitif direct: on pallie un manque (et non pallier à)."
+        "answer": 1,
+        "explanation": "En français normatif soigné, 'pallier' est transitif direct: on pallie un manque (et non pallier à).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quelle est la nature du mot 'leur' dans: 'Ces documents, je leur ai transmis hier'?",
@@ -3304,91 +4291,107 @@ const MULTI_TRACK_100_EXAMS = {
           "Pronom relatif"
         ],
         "answer": 0,
-        "explanation": "En tant que pronom personnel COI remplaçant 'à eux/elles', 'leur' ne prend jamais de -s."
+        "explanation": "En tant que pronom personnel COI remplaçant 'à eux/elles', 'leur' ne prend jamais de -s.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quel temps traduit le futur dans le passé au discours indirect?",
         "cat": "Concordance des temps",
         "options": [
-          "Le conditionnel présent",
           "Le futur simple",
+          "Le conditionnel présent",
           "L'imparfait",
           "Le subjonctif"
         ],
-        "answer": 0,
-        "explanation": "Le conditionnel présent joue le rôle fondamental de futur dans le passé par concordance temporelle."
+        "answer": 1,
+        "explanation": "Le conditionnel présent joue le rôle fondamental de futur dans le passé par concordance temporelle.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Dans un traité multilatéral, que signifie la formule 'fait foi' dans la clause finale?",
         "cat": "Droit des traités et langues officielles",
         "options": [
-          "Le texte dans cette langue fait autorité juridique souveraine en cas de divergence",
           "Le texte est simplement une traduction informative",
           "Le document est certifié par un notaire local",
+          "Le texte dans cette langue fait autorité juridique souveraine en cas de divergence",
           "Le texte expire dans 10 ans"
         ],
-        "answer": 0,
-        "explanation": "La clause d'authenticité linguistique établit quelle version linguistique a valeur juridique probante et officielle."
+        "answer": 2,
+        "explanation": "La clause d'authenticité linguistique établit quelle version linguistique a valeur juridique probante et officielle.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quelle inversion du sujet est obligatoire en tête de phrase après un adverbe modalisateur?",
         "cat": "Inversion stylistique C1",
         "options": [
-          "Peut-être a-t-il accepté la proposition.",
           "Peut-être il a accepté la proposition.",
+          "Peut-être a-t-il accepté la proposition.",
           "A-t-il accepté peut-être la proposition.",
           "Il a peut-être accepté que oui."
         ],
-        "answer": 0,
-        "explanation": "En tête de phrase, les adverbes 'peut-être', 'à peine', 'sans doute', 'aussi' commandent l'inversion du sujet."
+        "answer": 1,
+        "explanation": "En tête de phrase, les adverbes 'peut-être', 'à peine', 'sans doute', 'aussi' commandent l'inversion du sujet.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quelle phrase illustre l'emploi du subjonctif imparfait dans un texte juridique ou littéraire classique?",
         "cat": "Subjonctif imparfait C2",
         "options": [
-          "Quoiqu'il en coûtât à l'État, la mesure fut adoptée.",
           "Quoiqu'il en coûte à l'État.",
+          "Quoiqu'il en coûtât à l'État, la mesure fut adoptée.",
           "Bien qu'il en a coûté.",
           "Pourtant il en coûta."
         ],
-        "answer": 0,
-        "explanation": "Le subjonctif imparfait (coûtât) assure la concordance des temps au passé dans le registre juridique et classique."
+        "answer": 1,
+        "explanation": "Le subjonctif imparfait (coûtât) assure la concordance des temps au passé dans le registre juridique et classique.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quel est l'accord correct du verbe avec le collectif 'la plupart' employé seul?",
         "cat": "Accord des collectifs",
         "options": [
-          "La plupart ont voté pour la résolution (accord au pluriel).",
           "La plupart a voté pour la résolution.",
           "La plupart votait seul.",
-          "La plupart ayant voté."
+          "La plupart ayant voté.",
+          "La plupart ont voté pour la résolution (accord au pluriel)."
         ],
-        "answer": 0,
-        "explanation": "'La plupart' sans complément commande toujours l'accord au pluriel du verbe."
+        "answer": 3,
+        "explanation": "'La plupart' sans complément commande toujours l'accord au pluriel du verbe.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Dans la rédaction des résolutions de l'ONU, quel mode et temps caractérisent les paragraphes dispositifs?",
         "cat": "Rédaction diplomatique internationale",
         "options": [
-          "Le présent de l'indicatif à la 3e personne singulier (Décide, Prie, Réaffirme)",
           "L'impératif direct (Faites, Décidez)",
           "Le conditionnel passé",
+          "Le présent de l'indicatif à la 3e personne singulier (Décide, Prie, Réaffirme)",
           "L'infinitif passé"
         ],
-        "answer": 0,
-        "explanation": "Le protocole onusien exige des verbes d'action au présent à la 3e personne du singulier: Décide, Déclare, Invite."
+        "answer": 2,
+        "explanation": "Le protocole onusien exige des verbes d'action au présent à la 3e personne du singulier: Décide, Déclare, Invite.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Que désigne le terme 'lettres de créance' (Letters of Credence) dans les relations interétatiques?",
         "cat": "Droit diplomatique et consulaire",
         "options": [
-          "Le document officiel par lequel un chef d'État accrédite son ambassadeur auprès d'un autre chef d'État",
           "Une garantie bancaire internationale",
           "Un visa d'affaires prioritaire",
-          "Un passeport de service"
+          "Un passeport de service",
+          "Le document officiel par lequel un chef d'État accrédite son ambassadeur auprès d'un autre chef d'État"
         ],
-        "answer": 0,
-        "explanation": "Document solennel remis en audience officielle par l'ambassadeur au chef de l'État accréditaire."
+        "answer": 3,
+        "explanation": "Document solennel remis en audience officielle par l'ambassadeur au chef de l'État accréditaire.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quelle figure de style consiste à affirmer une idée en niant son contraire ('Ce n'est pas mal' pour 'C'est excellent')?",
@@ -3400,91 +4403,111 @@ const MULTI_TRACK_100_EXAMS = {
           "L'oxymore"
         ],
         "answer": 0,
-        "explanation": "La litote est une figure de modération et d'atténuation classique très prisée dans la langue diplomatique."
+        "explanation": "La litote est une figure de modération et d'atténuation classique très prisée dans la langue diplomatique.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quel faux-ami anglais-français est fréquemment commis avec le mot 'actuellement'?",
         "cat": "Faux-amis traductologiques",
         "options": [
-          "'Actuellement' signifie 'en ce moment' (at present), alors que l'anglais 'actually' signifie 'en fait / en réalité'",
           "'Actuellement' signifie 'effectivement'",
           "'Actuellement' n'existe pas en français",
-          "Aucune différence entre les deux"
+          "Aucune différence entre les deux",
+          "'Actuellement' signifie 'en ce moment' (at present), alors que l'anglais 'actually' signifie 'en fait / en réalité'"
         ],
-        "answer": 0,
-        "explanation": "Confusion classique: 'actually' = en réalité/en fait, tandis qu''actuellement' = currently/at present."
+        "answer": 3,
+        "explanation": "Confusion classique: 'actually' = en réalité/en fait, tandis qu''actuellement' = currently/at present.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Dans la norme ISO 17100:2015, que désigne précisément la phase de 'Révision' (Revision)?",
         "cat": "Normes professionnelles ISO 17100",
         "options": [
-          "L'examen bilingue comparatif exhaustif du texte cible par rapport au texte source par un second linguiste",
           "La correction typographique superficielle",
           "La relecture par le client lui-même",
+          "L'examen bilingue comparatif exhaustif du texte cible par rapport au texte source par un second linguiste",
           "L'alignement automatique par logiciel TAO"
         ],
-        "answer": 0,
-        "explanation": "L'ISO 17100 définit la révision comme l'examen bilingue obligatoire effectué par un réviseur distinct du traducteur."
+        "answer": 2,
+        "explanation": "L'ISO 17100 définit la révision comme l'examen bilingue obligatoire effectué par un réviseur distinct du traducteur.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quelle est la valeur de l'adjectif 'réfragable' dans le domaine de la preuve judiciaire?",
         "cat": "Terminologie du droit probatoire",
         "options": [
-          "Une présomption qui peut être combattue par la preuve contraire",
           "Une présomption irrévocable et absolue",
           "Un jugement sans appel possible",
-          "Un témoin irrecevable"
+          "Un témoin irrecevable",
+          "Une présomption qui peut être combattue par la preuve contraire"
         ],
-        "answer": 0,
-        "explanation": "Une présomption réfragable admet la preuve contraire, par opposition à la présomption irréfragable."
+        "answer": 3,
+        "explanation": "Une présomption réfragable admet la preuve contraire, par opposition à la présomption irréfragable.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Quel est le pluriel du mot composé 'un compte-rendu'?",
         "cat": "Pluriel des mots composés",
         "options": [
-          "des comptes-rendus",
           "des compte-rendus",
           "des compte-rendu",
+          "des comptes-rendus",
           "des comptes-rendu"
         ],
-        "answer": 0,
-        "explanation": "Composé d'un nom et d'un adjectif (participe), les deux éléments prennent la marque du pluriel: des comptes rendus."
+        "answer": 2,
+        "explanation": "Composé d'un nom et d'un adjectif (participe), les deux éléments prennent la marque du pluriel: des comptes rendus.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Identifiez l'accord correct du participe passé dans: 'Les cinq minutes que cette épreuve a ___'?",
         "cat": "Règles subtiles du participe passé",
         "options": [
-          "duré (invariable car verbe de mesure/durée sans COD)",
           "durée",
           "durées",
+          "duré (invariable car verbe de mesure/durée sans COD)",
           "durés"
         ],
-        "answer": 0,
-        "explanation": "Les verbes exprimant la mesure, le prix, la durée (peser, coûter, durer, valoir) ne prennent pas d'accord avec ce complément."
+        "answer": 2,
+        "explanation": "Les verbes exprimant la mesure, le prix, la durée (peser, coûter, durer, valoir) ne prennent pas d'accord avec ce complément.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Que signifie l'adverbe juridique 'nonobstant'?",
         "cat": "Vocabulaire juridique d'ancien droit",
         "options": [
-          "Malgré / en dépit de",
           "Par conséquent",
+          "Malgré / en dépit de",
           "Conformément à",
           "Pendant la durée de"
         ],
-        "answer": 0,
-        "explanation": "'Nonobstant' est une préposition ou adverbe soutenu signifiant en dépit de / sans égard à."
+        "answer": 1,
+        "explanation": "'Nonobstant' est une préposition ou adverbe soutenu signifiant en dépit de / sans égard à.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Quelle formule exprime une réserve solennelle lors d'une signature diplomatique?",
         "cat": "Pratique des traités",
         "options": [
-          "Ad referendum (sous réserve d'approbation ultérieure par l'autorité souveraine)",
           "Ipso facto",
+          "Ad referendum (sous réserve d'approbation ultérieure par l'autorité souveraine)",
           "De jure",
           "In limine litis"
         ],
-        "answer": 0,
-        "explanation": "La signature 'ad referendum' conditionne la validité de l'engagement à la confirmation expresse du gouvernement."
+        "answer": 1,
+        "explanation": "La signature 'ad referendum' conditionne la validité de l'engagement à la confirmation expresse du gouvernement.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Comment qualifie-t-on la traduction orale réalisée chuchotée à l'oreille d'un ou deux délégués?",
@@ -3496,7 +4519,10 @@ const MULTI_TRACK_100_EXAMS = {
           "Le relais de cabine"
         ],
         "answer": 0,
-        "explanation": "Le chuchotage est une modalité de simultanée sans matériel acoustique lourd, réservée à un auditoire très restreint."
+        "explanation": "Le chuchotage est une modalité de simultanée sans matériel acoustique lourd, réservée à un auditoire très restreint.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Quelle est l'antonyme soutenu et juridique de 'tacite'?",
@@ -3508,19 +4534,25 @@ const MULTI_TRACK_100_EXAMS = {
           "Différée"
         ],
         "answer": 0,
-        "explanation": "Ce qui est 'exprès' est formellement formulé, par opposition à ce qui est 'tacite' (induit du silence ou du comportement)."
+        "explanation": "Ce qui est 'exprès' est formellement formulé, par opposition à ce qui est 'tacite' (induit du silence ou du comportement).",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Quelle est l'orthographe correcte de l'adverbe dérivé de l'adjectif 'assidu'?",
         "cat": "Formation des adverbes en -ment",
         "options": [
-          "assidûment (avec accent circonflexe sur le u)",
           "assidument (sans accent)",
+          "assidûment (avec accent circonflexe sur le u)",
           "assiduellement",
           "assidement"
         ],
-        "answer": 0,
-        "explanation": "L'adverbe 'assidûment' conserve historiquement l'accent circonflexe sur le 'u'."
+        "answer": 1,
+        "explanation": "L'adverbe 'assidûment' conserve historiquement l'accent circonflexe sur le 'u'.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Que sanctionne le principe juridique 'Nemo auditur propriam turpitudinem allegans'?",
@@ -3532,19 +4564,25 @@ const MULTI_TRACK_100_EXAMS = {
           "La loi ne dispose que pour l'avenir"
         ],
         "answer": 0,
-        "explanation": "Adage classique empêchant une partie d'invoquer sa propre faute immorale ou illégale pour réclamer un droit."
+        "explanation": "Adage classique empêchant une partie d'invoquer sa propre faute immorale ou illégale pour réclamer un droit.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Quel est le terme technique désignant l'intervalle de décalage en cabine d'interprétation simultanée?",
         "cat": "Théorie de l'interprétation de conférence",
         "options": [
-          "Le décalage acoustique ou Ear-Voice Span (EVS)",
           "La modulation terminologique",
           "Le temps de latence cognitive passive",
+          "Le décalage acoustique ou Ear-Voice Span (EVS)",
           "La redondance sémiotique"
         ],
-        "answer": 0,
-        "explanation": "Le décalage (EVS) est le laps de temps (2 à 4 secondes) séparant l'émission de l'orateur et la restitution de l'interprète."
+        "answer": 2,
+        "explanation": "Le décalage (EVS) est le laps de temps (2 à 4 secondes) séparant l'émission de l'orateur et la restitution de l'interprète.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Quel est le pluriel régulier des noms étrangers comme 'le scénario' selon les rectifications orthographiques?",
@@ -3556,67 +4594,103 @@ const MULTI_TRACK_100_EXAMS = {
           "invariable"
         ],
         "answer": 0,
-        "explanation": "L'usage contemporain francise régulièrement le pluriel en 'scénarios' tout en admettant la forme latine 'scenarii'."
+        "explanation": "L'usage contemporain francise régulièrement le pluriel en 'scénarios' tout en admettant la forme latine 'scenarii'.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Dans un contrat de cession, quelle clause protège l'acheteur contre la concurrence du vendeur?",
         "cat": "Clauses contractuelles",
         "options": [
-          "La clause de non-concurrence",
           "La clause d'attribution de compétence",
           "La clause compromissoire",
+          "La clause de non-concurrence",
           "La clause résolutoire"
         ],
-        "answer": 0,
-        "explanation": "La clause de non-concurrence interdit au cédant de détourner la clientèle cédée dans un rayon et un temps déterminés."
+        "answer": 2,
+        "explanation": "La clause de non-concurrence interdit au cédant de détourner la clientèle cédée dans un rayon et un temps déterminés.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Que signifie l'expression 'faire grief' dans un contentieux administratif?",
         "cat": "Contentieux et procédure",
         "options": [
-          "Causer un préjudice direct et certain justifiant un recours",
           "Demander des excuses publiques",
           "Déposer une plainte pénale",
-          "Annuler un décret"
+          "Annuler un décret",
+          "Causer un préjudice direct et certain justifiant un recours"
         ],
-        "answer": 0,
-        "explanation": "Un acte ne peut faire l'objet d'un recours pour excès de pouvoir que s'il modifie l'ordonnancement juridique et 'fait grief'."
+        "answer": 3,
+        "explanation": "Un acte ne peut faire l'objet d'un recours pour excès de pouvoir que s'il modifie l'ordonnancement juridique et 'fait grief'.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Quelle est la vitesse de lecture maximale préconisée en sous-titrage professionnel (CPS)?",
         "cat": "Sous-titrage et traduction audiovisuelle",
         "options": [
-          "15 à 17 caractères par seconde (CPS)",
           "35 à 45 caractères par seconde",
           "5 à 8 caractères par seconde",
+          "15 à 17 caractères par seconde (CPS)",
           "Aucune limite technique"
         ],
-        "answer": 0,
-        "explanation": "Les standards de l'audiovisuel européen préconisent un rythme de 15 à 17 CPS (soit environ 160 à 180 mots par minute)."
+        "answer": 2,
+        "explanation": "Les standards de l'audiovisuel européen préconisent un rythme de 15 à 17 CPS (soit environ 160 à 180 mots par minute).",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Quelle est la règle concernant la césure d'une ligne de sous-titre?",
         "cat": "Normes de sous-titrage",
         "options": [
-          "Respecter les unités syntaxiques et grammaticales naturelles (ne pas couper sujet/verbe)",
           "Couper exactement au milieu de la phrase au caractère près",
           "Couper après chaque adjectif",
-          "Ne jamais utiliser deux lignes"
+          "Ne jamais utiliser deux lignes",
+          "Respecter les unités syntaxiques et grammaticales naturelles (ne pas couper sujet/verbe)"
         ],
-        "answer": 0,
-        "explanation": "La rupture de ligne doit impérativement respecter l'intégrité des syntagmes pour préserver la lisibilité de l'œil."
+        "answer": 3,
+        "explanation": "La rupture de ligne doit impérativement respecter l'intégrité des syntagmes pour préserver la lisibilité de l'œil.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Que consacre le concept de 'transposition' dans la stylistique comparée de Vinay et Darbelnet?",
         "cat": "Théories de la traduction",
         "options": [
-          "Le remplacement d'une catégorie grammaticale par une autre sans altérer le sens du message",
           "La traduction mot à mot exacte",
+          "Le remplacement d'une catégorie grammaticale par une autre sans altérer le sens du message",
           "Le changement de point de vue conceptuel",
           "L'omission pure et simple d'un terme"
         ],
-        "answer": 0,
-        "explanation": "La transposition consiste à changer de partie du discours (ex. traduire un verbe par un nom ou vice-versa) en gardant le sens."
+        "answer": 1,
+        "explanation": "La transposition consiste à changer de partie du discours (ex. traduire un verbe par un nom ou vice-versa) en gardant le sens.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
+      }
+    ],
+    "writingStudioTasks": [
+      {
+        "taskId": "task_1",
+        "title": "المهمة الأولى: المراسلة والمخاطبة الرسمية (120 - 150 كلمة)",
+        "prompt": "Rédigez un courriel professionnel formel à une institution internationale pour solliciter une accréditation en tant que traducteur-interprète assermenté.",
+        "minWords": 120,
+        "maxWords": 180,
+        "modelAnswer": "نموذج الصياغة المعتمدة يراعي البنية الرسمية، أسلوب التحية والختام المؤسساتي، الروابط المنطقية، والمصطلحات القانونية الدقيقة الخالية من الحشو."
+      },
+      {
+        "taskId": "task_2",
+        "title": "المهمة الثانية: المقال التحليلي المتخصص (200 - 250 كلمة)",
+        "prompt": "Dans un essai argumenté (220 mots), analysez l'impact de la traduction automatique neuronale sur la déontologie du traducteur assermenté.",
+        "minWords": 200,
+        "maxWords": 280,
+        "modelAnswer": "يتطلب المقال مقدمة واضحة، حُججاً متوازنة مع الاستشهاد بأمثلة حقيقية من سوق الترجمة، وخاتمة تلخص وجهة النظر بأسلوب أكاديمي رفيع."
       }
     ]
   },
@@ -3628,253 +4702,358 @@ const MULTI_TRACK_100_EXAMS = {
         "q": "Choose the correct verb form: 'By the time the delegates arrived, the keynote speech ___.'",
         "cat": "Past Perfect and Narrative Tenses",
         "options": [
-          "had already concluded",
           "has already concluded",
+          "had already concluded",
           "was already concluded",
           "already concluded"
         ],
-        "answer": 0,
-        "explanation": "The past perfect (had concluded) expresses an action completed before another past event (delegates arrived)."
+        "answer": 1,
+        "explanation": "The past perfect (had concluded) expresses an action completed before another past event (delegates arrived).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-GB",
+        "audioSpeaker": "Academic Lecturer / Speaker",
+        "audioScript": "Listen to the following academic audio excerpt carefully: Choose the correct verb form: 'By the time the delegates arrived, the keynote speech ___.' Choose the most accurate option."
       },
       {
         "q": "Select the correct preposition: 'The research committee is composed ___ seven distinguished scholars.'",
         "cat": "Prepositional Collocations",
         "options": [
-          "of",
           "from",
           "with",
-          "by"
+          "by",
+          "of"
         ],
-        "answer": 0,
-        "explanation": "The standard academic adjective collocation is 'composed of' (consisting of)."
+        "answer": 3,
+        "explanation": "The standard academic adjective collocation is 'composed of' (consisting of).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-GB",
+        "audioSpeaker": "Academic Lecturer / Speaker",
+        "audioScript": "Listen to the following academic audio excerpt carefully: Select the correct preposition: 'The research committee is composed ___ seven distinguished scholars.' Choose the most accurate option."
       },
       {
         "q": "Which sentence correctly utilizes the first conditional for academic forecasting?",
         "cat": "Conditional Sentences",
         "options": [
-          "If investment continues to decline, unemployment will inevitably rise.",
           "If investment will decline, unemployment would rise.",
           "If investment declined, unemployment will rise.",
-          "If investment declines, unemployment would rise."
+          "If investment declines, unemployment would rise.",
+          "If investment continues to decline, unemployment will inevitably rise."
         ],
-        "answer": 0,
-        "explanation": "First conditional standard pattern: If + present simple -> will + base verb."
+        "answer": 3,
+        "explanation": "First conditional standard pattern: If + present simple -> will + base verb.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-GB",
+        "audioSpeaker": "Academic Lecturer / Speaker",
+        "audioScript": "Listen to the following academic audio excerpt carefully: Which sentence correctly utilizes the first conditional for academic forecasting? Choose the most accurate option."
       },
       {
         "q": "Choose the accurate passive form: 'Scientists are currently investigating the environmental impact.'",
         "cat": "Passive Voice Transformation",
         "options": [
-          "The environmental impact is currently being investigated by scientists.",
           "The environmental impact is currently investigated by scientists.",
           "The environmental impact has been currently investigated.",
+          "The environmental impact is currently being investigated by scientists.",
           "The environmental impact was currently being investigated."
         ],
-        "answer": 0,
-        "explanation": "Present continuous passive requires: is/are + being + past participle (is currently being investigated)."
+        "answer": 2,
+        "explanation": "Present continuous passive requires: is/are + being + past participle (is currently being investigated).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-GB",
+        "audioSpeaker": "Academic Lecturer / Speaker",
+        "audioScript": "Listen to the following academic audio excerpt carefully: Choose the accurate passive form: 'Scientists are currently investigating the environmental impact.' Choose the most accurate option."
       },
       {
         "q": "Select the appropriate quantifier: 'There is ___ evidence to support this theoretical claim.'",
         "cat": "Quantifiers in Academic Prose",
         "options": [
-          "little (meaning scarce/insufficient)",
           "few",
           "many",
-          "a few"
+          "a few",
+          "little (meaning scarce/insufficient)"
         ],
-        "answer": 0,
-        "explanation": "'Evidence' is an uncountable noun; 'little' indicates a scarce or negative degree."
+        "answer": 3,
+        "explanation": "'Evidence' is an uncountable noun; 'little' indicates a scarce or negative degree.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-GB",
+        "audioSpeaker": "Academic Lecturer / Speaker",
+        "audioScript": "Listen to the following academic audio excerpt carefully: Select the appropriate quantifier: 'There is ___ evidence to support this theoretical claim.' Choose the most accurate option."
       },
       {
         "q": "Identify the correctly formed indirect question:",
         "cat": "Embedded and Indirect Questions",
         "options": [
-          "Could you clarify what the proposed methodology entails?",
           "Could you clarify what does the proposed methodology entail?",
+          "Could you clarify what the proposed methodology entails?",
           "Could you clarify what entails the proposed methodology?",
           "Could you clarify that what the proposed methodology entails?"
         ],
-        "answer": 0,
-        "explanation": "In embedded questions, standard subject-verb word order is maintained without auxiliary inversion."
+        "answer": 1,
+        "explanation": "In embedded questions, standard subject-verb word order is maintained without auxiliary inversion.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-GB",
+        "audioSpeaker": "Academic Lecturer / Speaker",
+        "audioScript": "Listen to the following academic audio excerpt carefully: Identify the correctly formed indirect question: Choose the most accurate option."
       },
       {
         "q": "Which modal verb accurately expresses a logical deduction based on clear evidence?",
         "cat": "Modal Verbs of Deduction",
         "options": [
-          "The experimental results must be valid, given the rigorous controls.",
           "The results should to be valid.",
           "The results can to be valid.",
+          "The experimental results must be valid, given the rigorous controls.",
           "The results must to be valid."
         ],
-        "answer": 0,
-        "explanation": "'Must' followed by bare infinitive expresses strong logical certainty or deduction."
+        "answer": 2,
+        "explanation": "'Must' followed by bare infinitive expresses strong logical certainty or deduction.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-GB",
+        "audioSpeaker": "Academic Lecturer / Speaker",
+        "audioScript": "Listen to the following academic audio excerpt carefully: Which modal verb accurately expresses a logical deduction based on clear evidence? Choose the most accurate option."
       },
       {
         "q": "Choose the correct relative pronoun: 'The university, ___ reputation is worldwide, announced new grants.'",
         "cat": "Relative Clauses",
         "options": [
-          "whose",
           "which",
+          "whose",
           "whom",
           "that"
         ],
-        "answer": 0,
-        "explanation": "'Whose' denotes possession for both people and institutional entities in non-defining clauses."
+        "answer": 1,
+        "explanation": "'Whose' denotes possession for both people and institutional entities in non-defining clauses.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-GB",
+        "audioSpeaker": "Academic Lecturer / Speaker",
+        "audioScript": "Listen to the following academic audio excerpt carefully: Choose the correct relative pronoun: 'The university, ___ reputation is worldwide, announced new grants.' Choose the most accurate option."
       },
       {
         "q": "Select the appropriate linking word indicating a contrasting perspective:",
         "cat": "Discourse Markers of Contrast",
         "options": [
-          "However",
           "Furthermore",
           "Consequently",
+          "However",
           "Similarly"
         ],
-        "answer": 0,
-        "explanation": "'However' introduces a counter-argument or contrastive observation."
+        "answer": 2,
+        "explanation": "'However' introduces a counter-argument or contrastive observation.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-GB",
+        "audioSpeaker": "Academic Lecturer / Speaker",
+        "audioScript": "Listen to the following academic audio excerpt carefully: Select the appropriate linking word indicating a contrasting perspective: Choose the most accurate option."
       },
       {
         "q": "Choose the correct gerund/infinitive pattern: 'The committee decided ___ the publication until further review.'",
         "cat": "Verb Complementation",
         "options": [
-          "to postpone",
           "postponing",
+          "to postpone",
           "postpone",
           "for postponing"
         ],
-        "answer": 0,
-        "explanation": "The verb 'decide' takes a to-infinitive complement (decided to postpone)."
+        "answer": 1,
+        "explanation": "The verb 'decide' takes a to-infinitive complement (decided to postpone).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-GB",
+        "audioSpeaker": "Academic Lecturer / Speaker",
+        "audioScript": "Listen to the following academic audio excerpt carefully: Choose the correct gerund/infinitive pattern: 'The committee decided ___ the publication until further review.' Choose the most accurate option."
       },
       {
         "q": "Identify the correct form for expressing regret about an unfulfilled past action:",
         "cat": "Past Modals",
         "options": [
-          "We should have consulted the legal department earlier.",
           "We must have consult the legal department earlier.",
           "We ought consult the legal department earlier.",
+          "We should have consulted the legal department earlier.",
           "We should had consulted the legal department earlier."
         ],
-        "answer": 0,
-        "explanation": "'Should have + past participle' expresses unfulfilled obligation or retrospective criticism."
+        "answer": 2,
+        "explanation": "'Should have + past participle' expresses unfulfilled obligation or retrospective criticism.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-GB",
+        "audioSpeaker": "Academic Lecturer / Speaker",
+        "audioScript": "Listen to the following academic audio excerpt carefully: Identify the correct form for expressing regret about an unfulfilled past action: Choose the most accurate option."
       },
       {
         "q": "Which sentence demonstrates correct subject-verb agreement with a collective subject?",
         "cat": "Subject-Verb Agreement",
         "options": [
-          "The majority of participants were satisfied with the workshop.",
           "The majority of participants was being satisfied.",
+          "The majority of participants were satisfied with the workshop.",
           "The majority of participants is satisfied.",
           "The majority of participants has satisfied."
         ],
-        "answer": 0,
-        "explanation": "When followed by an 'of + plural noun' phrase, collective quantifiers like 'majority' take plural agreement."
+        "answer": 1,
+        "explanation": "When followed by an 'of + plural noun' phrase, collective quantifiers like 'majority' take plural agreement.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-GB",
+        "audioSpeaker": "Academic Lecturer / Speaker",
+        "audioScript": "Listen to the following academic audio excerpt carefully: Which sentence demonstrates correct subject-verb agreement with a collective subject? Choose the most accurate option."
       },
       {
         "q": "Choose the accurate academic collocation for 'carry out': 'The laboratory will ___ an extensive trial.'",
         "cat": "Academic Collocations",
         "options": [
-          "conduct",
           "make",
+          "conduct",
           "commit",
           "fabricate"
         ],
-        "answer": 0,
-        "explanation": "In formal academic writing, 'conduct a trial/study/survey' is the preferred standard collocation."
+        "answer": 1,
+        "explanation": "In formal academic writing, 'conduct a trial/study/survey' is the preferred standard collocation.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-GB",
+        "audioSpeaker": "Academic Lecturer / Speaker",
+        "audioScript": "Listen to the following academic audio excerpt carefully: Choose the accurate academic collocation for 'carry out': 'The laboratory will ___ an extensive trial.' Choose the most accurate option."
       },
       {
         "q": "Select the correct comparative structure:",
         "cat": "Comparative Structures",
         "options": [
-          "The second hypothesis is far more plausible than the first.",
           "The second hypothesis is far much plausible than the first.",
           "The second hypothesis is more plausible that the first.",
+          "The second hypothesis is far more plausible than the first.",
           "The second hypothesis is plausible than the first."
         ],
-        "answer": 0,
-        "explanation": "'Far more + adjective + than' is the accurate modifier for emphatic comparison."
+        "answer": 2,
+        "explanation": "'Far more + adjective + than' is the accurate modifier for emphatic comparison.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-GB",
+        "audioSpeaker": "Academic Lecturer / Speaker",
+        "audioScript": "Listen to the following academic audio excerpt carefully: Select the correct comparative structure: Choose the most accurate option."
       },
       {
         "q": "Identify the accurate preposition: 'The economic crisis resulted ___ severe budgetary cuts.'",
         "cat": "Verb + Preposition Collocations",
         "options": [
-          "in",
           "from",
           "at",
-          "to"
+          "to",
+          "in"
         ],
-        "answer": 0,
-        "explanation": "'Result in' signifies 'lead to / cause', whereas 'result from' indicates origin/cause."
+        "answer": 3,
+        "explanation": "'Result in' signifies 'lead to / cause', whereas 'result from' indicates origin/cause.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-GB",
+        "audioSpeaker": "Academic Lecturer / Speaker",
+        "audioScript": "Listen to the following academic audio excerpt carefully: Identify the accurate preposition: 'The economic crisis resulted ___ severe budgetary cuts.' Choose the most accurate option."
       },
       {
         "q": "Choose the correct adverbial placement: 'The findings ___ confirm previous clinical observations.'",
         "cat": "Adverb Position in Sentences",
         "options": [
-          "clearly",
           "clear",
           "clarity",
-          "clearness"
+          "clearness",
+          "clearly"
         ],
-        "answer": 0,
-        "explanation": "Adverbs of manner placed between subject and main verb modify the assertion (clearly confirm)."
+        "answer": 3,
+        "explanation": "Adverbs of manner placed between subject and main verb modify the assertion (clearly confirm).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-GB",
+        "audioSpeaker": "Academic Lecturer / Speaker",
+        "audioScript": "Listen to the following academic audio excerpt carefully: Choose the correct adverbial placement: 'The findings ___ confirm previous clinical observations.' Choose the most accurate option."
       },
       {
         "q": "Select the appropriate conjunction indicating unexpected concession:",
         "cat": "Concessive Connectors",
         "options": [
-          "Although the sample size was modest, the conclusions remain compelling.",
           "Despite the sample size was modest.",
           "In spite the sample size was modest.",
-          "Because the sample size was modest."
+          "Because the sample size was modest.",
+          "Although the sample size was modest, the conclusions remain compelling."
         ],
-        "answer": 0,
-        "explanation": "'Although' introduces a subordinate clause containing a finite verb (was modest)."
+        "answer": 3,
+        "explanation": "'Although' introduces a subordinate clause containing a finite verb (was modest).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-GB",
+        "audioSpeaker": "Academic Lecturer / Speaker",
+        "audioScript": "Listen to the following academic audio excerpt carefully: Select the appropriate conjunction indicating unexpected concession: Choose the most accurate option."
       },
       {
         "q": "Which sentence correctly employs the third conditional?",
         "cat": "Hypothetical Conditionals",
         "options": [
-          "If the data had been verified earlier, the error would have been averted.",
           "If the data was verified earlier, the error would be averted.",
           "If the data had been verified, the error will be averted.",
-          "If the data would have been verified, the error had been averted."
+          "If the data would have been verified, the error had been averted.",
+          "If the data had been verified earlier, the error would have been averted."
         ],
-        "answer": 0,
-        "explanation": "Third conditional structure: If + had + past participle -> would have + past participle."
+        "answer": 3,
+        "explanation": "Third conditional structure: If + had + past participle -> would have + past participle.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-GB",
+        "audioSpeaker": "Academic Lecturer / Speaker",
+        "audioScript": "Listen to the following academic audio excerpt carefully: Which sentence correctly employs the third conditional? Choose the most accurate option."
       },
       {
         "q": "Choose the correct phrase expressing tentative hedging in research:",
         "cat": "Hedging in Academic Writing",
         "options": [
-          "The figures appear to indicate a downward trend.",
           "The figures definitely prove beyond all doubt.",
           "The figures always show without error.",
+          "The figures appear to indicate a downward trend.",
           "The figures never fail to prove."
         ],
-        "answer": 0,
-        "explanation": "Hedging verbs such as 'appear to indicate / tend to suggest' soften claims to maintain academic rigor."
+        "answer": 2,
+        "explanation": "Hedging verbs such as 'appear to indicate / tend to suggest' soften claims to maintain academic rigor.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-GB",
+        "audioSpeaker": "Academic Lecturer / Speaker",
+        "audioScript": "Listen to the following academic audio excerpt carefully: Choose the correct phrase expressing tentative hedging in research: Choose the most accurate option."
       },
       {
         "q": "Select the correct noun form: 'The ___ of the treaty took several months of negotiation.'",
         "cat": "Nominalization in Academic Style",
         "options": [
-          "ratification",
           "ratify",
+          "ratification",
           "ratified",
           "ratifyingly"
         ],
-        "answer": 0,
-        "explanation": "Nominalization transforms verbal actions into abstract noun concepts (ratification)."
+        "answer": 1,
+        "explanation": "Nominalization transforms verbal actions into abstract noun concepts (ratification).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-GB",
+        "audioSpeaker": "Academic Lecturer / Speaker",
+        "audioScript": "Listen to the following academic audio excerpt carefully: Select the correct noun form: 'The ___ of the treaty took several months of negotiation.' Choose the most accurate option."
       },
       {
         "q": "Identify the correct preposition: 'She is renowned ___ her pioneering work in sociolinguistics.'",
         "cat": "Adjective Prepositions",
         "options": [
-          "for",
           "with",
           "about",
+          "for",
           "by"
         ],
-        "answer": 0,
-        "explanation": "The adjective 'renowned' collocates with the preposition 'for' (famous for)."
+        "answer": 2,
+        "explanation": "The adjective 'renowned' collocates with the preposition 'for' (famous for).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-GB",
+        "audioSpeaker": "Academic Lecturer / Speaker",
+        "audioScript": "Listen to the following academic audio excerpt carefully: Identify the correct preposition: 'She is renowned ___ her pioneering work in sociolinguistics.' Choose the most accurate option."
       },
       {
         "q": "Which sentence correctly avoids a comma splice?",
@@ -3886,7 +5065,12 @@ const MULTI_TRACK_100_EXAMS = {
           "The report was finished, and therefore the team adjourned."
         ],
         "answer": 0,
-        "explanation": "Two independent clauses linked by a conjunctive adverb require a semicolon before and a comma after."
+        "explanation": "Two independent clauses linked by a conjunctive adverb require a semicolon before and a comma after.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-GB",
+        "audioSpeaker": "Academic Lecturer / Speaker",
+        "audioScript": "Listen to the following academic audio excerpt carefully: Which sentence correctly avoids a comma splice? Choose the most accurate option."
       },
       {
         "q": "Choose the antonym of 'superficial' in an academic analysis:",
@@ -3898,67 +5082,94 @@ const MULTI_TRACK_100_EXAMS = {
           "trivial"
         ],
         "answer": 0,
-        "explanation": "'Profound' or 'in-depth' denotes deep, thorough analytical rigor, contrary to 'superficial'."
+        "explanation": "'Profound' or 'in-depth' denotes deep, thorough analytical rigor, contrary to 'superficial'.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-GB",
+        "audioSpeaker": "Academic Lecturer / Speaker",
+        "audioScript": "Listen to the following academic audio excerpt carefully: Choose the antonym of 'superficial' in an academic analysis: Choose the most accurate option."
       },
       {
         "q": "Select the correct phrasal verb meaning 'account for / comprise': 'Renewable sources ___ 30% of energy.'",
         "cat": "Phrasal Verbs in Data Commentary",
         "options": [
-          "make up",
           "bring about",
+          "make up",
           "take down",
           "give off"
         ],
-        "answer": 0,
-        "explanation": "'Make up / account for' is the standard terminology for explaining constituent proportions in charts."
+        "answer": 1,
+        "explanation": "'Make up / account for' is the standard terminology for explaining constituent proportions in charts.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-GB",
+        "audioSpeaker": "Academic Lecturer / Speaker",
+        "audioScript": "Listen to the following academic audio excerpt carefully: Select the correct phrasal verb meaning 'account for / comprise': 'Renewable sources ___ 30% of energy.' Choose the most accurate option."
       },
       {
         "q": "Choose the correct form: 'Neither the author nor the editors ___ responsible for third-party citations.'",
         "cat": "Correlative Conjunctions",
         "options": [
-          "are",
           "is",
           "were being",
-          "am"
+          "am",
+          "are"
         ],
-        "answer": 0,
-        "explanation": "With 'neither... nor', the verb agrees with the closer subject ('editors' = plural -> are)."
+        "answer": 3,
+        "explanation": "With 'neither... nor', the verb agrees with the closer subject ('editors' = plural -> are).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "en-GB",
+        "audioSpeaker": "Academic Lecturer / Speaker",
+        "audioScript": "Listen to the following academic audio excerpt carefully: Choose the correct form: 'Neither the author nor the editors ___ responsible for third-party citations.' Choose the most accurate option."
       },
       {
         "q": "Identify the correct sentence using negative inversion for rhetorical emphasis:",
         "cat": "Negative Inversion C1",
         "options": [
-          "Seldom have we witnessed such rapid geopolitical shifts.",
           "Seldom we have witnessed such rapid geopolitical shifts.",
+          "Seldom have we witnessed such rapid geopolitical shifts.",
           "Seldom have witnessed we such rapid geopolitical shifts.",
           "Seldom we witnessed have such rapid geopolitical shifts."
         ],
-        "answer": 0,
-        "explanation": "Negative adverbials placed sentence-initially trigger auxiliary-subject inversion (Seldom have we witnessed)."
+        "answer": 1,
+        "explanation": "Negative adverbials placed sentence-initially trigger auxiliary-subject inversion (Seldom have we witnessed).",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Academic Passage: Corpus Linguistics and Cognitive Load in Conference Interpreting",
+        "readingPassage": "[1] Simultaneous interpretation represents one of the most cognitively demanding linguistic tasks. Practitioners must concurrently listen, comprehend, de-verbalize, and formulate output in the target language.\n[2] Recent empirical studies underscore the critical function of ear-voice span (EVS) in mitigating cognitive fatigue during high-level bilateral summits."
       },
       {
         "q": "Which sentence correctly employs a cleft sentence to emphasize the primary cause?",
         "cat": "Cleft Sentences for Focus",
         "options": [
-          "It was the lack of institutional oversight that precipitated the crisis.",
           "What precipitated the crisis it was the lack of oversight.",
           "The lack of oversight was it that precipitated the crisis.",
+          "It was the lack of institutional oversight that precipitated the crisis.",
           "That precipitated the crisis was the oversight lack."
         ],
-        "answer": 0,
-        "explanation": "It-cleft structure: It + be + focused element + that/who + subordinate clause."
+        "answer": 2,
+        "explanation": "It-cleft structure: It + be + focused element + that/who + subordinate clause.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Academic Passage: Corpus Linguistics and Cognitive Load in Conference Interpreting",
+        "readingPassage": "[1] Simultaneous interpretation represents one of the most cognitively demanding linguistic tasks. Practitioners must concurrently listen, comprehend, de-verbalize, and formulate output in the target language.\n[2] Recent empirical studies underscore the critical function of ear-voice span (EVS) in mitigating cognitive fatigue during high-level bilateral summits."
       },
       {
         "q": "Choose the correct participle clause replacing 'Because they had reviewed the literature':",
         "cat": "Participle Clauses",
         "options": [
-          "Having reviewed the literature, the authors formulated their core hypothesis.",
           "Reviewing the literature, the hypothesis was formulated.",
+          "Having reviewed the literature, the authors formulated their core hypothesis.",
           "Reviewed the literature, they formulated the hypothesis.",
           "To review the literature, the hypothesis formed."
         ],
-        "answer": 0,
-        "explanation": "The perfect participle (Having reviewed) correctly denotes an action completed prior to the main clause verb."
+        "answer": 1,
+        "explanation": "The perfect participle (Having reviewed) correctly denotes an action completed prior to the main clause verb.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Academic Passage: Corpus Linguistics and Cognitive Load in Conference Interpreting",
+        "readingPassage": "[1] Simultaneous interpretation represents one of the most cognitively demanding linguistic tasks. Practitioners must concurrently listen, comprehend, de-verbalize, and formulate output in the target language.\n[2] Recent empirical studies underscore the critical function of ear-voice span (EVS) in mitigating cognitive fatigue during high-level bilateral summits."
       },
       {
         "q": "Select the correct subjunctive mood form in formal British/American academic English:",
@@ -3970,19 +5181,27 @@ const MULTI_TRACK_100_EXAMS = {
           "It is essential that the protocol being adhered strictly."
         ],
         "answer": 0,
-        "explanation": "Mandative subjunctive requires the base form of the verb (be adhered to) regardless of the subject."
+        "explanation": "Mandative subjunctive requires the base form of the verb (be adhered to) regardless of the subject.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Academic Passage: Corpus Linguistics and Cognitive Load in Conference Interpreting",
+        "readingPassage": "[1] Simultaneous interpretation represents one of the most cognitively demanding linguistic tasks. Practitioners must concurrently listen, comprehend, de-verbalize, and formulate output in the target language.\n[2] Recent empirical studies underscore the critical function of ear-voice span (EVS) in mitigating cognitive fatigue during high-level bilateral summits."
       },
       {
         "q": "Identify the correct inversion after 'Not only':",
         "cat": "Correlative Inversion",
         "options": [
-          "Not only did the project meet its objectives, but it also secured additional funding.",
           "Not only the project met its objectives, but it also secured.",
+          "Not only did the project meet its objectives, but it also secured additional funding.",
           "Not only met the project its objectives, but also it secured.",
           "Not only the project did meet, but also secured."
         ],
-        "answer": 0,
-        "explanation": "'Not only' at the beginning of a clause requires auxiliary inversion (did the project meet)."
+        "answer": 1,
+        "explanation": "'Not only' at the beginning of a clause requires auxiliary inversion (did the project meet).",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Academic Passage: Corpus Linguistics and Cognitive Load in Conference Interpreting",
+        "readingPassage": "[1] Simultaneous interpretation represents one of the most cognitively demanding linguistic tasks. Practitioners must concurrently listen, comprehend, de-verbalize, and formulate output in the target language.\n[2] Recent empirical studies underscore the critical function of ear-voice span (EVS) in mitigating cognitive fatigue during high-level bilateral summits."
       },
       {
         "q": "Which sentence demonstrates correct parallelism in formal academic listing?",
@@ -3994,7 +5213,11 @@ const MULTI_TRACK_100_EXAMS = {
           "The initiative aims reducing emissions, foster innovation, and promote."
         ],
         "answer": 0,
-        "explanation": "Parallelism requires coordinated elements to share the identical grammatical pattern (reduce, foster, promote)."
+        "explanation": "Parallelism requires coordinated elements to share the identical grammatical pattern (reduce, foster, promote).",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Academic Passage: Corpus Linguistics and Cognitive Load in Conference Interpreting",
+        "readingPassage": "[1] Simultaneous interpretation represents one of the most cognitively demanding linguistic tasks. Practitioners must concurrently listen, comprehend, de-verbalize, and formulate output in the target language.\n[2] Recent empirical studies underscore the critical function of ear-voice span (EVS) in mitigating cognitive fatigue during high-level bilateral summits."
       },
       {
         "q": "Choose the correct prepositional phrase meaning 'in terms of / regarding':",
@@ -4006,19 +5229,27 @@ const MULTI_TRACK_100_EXAMS = {
           "On respect of the legislative framework."
         ],
         "answer": 0,
-        "explanation": "The established formal idiom is 'with respect to' or 'in respect of'."
+        "explanation": "The established formal idiom is 'with respect to' or 'in respect of'.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Academic Passage: Corpus Linguistics and Cognitive Load in Conference Interpreting",
+        "readingPassage": "[1] Simultaneous interpretation represents one of the most cognitively demanding linguistic tasks. Practitioners must concurrently listen, comprehend, de-verbalize, and formulate output in the target language.\n[2] Recent empirical studies underscore the critical function of ear-voice span (EVS) in mitigating cognitive fatigue during high-level bilateral summits."
       },
       {
         "q": "Select the nuanced academic adjective meaning 'present everywhere / widespread':",
         "cat": "Academic Lexis C1",
         "options": [
-          "ubiquitous",
           "ephemeral",
           "tangential",
+          "ubiquitous",
           "esoteric"
         ],
-        "answer": 0,
-        "explanation": "'Ubiquitous' describes phenomena that are omnipresent or universally pervasive."
+        "answer": 2,
+        "explanation": "'Ubiquitous' describes phenomena that are omnipresent or universally pervasive.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Academic Passage: Corpus Linguistics and Cognitive Load in Conference Interpreting",
+        "readingPassage": "[1] Simultaneous interpretation represents one of the most cognitively demanding linguistic tasks. Practitioners must concurrently listen, comprehend, de-verbalize, and formulate output in the target language.\n[2] Recent empirical studies underscore the critical function of ear-voice span (EVS) in mitigating cognitive fatigue during high-level bilateral summits."
       },
       {
         "q": "Identify the correct conditional inversion replacing 'If the board should approve':",
@@ -4030,7 +5261,11 @@ const MULTI_TRACK_100_EXAMS = {
           "Could the board approve, implementation will commence."
         ],
         "answer": 0,
-        "explanation": "'Should + subject + bare infinitive' is the formal inverted equivalent of a first conditional with 'should'."
+        "explanation": "'Should + subject + bare infinitive' is the formal inverted equivalent of a first conditional with 'should'.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Academic Passage: Corpus Linguistics and Cognitive Load in Conference Interpreting",
+        "readingPassage": "[1] Simultaneous interpretation represents one of the most cognitively demanding linguistic tasks. Practitioners must concurrently listen, comprehend, de-verbalize, and formulate output in the target language.\n[2] Recent empirical studies underscore the critical function of ear-voice span (EVS) in mitigating cognitive fatigue during high-level bilateral summits."
       },
       {
         "q": "Choose the correct mixed conditional expressing past action with present consequence:",
@@ -4042,43 +5277,59 @@ const MULTI_TRACK_100_EXAMS = {
           "If they would implement the patches, the system is not vulnerable now."
         ],
         "answer": 0,
-        "explanation": "Mixed conditional: past condition (If + had + pp) with ongoing present result (would not be vulnerable now)."
+        "explanation": "Mixed conditional: past condition (If + had + pp) with ongoing present result (would not be vulnerable now).",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Academic Passage: Corpus Linguistics and Cognitive Load in Conference Interpreting",
+        "readingPassage": "[1] Simultaneous interpretation represents one of the most cognitively demanding linguistic tasks. Practitioners must concurrently listen, comprehend, de-verbalize, and formulate output in the target language.\n[2] Recent empirical studies underscore the critical function of ear-voice span (EVS) in mitigating cognitive fatigue during high-level bilateral summits."
       },
       {
         "q": "Select the accurate collocation: 'The committee voiced ___ concerning the validity of the data.'",
         "cat": "Formal Collocations",
         "options": [
-          "grave reservations",
           "heavy doubtings",
+          "grave reservations",
           "deep cancellations",
           "big negatives"
         ],
-        "answer": 0,
-        "explanation": "'To voice/express grave reservations' is the idiomatic academic formula for profound scholarly concern."
+        "answer": 1,
+        "explanation": "'To voice/express grave reservations' is the idiomatic academic formula for profound scholarly concern.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Academic Passage: Corpus Linguistics and Cognitive Load in Conference Interpreting",
+        "readingPassage": "[1] Simultaneous interpretation represents one of the most cognitively demanding linguistic tasks. Practitioners must concurrently listen, comprehend, de-verbalize, and formulate output in the target language.\n[2] Recent empirical studies underscore the critical function of ear-voice span (EVS) in mitigating cognitive fatigue during high-level bilateral summits."
       },
       {
         "q": "Which sentence correctly employs a non-defining relative clause with proper punctuation?",
         "cat": "Punctuation of Relative Clauses",
         "options": [
-          "The treaty, which was drafted in Geneva, encompasses thirty member states.",
           "The treaty which was drafted in Geneva encompasses thirty member states.",
           "The treaty, that was drafted in Geneva, encompasses thirty states.",
+          "The treaty, which was drafted in Geneva, encompasses thirty member states.",
           "The treaty which was drafted in Geneva, encompasses thirty states."
         ],
-        "answer": 0,
-        "explanation": "Non-defining clauses provide supplementary non-essential information and must be enclosed in commas; 'that' is excluded."
+        "answer": 2,
+        "explanation": "Non-defining clauses provide supplementary non-essential information and must be enclosed in commas; 'that' is excluded.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Academic Passage: Corpus Linguistics and Cognitive Load in Conference Interpreting",
+        "readingPassage": "[1] Simultaneous interpretation represents one of the most cognitively demanding linguistic tasks. Practitioners must concurrently listen, comprehend, de-verbalize, and formulate output in the target language.\n[2] Recent empirical studies underscore the critical function of ear-voice span (EVS) in mitigating cognitive fatigue during high-level bilateral summits."
       },
       {
         "q": "Choose the word meaning 'to worsen or aggravate an existing dispute':",
         "cat": "Sophisticated Vocabulary",
         "options": [
-          "exacerbate",
           "ameliorate",
           "alleviate",
+          "exacerbate",
           "mitigate"
         ],
-        "answer": 0,
-        "explanation": "'Exacerbate' means to make a problem, disease, or hostile situation significantly worse."
+        "answer": 2,
+        "explanation": "'Exacerbate' means to make a problem, disease, or hostile situation significantly worse.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Academic Passage: Corpus Linguistics and Cognitive Load in Conference Interpreting",
+        "readingPassage": "[1] Simultaneous interpretation represents one of the most cognitively demanding linguistic tasks. Practitioners must concurrently listen, comprehend, de-verbalize, and formulate output in the target language.\n[2] Recent empirical studies underscore the critical function of ear-voice span (EVS) in mitigating cognitive fatigue during high-level bilateral summits."
       },
       {
         "q": "Select the antonym of 'mitigate' in risk management discourse:",
@@ -4090,55 +5341,75 @@ const MULTI_TRACK_100_EXAMS = {
           "diminish"
         ],
         "answer": 0,
-        "explanation": "'Mitigate' means to alleviate or lessen; its direct antonym is 'intensify / aggravate'."
+        "explanation": "'Mitigate' means to alleviate or lessen; its direct antonym is 'intensify / aggravate'.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Academic Passage: Corpus Linguistics and Cognitive Load in Conference Interpreting",
+        "readingPassage": "[1] Simultaneous interpretation represents one of the most cognitively demanding linguistic tasks. Practitioners must concurrently listen, comprehend, de-verbalize, and formulate output in the target language.\n[2] Recent empirical studies underscore the critical function of ear-voice span (EVS) in mitigating cognitive fatigue during high-level bilateral summits."
       },
       {
         "q": "Identify the correct formal connector replacing 'Because of this':",
         "cat": "Formal Transition Words",
         "options": [
-          "Consequently / Hence",
           "Besides",
           "Anyhow",
-          "For why"
+          "For why",
+          "Consequently / Hence"
         ],
-        "answer": 0,
-        "explanation": "'Consequently' and 'hence' are high-register adverbials expressing direct logical deduction."
+        "answer": 3,
+        "explanation": "'Consequently' and 'hence' are high-register adverbials expressing direct logical deduction.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Academic Passage: Corpus Linguistics and Cognitive Load in Conference Interpreting",
+        "readingPassage": "[1] Simultaneous interpretation represents one of the most cognitively demanding linguistic tasks. Practitioners must concurrently listen, comprehend, de-verbalize, and formulate output in the target language.\n[2] Recent empirical studies underscore the critical function of ear-voice span (EVS) in mitigating cognitive fatigue during high-level bilateral summits."
       },
       {
         "q": "Choose the sentence containing an accurate fronted adverbial of place:",
         "cat": "Fronting and Information Packaging",
         "options": [
-          "Under the ancient pillars lay the ceremonial diplomatic scrolls.",
           "Under the ancient pillars the ceremonial scrolls lay down.",
+          "Under the ancient pillars lay the ceremonial diplomatic scrolls.",
           "Lay under the ancient pillars the scrolls.",
           "The ceremonial scrolls lay, under the ancient pillars."
         ],
-        "answer": 0,
-        "explanation": "Locative inversion (Prepositional phrase + verb + subject) is used in literary and formal descriptive prose."
+        "answer": 1,
+        "explanation": "Locative inversion (Prepositional phrase + verb + subject) is used in literary and formal descriptive prose.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Academic Passage: Corpus Linguistics and Cognitive Load in Conference Interpreting",
+        "readingPassage": "[1] Simultaneous interpretation represents one of the most cognitively demanding linguistic tasks. Practitioners must concurrently listen, comprehend, de-verbalize, and formulate output in the target language.\n[2] Recent empirical studies underscore the critical function of ear-voice span (EVS) in mitigating cognitive fatigue during high-level bilateral summits."
       },
       {
         "q": "Select the formal adjective meaning 'temporary / lasting for a brief duration':",
         "cat": "Academic Lexis",
         "options": [
-          "ephemeral / transient",
           "immutable",
           "perpetual",
-          "enduring"
+          "enduring",
+          "ephemeral / transient"
         ],
-        "answer": 0,
-        "explanation": "'Ephemeral' or 'transient' denotes short-lived phenomena, opposed to permanent or immutable."
+        "answer": 3,
+        "explanation": "'Ephemeral' or 'transient' denotes short-lived phenomena, opposed to permanent or immutable.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Academic Passage: Corpus Linguistics and Cognitive Load in Conference Interpreting",
+        "readingPassage": "[1] Simultaneous interpretation represents one of the most cognitively demanding linguistic tasks. Practitioners must concurrently listen, comprehend, de-verbalize, and formulate output in the target language.\n[2] Recent empirical studies underscore the critical function of ear-voice span (EVS) in mitigating cognitive fatigue during high-level bilateral summits."
       },
       {
         "q": "Which phrase correctly expresses 'in accordance with established rules'?",
         "cat": "Formal Legal Expressions",
         "options": [
-          "in compliance with",
           "in compliant to",
           "in complying of",
+          "in compliance with",
           "with compliance at"
         ],
-        "answer": 0,
-        "explanation": "The standard institutional idiom is 'in compliance with' statutory standards."
+        "answer": 2,
+        "explanation": "The standard institutional idiom is 'in compliance with' statutory standards.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Academic Passage: Corpus Linguistics and Cognitive Load in Conference Interpreting",
+        "readingPassage": "[1] Simultaneous interpretation represents one of the most cognitively demanding linguistic tasks. Practitioners must concurrently listen, comprehend, de-verbalize, and formulate output in the target language.\n[2] Recent empirical studies underscore the critical function of ear-voice span (EVS) in mitigating cognitive fatigue during high-level bilateral summits."
       },
       {
         "q": "Choose the correct grammatical form: 'The minister was accused of having ___ his official powers.'",
@@ -4150,19 +5421,27 @@ const MULTI_TRACK_100_EXAMS = {
           "surmounted"
         ],
         "answer": 0,
-        "explanation": "'Exceeded his powers' (acting ultra vires) or 'abused' represents standard legal and diplomatic phraseology."
+        "explanation": "'Exceeded his powers' (acting ultra vires) or 'abused' represents standard legal and diplomatic phraseology.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Academic Passage: Corpus Linguistics and Cognitive Load in Conference Interpreting",
+        "readingPassage": "[1] Simultaneous interpretation represents one of the most cognitively demanding linguistic tasks. Practitioners must concurrently listen, comprehend, de-verbalize, and formulate output in the target language.\n[2] Recent empirical studies underscore the critical function of ear-voice span (EVS) in mitigating cognitive fatigue during high-level bilateral summits."
       },
       {
         "q": "Select the correct rhetorical device: 'Not that I loved Caesar less, but that I loved Rome more.'",
         "cat": "Rhetorical Structures",
         "options": [
-          "Antithesis",
           "Tautology",
           "Anacoluthon",
-          "Euphemism"
+          "Euphemism",
+          "Antithesis"
         ],
-        "answer": 0,
-        "explanation": "Antithesis places balanced contrasting ideas in grammatical juxtaposition for persuasive emphasis."
+        "answer": 3,
+        "explanation": "Antithesis places balanced contrasting ideas in grammatical juxtaposition for persuasive emphasis.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Academic Passage: Corpus Linguistics and Cognitive Load in Conference Interpreting",
+        "readingPassage": "[1] Simultaneous interpretation represents one of the most cognitively demanding linguistic tasks. Practitioners must concurrently listen, comprehend, de-verbalize, and formulate output in the target language.\n[2] Recent empirical studies underscore the critical function of ear-voice span (EVS) in mitigating cognitive fatigue during high-level bilateral summits."
       },
       {
         "q": "Identify the correct form of nominal relative clause:",
@@ -4174,19 +5453,27 @@ const MULTI_TRACK_100_EXAMS = {
           "Whichever remains unclear is the mechanism."
         ],
         "answer": 0,
-        "explanation": "Nominal relative 'What remains unclear' functions as the subject noun phrase of the copular verb 'is'."
+        "explanation": "Nominal relative 'What remains unclear' functions as the subject noun phrase of the copular verb 'is'.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Academic Passage: Corpus Linguistics and Cognitive Load in Conference Interpreting",
+        "readingPassage": "[1] Simultaneous interpretation represents one of the most cognitively demanding linguistic tasks. Practitioners must concurrently listen, comprehend, de-verbalize, and formulate output in the target language.\n[2] Recent empirical studies underscore the critical function of ear-voice span (EVS) in mitigating cognitive fatigue during high-level bilateral summits."
       },
       {
         "q": "Choose the precise legal term for an unalterable, non-appealable verdict:",
         "cat": "Judicial Terminology",
         "options": [
-          "irrevocable / definitive ruling",
           "tentative verdict",
           "preliminary finding",
+          "irrevocable / definitive ruling",
           "contingent decision"
         ],
-        "answer": 0,
-        "explanation": "An 'irrevocable' or 'definitive' judgment represents a res judicata decision that cannot be reopened."
+        "answer": 2,
+        "explanation": "An 'irrevocable' or 'definitive' judgment represents a res judicata decision that cannot be reopened.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Academic Passage: Corpus Linguistics and Cognitive Load in Conference Interpreting",
+        "readingPassage": "[1] Simultaneous interpretation represents one of the most cognitively demanding linguistic tasks. Practitioners must concurrently listen, comprehend, de-verbalize, and formulate output in the target language.\n[2] Recent empirical studies underscore the critical function of ear-voice span (EVS) in mitigating cognitive fatigue during high-level bilateral summits."
       },
       {
         "q": "Select the appropriate academic phrase denoting scholarly consensus:",
@@ -4198,55 +5485,71 @@ const MULTI_TRACK_100_EXAMS = {
           "The crowd view among historians says that..."
         ],
         "answer": 0,
-        "explanation": "'Prevailing consensus' is the attested academic collocation in peer-reviewed historiography."
+        "explanation": "'Prevailing consensus' is the attested academic collocation in peer-reviewed historiography.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Academic Passage: Corpus Linguistics and Cognitive Load in Conference Interpreting",
+        "readingPassage": "[1] Simultaneous interpretation represents one of the most cognitively demanding linguistic tasks. Practitioners must concurrently listen, comprehend, de-verbalize, and formulate output in the target language.\n[2] Recent empirical studies underscore the critical function of ear-voice span (EVS) in mitigating cognitive fatigue during high-level bilateral summits."
       },
       {
         "q": "Identify the correct passive infinitive: 'The protocol requires all personnel ___ prior to admission.'",
         "cat": "Passive Infinitives",
         "options": [
-          "to be vetted",
           "to vet",
           "vetting",
+          "to be vetted",
           "to have vetting"
         ],
-        "answer": 0,
-        "explanation": "Subject receives the action of security screening: requires [someone] to be vetted."
+        "answer": 2,
+        "explanation": "Subject receives the action of security screening: requires [someone] to be vetted.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Academic Passage: Corpus Linguistics and Cognitive Load in Conference Interpreting",
+        "readingPassage": "[1] Simultaneous interpretation represents one of the most cognitively demanding linguistic tasks. Practitioners must concurrently listen, comprehend, de-verbalize, and formulate output in the target language.\n[2] Recent empirical studies underscore the critical function of ear-voice span (EVS) in mitigating cognitive fatigue during high-level bilateral summits."
       },
       {
         "q": "Which sentence demonstrates accurate end-weight principle in English syntax?",
         "cat": "Information Structure & End-Weight",
         "options": [
-          "The delegates rejected the proposal, which had been compiled without consulting grassroots leaders.",
           "The delegates the proposal which had been compiled without consulting grassroots leaders rejected.",
+          "The delegates rejected the proposal, which had been compiled without consulting grassroots leaders.",
           "Without consulting grassroots leaders compiled proposal the delegates rejected.",
           "Rejected the delegates the long proposal."
         ],
-        "answer": 0,
-        "explanation": "The principle of end-weight places long, syntactically complex subordinate clauses at the end of the sentence."
+        "answer": 1,
+        "explanation": "The principle of end-weight places long, syntactically complex subordinate clauses at the end of the sentence.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "Academic Passage: Corpus Linguistics and Cognitive Load in Conference Interpreting",
+        "readingPassage": "[1] Simultaneous interpretation represents one of the most cognitively demanding linguistic tasks. Practitioners must concurrently listen, comprehend, de-verbalize, and formulate output in the target language.\n[2] Recent empirical studies underscore the critical function of ear-voice span (EVS) in mitigating cognitive fatigue during high-level bilateral summits."
       },
       {
         "q": "In treaty drafting, what distinguishes the legal force of 'shall' from 'may'?",
         "cat": "Normative Modality in Treaty Drafting",
         "options": [
-          "'Shall' imposes a mandatory obligation, whereas 'may' confers discretionary authorization.",
           "'Shall' expresses a tentative wish, while 'may' is compulsory.",
           "'Shall' applies only to individuals, not sovereign states.",
-          "Both are legally interchangeable synonyms."
+          "Both are legally interchangeable synonyms.",
+          "'Shall' imposes a mandatory obligation, whereas 'may' confers discretionary authorization."
         ],
-        "answer": 0,
-        "explanation": "In statutory and international treaty drafting, 'shall' signifies a binding obligation (must), and 'may' permissive discretion."
+        "answer": 3,
+        "explanation": "In statutory and international treaty drafting, 'shall' signifies a binding obligation (must), and 'may' permissive discretion.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "What is the primary stylistic hazard of 'nominalization' when overused in academic writing?",
         "cat": "Academic Stylistics and Readability",
         "options": [
-          "It creates bureaucratic obscurity and obscures the human agent performing the action.",
           "It makes sentences too colloquial and informal.",
+          "It creates bureaucratic obscurity and obscures the human agent performing the action.",
           "It violates subject-verb agreement rules.",
           "It forces the text into rhyme."
         ],
-        "answer": 0,
-        "explanation": "Excessive nominalization (noun stacks) causes stylistic heaviness ('bureaucratese') by burying vigorous verbs in abstract nouns."
+        "answer": 1,
+        "explanation": "Excessive nominalization (noun stacks) causes stylistic heaviness ('bureaucratese') by burying vigorous verbs in abstract nouns.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Identify the correct use of the subjunctive with 'lest' in formal prose:",
@@ -4258,55 +5561,65 @@ const MULTI_TRACK_100_EXAMS = {
           "The envoy checked the keys lest any transmission is intercepted."
         ],
         "answer": 0,
-        "explanation": "The conjunction 'lest' (for fear that) takes a mandative subjunctive bare infinitive ('be intercepted') in high-register English."
+        "explanation": "The conjunction 'lest' (for fear that) takes a mandative subjunctive bare infinitive ('be intercepted') in high-register English.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Which term denotes the intentional omission of words understood from context?",
         "cat": "Linguistic Cohesion",
         "options": [
-          "Ellipsis",
           "Anaphora",
           "Cataphora",
+          "Ellipsis",
           "Metonymy"
         ],
-        "answer": 0,
-        "explanation": "Ellipsis is the grammatical omission of elements readily recoverable from surrounding co-text without loss of clarity."
+        "answer": 2,
+        "explanation": "Ellipsis is the grammatical omission of elements readily recoverable from surrounding co-text without loss of clarity.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "What does the Latin phrase 'inter alia' signify when inserted in a diplomatic communique?",
         "cat": "Diplomatic Latinisms",
         "options": [
-          "Among other things / matters",
           "In the absence of parties",
           "By right of sovereignty",
+          "Among other things / matters",
           "To the very end"
         ],
-        "answer": 0,
-        "explanation": "'Inter alia' is standard diplomatic formula indicating that an enumeration is non-exhaustive."
+        "answer": 2,
+        "explanation": "'Inter alia' is standard diplomatic formula indicating that an enumeration is non-exhaustive.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Choose the precise synonym for 'lucid and persuasive' in discourse analysis:",
         "cat": "Stylistic Lexis C2",
         "options": [
-          "cogent / compelling",
           "diffuse",
           "incoherent",
-          "nebulous"
+          "nebulous",
+          "cogent / compelling"
         ],
-        "answer": 0,
-        "explanation": "A 'cogent' argument is logically organized, clear, and intellectually compelling."
+        "answer": 3,
+        "explanation": "A 'cogent' argument is logically organized, clear, and intellectually compelling.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "What is meant by the linguistic term 'register' in translation and sociolinguistics?",
         "cat": "Linguistic Terminology",
         "options": [
-          "The variety of language determined by the social context, communicative purpose, and audience",
           "The speed at which an interpreter speaks in the booth",
           "The pitch of an orator's voice",
-          "The alphabet in which a document is encoded"
+          "The alphabet in which a document is encoded",
+          "The variety of language determined by the social context, communicative purpose, and audience"
         ],
-        "answer": 0,
-        "explanation": "Register designates the situational appropriateness and formality level of linguistic choices (formal, frozen, consultative)."
+        "answer": 3,
+        "explanation": "Register designates the situational appropriateness and formality level of linguistic choices (formal, frozen, consultative).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Select the sentence illustrating correct usage of 'scarcely ... when':",
@@ -4318,55 +5631,65 @@ const MULTI_TRACK_100_EXAMS = {
           "Scarcely was the treaty ratified so hostilities erupted."
         ],
         "answer": 0,
-        "explanation": "The correlative pair is 'Scarcely had + subject + pp ... when + past simple'."
+        "explanation": "The correlative pair is 'Scarcely had + subject + pp ... when + past simple'.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "In academic argument, what constitutes a 'straw man' fallacy?",
         "cat": "Fallacies in Critical Reasoning",
         "options": [
-          "Misrepresenting an opponent's argument in a weakened form to refute it easily",
           "Attacking the speaker's personal character rather than their evidence",
           "Assuming as true the very premise that requires proof",
+          "Misrepresenting an opponent's argument in a weakened form to refute it easily",
           "Drawing a conclusion from an unrepresentative sample"
         ],
-        "answer": 0,
-        "explanation": "The straw man fallacy involves distorting or exaggerating an opposing viewpoint to render it vulnerable to easy attack."
+        "answer": 2,
+        "explanation": "The straw man fallacy involves distorting or exaggerating an opposing viewpoint to render it vulnerable to easy attack.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Identify the correct meaning of 'unprecedented' in historical analysis:",
         "cat": "Lexical Precision",
         "options": [
-          "Never having happened or existed before in documented history",
           "Occurring repeatedly in cycles",
           "Unimportant and negligible",
+          "Never having happened or existed before in documented history",
           "Widely celebrated by the public"
         ],
-        "answer": 0,
-        "explanation": "'Unprecedented' denotes an event or development devoid of prior historical parallel or benchmark."
+        "answer": 2,
+        "explanation": "'Unprecedented' denotes an event or development devoid of prior historical parallel or benchmark.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "What does 'pacta sunt servanda' mandate in customary international law?",
         "cat": "Core Legal Maxims",
         "options": [
-          "Agreements and treaties must be respected and fulfilled in good faith.",
           "Treaties expire upon the change of government.",
           "Only written agreements carry binding force.",
-          "All disputes must be settled by armed intervention."
+          "All disputes must be settled by armed intervention.",
+          "Agreements and treaties must be respected and fulfilled in good faith."
         ],
-        "answer": 0,
-        "explanation": "The cornerstone rule of the Vienna Convention on the Law of Treaties (Art. 26): treaties in force are binding upon parties."
+        "answer": 3,
+        "explanation": "The cornerstone rule of the Vienna Convention on the Law of Treaties (Art. 26): treaties in force are binding upon parties.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Choose the correct adjective describing a conclusion that logically follows from premises:",
         "cat": "Epistemological Lexis",
         "options": [
-          "deductive / valid",
           "fallacious",
+          "deductive / valid",
           "spurious",
           "tautological"
         ],
-        "answer": 0,
-        "explanation": "A deductively valid conclusion inevitably follows from true premises without contradiction."
+        "answer": 1,
+        "explanation": "A deductively valid conclusion inevitably follows from true premises without contradiction.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Select the word meaning 'to delineate the boundaries or limits of a concept':",
@@ -4378,19 +5701,23 @@ const MULTI_TRACK_100_EXAMS = {
           "obfuscate"
         ],
         "answer": 0,
-        "explanation": "'Demarcate' or 'delimit' means to set distinct borders, categories, or functional parameters."
+        "explanation": "'Demarcate' or 'delimit' means to set distinct borders, categories, or functional parameters.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "What is the rhetorical function of 'chiasmus' (e.g., 'Never let a fool kiss you or a kiss fool you')?",
         "cat": "Rhetorical Figures C2",
         "options": [
-          "Inverting the grammatical structure of corresponding phrases in reverse parallelism",
           "Repeating the same consonant sound",
           "Comparing two things using 'like' or 'as'",
+          "Inverting the grammatical structure of corresponding phrases in reverse parallelism",
           "Exaggerating for comic relief"
         ],
-        "answer": 0,
-        "explanation": "Chiasmus creates memorable balanced inversion (AB : BA pattern) to stimulate intellectual reflection."
+        "answer": 2,
+        "explanation": "Chiasmus creates memorable balanced inversion (AB : BA pattern) to stimulate intellectual reflection.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Identify the precise meaning of 'ex gratia' in financial settlements:",
@@ -4402,19 +5729,23 @@ const MULTI_TRACK_100_EXAMS = {
           "Payable under insurance penalty"
         ],
         "answer": 0,
-        "explanation": "An 'ex gratia' payment is granted out of benevolence or moral duty, without legal acknowledgement of fault."
+        "explanation": "An 'ex gratia' payment is granted out of benevolence or moral duty, without legal acknowledgement of fault.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "In discourse analysis, what characterizes 'cohesion' as opposed to 'coherence'?",
         "cat": "Text Linguistics",
         "options": [
-          "Cohesion refers to surface grammatical and lexical links; coherence refers to underlying conceptual unity.",
           "Cohesion is spoken; coherence is written.",
           "Cohesion is for vocabulary; coherence is for phonetics.",
-          "Both terms denote identical linguistic properties."
+          "Both terms denote identical linguistic properties.",
+          "Cohesion refers to surface grammatical and lexical links; coherence refers to underlying conceptual unity."
         ],
-        "answer": 0,
-        "explanation": "Cohesion pertains to syntactic and lexical ties (pronouns, connectors); coherence is the conceptual intelligibility of the discourse."
+        "answer": 3,
+        "explanation": "Cohesion pertains to syntactic and lexical ties (pronouns, connectors); coherence is the conceptual intelligibility of the discourse.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Choose the sophisticated idiom meaning 'to evade the central issue under discussion':",
@@ -4426,31 +5757,37 @@ const MULTI_TRACK_100_EXAMS = {
           "to burn bridges"
         ],
         "answer": 0,
-        "explanation": "'To prevaricate' or 'beat about the bush' signifies speaking evasively to avoid a direct truth or confrontation."
+        "explanation": "'To prevaricate' or 'beat about the bush' signifies speaking evasively to avoid a direct truth or confrontation.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "What does the adjective 'mercurial' convey when describing a diplomatic leader?",
         "cat": "Character Description Lexis",
         "options": [
-          "Unpredictably volatile in mood, policy, or temperament",
           "Deeply grounded and stable",
           "Slow to make decisions",
-          "Strictly obedient to international law"
+          "Strictly obedient to international law",
+          "Unpredictably volatile in mood, policy, or temperament"
         ],
-        "answer": 0,
-        "explanation": "'Mercurial' describes rapid, unpredictable fluctuations in temperament or political demeanor."
+        "answer": 3,
+        "explanation": "'Mercurial' describes rapid, unpredictable fluctuations in temperament or political demeanor.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Identify the meaning of the formal verb 'conflate':",
         "cat": "Conceptual Analysis Verbs",
         "options": [
-          "To mistakenly blend or merge two distinct concepts into one",
           "To clarify a complex argument",
+          "To mistakenly blend or merge two distinct concepts into one",
           "To expand a budget",
           "To discard obsolete data"
         ],
-        "answer": 0,
-        "explanation": "'To conflate' is to combine two separate ideas or datasets errantly, obscuring their vital differences."
+        "answer": 1,
+        "explanation": "'To conflate' is to combine two separate ideas or datasets errantly, obscuring their vital differences.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "In phonetic transcription, what is the 'schwa' sound (/ə/)?",
@@ -4462,7 +5799,9 @@ const MULTI_TRACK_100_EXAMS = {
           "A voiced dental fricative"
         ],
         "answer": 0,
-        "explanation": "The schwa (/ə/) is the most frequent unstressed reduced vowel sound in the English language (e.g., about, father)."
+        "explanation": "The schwa (/ə/) is the most frequent unstressed reduced vowel sound in the English language (e.g., about, father).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "What distinguishes an 'aphorism' from a general statement?",
@@ -4474,43 +5813,51 @@ const MULTI_TRACK_100_EXAMS = {
           "A statistical summary in tables"
         ],
         "answer": 0,
-        "explanation": "An aphorism is an epigrammatic, memorable distillation of philosophical insight (e.g., Bacon, Hippocrates)."
+        "explanation": "An aphorism is an epigrammatic, memorable distillation of philosophical insight (e.g., Bacon, Hippocrates).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Select the correct preposition in: 'The ambassador expressed deference ___ the host country's customs.'",
         "cat": "Noun Collocations",
         "options": [
-          "to",
           "for",
+          "to",
           "with",
           "from"
         ],
-        "answer": 0,
-        "explanation": "The noun 'deference' (respectful submission) collocates with the preposition 'to'."
+        "answer": 1,
+        "explanation": "The noun 'deference' (respectful submission) collocates with the preposition 'to'.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "What is the function of 'fronting' in communicative grammar?",
         "cat": "Stylistic Inversion & Thematization",
         "options": [
-          "Moving a non-subject clause element to the absolute beginning to establish topical prominence",
           "Placing the verb at the very end of the paragraph",
           "Eliminating vowels from formal acronyms",
+          "Moving a non-subject clause element to the absolute beginning to establish topical prominence",
           "Writing in capital letters for emphasis"
         ],
-        "answer": 0,
-        "explanation": "Fronting thematicizes information by shifting objects, complements, or adverbials to initial position for discourse emphasis."
+        "answer": 2,
+        "explanation": "Fronting thematicizes information by shifting objects, complements, or adverbials to initial position for discourse emphasis.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Identify the precise antonym of 'parsimonious' in economic policy:",
         "cat": "Economic and Character Lexis",
         "options": [
-          "prodigal / lavish / munificent",
           "frugal",
+          "prodigal / lavish / munificent",
           "prudent",
           "austere"
         ],
-        "answer": 0,
-        "explanation": "'Parsimonious' means excessively frugal or stingy; its antonyms are 'prodigal', 'lavish', or 'munificent'."
+        "answer": 1,
+        "explanation": "'Parsimonious' means excessively frugal or stingy; its antonyms are 'prodigal', 'lavish', or 'munificent'.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "In formal interpretation, what does the technique of 'salami phrasing' accomplish?",
@@ -4522,67 +5869,79 @@ const MULTI_TRACK_100_EXAMS = {
           "Repeating every word twice for clarity"
         ],
         "answer": 0,
-        "explanation": "The salami technique segments unwieldy embedded source structures into digestible, punchy sentences, preserving clarity in real time."
+        "explanation": "The salami technique segments unwieldy embedded source structures into digestible, punchy sentences, preserving clarity in real time.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "What does the Latin legal phrase 'ultra vires' indicate when applied to an executive decree?",
         "cat": "Constitutional & Administrative Law",
         "options": [
-          "Beyond the legal power or authority granted to that body",
           "Within the ordinary scope of duty",
           "Valid under constitutional review",
-          "Signed under military duress"
+          "Signed under military duress",
+          "Beyond the legal power or authority granted to that body"
         ],
-        "answer": 0,
-        "explanation": "An action taken 'ultra vires' exceeds statutory or constitutional authority and is legally void ab initio."
+        "answer": 3,
+        "explanation": "An action taken 'ultra vires' exceeds statutory or constitutional authority and is legally void ab initio.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Select the sophisticated academic verb meaning 'to explain or interpret the meaning of a complex text':",
         "cat": "Hermeneutic Lexis C2",
         "options": [
-          "explicate / elucidate",
           "obviate",
           "vitiate",
+          "explicate / elucidate",
           "interpolate"
         ],
-        "answer": 0,
-        "explanation": "'Explicate' signifies analyzing and explaining text or ideology in fine, scholarly detail."
+        "answer": 2,
+        "explanation": "'Explicate' signifies analyzing and explaining text or ideology in fine, scholarly detail.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Choose the correct adjective for an agreement that cannot be breached or violated:",
         "cat": "Legal & Treaty Adjectives",
         "options": [
-          "inviolable / sacrosanct",
           "malleable",
+          "inviolable / sacrosanct",
           "contingent",
           "revocable"
         ],
-        "answer": 0,
-        "explanation": "'Inviolable' describes rights, treaties, or territory that must be respected without infraction."
+        "answer": 1,
+        "explanation": "'Inviolable' describes rights, treaties, or territory that must be respected without infraction.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "What is the precise grammatical status of 'having said that' in academic discourse?",
         "cat": "Participial Discourse Markers",
         "options": [
-          "A concessive transitional phrase functioning as a disjunct",
           "A restrictive relative clause",
           "A gerundial direct object",
-          "An adverb of frequency"
+          "An adverb of frequency",
+          "A concessive transitional phrase functioning as a disjunct"
         ],
-        "answer": 0,
-        "explanation": "'Having said that' is a fixed discourse marker signaling a shift to a concessive counter-statement."
+        "answer": 3,
+        "explanation": "'Having said that' is a fixed discourse marker signaling a shift to a concessive counter-statement.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Identify the correct spelling of the formal adjective meaning 'excessively flattering or obsequious':",
         "cat": "Orthography and Advanced Lexis",
         "options": [
-          "sycophantic",
           "sicophantic",
           "sycofantic",
+          "sycophantic",
           "psycophantic"
         ],
-        "answer": 0,
-        "explanation": "'Sycophantic' (from Greek sycophant) describes servile flattery aimed at gaining advantage."
+        "answer": 2,
+        "explanation": "'Sycophantic' (from Greek sycophant) describes servile flattery aimed at gaining advantage.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "What does 'epistemology' study in philosophical inquiry?",
@@ -4594,19 +5953,23 @@ const MULTI_TRACK_100_EXAMS = {
           "The syntax of ancient languages"
         ],
         "answer": 0,
-        "explanation": "Epistemology investigates the grounds, validity, and scope of human knowledge."
+        "explanation": "Epistemology investigates the grounds, validity, and scope of human knowledge.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Select the correct preposition in: 'The policy was enacted pursuant ___ the ministerial directive.'",
         "cat": "Prepositional Idioms in Law",
         "options": [
-          "to",
           "of",
           "with",
+          "to",
           "for"
         ],
-        "answer": 0,
-        "explanation": "The established legal locution is 'pursuant to' (in accordance with)."
+        "answer": 2,
+        "explanation": "The established legal locution is 'pursuant to' (in accordance with).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Which term denotes the state of two legal provisions being mutually contradictory and irreconcilable?",
@@ -4618,91 +5981,112 @@ const MULTI_TRACK_100_EXAMS = {
           "jurisprudence"
         ],
         "answer": 0,
-        "explanation": "An 'antinomy' represents an unresolvable contradiction between two equally authoritative legal principles."
+        "explanation": "An 'antinomy' represents an unresolvable contradiction between two equally authoritative legal principles.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Choose the accurate academic noun for 'the act of attributing human emotions to non-human entities':",
         "cat": "Literary & Analytical Vocabulary",
         "options": [
-          "anthropomorphism / pathetic fallacy",
           "alliteration",
           "hyperbole",
+          "anthropomorphism / pathetic fallacy",
           "synecdoche"
         ],
-        "answer": 0,
-        "explanation": "Anthropomorphism or the pathetic fallacy projects human sentiments onto nature or objects."
+        "answer": 2,
+        "explanation": "Anthropomorphism or the pathetic fallacy projects human sentiments onto nature or objects.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "What is the function of an 'inchoate' offense in criminal law theory?",
         "cat": "Specialized Legal Lexis",
         "options": [
-          "An offense that has been begun or attempted but not yet consummated (e.g. conspiracy, attempt)",
           "A crime committed without motive",
           "A misdemeanor punishable by fine",
-          "A verdict acquitted on appeal"
+          "A verdict acquitted on appeal",
+          "An offense that has been begun or attempted but not yet consummated (e.g. conspiracy, attempt)"
         ],
-        "answer": 0,
-        "explanation": "Inchoate offenses (attempts, solicitations, conspiracies) criminalize conduct preparatory to harm."
+        "answer": 3,
+        "explanation": "Inchoate offenses (attempts, solicitations, conspiracies) criminalize conduct preparatory to harm.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "Select the nuanced adjective meaning 'seemingly reasonable, but actually misleading or deceptive':",
         "cat": "Critical Reasoning Lexis",
         "options": [
-          "specious / fallacious",
           "veracious",
+          "specious / fallacious",
           "axiomatic",
           "cogent"
         ],
-        "answer": 0,
-        "explanation": "A 'specious' argument appears superficially plausible but is fundamentally flawed or deceitful."
+        "answer": 1,
+        "explanation": "A 'specious' argument appears superficially plausible but is fundamentally flawed or deceitful.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Identify the rhetorical term for using a part of something to represent the whole (e.g., 'all hands on deck'):",
         "cat": "Figures of Speech",
         "options": [
-          "synecdoche",
           "metaphor",
           "apostrophe",
-          "irony"
+          "irony",
+          "synecdoche"
         ],
-        "answer": 0,
-        "explanation": "Synecdoche is the figure of speech where a part stands for the whole or vice-versa."
+        "answer": 3,
+        "explanation": "Synecdoche is the figure of speech where a part stands for the whole or vice-versa.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "What does the Latin term 'ipso facto' signify in evidentiary documentation?",
         "cat": "Legal Evidentiary Latinisms",
         "options": [
-          "By that very fact or act itself",
           "In accordance with custom",
+          "By that very fact or act itself",
           "Pending further investigation",
           "Without prejudice to claims"
         ],
-        "answer": 0,
-        "explanation": "'Ipso facto' denotes that a condition arises automatically by the very occurrence of a specific act."
+        "answer": 1,
+        "explanation": "'Ipso facto' denotes that a condition arises automatically by the very occurrence of a specific act.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Choose the correct adjective for a dispute that is purely academic and has no practical legal effect:",
         "cat": "Judicial Pragmatics",
         "options": [
-          "moot / academic",
           "substantive",
           "actionable",
-          "precedential"
+          "precedential",
+          "moot / academic"
         ],
-        "answer": 0,
-        "explanation": "A 'moot' question is hypothetical or no longer live, having lost practical consequence."
+        "answer": 3,
+        "explanation": "A 'moot' question is hypothetical or no longer live, having lost practical consequence.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "What constitutes 'verisimilitude' in critical textual analysis?",
         "cat": "Literary & Discourse Theory",
         "options": [
-          "The appearance or semblance of truth, authenticity, and reality",
           "The musical meter of verse",
           "The grammatical error count",
-          "The historical date of writing"
+          "The historical date of writing",
+          "The appearance or semblance of truth, authenticity, and reality"
         ],
-        "answer": 0,
-        "explanation": "Verisimilitude is the quality of plausibility that renders a narrative credible and lifelike."
+        "answer": 3,
+        "explanation": "Verisimilitude is the quality of plausibility that renders a narrative credible and lifelike.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Select the formal verb meaning 'to invalidate or destroy the legal efficacy of a contract':",
@@ -4714,19 +6098,25 @@ const MULTI_TRACK_100_EXAMS = {
           "subrogate"
         ],
         "answer": 0,
-        "explanation": "'To vitiate' a contract is to corrupt its validity through fraud, mistake, or duress."
+        "explanation": "'To vitiate' a contract is to corrupt its validity through fraud, mistake, or duress.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Which term describes the practice of balancing competing interests to achieve proportional justice?",
         "cat": "Legal Philosophy and Balancing",
         "options": [
-          "teleological balancing / proportionality test",
           "arbitrary discretion",
+          "teleological balancing / proportionality test",
           "literalism",
           "originalism"
         ],
-        "answer": 0,
-        "explanation": "Proportionality review balances competing rights against public interests to avoid excessive curtailment."
+        "answer": 1,
+        "explanation": "Proportionality review balances competing rights against public interests to avoid excessive curtailment.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Choose the precise antonym of 'equivocal' in diplomatic statements:",
@@ -4738,7 +6128,10 @@ const MULTI_TRACK_100_EXAMS = {
           "ambivalent"
         ],
         "answer": 0,
-        "explanation": "'Equivocal' means open to multiple misleading interpretations; its antonym is 'unambiguous / explicit'."
+        "explanation": "'Equivocal' means open to multiple misleading interpretations; its antonym is 'unambiguous / explicit'.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "What is the primary role of an 'amicus curiae' in appellate jurisprudence?",
@@ -4750,19 +6143,25 @@ const MULTI_TRACK_100_EXAMS = {
           "The defense attorney of record"
         ],
         "answer": 0,
-        "explanation": "An amicus curiae submits briefs to provide specialized legal insight on complex matters."
+        "explanation": "An amicus curiae submits briefs to provide specialized legal insight on complex matters.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Identify the meaning of the formal adjective 'ineluctable':",
         "cat": "Scholarly Lexis",
         "options": [
-          "Unavoidable, inescapable, and bound to happen",
           "Easily resolved",
           "Transparent to observe",
-          "Extremely fragile"
+          "Extremely fragile",
+          "Unavoidable, inescapable, and bound to happen"
         ],
-        "answer": 0,
-        "explanation": "'Ineluctable' describes outcomes or historical forces that cannot be escaped or resisted."
+        "answer": 3,
+        "explanation": "'Ineluctable' describes outcomes or historical forces that cannot be escaped or resisted.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "What does 'hermeneutics' encompass in linguistic and philosophical studies?",
@@ -4774,55 +6173,88 @@ const MULTI_TRACK_100_EXAMS = {
           "The translation of computer code"
         ],
         "answer": 0,
-        "explanation": "Hermeneutics explores the principles, conditions, and philosophy of textual interpretation."
+        "explanation": "Hermeneutics explores the principles, conditions, and philosophy of textual interpretation.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "Select the accurate collocation: 'The commission took ___ of the ongoing cross-border developments.'",
         "cat": "Institutional Collocations",
         "options": [
-          "cognizance",
           "noticeable",
           "knowing",
+          "cognizance",
           "intellection"
         ],
-        "answer": 0,
-        "explanation": "The formal institutional idiom is 'to take cognizance of' (to take official judicial/statutory notice)."
+        "answer": 2,
+        "explanation": "The formal institutional idiom is 'to take cognizance of' (to take official judicial/statutory notice).",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "What distinguishes 'relational autonomy' in modern socio-legal scholarship?",
         "cat": "Theoretical Jurisprudence",
         "options": [
-          "Understanding individual freedom as fundamentally shaped and enabled by social relationships",
           "Absolute isolation of the individual",
           "Total state control over speech",
-          "The elimination of private property"
+          "The elimination of private property",
+          "Understanding individual freedom as fundamentally shaped and enabled by social relationships"
         ],
-        "answer": 0,
-        "explanation": "Relational autonomy posits that genuine human agency develops within interpersonal and social contexts."
+        "answer": 3,
+        "explanation": "Relational autonomy posits that genuine human agency develops within interpersonal and social contexts.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "In UN multilateral diplomacy, what is the role of the 'depository' of a treaty?",
         "cat": "Vienna Convention on the Law of Treaties",
         "options": [
-          "The state or international body entrusted with custody of the authentic treaty text and instruments of ratification",
           "The translation agency printing copies",
+          "The state or international body entrusted with custody of the authentic treaty text and instruments of ratification",
           "The media covering the signing ceremony",
           "The bank holding the diplomatic fees"
         ],
-        "answer": 0,
-        "explanation": "The depository (often the UN Secretary-General) receives and registers all formal treaty ratifications."
+        "answer": 1,
+        "explanation": "The depository (often the UN Secretary-General) receives and registers all formal treaty ratifications.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "What is the precise term for the certified English translation of a foreign public document?",
         "cat": "Official Certified Translation Standards",
         "options": [
-          "Sworn / Certified Translation bearing the translator's official jurat and stamp",
           "Draft translation",
+          "Sworn / Certified Translation bearing the translator's official jurat and stamp",
           "Machine pre-translation",
           "Subtitled summary"
         ],
-        "answer": 0,
-        "explanation": "A sworn or certified translation includes the formal declaration (jurat), registration number, and seal attesting to full fidelity."
+        "answer": 1,
+        "explanation": "A sworn or certified translation includes the formal declaration (jurat), registration number, and seal attesting to full fidelity.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
+      }
+    ],
+    "writingStudioTasks": [
+      {
+        "taskId": "task_1",
+        "title": "المهمة الأولى: المراسلة والمخاطبة الرسمية (120 - 150 كلمة)",
+        "prompt": "Write a formal report (150 words) describing the stages of quality assurance in translation projects based on ISO 17100 standard workflow.",
+        "minWords": 120,
+        "maxWords": 180,
+        "modelAnswer": "نموذج الصياغة المعتمدة يراعي البنية الرسمية، أسلوب التحية والختام المؤسساتي، الروابط المنطقية، والمصطلحات القانونية الدقيقة الخالية من الحشو."
+      },
+      {
+        "taskId": "task_2",
+        "title": "المهمة الثانية: المقال التحليلي المتخصص (200 - 250 كلمة)",
+        "prompt": "Some linguists argue that artificial intelligence will soon render human conference interpreters obsolete. Discuss both views and give your reasoned opinion (250 words).",
+        "minWords": 200,
+        "maxWords": 280,
+        "modelAnswer": "يتطلب المقال مقدمة واضحة، حُججاً متوازنة مع الاستشهاد بأمثلة حقيقية من سوق الترجمة، وخاتمة تلخص وجهة النظر بأسلوب أكاديمي رفيع."
       }
     ]
   },
@@ -4840,91 +6272,131 @@ const MULTI_TRACK_100_EXAMS = {
           "ملحق ثقافي معتمد"
         ],
         "answer": 0,
-        "explanation": "اللقب الدبلوماسي الرسمي 'Plenipotentiary' يترجم حصراً بـ 'مفوض فوق العادة ومطلق الصلاحية'."
+        "explanation": "اللقب الدبلوماسي الرسمي 'Plenipotentiary' يترجم حصراً بـ 'مفوض فوق العادة ومطلق الصلاحية'.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "كابينة المؤتمرات الدولية / الجلسة العامة",
+        "audioScript": "استمع إلى التسجيل الصوتي المنقول من كابينة الترجمة الفورية: ما هي الترجمة المؤسساتية المعتمدة لمصطلح 'Plenipotentiary' في المعاهدات والاتفاقيات الدولية؟ ثم حدد الإجابة الدقيقة."
       },
       {
         "q": "في العقود التجارية الدولية، ما الفرق الجوهري الدقيق بين 'Force Majeure' و 'Hardship'؟",
         "cat": "الصياغة القانونية والعقود",
         "options": [
-          "Force Majeure تجعل التنفيذ مستحيلاً تماماً، بينما Hardship تجعله مرهقاً ومختلاً اقتصادياً بصورة غير متوقعة",
           "Hardship تطبق فقط في النزاعات الجنائية",
           "كلاهما يعني دفع غرامة تأخير بدون إعفاء",
-          "Force Majeure تشترط خطأ أحد الأطراف"
+          "Force Majeure تشترط خطأ أحد الأطراف",
+          "Force Majeure تجعل التنفيذ مستحيلاً تماماً، بينما Hardship تجعله مرهقاً ومختلاً اقتصادياً بصورة غير متوقعة"
         ],
-        "answer": 0,
-        "explanation": "القوة القاهرة تعدم إمكانية التنفيذ، بينما الظروف الطارئة (Hardship) تخل بالتوازن الاقتصادي دون استحالته."
+        "answer": 3,
+        "explanation": "القوة القاهرة تعدم إمكانية التنفيذ، بينما الظروف الطارئة (Hardship) تخل بالتوازن الاقتصادي دون استحالته.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "كابينة المؤتمرات الدولية / الجلسة العامة",
+        "audioScript": "استمع إلى التسجيل الصوتي المنقول من كابينة الترجمة الفورية: في العقود التجارية الدولية، ما الفرق الجوهري الدقيق بين 'Force Majeure' و 'Hardship'؟ ثم حدد الإجابة الدقيقة."
       },
       {
         "q": "ما المقابل العربي الأدق للعبارة القانونية اللاتينية 'Mutatis Mutandis' في نصوص المراسيم والاتفاقيات؟",
         "cat": "المصطلحات القانونية اللاتينية",
         "options": [
-          "مع مراعاة التعديلات اللازمة / مع ما يقتضيه الفارق",
           "إلى الأبد وبدون قيد أو شرط",
           "بحسن نية مطلقة",
-          "بأثر رجعي فوري"
+          "بأثر رجعي فوري",
+          "مع مراعاة التعديلات اللازمة / مع ما يقتضيه الفارق"
         ],
-        "answer": 0,
-        "explanation": "العبارة اللاتينية تعني تطبيق نفس الأحكام مع إجراء التغييرات الطفيفة اللازمة لاختلاف السياق."
+        "answer": 3,
+        "explanation": "العبارة اللاتينية تعني تطبيق نفس الأحكام مع إجراء التغييرات الطفيفة اللازمة لاختلاف السياق.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "كابينة المؤتمرات الدولية / الجلسة العامة",
+        "audioScript": "استمع إلى التسجيل الصوتي المنقول من كابينة الترجمة الفورية: ما المقابل العربي الأدق للعبارة القانونية اللاتينية 'Mutatis Mutandis' في نصوص المراسيم والاتفاقيات؟ ثم حدد الإجابة الدقيقة."
       },
       {
         "q": "ما هو المدلول القانوني الدقيق لمصطلح 'Ultra Vires' في ممارسات الهيئات الإدارية؟",
         "cat": "القانون الإداري والمؤسساتي",
         "options": [
-          "تجاوز حدود الاختصاص والسلطة المخولة قانوناً (مما يبطل التصرف)",
           "التصرف بحسن نية كاملة",
           "تفويض الصلاحيات لموظف أدنى",
-          "المصادقة الإجماعية على القرار"
+          "المصادقة الإجماعية على القرار",
+          "تجاوز حدود الاختصاص والسلطة المخولة قانوناً (مما يبطل التصرف)"
         ],
-        "answer": 0,
-        "explanation": "التصرف 'Ultra Vires' هو عمل يقع خارج النطاق القانوني أو الدستوري الممنوح للمؤسسة ويعد باطلاً."
+        "answer": 3,
+        "explanation": "التصرف 'Ultra Vires' هو عمل يقع خارج النطاق القانوني أو الدستوري الممنوح للمؤسسة ويعد باطلاً.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "كابينة المؤتمرات الدولية / الجلسة العامة",
+        "audioScript": "استمع إلى التسجيل الصوتي المنقول من كابينة الترجمة الفورية: ما هو المدلول القانوني الدقيق لمصطلح 'Ultra Vires' في ممارسات الهيئات الإدارية؟ ثم حدد الإجابة الدقيقة."
       },
       {
         "q": "ما المقابل العربي الرسمي لمصطلح 'Letters of Credence' في التمثيل الخارجي؟",
         "cat": "البروتوكول الدبلوماسي",
         "options": [
-          "أوراق الاعتماد",
           "رسائل التوصية",
+          "أوراق الاعتماد",
           "جوازات السفر الدبلوماسية",
           "وثائق المعاهدات"
         ],
-        "answer": 0,
-        "explanation": "أوراق الاعتماد هي الوثيقة الرسمية التي يقدمها السفير الجديد لرئيس الدولة المعتمد لديها."
+        "answer": 1,
+        "explanation": "أوراق الاعتماد هي الوثيقة الرسمية التي يقدمها السفير الجديد لرئيس الدولة المعتمد لديها.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "كابينة المؤتمرات الدولية / الجلسة العامة",
+        "audioScript": "استمع إلى التسجيل الصوتي المنقول من كابينة الترجمة الفورية: ما المقابل العربي الرسمي لمصطلح 'Letters of Credence' في التمثيل الخارجي؟ ثم حدد الإجابة الدقيقة."
       },
       {
         "q": "ما الفرق في الصياغة القانونية الإنجليزية بين 'Shall' و 'May'؟",
         "cat": "الصياغة التشريعية الإنجليزية",
         "options": [
-          "Shall تفيد الوجوب والإلزام الصارم، بينما May تفيد الجواز والإذن التقديري",
           "Shall تفيد المستقبل البسيط فقط",
           "كلاهما متطابق في القوة الإلزامية",
-          "May تستخدم فقط للأفراد و Shall للدول"
+          "May تستخدم فقط للأفراد و Shall للدول",
+          "Shall تفيد الوجوب والإلزام الصارم، بينما May تفيد الجواز والإذن التقديري"
         ],
-        "answer": 0,
-        "explanation": "في العقود الدولية: Shall تفرض التزاماً قانونياً واجباً، و May تمنح خياراً أو رخصة جوازية."
+        "answer": 3,
+        "explanation": "في العقود الدولية: Shall تفرض التزاماً قانونياً واجباً، و May تمنح خياراً أو رخصة جوازية.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "كابينة المؤتمرات الدولية / الجلسة العامة",
+        "audioScript": "استمع إلى التسجيل الصوتي المنقول من كابينة الترجمة الفورية: ما الفرق في الصياغة القانونية الإنجليزية بين 'Shall' و 'May'؟ ثم حدد الإجابة الدقيقة."
       },
       {
         "q": "ما هي الترجمة القانونية الصحيحة لمصطلح 'Without Prejudice' في المراسلات القضائية والتسويات؟",
         "cat": "المصطلحات القانونية",
         "options": [
-          "مع عدم الإخلال بالحقوق / دون مساس بالدعوى الأصلية",
           "بدون أي تحيز عرقي",
           "بحكم قضائي بات",
+          "مع عدم الإخلال بالحقوق / دون مساس بالدعوى الأصلية",
           "وفقاً للعرف السائد"
         ],
-        "answer": 0,
-        "explanation": "عبارة 'دون إخلال' تحمي حقوق الطرف المفاوض وتمنع استخدام التنازلات المقترحة كإقرار إدانة ضده أمام المحكمة."
+        "answer": 2,
+        "explanation": "عبارة 'دون إخلال' تحمي حقوق الطرف المفاوض وتمنع استخدام التنازلات المقترحة كإقرار إدانة ضده أمام المحكمة.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "كابينة المؤتمرات الدولية / الجلسة العامة",
+        "audioScript": "استمع إلى التسجيل الصوتي المنقول من كابينة الترجمة الفورية: ما هي الترجمة القانونية الصحيحة لمصطلح 'Without Prejudice' في المراسلات القضائية والتسويات؟ ثم حدد الإجابة الدقيقة."
       },
       {
         "q": "ما معنى مصطلح 'Persona non grata' في العلاقات الدبلوماسية الدولية؟",
         "cat": "الأعراف الدبلوماسية",
         "options": [
-          "شخص غير مرغوب فيه (يطلب مغادرته لأراضي الدولة المعتمد لديها)",
           "دبلوماسي ذو حصانة مطلقة",
           "مترجم كابينة معتمد",
-          "رئيس بعثة استثنائي"
+          "رئيس بعثة استثنائي",
+          "شخص غير مرغوب فيه (يطلب مغادرته لأراضي الدولة المعتمد لديها)"
         ],
-        "answer": 0,
-        "explanation": "إجراء بموجب اتفاقية فيينا للعلاقات الدبلوماسية تطلب بموجبه الدولة المستقبلة طرد الدبلوماسي دون إبداء الأسباب."
+        "answer": 3,
+        "explanation": "إجراء بموجب اتفاقية فيينا للعلاقات الدبلوماسية تطلب بموجبه الدولة المستقبلة طرد الدبلوماسي دون إبداء الأسباب.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "كابينة المؤتمرات الدولية / الجلسة العامة",
+        "audioScript": "استمع إلى التسجيل الصوتي المنقول من كابينة الترجمة الفورية: ما معنى مصطلح 'Persona non grata' في العلاقات الدبلوماسية الدولية؟ ثم حدد الإجابة الدقيقة."
       },
       {
         "q": "ما المقابل الدقيق لمصطلح 'Ipso Facto' في القرارات التعاقدية؟",
@@ -4936,31 +6408,46 @@ const MULTI_TRACK_100_EXAMS = {
           "بعد موافقة المحكمة"
         ],
         "answer": 0,
-        "explanation": "العبارة تعني حدوث النتيجة القانونية تلقائياً بقوة الواقعة نفسها دون حاجة لإجراء إضافي."
+        "explanation": "العبارة تعني حدوث النتيجة القانونية تلقائياً بقوة الواقعة نفسها دون حاجة لإجراء إضافي.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "كابينة المؤتمرات الدولية / الجلسة العامة",
+        "audioScript": "استمع إلى التسجيل الصوتي المنقول من كابينة الترجمة الفورية: ما المقابل الدقيق لمصطلح 'Ipso Facto' في القرارات التعاقدية؟ ثم حدد الإجابة الدقيقة."
       },
       {
         "q": "في المعاهدات الدولية، ما الفرق بين 'Ratification' و 'Accession'؟",
         "cat": "قانون المعاهدات الدولية",
         "options": [
-          "Ratification مصادقة دولة موقعة سابقاً، بينما Accession انضمام دولة لم تكن موقعة أصلاً على نص المعاهدة",
           "كلاهما يعني رفض المعاهدة",
           "Ratification للتحالفات العسكرية فقط",
+          "Ratification مصادقة دولة موقعة سابقاً، بينما Accession انضمام دولة لم تكن موقعة أصلاً على نص المعاهدة",
           "لا يوجد أي فرق"
         ],
-        "answer": 0,
-        "explanation": "المصادقة تكون لمن وقع النص خلال مهلة التوقيع، بينما الانضمام لدولة لم توقع مسبقاً وتلتحق بالمعاهدة لاحقاً."
+        "answer": 2,
+        "explanation": "المصادقة تكون لمن وقع النص خلال مهلة التوقيع، بينما الانضمام لدولة لم توقع مسبقاً وتلتحق بالمعاهدة لاحقاً.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "كابينة المؤتمرات الدولية / الجلسة العامة",
+        "audioScript": "استمع إلى التسجيل الصوتي المنقول من كابينة الترجمة الفورية: في المعاهدات الدولية، ما الفرق بين 'Ratification' و 'Accession'؟ ثم حدد الإجابة الدقيقة."
       },
       {
         "q": "ما الترجمة المعتمدة لمصطلح 'Jus Cogens' في القانون الدولي العام؟",
         "cat": "القواعد الآمرة",
         "options": [
-          "القواعد الآمرة في القانون الدولي (لا يجوز الاتفاق على مخالفتها)",
           "القوانين الوطنية المؤقتة",
           "الأعراف التجارية المحلية",
+          "القواعد الآمرة في القانون الدولي (لا يجوز الاتفاق على مخالفتها)",
           "أحكام المحاكم الابتدائية"
         ],
-        "answer": 0,
-        "explanation": "Jus Cogens هي القواعد الدولية الآمرة القطعية (مثل حظر الإبادة الجماعية والقرصنة والرق)."
+        "answer": 2,
+        "explanation": "Jus Cogens هي القواعد الدولية الآمرة القطعية (مثل حظر الإبادة الجماعية والقرصنة والرق).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "كابينة المؤتمرات الدولية / الجلسة العامة",
+        "audioScript": "استمع إلى التسجيل الصوتي المنقول من كابينة الترجمة الفورية: ما الترجمة المعتمدة لمصطلح 'Jus Cogens' في القانون الدولي العام؟ ثم حدد الإجابة الدقيقة."
       },
       {
         "q": "ما هي الترجمة القانونية الصحيحة لمصطلح 'Liquidated Damages' في عقود الفيدك (FIDIC)؟",
@@ -4972,67 +6459,97 @@ const MULTI_TRACK_100_EXAMS = {
           "تكاليف الشحن البحري"
         ],
         "answer": 0,
-        "explanation": "التعويض المقدر سلفاً في العقد عن كل يوم أو أسبوع تأخير في إنجاز المشروع دون حاجة لإثبات الضرر."
+        "explanation": "التعويض المقدر سلفاً في العقد عن كل يوم أو أسبوع تأخير في إنجاز المشروع دون حاجة لإثبات الضرر.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "كابينة المؤتمرات الدولية / الجلسة العامة",
+        "audioScript": "استمع إلى التسجيل الصوتي المنقول من كابينة الترجمة الفورية: ما هي الترجمة القانونية الصحيحة لمصطلح 'Liquidated Damages' في عقود الفيدك (FIDIC)؟ ثم حدد الإجابة الدقيقة."
       },
       {
         "q": "ما معنى عبارة 'Ad Referendum' عند توقيع المفاوض على مسودة اتفاقية؟",
         "cat": "إجراءات التوقيع الدولي",
         "options": [
-          "توقيع مشروط بمراجعة السلطة العليا المختصة وإقرارها",
           "توقيع نهائي غير قابل للطعن",
+          "توقيع مشروط بمراجعة السلطة العليا المختصة وإقرارها",
           "توقيع بالنيابة عن دولة ثالثة",
           "توقيع سري غير معلن"
         ],
-        "answer": 0,
-        "explanation": "التوقيع بشرط الرجوع للسلطة السياسية للتثبت من عدم تجاوز صلاحيات الوفد المفاوض."
+        "answer": 1,
+        "explanation": "التوقيع بشرط الرجوع للسلطة السياسية للتثبت من عدم تجاوز صلاحيات الوفد المفاوض.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "كابينة المؤتمرات الدولية / الجلسة العامة",
+        "audioScript": "استمع إلى التسجيل الصوتي المنقول من كابينة الترجمة الفورية: ما معنى عبارة 'Ad Referendum' عند توقيع المفاوض على مسودة اتفاقية؟ ثم حدد الإجابة الدقيقة."
       },
       {
         "q": "ما هو المقابل الاصطلاحي العربي لمصطلح 'De Facto' مقابل 'De Jure'؟",
         "cat": "المصطلحات المؤسساتية",
         "options": [
-          "بحكم الأمر الواقع مقابل بحكم القانون والشرعية الرسمية",
           "سري مقابل علني",
           "مؤقت مقابل دائم",
+          "بحكم الأمر الواقع مقابل بحكم القانون والشرعية الرسمية",
           "محلي مقابل دولي"
         ],
-        "answer": 0,
-        "explanation": "De Facto هو الواقع الفعلي المفروض، بينما De Jure هو الوضع الشرعي المعترف به قانوناً."
+        "answer": 2,
+        "explanation": "De Facto هو الواقع الفعلي المفروض، بينما De Jure هو الوضع الشرعي المعترف به قانوناً.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "كابينة المؤتمرات الدولية / الجلسة العامة",
+        "audioScript": "استمع إلى التسجيل الصوتي المنقول من كابينة الترجمة الفورية: ما هو المقابل الاصطلاحي العربي لمصطلح 'De Facto' مقابل 'De Jure'؟ ثم حدد الإجابة الدقيقة."
       },
       {
         "q": "ما الترجمة الدقيقة لمصطلح 'Joint and Several Liability' في المعاملات المالية؟",
         "cat": "المسؤولية القانونية",
         "options": [
-          "المسؤولية التضامنية والتكافلية (كل طرف مسؤول عن الكل وعن نصيبه)",
           "المسؤولية المحدودة بالأسهم فقط",
+          "المسؤولية التضامنية والتكافلية (كل طرف مسؤول عن الكل وعن نصيبه)",
           "المسؤولية الجزائية المشروطة",
           "انعدام المسؤولية المالية"
         ],
-        "answer": 0,
-        "explanation": "تضامن المدينين بحيث يحق للدائن مطالبة أي طرف بكامل الدين أو مطالبة الجميع مجتمعين."
+        "answer": 1,
+        "explanation": "تضامن المدينين بحيث يحق للدائن مطالبة أي طرف بكامل الدين أو مطالبة الجميع مجتمعين.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "كابينة المؤتمرات الدولية / الجلسة العامة",
+        "audioScript": "استمع إلى التسجيل الصوتي المنقول من كابينة الترجمة الفورية: ما الترجمة الدقيقة لمصطلح 'Joint and Several Liability' في المعاملات المالية؟ ثم حدد الإجابة الدقيقة."
       },
       {
         "q": "ما المقصود بـ 'Expressed Warranty' في عقود البيع التجاري الدولي؟",
         "cat": "الضمانات العقدية",
         "options": [
-          "الضمان الصريح المنصوص عليه بوضوح في بنود العقد",
           "الضمان الضمني المفترض عرفاً",
           "الضمان الشفهي غير المسجل",
+          "الضمان الصريح المنصوص عليه بوضوح في بنود العقد",
           "الضمان المنتهي الصلاحية"
         ],
-        "answer": 0,
-        "explanation": "الضمان الصريح هو التعهد التعاقدي المكتوب بوضوح خلافاً للضمان الضمني (Implied Warranty)."
+        "answer": 2,
+        "explanation": "الضمان الصريح هو التعهد التعاقدي المكتوب بوضوح خلافاً للضمان الضمني (Implied Warranty).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "كابينة المؤتمرات الدولية / الجلسة العامة",
+        "audioScript": "استمع إلى التسجيل الصوتي المنقول من كابينة الترجمة الفورية: ما المقصود بـ 'Expressed Warranty' في عقود البيع التجاري الدولي؟ ثم حدد الإجابة الدقيقة."
       },
       {
         "q": "ما المعنى الدقيق لعبارة 'Inter Alia' في التقارير الدولية؟",
         "cat": "اللاتينية المؤسساتية",
         "options": [
-          "من بين أمور أخرى / من جملتها (دون حصر)",
           "في غياب الأطراف",
           "بناءً على طلب الرئيس",
-          "في نهاية الجلسة"
+          "في نهاية الجلسة",
+          "من بين أمور أخرى / من جملتها (دون حصر)"
         ],
-        "answer": 0,
-        "explanation": "عبارة تفيد التمثيل لا الحصر، أي أن القائمة المذكورة ليست على سبيل الإحاطة التامة."
+        "answer": 3,
+        "explanation": "عبارة تفيد التمثيل لا الحصر، أي أن القائمة المذكورة ليست على سبيل الإحاطة التامة.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "كابينة المؤتمرات الدولية / الجلسة العامة",
+        "audioScript": "استمع إلى التسجيل الصوتي المنقول من كابينة الترجمة الفورية: ما المعنى الدقيق لعبارة 'Inter Alia' في التقارير الدولية؟ ثم حدد الإجابة الدقيقة."
       },
       {
         "q": "ما المقابل العربي لمصطلح 'Indemnification Clause' في عقود الاستثمار؟",
@@ -5044,79 +6561,114 @@ const MULTI_TRACK_100_EXAMS = {
           "بند الإعفاء الضريبي"
         ],
         "answer": 0,
-        "explanation": "البند الذي يلزم أحد الطرفين بتعويض الآخر والدفاع عنه ضد أي مطالبات أو خسائر ناتجة عن خرق العقد."
+        "explanation": "البند الذي يلزم أحد الطرفين بتعويض الآخر والدفاع عنه ضد أي مطالبات أو خسائر ناتجة عن خرق العقد.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "كابينة المؤتمرات الدولية / الجلسة العامة",
+        "audioScript": "استمع إلى التسجيل الصوتي المنقول من كابينة الترجمة الفورية: ما المقابل العربي لمصطلح 'Indemnification Clause' في عقود الاستثمار؟ ثم حدد الإجابة الدقيقة."
       },
       {
         "q": "ما الترجمة المعتمدة لمصطلح 'Arbitration Clause' في النزاعات العابرة للحدود؟",
         "cat": "التحكيم الدولي",
         "options": [
-          "شرط التحكيم (إحالة أي نزاع لمحكمين بدلاً من القضاء الوطني)",
           "شرط الوساطة الودية فقط",
+          "شرط التحكيم (إحالة أي نزاع لمحكمين بدلاً من القضاء الوطني)",
           "شرط الصلح الجنائي",
           "شرط مراجعة الأسعار"
         ],
-        "answer": 0,
-        "explanation": "بند بموجبه يتفق المتعاقدون على حل الخلافات عبر هيئات التحكيم الدولية (مثل ICC أو LCIA)."
+        "answer": 1,
+        "explanation": "بند بموجبه يتفق المتعاقدون على حل الخلافات عبر هيئات التحكيم الدولية (مثل ICC أو LCIA).",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "كابينة المؤتمرات الدولية / الجلسة العامة",
+        "audioScript": "استمع إلى التسجيل الصوتي المنقول من كابينة الترجمة الفورية: ما الترجمة المعتمدة لمصطلح 'Arbitration Clause' في النزاعات العابرة للحدود؟ ثم حدد الإجابة الدقيقة."
       },
       {
         "q": "ما المدلول الدقيق لـ 'Ex Gratia Payment' في التعويضات المالية؟",
         "cat": "التعويضات التقديرية",
         "options": [
-          "مبلغ مدفوع طواعية وتفضلاً دون إقرار بأي مسؤولية قانونية",
           "مبلغ محكوم به قضائياً",
           "قرض مصرفي إجباري",
-          "غرامة تهرب جمركي"
+          "غرامة تهرب جمركي",
+          "مبلغ مدفوع طواعية وتفضلاً دون إقرار بأي مسؤولية قانونية"
         ],
-        "answer": 0,
-        "explanation": "دفعة تسوية تُمنح تفضلاً من الدولة أو الشركة لجبر خواطر المتضررين دون الاعتراف بالذنب قانوناً."
+        "answer": 3,
+        "explanation": "دفعة تسوية تُمنح تفضلاً من الدولة أو الشركة لجبر خواطر المتضررين دون الاعتراف بالذنب قانوناً.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "كابينة المؤتمرات الدولية / الجلسة العامة",
+        "audioScript": "استمع إلى التسجيل الصوتي المنقول من كابينة الترجمة الفورية: ما المدلول الدقيق لـ 'Ex Gratia Payment' في التعويضات المالية؟ ثم حدد الإجابة الدقيقة."
       },
       {
         "q": "ما المقابل الرسمي لمصطلح 'Procès-Verbal' في الاجتماعات والتحقيقات الرسمية؟",
         "cat": "المصطلحات التوثيقية",
         "options": [
-          "محضر اجتماع رسمي / محضر ضبط قضائي",
           "تقرير مالي ختامي",
+          "محضر اجتماع رسمي / محضر ضبط قضائي",
           "دعوة لحضور مؤتمر",
           "جدول الأعمال المقترح"
         ],
-        "answer": 0,
-        "explanation": "الوثيقة الإجرائية الموثقة لوقائع جلسة رسمية أو ضبط مخالفة قانونية."
+        "answer": 1,
+        "explanation": "الوثيقة الإجرائية الموثقة لوقائع جلسة رسمية أو ضبط مخالفة قانونية.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "كابينة المؤتمرات الدولية / الجلسة العامة",
+        "audioScript": "استمع إلى التسجيل الصوتي المنقول من كابينة الترجمة الفورية: ما المقابل الرسمي لمصطلح 'Procès-Verbal' في الاجتماعات والتحقيقات الرسمية؟ ثم حدد الإجابة الدقيقة."
       },
       {
         "q": "ما الترجمة المعتمدة لمصطلح 'Sovereign Immunity' في القانون الدولي؟",
         "cat": "الحصانة الدولية",
         "options": [
-          "الحصانة السيادية للدول (عدم خضوع الدولة وقضائها لمحاكم دولة أخرى)",
           "الحصانة الجمركية للركاب",
+          "الحصانة السيادية للدول (عدم خضوع الدولة وقضائها لمحاكم دولة أخرى)",
           "حق الفيتو في مجلس الأمن",
           "الحق في إعلان الحرب"
         ],
-        "answer": 0,
-        "explanation": "المبدأ الذي يمنع مقاضاة دولة ذات سيادة أو مصادرة أصولها في المحاكم المحلية لدولة أجنبية."
+        "answer": 1,
+        "explanation": "المبدأ الذي يمنع مقاضاة دولة ذات سيادة أو مصادرة أصولها في المحاكم المحلية لدولة أجنبية.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "كابينة المؤتمرات الدولية / الجلسة العامة",
+        "audioScript": "استمع إلى التسجيل الصوتي المنقول من كابينة الترجمة الفورية: ما الترجمة المعتمدة لمصطلح 'Sovereign Immunity' في القانون الدولي؟ ثم حدد الإجابة الدقيقة."
       },
       {
         "q": "ما المعنى الدقيق لمصطلح 'Bilateral Agreement'؟",
         "cat": "أنواع الاتفاقيات",
         "options": [
-          "اتفاقية ثنائية (بين طرفين أو دولتين فقط)",
           "اتفاقية ثلاثية الأطراف",
           "معاهدة دولية مفتوحة لجميع الأمم",
-          "عقد عمل فردي"
+          "عقد عمل فردي",
+          "اتفاقية ثنائية (بين طرفين أو دولتين فقط)"
         ],
-        "answer": 0,
-        "explanation": "الاتفاق الثنائي المبرم بين كيانين أو دولتين متعاقدتين فقط."
+        "answer": 3,
+        "explanation": "الاتفاق الثنائي المبرم بين كيانين أو دولتين متعاقدتين فقط.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "كابينة المؤتمرات الدولية / الجلسة العامة",
+        "audioScript": "استمع إلى التسجيل الصوتي المنقول من كابينة الترجمة الفورية: ما المعنى الدقيق لمصطلح 'Bilateral Agreement'؟ ثم حدد الإجابة الدقيقة."
       },
       {
         "q": "ما معنى مصطلح 'Subpoena' في النظام القضائي الأنجلو-أمريكي (Common Law)؟",
         "cat": "الإجراءات القضائية",
         "options": [
-          "أمر استدعاء قضائي ملزم للمثول أو لتقديم مستندات تحت طائلة العقوبة",
           "حكم براءة نهائي",
           "عقد كفالة مالية",
+          "أمر استدعاء قضائي ملزم للمثول أو لتقديم مستندات تحت طائلة العقوبة",
           "مذكرة دفاع استئنافية"
         ],
-        "answer": 0,
-        "explanation": "أمر تصدره المحكمة يلزم الشخص بالشهادة أو إبراز مستندات تحت طائلة تهمة ازدراء المحكمة."
+        "answer": 2,
+        "explanation": "أمر تصدره المحكمة يلزم الشخص بالشهادة أو إبراز مستندات تحت طائلة تهمة ازدراء المحكمة.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "كابينة المؤتمرات الدولية / الجلسة العامة",
+        "audioScript": "استمع إلى التسجيل الصوتي المنقول من كابينة الترجمة الفورية: ما معنى مصطلح 'Subpoena' في النظام القضائي الأنجلو-أمريكي (Common Law)؟ ثم حدد الإجابة الدقيقة."
       },
       {
         "q": "ما المقابل العربي الدقيق لعبارة 'In Witness Whereof' التي تسبق تواقيع العقود؟",
@@ -5128,67 +6680,92 @@ const MULTI_TRACK_100_EXAMS = {
           "حسب الشريعة والقانون"
         ],
         "answer": 0,
-        "explanation": "الصيغة البروتوكولية الختامية المعتمدة تاريخياً قبل تواقيع الأطراف والشهود في العقود والاتفاقيات."
+        "explanation": "الصيغة البروتوكولية الختامية المعتمدة تاريخياً قبل تواقيع الأطراف والشهود في العقود والاتفاقيات.",
+        "skill": "listening",
+        "skillLabel": "🎧 فهم المسموع (Listening)",
+        "audioLang": "fr-FR",
+        "audioSpeaker": "كابينة المؤتمرات الدولية / الجلسة العامة",
+        "audioScript": "استمع إلى التسجيل الصوتي المنقول من كابينة الترجمة الفورية: ما المقابل العربي الدقيق لعبارة 'In Witness Whereof' التي تسبق تواقيع العقود؟ ثم حدد الإجابة الدقيقة."
       },
       {
         "q": "ما هو المدى الزمني المثالي للفارق الصوتي (Décalage / Ear-Voice Span) في كابينات المؤتمرات الفورية؟",
         "cat": "الترجمة الفورية للمؤتمرات",
         "options": [
-          "بين 2.0 إلى 4.0 ثوانٍ (حسب بنية اللغة المستهدفة وموضع الفعل)",
           "15 إلى 25 ثانية لتجميع الفقرة كاملة",
+          "بين 2.0 إلى 4.0 ثوانٍ (حسب بنية اللغة المستهدفة وموضع الفعل)",
           "0.1 ثانية مطابقة فورية تامة بدون تأخير",
           "دقيقة كاملة بعد انتهاء المتحدث"
         ],
-        "answer": 0,
-        "explanation": "المدى الزمني الدقيق (EVS) يتيح للمترجم استيعاب المعنى واكتشاف الفعل دون إرهاق الذاكرة قصيرة المدى."
+        "answer": 1,
+        "explanation": "المدى الزمني الدقيق (EVS) يتيح للمترجم استيعاب المعنى واكتشاف الفعل دون إرهاق الذاكرة قصيرة المدى.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "وثيقة مرجعية: مدونة السلوك المهني ومعايير الاعتماد ISO 17100 للمترجمين المحلفين",
+        "readingPassage": "[1] يُلزم المترجم المحلف بالتقيد الصارم بأمانة النص الأصلي وعدم إقحام أي تأويل شخصي يخل بالمركز القانوني للأطراف المتعاقدة.\n[2] تشترط المعايير الدولية خضوع كل ترجمة رسمية لمراجعة نظيرة مستقلة قبل إمهارها بالختم الرسمي وإيداعها في السجل التسلسلي."
       },
       {
         "q": "ما هي تقنية 'Salami Technique' المتبعة في الترجمة الفورية للمؤتمرات؟",
         "cat": "استراتيجيات الترجمة الفورية",
         "options": [
-          "تقطيع الجمل الطويلة والمعقدة إلى جمل قصيرة ومتماسكة لتخفيف العبء الذهني",
           "ترجمة كل كلمة بكلمة حرفياً",
           "حذف الصفات والظروف",
+          "تقطيع الجمل الطويلة والمعقدة إلى جمل قصيرة ومتماسكة لتخفيف العبء الذهني",
           "التوقف عن الترجمة كل دقيقتين"
         ],
-        "answer": 0,
-        "explanation": "استراتيجية تفكيك التراكيب المعقدة والمتداخلة في لغة المصدر إلى جمل قصيرة ومباشرة ومترابطة في لغة الهدف."
+        "answer": 2,
+        "explanation": "استراتيجية تفكيك التراكيب المعقدة والمتداخلة في لغة المصدر إلى جمل قصيرة ومباشرة ومترابطة في لغة الهدف.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "وثيقة مرجعية: مدونة السلوك المهني ومعايير الاعتماد ISO 17100 للمترجمين المحلفين",
+        "readingPassage": "[1] يُلزم المترجم المحلف بالتقيد الصارم بأمانة النص الأصلي وعدم إقحام أي تأويل شخصي يخل بالمركز القانوني للأطراف المتعاقدة.\n[2] تشترط المعايير الدولية خضوع كل ترجمة رسمية لمراجعة نظيرة مستقلة قبل إمهارها بالختم الرسمي وإيداعها في السجل التسلسلي."
       },
       {
         "q": "ما هو 'الترجمة التتابعية' (Consecutive Interpreting) مقارنة بالفورية؟",
         "cat": "أنماط الترجمة الشفهية",
         "options": [
-          "تحدث المترجم بعد انتهاء المتحدث من مقطعه معتمداً على التدوين والذاكرة",
           "تحدث المترجم في نفس اللحظة عبر الميكروفون",
           "ترجمة النصوص المكتوبة فقط في المكتب",
+          "تحدث المترجم بعد انتهاء المتحدث من مقطعه معتمداً على التدوين والذاكرة",
           "ترجمة الأفلام الوثائقية"
         ],
-        "answer": 0,
-        "explanation": "في التتابعية يستمع المترجم ويدون الملاحظات، ثم يقدم ترجمته بعد توقف المتحدث عن الكلام."
+        "answer": 2,
+        "explanation": "في التتابعية يستمع المترجم ويدون الملاحظات، ثم يقدم ترجمته بعد توقف المتحدث عن الكلام.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "وثيقة مرجعية: مدونة السلوك المهني ومعايير الاعتماد ISO 17100 للمترجمين المحلفين",
+        "readingPassage": "[1] يُلزم المترجم المحلف بالتقيد الصارم بأمانة النص الأصلي وعدم إقحام أي تأويل شخصي يخل بالمركز القانوني للأطراف المتعاقدة.\n[2] تشترط المعايير الدولية خضوع كل ترجمة رسمية لمراجعة نظيرة مستقلة قبل إمهارها بالختم الرسمي وإيداعها في السجل التسلسلي."
       },
       {
         "q": "ما هو 'Chuchotage' (الترجمة الوشوشية أو الهمسية)؟",
         "cat": "أنماط الترجمة الشفهية",
         "options": [
-          "الترجمة الفورية همساً لأذن مستمع واحد أو اثنين بدون معدات صوتية معقدة",
           "الترجمة عبر الراديو الوطني",
           "الصياغة القانونية المكتوبة",
+          "الترجمة الفورية همساً لأذن مستمع واحد أو اثنين بدون معدات صوتية معقدة",
           "تشفير المحادثات الدبلوماسية"
         ],
-        "answer": 0,
-        "explanation": "Chuchotage هو نمط فوري بدون كابينة يقف فيه المترجم خلف المستمع أو بجانبه ويهمس بالترجمة مباشرة."
+        "answer": 2,
+        "explanation": "Chuchotage هو نمط فوري بدون كابينة يقف فيه المترجم خلف المستمع أو بجانبه ويهمس بالترجمة مباشرة.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "وثيقة مرجعية: مدونة السلوك المهني ومعايير الاعتماد ISO 17100 للمترجمين المحلفين",
+        "readingPassage": "[1] يُلزم المترجم المحلف بالتقيد الصارم بأمانة النص الأصلي وعدم إقحام أي تأويل شخصي يخل بالمركز القانوني للأطراف المتعاقدة.\n[2] تشترط المعايير الدولية خضوع كل ترجمة رسمية لمراجعة نظيرة مستقلة قبل إمهارها بالختم الرسمي وإيداعها في السجل التسلسلي."
       },
       {
         "q": "ما هو مفهوم 'Relay Interpreting' (الترجمة عبر لغة وسيطة / الكابينة المحورية)؟",
         "cat": "كابينات المؤتمرات الفورية",
         "options": [
-          "استخدام لغة كابينة وسيطة (Pivot) عندما لا يجيد المترجم لغة المصدر مباشرة",
           "ترجمة المؤتمر بعد أسبوع",
+          "استخدام لغة كابينة وسيطة (Pivot) عندما لا يجيد المترجم لغة المصدر مباشرة",
           "ترجمة الحوار عبر الهاتف المحمول",
           "تبديل المترجمين كل ساعة"
         ],
-        "answer": 0,
-        "explanation": "تستمع كابينة اللغة النادرة إلى ترجمة كابينة وسيطة (كالفرنسية أو الإنجليزية) وتترجم منها للمستمعين."
+        "answer": 1,
+        "explanation": "تستمع كابينة اللغة النادرة إلى ترجمة كابينة وسيطة (كالفرنسية أو الإنجليزية) وتترجم منها للمستمعين.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "وثيقة مرجعية: مدونة السلوك المهني ومعايير الاعتماد ISO 17100 للمترجمين المحلفين",
+        "readingPassage": "[1] يُلزم المترجم المحلف بالتقيد الصارم بأمانة النص الأصلي وعدم إقحام أي تأويل شخصي يخل بالمركز القانوني للأطراف المتعاقدة.\n[2] تشترط المعايير الدولية خضوع كل ترجمة رسمية لمراجعة نظيرة مستقلة قبل إمهارها بالختم الرسمي وإيداعها في السجل التسلسلي."
       },
       {
         "q": "ما هو الحد الأقصى الموصى به لعمل مترجم المؤتمرات الفورية المنفرد في الكابينة؟",
@@ -5200,7 +6777,11 @@ const MULTI_TRACK_100_EXAMS = {
           "5 دقائق فقط"
         ],
         "answer": 0,
-        "explanation": "الإجهاد الذهني الشديد وانخفاض التركيز يفرضان وجود مترجمين اثنين يتبادلان كل 20 إلى 30 دقيقة."
+        "explanation": "الإجهاد الذهني الشديد وانخفاض التركيز يفرضان وجود مترجمين اثنين يتبادلان كل 20 إلى 30 دقيقة.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "وثيقة مرجعية: مدونة السلوك المهني ومعايير الاعتماد ISO 17100 للمترجمين المحلفين",
+        "readingPassage": "[1] يُلزم المترجم المحلف بالتقيد الصارم بأمانة النص الأصلي وعدم إقحام أي تأويل شخصي يخل بالمركز القانوني للأطراف المتعاقدة.\n[2] تشترط المعايير الدولية خضوع كل ترجمة رسمية لمراجعة نظيرة مستقلة قبل إمهارها بالختم الرسمي وإيداعها في السجل التسلسلي."
       },
       {
         "q": "ما هو 'Anticipation' (الاستباق أو التوقع الذهني) في الترجمة الفورية للألمانية؟",
@@ -5212,79 +6793,107 @@ const MULTI_TRACK_100_EXAMS = {
           "تسريع إيقاع الصوت"
         ],
         "answer": 0,
-        "explanation": "نظراً لأن الألمانية تضع الفعل في آخر الجملة الثانوية، يجب على المترجم استباق المعنى لتفادي التوقف الطويل."
+        "explanation": "نظراً لأن الألمانية تضع الفعل في آخر الجملة الثانوية، يجب على المترجم استباق المعنى لتفادي التوقف الطويل.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "وثيقة مرجعية: مدونة السلوك المهني ومعايير الاعتماد ISO 17100 للمترجمين المحلفين",
+        "readingPassage": "[1] يُلزم المترجم المحلف بالتقيد الصارم بأمانة النص الأصلي وعدم إقحام أي تأويل شخصي يخل بالمركز القانوني للأطراف المتعاقدة.\n[2] تشترط المعايير الدولية خضوع كل ترجمة رسمية لمراجعة نظيرة مستقلة قبل إمهارها بالختم الرسمي وإيداعها في السجل التسلسلي."
       },
       {
         "q": "ما الدور الحيوي لمترجم الكابينة الثاني غير المتحدث (The Passive Partner)؟",
         "cat": "العمل التشاركي في الكابينة",
         "options": [
-          "تدوين الأرقام والأسماء والمصطلحات الصعبة ومساعدة الزميل في المعاجم",
           "مغادرة الكابينة لشرب القهوة",
           "الاستماع للموسيقى بسماعاته",
-          "تغيير إعدادات الصوت للجمهور"
+          "تغيير إعدادات الصوت للجمهور",
+          "تدوين الأرقام والأسماء والمصطلحات الصعبة ومساعدة الزميل في المعاجم"
         ],
-        "answer": 0,
-        "explanation": "الشريك غير المتحدث يقدم دعماً حاسماً عبر رصد الأرقام الصعبة وتدوينها على ورقة أمام زميله المتحدث."
+        "answer": 3,
+        "explanation": "الشريك غير المتحدث يقدم دعماً حاسماً عبر رصد الأرقام الصعبة وتدوينها على ورقة أمام زميله المتحدث.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "وثيقة مرجعية: مدونة السلوك المهني ومعايير الاعتماد ISO 17100 للمترجمين المحلفين",
+        "readingPassage": "[1] يُلزم المترجم المحلف بالتقيد الصارم بأمانة النص الأصلي وعدم إقحام أي تأويل شخصي يخل بالمركز القانوني للأطراف المتعاقدة.\n[2] تشترط المعايير الدولية خضوع كل ترجمة رسمية لمراجعة نظيرة مستقلة قبل إمهارها بالختم الرسمي وإيداعها في السجل التسلسلي."
       },
       {
         "q": "ما هو 'Acoustic Shock' (الصدمة الصوتية) وكيف يتفاداه مترجم الكابينة؟",
         "cat": "الصحة المهنية للمترجمين",
         "options": [
-          "ارتفاع مفاجئ وحاد في الصوت في السماعة يؤذي السمع ويتفادى بمحددات الصوت الرقمية",
           "صدمة ناتجة عن انقطاع التيار الكهربائي",
+          "ارتفاع مفاجئ وحاد في الصوت في السماعة يؤذي السمع ويتفادى بمحددات الصوت الرقمية",
           "خوف المترجم من الجمهور",
           "عطل في ميكروفون الكابينة"
         ],
-        "answer": 0,
-        "explanation": "صدمة صوتية ناتجة عن صفير الميكروفونات؛ تتطلب تجهيزات ISO 2603 المزودة بنظام كبت الذروات (Limiters)."
+        "answer": 1,
+        "explanation": "صدمة صوتية ناتجة عن صفير الميكروفونات؛ تتطلب تجهيزات ISO 2603 المزودة بنظام كبت الذروات (Limiters).",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "وثيقة مرجعية: مدونة السلوك المهني ومعايير الاعتماد ISO 17100 للمترجمين المحلفين",
+        "readingPassage": "[1] يُلزم المترجم المحلف بالتقيد الصارم بأمانة النص الأصلي وعدم إقحام أي تأويل شخصي يخل بالمركز القانوني للأطراف المتعاقدة.\n[2] تشترط المعايير الدولية خضوع كل ترجمة رسمية لمراجعة نظيرة مستقلة قبل إمهارها بالختم الرسمي وإيداعها في السجل التسلسلي."
       },
       {
         "q": "ما هو المعيار الدولي القياسي لكابينات الترجمة الفورية الثابتة والمحمولة؟",
         "cat": "معايير الآيزو لكابينات المؤتمرات",
         "options": [
-          "ISO 2603 (الثابتة) و ISO 4043 (المتنقلة)",
           "ISO 9001 فقط",
+          "ISO 2603 (الثابتة) و ISO 4043 (المتنقلة)",
           "ISO 14001 للبيئة",
           "ISO 22000 للأغذية"
         ],
-        "answer": 0,
-        "explanation": "ISO 2603 و ISO 4043 تحددان متطلبات العزل الصوتي والرؤية المباشرة والتهوية لكابينات الترجمة."
+        "answer": 1,
+        "explanation": "ISO 2603 و ISO 4043 تحددان متطلبات العزل الصوتي والرؤية المباشرة والتهوية لكابينات الترجمة.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "وثيقة مرجعية: مدونة السلوك المهني ومعايير الاعتماد ISO 17100 للمترجمين المحلفين",
+        "readingPassage": "[1] يُلزم المترجم المحلف بالتقيد الصارم بأمانة النص الأصلي وعدم إقحام أي تأويل شخصي يخل بالمركز القانوني للأطراف المتعاقدة.\n[2] تشترط المعايير الدولية خضوع كل ترجمة رسمية لمراجعة نظيرة مستقلة قبل إمهارها بالختم الرسمي وإيداعها في السجل التسلسلي."
       },
       {
         "q": "ما المقصود بـ 'Sight Translation' (الترجمة الفورية الشفهية للنص المكتوب)؟",
         "cat": "أنماط الترجمة الشفهية",
         "options": [
-          "قراءة وثيقة مكتوبة وترجمتها فورياً بصوت مسموع ومباشر",
           "ترجمة الرسوم البيانية فقط",
           "حفظ النص غيباً قبل أسبوع",
+          "قراءة وثيقة مكتوبة وترجمتها فورياً بصوت مسموع ومباشر",
           "ترجمة لغة الإشارة"
         ],
-        "answer": 0,
-        "explanation": "الترجمة على الشاشة أو من الورقة فوراً بصوت جهوري دون كتابة مسبقة للنص الهدف."
+        "answer": 2,
+        "explanation": "الترجمة على الشاشة أو من الورقة فوراً بصوت جهوري دون كتابة مسبقة للنص الهدف.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "وثيقة مرجعية: مدونة السلوك المهني ومعايير الاعتماد ISO 17100 للمترجمين المحلفين",
+        "readingPassage": "[1] يُلزم المترجم المحلف بالتقيد الصارم بأمانة النص الأصلي وعدم إقحام أي تأويل شخصي يخل بالمركز القانوني للأطراف المتعاقدة.\n[2] تشترط المعايير الدولية خضوع كل ترجمة رسمية لمراجعة نظيرة مستقلة قبل إمهارها بالختم الرسمي وإيداعها في السجل التسلسلي."
       },
       {
         "q": "في الترجمة الفورية، ماذا يفعل المترجم عند مواجهة نكتة أو مثل شعبي غير قابل للنقل؟",
         "cat": "الاستراتيجيات الثقافية في الكابينة",
         "options": [
-          "نقل المعنى الدلالي العام أو شرح مقصده سريعاً أو توظيف مثل مكافئ في ثقافة الهدف",
           "الصمت التام لدقيقة كاملة",
           "ترجمة الكلمات حرفياً بلا معنى",
-          "الاعتذار للجمهور وإغلاق الميكروفون"
+          "الاعتذار للجمهور وإغلاق الميكروفون",
+          "نقل المعنى الدلالي العام أو شرح مقصده سريعاً أو توظيف مثل مكافئ في ثقافة الهدف"
         ],
-        "answer": 0,
-        "explanation": "إما توظيف مثل مكافئ وظيفياً، أو نقل الغرض البلاغي (ضحك أو تلطيف الأجواء) بلباقة تامة."
+        "answer": 3,
+        "explanation": "إما توظيف مثل مكافئ وظيفياً، أو نقل الغرض البلاغي (ضحك أو تلطيف الأجواء) بلباقة تامة.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "وثيقة مرجعية: مدونة السلوك المهني ومعايير الاعتماد ISO 17100 للمترجمين المحلفين",
+        "readingPassage": "[1] يُلزم المترجم المحلف بالتقيد الصارم بأمانة النص الأصلي وعدم إقحام أي تأويل شخصي يخل بالمركز القانوني للأطراف المتعاقدة.\n[2] تشترط المعايير الدولية خضوع كل ترجمة رسمية لمراجعة نظيرة مستقلة قبل إمهارها بالختم الرسمي وإيداعها في السجل التسلسلي."
       },
       {
         "q": "ما هو 'Shadowing' (التظليل الصوتي) وما فائدته الأكاديمية؟",
         "cat": "تدريب مترجمي الكابينات",
         "options": [
-          "تكرار كلام المتحدث في نفس اللحظة بنفس لغته لتطوير مرونة السمع والنطق المتزامن",
           "ترجمة الظلال في المسرح",
+          "تكرار كلام المتحدث في نفس اللحظة بنفس لغته لتطوير مرونة السمع والنطق المتزامن",
           "تسجيل الصوت في غرفة مظلمة",
           "إخفاء هوية المترجم"
         ],
-        "answer": 0,
-        "explanation": "تمرين تدريبي أساسي في مدارس الترجمة لفك الارتباط بين مهارة الاستماع ومهارة التعبير الصوتي المتزامن."
+        "answer": 1,
+        "explanation": "تمرين تدريبي أساسي في مدارس الترجمة لفك الارتباط بين مهارة الاستماع ومهارة التعبير الصوتي المتزامن.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "وثيقة مرجعية: مدونة السلوك المهني ومعايير الاعتماد ISO 17100 للمترجمين المحلفين",
+        "readingPassage": "[1] يُلزم المترجم المحلف بالتقيد الصارم بأمانة النص الأصلي وعدم إقحام أي تأويل شخصي يخل بالمركز القانوني للأطراف المتعاقدة.\n[2] تشترط المعايير الدولية خضوع كل ترجمة رسمية لمراجعة نظيرة مستقلة قبل إمهارها بالختم الرسمي وإيداعها في السجل التسلسلي."
       },
       {
         "q": "ما هو الترتيب المكاني الأمثل لموقع كابينة الترجمة في قاعة المؤتمر؟",
@@ -5296,43 +6905,59 @@ const MULTI_TRACK_100_EXAMS = {
           "بجوار المطبخ وبوفيه الطعام"
         ],
         "answer": 0,
-        "explanation": "تشترط معايير الاتحاد الدولي لمترجمي المؤتمرات (AIIC) رؤية بصرية كاملة ومباشرة للمتحدث وحركاته وإيماءاته."
+        "explanation": "تشترط معايير الاتحاد الدولي لمترجمي المؤتمرات (AIIC) رؤية بصرية كاملة ومباشرة للمتحدث وحركاته وإيماءاته.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "وثيقة مرجعية: مدونة السلوك المهني ومعايير الاعتماد ISO 17100 للمترجمين المحلفين",
+        "readingPassage": "[1] يُلزم المترجم المحلف بالتقيد الصارم بأمانة النص الأصلي وعدم إقحام أي تأويل شخصي يخل بالمركز القانوني للأطراف المتعاقدة.\n[2] تشترط المعايير الدولية خضوع كل ترجمة رسمية لمراجعة نظيرة مستقلة قبل إمهارها بالختم الرسمي وإيداعها في السجل التسلسلي."
       },
       {
         "q": "ما وظيفة زر 'Mute / Cough Button' في وحدة تحكم مترجم الكابينة؟",
         "cat": "تجهيزات كابينة الترجمة",
         "options": [
-          "كتم الميكروفون لحظياً للسعال أو شرب الماء دون وصول الصوت للمستمعين",
           "إيقاف ترجمة الزميل",
           "رفع مستوى الصوت في القاعة",
+          "كتم الميكروفون لحظياً للسعال أو شرب الماء دون وصول الصوت للمستمعين",
           "تسجيل الكلمة في الأرشيف"
         ],
-        "answer": 0,
-        "explanation": "زر الكتم اللحظي يمنع انتقال أصوات السعال أو النحنحة أو تنفس المترجم إلى سماعات المندوبين."
+        "answer": 2,
+        "explanation": "زر الكتم اللحظي يمنع انتقال أصوات السعال أو النحنحة أو تنفس المترجم إلى سماعات المندوبين.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "وثيقة مرجعية: مدونة السلوك المهني ومعايير الاعتماد ISO 17100 للمترجمين المحلفين",
+        "readingPassage": "[1] يُلزم المترجم المحلف بالتقيد الصارم بأمانة النص الأصلي وعدم إقحام أي تأويل شخصي يخل بالمركز القانوني للأطراف المتعاقدة.\n[2] تشترط المعايير الدولية خضوع كل ترجمة رسمية لمراجعة نظيرة مستقلة قبل إمهارها بالختم الرسمي وإيداعها في السجل التسلسلي."
       },
       {
         "q": "ما هو تصنيف اللغات في الاتحاد الدولي لمترجمي المؤتمرات (AIIC)؟",
         "cat": "معايير AIIC المهنية",
         "options": [
-          "اللغة A (الأم)، واللغة B (اللغة النشطة الثانية)، واللغة C (اللغة السلبية للاستيعاب فقط)",
           "اللغة 1 واللغة 2 واللغة 3 حسب السعر",
           "لغات شرقية وغربية",
-          "لغات رسمية ولغات عامية"
+          "لغات رسمية ولغات عامية",
+          "اللغة A (الأم)، واللغة B (اللغة النشطة الثانية)، واللغة C (اللغة السلبية للاستيعاب فقط)"
         ],
-        "answer": 0,
-        "explanation": "تصنيف AIIC: اللغة A ينقل إليها بحرية تامة؛ اللغة B ينقل إليها ومنها؛ اللغة C يفهمها وينقل منها فقط للغته الأم."
+        "answer": 3,
+        "explanation": "تصنيف AIIC: اللغة A ينقل إليها بحرية تامة؛ اللغة B ينقل إليها ومنها؛ اللغة C يفهمها وينقل منها فقط للغته الأم.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "وثيقة مرجعية: مدونة السلوك المهني ومعايير الاعتماد ISO 17100 للمترجمين المحلفين",
+        "readingPassage": "[1] يُلزم المترجم المحلف بالتقيد الصارم بأمانة النص الأصلي وعدم إقحام أي تأويل شخصي يخل بالمركز القانوني للأطراف المتعاقدة.\n[2] تشترط المعايير الدولية خضوع كل ترجمة رسمية لمراجعة نظيرة مستقلة قبل إمهارها بالختم الرسمي وإيداعها في السجل التسلسلي."
       },
       {
         "q": "ما هو 'Retour Interpreting' (الترجمة العكسية)؟",
         "cat": "أنماط الترجمة الشفهية",
         "options": [
-          "الترجمة من لغة المترجم الأم (A) إلى لغته النشطة الثانية (B)",
           "العودة للترجمة بعد التقاعد",
           "ترجمة المسودات القديمة",
+          "الترجمة من لغة المترجم الأم (A) إلى لغته النشطة الثانية (B)",
           "تكرار الجملة بالعكس"
         ],
-        "answer": 0,
-        "explanation": "الترجمة العكسية (Retour) تعني ترجمة المترجم من لغته الأم إلى لغته الأجنبية الثانية المتقنة."
+        "answer": 2,
+        "explanation": "الترجمة العكسية (Retour) تعني ترجمة المترجم من لغته الأم إلى لغته الأجنبية الثانية المتقنة.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "وثيقة مرجعية: مدونة السلوك المهني ومعايير الاعتماد ISO 17100 للمترجمين المحلفين",
+        "readingPassage": "[1] يُلزم المترجم المحلف بالتقيد الصارم بأمانة النص الأصلي وعدم إقحام أي تأويل شخصي يخل بالمركز القانوني للأطراف المتعاقدة.\n[2] تشترط المعايير الدولية خضوع كل ترجمة رسمية لمراجعة نظيرة مستقلة قبل إمهارها بالختم الرسمي وإيداعها في السجل التسلسلي."
       },
       {
         "q": "ما هي استراتيجية 'Reformulation' (إعادة الصياغة الذكية) في الترجمة الفورية؟",
@@ -5344,55 +6969,75 @@ const MULTI_TRACK_100_EXAMS = {
           "إضافة معلومات من الذاكرة الشخصية"
         ],
         "answer": 0,
-        "explanation": "إعادة سبك المعنى بأسلوب سلس ومباشر يراعي فصاحة لغة الهدف ويوصل الرسالة بأقصر طريق."
+        "explanation": "إعادة سبك المعنى بأسلوب سلس ومباشر يراعي فصاحة لغة الهدف ويوصل الرسالة بأقصر طريق.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "وثيقة مرجعية: مدونة السلوك المهني ومعايير الاعتماد ISO 17100 للمترجمين المحلفين",
+        "readingPassage": "[1] يُلزم المترجم المحلف بالتقيد الصارم بأمانة النص الأصلي وعدم إقحام أي تأويل شخصي يخل بالمركز القانوني للأطراف المتعاقدة.\n[2] تشترط المعايير الدولية خضوع كل ترجمة رسمية لمراجعة نظيرة مستقلة قبل إمهارها بالختم الرسمي وإيداعها في السجل التسلسلي."
       },
       {
         "q": "ما المقصود بـ 'Décalage Management' عندما يتحدث الخطيب بسرعة فائقة غير اعتيادية؟",
         "cat": "التحكم في سرعة الإلقاء",
         "options": [
-          "تكثيف الترجمة وتطبيق التلخيص الذكي والتركيز على الأفكار المحورية والمعطيات",
           "الصراخ في الميكروفون",
           "طلب خفض الإضاءة في القاعة",
+          "تكثيف الترجمة وتطبيق التلخيص الذكي والتركيز على الأفكار المحورية والمعطيات",
           "التوقف عن متابعة الخطيب نهائياً"
         ],
-        "answer": 0,
-        "explanation": "عند السرعة الفائقة يلجأ المترجم إلى ضغط النص (Condensation) وحذف الحشو والإبقاء على جوهر الرسالة."
+        "answer": 2,
+        "explanation": "عند السرعة الفائقة يلجأ المترجم إلى ضغط النص (Condensation) وحذف الحشو والإبقاء على جوهر الرسالة.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "وثيقة مرجعية: مدونة السلوك المهني ومعايير الاعتماد ISO 17100 للمترجمين المحلفين",
+        "readingPassage": "[1] يُلزم المترجم المحلف بالتقيد الصارم بأمانة النص الأصلي وعدم إقحام أي تأويل شخصي يخل بالمركز القانوني للأطراف المتعاقدة.\n[2] تشترط المعايير الدولية خضوع كل ترجمة رسمية لمراجعة نظيرة مستقلة قبل إمهارها بالختم الرسمي وإيداعها في السجل التسلسلي."
       },
       {
         "q": "ما هو واجب 'السرية المهنية' (Professional Secrecy) لمترجم المؤتمرات؟",
         "cat": "أخلاقيات مهنة الترجمة",
         "options": [
-          "الالتزام التام بعدم إفشاء أو استغلال أي معلومات تم الاطلاع عليها في الاجتماعات المغلقة",
           "إخبار وسائل الإعلام بما دار في الكواليس",
+          "الالتزام التام بعدم إفشاء أو استغلال أي معلومات تم الاطلاع عليها في الاجتماعات المغلقة",
           "كتابة مذكرات شخصية عن أسرار الرؤساء",
           "بيع الوثائق للشركات المنافسة"
         ],
-        "answer": 0,
-        "explanation": "أخلاقيات AIIC و ISO تلزم المترجم بالصمت التام وكتمان أسرار الاجتماعات المغلقة طوال حياته المهنية."
+        "answer": 1,
+        "explanation": "أخلاقيات AIIC و ISO تلزم المترجم بالصمت التام وكتمان أسرار الاجتماعات المغلقة طوال حياته المهنية.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "وثيقة مرجعية: مدونة السلوك المهني ومعايير الاعتماد ISO 17100 للمترجمين المحلفين",
+        "readingPassage": "[1] يُلزم المترجم المحلف بالتقيد الصارم بأمانة النص الأصلي وعدم إقحام أي تأويل شخصي يخل بالمركز القانوني للأطراف المتعاقدة.\n[2] تشترط المعايير الدولية خضوع كل ترجمة رسمية لمراجعة نظيرة مستقلة قبل إمهارها بالختم الرسمي وإيداعها في السجل التسلسلي."
       },
       {
         "q": "ما المقصود بـ 'Simultaneous Interpretation with Text' في الكابينة؟",
         "cat": "استراتيجيات الكابينة",
         "options": [
-          "متابعة النص المكتوب أمام المترجم مع الاستماع الحي لتصويبات المتحدث المرتجلة",
           "قراءة النص المطبوع بصوت آلي دون الاستماع للمتحدث",
           "ترجمة النص كتابياً على ورقة بيضاء",
-          "تجاهل الصوت والاكتفاء بالنص"
+          "تجاهل الصوت والاكتفاء بالنص",
+          "متابعة النص المكتوب أمام المترجم مع الاستماع الحي لتصويبات المتحدث المرتجلة"
         ],
-        "answer": 0,
-        "explanation": "المترجم يقرأ النص ويتابع بأذنيه ليرصد أي فقرات يتجاوزها المتحدث أو يضيفها بصورة مفاجئة."
+        "answer": 3,
+        "explanation": "المترجم يقرأ النص ويتابع بأذنيه ليرصد أي فقرات يتجاوزها المتحدث أو يضيفها بصورة مفاجئة.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "وثيقة مرجعية: مدونة السلوك المهني ومعايير الاعتماد ISO 17100 للمترجمين المحلفين",
+        "readingPassage": "[1] يُلزم المترجم المحلف بالتقيد الصارم بأمانة النص الأصلي وعدم إقحام أي تأويل شخصي يخل بالمركز القانوني للأطراف المتعاقدة.\n[2] تشترط المعايير الدولية خضوع كل ترجمة رسمية لمراجعة نظيرة مستقلة قبل إمهارها بالختم الرسمي وإيداعها في السجل التسلسلي."
       },
       {
         "q": "ما هي 'Déformation Professionnelle' الشائعة لمترجمي الكابينات؟",
         "cat": "علم النفس اللغوي للمترجمين",
         "options": [
-          "فرط الحساسية للأخطاء اللغوية في الحياة اليومية ومقاطعة المتحدثين تلقائياً",
           "فقدان القدرة على الكتابة بالقلم",
           "نسيان اللغة الأم بالكامل",
+          "فرط الحساسية للأخطاء اللغوية في الحياة اليومية ومقاطعة المتحدثين تلقائياً",
           "الرغبة في التحدث بالإنجليزية فقط"
         ],
-        "answer": 0,
-        "explanation": "ظاهرة نفسية يصبح فيها المترجم مفرط التدقيق في مخارج الحروف وصياغة الجمل في الحوارات العادية."
+        "answer": 2,
+        "explanation": "ظاهرة نفسية يصبح فيها المترجم مفرط التدقيق في مخارج الحروف وصياغة الجمل في الحوارات العادية.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "وثيقة مرجعية: مدونة السلوك المهني ومعايير الاعتماد ISO 17100 للمترجمين المحلفين",
+        "readingPassage": "[1] يُلزم المترجم المحلف بالتقيد الصارم بأمانة النص الأصلي وعدم إقحام أي تأويل شخصي يخل بالمركز القانوني للأطراف المتعاقدة.\n[2] تشترط المعايير الدولية خضوع كل ترجمة رسمية لمراجعة نظيرة مستقلة قبل إمهارها بالختم الرسمي وإيداعها في السجل التسلسلي."
       },
       {
         "q": "ما هو 'Cognitive Load' (العبء المعرفي) في الترجمة الشفهية؟",
@@ -5404,43 +7049,57 @@ const MULTI_TRACK_100_EXAMS = {
           "درجة حرارة الكابينة"
         ],
         "answer": 0,
-        "explanation": "تعدد المهام المعرفية المتزامنة في أجزاء من الثانية يستهلك الطاقة الذهنية ويتطلب تركيزاً استثنائياً."
+        "explanation": "تعدد المهام المعرفية المتزامنة في أجزاء من الثانية يستهلك الطاقة الذهنية ويتطلب تركيزاً استثنائياً.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "وثيقة مرجعية: مدونة السلوك المهني ومعايير الاعتماد ISO 17100 للمترجمين المحلفين",
+        "readingPassage": "[1] يُلزم المترجم المحلف بالتقيد الصارم بأمانة النص الأصلي وعدم إقحام أي تأويل شخصي يخل بالمركز القانوني للأطراف المتعاقدة.\n[2] تشترط المعايير الدولية خضوع كل ترجمة رسمية لمراجعة نظيرة مستقلة قبل إمهارها بالختم الرسمي وإيداعها في السجل التسلسلي."
       },
       {
         "q": "ما هو 'Ear-Voice Span Compression'؟",
         "cat": "تقنيات الكابينة المتقدمة",
         "options": [
-          "تقليص الفارق الزمني عبر التوقع المعجمي عند قرب انتهاء الخطاب أو ضيق الوقت",
           "إغلاق إحدى الأذنين باليد",
           "خفض نبرة الصوت في السماعة",
-          "التحدث دون توقف"
+          "التحدث دون توقف",
+          "تقليص الفارق الزمني عبر التوقع المعجمي عند قرب انتهاء الخطاب أو ضيق الوقت"
         ],
-        "answer": 0,
-        "explanation": "تقليص زمن الانتظار بذكاء لتفادي تراكم الكلام غير المترجم في ذاكرة العمل قصيرة المدى."
+        "answer": 3,
+        "explanation": "تقليص زمن الانتظار بذكاء لتفادي تراكم الكلام غير المترجم في ذاكرة العمل قصيرة المدى.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "وثيقة مرجعية: مدونة السلوك المهني ومعايير الاعتماد ISO 17100 للمترجمين المحلفين",
+        "readingPassage": "[1] يُلزم المترجم المحلف بالتقيد الصارم بأمانة النص الأصلي وعدم إقحام أي تأويل شخصي يخل بالمركز القانوني للأطراف المتعاقدة.\n[2] تشترط المعايير الدولية خضوع كل ترجمة رسمية لمراجعة نظيرة مستقلة قبل إمهارها بالختم الرسمي وإيداعها في السجل التسلسلي."
       },
       {
         "q": "ما هي مواصفة الجودة المعتمدة دولياً لخدمات الترجمة الشفهية؟",
         "cat": "معايير الآيزو الدولية",
         "options": [
-          "ISO 18841:2018 (Interpretation Services)",
           "ISO 9001 العامة",
           "ISO 27001 لأمن المعلومات",
-          "ISO 45001 للسلامة"
+          "ISO 45001 للسلامة",
+          "ISO 18841:2018 (Interpretation Services)"
         ],
-        "answer": 0,
-        "explanation": "ISO 18841:2018 هي المواصفة القياسية العالمية المتخصصة في المبادئ والمتطلبات الأساسية لخدمات الترجمة الشفهية."
+        "answer": 3,
+        "explanation": "ISO 18841:2018 هي المواصفة القياسية العالمية المتخصصة في المبادئ والمتطلبات الأساسية لخدمات الترجمة الشفهية.",
+        "skill": "reading",
+        "skillLabel": "📖 فهم المقروء (Reading)",
+        "passageTitle": "وثيقة مرجعية: مدونة السلوك المهني ومعايير الاعتماد ISO 17100 للمترجمين المحلفين",
+        "readingPassage": "[1] يُلزم المترجم المحلف بالتقيد الصارم بأمانة النص الأصلي وعدم إقحام أي تأويل شخصي يخل بالمركز القانوني للأطراف المتعاقدة.\n[2] تشترط المعايير الدولية خضوع كل ترجمة رسمية لمراجعة نظيرة مستقلة قبل إمهارها بالختم الرسمي وإيداعها في السجل التسلسلي."
       },
       {
         "q": "ما هي القاعدة الذهبية الأولى لنظام روزان (Jean-François Rozan 1956) في التدوين التتابعي؟",
         "cat": "نظام روزان للترجمة التتابعية",
         "options": [
-          "تدوين الفكرة والمعنى بدلاً من الكلمات الحرفية (Transposition de l'idée plutôt que du mot)",
           "كتابة كل كلمة كاملة دون اختصارات",
+          "تدوين الفكرة والمعنى بدلاً من الكلمات الحرفية (Transposition de l'idée plutôt que du mot)",
           "الاعتماد على التسجيل الصوتي بدون رموز",
           "ترجمة الجملة إلى الإنجليزية أولاً قبل التدوين"
         ],
-        "answer": 0,
-        "explanation": "المبدأ الأول لروزان: يجب تسجيل الفكرة المجردة برمز دال وليس اللفظ الحرفي المنطوق."
+        "answer": 1,
+        "explanation": "المبدأ الأول لروزان: يجب تسجيل الفكرة المجردة برمز دال وليس اللفظ الحرفي المنطوق.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما هو مبدأ 'Verticality' (العمودية) في قواعد روزان السبع للتدوين؟",
@@ -5452,67 +7111,79 @@ const MULTI_TRACK_100_EXAMS = {
           "استخدام خطوط عمودية ملونة"
         ],
         "answer": 0,
-        "explanation": "التدوين العمودي (Verticality) يفكك تداخل الكلمات ويجعل الفاعل والحدث والنتيجة تتدفق رأسياً."
+        "explanation": "التدوين العمودي (Verticality) يفكك تداخل الكلمات ويجعل الفاعل والحدث والنتيجة تتدفق رأسياً.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما هو مبدأ 'Shift' (الإزاحة أو التدرج الأفقي) عند روزان؟",
         "cat": "نظام روزان للتدوين",
         "options": [
-          "إزاحة العناصر التابعة للسطر التالي نحو اليمين أو اليسار لبيان تبعيتها للعنصر الرئيس",
           "كتابة الكلمات بحجم خط مائل",
           "تغيير الدفتر كل خمس دقائق",
+          "إزاحة العناصر التابعة للسطر التالي نحو اليمين أو اليسار لبيان تبعيتها للعنصر الرئيس",
           "تحريك القلم بسرعة فائقة"
         ],
-        "answer": 0,
-        "explanation": "الإزاحة التدرجية توضح العلاقات التبعية كالصفات والظروف تحت المتبوع مباشرة كشجرة دلالية."
+        "answer": 2,
+        "explanation": "الإزاحة التدرجية توضح العلاقات التبعية كالصفات والظروف تحت المتبوع مباشرة كشجرة دلالية.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما هو الرمز المعتمد عالمياً في التدوين لتمثيل مفهوم 'الزيادة أو النمو أو التصاعد'؟",
         "cat": "رموز التدوين التتابعي",
         "options": [
-          "سهم مائل للأعلى (↗ أو ↑)",
           "علامة استفهام مقلوبة",
+          "سهم مائل للأعلى (↗ أو ↑)",
           "دائرة مغلقة",
           "حرف X كبير"
         ],
-        "answer": 0,
-        "explanation": "الأسهم من الرموز الأساسية عند روزان للدلالة على الاتجاه (صعود، هبوط، تبادل، تقدم)."
+        "answer": 1,
+        "explanation": "الأسهم من الرموز الأساسية عند روزان للدلالة على الاتجاه (صعود، هبوط، تبادل، تقدم).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "كيف يدون مترجم التتابعية روابط العطف والسببية (الروابط المنطقية) وفق نظام روزان؟",
         "cat": "قواعد روزان السبع",
         "options": [
-          "تدوينها في أقصى هامش الصفحة الأيسر/الأيمن لبيان الانتقال المنطقي بوضوح",
           "كتابتها بحروف كبيرة في المنتصف",
           "تجاهلها تماماً لعدم أهميتها",
+          "تدوينها في أقصى هامش الصفحة الأيسر/الأيمن لبيان الانتقال المنطقي بوضوح",
           "وضع نقطتين فقط"
         ],
-        "answer": 0,
-        "explanation": "الروابط المنطقية (Articulation) هي عصب الخطاب؛ وتوضع في الهامش لتبين التحول الذهني (لكن، إذن، بما أن)."
+        "answer": 2,
+        "explanation": "الروابط المنطقية (Articulation) هي عصب الخطاب؛ وتوضع في الهامش لتبين التحول الذهني (لكن، إذن، بما أن).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "كيف يرمز روزان للأزمنة الماضية والمستقبلية في تدوين الأفعال؟",
         "cat": "تدوين الأزمنة عند روزان",
         "options": [
-          "وضع خط مائل أو مؤشر فوق رمز الفعل للماضي، أو سهم أمامي للمستقبل",
           "كتابة السنة الكاملة بالأرقام",
           "رسم ساعة رملية",
+          "وضع خط مائل أو مؤشر فوق رمز الفعل للماضي، أو سهم أمامي للمستقبل",
           "استخدام لون أحمر للمستقبل"
         ],
-        "answer": 0,
-        "explanation": "التعبير عن الزمن برمز إشاري فوق رمز الفعل لتفادي كتابة صيغة التصريف الطويلة."
+        "answer": 2,
+        "explanation": "التعبير عن الزمن برمز إشاري فوق رمز الفعل لتفادي كتابة صيغة التصريف الطويلة.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما هو رمز النفي القياسي والسريع في دفتر التدوين التتابعي؟",
         "cat": "رموز نظام روزان",
         "options": [
-          "شطب الرمز بخط مائل أو وضع دائرة بداخلها خط (Ø) أو علامة (NO)",
           "كتابة كلمة Not كاملة بخط عريض",
+          "شطب الرمز بخط مائل أو وضع دائرة بداخلها خط (Ø) أو علامة (NO)",
           "رسم سحابة سوداء",
           "ترك سطر فارغ في الدفتر"
         ],
-        "answer": 0,
-        "explanation": "الشطب المائل أو علامة الشطب تلغي المعنى مباشرة وتدل على الامتناع أو النفي القطعي."
+        "answer": 1,
+        "explanation": "الشطب المائل أو علامة الشطب تلغي المعنى مباشرة وتدل على الامتناع أو النفي القطعي.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما نوع الدفتر الموصى به عالمياً لتدوين الترجمة التتابعية؟",
@@ -5524,43 +7195,51 @@ const MULTI_TRACK_100_EXAMS = {
           "دفتر مدرسي مسطر بالمربعات"
         ],
         "answer": 0,
-        "explanation": "الدفتر الحلزوني العلوي يتيح قلب الصفحات بيد واحدة بسرعة فائقة دون إصدار أي صوت يشتت الخطاب."
+        "explanation": "الدفتر الحلزوني العلوي يتيح قلب الصفحات بيد واحدة بسرعة فائقة دون إصدار أي صوت يشتت الخطاب.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما المقصود بـ 'Non-verbal Note-taking' في مدارس الترجمة العليا (ESIT و FTI)؟",
         "cat": "نظريات التدوين التتابعي",
         "options": [
-          "استخدام رموز تصويرية ومجردة مستقلة عن ألفاظ أي لغة لتسهيل القراءة بأي لغة هدف",
           "التحدث بالإشارات فقط دون كلام",
           "الرسم التشكيلي الزيتي",
-          "التصوير الفوتوغرافي"
+          "التصوير الفوتوغرافي",
+          "استخدام رموز تصويرية ومجردة مستقلة عن ألفاظ أي لغة لتسهيل القراءة بأي لغة هدف"
         ],
-        "answer": 0,
-        "explanation": "الرمز اللالفظي يعبر عن المفهوم المحض مما يحرر المترجم من فخ الترجمة الحرفية لألفاظ المصدر."
+        "answer": 3,
+        "explanation": "الرمز اللالفظي يعبر عن المفهوم المحض مما يحرر المترجم من فخ الترجمة الحرفية لألفاظ المصدر.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "في نظام روزان، ما الرمز الدال على 'الدولة أو الأمة أو الشعب'؟",
         "cat": "رموز التدوين التتابعي",
         "options": [
-          "دائرة بداخلها نقطة أو الرمز المعتمد للبلد (مثل DZ, FR, US)",
           "رسم شجرة خضراء",
           "كتابة رقم الهاتف",
+          "دائرة بداخلها نقطة أو الرمز المعتمد للبلد (مثل DZ, FR, US)",
           "مربع فارغ تماماً"
         ],
-        "answer": 0,
-        "explanation": "رموز الهيئات والشعوب تختصر بوضع رمز الدائرة أو كود الدولة الإيزو الدولي."
+        "answer": 2,
+        "explanation": "رموز الهيئات والشعوب تختصر بوضع رمز الدائرة أو كود الدولة الإيزو الدولي.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "وفقاً للمواصفة القياسية العالمية ISO 17100:2015، ما هي مرحلة 'Revision' الإلزامية؟",
         "cat": "معايير الجودة والاعتماد ISO",
         "options": [
-          "فحص ثنائي اللغة يقارن النص الهدف بالنص المصدر بواسطة مدقق ثانٍ مؤهل ومستقل",
           "التدقيق الإملائي الآلي عبر برنامج Word",
+          "فحص ثنائي اللغة يقارن النص الهدف بالنص المصدر بواسطة مدقق ثانٍ مؤهل ومستقل",
           "مراجعة المترجم نفسه لنصه بعد أسبوع",
           "طباعة الوثيقة وختمها مباشرة دون فحص"
         ],
-        "answer": 0,
-        "explanation": "المواصفة تشترط إلزامياً وجود مرحلة Revision يقوم بها مراجع ثانٍ مستقل ومؤهل يقارن النصين سطراً بسطر."
+        "answer": 1,
+        "explanation": "المواصفة تشترط إلزامياً وجود مرحلة Revision يقوم بها مراجع ثانٍ مستقل ومؤهل يقارن النصين سطراً بسطر.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما الفرق في ISO 17100 بين 'Revision' و 'Review'؟",
@@ -5572,19 +7251,23 @@ const MULTI_TRACK_100_EXAMS = {
           "Review تشمل التدقيق المطبعي فقط"
         ],
         "answer": 0,
-        "explanation": "الريفيجن مقارنة ثنائية لغوية كاملة؛ أما الريفيو فهو تدقيق أحادي للغة الهدف في سياق تخصصي محدد."
+        "explanation": "الريفيجن مقارنة ثنائية لغوية كاملة؛ أما الريفيو فهو تدقيق أحادي للغة الهدف في سياق تخصصي محدد.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما هي المؤهلات الإلزامية التي تشترطها مواصفة ISO 17100 في المترجم المعتمد؟",
         "cat": "كفاءة المترجمين في ISO 17100",
         "options": [
-          "شهادة جامعية معترف بها في الترجمة، أو شهادة في تخصص آخر مع سنتين خبرة، أو 5 سنوات خبرة مثبتة",
           "معرفة التحدث بلغة ثانية في السفر",
           "امتلاك حساب بنكي دولي",
-          "إتقان الكتابة السريعة على لوحة المفاتيح"
+          "إتقان الكتابة السريعة على لوحة المفاتيح",
+          "شهادة جامعية معترف بها في الترجمة، أو شهادة في تخصص آخر مع سنتين خبرة، أو 5 سنوات خبرة مثبتة"
         ],
-        "answer": 0,
-        "explanation": "تحدد المواصفة بدقة معايير الكفاءة اللغوية والترجمية والتقنية والبحثية للمترجمين المحترفين."
+        "answer": 3,
+        "explanation": "تحدد المواصفة بدقة معايير الكفاءة اللغوية والترجمية والتقنية والبحثية للمترجمين المحترفين.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ماذا تعني مرحلة 'Proofreading' (التدقيق النهائي / تصحيح التجارب الطباعية) في الترجمة؟",
@@ -5596,7 +7279,9 @@ const MULTI_TRACK_100_EXAMS = {
           "التفاوض مع العميل على السعر"
         ],
         "answer": 0,
-        "explanation": "مرحلة فحص شكل الإخراج النهائي (Layout / Formatting) والتأكد من سلامة علامات الترقيم وخلوها من السهو."
+        "explanation": "مرحلة فحص شكل الإخراج النهائي (Layout / Formatting) والتأكد من سلامة علامات الترقيم وخلوها من السهو.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما هو 'Translation Memory' (ذاكرة الترجمة TM) في برمجيات الترجمة بمساعدة الحاسوب (CAT)؟",
@@ -5608,31 +7293,37 @@ const MULTI_TRACK_100_EXAMS = {
           "ملف نصي عادي يحفظ الأسماء"
         ],
         "answer": 0,
-        "explanation": "قاعدة بيانات مقاطع (Segments) ثنائية اللغة تضمن الاتساق التام وتسرع ترجمة المشاريع المتكررة."
+        "explanation": "قاعدة بيانات مقاطع (Segments) ثنائية اللغة تضمن الاتساق التام وتسرع ترجمة المشاريع المتكررة.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما هو الفرق بين 'Translation Memory' (TM) و 'Termbase' (TB)؟",
         "cat": "تقنيات الترجمة بمساعدة الحاسوب",
         "options": [
-          "TM تخزن جملاً ومقاطع كاملة، بينما TB تخزن مصطلحات ومفردات مفردة مع تعريفاتها",
           "TM مجانية و TB مدفوعة",
           "TM تستخدم للفرنسية فقط و TB للعربية",
-          "لا يوجد أي فرق وظيفي"
+          "لا يوجد أي فرق وظيفي",
+          "TM تخزن جملاً ومقاطع كاملة، بينما TB تخزن مصطلحات ومفردات مفردة مع تعريفاتها"
         ],
-        "answer": 0,
-        "explanation": "ذاكرة الترجمة تخزن فقرات وجمل كاملة سابقة؛ وبنك المصطلحات يخزن مفاهيم ومعاجم ومصطلحات محددة."
+        "answer": 3,
+        "explanation": "ذاكرة الترجمة تخزن فقرات وجمل كاملة سابقة؛ وبنك المصطلحات يخزن مفاهيم ومعاجم ومصطلحات محددة.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "في الترجمة القانونية المحلفة، ماذا يتضمن 'إقرار المترجم المحلف' (Sworn Translator's Jurat)؟",
         "cat": "الترجمة المحلفة الرسمية",
         "options": [
-          "تصريح رسمي بالاسم والصفة واليمين القانونية يفيد مطابقة الترجمة للأصل المرفق بدقة وأمانة مع الختم",
           "فاتورة الحساب البنكي",
+          "تصريح رسمي بالاسم والصفة واليمين القانونية يفيد مطابقة الترجمة للأصل المرفق بدقة وأمانة مع الختم",
           "تاريخ ميلاد العميل",
           "شرح تفصيلي لقواعد النحو"
         ],
-        "answer": 0,
-        "explanation": "الإقرار القانوني المذيل بالختم الرسمي وتوقيع المترجم المسجل في المحكمة يمنح الوثيقة حجيتها القضائية الرسمية."
+        "answer": 1,
+        "explanation": "الإقرار القانوني المذيل بالختم الرسمي وتوقيع المترجم المسجل في المحكمة يمنح الوثيقة حجيتها القضائية الرسمية.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما هي الصيغة الصحيحة للتعامل مع الاختصارات غير المعروفة في النص المصدر؟",
@@ -5644,19 +7335,23 @@ const MULTI_TRACK_100_EXAMS = {
           "استبدال الاختصار بكلمة عامة"
         ],
         "answer": 0,
-        "explanation": "الأمانة تقتضي التثبت؛ وفي حال تعذر ذلك يتم إخطار العميل أو إيضاح السياق بحاشية المترجم (م. ت)."
+        "explanation": "الأمانة تقتضي التثبت؛ وفي حال تعذر ذلك يتم إخطار العميل أو إيضاح السياق بحاشية المترجم (م. ت).",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما هو 'Concordance' في برمجيات الترجمة الحديثة؟",
         "cat": "أدوات البحث في CAT Tools",
         "options": [
-          "البحث السريع عن سياقات استخدام كلمة أو مصطلح محدد داخل جميع مشاريع ذاكرة الترجمة السابقة",
           "التدقيق الإملائي الآلي",
+          "البحث السريع عن سياقات استخدام كلمة أو مصطلح محدد داخل جميع مشاريع ذاكرة الترجمة السابقة",
           "حساب عدد الكلمات",
           "إرسال ملف الترجمة للعميل"
         ],
-        "answer": 0,
-        "explanation": "أداة تبحث عن الكلمة داخل سياقات حقيقية في ذاكرة الترجمة لمعرفة الصياغة المعتمدة سابقاً."
+        "answer": 1,
+        "explanation": "أداة تبحث عن الكلمة داخل سياقات حقيقية في ذاكرة الترجمة لمعرفة الصياغة المعتمدة سابقاً.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما هي مواصفة الجودة الدولية المعنية بإدارة مكاتب وشركات الترجمة؟",
@@ -5668,19 +7363,23 @@ const MULTI_TRACK_100_EXAMS = {
           "ISO 50001 للطاقة"
         ],
         "answer": 0,
-        "explanation": "ISO 17100:2015 هي المعيار الدولي الأعلى الذي يعتمد إدارة مشروعات الترجمة وتأهيل كوادرها."
+        "explanation": "ISO 17100:2015 هي المعيار الدولي الأعلى الذي يعتمد إدارة مشروعات الترجمة وتأهيل كوادرها.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "في الترجمة السمعية البصرية، ما هي 'قاعدة السطرين' (Two-line limit) في الترجمة التحتية؟",
         "cat": "معايير الترجمة السمعية البصرية",
         "options": [
-          "ألا يتجاوز السطرين لكل مقطع ترجمة تحتية لمنع حجب الرؤية عن المشهد البصري",
           "أن تكون الترجمة في سطرين فقط في الفيلم كامل",
           "أن يكتب المترجم سطرين في اليوم فقط",
+          "ألا يتجاوز السطرين لكل مقطع ترجمة تحتية لمنع حجب الرؤية عن المشهد البصري",
           "أن يقرأ المترجم سطرين بصوت عال"
         ],
-        "answer": 0,
-        "explanation": "المعايير الدولية للترجمة التحتية تحظر كتابة أكثر من سطرين معاً في أسفل الشاشة للمحافظة على الرؤية."
+        "answer": 2,
+        "explanation": "المعايير الدولية للترجمة التحتية تحظر كتابة أكثر من سطرين معاً في أسفل الشاشة للمحافظة على الرؤية.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما هو الحد الأقصى لعدد الحروف في السطر الواحد في ترجمة شاشات السينما والتلفزيون؟",
@@ -5692,7 +7391,9 @@ const MULTI_TRACK_100_EXAMS = {
           "لا يوجد أي قيود"
         ],
         "answer": 0,
-        "explanation": "الحد القياسي الدولي يتراوح بين 37 و 42 حرفاً لضمان عدم امتداد النص خارج الشاشة وسهولة قراءته."
+        "explanation": "الحد القياسي الدولي يتراوح بين 37 و 42 حرفاً لضمان عدم امتداد النص خارج الشاشة وسهولة قراءته.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ماذا يعني مفهوم 'Transcreation' (الترجمة الإبداعية) في التسويق والإعلانات؟",
@@ -5704,43 +7405,51 @@ const MULTI_TRACK_100_EXAMS = {
           "ترجمة العقود القانونية"
         ],
         "answer": 0,
-        "explanation": "Transcreation تمزج بين الترجمة والكتابة الإعلانية الإبداعية لمواءمة الحملات التجارية مع ثقافة المستهلك المحلي."
+        "explanation": "Transcreation تمزج بين الترجمة والكتابة الإعلانية الإبداعية لمواءمة الحملات التجارية مع ثقافة المستهلك المحلي.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "في تدقيق الجودة اللغوية (LQA)، ما هو تصنيف 'Critical Error' (الخطأ الجسيم)؟",
         "cat": "تقييم الجودة اللغوية LQA",
         "options": [
-          "خطأ يغير معنى النص بالكامل، كقلب الإيجاب إلى نفي أو تحريف رقم بند قانوني أو شرط جزائي",
           "خطأ في فاصلة منقوطة",
           "اختيار كلمة فصيحة بدلاً من عامية",
-          "تغيير طفيف في نوع الخط"
+          "تغيير طفيف في نوع الخط",
+          "خطأ يغير معنى النص بالكامل، كقلب الإيجاب إلى نفي أو تحريف رقم بند قانوني أو شرط جزائي"
         ],
-        "answer": 0,
-        "explanation": "الخطأ الحرج (Critical Error) هو الخطأ الذي يترتب عليه ضرر قانوني أو مالي أو إخلال فادح بمعنى الرسالة."
+        "answer": 3,
+        "explanation": "الخطأ الحرج (Critical Error) هو الخطأ الذي يترتب عليه ضرر قانوني أو مالي أو إخلال فادح بمعنى الرسالة.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما هي القاعدة الذهبية لأخلاقيات المترجم عند تضارب المصالح (Conflict of Interest)؟",
         "cat": "ميثاق الشرف وأخلاقيات المهنة",
         "options": [
-          "الإفصاح الفوري للعميل والاعتذار عن تولي المهمة أو الاستجابة لتوجيهات الإدارة القانونية المحايدة",
           "الاستمرار في الترجمة في سرية تامة",
           "مشاركة المعلومات مع الأصدقاء",
+          "الإفصاح الفوري للعميل والاعتذار عن تولي المهمة أو الاستجابة لتوجيهات الإدارة القانونية المحايدة",
           "طلب أتعاب مضاعفة للتكتم"
         ],
-        "answer": 0,
-        "explanation": "النزاهة المهنية تقتضي إعلان أي تضارب محتمل للمصالح والامتناع عن المشاركة لضمان الحياد المطلق."
+        "answer": 2,
+        "explanation": "النزاهة المهنية تقتضي إعلان أي تضارب محتمل للمصالح والامتناع عن المشاركة لضمان الحياد المطلق.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما هي مواصفة الجودة الدولية الخاصة بالتحرير اللاحق للترجمة الآلية (MTPE)؟",
         "cat": "معايير ISO للترجمة الآلية",
         "options": [
-          "ISO 18587:2017 (Post-editing of machine translation)",
           "ISO 9001",
           "ISO 14001",
-          "ISO 27001"
+          "ISO 27001",
+          "ISO 18587:2017 (Post-editing of machine translation)"
         ],
-        "answer": 0,
-        "explanation": "ISO 18587 هي المواصفة القياسية العالمية المخصصة لعمليات ومتطلبات التحرير اللاحق لمخرجات الترجمة الآلية."
+        "answer": 3,
+        "explanation": "ISO 18587 هي المواصفة القياسية العالمية المخصصة لعمليات ومتطلبات التحرير اللاحق لمخرجات الترجمة الآلية.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما الفرق في ISO 18587 بين 'Full Post-Editing' و 'Light Post-Editing'؟",
@@ -5752,55 +7461,65 @@ const MULTI_TRACK_100_EXAMS = {
           "كلاهما متطابق في التكلفة والوقت"
         ],
         "answer": 0,
-        "explanation": "التحرير الكامل ينتج نصاً احترافياً مساوياً للترجمة البشرية، بينما الخفيف يكتفي بصحة المعنى الأساسي دون صقل أسلوبي."
+        "explanation": "التحرير الكامل ينتج نصاً احترافياً مساوياً للترجمة البشرية، بينما الخفيف يكتفي بصحة المعنى الأساسي دون صقل أسلوبي.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما هو 'Apostille' (الأبوستيل) في التصديق على الوثائق والمستندات الرسمية المترجمة؟",
         "cat": "تصديق وتوثيق المستندات",
         "options": [
-          "شهادة تصديق دولية وفق اتفاقية لاهاي 1961 تلغي الحاجة للتصديق القنصلي المطول بين الدول الأعضاء",
           "ختم بنكي للتحويل المالي",
           "تأشيرة دخول سياحية",
-          "شهادة ميلاد مترجمة"
+          "شهادة ميلاد مترجمة",
+          "شهادة تصديق دولية وفق اتفاقية لاهاي 1961 تلغي الحاجة للتصديق القنصلي المطول بين الدول الأعضاء"
         ],
-        "answer": 0,
-        "explanation": "شهادة الأبوستيل تضفي الشرعية القانونية الدولية المباشرة على الوثائق العامة الرسمية المترجمة بين الدول الأعضاء في لاهاي."
+        "answer": 3,
+        "explanation": "شهادة الأبوستيل تضفي الشرعية القانونية الدولية المباشرة على الوثائق العامة الرسمية المترجمة بين الدول الأعضاء في لاهاي.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما المقصود بـ 'Incoterms' (مصطلحات التجارة الدولية) في ترجمة عقود الاستيراد والتصدير؟",
         "cat": "عقود التجارة والشحن الدولي",
         "options": [
-          "قواعد نموذجية صادرة عن غرفة التجارة الدولية (ICC) تحدد مسؤوليات ونفقات تسليم البضائع (مثل FOB, CIF, EXW)",
           "أسماء موانئ عالمية مشهورة",
           "قوانين التأمين الصحي للبحارة",
-          "عملات إلكترونية مشفرة"
+          "عملات إلكترونية مشفرة",
+          "قواعد نموذجية صادرة عن غرفة التجارة الدولية (ICC) تحدد مسؤوليات ونفقات تسليم البضائع (مثل FOB, CIF, EXW)"
         ],
-        "answer": 0,
-        "explanation": "شروط تجارية قياسية دولية كـ FOB (التسليم على ظهر السفينة) و CIF (التكلفة والتأمين والشحن) تحسم مسؤولية المخاطر ونقاط التسليم."
+        "answer": 3,
+        "explanation": "شروط تجارية قياسية دولية كـ FOB (التسليم على ظهر السفينة) و CIF (التكلفة والتأمين والشحن) تحسم مسؤولية المخاطر ونقاط التسليم.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "في عقود الفيدك (FIDIC)، ما هو دور 'The Engineer' (المهندس المشرف) من منظور قانوني؟",
         "cat": "عقود الهندسة والإنشاءات",
         "options": [
-          "طرف محايد تعينه جهة العمل لإدارة العقد ومراقبة الجودة وإصدار شهادات الدفع والبت الأولي في المطالبات",
           "عامل بناء بسيط",
           "محامي القضايا الجنائية",
+          "طرف محايد تعينه جهة العمل لإدارة العقد ومراقبة الجودة وإصدار شهادات الدفع والبت الأولي في المطالبات",
           "سفير الدولة المضيفة"
         ],
-        "answer": 0,
-        "explanation": "المهندس في عقود FIDIC يمارس دوراً مزدوجاً كوكيل لرب العمل ومحكّم فني أولي مستقل بين المقاول وصاحب المشروع."
+        "answer": 2,
+        "explanation": "المهندس في عقود FIDIC يمارس دوراً مزدوجاً كوكيل لرب العمل ومحكّم فني أولي مستقل بين المقاول وصاحب المشروع.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما هي 'Severability Clause' (بند قابلية الفصل أو التجزئة) في صياغة العقود الدولية؟",
         "cat": "بنود العقود النموذجية",
         "options": [
-          "بند ينص على أن بطلان أحد بنود العقد لا يؤدي إلى بطلان سائر البنود الأخرى التي تظل سارية المفعول",
           "بند يلزم الموظف بعدم الاستقالة",
           "بند لتقسيم الأرباح مناصفة",
-          "بند يحدد لغة التحكيم"
+          "بند يحدد لغة التحكيم",
+          "بند ينص على أن بطلان أحد بنود العقد لا يؤدي إلى بطلان سائر البنود الأخرى التي تظل سارية المفعول"
         ],
-        "answer": 0,
-        "explanation": "بند جوهري يحمي بقاء العقد نافذاً إذا قضت المحكمة بعدم قانونية فقرة أو التزام فرعي محدد دون إسقاط كامل الاتفاق."
+        "answer": 3,
+        "explanation": "بند جوهري يحمي بقاء العقد نافذاً إذا قضت المحكمة بعدم قانونية فقرة أو التزام فرعي محدد دون إسقاط كامل الاتفاق.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما الترجمة الدقيقة لمصطلح 'Entire Agreement Clause' (بند الاتفاق الكامل أو النهائي)؟",
@@ -5812,43 +7531,51 @@ const MULTI_TRACK_100_EXAMS = {
           "بند ينفي وجود أي شهود"
         ],
         "answer": 0,
-        "explanation": "يعرف أيضاً بـ 'Merger Clause' أو 'Four Corners Clause'؛ يمنع الاعتداد بأي وعود شفهية أو إيميلات سابقة خارج نص العقد النهائي."
+        "explanation": "يعرف أيضاً بـ 'Merger Clause' أو 'Four Corners Clause'؛ يمنع الاعتداد بأي وعود شفهية أو إيميلات سابقة خارج نص العقد النهائي.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما المقصود بـ 'Term Extraction' (استخراج المصطلحات الآلي) في مشروعات الترجمة الضخمة؟",
         "cat": "إدارة المصطلحات والمعاجم",
         "options": [
-          "تحليل النص المصدر برمجياً لتحديد المفردات والمفاهيم الفنية المتكررة لإنشاء بنك مصطلحات موحد قبل البدء",
           "حذف الكلمات الصعبة من الملف",
           "طباعة الفهرس الورقي",
+          "تحليل النص المصدر برمجياً لتحديد المفردات والمفاهيم الفنية المتكررة لإنشاء بنك مصطلحات موحد قبل البدء",
           "حساب عدد الصفحات المترجمة"
         ],
-        "answer": 0,
-        "explanation": "مرحلة تحضيرية حاسمة تضمن استخراج الكلمات المفتاحية ومصطلحات العميل لتوحيدها مسبقاً بين فريق المترجمين والمراجعين."
+        "answer": 2,
+        "explanation": "مرحلة تحضيرية حاسمة تضمن استخراج الكلمات المفتاحية ومصطلحات العميل لتوحيدها مسبقاً بين فريق المترجمين والمراجعين.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما هو 'Fuzzy Match' (المطابقة التقريبية) في برمجيات الترجمة التفاعلية؟",
         "cat": "ذاكرات الترجمة CAT Tools",
         "options": [
-          "مقطع جديد يتطابق جزئياً مع مقطع مخزن سابقاً بنسبة مئوية (مثل 75% إلى 99%) مما يتطلب تعديلاً يدوياً طفيفاً",
           "مطابقة تامة 100%",
+          "مقطع جديد يتطابق جزئياً مع مقطع مخزن سابقاً بنسبة مئوية (مثل 75% إلى 99%) مما يتطلب تعديلاً يدوياً طفيفاً",
           "جملة غير مترجمة إطلاقاً 0%",
           "خطأ تقني في الشاشة"
         ],
-        "answer": 0,
-        "explanation": "المطابقة التقريبية تفيد أن الفكرة مترجمة بنسبة مئوية عالية، وتظهر للمترجم الفوارق باللون للتركيز على تعديل التباين فقط."
+        "answer": 1,
+        "explanation": "المطابقة التقريبية تفيد أن الفكرة مترجمة بنسبة مئوية عالية، وتظهر للمترجم الفوارق باللون للتركيز على تعديل التباين فقط.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما معنى عبارة 'Pacta Sunt Servanda' في فقه المعاهدات الدولية؟",
         "cat": "أصول القانون الدولي العام",
         "options": [
-          "المعاهدات ملزمة لأطرافها ويجب تنفيذها بحسن نية مطلقة",
           "الاتفاقيات تلغى بتغير الحكومة",
           "المعاهدات الشفهية لا قيمة لها",
-          "الحرب تلغي جميع الديون الدولية"
+          "الحرب تلغي جميع الديون الدولية",
+          "المعاهدات ملزمة لأطرافها ويجب تنفيذها بحسن نية مطلقة"
         ],
-        "answer": 0,
-        "explanation": "المادة 26 من اتفاقية فيينا لقانون المعاهدات: العقد شريعة المتعاقدين دولياً، والتنفيذ الأمين واجب مقدس بين الدول."
+        "answer": 3,
+        "explanation": "المادة 26 من اتفاقية فيينا لقانون المعاهدات: العقد شريعة المتعاقدين دولياً، والتنفيذ الأمين واجب مقدس بين الدول.",
+        "skill": "syntax",
+        "skillLabel": "🧠 القواعد والتراكيب (Syntax & Use)"
       },
       {
         "q": "ما هو 'Corpus' (المدونة اللغوية الحاسوبية) في علم اللغويات والترجمة؟",
@@ -5860,7 +7587,10 @@ const MULTI_TRACK_100_EXAMS = {
           "ملف لتصميم الأغلفة"
         ],
         "answer": 0,
-        "explanation": "المدونة (Corpus) تقدم للمترجم والباحث دليلاً إحصائياً وتطبيقياً على السياقات الطبيعية التي ترد فيها الألفاظ والتراكيب."
+        "explanation": "المدونة (Corpus) تقدم للمترجم والباحث دليلاً إحصائياً وتطبيقياً على السياقات الطبيعية التي ترد فيها الألفاظ والتراكيب.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "ما هو 'Localization' (التوطين اللغوي والبرمجي L10n) مقارنة بالترجمة البسيطة؟",
@@ -5872,67 +7602,85 @@ const MULTI_TRACK_100_EXAMS = {
           "تغيير لغة لوحة المفاتيح"
         ],
         "answer": 0,
-        "explanation": "التوطين يتجاوز الترجمة اللغوية ليشمل تعديل الرسوميات وتنسيقات الأرقام والأبعاد الثقافية لتبدو السلعة محلية المنشأ."
+        "explanation": "التوطين يتجاوز الترجمة اللغوية ليشمل تعديل الرسوميات وتنسيقات الأرقام والأبعاد الثقافية لتبدو السلعة محلية المنشأ.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "ما معنى مصطلح 'Arbitral Award' الصادر عن هيئات التحكيم الدولية؟",
         "cat": "التحكيم التجاري والدولي",
         "options": [
-          "حكم التحكيم الملزم الصادر عن هيئة المحكمين للفصل في النزاع (يقابل الحكم القضائي)",
           "جائزة شرفية للمحامي",
+          "حكم التحكيم الملزم الصادر عن هيئة المحكمين للفصل في النزاع (يقابل الحكم القضائي)",
           "مكافأة مالية للشهود",
           "شهادة حضور المؤتمر"
         ],
-        "answer": 0,
-        "explanation": "حكم التحكيم (Arbitral Award) يتمتع بقوة النفاذ القضائي الدولي في أكثر من 160 دولة بموجب اتفاقية نيويورك 1958."
+        "answer": 1,
+        "explanation": "حكم التحكيم (Arbitral Award) يتمتع بقوة النفاذ القضائي الدولي في أكثر من 160 دولة بموجب اتفاقية نيويورك 1958.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "ما هي اتفاقية نيويورك لعام 1958 (New York Convention) وأهميتها للمترجم القانوني؟",
         "cat": "التحكيم والاعتراف الدولي",
         "options": [
-          "اتفاقية الاعتراف بقرارات التحكيم الأجنبية وإنفاذها، وتشترط إرفاق ترجمة معتمدة لحكم التحكيم واتفاقه",
           "اتفاقية لحماية البيئة البحرية",
+          "اتفاقية الاعتراف بقرارات التحكيم الأجنبية وإنفاذها، وتشترط إرفاق ترجمة معتمدة لحكم التحكيم واتفاقه",
           "معاهدة لحظر الأسلحة النووية",
           "اتفاقية حقوق الطيران المدني"
         ],
-        "answer": 0,
-        "explanation": "تلزم المادة الرابعة من الاتفاقية الأطراف بتقديم ترجمة رسمية معتمدة لحكم التحكيم وعقد التحكيم بلغة المحكمة المنفذة."
+        "answer": 1,
+        "explanation": "تلزم المادة الرابعة من الاتفاقية الأطراف بتقديم ترجمة رسمية معتمدة لحكم التحكيم وعقد التحكيم بلغة المحكمة المنفذة.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "ما هو 'Voice-Over' (التعليق الصوتي) في الترجمة السمعية البصرية؟",
         "cat": "فنون الصوت والوسائط",
         "options": [
-          "تسجيل صوتي يؤديه معلق بلغة الهدف فوق الصوت الأصلي الذي يخفض مستواه دون إلغائه تماماً",
           "كتابة الحوار في شريط أسود",
           "مسح الموسيقى التصويرية",
-          "ترجمة لغة الشفاه حرفياً"
+          "ترجمة لغة الشفاه حرفياً",
+          "تسجيل صوتي يؤديه معلق بلغة الهدف فوق الصوت الأصلي الذي يخفض مستواه دون إلغائه تماماً"
         ],
-        "answer": 0,
-        "explanation": "تقنية مستخدمة في الوثائقيات والمقابلات يظل فيها صوت المتحدث الأصلي مسموعاً بخفوت في الخلفية لتعزيز المصداقية."
+        "answer": 3,
+        "explanation": "تقنية مستخدمة في الوثائقيات والمقابلات يظل فيها صوت المتحدث الأصلي مسموعاً بخفوت في الخلفية لتعزيز المصداقية.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "ما الفرق بين 'Dubbing' (الدبلجة) و 'Voice-Over' في التعريب السمعي البصري؟",
         "cat": "الوسائط المتعددة والسينما",
         "options": [
-          "الدبلجة تستبدل الصوت الأصلي تماماً مع مطابقة حركة الشفاه (Lip-sync)، بينما Voice-Over يبقي الأصل في الخلفية",
           "الدبلجة للأخبار فقط",
+          "الدبلجة تستبدل الصوت الأصلي تماماً مع مطابقة حركة الشفاه (Lip-sync)، بينما Voice-Over يبقي الأصل في الخلفية",
           "Voice-Over يستعمل في أفلام الكرتون فقط",
           "لا يوجد أي فرق تقني"
         ],
-        "answer": 0,
-        "explanation": "الدبلجة تقتضي المزامنة الحركية التامة للشفاه (Lip-sync) ومسح المسار الصوتي الأصلي بالكامل لصالح الأداء التمثيلي الجديد."
+        "answer": 1,
+        "explanation": "الدبلجة تقتضي المزامنة الحركية التامة للشفاه (Lip-sync) ومسح المسار الصوتي الأصلي بالكامل لصالح الأداء التمثيلي الجديد.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "ما هو 'Blind Review' (التقييم الأعمى) في مراجعة الجودة الأكاديمية والترجمة؟",
         "cat": "تقييم الجودة الأكاديمية",
         "options": [
-          "فحص ومراجعة النص دون معرفة اسم المترجم أو مؤهلاته لضمان تجرد المراجع وحياده الموضوعي التام",
           "القراءة دون فتح الإضاءة",
           "المراجعة بواسطة الذكاء الاصطناعي فقط",
+          "فحص ومراجعة النص دون معرفة اسم المترجم أو مؤهلاته لضمان تجرد المراجع وحياده الموضوعي التام",
           "المراجعة الشفهية بدون نص"
         ],
-        "answer": 0,
-        "explanation": "منهجية حوكمة لغوية تمنع الانحياز المسبق؛ يراجع المدقق النص كمنتج مجرد عن أي اعتبارات شخصية."
+        "answer": 2,
+        "explanation": "منهجية حوكمة لغوية تمنع الانحياز المسبق؛ يراجع المدقق النص كمنتج مجرد عن أي اعتبارات شخصية.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "ما هو مفهوم 'Skopos Theory' (نظرية الهدف في علم الترجمة) لـ هانز فيرمير (Hans Vermeer)؟",
@@ -5944,19 +7692,25 @@ const MULTI_TRACK_100_EXAMS = {
           "أن السعر هو ما يحدد الجودة"
         ],
         "answer": 0,
-        "explanation": "نظرية سكبوس الوظيفية تؤكد أن غرض الترجمة (Skopos) هو الموجه الأول لكيفية الصياغة والتصرف اللغوي."
+        "explanation": "نظرية سكبوس الوظيفية تؤكد أن غرض الترجمة (Skopos) هو الموجه الأول لكيفية الصياغة والتصرف اللغوي.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "ما المقصود بـ 'Back-Translation' (الترجمة العكسية للتحقق) في الأبحاث الدوائية والتجارب السريرية؟",
         "cat": "الترجمة الطبية والسريرية",
         "options": [
-          "ترجمة النص الهدف مرة أخرى إلى لغة المصدر بواسطة مترجم مستقل لا يعرف الأصل للمقارنة وكشف أي لبس",
           "إرجاع الوثيقة للعميل دون ترجمة",
           "قراءة النص من اليسار إلى اليمين",
+          "ترجمة النص الهدف مرة أخرى إلى لغة المصدر بواسطة مترجم مستقل لا يعرف الأصل للمقارنة وكشف أي لبس",
           "إعادة صياغة العناوين فقط"
         ],
-        "answer": 0,
-        "explanation": "إجراء إلزامي في بروتوكولات الأدوية واستبيانات المرضى المعتمدة من منظمة الصحة العالمية وهيئة الغذاء والدواء FDA."
+        "answer": 2,
+        "explanation": "إجراء إلزامي في بروتوكولات الأدوية واستبيانات المرضى المعتمدة من منظمة الصحة العالمية وهيئة الغذاء والدواء FDA.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "ما هي 'Controlled Authoring / Language' (اللغة المضبوطة والمبسطة كـ Simplified Technical English)؟",
@@ -5968,72 +7722,108 @@ const MULTI_TRACK_100_EXAMS = {
           "حذف كافة الأفعال من النص"
         ],
         "answer": 0,
-        "explanation": "تقنية كتابة صناعية (مثل ASD-STE100) تمنع اللبس والغموض وتجعل الترجمة الآلية والبشرية بالغة الدقة وقليلة التكلفة."
+        "explanation": "تقنية كتابة صناعية (مثل ASD-STE100) تمنع اللبس والغموض وتجعل الترجمة الآلية والبشرية بالغة الدقة وقليلة التكلفة.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "ما معنى 'False Sense of Fluency' في تدقيق مخرجات الذكاء الاصطناعي التوليدي والترجمة الآلية؟",
         "cat": "الذكاء الاصطناعي ومخاطر الترجمة",
         "options": [
-          "نص يبدو ظاهرياً فصيحاً وبليغاً جداً ولكنه يحتوي على هلوسة أو تحريف جسيم في المعنى الأصلي أو إسقاط بند حاسم",
           "نص مليء بالأخطاء الإملائية الواضحة",
           "نص بطيء في الطباعة",
+          "نص يبدو ظاهرياً فصيحاً وبليغاً جداً ولكنه يحتوي على هلوسة أو تحريف جسيم في المعنى الأصلي أو إسقاط بند حاسم",
           "نص خالي من الألوان"
         ],
-        "answer": 0,
-        "explanation": "أخطر فخ في الذكاء الاصطناعي؛ فصاحة الصياغة وجمال المفردات قد يخدعان القارئ ويخفيان هلوسة خطيرة أو حذفاً لأرقام جوهرية."
+        "answer": 2,
+        "explanation": "أخطر فخ في الذكاء الاصطناعي؛ فصاحة الصياغة وجمال المفردات قد يخدعان القارئ ويخفيان هلوسة خطيرة أو حذفاً لأرقام جوهرية.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "ما هي وظيفة الرمز '§' في الوثائق القانونية والتشريعات الألمانية والأوروبية؟",
         "cat": "الرموز القانونية الرسمية",
         "options": [
-          "رمز الفقرة القانونية أو المادة التشريعية (Paragraph / Section)",
           "رمز العملة المشفرة",
+          "رمز الفقرة القانونية أو المادة التشريعية (Paragraph / Section)",
           "علامة النفي المطلق",
           "رقم القضية الجنائية"
         ],
-        "answer": 0,
-        "explanation": "رمز Paragraphenzeichen (§) يستخدم للإشارة إلى المواد والفقرات القانونية في القوانين والمدونات المدنية."
+        "answer": 1,
+        "explanation": "رمز Paragraphenzeichen (§) يستخدم للإشارة إلى المواد والفقرات القانونية في القوانين والمدونات المدنية.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "ما المعنى الدقيق لعبارة 'Ab Initio' في فسخ وإلغاء العقود غير المشروعة؟",
         "cat": "اللاتينية في فقه العقود",
         "options": [
-          "باطل من الأساس ومنذ البداية (كأنه لم ينعقد أصلاً بأثر رجعي تام)",
           "صحيح حتى إشعار آخر",
+          "باطل من الأساس ومنذ البداية (كأنه لم ينعقد أصلاً بأثر رجعي تام)",
           "يبدأ سريانه بعد شهر",
           "مشروط بموافقة الشهود"
         ],
-        "answer": 0,
-        "explanation": "'Void ab initio' تعني أن العقد كان معيباً في أركانه الجوهرية بحيث يعتبر معدوماً قانوناً منذ لحظة إبرامه الأولى."
+        "answer": 1,
+        "explanation": "'Void ab initio' تعني أن العقد كان معيباً في أركانه الجوهرية بحيث يعتبر معدوماً قانوناً منذ لحظة إبرامه الأولى.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "ما هي الرسالة الأخلاقية الأسمى لمترجم المؤتمرات والترجمة المحلفة المعتمدة عالمياً؟",
         "cat": "رسالة المترجم الإنسانية والمهنية",
         "options": [
-          "أن يكون جسراً أميناً وموثوقاً للتفاهم البشري والعدالة وسيادة القانون دون تزييف أو تحريف",
           "تحقيق الأرباح المالية السريعة فقط",
           "استبدال آراء المتحدثين بآرائه الخاصة",
-          "فرض ثقافته الشخصية على الآخرين"
+          "فرض ثقافته الشخصية على الآخرين",
+          "أن يكون جسراً أميناً وموثوقاً للتفاهم البشري والعدالة وسيادة القانون دون تزييف أو تحريف"
         ],
-        "answer": 0,
-        "explanation": "الأمانة المطلقة، الدقة العلمية، والحياد الإنساني النبيل هي جوهر رسالة مهنة الترجمة عبر التاريخ البشري."
+        "answer": 3,
+        "explanation": "الأمانة المطلقة، الدقة العلمية، والحياد الإنساني النبيل هي جوهر رسالة مهنة الترجمة عبر التاريخ البشري.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
       },
       {
         "q": "ما هي وظيفة الرقم المرجعي والتسلسلي الموحد في سجلات المترجم المحلف؟",
         "cat": "حوكمة الترجمة المعتمدة",
         "options": [
-          "إثبات قيد الوثيقة في السجل الرسمي للمحكمة ومنع أي تلاعب أو تزوير في الوثائق المصدقة",
           "تحديد رقم الحساب البنكي",
+          "إثبات قيد الوثيقة في السجل الرسمي للمحكمة ومنع أي تلاعب أو تزوير في الوثائق المصدقة",
           "تحديد تاريخ انتهاء جواز السفر",
           "إحصاء عدد الكلمات فقط"
         ],
-        "answer": 0,
-        "explanation": "كل وثيقة تترجم وتختم تسجل برقم تسلسلي غير قابل للتكرار في السجل الرسمي لتمكين السلطات من التحقق من صحتها."
+        "answer": 1,
+        "explanation": "كل وثيقة تترجم وتختم تسجل برقم تسلسلي غير قابل للتكرار في السجل الرسمي لتمكين السلطات من التحقق من صحتها.",
+        "skill": "writing",
+        "skillLabel": "✍️ التحرير والصياغة (Writing & Translation)",
+        "writingPrompt": "المطلوب في هذا القسم: فحص دقة الصياغة التحريرية والتوافق الدلالي وفق أعلى معايير الجودة الدولية."
+      }
+    ],
+    "writingStudioTasks": [
+      {
+        "taskId": "task_1",
+        "title": "المهمة الأولى: المراسلة والمخاطبة الرسمية (120 - 150 كلمة)",
+        "prompt": "صياغة بيان مطابقة رسمي واعتماد ترجمة محلفة موجه للمحكمة التجارية الدولية بشأن نزاع تعاقدي في عقد توريد دولي (150 كلمة).",
+        "minWords": 120,
+        "maxWords": 180,
+        "modelAnswer": "نموذج الصياغة المعتمدة يراعي البنية الرسمية، أسلوب التحية والختام المؤسساتي، الروابط المنطقية، والمصطلحات القانونية الدقيقة الخالية من الحشو."
+      },
+      {
+        "taskId": "task_2",
+        "title": "المهمة الثانية: المقال التحليلي المتخصص (200 - 250 كلمة)",
+        "prompt": "أطروحة تحليلية مقارنة (250 كلمة): بين نظرية السكوبوس ونظرية التكافؤ الديناميكي في ترجمة عقود الطاقة والمناقصات الدولية.",
+        "minWords": 200,
+        "maxWords": 280,
+        "modelAnswer": "يتطلب المقال مقدمة واضحة، حُججاً متوازنة مع الاستشهاد بأمثلة حقيقية من سوق الترجمة، وخاتمة تلخص وجهة النظر بأسلوب أكاديمي رفيع."
       }
     ]
   }
 };
 
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   window.MULTI_TRACK_100_EXAMS = MULTI_TRACK_100_EXAMS;
 }
