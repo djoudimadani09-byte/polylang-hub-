@@ -3345,46 +3345,50 @@
 
       </div>
 
-      <!-- Payment Gateways & Official Account Details -->
+      <!-- Payment Gateways & Official Account Request Card (بطاقة لطلب حسابي) -->
       <div style="background:var(--bg-body); border:2px solid var(--crimson); border-radius:12px; padding:16px; margin-bottom:14px;">
         <div style="font-size:13px; font-weight:900; color:var(--crimson); margin-bottom:8px; display:flex; align-items:center; gap:6px;">
-          <span>🔒</span> <span>شروط تفعيل باقات البريميوم VIP (الحسابات الرسمية المعتمدة):</span>
+          <span>💳</span> <span>بطاقة طلب بيانات الحساب الرسمي للدفع المعتمد (بريدي موب / CCP):</span>
         </div>
         <p style="font-size:12px; color:var(--text-main); margin-bottom:12px; line-height:1.6;">
-          <strong>تنبيه صارم:</strong> باقات بريميوم VIP لا تُفتح للجميع حتى يتم ويصل الدفع الفعلي وتأكيد الحوالة إلى أحد الحسابين الرسميين التاليين:
+          حفاظاً على الأمان المالي والخصوصية المصرفية المعتمدة، لا تُنشر أرقام الحسابات الشخصية علناً. يتم تزويد المشتركين برقم الحساب البريدي الجاري (CCP) ومعرّف (بريدي موب RIP) المشفر فور طلب الحساب لتأكيد الاشتراك وتفعيل الباقات.
         </p>
 
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:10px; margin-bottom:14px;">
-          <!-- BaridiMob RIP -->
-          <div style="background:var(--bg-surface); border:1px solid #10b981; border-radius:8px; padding:10px 12px;">
-            <div style="font-size:11px; font-weight:800; color:#10b981; margin-bottom:4px;">📱 بريدي موب (Rip BaridiMob):</div>
-            <div style="font-family:monospace; font-size:13px; font-weight:900; letter-spacing:1px; color:var(--text-main); background:var(--bg-body); padding:6px; border-radius:4px; user-select:all;" id="rip-account-number">
-              00799999002898430240
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:10px; margin-bottom:14px;">
+          <!-- BaridiMob Request Card -->
+          <div style="background:var(--bg-surface); border:1px solid #10b981; border-radius:8px; padding:12px;">
+            <div style="font-size:11.5px; font-weight:800; color:#10b981; margin-bottom:4px;">📱 بريدي موب (BaridiMob RIP):</div>
+            <div style="font-size:11.5px; color:var(--text-dim); margin-bottom:8px;">
+              يُرسل المعرّف الرسمي المعتمد فورياً للعميل عند الطلب لإجراء التحويل المالي بأمان.
             </div>
-            <button class="nav-pill" style="font-size:10.5px; padding:2px 8px; margin-top:6px;" onclick="navigator.clipboard.writeText('00799999002898430240'); alert('✓ تم نسخ رقم RIP بنجاح');">نسخ رقم RIP 📋</button>
+            <button class="nav-pill" style="font-size:11px; padding:4px 10px; background:rgba(16,185,129,0.1); color:#059669; border-color:#10b981; font-weight:800;" onclick="requestOfficialAccountDetails('baridi')">طلب معرّف بريدي موب 📩</button>
           </div>
 
-          <!-- CCP -->
-          <div style="background:var(--bg-surface); border:1px solid var(--crimson); border-radius:8px; padding:10px 12px;">
-            <div style="font-size:11px; font-weight:800; color:var(--crimson); margin-bottom:4px;">📮 الحساب البريدي الجاري (CCP):</div>
-            <div style="font-family:monospace; font-size:13px; font-weight:900; letter-spacing:1px; color:var(--text-main); background:var(--bg-body); padding:6px; border-radius:4px; user-select:all;" id="ccp-account-number">
-              0028984302 40
+          <!-- CCP Request Card -->
+          <div style="background:var(--bg-surface); border:1px solid var(--crimson); border-radius:8px; padding:12px;">
+            <div style="font-size:11.5px; font-weight:800; color:var(--crimson); margin-bottom:4px;">📮 الحساب البريدي الجاري (CCP):</div>
+            <div style="font-size:11.5px; color:var(--text-dim); margin-bottom:8px;">
+              يُسلّم رقم الحساب والمفتاح البريدي المعتمد للمشترك فور تقديم الطلب أو التواصل مع الإدارة.
             </div>
-            <button class="nav-pill" style="font-size:10.5px; padding:2px 8px; margin-top:6px;" onclick="navigator.clipboard.writeText('0028984302 40'); alert('✓ تم نسخ حساب CCP ومفتاح 40 بنجاح');">نسخ رقم CCP 📋</button>
+            <button class="nav-pill" style="font-size:11px; padding:4px 10px; background:rgba(239,68,68,0.1); color:var(--crimson); border-color:var(--crimson); font-weight:800;" onclick="requestOfficialAccountDetails('ccp')">طلب رقم حساب CCP 📩</button>
           </div>
+        </div>
+
+        <!-- Request Status Notification Box -->
+        <div id="account-request-status-box" style="display:none; background:#ecfdf5; border:1px solid #86efac; border-radius:8px; padding:10px 14px; margin-bottom:12px; font-size:12px; color:#15803d; font-weight:800;">
         </div>
 
         <!-- Payment Verification Submission -->
         <div style="background:var(--bg-card); border:1px dashed var(--border-line); border-radius:8px; padding:12px;">
-          <div style="font-size:12px; font-weight:800; margin-bottom:6px;">✍️ إرسال إشعار الدفع لتأكيد التفعيل:</div>
+          <div style="font-size:12px; font-weight:800; margin-bottom:6px;">✍️ إرسال إشعار الدفع أو تأكيد التحويل:</div>
           <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">
-            <input type="text" id="payment-tx-number" class="form-control" style="flex:1; min-width:180px; font-size:12px;" placeholder="رقم العملية / الحوالة من تطبيق بريدي موب أو وصل CCP">
+            <input type="text" id="payment-tx-number" class="form-control" style="flex:1; min-width:180px; font-size:12px;" placeholder="رقم العملية / الحوالة أو بريدك الإلكتروني لتأكيد الاستلام">
             <button class="btn-primary-red" style="font-size:12px; padding:8px 14px;" onclick="submitPaymentVerificationReceipt()">
-              تأكيد إرسال الحوالة 📤
+              تأكيد إرسال الإشعار 📤
             </button>
           </div>
           <div style="font-size:11px; color:var(--text-dim);">
-            بمجرد وصول التحويل إلى <strong>00799999002898430240</strong> أو <strong>0028984302 40</strong> يتم فتح الوصول الشامل فوراً.
+            بمجرد إرسال الإشعار أو التواصل مع الإدارة عبر <strong>djoudimadani09@gmail.com</strong> يتم تفعيل الباقة فورياً.
           </div>
         </div>
       </div>
@@ -5420,8 +5424,29 @@
     // ==========================================
     // SUBSCRIPTION & VIP PASS CONTROLS (Gated Payment Verification)
     // ==========================================
-    const OFFICIAL_PAYMENT_RIP = "00799999002898430240";
-    const OFFICIAL_PAYMENT_CCP = "0028984302 40";
+    function requestOfficialAccountDetails(type) {
+      const typeLabel = type === 'baridi' ? 'بريدي موب (BaridiMob RIP)' : 'الحساب البريدي الجاري (CCP)';
+      const statusBox = document.getElementById('account-request-status-box');
+      if (statusBox) {
+        statusBox.style.display = 'block';
+        statusBox.textContent = `✓ تم تسجيل طلب الحصول على بيانات ${typeLabel} بنجاح! سيتم تزويدك بالبيانات الرسمية المشفرة فورياً عبر بريدك المسجل أو رسالة مباشرة.`;
+      }
+      if (typeof ADMIN_EMAIL !== 'undefined') {
+        fetch(`https://formsubmit.co/ajax/${ADMIN_EMAIL}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify({
+            _subject: `[Polylang] طلب بيانات الحساب المالي: ${typeLabel}`,
+            user: typeof currentUserName !== 'undefined' ? currentUserName : "عميل المنصة",
+            email: typeof currentUserEmail !== 'undefined' ? currentUserEmail : "",
+            accountType: typeLabel,
+            time: new Date().toISOString()
+          })
+        }).catch(e => console.log(e));
+      }
+
+      alert(`📩 تم تسجيل طلب الحصول على بيانات ${typeLabel} بنجاح!\nتصلك بيانات الحساب المشفرة من الإدارة المعتمدة فورياً.\nيمكنك أيضاً مراسلة الإدارة مباشرة: ${typeof ADMIN_EMAIL !== 'undefined' ? ADMIN_EMAIL : 'djoudimadani09@gmail.com'}`);
+    }
 
     function selectSubscriptionPlan(planTier, priceDzd) {
       const planNames = {
@@ -5431,7 +5456,7 @@
       };
       const name = planNames[planTier] || planTier;
 
-      alert(`🔒 اشتراك VIP مشروط بوصول الدفع:\nلقد اخترت: ${name}.\n\nالباقات بريميوم لا تُفتح حتى يتم ويصل الدفع إلى:\n- بريدي موب Rip BaridiMob: ${OFFICIAL_PAYMENT_RIP}\n- الحساب الجاري CCP: ${OFFICIAL_PAYMENT_CCP}\n\nيرجى تحويل المبلغ ثم إدخال رقم المعاملة بالأسفل لتأكيد التفعيل.`);
+      alert(`🔒 اشتراك VIP مشروط بتأكيد التحويل:\nلقد اخترت: ${name}.\n\nللحصول على بيانات الحساب المعتمد (بريدي موب أو CCP)، اضغط على زر 'طلب بيانات الحساب' في البطاقة بالأسفل ليصلك الحساب فوراً.`);
       
       const txInput = document.getElementById('payment-tx-number');
       if (txInput) {
@@ -5444,34 +5469,33 @@
       const txInput = document.getElementById('payment-tx-number');
       const tx = txInput ? txInput.value.trim() : '';
 
-      if (!tx || tx.length < 5) {
-        alert(`⚠️ تنبيه التحقق من الدفع:\nيرجى إدخال رقم الحوالة / العملية الصحيح من وصل بريدي موب أو CCP.\n\nيجب أن يتم التحويل أولاً إلى:\nRip BaridiMob: ${OFFICIAL_PAYMENT_RIP}\nأو CCP: ${OFFICIAL_PAYMENT_CCP}`);
+      if (!tx || tx.length < 3) {
+        alert(`⚠️ تنبيه التحقق من الدفع:\nيرجى إدخال رقم الحوالة / العملية أو بريدك الإلكتروني المسجل بعد إتمام التحويل.\nلطلب بيانات الحساب الرسمي، اضغط على زر 'طلب بيانات الحساب' بالبطاقة أعلاه.`);
         return;
       }
 
-      // Record transaction and grant VIP access
       localStorage.setItem('polylang_vip_user', 'true');
       localStorage.setItem('polylang_payment_receipt', tx);
-      isUserVip = true;
+      if (typeof isUserVip !== 'undefined') isUserVip = true;
 
-      // Notify admin asynchronously
-      fetch(`https://formsubmit.co/ajax/${ADMIN_EMAIL}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify({
-          _subject: `[Polylang VIP] إشعار دفع جديد وصل: ${tx}`,
-          user: currentUserName,
-          email: currentUserEmail,
-          transaction: tx,
-          ripTarget: OFFICIAL_PAYMENT_RIP,
-          ccpTarget: OFFICIAL_PAYMENT_CCP,
-          time: new Date().toISOString()
-        })
-      }).catch(e => console.log(e));
+      if (typeof ADMIN_EMAIL !== 'undefined') {
+        fetch(`https://formsubmit.co/ajax/${ADMIN_EMAIL}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify({
+            _subject: `[Polylang VIP] إشعار دفع جديد وصل: ${tx}`,
+            user: typeof currentUserName !== 'undefined' ? currentUserName : "عميل",
+            email: typeof currentUserEmail !== 'undefined' ? currentUserEmail : "",
+            transaction: tx,
+            target: "طلب الحساب المعتمد للإدارة",
+            time: new Date().toISOString()
+          })
+        }).catch(e => console.log(e));
+      }
 
-      closeModal('premiumSubModal');
-      renderAcademyCards();
-      alert(`✅ تم التحقق من عملية الدفع رقم (${tx}) بنجاح!\nتم تأكيد وصول التحويل إلى الحساب المعتمد (${OFFICIAL_PAYMENT_RIP} / ${OFFICIAL_PAYMENT_CCP}).\nتم فتح كامل باقات بريميوم VIP والـ 100 فيديو تعليمي لك الآن.`);
+      if (typeof closeModal === 'function') closeModal('premiumSubModal');
+      if (typeof renderAcademyCards === 'function') renderAcademyCards();
+      alert(`✅ تم إرسال إشعار عملية الدفع رقم (${tx}) بنجاح!\nتم توثيق طلبك لدى الإدارة وسيتم تفعيل كامل باقات VIP والمساقات لك فوراً.`);
     }
 
     let isAghilasPromoActive = true;

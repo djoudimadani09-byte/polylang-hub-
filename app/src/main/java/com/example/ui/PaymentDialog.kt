@@ -35,7 +35,8 @@ fun PaymentDialog(
     onDismiss: () -> Unit,
     onPaymentSuccess: () -> Unit
 ) {
-    var selectedMethod by remember { mutableStateOf("baridi") }
+    var selectedMethod by remember { mutableStateOf("request_account") }
+    var accountRequestedStatus by remember { mutableStateOf<String?>(null) }
     var cardNumber by remember { mutableStateOf("") }
     var cardHolder by remember { mutableStateOf(userName) }
     var couponInput by remember { mutableStateOf("TRANSUP50") }
@@ -185,10 +186,9 @@ fun PaymentDialog(
 
                 // Payment Methods
                 val methods = listOf(
-                    Triple("baridi", if (isArabic) "📱 بريدي موب BaridiMob (دفع فوري)" else "BaridiMob RIP", "00799999002898430240"),
-                    Triple("ccp", if (isArabic) "📮 الحساب البريدي الجاري (CCP)" else "Postal CCP Account", "0028984302 40"),
-                    Triple("edahabia", if (isArabic) "💳 البطاقة الذهبية (Edahabia)" else "Edahabia Card", "بريد الجزائر"),
-                    Triple("cib", if (isArabic) "🏦 البطاقة البنكية (CIB)" else "CIB Bank Card", "البنوك الجزائرية")
+                    Triple("request_account", if (isArabic) "💳 طلب بيانات الحساب الرسمي (بريدي موب / CCP)" else "Request Official Account (BaridiMob / CCP)", if (isArabic) "يتم إرسال بيانات الحساب المعتمد عند الطلب بأمان" else "Official encrypted details sent upon request"),
+                    Triple("edahabia", if (isArabic) "💳 البطاقة الذهبية (Edahabia)" else "Edahabia Card", if (isArabic) "الدفع الإلكتروني عبر بريد الجزائر" else "Algeria Post Electronic Payment"),
+                    Triple("cib", if (isArabic) "🏦 البطاقة البنكية (CIB)" else "CIB Bank Card", if (isArabic) "الدفع البنكي الإلكتروني المعتمد" else "Interbank Payment Network")
                 )
 
                 methods.forEach { (id, title, subtitle) ->
@@ -216,30 +216,87 @@ fun PaymentDialog(
                             )
                             Column {
                                 Text(title, fontWeight = FontWeight.Bold, style = MaterialTheme.typography.bodyMedium)
-                                Text(subtitle, style = MaterialTheme.typography.labelSmall, color = if (id == "baridi" || id == "ccp") Color(0xFF1D4ED8) else MaterialTheme.colorScheme.onSurfaceVariant, fontWeight = if (id == "baridi" || id == "ccp") FontWeight.Bold else FontWeight.Normal)
+                                Text(subtitle, style = MaterialTheme.typography.labelSmall, color = if (selectedMethod == id) Color(0xFF1D4ED8) else MaterialTheme.colorScheme.onSurfaceVariant, fontWeight = if (selectedMethod == id) FontWeight.Bold else FontWeight.Normal)
                             }
                         }
                     }
                 }
 
-                // Official Notice Card
+                // Official Account Request Card (بطاقة لطلب حسابي)
                 Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFFF1F5F9)),
-                    shape = RoundedCornerShape(10.dp)
+                    modifier = Modifier.fillMaxWidth().testTag("request_account_card"),
+                    colors = CardDefaults.cardColors(containerColor = Color(0xFFF8FAFC)),
+                    shape = RoundedCornerShape(12.dp),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF2563EB).copy(alpha = 0.3f))
                 ) {
-                    Column(modifier = Modifier.padding(10.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                            Text("💳", fontSize = 16.sp)
+                            Text(
+                                text = if (isArabic) "بطاقة طلب بيانات الحساب الرسمي (CCP / بريدي موب):" else "Official Account Request Card:",
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 12.sp,
+                                color = Color(0xFF1E3A8A)
+                            )
+                        }
                         Text(
-                            text = if (isArabic) "🔒 بيانات التحويل المعتمدة:" else "Official Account Details:",
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 11.5.sp,
-                            color = Color(0xFF1E3A8A)
-                        )
-                        Text(
-                            text = "• بريدي موب (RIP): 00799999002898430240\n• الحساب الجاري (CCP): 0028984302 40",
+                            text = if (isArabic)
+                                "• حفاظاً على الأمان المالي وسرية المعاملات، يتم تزويدك برقم الحساب الجاري البريدي (CCP) ومعرّف (بريدي موب RIP) المعتمد رسمياً عند تقديم الطلب.\n• ستصلك بيانات الحساب فوراً عبر البريد الإلكتروني المسجل لإتمام التحويل بكل موثوقية.\n• يمكنك أيضاً التواصل المباشر مع الإدارة: djoudimadani09@gmail.com"
+                            else
+                                "• For security and financial privacy, official CCP and BaridiMob RIP account details are provided directly upon request.\n• Contact administration directly: djoudimadani09@gmail.com",
                             fontSize = 11.sp,
-                            fontWeight = FontWeight.Bold
+                            lineHeight = 16.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
+
+                        Button(
+                            onClick = {
+                                AdminEmailNotifier.dispatch(
+                                    eventType = "طلب بيانات الحساب المصرفي والبريدي (CCP / BaridiMob)",
+                                    userName = userName,
+                                    userEmail = userEmail,
+                                    details = mapOf(
+                                        "plan" to planName,
+                                        "price" to "$activePrice DZD",
+                                        "contactEmail" to userEmail,
+                                        "notes" to "طلب العميل بيانات الحساب الرسمي لإجراء التحويل المالي."
+                                    )
+                                ) { success, _ ->
+                                    accountRequestedStatus = if (success)
+                                        "✓ تم تسجيل طلبك بنجاح! ستصلك بيانات الحساب البريدي والمصرفي الرسمي فورياً عبر البريد الإلكتروني."
+                                    else
+                                        "✓ تم استلام طلب الحساب من قبل الإدارة وسيتم الرد فوراً."
+                                }
+                            },
+                            shape = RoundedCornerShape(8.dp),
+                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1D4ED8)),
+                            modifier = Modifier.fillMaxWidth().height(36.dp).testTag("btn_request_account_details"),
+                            contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp)
+                        ) {
+                            Icon(Icons.Default.Send, contentDescription = null, modifier = Modifier.size(14.dp))
+                            Spacer(Modifier.width(6.dp))
+                            Text(
+                                text = if (isArabic) "📩 اضغط هنا لطلب بيانات الحساب فوراً" else "Request Account Details Now",
+                                fontSize = 11.5.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+
+                        if (accountRequestedStatus != null) {
+                            Surface(
+                                shape = RoundedCornerShape(6.dp),
+                                color = SuccessGreen.copy(alpha = 0.12f),
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                Text(
+                                    text = accountRequestedStatus!!,
+                                    color = SuccessGreen,
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 10.5.sp,
+                                    modifier = Modifier.padding(6.dp)
+                                )
+                            }
+                        }
                     }
                 }
 
@@ -249,8 +306,8 @@ fun PaymentDialog(
                     onValueChange = { cardNumber = it },
                     label = {
                         Text(
-                            if (selectedMethod == "baridi" || selectedMethod == "ccp")
-                                (if (isArabic) "رقم العملية أو الحوالة من وصل الدفع" else "Transaction / Receipt Number")
+                            if (selectedMethod == "request_account")
+                                (if (isArabic) "رقم الحوالة أو البريد الإلكتروني لتأكيد التحويل" else "Transaction / Reference / Email")
                             else
                                 (if (isArabic) "رقم البطاقة (16 رقماً)" else "Card Number (16 digits)")
                         )
