@@ -65,4 +65,3 @@ fun PolylangTheme(
 ) {
     MyApplicationTheme(darkTheme = darkTheme, dynamicColor = dynamicColor, content = content)
 }
-
