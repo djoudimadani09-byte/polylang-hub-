@@ -54,13 +54,13 @@ fun DashboardScreen(
     val isClient = userRole == UserRole.CLIENT
     val isTranslatorOrAdmin = userRole == UserRole.TRANSLATOR || userRole == UserRole.ADMIN
 
-    // Client sees ONLY their own requested orders!
+    // Client sees ONLY their own requested orders (Starts from 0 for new accounts)
     val clientOrders = remember(orders.size, userEmail, userName) {
-        orders.filter { order ->
-            if (userEmail.isNotBlank()) {
-                order.clientEmail.equals(userEmail, ignoreCase = true) || order.clientName.equals(userName, ignoreCase = true)
-            } else {
-                order.clientEmail == "karim@polylang.dz" || order.clientName.contains("كريم")
+        if (userEmail.isBlank()) {
+            emptyList()
+        } else {
+            orders.filter { order ->
+                order.clientEmail.equals(userEmail, ignoreCase = true) || (userName.isNotBlank() && order.clientName.equals(userName, ignoreCase = true))
             }
         }
     }

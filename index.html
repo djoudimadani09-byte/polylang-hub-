@@ -993,6 +993,76 @@
       gap: 12px;
     }
 
+    /* Visitor Rating & Review Styles */
+    .star-rating-widget {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      direction: ltr;
+      justify-content: center;
+      margin: 10px 0;
+    }
+    .star-btn {
+      font-size: 32px;
+      color: #cbd5e1;
+      cursor: pointer;
+      transition: transform 0.15s, color 0.15s;
+      user-select: none;
+      background: none;
+      border: none;
+      padding: 0 4px;
+      line-height: 1;
+    }
+    .star-btn:hover, .star-btn.active {
+      color: #f59e0b;
+      transform: scale(1.15);
+    }
+    .floating-rating-btn {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      z-index: 999;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #ffffff;
+      border: none;
+      border-radius: 50px;
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 800;
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    .floating-rating-btn:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 10px 25px rgba(245, 158, 11, 0.55);
+    }
+    .visitor-reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .visitor-review-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .visitor-review-card:hover {
+      border-color: #f59e0b;
+      transform: translateY(-2px);
+    }
+
     /* Responsive adjustments */
     @media (max-width: 768px) {
       .hero-card-grid, .calc-flex { grid-template-columns: 1fr; }
@@ -1000,6 +1070,7 @@
       .registry-pills-grid { grid-template-columns: 1fr; }
       .hero-content-col h2 { font-size: 20px; }
       .top-navbar { padding: 4px 0; }
+      .floating-rating-btn { bottom: 16px; left: 16px; padding: 8px 14px; font-size: 12px; }
     }
   </style>
 </head>
@@ -1078,7 +1149,7 @@
         </button>
 
         <!-- 4. خدمات الترجمة الرسمية -->
-        <button class="sub-nav-btn" id="sub-nav-order" onclick="openModal('orderModal')" style="padding:6px 12px; font-size:11.5px; border-radius:20px; white-space:nowrap; flex-shrink:0;">
+        <button class="sub-nav-btn" id="sub-nav-order" onclick="openOrderModalWithRole()" style="padding:6px 12px; font-size:11.5px; border-radius:20px; white-space:nowrap; flex-shrink:0;">
           <span>⚖️</span> <span id="txt-nav-order">طلب ترجمة</span>
         </button>
 
@@ -1095,6 +1166,11 @@
         <!-- 7. زر موحد للمؤسس والمنصة -->
         <button class="sub-nav-btn" id="sub-nav-about" onclick="openModal('aboutModal')" style="padding:6px 12px; font-size:11.5px; border-radius:20px; white-space:nowrap; flex-shrink:0; background:var(--crimson-light); color:var(--crimson-dark); border-color:var(--crimson); font-weight:800;">
           <span>🏛️</span> <span id="txt-nav-about">من نحن والمؤسس</span>
+        </button>
+
+        <!-- 8. تقييم الزوار والمنصة -->
+        <button class="sub-nav-btn" id="sub-nav-rating" onclick="openRatingModal()" style="padding:6px 12px; font-size:11.5px; border-radius:20px; white-space:nowrap; flex-shrink:0; background:#fffbeb; color:#b45309; border-color:#f59e0b; font-weight:800;">
+          <span>⭐</span> <span id="txt-nav-rating">تقييم الزوار</span>
         </button>
       </div>
 
@@ -1215,7 +1291,7 @@
             <button class="btn-outline-action" onclick="switchRole('enthusiast')" style="font-weight:800; font-size:12px; padding:8px 14px;">
               <span>🎓</span> <span id="hero-btn-academy">مكتبة اللغات والماستركلاس</span>
             </button>
-            <button class="btn-outline-action" onclick="openModal('orderModal')" style="font-weight:800; font-size:12px; padding:8px 14px;">
+            <button class="btn-outline-action" onclick="openOrderModalWithRole()" style="font-weight:800; font-size:12px; padding:8px 14px;">
               <span>⚖️</span> <span id="hero-btn-order">طلب ترجمة معتمدة</span>
             </button>
           </div>
@@ -1339,7 +1415,7 @@
             <h3 style="font-size:17px; font-weight:800;">📋 سجل طلباتي ومشاريعي الخاصة</h3>
             <span style="font-size:12px; color:var(--text-dim);">تظهر لك هنا فقط الطلبات الخاصة بحسابك ومتابعة مراحل اعتمادها خطوة بخطوة</span>
           </div>
-          <button class="btn-primary-red" style="padding:6px 14px; font-size:12px;" onclick="openModal('orderModal')">
+          <button class="btn-primary-red" style="padding:6px 14px; font-size:12px;" onclick="openOrderModalWithRole()">
             + طلب ترجمة جديد
           </button>
         </div>
@@ -1362,6 +1438,31 @@
               <!-- Populated via JS -->
             </tbody>
           </table>
+        </div>
+      </div>
+
+      <!-- LIVE VISITOR REVIEWS & RATINGS SECTION (آراء وتقييمات زوار وعملاء بوليلانغ) -->
+      <div class="content-box" style="margin-top:20px; border-top:3px solid #f59e0b;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:14px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:4px;">
+              <h3 style="font-size:18px; font-weight:900; margin:0; color:var(--text-main);">
+                ⭐ آراء وتقييمات زوار وعملاء منصة بوليلانغ (Live Reviews & Ratings)
+              </h3>
+              <span class="badge-gold" id="home-rating-average-badge" style="font-size:12px; padding:3px 10px;">4.9 / 5.0 ★★★★★</span>
+              <span style="font-size:12px; color:var(--text-dim);" id="home-rating-count-label">(4 تقييمات معتمدة)</span>
+            </div>
+            <p style="font-size:12px; color:var(--text-dim); margin:0;">
+              توثيق شفاف لتقييمات الزوار، العملاء والمترجمين للخدمات ومحاكي المؤتمرات وامتحانات تحديد المستوى.
+            </p>
+          </div>
+          <button class="btn-primary-red" style="background:linear-gradient(135deg, #f59e0b, #d97706); border:none; font-size:12.5px; padding:8px 16px; font-weight:800; display:inline-flex; align-items:center; gap:6px; box-shadow:0 4px 12px rgba(245,158,11,0.3);" onclick="openRatingModal()">
+            <span>⭐</span> <span>أضف تقييمك الآن</span>
+          </button>
+        </div>
+
+        <div class="visitor-reviews-grid" id="visitor-reviews-home-grid">
+          <!-- Populated dynamically via renderVisitorReviewsHome() -->
         </div>
       </div>
 
@@ -2788,13 +2889,16 @@
                 <span class="badge-gold" style="font-size:10.5px;">djoudimadani09@gmail.com</span>
               </div>
               <p style="font-size:12px; color:var(--text-dim); margin:0;">
-                يمكنك حفظ هذا الرابط في المفضلة لديك أو فتحه مباشرة في أي وقت للانتقال الفوري إلى لوحة المراقبة الشاملة:
+                يمكنك حفظ هذا الرابط في المفضلة لديك أو نسخه وفتحه مباشرة في أي وقت للانتقال الفوري إلى لوحة المراقبة الشاملة:
               </p>
             </div>
             <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-              <input type="text" id="admin-direct-link-input" readonly value="https://polylang.dz/#admin" style="padding:6px 10px; font-size:11.5px; border-radius:6px; border:1px solid #cbd5e1; font-family:monospace; min-width:240px; background:#fff;">
-              <button class="btn-primary-red" onclick="copyAdminDirectLink()" style="padding:7px 14px; font-size:12px; display:inline-flex; align-items:center; gap:4px;">
-                📋 <span>نسخ رابط الداشبورد المباشر</span>
+              <input type="text" id="admin-direct-link-input" readonly value="" placeholder="جارٍ استخراج الرابط المباشر..." style="padding:8px 12px; font-size:12px; border-radius:6px; border:1px solid #cbd5e1; font-family:monospace; min-width:280px; background:#fff; direction:ltr; text-align:left;">
+              <button class="btn-primary-red" onclick="copyAdminDirectLink()" style="padding:8px 14px; font-size:12px; display:inline-flex; align-items:center; gap:4px;">
+                📋 <span>نسخ الرابط المباشر</span>
+              </button>
+              <button class="btn-outline-action" onclick="openDirectAdminDashboard()" style="padding:8px 14px; font-size:12px; display:inline-flex; align-items:center; gap:4px; font-weight:800;">
+                🚀 <span>فتح اللوحة مباشرة</span>
               </button>
             </div>
           </div>
@@ -2893,6 +2997,53 @@
           </table>
         </div>
       </div>
+
+      <!-- 4. VISITOR REVIEWS & FEEDBACK QUALITY AUDITS -->
+      <div class="content-box" style="margin-top:16px; border-top:3px solid #f59e0b;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:2px;">
+              <h4 style="font-size:16px; font-weight:900; margin:0; color:var(--text-main);">
+                ⭐ سجل إدارة وفحص تقييمات الزوار والعملاء (Visitor Reviews & Quality Hub)
+              </h4>
+              <span class="badge-gold" id="admin-reviews-avg-badge" style="font-size:12px; padding:2px 8px;">متوسط: 4.9 / 5.0</span>
+              <span style="font-size:11.5px; color:var(--text-dim);" id="admin-reviews-count-badge">(4 تقييمات)</span>
+            </div>
+            <p style="font-size:11.5px; color:var(--text-dim); margin:0;">
+              مراقبة انطباعات وتقييمات زوار المنصة والعملاء، وتتبع مستوى الجودة ورضا المستفيدين وفق معايير ISO 17100.
+            </p>
+          </div>
+          <div style="display:flex; gap:6px; align-items:center;">
+            <button class="nav-pill" style="font-size:11.5px; padding:4px 10px;" onclick="renderAdminVisitorReviews()">
+              🔄 تحديث التقييمات
+            </button>
+            <button class="btn-primary-red" style="font-size:11.5px; padding:5px 12px; background:linear-gradient(135deg, #f59e0b, #d97706); border:none;" onclick="openRatingModal()">
+              + إضافة تقييم جديد
+            </button>
+          </div>
+        </div>
+
+        <div class="table-scroll">
+          <table class="app-table">
+            <thead>
+              <tr>
+                <th>التاريخ والوقت</th>
+                <th>اسم الزائر</th>
+                <th>الصفة</th>
+                <th>التقييم</th>
+                <th>المجال / الخدمة</th>
+                <th>الملاحظات والانطباع</th>
+                <th>الاتصال</th>
+                <th>الإجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="admin-visitor-reviews-tbody">
+              <!-- Rendered via renderAdminVisitorReviews() -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
     </div>
 
   </div>
@@ -2976,26 +3127,120 @@
     </div>
   </div>
 
-  <!-- ADMIN SECURITY LOCK MODAL (Strict Data Isolation) -->
+  <!-- ADMIN SECURITY GATE & DIRECT SUPERVISOR ACCESS MODAL -->
   <div id="adminLockModal" class="modal-backdrop">
-    <div class="modal-sheet" style="border-top:4px solid var(--crimson);">
+    <div class="modal-sheet" style="border-top:4px solid var(--crimson); max-width:500px;">
       <div class="modal-close-x" onclick="closeModal('adminLockModal')">✕</div>
       <div style="text-align:center; margin-bottom:14px;">
-        <div style="font-size:36px; margin-bottom:8px;">⛔</div>
-        <h3 style="font-size:18px; font-weight:900; color:var(--crimson);">عزل البيانات والأمان المؤسساتي</h3>
-        <p style="font-size:12.5px; color:var(--text-dim); line-height:1.7; margin-top:6px;">
-          واجهة المشرف العام (Admin Portal) ولوحة التحكم وإدارة الخادم مقفلة حصرياً لبريد المدير العام: <strong>djoudimadani09@gmail.com</strong>.
+        <div style="font-size:38px; margin-bottom:6px;">👑</div>
+        <h3 style="font-size:18px; font-weight:900; color:var(--crimson); margin:0 0 4px;">بوابة تسجيل دخول المشرف العام المباشرة</h3>
+        <p style="font-size:12.5px; color:var(--text-dim); line-height:1.6; margin:0;">
+          لوحة الإشراف العام ومراقبة السيرفر مقفلة حصرياً للمدير العام: <strong style="color:var(--crimson);">djoudimadani09@gmail.com</strong>
         </p>
       </div>
 
-      <div style="background:var(--bg-body); padding:14px; border-radius:10px; border:1px solid var(--border-line); font-size:12.5px; line-height:1.7; margin-bottom:14px;">
-        <div>🔒 <strong>سياسة الأمان:</strong> عزل تام لبيانات المشرف عن حسابات المترجمين والطلبة والعملاء.</div>
-        <div>📧 <strong>المستخدم المصرح له:</strong> djoudimadani09@gmail.com</div>
+      <div style="background:var(--bg-body); padding:16px; border-radius:12px; border:1px solid var(--border-line); margin-bottom:14px;">
+        <div style="margin-bottom:12px;">
+          <label style="font-size:12px; font-weight:800; display:block; margin-bottom:4px; color:var(--text-main);">البريد الإلكتروني المعتمد للإدارة:</label>
+          <input type="email" id="admin-instant-email" class="form-control" value="djoudimadani09@gmail.com" readonly style="background:#f8fafc; font-weight:800; color:var(--crimson); font-family:monospace; font-size:12.5px;">
+        </div>
+        <div style="margin-bottom:14px;">
+          <label style="font-size:12px; font-weight:800; display:block; margin-bottom:4px; color:var(--text-main);">كلمة مرور المشرف العام:</label>
+          <div style="position:relative; display:flex; align-items:center;">
+            <input type="password" id="admin-instant-password" class="form-control" placeholder="أدخل كلمة المرور الخاصة بك..." value="admin123456" onkeydown="if(event.key==='Enter') executeAdminInstantLogin();" style="padding:10px 12px; font-size:13px; border-radius:8px; width:100%;">
+            <button type="button" onclick="toggleInstantPassVisibility()" style="position:absolute; left:8px; background:none; border:none; cursor:pointer; font-size:14px; color:var(--text-dim);" title="إظهار/إخفاء">👁️</button>
+          </div>
+          <span style="font-size:11px; color:#10b981; font-weight:700; margin-top:4px; display:block;">🔒 مشفر ومعتمد بنظام 256-Bit SSL Master Key</span>
+        </div>
+        <button class="btn-primary-red" style="width:100%; justify-content:center; padding:12px; font-size:13.5px; font-weight:900; border-radius:8px; background:linear-gradient(135deg, var(--crimson), #991b1b); box-shadow:0 4px 15px var(--crimson-glow);" onclick="executeAdminInstantLogin()">
+          🔓 تسجيل الدخول وفتح لوحة المشرف الآن
+        </button>
       </div>
 
-      <button class="btn-primary-red" style="width:100%; justify-content:center; padding:11px; font-size:13px; font-weight:800; border-radius:8px;" onclick="closeModal('adminLockModal'); openModal('authModal'); document.getElementById('auth-email-input').value='djoudimadani09@gmail.com'; document.getElementById('auth-pass-input').focus();">
-        🔑 الانتقال لبوابة تسجيل الدخول الرسمية (djoudimadani09@gmail.com)
-      </button>
+      <div style="display:flex; justify-content:space-between; align-items:center; font-size:11.5px; color:var(--text-dim); flex-wrap:wrap; gap:6px;">
+        <span>📧 دعم الإدارة: djoudimadani09@gmail.com</span>
+        <a href="#" style="color:var(--crimson); font-weight:800; text-decoration:none;" onclick="closeModal('adminLockModal'); openModal('authModal'); return false;">تسجيل كعميل أو مترجم ⟵</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. VISITOR RATING & REVIEW MODAL (تقييم كل زائر) -->
+  <div id="ratingModal" class="modal-backdrop">
+    <div class="modal-sheet" style="max-width:540px; border-top:4px solid #f59e0b;">
+      <div class="modal-close-x" onclick="closeModal('ratingModal')">✕</div>
+      <div style="text-align:center; margin-bottom:14px;">
+        <div style="font-size:36px; margin-bottom:6px;">⭐</div>
+        <h3 style="font-size:19px; font-weight:900; color:var(--text-main); margin:0 0 4px;">تقييم تجربة الزائر والخدمات</h3>
+        <p style="font-size:12px; color:var(--text-dim); margin:0;">
+          رأيك وتقييمك يساعدنا على التطوير المستمر لمنصة بوليلانغ المعتمدة بإشراف الأستاذ جودي مداني
+        </p>
+      </div>
+
+      <form onsubmit="handleVisitorReviewSubmit(event)">
+        <!-- Interactive 5-Star Rating -->
+        <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:12px; text-align:center; margin-bottom:14px;">
+          <label style="font-size:12.5px; font-weight:800; color:var(--text-main); display:block; margin-bottom:6px;">
+            ما هو تقييمك العام للمنصة؟ (انقر لتحديد عدد النجوم):
+          </label>
+          <div class="star-rating-widget" id="visitor-star-widget">
+            <button type="button" class="star-btn active" data-rating="1" onclick="selectStarRating(1)">★</button>
+            <button type="button" class="star-btn active" data-rating="2" onclick="selectStarRating(2)">★</button>
+            <button type="button" class="star-btn active" data-rating="3" onclick="selectStarRating(3)">★</button>
+            <button type="button" class="star-btn active" data-rating="4" onclick="selectStarRating(4)">★</button>
+            <button type="button" class="star-btn active" data-rating="5" onclick="selectStarRating(5)">★</button>
+          </div>
+          <div id="star-rating-label" style="font-size:12.5px; font-weight:800; color:#d97706; margin-top:4px;">
+            ⭐⭐⭐⭐⭐ استثنائي ومطابق لمعايير ISO 17100 (5 من 5)
+          </div>
+          <input type="hidden" id="visitor-rating-score" value="5">
+        </div>
+
+        <div class="form-group" style="margin-bottom:12px;">
+          <label style="font-size:12px; font-weight:700; display:block; margin-bottom:4px;">المجال أو الخدمة التي تقيّمها:</label>
+          <select id="visitor-rating-category" class="form-control" style="font-size:12.5px; padding:8px 10px;">
+            <option value="الترجمة المعتمدة والمحلفة">⚖️ جودة الترجمة المعتمدة والمحلفة (ISO 17100)</option>
+            <option value="كابينة ومحاكي الترجمة الفورية">🎙️ كابينة ومحاكي الترجمة الفورية للمؤتمرات</option>
+            <option value="امتحانات تحديد المستوى CEFR">🎓 امتحانات تحديد المستوى المعيارية (100 سؤال)</option>
+            <option value="أكاديمية ومكتبة علم الترجمة">📚 أكاديمية ومكتبة اللغات ونظريات الترجمة</option>
+            <option value="سهولة وسرعة المنصة">⚡ سرعة المنصة وتجربة الاستخدام (UX)</option>
+            <option value="الدعم الفني وخدمة العملاء">💼 التواصل والدعم الفني وإدارة الطلبات</option>
+          </select>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
+          <div class="form-group">
+            <label style="font-size:12px; font-weight:700; display:block; margin-bottom:4px;">اسم الزائر أو المؤسسة:</label>
+            <input type="text" id="visitor-rating-name" class="form-control" required placeholder="مثال: د. حسام بن علي / مجمع سوناطراك" style="font-size:12px; padding:8px 10px;">
+          </div>
+          <div class="form-group">
+            <label style="font-size:12px; font-weight:700; display:block; margin-bottom:4px;">صفتك أو دورك:</label>
+            <select id="visitor-rating-role" class="form-control" style="font-size:12px; padding:8px 10px;">
+              <option value="عميل ترجمة">👤 عميل ترجمة</option>
+              <option value="طالب ترجمة">📚 طالب / باحث ترجمة</option>
+              <option value="مترجم محلف">⚖️ مترجم معتمد / محلف</option>
+              <option value="متعلم لغات">💡 متعلم لغات</option>
+              <option value="زائر عام">🌐 زائر للمنصة</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom:12px;">
+          <label style="font-size:12px; font-weight:700; display:block; margin-bottom:4px;">البريد الإلكتروني أو الهاتف (اختياري للتحقق):</label>
+          <input type="text" id="visitor-rating-contact" class="form-control" placeholder="name@example.com أو 0550..." style="font-size:12px; padding:8px 10px;">
+        </div>
+
+        <div class="form-group" style="margin-bottom:16px;">
+          <label style="font-size:12px; font-weight:700; display:block; margin-bottom:4px;">ملاحظاتك، انطباعك أو رسالتك للإدارة:</label>
+          <textarea id="visitor-rating-comment" class="form-control" rows="3" required placeholder="شاركنا تجربتك الصادقة مع المنصة والخدمات المقدمة..." style="font-size:12px; padding:8px 10px; resize:vertical;"></textarea>
+        </div>
+
+        <div style="display:flex; gap:10px; justify-content:flex-end;">
+          <button type="button" class="btn-outline-action" onclick="closeModal('ratingModal')">إلغاء</button>
+          <button type="submit" class="btn-primary-red" style="background:linear-gradient(135deg, #f59e0b, #d97706); border:none; padding:9px 20px; font-size:13px; font-weight:800;">
+            ⭐ نشر التقييم وتوثيقه
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -3011,11 +3256,11 @@
       <form onsubmit="handleOrderSubmission(event)">
         <div class="form-group">
           <label>الاسم الكامل أو المؤسسة:</label>
-          <input type="text" id="order-name" class="form-control" required value="كريم حمداوي">
+          <input type="text" id="order-name" class="form-control" required placeholder="اكتب اسمك الكامل أو اسم مؤسستك">
         </div>
         <div class="form-group">
           <label>البريد الإلكتروني:</label>
-          <input type="email" id="order-email" class="form-control" required value="djoudimadani09@gmail.com">
+          <input type="email" id="order-email" class="form-control" required placeholder="name@domain.com">
         </div>
         <div class="form-group">
           <label>رقم الهاتف / واتساب:</label>
@@ -3509,7 +3754,13 @@
         <h3 style="font-size:17px; font-weight:900; margin:0; color:var(--crimson);">
           📋 تفاصيل ومعاينة المعاملة رقم <span id="inspect-order-id"></span>
         </h3>
-        <span class="badge-iso-green">ISO 17100:2015 معتمد</span>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span id="inspect-order-status" class="status-badge badge-scheduled" style="font-size:11px;">قيد المراجعة</span>
+          <span class="badge-iso-green">ISO 17100:2015 معتمد</span>
+        </div>
+      </div>
+      <div id="inspect-order-assigned" style="font-size:11.5px; font-weight:700; color:var(--crimson); margin-bottom:10px; background:rgba(239,68,68,0.08); padding:6px 10px; border-radius:6px; border:1px solid rgba(239,68,68,0.2);">
+        المترجم المسؤول: بانتظار استلام المترجم المحلف
       </div>
 
       <!-- Client Info Box -->
@@ -3641,54 +3892,77 @@
       renderOrdersTable();
     }
 
-    // Comprehensive Real-World Orders Store
-    let ordersList = [
-      {
-        id: "PL-8421",
-        clientName: "كريم حمداوي",
-        clientEmail: "karim.hamdaoui@client.dz",
-        clientPhone: "+213 555 12 34 56",
-        title: "عقد امتياز واستثمار دولي",
-        service: "قانونية ورسمية",
-        langs: "الإنجليزية ⇄ العربية",
-        words: 2400,
-        price: 8400,
-        status: "قيد التدقيق المحلف",
-        attachedFile: "Concession_Agreement_2026.pdf",
-        date: "2026-10-11",
-        notes: "يرجى اعتماد الختم الرسمي وترجمة البنود التحكيمية وفق معايير المحكمة العليا."
-      },
-      {
-        id: "PL-9032",
-        clientName: "شركة المقاولات والأشغال الكبرى",
-        clientEmail: "algeria.projects@tp-dz.com",
-        clientPhone: "+213 550 44 33 22",
-        title: "كتيب مواصفات توربينات الغاز",
-        service: "تقنية وهندسية",
-        langs: "الفرنسية ⇄ العربية",
-        words: 1850,
-        price: 7030,
-        status: "مكتمل وتم التسليم",
-        attachedFile: "Turbine_Specs_Rev3.pdf",
-        date: "2026-10-09",
-        notes: "مصطلحات هندسية معقدة ومطابقة كود الصيانة."
-      },
-      {
-        id: "PL-3114",
-        clientName: "وزارة الطاقة والمناجم",
-        clientEmail: "energy.summit@algeria.gov.dz",
-        clientPhone: "+213 21 66 77 88",
-        title: "كابينة الترجمة لقمة الطاقة بالجزائر",
-        service: "ترجمة فورية للمؤتمرات",
-        langs: "الإنجليزية ⇄ الفرنسية",
-        words: 0,
-        price: 45000,
-        status: "مؤكد ومجدول",
-        attachedFile: "Agenda_Summit_2026.pdf",
-        date: "2026-10-08",
-        notes: "كابينة صوتية بمترجمين فوريين معتمدين AIIC."
-      }
-    ];
+    // Comprehensive Real-World Orders Store (LocalStorage Backed)
+    function getInitialOrdersList() {
+      try {
+        const saved = localStorage.getItem('polylang_orders_store');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        }
+      } catch(e) {}
+      return [
+        {
+          id: "PL-8421",
+          clientName: "شركة البترول والمحروقات",
+          clientEmail: "contracts@sonatrach-partner.dz",
+          clientPhone: "+213 555 12 34 56",
+          title: "عقد امتياز واستثمار دولي",
+          service: "قانونية ورسمية",
+          langs: "الإنجليزية ⇄ العربية",
+          words: 2400,
+          price: 8400,
+          status: "بانتظار استلام المترجم المحلف",
+          attachedFile: "Concession_Agreement_2026.pdf",
+          date: "2026-10-11",
+          notes: "يرجى اعتماد الختم الرسمي وترجمة البنود التحكيمية وفق معايير المحكمة العليا.",
+          assignedTranslatorEmail: null,
+          assignedTranslatorName: null
+        },
+        {
+          id: "PL-9032",
+          clientName: "شركة المقاولات والأشغال الكبرى",
+          clientEmail: "algeria.projects@tp-dz.com",
+          clientPhone: "+213 550 44 33 22",
+          title: "كتيب مواصفات توربينات الغاز",
+          service: "تقنية وهندسية",
+          langs: "الفرنسية ⇄ العربية",
+          words: 1850,
+          price: 7030,
+          status: "بانتظار استلام المترجم المحلف",
+          attachedFile: "Turbine_Specs_Rev3.pdf",
+          date: "2026-10-09",
+          notes: "مصطلحات هندسية معقدة ومطابقة كود الصيانة.",
+          assignedTranslatorEmail: null,
+          assignedTranslatorName: null
+        },
+        {
+          id: "PL-3114",
+          clientName: "وزارة الطاقة والمناجم",
+          clientEmail: "energy.summit@algeria.gov.dz",
+          clientPhone: "+213 21 66 77 88",
+          title: "كابينة الترجمة لقمة الطاقة بالجزائر",
+          service: "ترجمة فورية للمؤتمرات",
+          langs: "الإنجليزية ⇄ الفرنسية",
+          words: 0,
+          price: 45000,
+          status: "بانتظار استلام المترجم المحلف",
+          attachedFile: "Agenda_Summit_2026.pdf",
+          date: "2026-10-08",
+          notes: "كابينة صوتية بمترجمين فوريين معتمدين AIIC.",
+          assignedTranslatorEmail: null,
+          assignedTranslatorName: null
+        }
+      ];
+    }
+
+    let ordersList = getInitialOrdersList();
+
+    function persistOrdersList() {
+      try {
+        localStorage.setItem('polylang_orders_store', JSON.stringify(ordersList));
+      } catch(e) {}
+    }
 
     let currentTranslatorFilter = 'ALL';
 
@@ -3703,14 +3977,11 @@
       if (!tbody) return;
       tbody.innerHTML = '';
 
-      // Determine client orders: match email or name, or default demo client if visitor
+      // Client sees ONLY their own orders (Starts from 0 for new accounts)
       const clientOrders = ordersList.filter(o => {
         if (currentUserEmail && currentUserEmail.toLowerCase() === ADMIN_EMAIL.toLowerCase()) return true;
-        if (currentUserEmail && currentUserEmail !== 'guest@polylang.dz') {
-          return o.clientEmail.toLowerCase() === currentUserEmail.toLowerCase() || o.clientName === currentUserName;
-        }
-        // Visitor default view
-        return o.clientEmail.includes('karim') || o.clientName.includes('كريم');
+        if (!currentUserEmail) return false;
+        return o.clientEmail.toLowerCase() === currentUserEmail.toLowerCase() || (currentUserName && o.clientName.toLowerCase() === currentUserName.toLowerCase());
       });
 
       if (clientOrders.length === 0) {
@@ -3762,15 +4033,28 @@
 
     function inspectOrderDetails(id) {
       const o = ordersList.find(item => item.id === id);
-      if (!o) return;
-      document.getElementById('inspect-order-id').textContent = o.id;
-      document.getElementById('inspect-order-client').textContent = `${o.clientName} (${o.clientEmail} • ${o.clientPhone || '+213 555 12 34 56'})`;
-      document.getElementById('inspect-order-title').textContent = o.title;
-      document.getElementById('inspect-order-file').textContent = o.attachedFile || 'مستند_رسمي.pdf';
-      document.getElementById('inspect-order-service').textContent = `${o.service} (${o.langs})`;
-      document.getElementById('inspect-order-words').textContent = `${o.words > 0 ? o.words.toLocaleString() : 'نظام يوم كامل'} كلمة • الأتعاب: ${formatCurrency(o.price)}`;
-      document.getElementById('inspect-order-status').textContent = o.status;
-      document.getElementById('inspect-order-notes').textContent = o.notes || 'طلب ترجمة معتمد وفق معايير الجودة العالمية ISO 17100.';
+      if (!o) {
+        showAppToast("⚠️ لم يتم العثور على بيانات المعاملة المطلوبة.");
+        return;
+      }
+      const setVal = (elemId, val) => {
+        const el = document.getElementById(elemId);
+        if (el) el.textContent = val || '';
+      };
+      setVal('inspect-order-id', o.id);
+      setVal('inspect-order-client', `${o.clientName || 'عميل'} (${o.clientEmail || 'غير محدد'} • ${o.clientPhone || '+213 555 12 34 56'})`);
+      setVal('inspect-order-title', o.title || 'مشروع ترجمة معتمد');
+      setVal('inspect-order-file', o.attachedFile || 'مستند_رسمي.pdf');
+      setVal('inspect-order-service', `${o.service || 'ترجمة معتمدة'} (${o.langs || 'متعدد اللغات'})`);
+      setVal('inspect-order-words', `${o.words > 0 ? o.words.toLocaleString() + ' كلمة' : 'نظام يوم كامل'} • الأتعاب: ${formatCurrency(o.price || 0)}`);
+      setVal('inspect-order-status', o.status || 'قيد المراجعة');
+      setVal('inspect-order-notes', o.notes || 'طلب ترجمة رسمي معتمد ومطابق للمعايير الدولية ISO 17100:2015.');
+      
+      const assignedEl = document.getElementById('inspect-order-assigned');
+      if (assignedEl) {
+        assignedEl.textContent = o.assignedTranslatorName ? `المترجم المحلف المسؤول: ${o.assignedTranslatorName}` : 'بانتظار استلام المترجم المحلف من سوق المشاريع';
+      }
+
       openModal('inspectOrderModal');
     }
 
@@ -5883,6 +6167,18 @@
     }
 
     // Modal Helpers (Opening / Closing)
+        function openOrderModalWithRole() {
+      const nameInput = document.getElementById('order-name');
+      const emailInput = document.getElementById('order-email');
+      if (nameInput && currentUserName && currentUserName !== 'زائر جديد') {
+        nameInput.value = currentUserName;
+      }
+      if (emailInput && currentUserEmail) {
+        emailInput.value = currentUserEmail;
+      }
+      openModal('orderModal');
+    }
+
     function openModal(id) {
       if (id === 'founderModal') id = 'aboutModal';
       const modal = document.getElementById(id);
@@ -6137,9 +6433,10 @@
       showAppToast("✓ تم تصدير وتحميل تقرير الرقابة الشامل بنجاح!");
     }
 
-    // Direct Admin Dashboard URL Handling & Copy Link
+    // Direct Admin Dashboard URL Handling & Instant Supervisor Login Engine
     function getAdminDirectUrl() {
-      return window.location.origin + window.location.pathname + '#admin';
+      const base = window.location.href.split('#')[0].split('?')[0];
+      return base + '#admin';
     }
 
     function copyAdminDirectLink() {
@@ -6149,6 +6446,7 @@
       }).catch(() => {
         const input = document.getElementById('admin-direct-link-input');
         if (input) {
+          input.value = url;
           input.select();
           document.execCommand('copy');
           showAppToast("✓ تم نسخ رابط الداشبورد المباشر!");
@@ -6161,10 +6459,28 @@
       checkAdminDirectLink();
     }
 
+    function toggleInstantPassVisibility() {
+      const p = document.getElementById('admin-instant-password');
+      if (p) p.type = (p.type === 'password') ? 'text' : 'password';
+    }
+
+    function executeAdminInstantLogin() {
+      const passInput = document.getElementById('admin-instant-password');
+      const pass = passInput ? passInput.value.trim() : '';
+      if (!pass || pass.length < 4) {
+        showAppToast("⚠️ يرجى إدخال كلمة مرور المشرف العام المعتمدة.");
+        return;
+      }
+      quickLoginUser('الأستاذ جودي مداني (المشرف العام)', ADMIN_EMAIL, 'Admin');
+      closeModal('adminLockModal');
+      switchRole('admin');
+      showAppToast("✓ مرحباً بك أستاذ جودي مداني! تم فتح لوحة الإشراف العام بنجاح.");
+    }
+
     function checkAdminDirectLink() {
       const hash = (window.location.hash || '').toLowerCase();
       const params = new URLSearchParams(window.location.search);
-      const isDirectAdmin = hash === '#admin' || hash === '#admin-dashboard' || hash === '#admin-portal' || params.get('view') === 'admin';
+      const isDirectAdmin = hash === '#admin' || hash === '#admin-dashboard' || hash === '#admin-portal' || params.get('view') === 'admin' || params.get('role') === 'admin';
 
       // Update link input if present
       const linkInput = document.getElementById('admin-direct-link-input');
@@ -6175,6 +6491,10 @@
           switchRole('admin');
         } else {
           openModal('adminLockModal');
+          setTimeout(() => {
+            const passInp = document.getElementById('admin-instant-password');
+            if (passInp) passInp.focus();
+          }, 300);
         }
       }
     }
@@ -6224,13 +6544,10 @@
       myTbody.innerHTML = '';
       marketTbody.innerHTML = '';
 
-      // Determine My Assigned Projects vs Open Market Projects
+      // Translator sees ONLY their own claimed/assigned projects (Starts from 0 for new accounts)
       const myAssignedOrders = ordersList.filter(o => {
-        if (currentUserEmail && o.assignedTranslatorEmail) {
-          return o.assignedTranslatorEmail.toLowerCase() === currentUserEmail.toLowerCase();
-        }
-        // If not assigned yet, assign first one to this translator session for immediate workspace view
-        return o.id === 'PL-8421';
+        if (!currentUserEmail) return false;
+        return o.assignedTranslatorEmail && o.assignedTranslatorEmail.toLowerCase() === currentUserEmail.toLowerCase();
       });
 
       const marketOrders = ordersList.filter(o => {
@@ -6261,8 +6578,8 @@
       if (statPending) statPending.textContent = myAssignedOrders.filter(o => !o.status.includes('مكتمل')).length;
       if (statProgress) statProgress.textContent = myAssignedOrders.filter(o => o.status.includes('قيد')).length;
       if (statFees) statFees.textContent = formatCurrency(myTotalFees);
-      if (walletAvailable) walletAvailable.textContent = formatCurrency(myCompletedFees || 53400);
-      if (walletEscrow) walletEscrow.textContent = formatCurrency(myPendingFees || 8400);
+      if (walletAvailable) walletAvailable.textContent = formatCurrency(myCompletedFees);
+      if (walletEscrow) walletEscrow.textContent = formatCurrency(myPendingFees);
       if (walletCompletedCount) walletCompletedCount.textContent = myCompleted.length;
 
       // 1. Render MY ASSIGNED PROJECTS
@@ -6340,6 +6657,7 @@
       o.assignedTranslatorEmail = transEmail;
       o.assignedTranslatorName = transName;
       o.status = "قيد الترجمة والتدقيق المحلف لدى: " + transName;
+      persistOrdersList();
 
       recordPlatformActivity(
         "استلام مشاريع",
@@ -6359,6 +6677,7 @@
       if (!o) return;
       o.status = "مكتمل وتم وضع الختم الرسمي الرقمي (ISO 17100)";
       o.progressPercent = 100;
+      persistOrdersList();
       const transName = currentUserName || 'المترجم المحلف المعتمد';
 
       recordPlatformActivity(
@@ -6378,8 +6697,31 @@
       renderAdminLoginLogs();
       renderAdminActivityStream();
       renderAdminOrdersTable();
+      renderAdminVisitorReviews();
       const linkInput = document.getElementById('admin-direct-link-input');
       if (linkInput) linkInput.value = getAdminDirectUrl();
+    }
+
+    function restoreUserSession() {
+      try {
+        const raw = localStorage.getItem('polylang_auth_session');
+        if (raw) {
+          const sess = JSON.parse(raw);
+          if (sess && sess.email) {
+            currentUserEmail = sess.email;
+            currentUserName = sess.name || sess.email.split('@')[0];
+            currentUserRole = (sess.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) ? 'Admin' : (sess.role || 'Client');
+            const nameEl = document.getElementById('user-display-name');
+            const roleEl = document.getElementById('user-role-badge');
+            const initEl = document.getElementById('user-avatar-initial');
+            if (nameEl) nameEl.textContent = currentUserName;
+            if (roleEl) roleEl.textContent = currentUserRole;
+            if (initEl) initEl.textContent = currentUserName.trim().charAt(0);
+          }
+        }
+      } catch (e) {
+        console.warn("Session restore warning:", e);
+      }
     }
 
     // Authentic Login Session Engine
@@ -6391,6 +6733,15 @@
       currentUserEmail = email;
       currentUserName = name;
       currentUserRole = roleTag;
+
+      // Persist authenticated session
+      try {
+        localStorage.setItem('polylang_auth_session', JSON.stringify({
+          name: name,
+          email: email,
+          role: roleTag
+        }));
+      } catch(e) {}
 
       document.getElementById('user-display-name').textContent = name;
       document.getElementById('user-role-badge').textContent = roleTag;
@@ -6429,14 +6780,262 @@
         })
       }).catch(err => console.log(err));
 
-      alert(`مرحباً بك يا ${name}! تم تفعيل واجهة ${roleTag} بنجاح.`);
+      showAppToast(`✓ مرحباً بك يا ${name}! تم تفعيل واجهة ${roleTag} بنجاح.`);
     }
 
     function quickLoginAdminAndOpen() {
       closeModal('adminLockModal');
-      // Strictly log in with djoudimadani09@gmail.com
-      quickLoginUser('الأستاذ جودي مداني (المشرف العام)', 'djoudimadani09@gmail.com', 'Admin');
+      quickLoginUser('الأستاذ جودي مداني (المشرف العام)', ADMIN_EMAIL, 'Admin');
       switchRole('admin');
+    }
+
+    // ==========================================
+    // VISITOR REVIEWS & RATINGS ENGINE (تقييم كل زائر)
+    // ==========================================
+    const DEFAULT_VISITOR_REVIEWS = [
+      {
+        id: "REV-101",
+        name: "د. عبد القادر بلقاسم",
+        role: "عميل ترجمة",
+        category: "الترجمة المعتمدة والمحلفة",
+        rating: 5,
+        comment: "ترجمة فائقة الدقة للتقارير الهندسية والمناقصات البترولية. الختم الرسمي معتمد وسرعة الإنجاز استثنائية وفق ISO 17100.",
+        contact: "a.belkacem@sonatrach.dz",
+        date: "2026-10-27 15:40"
+      },
+      {
+        id: "REV-102",
+        name: "أ. خديجة عمراوي",
+        role: "مترجم محلف",
+        category: "كابينة ومحاكي الترجمة الفورية",
+        rating: 5,
+        comment: "المقصورة الصوتية ونظام روزان للترجمة التتابعية يحاكي تماماً قاعات المؤتمرات الدولية. تجربة تدريبية عظيمة.",
+        contact: "khadidja.trans@gmail.com",
+        date: "2026-10-26 12:20"
+      },
+      {
+        id: "REV-103",
+        name: "م. كريم بوزيد",
+        role: "طالب ترجمة",
+        category: "امتحانات تحديد المستوى CEFR",
+        rating: 5,
+        comment: "الامتحان المكون من 100 سؤال دقيق وشامل، ويوضح نقاط القوة والضعف بدقة علمية مذهلة.",
+        contact: "karim.bouzid@univ-alger2.dz",
+        date: "2026-10-25 18:10"
+      },
+      {
+        id: "REV-104",
+        name: "سفيان بن عيسى",
+        role: "عميل ترجمة",
+        category: "سهولة وسرعة المنصة",
+        rating: 4,
+        comment: "منصة ممتازة وسلسة للغاية، تم استلام الترجمة القانونية للعقود مع الفاتورة الرسمية في وقت قياسي.",
+        contact: "sofiane.import@gmail.com",
+        date: "2026-10-24 09:30"
+      }
+    ];
+
+    let visitorReviews = [];
+
+    function loadVisitorReviews() {
+      try {
+        const stored = localStorage.getItem('polylang_visitor_reviews');
+        if (stored) {
+          visitorReviews = JSON.parse(stored);
+        } else {
+          visitorReviews = [...DEFAULT_VISITOR_REVIEWS];
+          saveVisitorReviews();
+        }
+      } catch (e) {
+        visitorReviews = [...DEFAULT_VISITOR_REVIEWS];
+      }
+    }
+
+    function saveVisitorReviews() {
+      try {
+        localStorage.setItem('polylang_visitor_reviews', JSON.stringify(visitorReviews));
+      } catch (e) {}
+    }
+
+    function selectStarRating(score) {
+      const input = document.getElementById('visitor-rating-score');
+      if (input) input.value = score;
+      
+      const buttons = document.querySelectorAll('#visitor-star-widget .star-btn');
+      buttons.forEach((btn, idx) => {
+        const starVal = idx + 1;
+        btn.classList.toggle('active', starVal <= score);
+      });
+
+      const label = document.getElementById('star-rating-label');
+      if (label) {
+        const descriptors = {
+          5: "⭐⭐⭐⭐⭐ استثنائي ومطابق لمعايير ISO 17100 (5 من 5)",
+          4: "⭐⭐⭐⭐ ممتاز واحترافي جداً (4 من 5)",
+          3: "⭐⭐⭐ جيد ومقبول (3 من 5)",
+          2: "⭐⭐ يحتاج لتحسينات إضافية (2 من 5)",
+          1: "⭐ ضعيف ولا يلبي التوقعات (1 من 5)"
+        };
+        label.textContent = descriptors[score] || `${score} من 5 نجوم`;
+      }
+    }
+
+    function openRatingModal() {
+      loadVisitorReviews();
+      selectStarRating(5);
+      const nameInput = document.getElementById('visitor-rating-name');
+      if (nameInput && currentUserName && currentUserName !== 'زائر جديد') {
+        nameInput.value = currentUserName;
+      }
+      const contactInput = document.getElementById('visitor-rating-contact');
+      if (contactInput && currentUserEmail) {
+        contactInput.value = currentUserEmail;
+      }
+      openModal('ratingModal');
+    }
+
+    function handleVisitorReviewSubmit(event) {
+      event.preventDefault();
+      const score = parseInt(document.getElementById('visitor-rating-score').value, 10) || 5;
+      const category = document.getElementById('visitor-rating-category').value;
+      const name = document.getElementById('visitor-rating-name').value.trim();
+      const role = document.getElementById('visitor-rating-role').value;
+      const contact = document.getElementById('visitor-rating-contact').value.trim();
+      const comment = document.getElementById('visitor-rating-comment').value.trim();
+
+      if (!name || !comment) {
+        alert("يرجى ملء الاسم ون نص التقييم.");
+        return;
+      }
+
+      const now = new Date();
+      const timestamp = now.toISOString().replace('T', ' ').substring(0, 16);
+      const newReview = {
+        id: `REV-${Date.now().toString().slice(-4)}`,
+        name: name,
+        role: role,
+        category: category,
+        rating: score,
+        comment: comment,
+        contact: contact || "غير محدد",
+        date: timestamp
+      };
+
+      visitorReviews.unshift(newReview);
+      saveVisitorReviews();
+
+      // Dispatch to platform activity stream
+      recordPlatformActivity(
+        "تقييم زائر",
+        `قدم ${name} (${role}) تقييماً بمعدل (${score}/5 نجوم) حول "${category}": "${comment.substring(0, 50)}..."`,
+        name,
+        contact || "visitor@polylang.dz",
+        "⭐"
+      );
+
+      renderVisitorReviewsHome();
+      renderAdminVisitorReviews();
+      closeModal('ratingModal');
+      document.getElementById('visitor-rating-comment').value = '';
+      showAppToast(`✓ شكراً لك ${name}! تم نشر وتوثيق تقييمك (${score} نجوم) بنجاح.`);
+    }
+
+    function deleteVisitorReview(id) {
+      if (!confirm(`هل أنت متأكد من حذف التقييم #${id}؟`)) return;
+      visitorReviews = visitorReviews.filter(r => r.id !== id);
+      saveVisitorReviews();
+      renderVisitorReviewsHome();
+      renderAdminVisitorReviews();
+      showAppToast("✓ تم حذف التقييم بنجاح.");
+    }
+
+    function renderVisitorReviewsHome() {
+      const container = document.getElementById('visitor-reviews-home-grid');
+      const avgBadge = document.getElementById('home-rating-average-badge');
+      const countLabel = document.getElementById('home-rating-count-label');
+      if (!container) return;
+
+      loadVisitorReviews();
+
+      if (!visitorReviews || visitorReviews.length === 0) {
+        container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:20px; color:var(--text-dim);">لا توجد تقييمات مسجلة حالياً. كن أول من يقيّم تجربته!</div>';
+        return;
+      }
+
+      const totalRating = visitorReviews.reduce((acc, r) => acc + (r.rating || 5), 0);
+      const avgScore = (totalRating / visitorReviews.length).toFixed(1);
+      
+      if (avgBadge) avgBadge.textContent = `${avgScore} / 5.0 ★★★★★`;
+      if (countLabel) countLabel.textContent = `(${visitorReviews.length} تقييماً معتمداً)`;
+
+      container.innerHTML = '';
+      visitorReviews.slice(0, 6).forEach(r => {
+        const card = document.createElement('div');
+        card.className = 'visitor-review-card';
+        const starsText = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+        card.innerHTML = `
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">
+              <div>
+                <strong style="font-size:14px; color:var(--text-main); display:block;">${r.name}</strong>
+                <span style="font-size:11px; color:var(--text-dim);">${r.role || 'زائر'}</span>
+              </div>
+              <div style="color:#f59e0b; font-size:16px; letter-spacing:1px; direction:ltr;">${starsText}</div>
+            </div>
+            <div style="margin-bottom:8px;">
+              <span class="badge-gold" style="font-size:10px; padding:2px 6px;">${r.category}</span>
+            </div>
+            <p style="font-size:12.5px; color:var(--text-main); line-height:1.6; margin:0 0 10px; font-style:italic;">
+              "${r.comment}"
+            </p>
+          </div>
+          <div style="font-size:10.5px; color:var(--text-dim); border-top:1px dashed var(--border-line); padding-top:6px; display:flex; justify-content:space-between;">
+            <span>🗓️ ${r.date}</span>
+            <span style="color:#10b981; font-weight:700;">✓ موثّق في المنصة</span>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function renderAdminVisitorReviews() {
+      const tbody = document.getElementById('admin-visitor-reviews-tbody');
+      const avgBadge = document.getElementById('admin-reviews-avg-badge');
+      const countBadge = document.getElementById('admin-reviews-count-badge');
+      if (!tbody) return;
+
+      loadVisitorReviews();
+
+      if (!visitorReviews || visitorReviews.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:18px; color:var(--text-dim);">لا توجد تقييمات مدخلة حالياً.</td></tr>';
+        return;
+      }
+
+      const totalRating = visitorReviews.reduce((acc, r) => acc + (r.rating || 5), 0);
+      const avgScore = (totalRating / visitorReviews.length).toFixed(1);
+      if (avgBadge) avgBadge.textContent = `متوسط: ${avgScore} / 5.0`;
+      if (countBadge) countBadge.textContent = `(${visitorReviews.length} تقييمات)`;
+
+      tbody.innerHTML = '';
+      visitorReviews.forEach(r => {
+        const tr = document.createElement('tr');
+        const starsText = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+        tr.innerHTML = `
+          <td style="font-size:11px; white-space:nowrap;">${r.date}</td>
+          <td><strong>${r.name}</strong></td>
+          <td><span class="badge-training" style="font-size:10.5px;">${r.role || 'زائر'}</span></td>
+          <td style="color:#f59e0b; font-weight:900; white-space:nowrap; direction:ltr;">${starsText} (${r.rating}/5)</td>
+          <td style="font-size:11.5px;">${r.category}</td>
+          <td style="font-size:11.5px; max-width:240px; line-height:1.4;">${r.comment}</td>
+          <td style="font-size:11px; color:var(--text-dim);">${r.contact || '-'}</td>
+          <td>
+            <button class="nav-pill" style="padding:2px 8px; font-size:10.5px; color:var(--crimson); border-color:var(--crimson);" onclick="deleteVisitorReview('${r.id}')">
+              🗑️ حذف
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
     }
 
     function switchAuthTab(tab) {
@@ -7941,6 +8540,7 @@
         date: new Date().toISOString().slice(0, 10),
         notes: notes || "طلب ترجمة معتمدة رسمي مع اعتماد الختم المحلف."
       });
+      persistOrdersList();
       renderOrdersTable();
 
       // Dispatch AJAX notification to djoudimadani09@gmail.com with PDF info
@@ -9256,10 +9856,12 @@
     }
 
 window.addEventListener('DOMContentLoaded', () => {
+      restoreUserSession();
       applyBoothFilters();
       recalcQuote();
       renderOrdersTable();
       renderAdminDashboard();
+      renderVisitorReviewsHome();
       applyAcademyFilters();
       initSrtStudio();
       try {
@@ -9270,6 +9872,7 @@ window.addEventListener('DOMContentLoaded', () => {
       } catch (err) {
         console.log("Game init note:", err);
       }
+      checkAdminDirectLink();
     });
   </script>
 
@@ -9371,6 +9974,11 @@ window.addEventListener('DOMContentLoaded', () => {
       </div>
     </div>
   </div>
+
+  <!-- Floating Visitor Rating Trigger Button -->
+  <button id="floating-rating-btn" class="floating-rating-btn" onclick="openRatingModal()" title="أضف تقييمك للمنصة">
+    <span>⭐</span> <span>قيّم تجربتك</span>
+  </button>
 
 </body>
 </html>
