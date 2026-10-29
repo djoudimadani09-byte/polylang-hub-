@@ -14,7 +14,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -305,18 +307,89 @@ fun DashboardScreen(
                         }
 
                         if (isAuthorizedAdmin) {
+                            val clipboardManager = LocalClipboardManager.current
                             Text(
-                                text = "🗄️ قاعدة البيانات السحابية: مؤمنة ومشفرة بالكامل وفق معايير الحماية (Zero-Trust)\n📧 التنبيهات الفورية: ترسل مباشرة إلى djoudimadani09@gmail.com\n👥 عزل البيانات: العميل يرى فقط ما طلب، والمترجم يرى جميع طلبات العملاء",
+                                text = "🗄️ قاعدة البيانات السحابية: مؤمنة ومشفرة بالكامل وفق معايير الحماية (Zero-Trust)\n📧 التنبيهات الفورية: ترسل مباشرة إلى djoudimadani09@gmail.com\n👥 عزل البيانات: العميل يرى فقط ما طلب، والمترجم يرى مشاريع مساحة عمله فقط",
                                 fontSize = 11.5.sp,
                                 lineHeight = 18.sp,
                                 color = MaterialTheme.colorScheme.onSurface
                             )
+
+                            // Direct Admin Dashboard URL Card
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
+                                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                                modifier = Modifier.fillMaxWidth().padding(top = 4.dp)
+                            ) {
+                                Column(modifier = Modifier.padding(10.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                                    Text(
+                                        text = "🔗 الرابط المباشر للوحة المشرف (Direct Admin URL):",
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = 11.sp,
+                                        color = RedDark
+                                    )
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.SpaceBetween,
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Text(
+                                            text = "https://polylang.dz/#admin",
+                                            fontSize = 12.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            color = MaterialTheme.colorScheme.primary
+                                        )
+                                        OutlinedButton(
+                                            onClick = {
+                                                clipboardManager.setText(AnnotatedString("https://polylang.dz/#admin"))
+                                                actionNotificationMessage = "✓ تم نسخ الرابط المباشر للوحة المشرف إلى الحافظة بنجاح!"
+                                            },
+                                            shape = RoundedCornerShape(6.dp),
+                                            contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp),
+                                            modifier = Modifier.height(30.dp)
+                                        ) {
+                                            Text(if (isArabic) "📋 نسخ الرابط" else "Copy URL", fontSize = 11.sp)
+                                        }
+                                    }
+                                }
+                            }
+
+                            // Live Platform Activity Timeline
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
+                                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                                modifier = Modifier.fillMaxWidth().padding(top = 4.dp)
+                            ) {
+                                Column(modifier = Modifier.padding(10.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                    Text(
+                                        text = "⚡ البث الحي لأحداث المنصة (Live Activity Stream):",
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = 11.sp,
+                                        color = SuccessGreen
+                                    )
+                                    Text("• 📄 طلب جديد: عقد امتياز دولي (كريم حمداوي - 2,400 كلمة)", fontSize = 10.5.sp)
+                                    Text("• 🔏 ختم معتمد: كتيب توربينات الغاز (أ. مريم بوعلام - ISO 17100)", fontSize = 10.5.sp)
+                                    Text("• 🏆 امتحان تحديد المستوى: سارة بن علي (TCF - المستوى المتقدم C1)", fontSize = 10.5.sp)
+                                    Text("• 🔒 جلسة دخول مؤمنة للمشرف العام: djoudimadani09@gmail.com", fontSize = 10.5.sp, color = RedDark)
+                                }
+                            }
                         } else {
                             Text(
-                                text = "عزل بيانات الإدارة: صلاحية الأدمن مخصصة حصراً للأستاذ جودي مداني عبر بريده المعتمد: ${AdminEmailNotifier.ADMIN_EMAIL}",
+                                text = "عزل بيانات الإدارة: صلاحية الأدمن مخصصة حصراً للأستاذ جودي مداني عبر بريده المعتمد: ${AdminEmailNotifier.ADMIN_EMAIL}.\nيرجى تسجيل الدخول بالبريد المعتمد للوصول للوحة التحكم.",
                                 fontSize = 12.sp,
-                                color = MaterialTheme.colorScheme.error
+                                color = MaterialTheme.colorScheme.error,
+                                lineHeight = 17.sp
                             )
+                            Button(
+                                onClick = onOpenAuthDialog,
+                                modifier = Modifier.fillMaxWidth().testTag("admin_login_cta"),
+                                colors = ButtonDefaults.buttonColors(containerColor = RedDark),
+                                shape = RoundedCornerShape(8.dp)
+                            ) {
+                                Icon(Icons.Default.Lock, contentDescription = null, modifier = Modifier.size(16.dp))
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Text(if (isArabic) "تسجيل الدخول بحساب المشرف المعتمد" else "Login as Authorized Admin", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                            }
                         }
                     }
                 }

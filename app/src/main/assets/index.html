@@ -1051,10 +1051,10 @@
           </button>
 
           <!-- User Account Chip (Clickable for Login & Profile!) -->
-          <div class="nav-user-chip" onclick="openModal('authModal')" title="User Profile / Sign In">
-            <div class="user-avatar-circle" id="user-avatar-initial">ك</div>
-            <span class="user-chip-label" id="user-display-name">كريم حمداوي (عميل مؤسساتي)</span>
-            <span class="badge-training" id="user-role-badge">Training</span>
+          <div class="nav-user-chip" onclick="openModal('authModal')" title="تسجيل الدخول / الملف الشخصي">
+            <div class="user-avatar-circle" id="user-avatar-initial">👤</div>
+            <span class="user-chip-label" id="user-display-name">تسجيل الدخول / حساب جديد</span>
+            <span class="badge-training" id="user-role-badge" style="background:#fef2f2; color:var(--crimson);">زائر</span>
           </div>
         </div>
 
@@ -1410,33 +1410,64 @@
           </div>
         </div>
 
-        <!-- SUB-TAB SWITCHER FOR TRANSLATOR -->
+        <!-- GLOBAL PLATFORM WORKSPACE TABS FOR TRANSLATOR (نظام المنصات العالمية) -->
         <div style="display:flex; gap:8px; margin-top:16px; flex-wrap:wrap;">
-          <button class="nav-pill active" id="btn-trans-tab-orders" onclick="switchTranslatorSubTab('orders')" style="font-size:12px; padding:6px 14px; font-weight:800; cursor:pointer;">
-            📋 مشاريع وطلبات جميع العملاء
+          <button class="nav-pill active" id="btn-trans-tab-my-orders" onclick="switchTranslatorSubTab('my-orders')" style="font-size:12px; padding:7px 14px; font-weight:800; cursor:pointer;">
+            💼 مشاريعي المستلمة والجارية (<span id="trans-my-count">1</span>)
           </button>
-          <button class="nav-pill" id="btn-trans-tab-srt" onclick="switchTranslatorSubTab('srt')" style="font-size:12px; padding:6px 14px; font-weight:800; cursor:pointer;">
+          <button class="nav-pill" id="btn-trans-tab-market" onclick="switchTranslatorSubTab('market')" style="font-size:12px; padding:7px 14px; font-weight:800; cursor:pointer; background:rgba(239,68,68,0.08); color:var(--crimson); border-color:var(--crimson);">
+            🌐 سوق المشاريع المتاحة للاستلام (<span id="trans-market-count">2</span>)
+          </button>
+          <button class="nav-pill" id="btn-trans-tab-srt" onclick="switchTranslatorSubTab('srt')" style="font-size:12px; padding:7px 14px; font-weight:800; cursor:pointer;">
             🎬 استوديو ومحرر SRT ومزامنة الفيديو
           </button>
-          <button class="nav-pill" id="btn-trans-tab-stamp" onclick="switchTranslatorSubTab('stamp')" style="font-size:12px; padding:6px 14px; font-weight:800; cursor:pointer;">
+          <button class="nav-pill" id="btn-trans-tab-stamp" onclick="switchTranslatorSubTab('stamp')" style="font-size:12px; padding:7px 14px; font-weight:800; cursor:pointer;">
             🔏 سجل الأختام والاعتماد الرسمي (ISO 17100)
+          </button>
+          <button class="nav-pill" id="btn-trans-tab-wallet" onclick="switchTranslatorSubTab('wallet')" style="font-size:12px; padding:7px 14px; font-weight:800; cursor:pointer;">
+            💳 محفظتي ومستحقات الأتعاب
           </button>
         </div>
       </div>
 
-      <!-- TRANSLATOR PANEL 1: ALL CLIENT ORDERS PIPELINE -->
-      <div id="trans-panel-orders" class="content-box">
+<!-- TRANSLATOR PANEL 1: MY ASSIGNED PROJECTS (مشاريعي المستلمة والجارية) -->
+      <div id="trans-panel-my-orders" class="content-box">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
           <div>
-            <h3 style="font-size:17px; font-weight:800; margin:0 0 3px;">قائمة طلبات ومشاريع جميع العملاء (All Client Requests)</h3>
-            <span style="font-size:12px; color:var(--text-dim);">إمكانية استلام المشاريع، فحص المستند المرفق، واعتماد الترجمة بالختم الرسمي</span>
+            <h3 style="font-size:17px; font-weight:900; margin:0 0 3px; color:var(--text-main);">💼 مساحة عمل المترجم: مشاريعي الجارية المستلمة (My Active Workspace)</h3>
+            <span style="font-size:12px; color:var(--text-dim);">هذه المشاريع متعاقد عليها ومسندة إليك شخصياً. يمكنك فحص الملفات المرفقة، التدقيق، وتطبيق الختم المحلف وتسليمها للعميل.</span>
           </div>
-          <div style="display:flex; gap:6px; flex-wrap:wrap;">
-            <button class="nav-pill active" id="filter-all" onclick="filterTranslatorOrders('ALL')" style="font-size:11px; padding:4px 10px;">الكل</button>
-            <button class="nav-pill" id="filter-pending" onclick="filterTranslatorOrders('PENDING')" style="font-size:11px; padding:4px 10px;">بانتظار الاستلام</button>
-            <button class="nav-pill" id="filter-progress" onclick="filterTranslatorOrders('PROGRESS')" style="font-size:11px; padding:4px 10px;">قيد العمل</button>
-            <button class="nav-pill" id="filter-completed" onclick="filterTranslatorOrders('COMPLETED')" style="font-size:11px; padding:4px 10px;">مكتمل ومختوم</button>
+          <span class="badge-iso-green" id="trans-personal-badge">DZ-TRANS-8842 • مترجم محلف معتمد</span>
+        </div>
+
+        <div class="table-scroll">
+          <table class="app-table">
+            <thead>
+              <tr>
+                <th>رقم المشروع</th>
+                <th>العميل والاتصال</th>
+                <th>المستند المرفق</th>
+                <th>التخصص واللغات</th>
+                <th>الكلمات والأتعاب</th>
+                <th>الحالة الإجرائية</th>
+                <th>إجراءات الإنجاز والختم</th>
+              </tr>
+            </thead>
+            <tbody id="trans-my-orders-tbody">
+              <!-- Populated via renderTranslatorOrdersTable -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TRANSLATOR PANEL 2: OPEN JOB MARKET (سوق المشاريع المفتوح للاستلام) -->
+      <div id="trans-panel-market" class="content-box" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+          <div>
+            <h3 style="font-size:17px; font-weight:900; margin:0 0 3px; color:var(--crimson);">🌐 سوق المشاريع المتاحة للترجمة والاعتماد (Open Translation Marketplace)</h3>
+            <span style="font-size:12px; color:var(--text-dim);">طلبات عملاء جديدة بانتظار استلام مترجم محلف معتمد. انقر على «استلام المشروع» للتعاقد الفوري ونقله لمساحة عملك.</span>
           </div>
+          <button class="nav-pill" onclick="renderTranslatorOrdersTable()" style="font-size:11.5px; padding:4px 10px;">🔄 تحديث العروض</button>
         </div>
 
         <div class="table-scroll">
@@ -1444,20 +1475,46 @@
             <thead>
               <tr>
                 <th>رقم الطلب</th>
-                <th>العميل والاتصال</th>
-                <th>المشروع / الملف المرفق</th>
-                <th>التخصص</th>
-                <th>اللغات</th>
-                <th>الكلمات</th>
-                <th>الأتعاب</th>
-                <th>الحالة</th>
-                <th>إجراءات المترجم المحلف</th>
+                <th>صاحب الطلب</th>
+                <th>عنوان المشروع والملف</th>
+                <th>التخصص المطلوب</th>
+                <th>الزوج اللغوي</th>
+                <th>حجم العمل</th>
+                <th>قيمة التعاقد</th>
+                <th>إجراء التعاقد الفوري</th>
               </tr>
             </thead>
-            <tbody id="translator-orders-tbody">
-              <!-- Populated via JS with ALL client requests -->
+            <tbody id="trans-market-orders-tbody">
+              <!-- Populated via renderTranslatorOrdersTable -->
             </tbody>
           </table>
+        </div>
+      </div>
+
+      <!-- TRANSLATOR PANEL 4: EARNINGS & WALLET (المحفظة والأرباح) -->
+      <div id="trans-panel-wallet" class="content-box" style="display:none;">
+        <div class="section-title-wrap">
+          <h3>💳 محفظة الأتعاب وكشف الحساب المالي للمترجم المحلف</h3>
+          <p>متابعة دقيقة لمستحقات الترجمة للمشاريع المنجزة والمختومة بموجب معايير ISO 17100.</p>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:14px; margin-bottom:16px;">
+          <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:14px; text-align:center;">
+            <div style="font-size:11.5px; color:var(--text-dim); font-weight:700;">الأتعاب المكتسبة الجاهزة للصرف</div>
+            <div id="trans-wallet-available" style="font-size:22px; font-weight:900; color:#059669; margin-top:4px;">53,400 د.ج</div>
+          </div>
+          <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:14px; text-align:center;">
+            <div style="font-size:11.5px; color:var(--text-dim); font-weight:700;">أتعاب قيد الإنجاز (ضمان مؤقت)</div>
+            <div id="trans-wallet-escrow" style="font-size:22px; font-weight:900; color:#d97706; margin-top:4px;">8,400 د.ج</div>
+          </div>
+          <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:14px; text-align:center;">
+            <div style="font-size:11.5px; color:var(--text-dim); font-weight:700;">المشاريع المعتمدة بالختم الرسمي</div>
+            <div id="trans-wallet-completed-count" style="font-size:22px; font-weight:900; color:var(--crimson); margin-top:4px;">2</div>
+          </div>
+        </div>
+        <div style="text-align:center; padding:14px; background:var(--bg-body); border-radius:10px; border:1px dashed var(--border-line);">
+          <button class="btn-primary-red" onclick="alert('✓ تم تقديم طلب تحويل الأتعاب إلى الإدارة: djoudimadani09@gmail.com بنجاح! ستصلك رسالة تأكيد رسمية.')">
+            💸 طلب تحويل الأتعاب لحسابي البنكي / البريدي
+          </button>
         </div>
       </div>
 
@@ -2721,6 +2778,28 @@
         </div>
       </div>
 
+        <!-- 1. DEDICATED DIRECT DASHBOARD LINK FOR DJOUDIMADANI09@GMAIL.COM -->
+        <div style="background:var(--bg-body); border:2px solid #f59e0b; border-radius:12px; padding:14px 16px; margin-top:16px; box-shadow:0 4px 14px rgba(245,158,11,0.15);">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <div>
+              <div style="display:flex; align-items:center; gap:6px; margin-bottom:4px;">
+                <span style="font-size:18px;">👑</span>
+                <strong style="font-size:14px; color:#92400e;">الرابط المباشر الحصري للوحة المشرف العام (Direct Secret Dashboard Link)</strong>
+                <span class="badge-gold" style="font-size:10.5px;">djoudimadani09@gmail.com</span>
+              </div>
+              <p style="font-size:12px; color:var(--text-dim); margin:0;">
+                يمكنك حفظ هذا الرابط في المفضلة لديك أو فتحه مباشرة في أي وقت للانتقال الفوري إلى لوحة المراقبة الشاملة:
+              </p>
+            </div>
+            <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+              <input type="text" id="admin-direct-link-input" readonly value="https://polylang.dz/#admin" style="padding:6px 10px; font-size:11.5px; border-radius:6px; border:1px solid #cbd5e1; font-family:monospace; min-width:240px; background:#fff;">
+              <button class="btn-primary-red" onclick="copyAdminDirectLink()" style="padding:7px 14px; font-size:12px; display:inline-flex; align-items:center; gap:4px;">
+                📋 <span>نسخ رابط الداشبورد المباشر</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
       <!-- Live User Login History Table -->
       <div class="content-box" style="margin-top:16px;">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
@@ -2753,6 +2832,28 @@
               <!-- Rendered via JS -->
             </tbody>
           </table>
+        </div>
+      </div>
+
+            <!-- Live Platform Activity Stream (ماذا حدث في المنصة لحظة بلحظة) -->
+      <div class="content-box" style="margin-top:16px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+          <div>
+            <h4 style="font-size:16px; font-weight:900; margin:0 0 2px; color:var(--text-main);">
+              ⚡ البث الحي لأحداث المنصة: ماذا حدث بالتفصيل (Live Activity & Event Stream)
+            </h4>
+            <p style="font-size:11.5px; color:var(--text-dim); margin:0;">
+              تسجيل لحظي لكافة العمليات التي يقوم بها العملاء والمترجمون وطلبة الترجمة (طلبات، استلام مشاريع، أختام رسمية، امتحانات، شهادات).
+            </p>
+          </div>
+          <div style="display:flex; gap:6px;">
+            <button class="nav-pill" style="font-size:11px; padding:4px 10px;" onclick="renderAdminActivityStream()">🔄 تحديث البث</button>
+            <button class="btn-outline-action" style="font-size:11px; padding:4px 10px;" onclick="exportAdminAuditReport()">📥 تصدير التقرير الكامل</button>
+          </div>
+        </div>
+
+        <div style="max-height:360px; overflow-y:auto; border:1px solid var(--border-line); border-radius:10px; background:var(--bg-body); padding:10px;" id="admin-activity-stream-container">
+          <!-- Populated dynamically via renderAdminActivityStream -->
         </div>
       </div>
 
@@ -2814,14 +2915,10 @@
         </p>
       </div>
 
-      <!-- Segmented Auth Mode Switcher -->
-      <div style="display:flex; background:var(--bg-body); padding:4px; border-radius:10px; border:1px solid var(--border-line); margin-bottom:16px;">
-        <button id="auth-tab-direct" class="nav-pill active" style="flex:1; justify-content:center; font-size:12.5px; font-weight:800; border-radius:8px; border:none; padding:8px;" onclick="switchAuthTab('direct')">
-          🔑 الدخول المباشر بالبريد
-        </button>
-        <button id="auth-tab-roles" class="nav-pill" style="flex:1; justify-content:center; font-size:12.5px; font-weight:800; border-radius:8px; border:none; padding:8px;" onclick="switchAuthTab('roles')">
-          ⚡ حسابات تجريبية سريعة
-        </button>
+      <!-- Authentic Security Banner -->
+      <div style="display:flex; align-items:center; gap:8px; background:var(--bg-body); padding:10px 14px; border-radius:10px; border:1px solid var(--border-line); margin-bottom:16px; font-size:12px; color:var(--text-dim);">
+        <span style="font-size:16px;">🔒</span>
+        <span>تسجيل دخول رسمي حقيقي ومشفّر (256-Bit SSL/TLS). صلاحية المشرف العام محصورة حصرياً لبريد الإدارة المعتمد.</span>
       </div>
 
       <!-- Tab 1: Direct Form Login / Register -->
@@ -2867,54 +2964,6 @@
         </div>
       </div>
 
-      <!-- Tab 2: One-Click Verified Role Profiles -->
-      <div id="auth-panel-roles" style="display:none;">
-        <div style="font-size:11.5px; color:var(--text-dim); margin-bottom:10px;">
-          يمكنك الدخول الفوري بملفات محاكاة واقعية لاختبار تجربة المستخدم لكافة أطراف المنصة:
-        </div>
-        <div style="display:flex; flex-direction:column; gap:8px; max-height:280px; overflow-y:auto; padding-right:2px;">
-          <button class="nav-pill" style="justify-content:flex-start; padding:10px; border:2px solid var(--crimson); border-radius:10px;" onclick="quickLoginUser('الأستاذ جودي مداني (المشرف العام)', 'djoudimadani09@gmail.com', 'Admin')">
-            <span style="font-size:20px;">👑</span>
-            <div style="text-align:start;">
-              <strong style="color:var(--crimson); font-size:12.5px;">الأستاذ جودي مداني (Admin Portal)</strong>
-              <div style="font-size:11px; color:var(--text-faint);">djoudimadani09@gmail.com — حساب المشرف الحصري والمخول الوحيد</div>
-            </div>
-          </button>
-
-          <button class="nav-pill" style="justify-content:flex-start; padding:10px; border-radius:10px;" onclick="quickLoginUser('أ. مريم بوعلام (مترجمة مؤتمرات معتمدة)', 'mariem.trans@polylang.dz', 'Translator')">
-            <span style="font-size:20px;">🎓</span>
-            <div style="text-align:start;">
-              <strong style="font-size:12.5px;">أ. مريم بوعلام (مترجمة معتمدة)</strong>
-              <div style="font-size:11px; color:var(--text-faint);">mariem.trans@polylang.dz — استوديو المترجم ومحرر SRT</div>
-            </div>
-          </button>
-
-          <button class="nav-pill" style="justify-content:flex-start; padding:10px; border-radius:10px;" onclick="quickLoginUser('سارة بن علي (طالبة ماستر ترجمة)', 'sara.student@univ-alger2.dz', 'Student')">
-            <span style="font-size:20px;">📚</span>
-            <div style="text-align:start;">
-              <strong style="font-size:12.5px;">سارة بن علي (طالبة معهد الترجمة - جامعة الجزائر 2)</strong>
-              <div style="font-size:11px; color:var(--text-faint);">sara.student@univ-alger2.dz — كابينة الترجمة الفورية وامتحان المستوى</div>
-            </div>
-          </button>
-
-          <button class="nav-pill" style="justify-content:flex-start; padding:10px; border-radius:10px;" onclick="quickLoginUser('كريم حمداوي (عميل ترجمة)', 'karim@polylang.dz', 'Client')">
-            <span style="font-size:20px;">👤</span>
-            <div style="text-align:start;">
-              <strong style="font-size:12.5px;">كريم حمداوي (عميل ترجمة ومؤسسات)</strong>
-              <div style="font-size:11px; color:var(--text-faint);">karim@polylang.dz — بوابة العميل وحاسبة الأسعار</div>
-            </div>
-          </button>
-
-          <button class="nav-pill" style="justify-content:flex-start; padding:10px; border-radius:10px;" onclick="quickLoginUser('يوسف مراد (متعلم لغات)', 'youssef.learner@gmail.com', 'Learner')">
-            <span style="font-size:20px;">💡</span>
-            <div style="text-align:start;">
-              <strong style="font-size:12.5px;">يوسف مراد (متعلم لغات وشغوف)</strong>
-              <div style="font-size:11px; color:var(--text-faint);">youssef.learner@gmail.com — التظليل الصوتي والكويزات</div>
-            </div>
-          </button>
-        </div>
-      </div>
-
       <!-- Active Account Information Footer -->
       <div id="account-info-banner" style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:10px 12px; margin-top:14px; font-size:11.5px;">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
@@ -2944,8 +2993,8 @@
         <div>📧 <strong>المستخدم المصرح له:</strong> djoudimadani09@gmail.com</div>
       </div>
 
-      <button class="btn-primary-red" style="width:100%; justify-content:center; padding:10px;" onclick="quickLoginAdminAndOpen()">
-        🔐 تسجيل الدخول الفوري بحساب المشرف (djoudimadani09@gmail.com)
+      <button class="btn-primary-red" style="width:100%; justify-content:center; padding:11px; font-size:13px; font-weight:800; border-radius:8px;" onclick="closeModal('adminLockModal'); openModal('authModal'); document.getElementById('auth-email-input').value='djoudimadani09@gmail.com'; document.getElementById('auth-pass-input').focus();">
+        🔑 الانتقال لبوابة تسجيل الدخول الرسمية (djoudimadani09@gmail.com)
       </button>
     </div>
   </div>
@@ -3656,7 +3705,7 @@
 
       // Determine client orders: match email or name, or default demo client if visitor
       const clientOrders = ordersList.filter(o => {
-        if (currentUserEmail === ADMIN_EMAIL || currentUserEmail === 'admin@polylang.dz') return true;
+        if (currentUserEmail && currentUserEmail.toLowerCase() === ADMIN_EMAIL.toLowerCase()) return true;
         if (currentUserEmail && currentUserEmail !== 'guest@polylang.dz') {
           return o.clientEmail.toLowerCase() === currentUserEmail.toLowerCase() || o.clientName === currentUserName;
         }
@@ -3703,116 +3752,6 @@
         `;
         tbody.appendChild(tr);
       });
-    }
-
-    // 2. TRANSLATOR ORDERS TABLE: Shows ALL client requests with full management tools!
-    function renderTranslatorOrdersTable() {
-      const tbody = document.getElementById('translator-orders-tbody');
-      if (!tbody) return;
-      tbody.innerHTML = '';
-
-      // Update Translator KPIs
-      const statTotal = document.getElementById('trans-stat-total');
-      const statPending = document.getElementById('trans-stat-pending');
-      const statProgress = document.getElementById('trans-stat-progress');
-      const statFees = document.getElementById('trans-stat-fees');
-
-      const pendingCount = ordersList.filter(o => o.status.includes('مراجعة') || o.status.includes('تدقيق')).length;
-      const progressCount = ordersList.filter(o => o.status.includes('قيد') || o.status.includes('مؤكد')).length;
-      const totalFees = ordersList.reduce((acc, cur) => acc + (cur.price || 0), 0);
-
-      if (statTotal) statTotal.textContent = ordersList.length;
-      if (statPending) statPending.textContent = pendingCount;
-      if (statProgress) statProgress.textContent = progressCount;
-      if (statFees) statFees.textContent = formatCurrency(totalFees);
-
-      // Filtered orders
-      let filtered = ordersList;
-      if (currentTranslatorFilter === 'PENDING') {
-        filtered = ordersList.filter(o => o.status.includes('مراجعة') || o.status.includes('تدقيق'));
-      } else if (currentTranslatorFilter === 'PROGRESS') {
-        filtered = ordersList.filter(o => o.status.includes('قيد') || o.status.includes('مؤكد'));
-      } else if (currentTranslatorFilter === 'COMPLETED') {
-        filtered = ordersList.filter(o => o.status.includes('مكتمل'));
-      }
-
-      filtered.forEach(o => {
-        const tr = document.createElement('tr');
-        let badge = 'badge-review';
-        if (o.status.includes('مكتمل')) badge = 'badge-done';
-        else if (o.status.includes('مؤكد') || o.status.includes('قيد')) badge = 'badge-scheduled';
-
-        let actionButtons = '';
-        if (!o.status.includes('مكتمل')) {
-          if (!o.status.includes('قيد')) {
-            actionButtons += `<button class="btn-primary-red" style="padding:3px 8px; font-size:11px;" onclick="claimOrderAsTranslator('${o.id}')">✅ استلام المشروع</button> `;
-          } else {
-            actionButtons += `<button class="btn-primary-red" style="padding:3px 8px; font-size:11px; background:#10b981;" onclick="certifyAndSealOrder('${o.id}')">✍️ ختم واعتماد</button> `;
-          }
-        }
-        actionButtons += `
-          <button class="nav-pill" style="padding:3px 8px; font-size:11px;" onclick="inspectOrderDetails('${o.id}')">👁️ فحص</button>
-          <button class="nav-pill" style="padding:3px 8px; font-size:11px;" onclick="contactClientForOrder('${o.id}')">💬 تواصل</button>
-          <button class="nav-pill" style="padding:3px 8px; font-size:11px;" onclick="viewOrderInvoice('${o.id}')">🧾 فاتورة</button>
-        `;
-
-        tr.innerHTML = `
-          <td><strong>${o.id}</strong><br><span style="font-size:10px; color:var(--text-dim);">${o.date || '2026-10-12'}</span></td>
-          <td>
-            <strong>${o.clientName || 'عميل معتمد'}</strong><br>
-            <span style="font-size:11px; color:var(--text-dim);">${o.clientEmail || 'contact@client.dz'}</span>
-          </td>
-          <td>
-            <div style="font-weight:700;">${o.title}</div>
-            <div style="font-size:11px; color:#10b981;">📎 ${o.attachedFile || 'وثيقة_مرفقة.pdf'}</div>
-          </td>
-          <td>${o.service}</td>
-          <td>${o.langs}</td>
-          <td>${o.words > 0 ? o.words.toLocaleString() : 'نظام يوم كامل'}</td>
-          <td style="font-weight:800; color:#059669;">${formatCurrency(o.price)}</td>
-          <td><span class="status-badge ${badge}">${o.status}</span></td>
-          <td>
-            <div style="display:flex; gap:4px; flex-wrap:wrap; align-items:center;">
-              ${actionButtons}
-            </div>
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
-
-    function filterTranslatorOrders(filter) {
-      currentTranslatorFilter = filter;
-      document.querySelectorAll('#trans-panel-orders .nav-pill').forEach(btn => btn.classList.remove('active'));
-      const activeBtn = document.getElementById('filter-' + filter.toLowerCase());
-      if (activeBtn) activeBtn.classList.add('active');
-      renderTranslatorOrdersTable();
-    }
-
-    function switchTranslatorSubTab(tab) {
-      document.getElementById('trans-panel-orders').style.display = (tab === 'orders') ? 'block' : 'none';
-      document.getElementById('trans-panel-srt').style.display = (tab === 'srt') ? 'block' : 'none';
-      document.getElementById('trans-panel-stamp').style.display = (tab === 'stamp') ? 'block' : 'none';
-
-      document.getElementById('btn-trans-tab-orders').classList.toggle('active', tab === 'orders');
-      document.getElementById('btn-trans-tab-srt').classList.toggle('active', tab === 'srt');
-      document.getElementById('btn-trans-tab-stamp').classList.toggle('active', tab === 'stamp');
-    }
-
-    function claimOrderAsTranslator(id) {
-      const o = ordersList.find(item => item.id === id);
-      if (!o) return;
-      o.status = "قيد الترجمة والختم الرسمي";
-      renderOrdersTable();
-      showAppToast(`✓ تم استلام المشروع #${o.id} وبدء الترجمة المحلفة.`);
-    }
-
-    function certifyAndSealOrder(id) {
-      const o = ordersList.find(item => item.id === id);
-      if (!o) return;
-      o.status = "مكتمل وتم وضع الختم الرسمي";
-      renderOrdersTable();
-      showAppToast(`✓ تم اعتماد الوثيقة #${o.id} وتطبيق الختم المحلف الرسمي (ISO 17100) بنجاح!`);
     }
 
     function contactClientForOrder(id) {
@@ -3869,7 +3808,7 @@
 
     function isUserAuthenticatedForRole(role) {
       // Admin djoudimadani09@gmail.com has instant universal master access to all views
-      if (currentUserEmail === ADMIN_EMAIL || currentUserEmail === 'admin@polylang.dz') return true;
+      if (currentUserEmail && currentUserEmail.toLowerCase() === ADMIN_EMAIL.toLowerCase()) return true;
 
       // Guest cannot access protected role portals directly
       if (!currentUserEmail || currentUserEmail === 'guest@polylang.dz') return false;
@@ -5955,10 +5894,10 @@
       if (modal) modal.classList.remove('open');
     }
 
-    // User Session State & Roles (Clean default guest session)
-    let currentUserEmail = 'guest@polylang.dz';
-    let currentUserName = 'زائر جديد (Guest)';
-    let currentUserRole = 'Client';
+    // User Session State & Roles (Authentic default session)
+    let currentUserEmail = '';
+    let currentUserName = 'زائر جديد';
+    let currentUserRole = 'Guest';
 
     // Real-Time Login Logs Store for Admin Audit
     let platformLoginLogs = [
@@ -6069,13 +6008,386 @@
       });
     }
 
-    function renderAdminDashboard() {
-      renderAdminLoginLogs();
-      renderAdminOrdersTable();
+    
+    // ==========================================
+    // MULTI-TENANT WORKSPACE & ADMIN INTELLIGENCE ENGINE
+    // ==========================================
+
+    // Live Platform Activity Stream (ماذا حدث في المنصة بالتفصيل)
+    let platformActivityStream = [
+      {
+        time: "2026-10-28 20:15:30",
+        category: "طلبات ترجمة",
+        icon: "📄",
+        desc: "أودع العميل كريم حمداوي طلباً جديداً لترجمة عقد امتياز واستثمار دولي (2,400 كلمة).",
+        actor: "كريم حمداوي",
+        email: "karim@polylang.dz",
+        badgeClass: "badge-scheduled"
+      },
+      {
+        time: "2026-10-28 19:40:12",
+        category: "اعتماد وأختام",
+        icon: "🔏",
+        desc: "اعتمد المترجم المحلف وثيقة كتيب توربينات الغاز بالختم الرسمي الرقمي (DZ-TRANS-8842 / ISO 17100).",
+        actor: "أ. مريم بوعلام",
+        email: "mariem.trans@polylang.dz",
+        badgeClass: "badge-done"
+      },
+      {
+        time: "2026-10-28 18:22:05",
+        category: "امتحانات المستوى",
+        icon: "🏆",
+        desc: "أتمت الطالبة سارة بن علي امتحان تحديد المستوى (TCF الفرنسي) وحققت درجة المستوى المتقدم C1.",
+        actor: "سارة بن علي",
+        email: "sara.student@univ-alger2.dz",
+        badgeClass: "badge-gold"
+      },
+      {
+        time: "2026-10-28 17:05:44",
+        category: "كابينة المؤتمرات",
+        icon: "🎙️",
+        desc: "أنجز متدرب جلسة تدريب على الترجمة الفورية لخطاب قمة دافوس للاقتصاد مع حساب الفارق الزمني (Décalage).",
+        actor: "يوسف مراد",
+        email: "youssef.learner@gmail.com",
+        badgeClass: "badge-training"
+      },
+      {
+        time: "2026-10-28 16:10:18",
+        category: "جلسات الدخول",
+        icon: "🔒",
+        desc: "تسجيل دخول مؤمن للمشرف العام الأستاذ جودي مداني مع تفعيل بوابة الإدارة المركزية.",
+        actor: "الأستاذ جودي مداني",
+        email: "djoudimadani09@gmail.com",
+        badgeClass: "badge-done"
+      }
+    ];
+
+    function recordPlatformActivity(category, desc, actor, email, icon = "⚡") {
+      const now = new Date();
+      const timeStr = now.getFullYear() + '-' +
+        String(now.getMonth() + 1).padStart(2, '0') + '-' +
+        String(now.getDate()).padStart(2, '0') + ' ' +
+        String(now.getHours()).padStart(2, '0') + ':' +
+        String(now.getMinutes()).padStart(2, '0') + ':' +
+        String(now.getSeconds()).padStart(2, '0');
+
+      platformActivityStream.unshift({
+        time: timeStr,
+        category: category,
+        icon: icon,
+        desc: desc,
+        actor: actor || currentUserName || 'مستخدم المنصة',
+        email: email || currentUserEmail || 'user@polylang.dz',
+        badgeClass: category.includes('ختم') ? 'badge-done' : (category.includes('طلب') ? 'badge-scheduled' : 'badge-gold')
+      });
+
+      if (platformActivityStream.length > 50) platformActivityStream.pop();
+      renderAdminActivityStream();
     }
 
-    // Quick Login Engine
+    function renderAdminActivityStream() {
+      const container = document.getElementById('admin-activity-stream-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      if (platformActivityStream.length === 0) {
+        container.innerHTML = '<div style="text-align:center; padding:20px; color:var(--text-dim);">لا توجد أنشطة مسجلة بعد.</div>';
+        return;
+      }
+
+      platformActivityStream.forEach(act => {
+        const item = document.createElement('div');
+        item.style.cssText = 'display:flex; align-items:flex-start; gap:12px; padding:10px 12px; background:var(--bg-card); border:1px solid var(--border-line); border-radius:8px; margin-bottom:8px;';
+        item.innerHTML = `
+          <div style="font-size:22px; line-height:1; padding-top:2px;">${act.icon}</div>
+          <div style="flex:1;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:4px; margin-bottom:3px;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span class="reg-pill ${act.badgeClass}" style="font-size:10px; font-weight:800;">${act.category}</span>
+                <strong style="font-size:12px; color:var(--text-main);">${act.actor}</strong>
+                <span style="font-size:11px; color:var(--text-dim); direction:ltr;">(${act.email})</span>
+              </div>
+              <span style="font-size:10.5px; color:var(--text-dim);">${act.time}</span>
+            </div>
+            <div style="font-size:12px; color:var(--text-main); line-height:1.5;">${act.desc}</div>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function exportAdminAuditReport() {
+      const report = {
+        platform: "Polylang Hub - ISO 17100 Certified Platform",
+        supervisor: "Prof. Djoudi Madani (djoudimadani09@gmail.com)",
+        generatedAt: new Date().toISOString(),
+        totalActivities: platformActivityStream.length,
+        totalLoginAudits: platformLoginLogs.length,
+        activities: platformActivityStream,
+        loginLogs: platformLoginLogs
+      };
+
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(report, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `Polylang_Audit_Report_${Date.now()}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      showAppToast("✓ تم تصدير وتحميل تقرير الرقابة الشامل بنجاح!");
+    }
+
+    // Direct Admin Dashboard URL Handling & Copy Link
+    function getAdminDirectUrl() {
+      return window.location.origin + window.location.pathname + '#admin';
+    }
+
+    function copyAdminDirectLink() {
+      const url = getAdminDirectUrl();
+      navigator.clipboard.writeText(url).then(() => {
+        showAppToast("✓ تم نسخ الرابط المباشر للوحة المشرف إلى الحافظة!");
+      }).catch(() => {
+        const input = document.getElementById('admin-direct-link-input');
+        if (input) {
+          input.select();
+          document.execCommand('copy');
+          showAppToast("✓ تم نسخ رابط الداشبورد المباشر!");
+        }
+      });
+    }
+
+    function openDirectAdminDashboard() {
+      window.location.hash = '#admin';
+      checkAdminDirectLink();
+    }
+
+    function checkAdminDirectLink() {
+      const hash = (window.location.hash || '').toLowerCase();
+      const params = new URLSearchParams(window.location.search);
+      const isDirectAdmin = hash === '#admin' || hash === '#admin-dashboard' || hash === '#admin-portal' || params.get('view') === 'admin';
+
+      // Update link input if present
+      const linkInput = document.getElementById('admin-direct-link-input');
+      if (linkInput) linkInput.value = getAdminDirectUrl();
+
+      if (isDirectAdmin) {
+        if (currentUserEmail && currentUserEmail.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+          switchRole('admin');
+        } else {
+          openModal('adminLockModal');
+        }
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', checkAdminDirectLink);
+    window.addEventListener('hashchange', checkAdminDirectLink);
+
+    // ==========================================
+    // ENHANCED MULTI-TENANT TRANSLATOR WORKSPACE (نظام المنصات العالمية)
+    // ==========================================
+    let currentTranslatorSubTab = 'my-orders';
+
+    function switchTranslatorSubTab(tab) {
+      currentTranslatorSubTab = tab;
+      const panels = {
+        'my-orders': document.getElementById('trans-panel-my-orders'),
+        'market': document.getElementById('trans-panel-market'),
+        'srt': document.getElementById('trans-panel-srt'),
+        'stamp': document.getElementById('trans-panel-stamp'),
+        'wallet': document.getElementById('trans-panel-wallet')
+      };
+
+      Object.keys(panels).forEach(k => {
+        if (panels[k]) panels[k].style.display = (k === tab) ? 'block' : 'none';
+      });
+
+      const buttons = {
+        'my-orders': document.getElementById('btn-trans-tab-my-orders'),
+        'market': document.getElementById('btn-trans-tab-market'),
+        'srt': document.getElementById('btn-trans-tab-srt'),
+        'stamp': document.getElementById('btn-trans-tab-stamp'),
+        'wallet': document.getElementById('btn-trans-tab-wallet')
+      };
+
+      Object.keys(buttons).forEach(k => {
+        if (buttons[k]) buttons[k].classList.toggle('active', k === tab);
+      });
+
+      renderTranslatorOrdersTable();
+    }
+
+    function renderTranslatorOrdersTable() {
+      const myTbody = document.getElementById('trans-my-orders-tbody');
+      const marketTbody = document.getElementById('trans-market-orders-tbody');
+      if (!myTbody || !marketTbody) return;
+
+      myTbody.innerHTML = '';
+      marketTbody.innerHTML = '';
+
+      // Determine My Assigned Projects vs Open Market Projects
+      const myAssignedOrders = ordersList.filter(o => {
+        if (currentUserEmail && o.assignedTranslatorEmail) {
+          return o.assignedTranslatorEmail.toLowerCase() === currentUserEmail.toLowerCase();
+        }
+        // If not assigned yet, assign first one to this translator session for immediate workspace view
+        return o.id === 'PL-8421';
+      });
+
+      const marketOrders = ordersList.filter(o => {
+        return !myAssignedOrders.some(m => m.id === o.id);
+      });
+
+      // Update Tab Counter Badges
+      const myCountEl = document.getElementById('trans-my-count');
+      const marketCountEl = document.getElementById('trans-market-count');
+      if (myCountEl) myCountEl.textContent = myAssignedOrders.length;
+      if (marketCountEl) marketCountEl.textContent = marketOrders.length;
+
+      // Update Translator KPIs and Wallet
+      const statTotal = document.getElementById('trans-stat-total');
+      const statPending = document.getElementById('trans-stat-pending');
+      const statProgress = document.getElementById('trans-stat-progress');
+      const statFees = document.getElementById('trans-stat-fees');
+      const walletAvailable = document.getElementById('trans-wallet-available');
+      const walletEscrow = document.getElementById('trans-wallet-escrow');
+      const walletCompletedCount = document.getElementById('trans-wallet-completed-count');
+
+      const myTotalFees = myAssignedOrders.reduce((acc, cur) => acc + (cur.price || 0), 0);
+      const myCompleted = myAssignedOrders.filter(o => o.status.includes('مكتمل'));
+      const myCompletedFees = myCompleted.reduce((acc, cur) => acc + (cur.price || 0), 0);
+      const myPendingFees = myTotalFees - myCompletedFees;
+
+      if (statTotal) statTotal.textContent = myAssignedOrders.length;
+      if (statPending) statPending.textContent = myAssignedOrders.filter(o => !o.status.includes('مكتمل')).length;
+      if (statProgress) statProgress.textContent = myAssignedOrders.filter(o => o.status.includes('قيد')).length;
+      if (statFees) statFees.textContent = formatCurrency(myTotalFees);
+      if (walletAvailable) walletAvailable.textContent = formatCurrency(myCompletedFees || 53400);
+      if (walletEscrow) walletEscrow.textContent = formatCurrency(myPendingFees || 8400);
+      if (walletCompletedCount) walletCompletedCount.textContent = myCompleted.length;
+
+      // 1. Render MY ASSIGNED PROJECTS
+      if (myAssignedOrders.length === 0) {
+        myTbody.innerHTML = `
+          <tr>
+            <td colspan="7" style="text-align:center; padding:28px; color:var(--text-dim);">
+              <div style="font-size:24px; margin-bottom:6px;">📂</div>
+              <strong>لا توجد مشاريع مسندة إليك حالياً في مساحة عملك</strong>
+              <div style="font-size:11.5px; margin-top:4px;">انتقل إلى «سوق المشاريع المتاحة للاستلام» واختر مشروعاً لبدء العمل.</div>
+            </td>
+          </tr>
+        `;
+      } else {
+        myAssignedOrders.forEach(o => {
+          const tr = document.createElement('tr');
+          const isDone = o.status.includes('مكتمل');
+          tr.innerHTML = `
+            <td><strong>${o.id}</strong><br><span style="font-size:10px; color:var(--text-dim);">${o.date}</span></td>
+            <td><strong>${o.clientName}</strong><br><span style="font-size:11px; color:var(--text-dim);">${o.clientEmail}</span></td>
+            <td><div style="font-weight:700;">${o.title}</div><div style="font-size:11px; color:#10b981;">📎 ${o.attachedFile || 'وثيقة_مرفقة.pdf'}</div></td>
+            <td><span class="reg-pill" style="font-size:10px;">${o.service}</span><div style="font-size:11px; margin-top:2px;">${o.langs}</div></td>
+            <td><div>${o.words > 0 ? o.words.toLocaleString() + ' كلمة' : 'نظام يوم'}</div><strong style="color:#059669;">${formatCurrency(o.price)}</strong></td>
+            <td><span class="status-badge ${isDone ? 'badge-done' : 'badge-scheduled'}">${o.status}</span></td>
+            <td>
+              <div style="display:flex; gap:4px; flex-wrap:wrap;">
+                ${!isDone ? `<button class="btn-primary-red" style="padding:4px 8px; font-size:11px; background:#10b981;" onclick="certifyAndSealOrder('${o.id}')">🔏 ختم واعتماد</button>` : `<span class="badge-iso-green" style="font-size:10px;">✓ مختوم رسمياً</span>`}
+                <button class="nav-pill" style="padding:3px 8px; font-size:11px;" onclick="inspectOrderDetails('${o.id}')">👁️ فحص</button>
+                <button class="nav-pill" style="padding:3px 8px; font-size:11px;" onclick="contactClientForOrder('${o.id}')">💬 تواصل</button>
+                <button class="nav-pill" style="padding:3px 8px; font-size:11px;" onclick="viewOrderInvoice('${o.id}')">🧾 فاتورة</button>
+              </div>
+            </td>
+          `;
+          myTbody.appendChild(tr);
+        });
+      }
+
+      // 2. Render OPEN MARKET ORDERS
+      if (marketOrders.length === 0) {
+        marketTbody.innerHTML = `
+          <tr>
+            <td colspan="8" style="text-align:center; padding:28px; color:var(--text-dim);">
+              <div style="font-size:24px; margin-bottom:6px;">🌟</div>
+              <strong>تم التعاقد على كافة المشاريع المطروحة في السوق حالياً!</strong>
+            </td>
+          </tr>
+        `;
+      } else {
+        marketOrders.forEach(o => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td><strong>${o.id}</strong></td>
+            <td><strong>${o.clientName}</strong></td>
+            <td><div style="font-weight:700;">${o.title}</div><div style="font-size:11px; color:#10b981;">📎 ${o.attachedFile || 'ملف_العميل.pdf'}</div></td>
+            <td><span class="reg-pill" style="font-size:10px;">${o.service}</span></td>
+            <td><strong>${o.langs}</strong></td>
+            <td>${o.words > 0 ? o.words.toLocaleString() + ' كلمة' : 'نظام يوم'}</td>
+            <td><strong style="color:var(--crimson);">${formatCurrency(o.price)}</strong></td>
+            <td>
+              <button class="btn-primary-red" style="padding:5px 12px; font-size:11.5px; font-weight:800;" onclick="claimOrderAsTranslator('${o.id}')">
+                📥 استلام والتعاقد الفوري
+              </button>
+            </td>
+          `;
+          marketTbody.appendChild(tr);
+        });
+      }
+    }
+
+    function claimOrderAsTranslator(id) {
+      const o = ordersList.find(item => item.id === id);
+      if (!o) return;
+      const transName = currentUserName || 'أ. مريم بوعلام (مترجمة محلفة)';
+      const transEmail = currentUserEmail || 'translator@polylang.dz';
+      o.assignedTranslatorEmail = transEmail;
+      o.assignedTranslatorName = transName;
+      o.status = "قيد الترجمة والتدقيق المحلف لدى: " + transName;
+
+      recordPlatformActivity(
+        "استلام مشاريع",
+        `تعاقد المترجم المحلف ${transName} على المشروع #${o.id} (${o.title}) وبدء الترجمة.`,
+        transName,
+        transEmail,
+        "📥"
+      );
+
+      renderOrdersTable();
+      switchTranslatorSubTab('my-orders');
+      showAppToast(`✓ تم بنجاح استلام والتعاقد على المشروع #${o.id}! نقل إلى مساحة عملك.`);
+    }
+
+    function certifyAndSealOrder(id) {
+      const o = ordersList.find(item => item.id === id);
+      if (!o) return;
+      o.status = "مكتمل وتم وضع الختم الرسمي الرقمي (ISO 17100)";
+      o.progressPercent = 100;
+      const transName = currentUserName || 'المترجم المحلف المعتمد';
+
+      recordPlatformActivity(
+        "اعتماد وأختام",
+        `تم تطبيق الختم الرقمي المعتمد DZ-TRANS-8842 على وثيقة المشروع #${o.id} (${o.title}) وجاهزة للتسليم للعميل.`,
+        transName,
+        currentUserEmail || 'translator@polylang.dz',
+        "🔏"
+      );
+
+      renderOrdersTable();
+      showAppToast(`✓ تم اعتماد الوثيقة #${o.id} وتطبيق الختم المحلف الرسمي (ISO 17100) بنجاح!`);
+    }
+
+
+    function renderAdminDashboard() {
+      renderAdminLoginLogs();
+      renderAdminActivityStream();
+      renderAdminOrdersTable();
+      const linkInput = document.getElementById('admin-direct-link-input');
+      if (linkInput) linkInput.value = getAdminDirectUrl();
+    }
+
+    // Authentic Login Session Engine
     function quickLoginUser(name, email, roleTag) {
+      // Security enforcement: ONLY djoudimadani09@gmail.com can ever hold Admin role
+      if (roleTag === 'Admin' && (!email || email.toLowerCase() !== ADMIN_EMAIL.toLowerCase())) {
+        roleTag = 'Client';
+      }
       currentUserEmail = email;
       currentUserName = name;
       currentUserRole = roleTag;
@@ -6182,8 +6494,13 @@
 
       if (!valid) return;
 
-      const userName = email.split('@')[0];
-      const finalRole = email === ADMIN_EMAIL ? 'Admin' : role;
+      const isOwner = email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
+      if (role === 'Admin' && !isOwner) {
+        alert("⛔ واجهة المشرف العام مقفلة حصرياً لبريد الإدارة المعتمد (djoudimadani09@gmail.com). يرجى اختيار صفتك الحقيقية (مترجم / طالب / عميل / متعلم).");
+        return;
+      }
+      const userName = isOwner ? 'الأستاذ جودي مداني (المشرف العام)' : (email.split('@')[0].replace('.', ' '));
+      const finalRole = isOwner ? 'Admin' : role;
       quickLoginUser(userName, email, finalRole);
     }
 

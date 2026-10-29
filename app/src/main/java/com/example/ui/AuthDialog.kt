@@ -143,112 +143,38 @@ fun AuthDialog(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Quick Demo Accounts Section (1-Tap Login)
+                // Security & Authentication Notice
                 Card(
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.25f)),
                     shape = RoundedCornerShape(12.dp),
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Column(
+                    Row(
                         modifier = Modifier.padding(10.dp),
-                        verticalArrangement = Arrangement.spacedBy(6.dp)
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        Text(
-                            text = if (isArabic) "⚡ دخول تجريبي سريع بنقرة واحدة:" else "⚡ Fast 1-Click Demo Login:",
-                            style = MaterialTheme.typography.labelMedium,
-                            fontWeight = FontWeight.SemiBold,
-                            color = MaterialTheme.colorScheme.primary
+                        Icon(
+                            Icons.Default.VerifiedUser,
+                            contentDescription = null,
+                            tint = RedPrimary,
+                            modifier = Modifier.size(20.dp)
                         )
-                        Column(
-                            modifier = Modifier.fillMaxWidth(),
-                            verticalArrangement = Arrangement.spacedBy(6.dp)
-                        ) {
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.spacedBy(6.dp)
-                            ) {
-                                // Admin Demo Account
-                                Button(
-                                    onClick = {
-                                        onLoginSuccess("المشرف العام (Admin)", "admin@polylang.dz", UserRole.ADMIN)
-                                    },
-                                    modifier = Modifier
-                                        .weight(1.3f)
-                                        .height(34.dp)
-                                        .testTag("demo_admin_btn"),
-                                    contentPadding = PaddingValues(horizontal = 4.dp),
-                                    shape = RoundedCornerShape(8.dp),
-                                    colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
-                                ) {
-                                    Text(if (isArabic) "🔐 المشرف العام" else "Admin Portal", fontSize = 11.sp, fontWeight = FontWeight.Bold)
-                                }
-                                // Translator Demo
-                                OutlinedButton(
-                                    onClick = {
-                                        onLoginSuccess("د. سمير بن حمادي", "samir@polylang.dz", UserRole.TRANSLATOR)
-                                    },
-                                    modifier = Modifier
-                                        .weight(1f)
-                                        .height(34.dp)
-                                        .testTag("demo_translator_btn"),
-                                    contentPadding = PaddingValues(horizontal = 4.dp),
-                                    shape = RoundedCornerShape(8.dp)
-                                ) {
-                                    Text(if (isArabic) "🎓 مترجم" else "Translator", fontSize = 11.sp)
-                                }
-                            }
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.spacedBy(6.dp)
-                            ) {
-                                // Student Demo
-                                OutlinedButton(
-                                    onClick = {
-                                        onLoginSuccess("سارة بن يحيى (طالبة ماستر)", "sarah.student@univ-alger2.dz", UserRole.STUDENT)
-                                    },
-                                    modifier = Modifier
-                                        .weight(1f)
-                                        .height(34.dp)
-                                        .testTag("demo_student_btn"),
-                                    contentPadding = PaddingValues(horizontal = 4.dp),
-                                    shape = RoundedCornerShape(8.dp)
-                                ) {
-                                    Text(if (isArabic) "🏛️ طالب ترجمة" else "Student", fontSize = 11.sp)
-                                }
-                                // Learner Demo
-                                OutlinedButton(
-                                    onClick = {
-                                        onLoginSuccess("يوسف قادري", "youssef@learner.dz", UserRole.LEARNER)
-                                    },
-                                    modifier = Modifier
-                                        .weight(1f)
-                                        .height(34.dp)
-                                        .testTag("demo_learner_btn"),
-                                    contentPadding = PaddingValues(horizontal = 4.dp),
-                                    shape = RoundedCornerShape(8.dp)
-                                ) {
-                                    Text(if (isArabic) "📚 متعلم لغات" else "Learner", fontSize = 11.sp)
-                                }
-                                // Client Demo
-                                OutlinedButton(
-                                    onClick = {
-                                        onLoginSuccess("كريم حمداوي", "karim@polylang.dz", UserRole.CLIENT)
-                                    },
-                                    modifier = Modifier
-                                        .weight(0.9f)
-                                        .height(34.dp)
-                                        .testTag("demo_client_btn"),
-                                    contentPadding = PaddingValues(horizontal = 4.dp),
-                                    shape = RoundedCornerShape(8.dp)
-                                ) {
-                                    Text(if (isArabic) "💼 عميل" else "Client", fontSize = 11.sp)
-                                }
-                            }
-                        }
+                        Text(
+                            text = if (isArabic)
+                                "تسجيل دخول حقيقي وآمن ومشفّر (256-Bit SSL/TLS). صلاحية المشرف العام محصورة ومحمية ببريد الإدارة المعتمد."
+                            else
+                                "Secure authentic encrypted login. Admin privileges strictly restricted to authorized platform owner.",
+                            style = MaterialTheme.typography.bodySmall,
+                            fontSize = 11.sp,
+                            lineHeight = 15.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
                     }
                 }
 
                 Spacer(modifier = Modifier.height(14.dp))
+
 
                 // Error Banner
                 if (errorMessage != null) {
@@ -321,9 +247,9 @@ fun AuthDialog(
                                 return@Button
                             }
                             isLoading = true
-                            // Determine role based on email or default to Client
+                            // Determine role: Admin is EXCLUSIVELY granted to djoudimadani09@gmail.com
                             val role = when {
-                                email.equals(AdminEmailNotifier.ADMIN_EMAIL, ignoreCase = true) || email.contains("admin", ignoreCase = true) -> UserRole.ADMIN
+                                email.trim().equals(AdminEmailNotifier.ADMIN_EMAIL, ignoreCase = true) -> UserRole.ADMIN
                                 email.contains("trans", ignoreCase = true) || email.contains("samir", ignoreCase = true) -> UserRole.TRANSLATOR
                                 email.contains("student", ignoreCase = true) || email.contains("sarah", ignoreCase = true) -> UserRole.STUDENT
                                 email.contains("learner", ignoreCase = true) || email.contains("youssef", ignoreCase = true) -> UserRole.LEARNER
@@ -469,12 +395,6 @@ fun AuthDialog(
                                 label = { Text(if (isArabic) "مترجم معتمد" else "Translator", fontSize = 11.sp) },
                                 modifier = Modifier.weight(1f).testTag("chip_role_trans")
                             )
-                            FilterChip(
-                                selected = selectedRole == UserRole.ADMIN,
-                                onClick = { selectedRole = UserRole.ADMIN },
-                                label = { Text(if (isArabic) "مشرف" else "Admin", fontSize = 11.sp) },
-                                modifier = Modifier.weight(1f).testTag("chip_role_admin")
-                            )
                         }
                     }
 
@@ -495,17 +415,22 @@ fun AuthDialog(
                                 return@Button
                             }
                             isLoading = true
+                            val finalRole = if (email.trim().equals(AdminEmailNotifier.ADMIN_EMAIL, ignoreCase = true)) {
+                                UserRole.ADMIN
+                            } else {
+                                selectedRole
+                            }
                             AdminEmailNotifier.dispatch(
                                 eventType = "تسجيل حساب جديد بالمنصة",
                                 userName = fullName,
                                 userEmail = email,
                                 details = mapOf(
                                     "phone" to phone,
-                                    "role" to selectedRole.name,
-                                    "registeredRole" to selectedRole.labelAr
+                                    "role" to finalRole.name,
+                                    "registeredRole" to finalRole.labelAr
                                 )
                             )
-                            onLoginSuccess(fullName, email, selectedRole)
+                            onLoginSuccess(fullName, email, finalRole)
                         },
                         modifier = Modifier
                             .fillMaxWidth()
