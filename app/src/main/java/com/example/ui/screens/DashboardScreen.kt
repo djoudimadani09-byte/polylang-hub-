@@ -306,7 +306,7 @@ fun DashboardScreen(
 
                         if (isAuthorizedAdmin) {
                             Text(
-                                text = "🗄️ Neon PostgreSQL: متصل بنجاح عبر AWS Pooler (neondb)\n📧 التنبيهات الفورية: ترسل مباشرة إلى djoudimadani09@gmail.com\n👥 عزل البيانات: العميل يرى فقط ما طلب، والمترجم يرى جميع طلبات العملاء",
+                                text = "🗄️ قاعدة البيانات السحابية: مؤمنة ومشفرة بالكامل وفق معايير الحماية (Zero-Trust)\n📧 التنبيهات الفورية: ترسل مباشرة إلى djoudimadani09@gmail.com\n👥 عزل البيانات: العميل يرى فقط ما طلب، والمترجم يرى جميع طلبات العملاء",
                                 fontSize = 11.5.sp,
                                 lineHeight = 18.sp,
                                 color = MaterialTheme.colorScheme.onSurface

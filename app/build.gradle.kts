@@ -62,11 +62,5 @@ dependencies {
 secrets {
     propertiesFileName = ".env"
     defaultPropertiesFileName = ".env.example"
-    ignoreList.add("DATABASE_URL")
-    ignoreList.add(".*DATABASE.*")
-    ignoreList.add(".*POSTGRES.*")
-    ignoreList.add(".*URI.*")
-    ignoreList.add(".*URL.*")
-    ignoreList.add(".*PASSWORD.*")
-    ignoreList.add(".*SECRET.*")
+    ignoreList.add(".*")
 }
