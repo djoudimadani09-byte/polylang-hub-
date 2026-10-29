@@ -1,23 +1,19 @@
-# Environment variables and secrets
 .env
 .env.local
 .env.*.local
 *.env
-
-# Keystores & sensitive credentials
 *.jks
 *.keystore
 debug.keystore
 debug.keystore.base64
+local.properties
 
-# Gradle and build directories
 .gradle/
 build/
 app/build/
 *.apk
 *.aab
 
-# IDE & OS files
 .idea/
 *.iml
 .DS_Store
