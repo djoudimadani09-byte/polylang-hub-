@@ -14,6 +14,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
@@ -129,6 +130,9 @@ fun PolylangHubApp() {
     var showCertificateDialog by remember { mutableStateOf(false) }
     var certificateCourseTitle by remember { mutableStateOf("الترجمة القانونية وصياغة العقود الدولية") }
     var showTermbaseDialog by remember { mutableStateOf(false) }
+    var showMadaniAiDialog by remember { mutableStateOf(false) }
+    var madaniAvatarConfig by remember { mutableStateOf(MadaniAvatarConfig()) }
+    var showMadaniCustomizerDialog by remember { mutableStateOf(false) }
 
     // Currency Menu
     var showCurrencyMenu by remember { mutableStateOf(false) }
@@ -204,10 +208,44 @@ fun PolylangHubApp() {
                             tint = RedPrimary
                         )
                     }
+
+                    // Madani AI Quick Launch Button
+                    IconButton(
+                        onClick = { showMadaniAiDialog = true },
+                        modifier = Modifier.testTag("top_madani_ai_btn")
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.SmartToy,
+                            contentDescription = "Madani AI Mentor",
+                            tint = RedPrimary
+                        )
+                    }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.surface
                 )
+            )
+        },
+        floatingActionButton = {
+            ExtendedFloatingActionButton(
+                onClick = { showMadaniAiDialog = true },
+                icon = {
+                    MadaniAvatarIcon(
+                        config = madaniAvatarConfig,
+                        size = 32.dp,
+                        isSpeaking = false
+                    )
+                },
+                text = {
+                    Text(
+                        text = if (isArabic) "مدني AI 🎙️" else "Madani AI 🎙️",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 12.sp
+                    )
+                },
+                containerColor = RedPrimary,
+                contentColor = Color.White,
+                modifier = Modifier.testTag("fab_madani_ai")
             )
         },
         bottomBar = {
@@ -379,7 +417,8 @@ fun PolylangHubApp() {
                         onClaimCertificate = { title ->
                             certificateCourseTitle = title
                             showCertificateDialog = true
-                        }
+                        },
+                        onOpenMadaniAi = { showMadaniAiDialog = true }
                     )
                     AppTab.PRICING -> PricingScreen(
                         isArabic = isArabic,
@@ -503,6 +542,33 @@ fun PolylangHubApp() {
         AiTermbaseDialog(
             isArabic = isArabic,
             onDismiss = { showTermbaseDialog = false }
+        )
+    }
+
+    // 7. Madani AI Mentor Dialog
+    if (showMadaniAiDialog) {
+        MadaniAgentDialog(
+            isArabic = isArabic,
+            avatarConfig = madaniAvatarConfig,
+            onOpenCustomizer = { showMadaniCustomizerDialog = true },
+            onDismiss = { showMadaniAiDialog = false }
+        )
+    }
+
+    // 8. Madani Avatar Appearance Customizer Dialog
+    if (showMadaniCustomizerDialog) {
+        MadaniAvatarCustomizerDialog(
+            currentConfig = madaniAvatarConfig,
+            isArabic = isArabic,
+            onDismiss = { showMadaniCustomizerDialog = false },
+            onSaveConfig = { newConfig ->
+                madaniAvatarConfig = newConfig
+                coroutineScope.launch {
+                    snackbarHostState.showSnackbar(
+                        message = if (isArabic) "✓ تم تحديث مظهر وهالة أيقونة مداني بنجاح!" else "✓ Madani AI avatar appearance updated!"
+                    )
+                }
+            }
         )
     }
     }

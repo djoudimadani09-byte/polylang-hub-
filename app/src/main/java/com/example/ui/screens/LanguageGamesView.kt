@@ -38,7 +38,11 @@ enum class GameType(val titleAr: String, val titleEn: String, val icon: String) 
     IDIOMS_MASTER("كاشف التعبيرات الاصطلاحية", "Idioms Decipherer", "💡"),
     ACRONYM_CRACKER("مفكك الاختصارات الدولية", "Acronyms Cracker", "🌐"),
     SIGHT_TRANSLATION_SPRINT("تحدي الترجمة المنظورة", "Sight Sprint", "👁️"),
-    TERMINOLOGY_BATTLE("معركة المصطلحات المتخصصة", "Domain Battle", "⚔️")
+    TERMINOLOGY_BATTLE("معركة المصطلحات المتخصصة", "Domain Battle", "⚔️"),
+    COLLOCATION_MASTER("ماستر المتلازمات اللفظية", "Collocation Master", "🔗"),
+    PROOFREADER_CHALLENGE("كاشف أخطاء الترجمة", "Proofreader Detective", "🔍"),
+    CULTURAL_NUANCE_QUEST("الفروق القانونية والثقافية", "Legal & Cultural Nuance", "🏛️"),
+    AUDIO_SHADOWING_CHALLENGE("محاكاة النطق والتفريغ", "Audio Shadowing & Dictation", "🎧")
 }
 
 @Composable
@@ -76,7 +80,7 @@ fun LanguageGamesView(
                         fontWeight = FontWeight.Bold
                     )
                     Text(
-                        text = if (isArabic) "8 ألعاب تفاعلية لترسيخ المعاجم القانونية والطبية والدبلوماسية وتفادي الأفخاخ" else "8 Gamified language & translation reflex challenges",
+                        text = if (isArabic) "12 لعبة تفاعلية لترسيخ المعاجم القانونية والطبية والدبلوماسية وتفادي الأفخاخ" else "12 Gamified language & translation reflex challenges",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -174,6 +178,22 @@ fun LanguageGamesView(
                 onAddScore = { totalGamerScore += it }
             )
             GameType.TERMINOLOGY_BATTLE -> TerminologyBattleGame(
+                isArabic = isArabic,
+                onAddScore = { totalGamerScore += it }
+            )
+            GameType.COLLOCATION_MASTER -> CollocationMasterGame(
+                isArabic = isArabic,
+                onAddScore = { totalGamerScore += it }
+            )
+            GameType.PROOFREADER_CHALLENGE -> ProofreaderChallengeGame(
+                isArabic = isArabic,
+                onAddScore = { totalGamerScore += it }
+            )
+            GameType.CULTURAL_NUANCE_QUEST -> CulturalNuancesGame(
+                isArabic = isArabic,
+                onAddScore = { totalGamerScore += it }
+            )
+            GameType.AUDIO_SHADOWING_CHALLENGE -> AudioShadowingGame(
                 isArabic = isArabic,
                 onAddScore = { totalGamerScore += it }
             )

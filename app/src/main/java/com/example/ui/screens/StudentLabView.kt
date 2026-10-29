@@ -45,7 +45,7 @@ import androidx.compose.material.icons.filled.Speed
 
 
 enum class LabSubSection {
-    INTERPRETATION, ROZAN, PRACTICAL_DRILLS, SHARED_LANGUAGES, EXAM
+    DASHBOARD, INTERPRETATION, ROZAN, PRACTICAL_DRILLS, SHARED_LANGUAGES, EXAM
 }
 
 data class ExamQuestion(
@@ -71,18 +71,26 @@ fun StudentLabView(
     userName: String = "طالب الترجمة",
     userEmail: String = AdminEmailNotifier.ADMIN_EMAIL
 ) {
-    var activeSubSection by remember { mutableStateOf(LabSubSection.INTERPRETATION) }
+    var activeSubSection by remember { mutableStateOf(LabSubSection.DASHBOARD) }
 
     Column(
         modifier = Modifier
             .fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        // Section Selector Tabs (Scrollable Row for 5 modules)
+        // Section Selector Tabs (Scrollable Row for 6 modules)
         androidx.compose.foundation.lazy.LazyRow(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(6.dp)
         ) {
+            item {
+                FilterChip(
+                    selected = activeSubSection == LabSubSection.DASHBOARD,
+                    onClick = { activeSubSection = LabSubSection.DASHBOARD },
+                    label = { Text(if (isArabic) "📊 لوحة التقدم والـ Décalage" else "Décalage Tracker", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
+                    modifier = Modifier.testTag("tab_lab_dashboard")
+                )
+            }
             item {
                 FilterChip(
                     selected = activeSubSection == LabSubSection.INTERPRETATION,
@@ -126,6 +134,13 @@ fun StudentLabView(
         }
 
         when (activeSubSection) {
+            LabSubSection.DASHBOARD -> StudentProgressDashboard(
+                isArabic = isArabic,
+                userName = userName,
+                onLaunchBoothSpeech = { speechId ->
+                    activeSubSection = LabSubSection.INTERPRETATION
+                }
+            )
             LabSubSection.INTERPRETATION -> InterpretationBoothComponent(isArabic, userName, userEmail)
             LabSubSection.ROZAN -> RozanNotebookComponent(isArabic, userName, userEmail)
             LabSubSection.PRACTICAL_DRILLS -> PracticalTranslationDrillsComponent(isArabic, userName, userEmail)

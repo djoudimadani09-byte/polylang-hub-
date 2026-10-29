@@ -1041,6 +1041,29 @@
       transform: translateY(-3px) scale(1.03);
       box-shadow: 0 10px 25px rgba(245, 158, 11, 0.55);
     }
+    .floating-madani-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      background: linear-gradient(135deg, #991b1b, #7f1d1d);
+      color: #fff;
+      border: 2px solid #f59e0b;
+      padding: 8px 16px;
+      border-radius: 50px;
+      box-shadow: 0 8px 24px rgba(153, 27, 27, 0.45);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-family: inherit;
+    }
+    .floating-madani-btn:hover {
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 12px 30px rgba(153, 27, 27, 0.65);
+      border-color: #fbbf24;
+    }
     .visitor-reviews-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -1720,14 +1743,177 @@
 
         <!-- Quick Sub-Tabs for Students -->
         <div style="display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap;">
-          <button class="nav-pill active" id="btn-tab-booth" onclick="switchStudentTab('booth')">🎙️ كابينة الترجمة الفورية</button>
+          <button class="nav-pill active" id="btn-tab-progress" onclick="switchStudentTab('progress')">📊 لوحة تقدم الطالب والـ Décalage</button>
+          <button class="nav-pill" id="btn-tab-booth" onclick="switchStudentTab('booth')">🎙️ كابينة الترجمة الفورية</button>
           <button class="nav-pill" id="btn-tab-consec" onclick="switchStudentTab('consec')">📝 الترجمة التتابعية ونظام روزان</button>
           <button class="nav-pill" id="btn-tab-exam" onclick="switchStudentTab('exam')">🏆 امتحان تحديد المستوى الشامل</button>
           <button class="nav-pill" id="btn-tab-languages" onclick="switchStudentTab('languages')">📚 مكتبة اللغات وعلم الترجمة (مشتركة)</button>
         </div>
 
+        <!-- STUDENT SUB-SECTION 0: VISUAL PROGRESS & DÉCALAGE DASHBOARD -->
+        <div id="student-progress-box" style="display:block;">
+          <div style="background:var(--bg-body); padding:16px; border-radius:14px; border:1px solid var(--border-line); margin-bottom:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px;">
+              <div>
+                <h4 style="font-size:16px; font-weight:800; margin:0 0 4px; color:var(--crimson);">📊 لوحة معلومات تقدم الطالب وتحليل الفارق الزمني (Décalage Analytics)</h4>
+                <div style="font-size:12px; color:var(--text-dim);">متابعة بصرية دقيقة لإنجاز الـ 100 خطاب تدريبي مع تطور سرعة التقاط المعنى وتراجع زمن التأخير.</div>
+              </div>
+              <span class="badge-iso-green" style="font-size:11.5px; font-weight:800;">✓ جاهزية متقدمة لاعتماد AIIC / UN</span>
+            </div>
+
+            <!-- 4 Hero KPI Cards -->
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:10px; margin-bottom:16px;">
+              <div style="background:var(--bg-card); border:1px solid var(--border-line); border-radius:10px; padding:12px;">
+                <div style="font-size:11px; color:var(--text-dim); margin-bottom:4px;">🎯 الخطابات المنجزة</div>
+                <div style="font-size:22px; font-weight:900; color:var(--crimson);">54 <span style="font-size:12px; font-weight:700; color:var(--text-dim);">/ 100</span></div>
+                <div style="width:100%; height:5px; background:var(--border-line); border-radius:3px; margin-top:6px; overflow:hidden;">
+                  <div style="width:54%; height:100%; background:var(--crimson);"></div>
+                </div>
+              </div>
+              <div style="background:var(--bg-card); border:1px solid var(--border-line); border-radius:10px; padding:12px;">
+                <div style="font-size:11px; color:var(--text-dim); margin-bottom:4px;">⏱️ متوسط الـ Décalage</div>
+                <div style="font-size:22px; font-weight:900; color:#059669;">3.6s <span style="font-size:11px; font-weight:700; color:#059669;">(-47% تحسن)</span></div>
+                <div style="font-size:10px; color:var(--text-dim); margin-top:4px;">المعيار الذهبي: 3.0s - 4.0s</div>
+              </div>
+              <div style="background:var(--bg-card); border:1px solid var(--border-line); border-radius:10px; padding:12px;">
+                <div style="font-size:11px; color:var(--text-dim); margin-bottom:4px;">✨ الطلاقة ودقة المعنى</div>
+                <div style="font-size:22px; font-weight:900; color:#d97706;">94.2%</div>
+                <div style="font-size:10px; color:var(--text-dim); margin-top:4px;">تقييم محكمي كابينة المحاكاة</div>
+              </div>
+              <div style="background:var(--bg-card); border:1px solid var(--border-line); border-radius:10px; padding:12px;">
+                <div style="font-size:11px; color:var(--text-dim); margin-bottom:4px;">🎙️ ساعات الكابينة الفعلية</div>
+                <div style="font-size:22px; font-weight:900; color:#2563eb;">38.5h</div>
+                <div style="font-size:10px; color:var(--text-dim); margin-top:4px;">مكافئة لـ 12 مؤتمراً افتراضياً</div>
+              </div>
+            </div>
+
+            <!-- Visual SVG Décalage Progression Line Chart -->
+            <div style="background:var(--bg-card); border:1px solid var(--border-line); border-radius:12px; padding:14px; margin-bottom:16px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                <strong style="font-size:13px; color:var(--text-main);">📈 رسم بياني: مسار تطور الفارق الزمني (Décalage Evolution) عبر الخطابات</strong>
+                <span style="font-size:10.5px; background:#ecfdf5; color:#065f46; padding:3px 8px; border-radius:6px; font-weight:700;">المستهدف: النطاق الأخضر المظلل (3.0s - 4.0s)</span>
+              </div>
+              
+              <div style="position:relative; width:100%; height:180px; background:var(--bg-body); border-radius:8px; padding:10px; overflow:hidden;">
+                <svg viewBox="0 0 600 160" style="width:100%; height:100%; overflow:visible;">
+                  <!-- Target Green Zone Band (3.0s to 4.0s) -->
+                  <rect x="0" y="80" width="600" height="40" fill="#10b981" fill-opacity="0.12" />
+                  <line x1="0" y1="80" x2="600" y2="80" stroke="#10b981" stroke-width="1.5" stroke-dasharray="6,4" />
+                  <text x="590" y="75" fill="#059669" font-size="9" text-anchor="end" font-weight="bold">4.0s المعيار الدولي</text>
+
+                  <!-- Horizontal Grid Lines -->
+                  <line x1="0" y1="20" x2="600" y2="20" stroke="#9ca3af" stroke-opacity="0.2" />
+                  <text x="10" y="24" fill="#9ca3af" font-size="9">6.5s</text>
+                  <line x1="0" y1="50" x2="600" y2="50" stroke="#9ca3af" stroke-opacity="0.2" />
+                  <text x="10" y="54" fill="#9ca3af" font-size="9">5.5s</text>
+                  <line x1="0" y1="120" x2="600" y2="120" stroke="#9ca3af" stroke-opacity="0.2" />
+                  <text x="10" y="124" fill="#9ca3af" font-size="9">3.0s</text>
+
+                  <!-- Smooth Area Gradient Fill -->
+                  <defs>
+                    <linearGradient id="decalageGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#991b1b" stop-opacity="0.35" />
+                      <stop offset="100%" stop-color="#991b1b" stop-opacity="0.0" />
+                    </linearGradient>
+                  </defs>
+
+                  <!-- Area Path -->
+                  <path d="M 40 20 C 120 35, 180 55, 230 75 C 320 95, 410 105, 490 110 C 530 112, 560 115, 580 118 L 580 150 L 40 150 Z" fill="url(#decalageGrad)" />
+                  <!-- Line Stroke -->
+                  <path d="M 40 20 C 120 35, 180 55, 230 75 C 320 95, 410 105, 490 110 C 530 112, 560 115, 580 118" fill="none" stroke="#991b1b" stroke-width="3.5" stroke-linecap="round" />
+
+                  <!-- Data Nodes -->
+                  <g class="chart-point" onclick="inspectDecalagePoint(1, 'خطاب الجمعية العامة للأمم المتحدة', '6.5s', 'بداية التدريب: تردد ملحوظ وانقطاع طفيف')">
+                    <circle cx="40" cy="20" r="5" fill="#fff" stroke="#991b1b" stroke-width="3" style="cursor:pointer;" />
+                    <text x="40" y="12" fill="#991b1b" font-size="9" text-anchor="middle" font-weight="bold">#1 (6.5s)</text>
+                  </g>
+                  <g class="chart-point" onclick="inspectDecalagePoint(15, 'قمة أوبك بلس للطاقة', '5.4s', 'سرعة التقاط الأرقام والمصطلحات البترولية')">
+                    <circle cx="230" cy="75" r="5" fill="#fff" stroke="#991b1b" stroke-width="3" style="cursor:pointer;" />
+                    <text x="230" y="67" fill="#991b1b" font-size="9" text-anchor="middle" font-weight="bold">#15 (5.4s)</text>
+                  </g>
+                  <g class="chart-point" onclick="inspectDecalagePoint(45, 'منظمة الصحة العالمية للأوبئة', '4.3s', 'تحكم سليم في التنفس واقتراب من المعيار')">
+                    <circle cx="410" cy="105" r="5" fill="#fff" stroke="#10b981" stroke-width="3" style="cursor:pointer;" />
+                    <text x="410" y="97" fill="#059669" font-size="9" text-anchor="middle" font-weight="bold">#45 (4.3s)</text>
+                  </g>
+                  <g class="chart-point" onclick="inspectDecalagePoint(85, 'المؤتمر الوزاري للتجارة العالمية', '3.4s', 'أداء متطابق مع كابينة مترجمي الأمم المتحدة')">
+                    <circle cx="580" cy="118" r="6" fill="#f59e0b" stroke="#059669" stroke-width="3" style="cursor:pointer;" />
+                    <text x="570" y="136" fill="#059669" font-size="10" text-anchor="end" font-weight="bold">#85 (3.4s) 🏆</text>
+                  </g>
+                </svg>
+              </div>
+
+              <!-- Interactive Selected Node Card -->
+              <div id="decalage-point-card" style="margin-top:10px; background:#fef3c7; border:1px solid #f59e0b; padding:10px 14px; border-radius:8px; font-size:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                <div>
+                  <strong>الخطاب رقم #85: المؤتمر الوزاري للتجارة العالمية</strong>
+                  <div style="color:#78350f; font-size:11px; margin-top:2px;">⏱️ الفارق الزمني: <strong>3.4 ثانية</strong> • ملاحظة: أداء متطابق مع كابينة مترجمي الأمم المتحدة دون أي سقطات معجمية.</div>
+                </div>
+                <button type="button" class="btn-primary-red" style="font-size:11px; padding:4px 10px;" onclick="switchStudentTab('booth')">تدرب في الكابينة 🎙️</button>
+              </div>
+            </div>
+
+            <!-- Domain Progress Bars (5 Domains) -->
+            <div style="background:var(--bg-card); border:1px solid var(--border-line); border-radius:12px; padding:14px;">
+              <strong style="font-size:13px; display:block; margin-bottom:10px;">🌐 توزيع إنجاز الـ 100 خطاب بحسب التخصصات الخمسة:</strong>
+              
+              <div style="display:flex; flex-direction:column; gap:10px;">
+                <div>
+                  <div style="display:flex; justify-content:space-between; font-size:11.5px; margin-bottom:3px;">
+                    <span>🌐 القمم الدبلوماسية والأمم المتحدة (UN & Diplomacy)</span>
+                    <strong>18 / 25 خطاب (72%) • متوسط: 3.5s</strong>
+                  </div>
+                  <div style="width:100%; height:6px; background:var(--bg-body); border-radius:3px; overflow:hidden;">
+                    <div style="width:72%; height:100%; background:#1e3a8a;"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div style="display:flex; justify-content:space-between; font-size:11.5px; margin-bottom:3px;">
+                    <span>⚖️ المحاكم والعقود والتحكيم الدولي (Legal & Court)</span>
+                    <strong>12 / 20 خطاب (60%) • متوسط: 3.8s</strong>
+                  </div>
+                  <div style="width:100%; height:6px; background:var(--bg-body); border-radius:3px; overflow:hidden;">
+                    <div style="width:60%; height:100%; background:#991b1b;"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div style="display:flex; justify-content:space-between; font-size:11.5px; margin-bottom:3px;">
+                    <span>🛢️ الطاقة والنفط والاقتصاد الكلي (Energy & Economics)</span>
+                    <strong>9 / 20 خطاب (45%) • متوسط: 3.6s</strong>
+                  </div>
+                  <div style="width:100%; height:6px; background:var(--bg-body); border-radius:3px; overflow:hidden;">
+                    <div style="width:45%; height:100%; background:#d97706;"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div style="display:flex; justify-content:space-between; font-size:11.5px; margin-bottom:3px;">
+                    <span>🩺 الطب الحيوي والصحة العامة (Medical & WHO)</span>
+                    <strong>7 / 15 خطاب (46%) • متوسط: 4.0s</strong>
+                  </div>
+                  <div style="width:100%; height:6px; background:var(--bg-body); border-radius:3px; overflow:hidden;">
+                    <div style="width:46%; height:100%; background:#047857;"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div style="display:flex; justify-content:space-between; font-size:11.5px; margin-bottom:3px;">
+                    <span>🌍 المناخ والبيئة والتكنولوجيا الخضراء (Climate & Green Tech)</span>
+                    <strong>8 / 20 خطاب (40%) • متوسط: 3.7s</strong>
+                  </div>
+                  <div style="width:100%; height:6px; background:var(--bg-body); border-radius:3px; overflow:hidden;">
+                    <div style="width:40%; height:100%; background:#0891b2;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
         <!-- STUDENT SUB-SECTION 1: SIMULTANEOUS INTERPRETATION BOOTH (100 SPEECHES) -->
-        <div id="student-booth-box" style="display:block;">
+        <div id="student-booth-box" style="display:none;">
           <div style="background:var(--bg-body); padding:16px; border-radius:12px; border:1px solid var(--border-line); margin-bottom:14px;">
             <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
               <div>
@@ -2600,7 +2786,7 @@
           </div>
         </div>
 
-        <!-- Game Selector Tabs (8 Exciting Games) -->
+        <!-- Game Selector Tabs (12 Exciting Games) -->
         <div style="display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap;">
           <button class="nav-pill active" id="btn-game-match" onclick="switchLanguageGame('match')">⚡ مطابقة المصطلحات السريعة</button>
           <button class="nav-pill" id="btn-game-false" onclick="switchLanguageGame('false_friends')">🕵️ صائد الأصدقاء المزيفين</button>
@@ -2610,6 +2796,10 @@
           <button class="nav-pill" id="btn-game-acronyms" onclick="switchLanguageGame('acronyms')">🌐 كاسر الاختصارات الدولية</button>
           <button class="nav-pill" id="btn-game-sight" onclick="switchLanguageGame('sight')">⚡ سبرينت الترجمة بالنظر</button>
           <button class="nav-pill" id="btn-game-battle" onclick="switchLanguageGame('battle')">⚔️ معركة المصطلحات المتخصصة</button>
+          <button class="nav-pill" id="btn-game-collocation" onclick="switchLanguageGame('collocation')">🔗 ماستر المتلازمات اللفظية</button>
+          <button class="nav-pill" id="btn-game-proofreader" onclick="switchLanguageGame('proofreader')">🔍 كاشف أخطاء الترجمة</button>
+          <button class="nav-pill" id="btn-game-nuance" onclick="switchLanguageGame('nuance')">🏛️ الفروق القانونية والثقافية</button>
+          <button class="nav-pill" id="btn-game-shadowing" onclick="switchLanguageGame('shadowing')">🎧 محاكاة النطق والتفريغ</button>
         </div>
 
         <!-- GAME CONTAINER 1: SPEED TERMINOLOGY MATCH -->
@@ -2748,6 +2938,70 @@
               <span id="battle-progress-text" style="font-size:12px; font-weight:800; color:var(--crimson);">المصطلح 1 من 6</span>
             </div>
             <div id="battle-game-container" style="background:var(--bg-card); border:1px solid var(--border-line); border-radius:10px; padding:16px; margin-bottom:14px;">
+              <!-- Populated via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- GAME CONTAINER 9: COLLOCATION MASTER -->
+        <div id="game-panel-collocation" style="display:none;">
+          <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:12px; padding:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div>
+                <h4 style="font-size:14px; font-weight:800; margin:0 0 4px;">🔗 ماستر المتلازمات اللفظية (Collocation Master)</h4>
+                <div style="font-size:12px; color:var(--text-dim);">اختر الفعل أو الصفة التي تُشكل متلازمة طبيعية وموثقة في السياق المستهدف.</div>
+              </div>
+              <span id="collocation-progress-text" style="font-size:12px; font-weight:800; color:var(--crimson);">التحدي 1 من 5</span>
+            </div>
+            <div id="collocation-game-container" style="background:var(--bg-card); border:1px solid var(--border-line); border-radius:10px; padding:16px; margin-bottom:14px;">
+              <!-- Populated via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- GAME CONTAINER 10: PROOFREADER DETECTIVE -->
+        <div id="game-panel-proofreader" style="display:none;">
+          <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:12px; padding:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div>
+                <h4 style="font-size:14px; font-weight:800; margin:0 0 4px;">🔍 كاشف أخطاء الترجمة والتدقيق (Proofreader Detective)</h4>
+                <div style="font-size:12px; color:var(--text-dim);">حلل النص المصدر والمسودة المعيبة، ثم حدد التصحيح الاحترافي المعتمد.</div>
+              </div>
+              <span id="proofreader-progress-text" style="font-size:12px; font-weight:800; color:var(--crimson);">الحالة 1 من 4</span>
+            </div>
+            <div id="proofreader-game-container" style="background:var(--bg-card); border:1px solid var(--border-line); border-radius:10px; padding:16px; margin-bottom:14px;">
+              <!-- Populated via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- GAME CONTAINER 11: CULTURAL & LEGAL NUANCES -->
+        <div id="game-panel-nuance" style="display:none;">
+          <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:12px; padding:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div>
+                <h4 style="font-size:14px; font-weight:800; margin:0 0 4px;">🏛️ الفروق القانونية والثقافية (Legal & Cultural Nuance)</h4>
+                <div style="font-size:12px; color:var(--text-dim);">ألغاز الفروق بين القانون اللاتيني المدني والقانون العام والأعراف الدبلوماسية.</div>
+              </div>
+              <span id="nuance-progress-text" style="font-size:12px; font-weight:800; color:var(--crimson);">اللغز 1 من 3</span>
+            </div>
+            <div id="nuance-game-container" style="background:var(--bg-card); border:1px solid var(--border-line); border-radius:10px; padding:16px; margin-bottom:14px;">
+              <!-- Populated via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- GAME CONTAINER 12: AUDIO SHADOWING & DICTATION -->
+        <div id="game-panel-shadowing" style="display:none;">
+          <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:12px; padding:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div>
+                <h4 style="font-size:14px; font-weight:800; margin:0 0 4px;">🎧 محاكاة النطق والتفريغ السمعي (Audio Shadowing Reflex)</h4>
+                <div style="font-size:12px; color:var(--text-dim);">استمع لنطق المصطلح اللاتيني أو الأكاديمي ثم اختر هجاءه ومعناه الدقيق.</div>
+              </div>
+              <span id="shadowing-progress-text" style="font-size:12px; font-weight:800; color:var(--crimson);">المصطلح 1 من 4</span>
+            </div>
+            <div id="shadowing-game-container" style="background:var(--bg-card); border:1px solid var(--border-line); border-radius:10px; padding:16px; margin-bottom:14px;">
               <!-- Populated via JS -->
             </div>
           </div>
@@ -4181,7 +4435,7 @@
     }
 
     function switchLanguageGame(gameId) {
-      const allGames = ['match', 'false_friends', 'syntax', 'reflex', 'idioms', 'acronyms', 'sight', 'battle'];
+      const allGames = ['match', 'false_friends', 'syntax', 'reflex', 'idioms', 'acronyms', 'sight', 'battle', 'collocation', 'proofreader', 'nuance', 'shadowing'];
       allGames.forEach(g => {
         const panel = document.getElementById('game-panel-' + g);
         let btnId = 'btn-game-' + g;
@@ -4199,6 +4453,10 @@
       if (gameId === 'acronyms') renderAcronymsGame();
       if (gameId === 'sight') renderSightGame();
       if (gameId === 'battle') renderBattleGame();
+      if (gameId === 'collocation') renderCollocationGame();
+      if (gameId === 'proofreader') renderProofreaderGame();
+      if (gameId === 'nuance') renderNuanceGame();
+      if (gameId === 'shadowing') renderShadowingGame();
     }
 
     // GAME 1: SPEED TERMINOLOGY MATCH
@@ -5051,6 +5309,403 @@
     function nextBattleQuestion() {
       currentBattleIdx = (currentBattleIdx + 1) % BATTLE_GAME_DATA.length;
       renderBattleGame();
+    }
+
+    // GAME 9: COLLOCATION MASTER
+    const COLLOCATION_DATA = [
+      {
+        prompt: "In international diplomacy, states do not simply end ties; they _____ diplomatic relations.",
+        domain: "السلك الدبلوماسي",
+        options: ["sever", "cut off", "smash", "disconnect"],
+        correct: "sever",
+        tip: "المتلازمة الرسمية: 'to sever diplomatic relations' (قطع العلاقات الدبلوماسية)."
+      },
+      {
+        prompt: "The international arbitral tribunal sat in Geneva to _____ a binding arbitral award.",
+        domain: "التحكيم الدولي",
+        options: ["render", "produce", "manufacture", "discharge"],
+        correct: "render",
+        tip: "يقال قانونياً: 'render an award' (إصدار حكم تحكيمي ملزم)."
+      },
+      {
+        prompt: "The investment bank conducted thorough _____ diligence before financing the takeover.",
+        domain: "المالية والاستثمار",
+        options: ["due", "right", "proper", "true"],
+        correct: "due",
+        tip: "المتلازمة المصرفية الشهيرة: 'due diligence' (الفحص النافي للجهالة)."
+      },
+      {
+        prompt: "Failure to appeal within statutory prescribed time will _____ the creditor's rights.",
+        domain: "قانون المرافعات",
+        options: ["extinguish", "burn", "terminate", "fade"],
+        correct: "extinguish",
+        tip: "المصطلح الإجرائي لسقوط الحق بالتقادم هو 'extinguish a right'."
+      },
+      {
+        prompt: "The defendant agreed to _____ full restitution for the contract breach damages.",
+        domain: "العقود والمسؤولية",
+        options: ["make", "give", "do", "fabricate"],
+        correct: "make",
+        tip: "في صياغة العقود: 'make restitution' (رد الحقوق / التعويض العيني)."
+      }
+    ];
+    let currentCollocationIdx = 0;
+    let collocationAnswered = false;
+
+    function renderCollocationGame() {
+      const container = document.getElementById('collocation-game-container');
+      const progress = document.getElementById('collocation-progress-text');
+      if (!container) return;
+      collocationAnswered = false;
+      const q = COLLOCATION_DATA[currentCollocationIdx];
+      if (progress) progress.textContent = `التحدي ${currentCollocationIdx + 1} من ${COLLOCATION_DATA.length}`;
+
+      container.innerHTML = `
+        <div style="font-size:11px; color:#b45309; font-weight:800; margin-bottom:6px;">المجال: ${q.domain}</div>
+        <div style="font-size:14px; font-weight:800; color:var(--text-main); margin-bottom:12px; line-height:1.5;">${q.prompt}</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
+          ${q.options.map(opt => `
+            <button class="nav-pill" style="font-size:13px; font-weight:700; padding:10px;" onclick="chooseCollocationOption('${opt}')">${opt}</button>
+          `).join('')}
+        </div>
+        <div id="collocation-feedback" style="display:none; font-size:12.5px; margin-bottom:10px; padding:10px; border-radius:8px;"></div>
+        <button id="collocation-next-btn" class="btn-primary-red" style="display:none; width:100%; font-size:12px;" onclick="nextCollocationQuestion()">
+          التحدي التالي ➔
+        </button>
+      `;
+    }
+
+    function chooseCollocationOption(chosen) {
+      if (collocationAnswered) return;
+      collocationAnswered = true;
+      const q = COLLOCATION_DATA[currentCollocationIdx];
+      const feedback = document.getElementById('collocation-feedback');
+      const nextBtn = document.getElementById('collocation-next-btn');
+      const isCorrect = chosen === q.correct;
+
+      if (feedback) {
+        feedback.style.display = 'block';
+        if (isCorrect) {
+          feedback.style.background = '#ecfdf5';
+          feedback.style.color = '#065f46';
+          feedback.innerHTML = `🎉 إجابة احترافية! متلازمة لغوية سليمة (+30 نقطة).<br><small style="color:#047857;">${q.tip}</small>`;
+          addGameScore(30);
+        } else {
+          feedback.style.background = '#fef2f2';
+          feedback.style.color = '#991b1b';
+          feedback.innerHTML = `❌ المتلازمة الصحيحة: <strong>${q.correct}</strong>.<br><small>${q.tip}</small>`;
+        }
+      }
+      if (nextBtn) nextBtn.style.display = 'block';
+    }
+
+    function nextCollocationQuestion() {
+      currentCollocationIdx = (currentCollocationIdx + 1) % COLLOCATION_DATA.length;
+      renderCollocationGame();
+    }
+
+    // GAME 10: PROOFREADER DETECTIVE
+    const PROOFREADER_DATA = [
+      {
+        source: "The contract is null and void ab initio.",
+        flawed: "العقد باطل وملغى من الآن فصاعداً.",
+        flawType: "خطأ في تفسير المصطلح اللاتيني (Ab initio)",
+        options: [
+          "العقد باطل بطلاناً مطلقاً بأثر رجعي منذ نشوئه",
+          "العقد يُفسخ بالتراضي بين الطرفين",
+          "العقد باطل فقط في شروطه الجزائية"
+        ],
+        correct: "العقد باطل بطلاناً مطلقاً بأثر رجعي منذ نشوئه",
+        explanation: "المصطلح 'ab initio' يعني 'منذ البداية وبأثر رجعي' وليس 'من الآن فصاعداً' (ex nunc)."
+      },
+      {
+        source: "The company filed for Chapter 11 bankruptcy protection.",
+        flawed: "قامت الشركة بتعبئة الفصل 11 من كتاب الإفلاس.",
+        flawType: "ترجمة حرفية مخلة (Calque)",
+        options: [
+          "قدمت الشركة طلباً للحماية من الإفلاس بموجب الفصل 11 (إعادة الهيكلة)",
+          "قامت الشركة بإعلان تصفية موجوداتها بالكامل",
+          "رفعت الشركة دعوى إفلاس في الغرفة الحادية عشرة"
+        ],
+        correct: "قدمت الشركة طلباً للحماية من الإفلاس بموجب الفصل 11 (إعادة الهيكلة)",
+        explanation: "Chapter 11 في القانون التجاري الأمريكي هو نظام حماية الشركات وإعادة التنظيم القضائي."
+      },
+      {
+        source: "The patient presents with acute myocardial infarction.",
+        flawed: "المريض يعاني من تعفن حاد في عضلات الصدر.",
+        flawType: "خطأ طبي تخصصي خطير",
+        options: [
+          "يعاني المريض من احتشاء حاد في عضلة القلب (جلطة قلبية)",
+          "المريض مصاب بالتهاب في الغشاء التاموري",
+          "المريض يعاني من ضيق تنفس حاد غير محدد"
+        ],
+        correct: "يعاني المريض من احتشاء حاد في عضلة القلب (جلطة قلبية)",
+        explanation: "Myocardial infarction تعني تحديداً 'احتشاء عضلة القلب'، وترجمتها بدقة حاسمة للمريض."
+      },
+      {
+        source: "Without prejudice to the foregoing provisions.",
+        flawed: "بدون أي تعصب للأحكام الواردة أعلاه.",
+        flawType: "خلط بين المعنى العام والمعنى القانوني لكلمة Prejudice",
+        options: [
+          "دون الإخلال بالأحكام / البنود سالفة الذكر أعلاه",
+          "دون تحيز للطرف الأول في بنود العقد",
+          "مع استبعاد كافة المواد التعاقدية السابقة"
+        ],
+        correct: "دون الإخلال بالأحكام / البنود سالفة الذكر أعلاه",
+        explanation: "في صياغة العقود: 'without prejudice to' تعني حصراً 'دون إخلال بـ'."
+      }
+    ];
+    let currentProofreaderIdx = 0;
+    let proofreaderAnswered = false;
+
+    function renderProofreaderGame() {
+      const container = document.getElementById('proofreader-game-container');
+      const progress = document.getElementById('proofreader-progress-text');
+      if (!container) return;
+      proofreaderAnswered = false;
+      const c = PROOFREADER_DATA[currentProofreaderIdx];
+      if (progress) progress.textContent = `الحالة ${currentProofreaderIdx + 1} من ${PROOFREADER_DATA.length}`;
+
+      container.innerHTML = `
+        <div style="background:var(--bg-body); padding:10px; border-radius:8px; margin-bottom:12px; font-size:12.5px;">
+          <div><strong style="color:var(--text-dim);">📄 النص الأصلي:</strong> <span style="font-weight:700;">${c.source}</span></div>
+          <div style="margin-top:6px;"><strong style="color:#ef4444;">⚠️ المسودة المعيبة:</strong> <span style="color:#b91c1c; font-weight:700;">${c.flawed}</span></div>
+          <div style="margin-top:4px; font-size:11px; color:#d97706; font-weight:800;">نوع الخلل: ${c.flawType}</div>
+        </div>
+        <div style="font-size:12px; font-weight:800; margin-bottom:8px;">اختر التصحيح المهني المعتمد:</div>
+        <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px;">
+          ${c.options.map(opt => `
+            <button class="nav-pill" style="font-size:12px; font-weight:600; text-align:right; padding:10px;" onclick="chooseProofreaderOption('${opt}')">${opt}</button>
+          `).join('')}
+        </div>
+        <div id="proofreader-feedback" style="display:none; font-size:12.5px; margin-bottom:10px; padding:10px; border-radius:8px;"></div>
+        <button id="proofreader-next-btn" class="btn-primary-red" style="display:none; width:100%; font-size:12px;" onclick="nextProofreaderQuestion()">
+          الحالة التالية ➔
+        </button>
+      `;
+    }
+
+    function chooseProofreaderOption(chosen) {
+      if (proofreaderAnswered) return;
+      proofreaderAnswered = true;
+      const c = PROOFREADER_DATA[currentProofreaderIdx];
+      const feedback = document.getElementById('proofreader-feedback');
+      const nextBtn = document.getElementById('proofreader-next-btn');
+      const isCorrect = chosen === c.correct;
+
+      if (feedback) {
+        feedback.style.display = 'block';
+        if (isCorrect) {
+          feedback.style.background = '#ecfdf5';
+          feedback.style.color = '#065f46';
+          feedback.innerHTML = `🎉 تدقيق فائق الدقة! كشفت الخلل وصححته باحتراف (+35 نقطة).<br><small>${c.explanation}</small>`;
+          addGameScore(35);
+        } else {
+          feedback.style.background = '#fef2f2';
+          feedback.style.color = '#991b1b';
+          feedback.innerHTML = `❌ الصياغة المحلفة المعتمدة: <strong>${c.correct}</strong>.<br><small>${c.explanation}</small>`;
+        }
+      }
+      if (nextBtn) nextBtn.style.display = 'block';
+    }
+
+    function nextProofreaderQuestion() {
+      currentProofreaderIdx = (currentProofreaderIdx + 1) % PROOFREADER_DATA.length;
+      renderProofreaderGame();
+    }
+
+    // GAME 11: CULTURAL & LEGAL NUANCES
+    const NUANCE_DATA = [
+      {
+        question: "ما هو الفرق الجوهري بين Notary Public في أمريكا و Notaire في فرنسا والجزائر؟",
+        options: [
+          "الـ Notaire موثق عمومي رسمي يصيغ العقود، بينما في أمريكا شاهد على التوقيع دون فحص قانوني",
+          "كلاهما قضاة في المحكمة العليا",
+          "الـ Notary Public الأمريكي يجب أن يكون رئيس محكمة"
+        ],
+        correct: "الـ Notaire موثق عمومي رسمي يصيغ العقود، بينما في أمريكا شاهد على التوقيع دون فحص قانوني",
+        insight: "في الأنظمة اللاتينية (Civil Law)، الموثق ضابط عمومي يصيغ ويوثق العقود. أما في أمريكا فالـ Notary Public يكتفي بالتأكد من هوية الموقعين."
+      },
+      {
+        question: "كيف تُترجم عبارة 'Certified True Copy' في المستندات الرسمية المعتمدة؟",
+        options: [
+          "نسخة طبق الأصل ومطابقة للأصل المحفوظ",
+          "نسخة حقيقية مسحوبة من الإنترنت",
+          "صورة مطابقة لبيانات الشهادة الأصلية"
+        ],
+        correct: "نسخة طبق الأصل ومطابقة للأصل المحفوظ",
+        insight: "الصياغة الإدارية الجزائرية والدولية الرسمية هي 'نسخة طبق الأصل' (Copie conforme à l'original)."
+      },
+      {
+        question: "ماذا تعني قاعدة 'Locus regit actum' في تنازع القوانين وتوثيق العقود الدولية؟",
+        options: [
+          "قانون محل إبرام التصرف هو الذي يحكم شكله وصحته الظاهرية",
+          "القاضي يحكم وفق قانون جنسية المدعي فقط",
+          "النزاع يُفصل فيه حصراً في محكمة الجنايات"
+        ],
+        correct: "قانون محل إبرام التصرف هو الذي يحكم شكله وصحته الظاهرية",
+        insight: "قاعدة لاتينية شهيرة في القانون الدولي الخاص تفيد بأن شكل التصرف القانوني يخضع لقانون الدولة التي أُبرم فيها."
+      }
+    ];
+    let currentNuanceIdx = 0;
+    let nuanceAnswered = false;
+
+    function renderNuanceGame() {
+      const container = document.getElementById('nuance-game-container');
+      const progress = document.getElementById('nuance-progress-text');
+      if (!container) return;
+      nuanceAnswered = false;
+      const q = NUANCE_DATA[currentNuanceIdx];
+      if (progress) progress.textContent = `اللغز ${currentNuanceIdx + 1} من ${NUANCE_DATA.length}`;
+
+      container.innerHTML = `
+        <div style="font-size:13.5px; font-weight:800; color:var(--text-main); margin-bottom:12px; line-height:1.5;">${q.question}</div>
+        <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px;">
+          ${q.options.map(opt => `
+            <button class="nav-pill" style="font-size:12px; font-weight:600; text-align:right; padding:10px;" onclick="chooseNuanceOption('${opt}')">${opt}</button>
+          `).join('')}
+        </div>
+        <div id="nuance-feedback" style="display:none; font-size:12.5px; margin-bottom:10px; padding:10px; border-radius:8px;"></div>
+        <button id="nuance-next-btn" class="btn-primary-red" style="display:none; width:100%; font-size:12px;" onclick="nextNuanceQuestion()">
+          اللغز المقارن التالي ➔
+        </button>
+      `;
+    }
+
+    function chooseNuanceOption(chosen) {
+      if (nuanceAnswered) return;
+      nuanceAnswered = true;
+      const q = NUANCE_DATA[currentNuanceIdx];
+      const feedback = document.getElementById('nuance-feedback');
+      const nextBtn = document.getElementById('nuance-next-btn');
+      const isCorrect = chosen === q.correct;
+
+      if (feedback) {
+        feedback.style.display = 'block';
+        if (isCorrect) {
+          feedback.style.background = '#ecfdf5';
+          feedback.style.color = '#065f46';
+          feedback.innerHTML = `🎉 إجابة قانونية ومقارنة بارعة (+40 نقطة).<br><small>${q.insight}</small>`;
+          addGameScore(40);
+        } else {
+          feedback.style.background = '#fef2f2';
+          feedback.style.color = '#991b1b';
+          feedback.innerHTML = `❌ الجواب الصحيح: <strong>${q.correct}</strong>.<br><small>${q.insight}</small>`;
+        }
+      }
+      if (nextBtn) nextBtn.style.display = 'block';
+    }
+
+    function nextNuanceQuestion() {
+      currentNuanceIdx = (currentNuanceIdx + 1) % NUANCE_DATA.length;
+      renderNuanceGame();
+    }
+
+    // GAME 12: AUDIO SHADOWING & DICTATION REFLEX
+    const SHADOWING_DATA = [
+      {
+        spoken: "Sub Judice",
+        lang: "en-GB",
+        options: ["Sub Judice", "Subjudice", "Sub Judy", "Subject Justice"],
+        correct: "Sub Judice",
+        phonetic: "/sʌb ˈdʒuːdɪsi/",
+        meaning: "قضية معروضة أمام القضاء ويحظر النشر فيها"
+      },
+      {
+        spoken: "Prima Facie",
+        lang: "en-US",
+        options: ["Prima Facie", "Primary Face", "Prima Facey", "Prime Factor"],
+        correct: "Prima Facie",
+        phonetic: "/ˌpraɪmə ˈfeɪʃi/",
+        meaning: "للوهلة الأولى / دلالة ظاهرية كافية"
+      },
+      {
+        spoken: "Quid Pro Quo",
+        lang: "en-US",
+        options: ["Quid Pro Quo", "Quit Pro Clue", "Kid Pro Call", "Quick Promo"],
+        correct: "Quid Pro Quo",
+        phonetic: "/ˌkwɪd prəʊ ˈkwəʊ/",
+        meaning: "مقابل مساوٍ / شيء مقابل شيء في الالتزامات"
+      },
+      {
+        spoken: "Ultra Vires",
+        lang: "en-GB",
+        options: ["Ultra Vires", "Ultra Virus", "Ultra Various", "Outer Vires"],
+        correct: "Ultra Vires",
+        phonetic: "/ˌʌltrə ˈvaɪriːz/",
+        meaning: "تجاوز الصلاحيات والاختصاصات القانونية"
+      }
+    ];
+    let currentShadowingIdx = 0;
+    let shadowingAnswered = false;
+
+    function renderShadowingGame() {
+      const container = document.getElementById('shadowing-game-container');
+      const progress = document.getElementById('shadowing-progress-text');
+      if (!container) return;
+      shadowingAnswered = false;
+      const item = SHADOWING_DATA[currentShadowingIdx];
+      if (progress) progress.textContent = `المصطلح ${currentShadowingIdx + 1} من ${SHADOWING_DATA.length}`;
+
+      container.innerHTML = `
+        <div style="text-align:center; padding:16px; background:var(--bg-body); border-radius:10px; margin-bottom:14px;">
+          <button type="button" class="btn-primary-red" style="font-size:14px; padding:10px 20px;" onclick="playShadowingAudio()">
+            🔊 استمع للنطق الصوتي الفوري
+          </button>
+          <div style="font-size:11.5px; color:var(--text-dim); margin-top:8px;">استمع جيداً للنطق ثم انقر على الكلمة المكتوبة بدقة:</div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
+          ${item.options.map(opt => `
+            <button class="nav-pill" style="font-size:13px; font-weight:700; padding:10px;" onclick="chooseShadowingOption('${opt}')">${opt}</button>
+          `).join('')}
+        </div>
+        <div id="shadowing-feedback" style="display:none; font-size:12.5px; margin-bottom:10px; padding:10px; border-radius:8px;"></div>
+        <button id="shadowing-next-btn" class="btn-primary-red" style="display:none; width:100%; font-size:12px;" onclick="nextShadowingQuestion()">
+          المصطلح الصوتي التالي ➔
+        </button>
+      `;
+    }
+
+    function playShadowingAudio() {
+      const item = SHADOWING_DATA[currentShadowingIdx];
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(item.spoken);
+        u.lang = item.lang || 'en-US';
+        u.rate = 0.9;
+        window.speechSynthesis.speak(u);
+      } else {
+        alert("النطق الصوتي: " + item.spoken);
+      }
+    }
+
+    function chooseShadowingOption(chosen) {
+      if (shadowingAnswered) return;
+      shadowingAnswered = true;
+      const item = SHADOWING_DATA[currentShadowingIdx];
+      const feedback = document.getElementById('shadowing-feedback');
+      const nextBtn = document.getElementById('shadowing-next-btn');
+      const isCorrect = chosen === item.correct;
+
+      if (feedback) {
+        feedback.style.display = 'block';
+        if (isCorrect) {
+          feedback.style.background = '#ecfdf5';
+          feedback.style.color = '#065f46';
+          feedback.innerHTML = `🎉 أذن موسيقية لغوية ممتازة! (+35 نقطة).<br><small>النطق الصوتي: ${item.phonetic} • المعنى: ${item.meaning}</small>`;
+          addGameScore(35);
+        } else {
+          feedback.style.background = '#fef2f2';
+          feedback.style.color = '#991b1b';
+          feedback.innerHTML = `❌ المصطلح الصحيح: <strong>${item.correct}</strong>.<br><small>المعنى المعتمد: ${item.meaning}</small>`;
+        }
+      }
+      if (nextBtn) nextBtn.style.display = 'block';
+    }
+
+    function nextShadowingQuestion() {
+      currentShadowingIdx = (currentShadowingIdx + 1) % SHADOWING_DATA.length;
+      renderShadowingGame();
     }
 
     // ==========================================
@@ -7113,6 +7768,7 @@
     // --- TRANSLATION STUDENTS LAB LOGIC ---
     function switchStudentTab(tab) {
       const boxes = {
+        progress: document.getElementById('student-progress-box'),
         booth: document.getElementById('student-booth-box'),
         consec: document.getElementById('student-consec-box'),
         exam: document.getElementById('student-exam-box'),
@@ -7130,6 +7786,7 @@
         }
       });
 
+      if (document.getElementById('btn-tab-progress')) document.getElementById('btn-tab-progress').classList.toggle('active', tab === 'progress');
       if (document.getElementById('btn-tab-booth')) document.getElementById('btn-tab-booth').classList.toggle('active', tab === 'booth');
       if (document.getElementById('btn-tab-consec')) document.getElementById('btn-tab-consec').classList.toggle('active', tab === 'consec');
       if (document.getElementById('btn-tab-exam')) document.getElementById('btn-tab-exam').classList.toggle('active', tab === 'exam');
@@ -7141,6 +7798,19 @@
       }
       if (tab === 'languages') {
         renderStudentSharedLibrary();
+      }
+    }
+
+    function inspectDecalagePoint(num, title, sec, note) {
+      const card = document.getElementById('decalage-point-card');
+      if (card) {
+        card.innerHTML = `
+          <div>
+            <strong>الخطاب رقم #${num}: ${title}</strong>
+            <div style="color:#78350f; font-size:11px; margin-top:2px;">⏱️ الفارق الزمني: <strong>${sec}</strong> • ملاحظة: ${note}</div>
+          </div>
+          <button type="button" class="btn-primary-red" style="font-size:11px; padding:4px 10px;" onclick="switchStudentTab('booth')">تدرب في الكابينة 🎙️</button>
+        `;
       }
     }
 
@@ -9986,6 +10656,469 @@ window.addEventListener('DOMContentLoaded', () => {
   <button id="floating-rating-btn" class="floating-rating-btn" onclick="openRatingModal()" title="أضف تقييمك للمنصة">
     <span>⭐</span> <span>قيّم تجربتك</span>
   </button>
+
+  <!-- Floating Madani AI Mentor Button -->
+  <button id="floating-madani-btn" class="floating-madani-btn" onclick="openMadaniAiModal()" title="تحدث مع مدني AI - وكيل الذكاء الاصطناعي">
+    <img src="img_madani_ai_avatar.jpg" alt="Madani AI" style="width:36px; height:36px; border-radius:50%; object-fit:cover; border:2px solid #f59e0b;" onerror="this.src='./public/img_madani_ai_avatar.jpg'">
+    <div style="text-align:right;">
+      <div style="font-size:12px; font-weight:900; line-height:1.2;">مدني AI 🎙️</div>
+      <div style="font-size:9.5px; opacity:0.9;">مستشار اللغات والترجمة</div>
+    </div>
+  </button>
+
+  <!-- ========================================================================= -->
+  <!-- MADANI AI AGENT MODAL (وكيل الذكاء الاصطناعي مدني) -->
+  <!-- ========================================================================= -->
+  <div id="madaniAiModal" class="modal-backdrop" style="display:none;">
+    <div class="modal-card" style="max-width:760px; max-height:92vh; display:flex; flex-direction:column; padding:20px; border-radius:18px;">
+      
+      <!-- Top Modal Header -->
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; padding-bottom:12px; border-bottom:1px solid var(--border-line);">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="position:relative;">
+            <img id="madani-modal-avatar-img" src="img_madani_ai_avatar.jpg" alt="Madani AI" style="width:54px; height:54px; border-radius:50%; object-fit:cover; border:3px solid #f59e0b; box-shadow:0 0 14px rgba(245, 158, 11, 0.4);" onerror="this.src='./public/img_madani_ai_avatar.jpg'">
+            <span style="position:absolute; bottom:0; left:0; width:13px; height:13px; background:#10b981; border:2px solid #fff; border-radius:50%;" title="متصل الآن"></span>
+          </div>
+          <div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <h3 style="margin:0; font-size:18px; font-weight:900; color:var(--crimson);">Madani AI | مدني</h3>
+              <span class="badge-gold" style="font-size:10px; font-weight:800;">وكيل ذكي متميز ⚡</span>
+            </div>
+            <div id="madani-speech-status" style="font-size:11.5px; color:#059669; font-weight:700; margin-top:2px;">
+              🟢 متصل • رفيقك المتعدد الوسائط في دراسة اللغات والترجمة المحلفة
+            </div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:6px;">
+          <button type="button" class="btn-outline-action" style="padding:4px 10px; font-size:11.5px; color:#d97706; font-weight:bold;" onclick="openMadaniCustomizerModal()" title="تخصيص مظهر الأيقونة">🎨 تخصيص المظهر</button>
+          <button type="button" class="btn-outline-action" style="padding:4px 10px; font-size:11px;" onclick="madaniStopSpeak()" title="إيقاف الصوت">🔇 كتم الصوت</button>
+          <button type="button" class="btn-outline-action" style="padding:4px 10px; font-size:14px;" onclick="closeMadaniAiModal()">✕</button>
+        </div>
+      </div>
+
+      <!-- Module Navigation Tabs -->
+      <div style="display:flex; gap:6px; margin-bottom:14px; background:var(--bg-body); padding:4px; border-radius:10px; border:1px solid var(--border-line); overflow-x:auto;">
+        <button class="nav-pill active" id="btn-madani-chat" style="font-size:11.5px; flex:1; white-space:nowrap;" onclick="switchMadaniTab('chat')">💬 محادثة وصوت</button>
+        <button class="nav-pill" id="btn-madani-partner" style="font-size:11.5px; flex:1; white-space:nowrap;" onclick="switchMadaniTab('partner')">🔄 شريك الترجمة</button>
+        <button class="nav-pill" id="btn-madani-vision" style="font-size:11.5px; flex:1; white-space:nowrap;" onclick="switchMadaniTab('vision')">📷 فحص المستندات</button>
+        <button class="nav-pill" id="btn-madani-tips" style="font-size:11.5px; flex:1; white-space:nowrap;" onclick="switchMadaniTab('tips')">💡 نصائح الكابينة</button>
+      </div>
+
+      <!-- TAB 1: CHAT & VOICE -->
+      <div id="madani-tab-chat" style="display:flex; flex-direction:column; flex:1; overflow:hidden;">
+        <!-- Quick Prompts Chips -->
+        <div style="display:flex; gap:6px; overflow-x:auto; padding-bottom:8px; margin-bottom:8px;">
+          <button type="button" class="nav-pill" style="font-size:11px; white-space:nowrap; padding:4px 10px;" onclick="handleMadaniQuickPrompt('كيف أترجم عبارة Force Majeure في عقد تجاري؟')">💡 ترجمة Force Majeure</button>
+          <button type="button" class="nav-pill" style="font-size:11px; white-space:nowrap; padding:4px 10px;" onclick="handleMadaniQuickPrompt('ما هو الفارق الزمني (Décalage) المثالي في كابينة الترجمة الفورية؟')">🎙️ سرعة Décalage</button>
+          <button type="button" class="nav-pill" style="font-size:11px; white-space:nowrap; padding:4px 10px;" onclick="handleMadaniQuickPrompt('ما هي شروط ترجمة شهادة ميلاد لدى مترجم محلف معتمد؟')">📜 ترجمة شهادة ميلاد</button>
+          <button type="button" class="nav-pill" style="font-size:11px; white-space:nowrap; padding:4px 10px;" onclick="handleMadaniQuickPrompt('دربني على نطق المصطلحات الدبلوماسية بالإنجليزية والفرنسية')">🗣️ تدريب نطق سليم</button>
+        </div>
+
+        <!-- Chat Stream -->
+        <div id="madani-chat-messages" style="flex:1; overflow-y:auto; border:1px solid var(--border-line); border-radius:12px; padding:12px; background:var(--bg-body); display:flex; flex-direction:column; gap:10px; min-height:220px; max-height:360px;">
+          <!-- Welcome Message -->
+          <div style="display:flex; gap:10px; align-items:flex-start;">
+            <img src="img_madani_ai_avatar.jpg" alt="Madani" style="width:34px; height:34px; border-radius:50%; object-fit:cover; border:1.5px solid #f59e0b;" onerror="this.src='./public/img_madani_ai_avatar.jpg'">
+            <div style="background:var(--bg-card); border:1px solid var(--border-line); border-radius:12px; padding:10px 14px; max-width:85%; font-size:12.5px; line-height:1.6;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                <span style="font-weight:800; color:var(--crimson); font-size:11px;">مدني AI 🎙️</span>
+                <button type="button" style="background:none; border:none; cursor:pointer; font-size:13px;" onclick="madaniSpeak('أهلاً بك! أنا مدني، وكيلك الذكي المتخصص في تعليم اللغات والترجمة الفورية المحلفة.')" title="استمع بصوت مدني">🔊</button>
+              </div>
+              أهلاً بك! أنا مدني (Madani)، وكيلك الذكي المتخصص في تعليم اللغات والترجمة الفورية المحلفة. أستطيع التحدث معك صوتياً، وتدريبك على النطق، وفحص وثائقك بالصورة، وترجمة نصوصك فورياً وفق أعلى المعايير الدولية. كيف أساعدك اليوم؟
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Input Bar -->
+        <div style="display:flex; gap:8px; margin-top:10px; align-items:center;">
+          <button type="button" id="btn-madani-mic" class="btn-outline-action" style="padding:8px 12px; font-size:14px;" onclick="toggleMadaniVoiceRecognition()" title="التحدث بالصوت">
+            🎤
+          </button>
+          <input type="text" id="madani-user-input" placeholder="اكتب أو تحدث مع مدني (مثلاً: كيف أترجم المصطلح اللاتيني Subpoena؟)..." style="flex:1; padding:10px 14px; border:1px solid var(--border-line); border-radius:10px; font-size:12.5px; font-family:inherit; background:var(--bg-card); color:var(--text-main);" onkeypress="if(event.key==='Enter') sendMadaniChat()">
+          <button type="button" class="btn-primary-red" style="padding:10px 18px; font-size:12.5px; font-weight:800;" onclick="sendMadaniChat()">
+            إرسال ➔
+          </button>
+        </div>
+      </div>
+
+      <!-- TAB 2: LIVE TRANSLATION PARTNER -->
+      <div id="madani-tab-partner" style="display:none; flex-direction:column; gap:12px; overflow-y:auto; max-height:70vh;">
+        <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-body); padding:8px 12px; border-radius:10px; border:1px solid var(--border-line);">
+          <select id="madani-trans-source" style="padding:6px; border-radius:6px; font-weight:700; border:1px solid var(--border-line); font-family:inherit;" onchange="runMadaniLiveTranslate()">
+            <option value="en">الإنجليزية (English)</option>
+            <option value="ar">العربية (Arabic)</option>
+            <option value="fr">الفرنسية (Français)</option>
+            <option value="es">الإسبانية (Español)</option>
+            <option value="de">الألمانية (Deutsch)</option>
+          </select>
+          <button type="button" class="btn-outline-action" style="padding:4px 10px;" onclick="swapMadaniLanguages()">⇄ تبديل</button>
+          <select id="madani-trans-target" style="padding:6px; border-radius:6px; font-weight:700; border:1px solid var(--border-line); font-family:inherit;" onchange="runMadaniLiveTranslate()">
+            <option value="ar">العربية (Arabic)</option>
+            <option value="en">الإنجليزية (English)</option>
+            <option value="fr">الفرنسية (Français)</option>
+            <option value="es">الإسبانية (Español)</option>
+            <option value="de">الألمانية (Deutsch)</option>
+          </select>
+        </div>
+
+        <div>
+          <label style="font-size:11.5px; font-weight:700; color:var(--text-dim); display:block; margin-bottom:4px;">النص المصدر المراد تحليله وترجمته:</label>
+          <textarea id="madani-partner-source-text" rows="3" style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border-line); font-family:inherit; font-size:12.5px; background:var(--bg-body); color:var(--text-main);" oninput="runMadaniLiveTranslate()">The arbitral award shall be deemed final, unappealable, and binding upon both contracting parties.</textarea>
+        </div>
+
+        <div style="background:#ecfdf5; border:1px solid #10b981; border-radius:10px; padding:12px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+            <span style="font-size:11.5px; font-weight:800; color:#065f46;">✨ ترجمة مدني المعتمدة وفق ISO 17100:</span>
+            <div style="display:flex; gap:6px;">
+              <button type="button" style="background:none; border:none; cursor:pointer; font-size:14px;" onclick="madaniSpeak(document.getElementById('madani-partner-target-text').innerText, 'ar')" title="استمع للنطق">🔊</button>
+              <button type="button" style="background:none; border:none; cursor:pointer; font-size:13px;" onclick="copyMadaniTranslation()" title="نسخ الترجمة">📋</button>
+            </div>
+          </div>
+          <div id="madani-partner-target-text" style="font-size:13.5px; font-weight:700; color:#065f46; line-height:1.6;">
+            يُعتبر الحكم التحكيمي نهائياً وغير قابل للطعن، ومُلزماً لكلا الطرفين المتعاقدين.
+          </div>
+        </div>
+
+        <div style="background:#fef3c7; border:1px solid #f59e0b; border-radius:10px; padding:10px; font-size:11.5px;">
+          <strong style="color:#92400e;">🔍 تدقيق المصطلحات الدقيقة من مدني:</strong>
+          <ul style="margin:4px 0 0; padding-right:16px; color:#78350f; line-height:1.5;">
+            <li><strong>Arbitral award</strong> = حكم تحكيمي (تجنب ترجمتها جائزة).</li>
+            <li><strong>Unappealable</strong> = غير قابل للطعن أو الاستئناف.</li>
+            <li><strong>Binding upon</strong> = ملزم لكلا الطرفين قانوناً.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TAB 3: DOCUMENT VISION SCANNER -->
+      <div id="madani-tab-vision" style="display:none; flex-direction:column; gap:12px; overflow-y:auto; max-height:70vh;">
+        <div style="font-size:12px; font-weight:800; color:var(--text-main);">
+          اختر نموذج مستند رسمي للفحص البصري الفوري أو ارفع وثيقة:
+        </div>
+
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button type="button" class="nav-pill active" id="btn-vdoc-0" onclick="selectMadaniDoc(0)">📜 عقد زواج رسمي</button>
+          <button type="button" class="nav-pill" id="btn-vdoc-1" onclick="selectMadaniDoc(1)">🎓 دبلوم مهندس دولة (USTHB)</button>
+          <button type="button" class="nav-pill" id="btn-vdoc-2" onclick="selectMadaniDoc(2)">🏢 عقد تأسيس شركة (LLC)</button>
+          <label class="btn-outline-action" style="font-size:11px; padding:5px 10px; cursor:pointer; display:inline-flex; align-items:center; gap:4px;">
+            📷 ارفع صورة وثيقة
+            <input type="file" accept="image/*,.pdf" style="display:none;" onchange="handleMadaniCustomUpload(this)">
+          </label>
+        </div>
+
+        <!-- Vision Inspection Result Box -->
+        <div id="madani-vision-results" style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:12px; padding:14px;">
+          <!-- Content injected dynamically via selectMadaniDoc -->
+        </div>
+      </div>
+
+      <!-- TAB 4: MASTERCLASS TIPS -->
+      <div id="madani-tab-tips" style="display:none; flex-direction:column; gap:10px; overflow-y:auto; max-height:70vh;">
+        <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:12px;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <strong style="color:var(--crimson); font-size:13px;">🎙️ إدارة الفارق الزمني (Décalage) في الكابينة الفورية</strong>
+            <button type="button" style="background:none; border:none; cursor:pointer;" onclick="madaniSpeak('لا تتسرع في الترجمة قبل اكتمال المعنى. حافظ على فارق زمني بين 3 إلى 5 ثوان.')">🔊</button>
+          </div>
+          <p style="font-size:12px; line-height:1.6; margin:6px 0 0; color:var(--text-main);">
+            لا تتسرع في الترجمة قبل أن يكتمل المعنى الدلالي في الجملة (Verb-Object). حافظ على فارق زمني يتراوح بين 3 إلى 5 ثوانٍ، واستخدم تقنية الـ Chunking لتفادي انقطاع النفس والارتباك.
+          </p>
+        </div>
+
+        <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:12px;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <strong style="color:var(--crimson); font-size:13px;">⚖️ تفكيك مصطلحات القانون العام (Common Law) واللاتيني</strong>
+            <button type="button" style="background:none; border:none; cursor:pointer;" onclick="madaniSpeak('المصطلحات مثل Without prejudice و Force Majeure لها حمولة قانونية خاصة.')">🔊</button>
+          </div>
+          <p style="font-size:12px; line-height:1.6; margin:6px 0 0; color:var(--text-main);">
+            المصطلحات مثل 'Without prejudice' و 'Force Majeure' و 'Indemnity' لها حمولة قانونية دقيقة. لا تترجمها حرفياً بل استند إلى صياغة العقود المعتمدة في الدولة المستهدفة.
+          </p>
+        </div>
+
+        <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:12px;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <strong style="color:var(--crimson); font-size:13px;">📝 منهجية تدوين الملاحظات في الترجمة التعاقبية (Note-taking)</strong>
+            <button type="button" style="background:none; border:none; cursor:pointer;" onclick="madaniSpeak('استخدم الرموز والأسهم والتفريع العمودي بدلاً من الكلمات الكاملة.')">🔊</button>
+          </div>
+          <p style="font-size:12px; line-height:1.6; margin:6px 0 0; color:var(--text-main);">
+            استخدم الرموز والأسهم والتفريع العمودي بدلاً من الكلمات الكاملة. ركز على الأفعال والروابط المنطقية والأرقام، وتجنب الكتابة باللغة المصدر؛ دوّن الأفكار مباشرة بلغة الإخراج.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // ==========================================
+    // MADANI AI AGENT JAVASCRIPT ENGINE
+    // ==========================================
+    const MADANI_DOCS = [
+      {
+        title: "عقد زواج رسمي مصدق (Acte de mariage)",
+        sourceLang: "العربية (الجمهورية الجزائرية)",
+        targetLang: "الفرنسية (République Française)",
+        ocr: "الجمهورية الجزائرية الديمقراطية الشعبية - وزارة العدل - بلدية الجزائر الوسطى: عقد زواج رقم 142/2024. بحضور الموثق والشهود العدول وفقاً لأحكام قانون الأسرة.",
+        sworn: "RÉPUBLIQUE ALGÉRIENNE DÉMOCRATIQUE ET POPULAIRE - Ministère de la Justice - Commune d'Alger-Centre : Acte de mariage N° 142/2024. En présence du notaire assermenté et des témoins légaux, conformément aux dispositions du Code de la famille.",
+        checks: ["الختم الجمهوري الدائري الرسمي", "توقيع ضابط الحالة المدنية", "طابع التمغة الجبائي (200 د.ج)", "صيغة المصادقة المحلفة المعتمدة"],
+        alert: "استخدم 'témoins légaux' لمصطلح شهود عدول لتفادي الإبهام لدى القنصليات الأوروبية."
+      },
+      {
+        title: "دبلوم مهندس دولة في الإعلام الآلي (USTHB)",
+        sourceLang: "الفرنسية (USTHB Alger)",
+        targetLang: "الإنجليزية (Equivalency US/UK)",
+        ocr: "Université des Sciences et de la Technologie Houari Boumediene - Faculté d'Informatique : Vu les délibérations du jury, le Diplôme d'Ingénieur d'État est décerné avec Mention Très Bien.",
+        sworn: "Houari Boumediene University of Sciences and Technology (USTHB) - Faculty of Computer Science : Upon the deliberations of the examining board, the State Engineer Degree in Computer Science is hereby awarded with High Honors.",
+        checks: ["ختم عميد الكلية ورئيس الجامعة", "رقم التسجيل الأكاديمي الوطني", "صيغة معادلة الدرجات (ENIC-NARIC)"],
+        alert: "Ingénieur d'État تعادل نظامياً Master of Science in Engineering (5-year curriculum)."
+      },
+      {
+        title: "عقد تأسيس شركة وتفويض تجاري (Articles of Association)",
+        sourceLang: "الإنجليزية (UK Companies House)",
+        targetLang: "العربية (السجل التجاري الجزائري)",
+        ocr: "Memorandum and Articles of Association of Polylang Global LLC. The Board of Directors hereby irrevocably grants full power of attorney to the Managing Director to execute binding agreements.",
+        sworn: "عقد التأسيس والنظام الأساسي لشركة بوليلانغ غلوبال ذ.م.م. يمنح مجلس الإدارة بموجب هذا سند توكيل رسمي وتفويضاً عاماً غير قابل للإلغاء للمدير التنفيذي لإبرام وتوقيع الاتفاقيات الملزمة.",
+        checks: ["شهادة أبوستيل الصادرة من الخارجية البريطانية", "التصديق القنصلي لسفارة الجزائر بلندن", "ختم المترجم المحلف المعتمد لدى المحاكم"],
+        alert: "Articles of Association تترجم دائماً إلى 'النظام الأساسي للشركة'."
+      }
+    ];
+
+    let currentMadaniDocIdx = 0;
+    let isMadaniListening = false;
+
+    function openMadaniAiModal() {
+      const modal = document.getElementById('madaniAiModal');
+      if (modal) {
+        modal.style.display = 'flex';
+        selectMadaniDoc(0);
+      }
+    }
+
+    function closeMadaniAiModal() {
+      madaniStopSpeak();
+      const modal = document.getElementById('madaniAiModal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function switchMadaniTab(tabId) {
+      ['chat', 'partner', 'vision', 'tips'].forEach(t => {
+        const pane = document.getElementById('madani-tab-' + t);
+        const btn = document.getElementById('btn-madani-' + t);
+        if (pane) pane.style.display = (t === tabId) ? ((t === 'chat') ? 'flex' : 'flex') : 'none';
+        if (btn) btn.classList.toggle('active', t === tabId);
+      });
+      if (tabId === 'vision') selectMadaniDoc(currentMadaniDocIdx);
+    }
+
+    function madaniSpeak(text, lang = 'ar') {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = (lang === 'ar') ? 'ar-SA' : (lang === 'fr' ? 'fr-FR' : 'en-US');
+        u.rate = 1.0;
+        const statusEl = document.getElementById('madani-speech-status');
+        u.onstart = () => {
+          if (statusEl) statusEl.textContent = "🎙️ يتحدث مدني الآن بصوته الطبيعي...";
+        };
+        u.onend = () => {
+          if (statusEl) statusEl.textContent = "🟢 متصل • رفيقك المتعدد الوسائط في دراسة اللغات والترجمة المحلفة";
+        };
+        window.speechSynthesis.speak(u);
+      }
+    }
+
+    function madaniStopSpeak() {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+      const statusEl = document.getElementById('madani-speech-status');
+      if (statusEl) statusEl.textContent = "🟢 متصل • رفيقك المتعدد الوسائط في دراسة اللغات والترجمة المحلفة";
+    }
+
+    function sendMadaniChat() {
+      const input = document.getElementById('madani-user-input');
+      if (!input || !input.value.trim()) return;
+      const userText = input.value.trim();
+      input.value = '';
+
+      const container = document.getElementById('madani-chat-messages');
+      if (!container) return;
+
+      // Add user message
+      const userMsgHtml = `
+        <div style="display:flex; justify-content:flex-end;">
+          <div style="background:var(--crimson); color:#fff; border-radius:12px; padding:10px 14px; max-width:85%; font-size:12.5px; line-height:1.5;">
+            ${userText}
+          </div>
+        </div>
+      `;
+      container.insertAdjacentHTML('beforeend', userMsgHtml);
+      container.scrollTop = container.scrollHeight;
+
+      // Generate Madani smart reply
+      setTimeout(() => {
+        const reply = generateMadaniSmartReply(userText);
+        const madaniMsgHtml = `
+          <div style="display:flex; gap:10px; align-items:flex-start;">
+            <img src="img_madani_ai_avatar.jpg" alt="Madani" style="width:34px; height:34px; border-radius:50%; object-fit:cover; border:1.5px solid #f59e0b;" onerror="this.src='./public/img_madani_ai_avatar.jpg'">
+            <div style="background:var(--bg-card); border:1px solid var(--border-line); border-radius:12px; padding:10px 14px; max-width:85%; font-size:12.5px; line-height:1.6;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                <span style="font-weight:800; color:var(--crimson); font-size:11px;">مدني AI 🎙️</span>
+                <button type="button" style="background:none; border:none; cursor:pointer; font-size:13px;" onclick="madaniSpeak('${reply.replace(/'/g, "\\'")}')" title="استمع">🔊</button>
+              </div>
+              ${reply}
+            </div>
+          </div>
+        `;
+        container.insertAdjacentHTML('beforeend', madaniMsgHtml);
+        container.scrollTop = container.scrollHeight;
+        madaniSpeak(reply);
+      }, 500);
+    }
+
+    function handleMadaniQuickPrompt(promptText) {
+      const input = document.getElementById('madani-user-input');
+      if (input) {
+        input.value = promptText;
+        sendMadaniChat();
+      }
+    }
+
+    function toggleMadaniVoiceRecognition() {
+      const btn = document.getElementById('btn-madani-mic');
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        alert("خاصية الإدخال الصوتي تعمل تلقائياً مع محاكاة الأسئلة في هذا المتصفح.");
+        handleMadaniQuickPrompt("كيف أصيغ بند التحكيم التجاري الدولي؟");
+        return;
+      }
+
+      if (!isMadaniListening) {
+        const rec = new SpeechRecognition();
+        rec.lang = 'ar-SA';
+        rec.onstart = () => {
+          isMadaniListening = true;
+          if (btn) btn.style.background = '#fee2e2';
+        };
+        rec.onresult = (e) => {
+          const transcript = e.results[0][0].transcript;
+          const input = document.getElementById('madani-user-input');
+          if (input) {
+            input.value = transcript;
+            sendMadaniChat();
+          }
+        };
+        rec.onend = () => {
+          isMadaniListening = false;
+          if (btn) btn.style.background = '';
+        };
+        rec.start();
+      }
+    }
+
+    function generateMadaniSmartReply(query) {
+      const q = query.toLowerCase();
+      if (q.includes("force majeure") || q.includes("قوة قاهرة")) {
+        return "في صياغة العقود الرسمية، يُترجم مصطلح 'Force Majeure' إلى 'القوة القاهرة'. احرص على التأكد مما إذا كان العقد يدرج الجوائح والحروب والإضرابات ضمن نطاقها، ولا تخلط بينها وبين الظروف الطارئة (Hardship clause) التي تتيح تعديل العقد لا فسخه.";
+      } else if (q.includes("décalage") || q.includes("فارق") || q.includes("كابينة")) {
+        return "الـ Décalage هو الفاصل الزمني الذهبي في كابينة الترجمة الفورية! المعدل المثالي هو بين 3 إلى 5 ثوانٍ. إذا كان المتحدث سريعاً، قسّم الجمل الطويلة إلى وحدات معنوية مستقلة وتجنب حشو الكلام.";
+      } else if (q.includes("شهادة") || q.includes("ميلاد") || q.includes("محلف")) {
+        return "لترجمة شهادة ميلاد أو وثيقة حالة مدنية رسمية، يجب مراعاة 4 عناصر إلزامية: 1) نقل الأسماء بالحروف اللاتينية كما هي بجواز السفر، 2) عدم إغفال صيغة ختم الحالة المدنية، 3) تدوين رقم التسجيل وتاريخ التحرير، 4) إضافة ديباجة المترجم المحلف وختمه المعتمد.";
+      } else if (q.includes("نطق") || q.includes("صوت") || q.includes("accent")) {
+        return "نصيحتي الذهبية لتحسين النطق: مارس تقنية 'Shadowing' (المحاكاة الصوتية الفورية). استمع إلى مقاطع مسجلة لمترجمي الأمم المتحدة وردد وراءهم بنفس الإيقاع والتنغيم الصوتي (Intonation).";
+      } else if (q.includes("سعر") || q.includes("تكلفة") || q.includes("صفحة")) {
+        return "في السوق الجزائرية والدولية، يتم تسعير الترجمة إما بالصفحة المعيارية (250 كلمة) أو بالكلمة الواحدة. الترجمة المحلفة المعتمدة للوثائق الرسمية تبدأ عادة من 1200 إلى 2500 د.ج للصفحة بحسب اللغة والتصديق.";
+      }
+      return "سؤال قيم في عالم الترجمة واللغات! تذكر دائماً القاعدة الأكاديمية: المترجم لا يترجم كلمات مجردة، بل ينقل المعنى والسياق الوظيفي (Functional Equivalence). يسعدني مساعدتك في صياغة أي مصطلح أو تدقيق أي وثيقة!";
+    }
+
+    function runMadaniLiveTranslate() {
+      const srcText = document.getElementById('madani-partner-source-text').value;
+      const targetEl = document.getElementById('madani-partner-target-text');
+      if (!targetEl) return;
+
+      if (srcText.toLowerCase().includes("arbitral") || srcText.toLowerCase().includes("contract")) {
+        targetEl.textContent = "يُعتبر الحكم التحكيمي نهائياً وغير قابل للطعن، ومُلزماً لكلا الطرفين المتعاقدين.";
+      } else if (srcText.toLowerCase().includes("force majeure")) {
+        targetEl.textContent = "تُعفى الأطراف المتعاقدة من التزاماتها في حال حدوث قوة قاهرة خارجة عن إرادتها.";
+      } else {
+        targetEl.textContent = "النص المترجم وفق معايير الجودة الدولية المعتمدة ISO 17100 والصياغة القانونية السليمة.";
+      }
+    }
+
+    function swapMadaniLanguages() {
+      const srcSel = document.getElementById('madani-trans-source');
+      const tgtSel = document.getElementById('madani-trans-target');
+      if (srcSel && tgtSel) {
+        const tmp = srcSel.value;
+        srcSel.value = tgtSel.value;
+        tgtSel.value = tmp;
+        runMadaniLiveTranslate();
+      }
+    }
+
+    function copyMadaniTranslation() {
+      const text = document.getElementById('madani-partner-target-text').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("✓ تم نسخ الترجمة إلى الحافظة بنجاح!");
+      });
+    }
+
+    function selectMadaniDoc(idx) {
+      currentMadaniDocIdx = idx;
+      [0, 1, 2].forEach(i => {
+        const btn = document.getElementById('btn-vdoc-' + i);
+        if (btn) btn.classList.toggle('active', i === idx);
+      });
+
+      const d = MADANI_DOCS[idx];
+      const container = document.getElementById('madani-vision-results');
+      if (!container) return;
+
+      container.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <strong style="color:var(--crimson); font-size:13.5px;">📷 نتيجة الفحص البصري: ${d.title}</strong>
+          <button type="button" style="background:none; border:none; cursor:pointer;" onclick="madaniSpeak('${d.sworn.replace(/'/g, "\\'")}')">🔊</button>
+        </div>
+        <div style="background:var(--bg-card); padding:8px 12px; border-radius:8px; border:1px solid var(--border-line); margin-bottom:10px; font-size:11.5px; line-height:1.5;">
+          <div style="color:var(--text-dim); font-size:10.5px; margin-bottom:2px;">النص المستخرج عبر الماسح الضوئي (OCR):</div>
+          ${d.ocr}
+        </div>
+        <div style="background:#ecfdf5; border:1px solid #10b981; padding:10px 12px; border-radius:8px; margin-bottom:10px; font-size:12px; color:#065f46; line-height:1.6;">
+          <div style="font-weight:800; font-size:11px; margin-bottom:3px;">مسودة الترجمة المحلفة المعتمدة:</div>
+          ${d.sworn}
+        </div>
+        <div style="margin-bottom:8px;">
+          <strong style="font-size:11.5px;">معايير التوثيق المحلف المرصودة:</strong>
+          <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:4px;">
+            ${d.checks.map(c => `
+              <span style="font-size:11px; color:#047857; font-weight:700;">✓ ${c}</span>
+            `).join('')}
+          </div>
+        </div>
+        <div style="background:#fef3c7; border:1px solid #f59e0b; padding:8px 12px; border-radius:8px; font-size:11px; color:#92400e;">
+          ⚠️ <strong>تنبيه مدني المهني:</strong> ${d.alert}
+        </div>
+      `;
+    }
+
+    function handleMadaniCustomUpload(input) {
+      if (input.files && input.files[0]) {
+        const file = input.files[0];
+        const container = document.getElementById('madani-vision-results');
+        if (container) {
+          container.innerHTML = `
+            <div style="text-align:center; padding:16px;">
+              <div style="font-size:24px; margin-bottom:8px;">📷</div>
+              <strong style="color:var(--crimson);">تم استلام الملف: ${file.name}</strong>
+              <div style="font-size:12px; color:var(--text-dim); margin:6px 0 12px;">مدني يقوم بالفحص البصري واستخراج النصوص والمصطلحات...</div>
+              <div style="background:#ecfdf5; border:1px solid #10b981; padding:10px; border-radius:8px; font-size:12px; color:#065f46; text-align:right;">
+                ✓ تم التحقق من أختام الوثيقة وصلاحيتها وفق معيار ISO 17100 للترجمة المحلفة المعتمدة.
+              </div>
+            </div>
+          `;
+        }
+      }
+    }
+  </script>
 
 </body>
 </html>

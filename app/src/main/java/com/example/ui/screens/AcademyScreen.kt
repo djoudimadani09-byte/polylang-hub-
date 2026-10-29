@@ -31,7 +31,8 @@ fun AcademyScreen(
     userName: String = "طالب الترجمة",
     userEmail: String = "user@polylang.dz",
     onOpenCourse: (MasterclassCourse) -> Unit,
-    onClaimCertificate: (courseTitle: String) -> Unit
+    onClaimCertificate: (courseTitle: String) -> Unit,
+    onOpenMadaniAi: () -> Unit = {}
 ) {
     var searchQuery by remember { mutableStateOf("") }
     var selectedCategory by remember { mutableStateOf(if (isArabic) "الكل" else "All") }
@@ -80,28 +81,35 @@ fun AcademyScreen(
         }
 
         // Primary Module Switcher
-        TabRow(
+        ScrollableTabRow(
             selectedTabIndex = selectedMainTab,
             containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f),
+            edgePadding = 0.dp,
             modifier = Modifier.clip(RoundedCornerShape(12.dp))
         ) {
             Tab(
                 selected = selectedMainTab == 0,
                 onClick = { selectedMainTab = 0 },
-                text = { Text(if (isArabic) "🏛️ مخبر الترجمة والامتحان" else "Student Lab", fontWeight = FontWeight.Bold, fontSize = 11.5.sp) },
+                text = { Text(if (isArabic) "🏛️ مخبر الترجمة" else "Student Lab", fontWeight = FontWeight.Bold, fontSize = 11.sp) },
                 modifier = Modifier.testTag("tab_student_lab")
             )
             Tab(
                 selected = selectedMainTab == 1,
                 onClick = { selectedMainTab = 1 },
-                text = { Text(if (isArabic) "📚 مراجع ومساقات الترجمة" else "Translation Courses", fontWeight = FontWeight.Bold, fontSize = 11.5.sp) },
+                text = { Text(if (isArabic) "📚 مساقات الترجمة" else "Courses", fontWeight = FontWeight.Bold, fontSize = 11.sp) },
                 modifier = Modifier.testTag("tab_masterclasses")
             )
             Tab(
                 selected = selectedMainTab == 2,
                 onClick = { selectedMainTab = 2 },
-                text = { Text(if (isArabic) "🎮 ألعاب تعليمية للغات" else "Language Games", fontWeight = FontWeight.Bold, fontSize = 11.5.sp) },
+                text = { Text(if (isArabic) "🎮 12 لعبة لغات" else "12 Games", fontWeight = FontWeight.Bold, fontSize = 11.sp) },
                 modifier = Modifier.testTag("tab_language_games")
+            )
+            Tab(
+                selected = false,
+                onClick = { onOpenMadaniAi() },
+                text = { Text(if (isArabic) "🎙️ وكيل مدني AI" else "Madani AI", fontWeight = FontWeight.Bold, fontSize = 11.sp, color = RedPrimary) },
+                modifier = Modifier.testTag("tab_madani_ai")
             )
         }
 
