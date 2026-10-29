@@ -15,6 +15,9 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+        val adminEmail = System.getenv("ADMIN_EMAIL") ?: "support@yourdomain.com"
+        buildConfigField("String", "ADMIN_EMAIL", "\"$adminEmail\"")
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 

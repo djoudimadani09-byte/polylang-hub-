@@ -16,7 +16,11 @@ import java.util.Date
 import java.util.Locale
 
 object AdminEmailNotifier {
-    const val ADMIN_EMAIL = "djoudimadani09@gmail.com"
+    private const val DEFAULT_ADMIN_EMAIL = "support@yourdomain.com"
+
+    private fun adminEmail(): String {
+        return BuildConfig.ADMIN_EMAIL.ifBlank { DEFAULT_ADMIN_EMAIL }
+    }
 
     fun dispatch(
         eventType: String,
@@ -31,22 +35,23 @@ object AdminEmailNotifier {
             try {
                 val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
                 val timestamp = dateFormat.format(Date())
+                val targetAdmin = adminEmail()
 
                 val jsonObj = JSONObject()
                 jsonObj.put("_subject", "[Polylang Hub] $eventType: ${userName.ifBlank { "عميل جديد" }}")
-                jsonObj.put("_replyto", userEmail.ifBlank { ADMIN_EMAIL })
+                jsonObj.put("_replyto", userEmail.ifBlank { targetAdmin })
                 jsonObj.put("_captcha", "false")
                 jsonObj.put("eventType", eventType)
                 jsonObj.put("timestamp", timestamp)
                 jsonObj.put("userName", userName.ifBlank { "غير مسجل / زائر" })
                 jsonObj.put("userEmail", userEmail.ifBlank { "لم يحدد" })
-                jsonObj.put("targetAdmin", ADMIN_EMAIL)
+                jsonObj.put("targetAdmin", targetAdmin)
 
                 for ((key, value) in details) {
                     jsonObj.put(key, value)
                 }
 
-                val url = URL("https://formsubmit.co/ajax/$ADMIN_EMAIL")
+                val url = URL("https://formsubmit.co/ajax/$targetAdmin")
                 val conn = url.openConnection() as HttpURLConnection
                 conn.requestMethod = "POST"
                 conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8")
@@ -64,7 +69,7 @@ object AdminEmailNotifier {
 
                 val code = conn.responseCode
                 success = (code in 200..299)
-                responseMessage = if (success) "تم الإرسال بنجاح إلى $ADMIN_EMAIL" else "كود الاستجابة: $code"
+                responseMessage = if (success) "تم الإرسال بنجاح إلى $targetAdmin" else "كود الاستجابة: $code"
                 conn.disconnect()
             } catch (e: Exception) {
                 success = false
@@ -79,8 +84,9 @@ object AdminEmailNotifier {
 
     fun openMailClient(context: Context, subject: String, body: String) {
         try {
+            val email = adminEmail()
             val intent = Intent(Intent.ACTION_SENDTO).apply {
-                data = Uri.parse("mailto:$ADMIN_EMAIL")
+                data = Uri.parse("mailto:$email")
                 putExtra(Intent.EXTRA_SUBJECT, subject)
                 putExtra(Intent.EXTRA_TEXT, body)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
