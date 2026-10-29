@@ -769,10 +769,10 @@ private fun RozanNotebookComponent(
                                 details = mapOf(
                                     "speechTitle" to currentConsec.titleAr,
                                     "studentNotes" to notesText.ifBlank { "لم يدون ملاحظات" },
-                                    "adminEmail" to AdminEmailNotifier.ADMIN_EMAIL
+                                    "adminEmail" to AdminEmailNotifier.OFFICIAL_ADMIN_EMAIL
                                 )
                             ) { success, _ ->
-                                rozanDispatchStatus = if (success) "✓ تم إرسال ملاحظاتك إلى المشرف بنجاح (djoudimadani09@gmail.com)" else "تم الحفظ محلياً"
+                                rozanDispatchStatus = if (success) "✓ تم إرسال ملاحظاتك إلى المشرف بنجاح (${AdminEmailNotifier.OFFICIAL_ADMIN_EMAIL})" else "تم الحفظ محلياً"
                             }
                         },
                         shape = RoundedCornerShape(8.dp),
@@ -780,7 +780,7 @@ private fun RozanNotebookComponent(
                     ) {
                         Icon(Icons.Default.Send, contentDescription = null, modifier = Modifier.size(14.dp), tint = RedPrimary)
                         Spacer(modifier = Modifier.width(6.dp))
-                        Text(if (isArabic) "إرسال الملاحظات إلى المشرف (djoudimadani09@gmail.com)" else "Send Notes to Admin (djoudimadani09@gmail.com)", fontSize = 11.sp)
+                        Text(if (isArabic) "إرسال الملاحظات إلى المشرف (${AdminEmailNotifier.OFFICIAL_ADMIN_EMAIL})" else "Send Notes to Admin (${AdminEmailNotifier.OFFICIAL_ADMIN_EMAIL})", fontSize = 11.sp)
                     }
 
                     if (rozanDispatchStatus != null) {
@@ -1501,7 +1501,7 @@ private fun LevelPlacementExamComponent(
                         ) {
                             Icon(Icons.Default.CheckCircle, contentDescription = null, tint = SuccessGreen)
                             Text(
-                                text = examDispatchStatus ?: (if (isArabic) "✓ تم تسجيل نتيجتك وإرسالها فوراً إلى بريد الإدارة (djoudimadani09@gmail.com)." else "✓ Result sent to administration (djoudimadani09@gmail.com)."),
+                                text = examDispatchStatus ?: (if (isArabic) "✓ تم تسجيل نتيجتك وإرسالها فوراً إلى بريد الإدارة (${AdminEmailNotifier.OFFICIAL_ADMIN_EMAIL})." else "✓ Result sent to administration (${AdminEmailNotifier.OFFICIAL_ADMIN_EMAIL})."),
                                 fontSize = 11.5.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = SuccessGreen
@@ -1858,7 +1858,7 @@ private fun PracticalTranslationDrillsComponent(
                                     }
                                 }
 
-                                // Send attempt to Admin Email (djoudimadani09@gmail.com)
+                                // Send attempt to Admin Email
                                 Button(
                                     onClick = {
                                         isSendingFeedback = true
@@ -1875,7 +1875,7 @@ private fun PracticalTranslationDrillsComponent(
                                             )
                                         ) { success, msg ->
                                             isSendingFeedback = false
-                                            dispatchStatus = if (success) "✓ تم تسليم المحاولة بنجاح إلى الإدارة الأكاديمية (djoudimadani09@gmail.com)" else "تم إرسال إشعار المحاولة إلى الإدارة."
+                                            dispatchStatus = if (success) "✓ تم تسليم المحاولة بنجاح إلى الإدارة الأكاديمية (${AdminEmailNotifier.OFFICIAL_ADMIN_EMAIL})" else "تم إرسال إشعار المحاولة إلى الإدارة."
                                         }
                                     },
                                     modifier = Modifier.fillMaxWidth().testTag("send_drill_feedback_btn"),

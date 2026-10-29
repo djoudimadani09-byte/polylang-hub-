@@ -176,7 +176,7 @@ fun AiTermbaseDialog(
                                                     "targetAdmin" to AdminEmailNotifier.ADMIN_EMAIL
                                                 )
                                             ) { success, _ ->
-                                                termDispatchStatus = if (success) "✓ تم إرسال المصطلح للمشرف بنجاح (djoudimadani09@gmail.com)" else "تم التوثيق محلياً"
+                                                termDispatchStatus = if (success) "✓ تم إرسال المصطلح للمشرف بنجاح (${AdminEmailNotifier.OFFICIAL_ADMIN_EMAIL})" else "تم التوثيق محلياً"
                                                 newTermEn = ""
                                                 newTermAr = ""
                                                 showSuggestTerm = false

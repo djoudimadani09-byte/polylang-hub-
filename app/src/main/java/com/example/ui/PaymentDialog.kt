@@ -241,9 +241,9 @@ fun PaymentDialog(
                         }
                         Text(
                             text = if (isArabic)
-                                "• حفاظاً على الأمان المالي وسرية المعاملات، يتم تزويدك برقم الحساب الجاري البريدي (CCP) ومعرّف (بريدي موب RIP) المعتمد رسمياً عند تقديم الطلب.\n• ستصلك بيانات الحساب فوراً عبر البريد الإلكتروني المسجل لإتمام التحويل بكل موثوقية.\n• يمكنك أيضاً التواصل المباشر مع الإدارة: djoudimadani09@gmail.com"
+                                "• حفاظاً على الأمان المالي وسرية المعاملات، يتم تزويدك برقم الحساب الجاري البريدي (CCP) ومعرّف (بريدي موب RIP) المعتمد رسمياً عند تقديم الطلب.\n• ستصلك بيانات الحساب فوراً عبر البريد الإلكتروني المسجل لإتمام التحويل بكل موثوقية.\n• يمكنك أيضاً التواصل المباشر مع الدعم الفني: ${AdminEmailNotifier.OFFICIAL_SUPPORT_EMAIL}"
                             else
-                                "• For security and financial privacy, official CCP and BaridiMob RIP account details are provided directly upon request.\n• Contact administration directly: djoudimadani09@gmail.com",
+                                "• For security and financial privacy, official CCP and BaridiMob RIP account details are provided directly upon request.\n• Contact support directly: ${AdminEmailNotifier.OFFICIAL_SUPPORT_EMAIL}",
                             fontSize = 11.sp,
                             lineHeight = 16.sp,
                             color = MaterialTheme.colorScheme.onSurfaceVariant

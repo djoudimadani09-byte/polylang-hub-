@@ -309,7 +309,7 @@ fun DashboardScreen(
                         if (isAuthorizedAdmin) {
                             val clipboardManager = LocalClipboardManager.current
                             Text(
-                                text = "🗄️ قاعدة البيانات السحابية: مؤمنة ومشفرة بالكامل وفق معايير الحماية (Zero-Trust)\n📧 التنبيهات الفورية: ترسل مباشرة إلى djoudimadani09@gmail.com\n👥 عزل البيانات: العميل يرى فقط ما طلب، والمترجم يرى مشاريع مساحة عمله فقط",
+                                text = "🗄️ قاعدة البيانات السحابية: مؤمنة ومشفرة بالكامل وفق معايير الحماية (Zero-Trust)\n📧 التنبيهات الفورية: ترسل مباشرة إلى بريد الإدارة (${AdminEmailNotifier.OFFICIAL_ADMIN_EMAIL})\n👥 عزل البيانات: العميل يرى فقط ما طلب، والمترجم يرى مشاريع مساحة عمله فقط",
                                 fontSize = 11.5.sp,
                                 lineHeight = 18.sp,
                                 color = MaterialTheme.colorScheme.onSurface
@@ -370,12 +370,12 @@ fun DashboardScreen(
                                     Text("• 📄 طلب جديد: عقد امتياز دولي (كريم حمداوي - 2,400 كلمة)", fontSize = 10.5.sp)
                                     Text("• 🔏 ختم معتمد: كتيب توربينات الغاز (أ. مريم بوعلام - ISO 17100)", fontSize = 10.5.sp)
                                     Text("• 🏆 امتحان تحديد المستوى: سارة بن علي (TCF - المستوى المتقدم C1)", fontSize = 10.5.sp)
-                                    Text("• 🔒 جلسة دخول مؤمنة للمشرف العام: djoudimadani09@gmail.com", fontSize = 10.5.sp, color = RedDark)
+                                    Text("• 🔒 جلسة دخول مؤمنة للمشرف العام: ${AdminEmailNotifier.OFFICIAL_ADMIN_EMAIL}", fontSize = 10.5.sp, color = RedDark)
                                 }
                             }
                         } else {
                             Text(
-                                text = "عزل بيانات الإدارة: صلاحية الأدمن مخصصة حصراً للأستاذ جودي مداني عبر بريده المعتمد: ${AdminEmailNotifier.ADMIN_EMAIL}.\nيرجى تسجيل الدخول بالبريد المعتمد للوصول للوحة التحكم.",
+                                text = "عزل بيانات الإدارة: صلاحية المشرف مخصصة حصراً للإدارة عبر البريد المعتمد: ${AdminEmailNotifier.OFFICIAL_ADMIN_EMAIL}.\nيرجى تسجيل الدخول بالبريد المعتمد للوصول للوحة التحكم.",
                                 fontSize = 12.sp,
                                 color = MaterialTheme.colorScheme.error,
                                 lineHeight = 17.sp

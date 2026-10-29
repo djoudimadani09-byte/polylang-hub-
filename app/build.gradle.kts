@@ -13,18 +13,26 @@ android {
         minSdk = 24
         targetSdk = 36
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "SUPPORT_EMAIL", "\"contact@polylang.dz\"")
+        buildConfigField("String", "ADMIN_EMAIL", "\"admin@polylang.dz\"")
+        buildConfigField("String", "API_BASE_URL", "\"https://api.polylang.dz/v1\"")
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        debug {
+            isMinifyEnabled = false
         }
     }
     compileOptions {

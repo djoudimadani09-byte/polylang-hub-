@@ -36,9 +36,9 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun MyApplicationTheme(
+fun PolylangTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
@@ -57,12 +57,16 @@ fun MyApplicationTheme(
     )
 }
 
+/**
+ * Legacy theme alias for backwards compatibility
+ */
+@Deprecated("Use PolylangTheme instead", ReplaceWith("PolylangTheme(darkTheme, dynamicColor, content)"))
 @Composable
-fun PolylangTheme(
+fun MyApplicationTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = false,
+    dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
-    MyApplicationTheme(darkTheme = darkTheme, dynamicColor = dynamicColor, content = content)
+    PolylangTheme(darkTheme = darkTheme, dynamicColor = dynamicColor, content = content)
 }
 

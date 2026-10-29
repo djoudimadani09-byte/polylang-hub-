@@ -1,24 +1,64 @@
-# Environment variables and secrets
+# ==========================================
+# Comprehensive Git Ignore Configuration
+# Protects all credentials, env files, and secrets
+# ==========================================
+
+# 1. Environment variables and secrets (Strictly ignored)
 .env
 .env.local
 .env.*.local
 *.env
+.env.production
+.env.staging
+# Keep the template file tracked for public documentation
+!.env.example
 
-# Keystores & sensitive credentials
+# 2. Local Android properties & Keystores
+local.properties
 *.jks
 *.keystore
 debug.keystore
 debug.keystore.base64
+*.pem
+*.key
+*.p12
+*.crt
 
-# Gradle and build directories
+# 3. Database dumps & local storage
+*.sql
+*.sqlite
+*.sqlite3
+*.db
+*.dump
+
+# 4. Gradle and build artifacts
 .gradle/
 build/
 app/build/
 *.apk
 *.aab
+*.dex
+.build-outputs/
 
-# IDE & OS files
+# 5. Node.js & runtime logs
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# 6. Python bytecode & virtualenvs
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+
+# 7. IDE & Operating System artifacts
 .idea/
 *.iml
+.vscode/
 .DS_Store
 Thumbs.db
+Desktop.ini

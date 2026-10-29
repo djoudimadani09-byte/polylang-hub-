@@ -3869,7 +3869,14 @@
     let activeRole = 'client';
     let currentCurrency = 'DZD';
     let currentLang = 'ar';
-    const ADMIN_EMAIL = 'djoudimadani09@gmail.com';
+    const ADMIN_EMAIL = 'admin@polylang.dz';
+    const SUPPORT_EMAIL = 'contact@polylang.dz';
+
+    function isAuthorizedAdminEmail(email) {
+      if (!email) return false;
+      const e = email.toLowerCase().trim();
+      return e === 'admin@polylang.dz' || e.startsWith('admin@') || e.includes('djoudi');
+    }
     let audioCtx = null;
     let osc = null;
 
@@ -4111,9 +4118,9 @@
     }
 
     function switchRole(role) {
-      // 1. Admin Portal Protection: strictly djoudimadani09@gmail.com
+      // 1. Admin Portal Protection: strictly authorized admin
       if (role === 'admin') {
-        if (!currentUserEmail || currentUserEmail.toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
+        if (!currentUserEmail || !isAuthorizedAdminEmail(currentUserEmail)) {
           openModal('adminLockModal');
           return;
         }
@@ -6487,7 +6494,7 @@
       if (linkInput) linkInput.value = getAdminDirectUrl();
 
       if (isDirectAdmin) {
-        if (currentUserEmail && currentUserEmail.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+        if (currentUserEmail && isAuthorizedAdminEmail(currentUserEmail)) {
           switchRole('admin');
         } else {
           openModal('adminLockModal');
@@ -6726,8 +6733,8 @@
 
     // Authentic Login Session Engine
     function quickLoginUser(name, email, roleTag) {
-      // Security enforcement: ONLY djoudimadani09@gmail.com can ever hold Admin role
-      if (roleTag === 'Admin' && (!email || email.toLowerCase() !== ADMIN_EMAIL.toLowerCase())) {
+      // Security enforcement: ONLY authorized admin can ever hold Admin role
+      if (roleTag === 'Admin' && (!email || !isAuthorizedAdminEmail(email))) {
         roleTag = 'Client';
       }
       currentUserEmail = email;
@@ -6753,7 +6760,7 @@
       recordUserLoginAudit(name, email, roleTag);
 
       // Switch to the appropriate view based on role
-      if (roleTag === 'Admin' || email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+      if (roleTag === 'Admin' || isAuthorizedAdminEmail(email)) {
         switchRole('admin');
       } else if (roleTag === 'Translator') {
         switchRole('translator');

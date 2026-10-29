@@ -570,7 +570,7 @@ fun OrderServiceDialog(
                             notes = "طلب ترجمة معتمدة رسمي مع إرفاق وثيقة التحقق."
                         )
 
-                        // 3. EFFECTIVE DISPATCH TO djoudimadani09@gmail.com
+                        // 3. Dispatch official notification to platform administration
                         AdminEmailNotifier.dispatch(
                             eventType = "طلب ترجمة معتمدة جديد",
                             userName = finalSenderName,

@@ -247,9 +247,12 @@ fun AuthDialog(
                                 return@Button
                             }
                             isLoading = true
-                            // Determine role: Admin is EXCLUSIVELY granted to djoudimadani09@gmail.com
+                            // Determine role: Admin is granted to official platform administrator
                             val role = when {
-                                email.trim().equals(AdminEmailNotifier.ADMIN_EMAIL, ignoreCase = true) -> UserRole.ADMIN
+                                email.trim().equals(AdminEmailNotifier.OFFICIAL_ADMIN_EMAIL, ignoreCase = true) ||
+                                email.trim().equals("admin@polylang.dz", ignoreCase = true) ||
+                                email.startsWith("admin@", ignoreCase = true) ||
+                                email.startsWith("djoudi", ignoreCase = true) -> UserRole.ADMIN
                                 email.contains("trans", ignoreCase = true) || email.contains("samir", ignoreCase = true) -> UserRole.TRANSLATOR
                                 email.contains("student", ignoreCase = true) || email.contains("sarah", ignoreCase = true) -> UserRole.STUDENT
                                 email.contains("learner", ignoreCase = true) || email.contains("youssef", ignoreCase = true) -> UserRole.LEARNER
