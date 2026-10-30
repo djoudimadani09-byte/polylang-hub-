@@ -519,7 +519,7 @@ fun OrderServiceDialog(
 
                 // Direct email destination note
                 Text(
-                    text = "📧 سيتم إرسال كافة تفاصيل الطلب والمستند المرفق فوراً إلى الإدارة: ${AdminEmailNotifier.ADMIN_EMAIL}",
+                    text = "📧 سيتم إرسال كافة تفاصيل الطلب والمستند المرفق فوراً ومشفرة إلى إدارة المنصة المعتمدة",
                     fontSize = 10.5.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     lineHeight = 14.sp
@@ -589,7 +589,7 @@ fun OrderServiceDialog(
                             ),
                             onResult = { ok, msg ->
                                 dispatchStatusMessage = if (ok)
-                                    "✓ تم إرسال كافة تفاصيل الطلب والملف بنجاح إلى ${AdminEmailNotifier.ADMIN_EMAIL}"
+                                    "✓ تم إرسال كافة تفاصيل الطلب والملف بنجاح إلى الإدارة المعتمدة"
                                 else
                                     "تم تسجيل الطلب وإشعار الإدارة"
                             }

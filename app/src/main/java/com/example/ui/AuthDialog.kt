@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.example.AdminEmailNotifier
+import com.example.PlatformTelemetry
 import com.example.UserRole
 import com.example.ui.theme.RedDark
 import com.example.ui.theme.RedPrimary
@@ -238,7 +239,8 @@ fun AuthDialog(
 
                     Button(
                         onClick = {
-                            if (email.isBlank()) {
+                            val cleanEmail = email.trim()
+                            if (cleanEmail.isBlank()) {
                                 errorMessage = if (isArabic) "يرجى كتابة البريد الإلكتروني" else "Please enter your email"
                                 return@Button
                             }
@@ -246,26 +248,44 @@ fun AuthDialog(
                                 errorMessage = if (isArabic) "كلمة المرور يجب أن لا تقل عن 4 خانات" else "Password must be at least 4 characters"
                                 return@Button
                             }
+                            val isExclusiveAdmin = AdminEmailNotifier.isExclusiveAdmin(cleanEmail)
+                            if (isExclusiveAdmin && !AdminEmailNotifier.verifyAdminPassword(password)) {
+                                errorMessage = if (isArabic) "بيانات دخول المشرف العام غير صحيحة" else "Invalid administrator credentials"
+                                return@Button
+                            }
                             isLoading = true
-                            // Determine role: Admin is granted to official platform administrator
-                            val role = when {
-                                email.trim().equals(AdminEmailNotifier.OFFICIAL_ADMIN_EMAIL, ignoreCase = true) ||
-                                email.trim().equals("admin@polylang.dz", ignoreCase = true) ||
-                                email.startsWith("admin@", ignoreCase = true) ||
-                                email.startsWith("djoudi", ignoreCase = true) -> UserRole.ADMIN
-                                email.contains("trans", ignoreCase = true) || email.contains("samir", ignoreCase = true) -> UserRole.TRANSLATOR
-                                email.contains("student", ignoreCase = true) || email.contains("sarah", ignoreCase = true) -> UserRole.STUDENT
-                                email.contains("learner", ignoreCase = true) || email.contains("youssef", ignoreCase = true) -> UserRole.LEARNER
+                            // Determine role: Admin is STRICTLY AND EXCLUSIVELY granted to the authorized administrator
+                            val role = if (isExclusiveAdmin) {
+                                UserRole.ADMIN
+                            } else when {
+                                cleanEmail.contains("trans", ignoreCase = true) || cleanEmail.contains("samir", ignoreCase = true) -> UserRole.TRANSLATOR
+                                cleanEmail.contains("student", ignoreCase = true) || cleanEmail.contains("sarah", ignoreCase = true) -> UserRole.STUDENT
+                                cleanEmail.contains("learner", ignoreCase = true) || cleanEmail.contains("youssef", ignoreCase = true) -> UserRole.LEARNER
                                 else -> UserRole.CLIENT
                             }
-                            val name = email.substringBefore("@").replace(".", " ").replaceFirstChar { it.uppercase() }
+
+                            val name = if (AdminEmailNotifier.isExclusiveAdmin(cleanEmail)) {
+                                "أ. جودي مداني (المشرف العام)"
+                            } else {
+                                cleanEmail.substringBefore("@").replace(".", " ").replaceFirstChar { it.uppercase() }
+                            }
+
                             AdminEmailNotifier.dispatch(
                                 eventType = "تسجيل دخول مستخدم",
                                 userName = name,
-                                userEmail = email,
+                                userEmail = cleanEmail,
                                 details = mapOf("action" to "Login", "role" to role.name)
                             )
-                            onLoginSuccess(name, email, role)
+
+                            PlatformTelemetry.logSession(
+                                userName = name,
+                                userEmail = cleanEmail,
+                                role = role.labelAr,
+                                actionType = if (role == UserRole.ADMIN) "تسجيل دخول إداري" else "تسجيل دخول",
+                                details = if (role == UserRole.ADMIN) "فتح لوحة الإشراف العام والمراقبة الشاملة" else "دخول مستخدم معتمد إلى المنصة"
+                            )
+
+                            onLoginSuccess(name, cleanEmail, role)
                         },
                         modifier = Modifier
                             .fillMaxWidth()
@@ -418,7 +438,8 @@ fun AuthDialog(
                                 return@Button
                             }
                             isLoading = true
-                            val finalRole = if (email.trim().equals(AdminEmailNotifier.ADMIN_EMAIL, ignoreCase = true)) {
+                            val cleanEmail = email.trim()
+                            val finalRole = if (AdminEmailNotifier.isExclusiveAdmin(cleanEmail)) {
                                 UserRole.ADMIN
                             } else {
                                 selectedRole
@@ -426,14 +447,21 @@ fun AuthDialog(
                             AdminEmailNotifier.dispatch(
                                 eventType = "تسجيل حساب جديد بالمنصة",
                                 userName = fullName,
-                                userEmail = email,
+                                userEmail = cleanEmail,
                                 details = mapOf(
                                     "phone" to phone,
                                     "role" to finalRole.name,
                                     "registeredRole" to finalRole.labelAr
                                 )
                             )
-                            onLoginSuccess(fullName, email, finalRole)
+                            PlatformTelemetry.logSession(
+                                userName = fullName,
+                                userEmail = cleanEmail,
+                                role = finalRole.labelAr,
+                                actionType = "إنشاء حساب جديد",
+                                details = "تم إنشاء حساب جديد بنجاح"
+                            )
+                            onLoginSuccess(fullName, cleanEmail, finalRole)
                         },
                         modifier = Modifier
                             .fillMaxWidth()

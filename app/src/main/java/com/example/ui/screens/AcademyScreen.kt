@@ -31,8 +31,7 @@ fun AcademyScreen(
     userName: String = "طالب الترجمة",
     userEmail: String = "user@polylang.dz",
     onOpenCourse: (MasterclassCourse) -> Unit,
-    onClaimCertificate: (courseTitle: String) -> Unit,
-    onOpenMadaniAi: () -> Unit = {}
+    onClaimCertificate: (courseTitle: String) -> Unit
 ) {
     var searchQuery by remember { mutableStateOf("") }
     var selectedCategory by remember { mutableStateOf(if (isArabic) "الكل" else "All") }
@@ -104,12 +103,6 @@ fun AcademyScreen(
                 onClick = { selectedMainTab = 2 },
                 text = { Text(if (isArabic) "🎮 12 لعبة لغات" else "12 Games", fontWeight = FontWeight.Bold, fontSize = 11.sp) },
                 modifier = Modifier.testTag("tab_language_games")
-            )
-            Tab(
-                selected = false,
-                onClick = { onOpenMadaniAi() },
-                text = { Text(if (isArabic) "🎙️ وكيل مدني AI" else "Madani AI", fontWeight = FontWeight.Bold, fontSize = 11.sp, color = RedPrimary) },
-                modifier = Modifier.testTag("tab_madani_ai")
             )
         }
 

@@ -130,9 +130,6 @@ fun PolylangHubApp() {
     var showCertificateDialog by remember { mutableStateOf(false) }
     var certificateCourseTitle by remember { mutableStateOf("الترجمة القانونية وصياغة العقود الدولية") }
     var showTermbaseDialog by remember { mutableStateOf(false) }
-    var showMadaniAiDialog by remember { mutableStateOf(false) }
-    var madaniAvatarConfig by remember { mutableStateOf(MadaniAvatarConfig()) }
-    var showMadaniCustomizerDialog by remember { mutableStateOf(false) }
 
     // Currency Menu
     var showCurrencyMenu by remember { mutableStateOf(false) }
@@ -209,43 +206,22 @@ fun PolylangHubApp() {
                         )
                     }
 
-                    // Madani AI Quick Launch Button
-                    IconButton(
-                        onClick = { showMadaniAiDialog = true },
-                        modifier = Modifier.testTag("top_madani_ai_btn")
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.SmartToy,
-                            contentDescription = "Madani AI Mentor",
-                            tint = RedPrimary
+                    // Exclusive Director Admin Indicator
+                    if (userRole == UserRole.ADMIN) {
+                        SuggestionChip(
+                            onClick = { currentTab = AppTab.DASHBOARD },
+                            label = { Text(if (isArabic) "👑 الإدارة" else "Admin", fontSize = 11.sp, fontWeight = FontWeight.Bold) },
+                            colors = SuggestionChipDefaults.suggestionChipColors(
+                                containerColor = RedPrimary,
+                                labelColor = Color.White
+                            ),
+                            modifier = Modifier.testTag("top_admin_chip")
                         )
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.surface
                 )
-            )
-        },
-        floatingActionButton = {
-            ExtendedFloatingActionButton(
-                onClick = { showMadaniAiDialog = true },
-                icon = {
-                    MadaniAvatarIcon(
-                        config = madaniAvatarConfig,
-                        size = 32.dp,
-                        isSpeaking = false
-                    )
-                },
-                text = {
-                    Text(
-                        text = if (isArabic) "مدني AI 🎙️" else "Madani AI 🎙️",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 12.sp
-                    )
-                },
-                containerColor = RedPrimary,
-                contentColor = Color.White,
-                modifier = Modifier.testTag("fab_madani_ai")
             )
         },
         bottomBar = {
@@ -285,12 +261,23 @@ fun PolylangHubApp() {
                     label = { Text(if (isArabic) "الأسعار" else "Pricing", fontSize = 11.5.sp, fontWeight = if (currentTab == AppTab.PRICING) FontWeight.Bold else FontWeight.Normal) },
                     modifier = Modifier.testTag("nav_pricing")
                 )
-                // 5. Dashboard
+                // 5. Dashboard / Admin Portal
                 NavigationBarItem(
                     selected = currentTab == AppTab.DASHBOARD,
                     onClick = { currentTab = AppTab.DASHBOARD },
-                    icon = { Icon(Icons.Default.Person, contentDescription = null) },
-                    label = { Text(if (isArabic) "حسابي" else "Profile", fontSize = 11.5.sp, fontWeight = if (currentTab == AppTab.DASHBOARD) FontWeight.Bold else FontWeight.Normal) },
+                    icon = {
+                        Icon(
+                            if (userRole == UserRole.ADMIN) Icons.Default.AdminPanelSettings else Icons.Default.Person,
+                            contentDescription = null
+                        )
+                    },
+                    label = {
+                        Text(
+                            text = if (userRole == UserRole.ADMIN) (if (isArabic) "الإدارة 👑" else "Admin 👑") else (if (isArabic) "حسابي" else "Profile"),
+                            fontSize = 11.5.sp,
+                            fontWeight = if (currentTab == AppTab.DASHBOARD) FontWeight.Bold else FontWeight.Normal
+                        )
+                    },
                     modifier = Modifier.testTag("nav_dashboard")
                 )
             }
@@ -417,8 +404,7 @@ fun PolylangHubApp() {
                         onClaimCertificate = { title ->
                             certificateCourseTitle = title
                             showCertificateDialog = true
-                        },
-                        onOpenMadaniAi = { showMadaniAiDialog = true }
+                        }
                     )
                     AppTab.PRICING -> PricingScreen(
                         isArabic = isArabic,
@@ -542,33 +528,6 @@ fun PolylangHubApp() {
         AiTermbaseDialog(
             isArabic = isArabic,
             onDismiss = { showTermbaseDialog = false }
-        )
-    }
-
-    // 7. Madani AI Mentor Dialog
-    if (showMadaniAiDialog) {
-        MadaniAgentDialog(
-            isArabic = isArabic,
-            avatarConfig = madaniAvatarConfig,
-            onOpenCustomizer = { showMadaniCustomizerDialog = true },
-            onDismiss = { showMadaniAiDialog = false }
-        )
-    }
-
-    // 8. Madani Avatar Appearance Customizer Dialog
-    if (showMadaniCustomizerDialog) {
-        MadaniAvatarCustomizerDialog(
-            currentConfig = madaniAvatarConfig,
-            isArabic = isArabic,
-            onDismiss = { showMadaniCustomizerDialog = false },
-            onSaveConfig = { newConfig ->
-                madaniAvatarConfig = newConfig
-                coroutineScope.launch {
-                    snackbarHostState.showSnackbar(
-                        message = if (isArabic) "✓ تم تحديث مظهر وهالة أيقونة مداني بنجاح!" else "✓ Madani AI avatar appearance updated!"
-                    )
-                }
-            }
         )
     }
     }

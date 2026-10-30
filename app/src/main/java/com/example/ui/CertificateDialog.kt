@@ -199,7 +199,7 @@ fun CertificateDialog(
                             AdminEmailNotifier.dispatch(
                                 eventType = "إصدار شهادة معتمدة",
                                 userName = studentName,
-                                userEmail = AdminEmailNotifier.ADMIN_EMAIL,
+                                userEmail = "student@polylang.dz",
                                 details = mapOf("certId" to certId, "course" to courseTitle)
                             )
                             onDismiss()

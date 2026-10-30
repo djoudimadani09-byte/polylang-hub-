@@ -169,14 +169,14 @@ fun AiTermbaseDialog(
                                             AdminEmailNotifier.dispatch(
                                                 eventType = "اقتراح مصطلح جديد في المسرد",
                                                 userName = "مستخدم المسرد",
-                                                userEmail = AdminEmailNotifier.ADMIN_EMAIL,
+                                                userEmail = "user@polylang.dz",
                                                 details = mapOf(
                                                     "foreignTerm" to newTermEn,
                                                     "arabicTranslation" to newTermAr,
                                                     "targetAdmin" to AdminEmailNotifier.ADMIN_EMAIL
                                                 )
                                             ) { success, _ ->
-                                                termDispatchStatus = if (success) "✓ تم إرسال المصطلح للمشرف بنجاح (${AdminEmailNotifier.OFFICIAL_ADMIN_EMAIL})" else "تم التوثيق محلياً"
+                                                termDispatchStatus = if (success) "✓ تم إرسال المصطلح للمشرف بنجاح" else "تم التوثيق محلياً"
                                                 newTermEn = ""
                                                 newTermAr = ""
                                                 showSuggestTerm = false

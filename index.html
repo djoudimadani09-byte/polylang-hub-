@@ -1041,29 +1041,6 @@
       transform: translateY(-3px) scale(1.03);
       box-shadow: 0 10px 25px rgba(245, 158, 11, 0.55);
     }
-    .floating-madani-btn {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 9999;
-      background: linear-gradient(135deg, #991b1b, #7f1d1d);
-      color: #fff;
-      border: 2px solid #f59e0b;
-      padding: 8px 16px;
-      border-radius: 50px;
-      box-shadow: 0 8px 24px rgba(153, 27, 27, 0.45);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      font-family: inherit;
-    }
-    .floating-madani-btn:hover {
-      transform: translateY(-3px) scale(1.04);
-      box-shadow: 0 12px 30px rgba(153, 27, 27, 0.65);
-      border-color: #fbbf24;
-    }
     .visitor-reviews-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -1387,8 +1364,8 @@
               <button id="founder-btn-academy" class="btn-outline-action" style="padding:5px 12px; font-size:11.5px; border-radius:8px;" onclick="switchRole('enthusiast')">
                 🎓 استكشاف 100 فيديو تعليمي
               </button>
-              <a id="founder-btn-email" href="mailto:djoudimadani09@gmail.com" class="btn-outline-action" style="padding:5px 12px; font-size:11.5px; border-radius:8px; text-decoration:none; display:inline-flex; align-items:center;">
-                ✉️ djoudimadani09@gmail.com
+              <a id="founder-btn-email" href="mailto:contact@polylang.dz" class="btn-outline-action" style="padding:5px 12px; font-size:11.5px; border-radius:8px; text-decoration:none; display:inline-flex; align-items:center;">
+                ✉️ contact@polylang.dz
               </a>
             </div>
           </div>
@@ -1636,7 +1613,7 @@
           </div>
         </div>
         <div style="text-align:center; padding:14px; background:var(--bg-body); border-radius:10px; border:1px dashed var(--border-line);">
-          <button class="btn-primary-red" onclick="alert('✓ تم تقديم طلب تحويل الأتعاب إلى الإدارة: djoudimadani09@gmail.com بنجاح! ستصلك رسالة تأكيد رسمية.')">
+          <button class="btn-primary-red" onclick="alert('✓ تم تقديم طلب تحويل الأتعاب إلى الإدارة المعتمدة بنجاح! ستصلك رسالة تأكيد رسمية.')">
             💸 طلب تحويل الأتعاب لحسابي البنكي / البريدي
           </button>
         </div>
@@ -3079,7 +3056,7 @@
       </div>
     </div>
 
-    <!-- DYNAMIC VIEW 4: ADMIN PANEL (Secured - Exclusive to djoudimadani09@gmail.com) -->
+    <!-- DYNAMIC VIEW 4: ADMIN PANEL (Secured Master Admin) -->
     <div id="view-admin" class="view-panel">
       <!-- Admin Security & Verification Header -->
       <div class="content-box" style="border-top:4px solid var(--crimson); background: linear-gradient(to left, var(--bg-card), var(--crimson-light));">
@@ -3093,12 +3070,12 @@
               <span class="badge-iso-green" style="font-size:11px; padding:3px 8px;">ISO 17100:2015 Verified</span>
             </div>
             <p style="margin:0; font-size:12.5px; color:var(--text-dim); line-height:1.6;">
-              الوصول مقفل ومحمي حصرياً للمشرف العام: <strong style="color:var(--crimson);">djoudimadani09@gmail.com</strong>. تتضمن اللوحة تقارير حية وفورية عن حركة الخادم، سجل تسجيلات الدخول لجميع المستخدمين، إدارة الطلبات والمشاريع، وفحص الربط البريدي.
+              الوصول مقفل ومحمي حصرياً للإدارة المركزية العليا. تتضمن اللوحة تقارير حية وفورية عن حركة الخادم، سجل تسجيلات الدخول لجميع المستخدمين، إدارة الطلبات والمشاريع، وفحص الربط البريدي.
             </p>
           </div>
           <div style="display:flex; align-items:center; gap:8px;">
             <button class="btn-primary-red" style="padding:6px 14px; font-size:12px;" onclick="triggerTestEmail()">
-              📧 فحص إرسال التنبيهات إلى djoudimadani09@gmail.com
+              📧 فحص إرسال التنبيهات إلى بريد الإدارة
             </button>
           </div>
         </div>
@@ -3140,7 +3117,7 @@
               <div style="display:flex; align-items:center; gap:6px; margin-bottom:4px;">
                 <span style="font-size:18px;">👑</span>
                 <strong style="font-size:14px; color:#92400e;">الرابط المباشر الحصري للوحة المشرف العام (Direct Secret Dashboard Link)</strong>
-                <span class="badge-gold" style="font-size:10.5px;">djoudimadani09@gmail.com</span>
+                <span class="badge-gold" style="font-size:10.5px;">الإدارة العليا المعتمدة</span>
               </div>
               <p style="font-size:12px; color:var(--text-dim); margin:0;">
                 يمكنك حفظ هذا الرابط في المفضلة لديك أو نسخه وفتحه مباشرة في أي وقت للانتقال الفوري إلى لوحة المراقبة الشاملة:
@@ -3389,19 +3366,19 @@
         <div style="font-size:38px; margin-bottom:6px;">👑</div>
         <h3 style="font-size:18px; font-weight:900; color:var(--crimson); margin:0 0 4px;">بوابة تسجيل دخول المشرف العام المباشرة</h3>
         <p style="font-size:12.5px; color:var(--text-dim); line-height:1.6; margin:0;">
-          لوحة الإشراف العام ومراقبة السيرفر مقفلة حصرياً للمدير العام: <strong style="color:var(--crimson);">djoudimadani09@gmail.com</strong>
+          لوحة الإشراف العام ومراقبة السيرفر مقفلة ومحمية بحساب الإدارة العليا المعتمدة.
         </p>
       </div>
 
       <div style="background:var(--bg-body); padding:16px; border-radius:12px; border:1px solid var(--border-line); margin-bottom:14px;">
         <div style="margin-bottom:12px;">
           <label style="font-size:12px; font-weight:800; display:block; margin-bottom:4px; color:var(--text-main);">البريد الإلكتروني المعتمد للإدارة:</label>
-          <input type="email" id="admin-instant-email" class="form-control" value="djoudimadani09@gmail.com" readonly style="background:#f8fafc; font-weight:800; color:var(--crimson); font-family:monospace; font-size:12.5px;">
+          <input type="email" id="admin-instant-email" class="form-control" placeholder="أدخل البريد الإلكتروني المعتمد للإدارة..." value="" style="background:#fff; font-weight:700; color:var(--text-main); font-size:12.5px;">
         </div>
         <div style="margin-bottom:14px;">
           <label style="font-size:12px; font-weight:800; display:block; margin-bottom:4px; color:var(--text-main);">كلمة مرور المشرف العام:</label>
           <div style="position:relative; display:flex; align-items:center;">
-            <input type="password" id="admin-instant-password" class="form-control" placeholder="أدخل كلمة المرور الخاصة بك..." value="admin123456" onkeydown="if(event.key==='Enter') executeAdminInstantLogin();" style="padding:10px 12px; font-size:13px; border-radius:8px; width:100%;">
+            <input type="password" id="admin-instant-password" class="form-control" placeholder="أدخل كلمة مرور المشرف..." value="" onkeydown="if(event.key==='Enter') executeAdminInstantLogin();" style="padding:10px 12px; font-size:13px; border-radius:8px; width:100%;">
             <button type="button" onclick="toggleInstantPassVisibility()" style="position:absolute; left:8px; background:none; border:none; cursor:pointer; font-size:14px; color:var(--text-dim);" title="إظهار/إخفاء">👁️</button>
           </div>
           <span style="font-size:11px; color:#10b981; font-weight:700; margin-top:4px; display:block;">🔒 مشفر ومعتمد بنظام 256-Bit SSL Master Key</span>
@@ -3412,7 +3389,7 @@
       </div>
 
       <div style="display:flex; justify-content:space-between; align-items:center; font-size:11.5px; color:var(--text-dim); flex-wrap:wrap; gap:6px;">
-        <span>📧 دعم الإدارة: djoudimadani09@gmail.com</span>
+        <span>📧 الدعم الفني المعتمد: contact@polylang.dz</span>
         <a href="#" style="color:var(--crimson); font-weight:800; text-decoration:none;" onclick="closeModal('adminLockModal'); openModal('authModal'); return false;">تسجيل كعميل أو مترجم ⟵</a>
       </div>
     </div>
@@ -3504,7 +3481,7 @@
       <div class="modal-close-x" onclick="closeModal('orderModal')">✕</div>
       <h3 style="font-size:18px; font-weight:800; margin-bottom:6px;">طلب ترجمة معتمدة / حجز مؤتمر</h3>
       <p style="font-size:12px; color:var(--text-dim); margin-bottom:16px;">
-        سيتم تسجيل طلبك وإرسال إشعار فوري إلى الإدارة (djoudimadani09@gmail.com).
+        سيتم تسجيل طلبك وإرسال إشعار فوري ومشفر إلى إدارة المنصة المعتمدة.
       </p>
 
       <form onsubmit="handleOrderSubmission(event)">
@@ -3614,7 +3591,7 @@
         <div style="font-size:12.5px; background:var(--bg-card); padding:10px; border-radius:8px;">
           <div>📍 <strong>المقر الرئيسي:</strong> الجزائر العاصمة (Algiers, Algeria)</div>
           <div>🌐 <strong>لغات التخصص:</strong> العربية، الإنجليزية، الفرنسية، الألمانية، والإسبانية.</div>
-          <div>📧 <strong>البريد الإلكتروني المباشر:</strong> djoudimadani09@gmail.com</div>
+          <div>📧 <strong>البريد الإلكتروني المعتمد:</strong> contact@polylang.dz</div>
         </div>
       </div>
 
@@ -3642,7 +3619,7 @@
         <div>● STATUS: ONLINE (Active Pooler)</div>
         <div>● HOST: db.polylang-hub.internal (SSL Encrypted)</div>
         <div>● DATABASE: [SECURED] | SSL: Required</div>
-        <div>● NOTIFICATIONS: djoudimadani09@gmail.com [ACTIVE]</div>
+        <div>● NOTIFICATIONS: SECURE DISPATCH GATEWAY [ACTIVE]</div>
         <div>● RESPONSE LATENCY: 42ms</div>
       </div>
 
@@ -3936,7 +3913,7 @@
             </button>
           </div>
           <div style="font-size:11px; color:var(--text-dim);">
-            بمجرد إرسال الإشعار أو التواصل مع الإدارة عبر <strong>djoudimadani09@gmail.com</strong> يتم تفعيل الباقة فورياً.
+            بمجرد إرسال الإشعار أو التواصل مع الإدارة عبر <strong>contact@polylang.dz</strong> يتم تفعيل الباقة فورياً.
           </div>
         </div>
       </div>
@@ -4084,7 +4061,7 @@
         © 2026 منصة بوليلانغ للترجمة المعتمدة (Polylang Hub). برئاسة الأستاذ جودي مداني.
       </div>
       <div>
-        ISO 17100:2015 Verified • بريد الإدارة: <strong>djoudimadani09@gmail.com</strong>
+        ISO 17100:2015 Verified • بريد التواصل المعتمد: <strong>contact@polylang.dz</strong>
       </div>
     </div>
   </footer>
@@ -4123,13 +4100,19 @@
     let activeRole = 'client';
     let currentCurrency = 'DZD';
     let currentLang = 'ar';
-    const ADMIN_EMAIL = 'admin@polylang.dz';
+    const ADMIN_EMAIL = 'djoudimadani09@gmail.com';
     const SUPPORT_EMAIL = 'contact@polylang.dz';
 
     function isAuthorizedAdminEmail(email) {
       if (!email) return false;
       const e = email.toLowerCase().trim();
-      return e === 'admin@polylang.dz' || e.startsWith('admin@') || e.includes('djoudi');
+      return e === ADMIN_EMAIL.toLowerCase();
+    }
+
+    function verifyAdminPassword(pass) {
+      if (!pass) return false;
+      const p = pass.trim();
+      return p === 'admin123456' || p === 'admin2026' || p === 'djoudi2026' || p === 'Madani@2026';
     }
     let audioCtx = null;
     let osc = null;
@@ -4348,11 +4331,11 @@
       openModal('orderModal');
     }
 
-    // Role Switching with Strict Login Requirement & Admin djoudimadani09@gmail.com Exemption
+    // Role Switching with Strict Login Requirement & Admin Master Exemption
     let pendingRoleSwitch = null;
 
     function isUserAuthenticatedForRole(role) {
-      // Admin djoudimadani09@gmail.com has instant universal master access to all views
+      // Authorized Admin has instant universal master access to all views
       if (currentUserEmail && currentUserEmail.toLowerCase() === ADMIN_EMAIL.toLowerCase()) return true;
 
       // Guest cannot access protected role portals directly
@@ -6330,7 +6313,7 @@
         }).catch(e => console.log(e));
       }
 
-      alert(`📩 تم تسجيل طلب الحصول على بيانات ${typeLabel} بنجاح!\nتصلك بيانات الحساب المشفرة من الإدارة المعتمدة فورياً.\nيمكنك أيضاً مراسلة الإدارة مباشرة: ${typeof ADMIN_EMAIL !== 'undefined' ? ADMIN_EMAIL : 'djoudimadani09@gmail.com'}`);
+      alert(`📩 تم تسجيل طلب الحصول على بيانات ${typeLabel} بنجاح!\nتصلك بيانات الحساب المشفرة من الإدارة المعتمدة فورياً.\nيمكنك أيضاً مراسلة الإدارة مباشرة: ${typeof SUPPORT_EMAIL !== 'undefined' ? SUPPORT_EMAIL : 'contact@polylang.dz'}`);
     }
 
     function selectSubscriptionPlan(planTier, priceDzd) {
@@ -6862,7 +6845,7 @@
       {
         time: "2026-10-13 22:45:12",
         name: "الأستاذ جودي مداني",
-        email: "djoudimadani09@gmail.com",
+        email: "admin@polylang.dz",
         role: "Admin (المشرف العام)",
         authType: "256-Bit SSL Master Key",
         status: "نشط الآن (Active)"
@@ -7015,7 +6998,7 @@
         icon: "🔒",
         desc: "تسجيل دخول مؤمن للمشرف العام الأستاذ جودي مداني مع تفعيل بوابة الإدارة المركزية.",
         actor: "الأستاذ جودي مداني",
-        email: "djoudimadani09@gmail.com",
+        email: "admin@polylang.dz",
         badgeClass: "badge-done"
       }
     ];
@@ -7077,7 +7060,7 @@
     function exportAdminAuditReport() {
       const report = {
         platform: "Polylang Hub - ISO 17100 Certified Platform",
-        supervisor: "Prof. Djoudi Madani (djoudimadani09@gmail.com)",
+        supervisor: "Prof. Djoudi Madani (General Administration)",
         generatedAt: new Date().toISOString(),
         totalActivities: platformActivityStream.length,
         totalLoginAudits: platformLoginLogs.length,
@@ -7127,10 +7110,17 @@
     }
 
     function executeAdminInstantLogin() {
+      const emailInput = document.getElementById('admin-instant-email');
       const passInput = document.getElementById('admin-instant-password');
+      const email = emailInput ? emailInput.value.trim().toLowerCase() : '';
       const pass = passInput ? passInput.value.trim() : '';
-      if (!pass || pass.length < 4) {
-        showAppToast("⚠️ يرجى إدخال كلمة مرور المشرف العام المعتمدة.");
+
+      if (!email || !pass) {
+        showAppToast("⚠️ يرجى إدخال البريد الإلكتروني وكلمة المرور الخاصة بالإدارة.");
+        return;
+      }
+      if (!isAuthorizedAdminEmail(email) || !verifyAdminPassword(pass)) {
+        showAppToast("⛔ بيانات الدخول غير صحيحة أو غير مصرح لها بصلاحيات المشرف.");
         return;
       }
       quickLoginUser('الأستاذ جودي مداني (المشرف العام)', ADMIN_EMAIL, 'Admin');
@@ -7722,7 +7712,7 @@
     }
 
     function forgotPasswordNotice() {
-      alert("🔒 استعادة كلمة المرور:\nلأسباب أمنية وتوافقاً مع معايير حماية البيانات، يتم إرسال رمز التحقق وإعادة التعيين عبر البريد الإلكتروني المعتمد.\nيرجى التواصل مع المشرف: djoudimadani09@gmail.com");
+      alert("🔒 استعادة كلمة المرور:\nلأسباب أمنية وتوافقاً مع معايير حماية البيانات، يتم إرسال رمز التحقق وإعادة التعيين عبر البريد الإلكتروني المعتمد.\nيرجى التواصل مع الإدارة: contact@polylang.dz");
     }
 
     function customFormLogin() {
@@ -7756,8 +7746,12 @@
       if (!valid) return;
 
       const isOwner = email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
+      if (isOwner && !verifyAdminPassword(pass)) {
+        alert("⛔ كلمة المرور غير صحيحة لحساب الإدارة المشرف.");
+        return;
+      }
       if (role === 'Admin' && !isOwner) {
-        alert("⛔ واجهة المشرف العام مقفلة حصرياً لبريد الإدارة المعتمد (djoudimadani09@gmail.com). يرجى اختيار صفتك الحقيقية (مترجم / طالب / عميل / متعلم).");
+        alert("⛔ واجهة المشرف العام مقفلة حصرياً لحساب الإدارة العليا المعتمد. يرجى اختيار صفتك الحقيقية (مترجم / طالب / عميل / متعلم).");
         return;
       }
       const userName = isOwner ? 'الأستاذ جودي مداني (المشرف العام)' : (email.split('@')[0].replace('.', ' '));
@@ -8204,7 +8198,7 @@
       const all = getBoothSpeeches();
       const sp = all.find(s => s.id === (select ? select.value : '')) || {};
 
-      alert(`✓ تم إرسال تقرير تمرين كابينة الترجمة الفورية إلى المشرف الأكاديمي (djoudimadani09@gmail.com):\nالخطاب: ${sp.title_ar || 'خطاب كابينة'}\nالفارق الزمني المحقق: ${decalageSeconds.toFixed(1)} ثانية\nعدد الكلمات المترجمة: ${userText.split(/\s+/).filter(Boolean).length}`);
+      alert(`✓ تم إرسال تقرير تمرين كابينة الترجمة الفورية إلى المشرف الأكاديمي المعتمد بنجاح:\nالخطاب: ${sp.title_ar || 'خطاب كابينة'}\nالفارق الزمني المحقق: ${decalageSeconds.toFixed(1)} ثانية\nعدد الكلمات المترجمة: ${userText.split(/\s+/).filter(Boolean).length}`);
     }
 
     // --- CONSECUTIVE ROZAN INTERPRETATION FUNCTIONS ---
@@ -9220,7 +9214,7 @@
       persistOrdersList();
       renderOrdersTable();
 
-      // Dispatch AJAX notification to djoudimadani09@gmail.com with PDF info
+      // Dispatch AJAX notification to admin gateway with PDF info
       fetch(`https://formsubmit.co/ajax/${ADMIN_EMAIL}`, {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
@@ -9238,7 +9232,7 @@
         })
       }).catch(err => console.log(err));
 
-      alert(`تم تسجيل طلبك بنجاح برقم: ${newId}\nتم إرسال إشعار فوري إلى الإدارة (djoudimadani09@gmail.com) متضمناً تفاصيل الملف المرفق.\nسيتواصل معك فريق المنصة في أقرب وقت.`);
+      alert(`تم تسجيل طلبك بنجاح برقم: ${newId}\nتم إرسال إشعار فوري ومشفر إلى إدارة المنصة متضمناً تفاصيل الملف المرفق.\nسيتواصل معك فريق المنصة في أقرب وقت.`);
       closeModal('orderModal');
     }
 
@@ -10657,468 +10651,11 @@ window.addEventListener('DOMContentLoaded', () => {
     <span>⭐</span> <span>قيّم تجربتك</span>
   </button>
 
-  <!-- Floating Madani AI Mentor Button -->
-  <button id="floating-madani-btn" class="floating-madani-btn" onclick="openMadaniAiModal()" title="تحدث مع مدني AI - وكيل الذكاء الاصطناعي">
-    <img src="img_madani_ai_avatar.jpg" alt="Madani AI" style="width:36px; height:36px; border-radius:50%; object-fit:cover; border:2px solid #f59e0b;" onerror="this.src='./public/img_madani_ai_avatar.jpg'">
-    <div style="text-align:right;">
-      <div style="font-size:12px; font-weight:900; line-height:1.2;">مدني AI 🎙️</div>
-      <div style="font-size:9.5px; opacity:0.9;">مستشار اللغات والترجمة</div>
-    </div>
-  </button>
 
-  <!-- ========================================================================= -->
-  <!-- MADANI AI AGENT MODAL (وكيل الذكاء الاصطناعي مدني) -->
-  <!-- ========================================================================= -->
-  <div id="madaniAiModal" class="modal-backdrop" style="display:none;">
-    <div class="modal-card" style="max-width:760px; max-height:92vh; display:flex; flex-direction:column; padding:20px; border-radius:18px;">
-      
-      <!-- Top Modal Header -->
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; padding-bottom:12px; border-bottom:1px solid var(--border-line);">
-        <div style="display:flex; align-items:center; gap:12px;">
-          <div style="position:relative;">
-            <img id="madani-modal-avatar-img" src="img_madani_ai_avatar.jpg" alt="Madani AI" style="width:54px; height:54px; border-radius:50%; object-fit:cover; border:3px solid #f59e0b; box-shadow:0 0 14px rgba(245, 158, 11, 0.4);" onerror="this.src='./public/img_madani_ai_avatar.jpg'">
-            <span style="position:absolute; bottom:0; left:0; width:13px; height:13px; background:#10b981; border:2px solid #fff; border-radius:50%;" title="متصل الآن"></span>
-          </div>
-          <div>
-            <div style="display:flex; align-items:center; gap:8px;">
-              <h3 style="margin:0; font-size:18px; font-weight:900; color:var(--crimson);">Madani AI | مدني</h3>
-              <span class="badge-gold" style="font-size:10px; font-weight:800;">وكيل ذكي متميز ⚡</span>
-            </div>
-            <div id="madani-speech-status" style="font-size:11.5px; color:#059669; font-weight:700; margin-top:2px;">
-              🟢 متصل • رفيقك المتعدد الوسائط في دراسة اللغات والترجمة المحلفة
-            </div>
-          </div>
-        </div>
-        <div style="display:flex; align-items:center; gap:6px;">
-          <button type="button" class="btn-outline-action" style="padding:4px 10px; font-size:11.5px; color:#d97706; font-weight:bold;" onclick="openMadaniCustomizerModal()" title="تخصيص مظهر الأيقونة">🎨 تخصيص المظهر</button>
-          <button type="button" class="btn-outline-action" style="padding:4px 10px; font-size:11px;" onclick="madaniStopSpeak()" title="إيقاف الصوت">🔇 كتم الصوت</button>
-          <button type="button" class="btn-outline-action" style="padding:4px 10px; font-size:14px;" onclick="closeMadaniAiModal()">✕</button>
-        </div>
-      </div>
 
-      <!-- Module Navigation Tabs -->
-      <div style="display:flex; gap:6px; margin-bottom:14px; background:var(--bg-body); padding:4px; border-radius:10px; border:1px solid var(--border-line); overflow-x:auto;">
-        <button class="nav-pill active" id="btn-madani-chat" style="font-size:11.5px; flex:1; white-space:nowrap;" onclick="switchMadaniTab('chat')">💬 محادثة وصوت</button>
-        <button class="nav-pill" id="btn-madani-partner" style="font-size:11.5px; flex:1; white-space:nowrap;" onclick="switchMadaniTab('partner')">🔄 شريك الترجمة</button>
-        <button class="nav-pill" id="btn-madani-vision" style="font-size:11.5px; flex:1; white-space:nowrap;" onclick="switchMadaniTab('vision')">📷 فحص المستندات</button>
-        <button class="nav-pill" id="btn-madani-tips" style="font-size:11.5px; flex:1; white-space:nowrap;" onclick="switchMadaniTab('tips')">💡 نصائح الكابينة</button>
-      </div>
+  
 
-      <!-- TAB 1: CHAT & VOICE -->
-      <div id="madani-tab-chat" style="display:flex; flex-direction:column; flex:1; overflow:hidden;">
-        <!-- Quick Prompts Chips -->
-        <div style="display:flex; gap:6px; overflow-x:auto; padding-bottom:8px; margin-bottom:8px;">
-          <button type="button" class="nav-pill" style="font-size:11px; white-space:nowrap; padding:4px 10px;" onclick="handleMadaniQuickPrompt('كيف أترجم عبارة Force Majeure في عقد تجاري؟')">💡 ترجمة Force Majeure</button>
-          <button type="button" class="nav-pill" style="font-size:11px; white-space:nowrap; padding:4px 10px;" onclick="handleMadaniQuickPrompt('ما هو الفارق الزمني (Décalage) المثالي في كابينة الترجمة الفورية؟')">🎙️ سرعة Décalage</button>
-          <button type="button" class="nav-pill" style="font-size:11px; white-space:nowrap; padding:4px 10px;" onclick="handleMadaniQuickPrompt('ما هي شروط ترجمة شهادة ميلاد لدى مترجم محلف معتمد؟')">📜 ترجمة شهادة ميلاد</button>
-          <button type="button" class="nav-pill" style="font-size:11px; white-space:nowrap; padding:4px 10px;" onclick="handleMadaniQuickPrompt('دربني على نطق المصطلحات الدبلوماسية بالإنجليزية والفرنسية')">🗣️ تدريب نطق سليم</button>
-        </div>
-
-        <!-- Chat Stream -->
-        <div id="madani-chat-messages" style="flex:1; overflow-y:auto; border:1px solid var(--border-line); border-radius:12px; padding:12px; background:var(--bg-body); display:flex; flex-direction:column; gap:10px; min-height:220px; max-height:360px;">
-          <!-- Welcome Message -->
-          <div style="display:flex; gap:10px; align-items:flex-start;">
-            <img src="img_madani_ai_avatar.jpg" alt="Madani" style="width:34px; height:34px; border-radius:50%; object-fit:cover; border:1.5px solid #f59e0b;" onerror="this.src='./public/img_madani_ai_avatar.jpg'">
-            <div style="background:var(--bg-card); border:1px solid var(--border-line); border-radius:12px; padding:10px 14px; max-width:85%; font-size:12.5px; line-height:1.6;">
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-                <span style="font-weight:800; color:var(--crimson); font-size:11px;">مدني AI 🎙️</span>
-                <button type="button" style="background:none; border:none; cursor:pointer; font-size:13px;" onclick="madaniSpeak('أهلاً بك! أنا مدني، وكيلك الذكي المتخصص في تعليم اللغات والترجمة الفورية المحلفة.')" title="استمع بصوت مدني">🔊</button>
-              </div>
-              أهلاً بك! أنا مدني (Madani)، وكيلك الذكي المتخصص في تعليم اللغات والترجمة الفورية المحلفة. أستطيع التحدث معك صوتياً، وتدريبك على النطق، وفحص وثائقك بالصورة، وترجمة نصوصك فورياً وفق أعلى المعايير الدولية. كيف أساعدك اليوم؟
-            </div>
-          </div>
-        </div>
-
-        <!-- Chat Input Bar -->
-        <div style="display:flex; gap:8px; margin-top:10px; align-items:center;">
-          <button type="button" id="btn-madani-mic" class="btn-outline-action" style="padding:8px 12px; font-size:14px;" onclick="toggleMadaniVoiceRecognition()" title="التحدث بالصوت">
-            🎤
-          </button>
-          <input type="text" id="madani-user-input" placeholder="اكتب أو تحدث مع مدني (مثلاً: كيف أترجم المصطلح اللاتيني Subpoena؟)..." style="flex:1; padding:10px 14px; border:1px solid var(--border-line); border-radius:10px; font-size:12.5px; font-family:inherit; background:var(--bg-card); color:var(--text-main);" onkeypress="if(event.key==='Enter') sendMadaniChat()">
-          <button type="button" class="btn-primary-red" style="padding:10px 18px; font-size:12.5px; font-weight:800;" onclick="sendMadaniChat()">
-            إرسال ➔
-          </button>
-        </div>
-      </div>
-
-      <!-- TAB 2: LIVE TRANSLATION PARTNER -->
-      <div id="madani-tab-partner" style="display:none; flex-direction:column; gap:12px; overflow-y:auto; max-height:70vh;">
-        <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-body); padding:8px 12px; border-radius:10px; border:1px solid var(--border-line);">
-          <select id="madani-trans-source" style="padding:6px; border-radius:6px; font-weight:700; border:1px solid var(--border-line); font-family:inherit;" onchange="runMadaniLiveTranslate()">
-            <option value="en">الإنجليزية (English)</option>
-            <option value="ar">العربية (Arabic)</option>
-            <option value="fr">الفرنسية (Français)</option>
-            <option value="es">الإسبانية (Español)</option>
-            <option value="de">الألمانية (Deutsch)</option>
-          </select>
-          <button type="button" class="btn-outline-action" style="padding:4px 10px;" onclick="swapMadaniLanguages()">⇄ تبديل</button>
-          <select id="madani-trans-target" style="padding:6px; border-radius:6px; font-weight:700; border:1px solid var(--border-line); font-family:inherit;" onchange="runMadaniLiveTranslate()">
-            <option value="ar">العربية (Arabic)</option>
-            <option value="en">الإنجليزية (English)</option>
-            <option value="fr">الفرنسية (Français)</option>
-            <option value="es">الإسبانية (Español)</option>
-            <option value="de">الألمانية (Deutsch)</option>
-          </select>
-        </div>
-
-        <div>
-          <label style="font-size:11.5px; font-weight:700; color:var(--text-dim); display:block; margin-bottom:4px;">النص المصدر المراد تحليله وترجمته:</label>
-          <textarea id="madani-partner-source-text" rows="3" style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border-line); font-family:inherit; font-size:12.5px; background:var(--bg-body); color:var(--text-main);" oninput="runMadaniLiveTranslate()">The arbitral award shall be deemed final, unappealable, and binding upon both contracting parties.</textarea>
-        </div>
-
-        <div style="background:#ecfdf5; border:1px solid #10b981; border-radius:10px; padding:12px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-            <span style="font-size:11.5px; font-weight:800; color:#065f46;">✨ ترجمة مدني المعتمدة وفق ISO 17100:</span>
-            <div style="display:flex; gap:6px;">
-              <button type="button" style="background:none; border:none; cursor:pointer; font-size:14px;" onclick="madaniSpeak(document.getElementById('madani-partner-target-text').innerText, 'ar')" title="استمع للنطق">🔊</button>
-              <button type="button" style="background:none; border:none; cursor:pointer; font-size:13px;" onclick="copyMadaniTranslation()" title="نسخ الترجمة">📋</button>
-            </div>
-          </div>
-          <div id="madani-partner-target-text" style="font-size:13.5px; font-weight:700; color:#065f46; line-height:1.6;">
-            يُعتبر الحكم التحكيمي نهائياً وغير قابل للطعن، ومُلزماً لكلا الطرفين المتعاقدين.
-          </div>
-        </div>
-
-        <div style="background:#fef3c7; border:1px solid #f59e0b; border-radius:10px; padding:10px; font-size:11.5px;">
-          <strong style="color:#92400e;">🔍 تدقيق المصطلحات الدقيقة من مدني:</strong>
-          <ul style="margin:4px 0 0; padding-right:16px; color:#78350f; line-height:1.5;">
-            <li><strong>Arbitral award</strong> = حكم تحكيمي (تجنب ترجمتها جائزة).</li>
-            <li><strong>Unappealable</strong> = غير قابل للطعن أو الاستئناف.</li>
-            <li><strong>Binding upon</strong> = ملزم لكلا الطرفين قانوناً.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- TAB 3: DOCUMENT VISION SCANNER -->
-      <div id="madani-tab-vision" style="display:none; flex-direction:column; gap:12px; overflow-y:auto; max-height:70vh;">
-        <div style="font-size:12px; font-weight:800; color:var(--text-main);">
-          اختر نموذج مستند رسمي للفحص البصري الفوري أو ارفع وثيقة:
-        </div>
-
-        <div style="display:flex; gap:8px; flex-wrap:wrap;">
-          <button type="button" class="nav-pill active" id="btn-vdoc-0" onclick="selectMadaniDoc(0)">📜 عقد زواج رسمي</button>
-          <button type="button" class="nav-pill" id="btn-vdoc-1" onclick="selectMadaniDoc(1)">🎓 دبلوم مهندس دولة (USTHB)</button>
-          <button type="button" class="nav-pill" id="btn-vdoc-2" onclick="selectMadaniDoc(2)">🏢 عقد تأسيس شركة (LLC)</button>
-          <label class="btn-outline-action" style="font-size:11px; padding:5px 10px; cursor:pointer; display:inline-flex; align-items:center; gap:4px;">
-            📷 ارفع صورة وثيقة
-            <input type="file" accept="image/*,.pdf" style="display:none;" onchange="handleMadaniCustomUpload(this)">
-          </label>
-        </div>
-
-        <!-- Vision Inspection Result Box -->
-        <div id="madani-vision-results" style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:12px; padding:14px;">
-          <!-- Content injected dynamically via selectMadaniDoc -->
-        </div>
-      </div>
-
-      <!-- TAB 4: MASTERCLASS TIPS -->
-      <div id="madani-tab-tips" style="display:none; flex-direction:column; gap:10px; overflow-y:auto; max-height:70vh;">
-        <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:12px;">
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <strong style="color:var(--crimson); font-size:13px;">🎙️ إدارة الفارق الزمني (Décalage) في الكابينة الفورية</strong>
-            <button type="button" style="background:none; border:none; cursor:pointer;" onclick="madaniSpeak('لا تتسرع في الترجمة قبل اكتمال المعنى. حافظ على فارق زمني بين 3 إلى 5 ثوان.')">🔊</button>
-          </div>
-          <p style="font-size:12px; line-height:1.6; margin:6px 0 0; color:var(--text-main);">
-            لا تتسرع في الترجمة قبل أن يكتمل المعنى الدلالي في الجملة (Verb-Object). حافظ على فارق زمني يتراوح بين 3 إلى 5 ثوانٍ، واستخدم تقنية الـ Chunking لتفادي انقطاع النفس والارتباك.
-          </p>
-        </div>
-
-        <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:12px;">
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <strong style="color:var(--crimson); font-size:13px;">⚖️ تفكيك مصطلحات القانون العام (Common Law) واللاتيني</strong>
-            <button type="button" style="background:none; border:none; cursor:pointer;" onclick="madaniSpeak('المصطلحات مثل Without prejudice و Force Majeure لها حمولة قانونية خاصة.')">🔊</button>
-          </div>
-          <p style="font-size:12px; line-height:1.6; margin:6px 0 0; color:var(--text-main);">
-            المصطلحات مثل 'Without prejudice' و 'Force Majeure' و 'Indemnity' لها حمولة قانونية دقيقة. لا تترجمها حرفياً بل استند إلى صياغة العقود المعتمدة في الدولة المستهدفة.
-          </p>
-        </div>
-
-        <div style="background:var(--bg-body); border:1px solid var(--border-line); border-radius:10px; padding:12px;">
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <strong style="color:var(--crimson); font-size:13px;">📝 منهجية تدوين الملاحظات في الترجمة التعاقبية (Note-taking)</strong>
-            <button type="button" style="background:none; border:none; cursor:pointer;" onclick="madaniSpeak('استخدم الرموز والأسهم والتفريع العمودي بدلاً من الكلمات الكاملة.')">🔊</button>
-          </div>
-          <p style="font-size:12px; line-height:1.6; margin:6px 0 0; color:var(--text-main);">
-            استخدم الرموز والأسهم والتفريع العمودي بدلاً من الكلمات الكاملة. ركز على الأفعال والروابط المنطقية والأرقام، وتجنب الكتابة باللغة المصدر؛ دوّن الأفكار مباشرة بلغة الإخراج.
-          </p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <script>
-    // ==========================================
-    // MADANI AI AGENT JAVASCRIPT ENGINE
-    // ==========================================
-    const MADANI_DOCS = [
-      {
-        title: "عقد زواج رسمي مصدق (Acte de mariage)",
-        sourceLang: "العربية (الجمهورية الجزائرية)",
-        targetLang: "الفرنسية (République Française)",
-        ocr: "الجمهورية الجزائرية الديمقراطية الشعبية - وزارة العدل - بلدية الجزائر الوسطى: عقد زواج رقم 142/2024. بحضور الموثق والشهود العدول وفقاً لأحكام قانون الأسرة.",
-        sworn: "RÉPUBLIQUE ALGÉRIENNE DÉMOCRATIQUE ET POPULAIRE - Ministère de la Justice - Commune d'Alger-Centre : Acte de mariage N° 142/2024. En présence du notaire assermenté et des témoins légaux, conformément aux dispositions du Code de la famille.",
-        checks: ["الختم الجمهوري الدائري الرسمي", "توقيع ضابط الحالة المدنية", "طابع التمغة الجبائي (200 د.ج)", "صيغة المصادقة المحلفة المعتمدة"],
-        alert: "استخدم 'témoins légaux' لمصطلح شهود عدول لتفادي الإبهام لدى القنصليات الأوروبية."
-      },
-      {
-        title: "دبلوم مهندس دولة في الإعلام الآلي (USTHB)",
-        sourceLang: "الفرنسية (USTHB Alger)",
-        targetLang: "الإنجليزية (Equivalency US/UK)",
-        ocr: "Université des Sciences et de la Technologie Houari Boumediene - Faculté d'Informatique : Vu les délibérations du jury, le Diplôme d'Ingénieur d'État est décerné avec Mention Très Bien.",
-        sworn: "Houari Boumediene University of Sciences and Technology (USTHB) - Faculty of Computer Science : Upon the deliberations of the examining board, the State Engineer Degree in Computer Science is hereby awarded with High Honors.",
-        checks: ["ختم عميد الكلية ورئيس الجامعة", "رقم التسجيل الأكاديمي الوطني", "صيغة معادلة الدرجات (ENIC-NARIC)"],
-        alert: "Ingénieur d'État تعادل نظامياً Master of Science in Engineering (5-year curriculum)."
-      },
-      {
-        title: "عقد تأسيس شركة وتفويض تجاري (Articles of Association)",
-        sourceLang: "الإنجليزية (UK Companies House)",
-        targetLang: "العربية (السجل التجاري الجزائري)",
-        ocr: "Memorandum and Articles of Association of Polylang Global LLC. The Board of Directors hereby irrevocably grants full power of attorney to the Managing Director to execute binding agreements.",
-        sworn: "عقد التأسيس والنظام الأساسي لشركة بوليلانغ غلوبال ذ.م.م. يمنح مجلس الإدارة بموجب هذا سند توكيل رسمي وتفويضاً عاماً غير قابل للإلغاء للمدير التنفيذي لإبرام وتوقيع الاتفاقيات الملزمة.",
-        checks: ["شهادة أبوستيل الصادرة من الخارجية البريطانية", "التصديق القنصلي لسفارة الجزائر بلندن", "ختم المترجم المحلف المعتمد لدى المحاكم"],
-        alert: "Articles of Association تترجم دائماً إلى 'النظام الأساسي للشركة'."
-      }
-    ];
-
-    let currentMadaniDocIdx = 0;
-    let isMadaniListening = false;
-
-    function openMadaniAiModal() {
-      const modal = document.getElementById('madaniAiModal');
-      if (modal) {
-        modal.style.display = 'flex';
-        selectMadaniDoc(0);
-      }
-    }
-
-    function closeMadaniAiModal() {
-      madaniStopSpeak();
-      const modal = document.getElementById('madaniAiModal');
-      if (modal) modal.style.display = 'none';
-    }
-
-    function switchMadaniTab(tabId) {
-      ['chat', 'partner', 'vision', 'tips'].forEach(t => {
-        const pane = document.getElementById('madani-tab-' + t);
-        const btn = document.getElementById('btn-madani-' + t);
-        if (pane) pane.style.display = (t === tabId) ? ((t === 'chat') ? 'flex' : 'flex') : 'none';
-        if (btn) btn.classList.toggle('active', t === tabId);
-      });
-      if (tabId === 'vision') selectMadaniDoc(currentMadaniDocIdx);
-    }
-
-    function madaniSpeak(text, lang = 'ar') {
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const u = new SpeechSynthesisUtterance(text);
-        u.lang = (lang === 'ar') ? 'ar-SA' : (lang === 'fr' ? 'fr-FR' : 'en-US');
-        u.rate = 1.0;
-        const statusEl = document.getElementById('madani-speech-status');
-        u.onstart = () => {
-          if (statusEl) statusEl.textContent = "🎙️ يتحدث مدني الآن بصوته الطبيعي...";
-        };
-        u.onend = () => {
-          if (statusEl) statusEl.textContent = "🟢 متصل • رفيقك المتعدد الوسائط في دراسة اللغات والترجمة المحلفة";
-        };
-        window.speechSynthesis.speak(u);
-      }
-    }
-
-    function madaniStopSpeak() {
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-      }
-      const statusEl = document.getElementById('madani-speech-status');
-      if (statusEl) statusEl.textContent = "🟢 متصل • رفيقك المتعدد الوسائط في دراسة اللغات والترجمة المحلفة";
-    }
-
-    function sendMadaniChat() {
-      const input = document.getElementById('madani-user-input');
-      if (!input || !input.value.trim()) return;
-      const userText = input.value.trim();
-      input.value = '';
-
-      const container = document.getElementById('madani-chat-messages');
-      if (!container) return;
-
-      // Add user message
-      const userMsgHtml = `
-        <div style="display:flex; justify-content:flex-end;">
-          <div style="background:var(--crimson); color:#fff; border-radius:12px; padding:10px 14px; max-width:85%; font-size:12.5px; line-height:1.5;">
-            ${userText}
-          </div>
-        </div>
-      `;
-      container.insertAdjacentHTML('beforeend', userMsgHtml);
-      container.scrollTop = container.scrollHeight;
-
-      // Generate Madani smart reply
-      setTimeout(() => {
-        const reply = generateMadaniSmartReply(userText);
-        const madaniMsgHtml = `
-          <div style="display:flex; gap:10px; align-items:flex-start;">
-            <img src="img_madani_ai_avatar.jpg" alt="Madani" style="width:34px; height:34px; border-radius:50%; object-fit:cover; border:1.5px solid #f59e0b;" onerror="this.src='./public/img_madani_ai_avatar.jpg'">
-            <div style="background:var(--bg-card); border:1px solid var(--border-line); border-radius:12px; padding:10px 14px; max-width:85%; font-size:12.5px; line-height:1.6;">
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-                <span style="font-weight:800; color:var(--crimson); font-size:11px;">مدني AI 🎙️</span>
-                <button type="button" style="background:none; border:none; cursor:pointer; font-size:13px;" onclick="madaniSpeak('${reply.replace(/'/g, "\\'")}')" title="استمع">🔊</button>
-              </div>
-              ${reply}
-            </div>
-          </div>
-        `;
-        container.insertAdjacentHTML('beforeend', madaniMsgHtml);
-        container.scrollTop = container.scrollHeight;
-        madaniSpeak(reply);
-      }, 500);
-    }
-
-    function handleMadaniQuickPrompt(promptText) {
-      const input = document.getElementById('madani-user-input');
-      if (input) {
-        input.value = promptText;
-        sendMadaniChat();
-      }
-    }
-
-    function toggleMadaniVoiceRecognition() {
-      const btn = document.getElementById('btn-madani-mic');
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SpeechRecognition) {
-        alert("خاصية الإدخال الصوتي تعمل تلقائياً مع محاكاة الأسئلة في هذا المتصفح.");
-        handleMadaniQuickPrompt("كيف أصيغ بند التحكيم التجاري الدولي؟");
-        return;
-      }
-
-      if (!isMadaniListening) {
-        const rec = new SpeechRecognition();
-        rec.lang = 'ar-SA';
-        rec.onstart = () => {
-          isMadaniListening = true;
-          if (btn) btn.style.background = '#fee2e2';
-        };
-        rec.onresult = (e) => {
-          const transcript = e.results[0][0].transcript;
-          const input = document.getElementById('madani-user-input');
-          if (input) {
-            input.value = transcript;
-            sendMadaniChat();
-          }
-        };
-        rec.onend = () => {
-          isMadaniListening = false;
-          if (btn) btn.style.background = '';
-        };
-        rec.start();
-      }
-    }
-
-    function generateMadaniSmartReply(query) {
-      const q = query.toLowerCase();
-      if (q.includes("force majeure") || q.includes("قوة قاهرة")) {
-        return "في صياغة العقود الرسمية، يُترجم مصطلح 'Force Majeure' إلى 'القوة القاهرة'. احرص على التأكد مما إذا كان العقد يدرج الجوائح والحروب والإضرابات ضمن نطاقها، ولا تخلط بينها وبين الظروف الطارئة (Hardship clause) التي تتيح تعديل العقد لا فسخه.";
-      } else if (q.includes("décalage") || q.includes("فارق") || q.includes("كابينة")) {
-        return "الـ Décalage هو الفاصل الزمني الذهبي في كابينة الترجمة الفورية! المعدل المثالي هو بين 3 إلى 5 ثوانٍ. إذا كان المتحدث سريعاً، قسّم الجمل الطويلة إلى وحدات معنوية مستقلة وتجنب حشو الكلام.";
-      } else if (q.includes("شهادة") || q.includes("ميلاد") || q.includes("محلف")) {
-        return "لترجمة شهادة ميلاد أو وثيقة حالة مدنية رسمية، يجب مراعاة 4 عناصر إلزامية: 1) نقل الأسماء بالحروف اللاتينية كما هي بجواز السفر، 2) عدم إغفال صيغة ختم الحالة المدنية، 3) تدوين رقم التسجيل وتاريخ التحرير، 4) إضافة ديباجة المترجم المحلف وختمه المعتمد.";
-      } else if (q.includes("نطق") || q.includes("صوت") || q.includes("accent")) {
-        return "نصيحتي الذهبية لتحسين النطق: مارس تقنية 'Shadowing' (المحاكاة الصوتية الفورية). استمع إلى مقاطع مسجلة لمترجمي الأمم المتحدة وردد وراءهم بنفس الإيقاع والتنغيم الصوتي (Intonation).";
-      } else if (q.includes("سعر") || q.includes("تكلفة") || q.includes("صفحة")) {
-        return "في السوق الجزائرية والدولية، يتم تسعير الترجمة إما بالصفحة المعيارية (250 كلمة) أو بالكلمة الواحدة. الترجمة المحلفة المعتمدة للوثائق الرسمية تبدأ عادة من 1200 إلى 2500 د.ج للصفحة بحسب اللغة والتصديق.";
-      }
-      return "سؤال قيم في عالم الترجمة واللغات! تذكر دائماً القاعدة الأكاديمية: المترجم لا يترجم كلمات مجردة، بل ينقل المعنى والسياق الوظيفي (Functional Equivalence). يسعدني مساعدتك في صياغة أي مصطلح أو تدقيق أي وثيقة!";
-    }
-
-    function runMadaniLiveTranslate() {
-      const srcText = document.getElementById('madani-partner-source-text').value;
-      const targetEl = document.getElementById('madani-partner-target-text');
-      if (!targetEl) return;
-
-      if (srcText.toLowerCase().includes("arbitral") || srcText.toLowerCase().includes("contract")) {
-        targetEl.textContent = "يُعتبر الحكم التحكيمي نهائياً وغير قابل للطعن، ومُلزماً لكلا الطرفين المتعاقدين.";
-      } else if (srcText.toLowerCase().includes("force majeure")) {
-        targetEl.textContent = "تُعفى الأطراف المتعاقدة من التزاماتها في حال حدوث قوة قاهرة خارجة عن إرادتها.";
-      } else {
-        targetEl.textContent = "النص المترجم وفق معايير الجودة الدولية المعتمدة ISO 17100 والصياغة القانونية السليمة.";
-      }
-    }
-
-    function swapMadaniLanguages() {
-      const srcSel = document.getElementById('madani-trans-source');
-      const tgtSel = document.getElementById('madani-trans-target');
-      if (srcSel && tgtSel) {
-        const tmp = srcSel.value;
-        srcSel.value = tgtSel.value;
-        tgtSel.value = tmp;
-        runMadaniLiveTranslate();
-      }
-    }
-
-    function copyMadaniTranslation() {
-      const text = document.getElementById('madani-partner-target-text').innerText;
-      navigator.clipboard.writeText(text).then(() => {
-        alert("✓ تم نسخ الترجمة إلى الحافظة بنجاح!");
-      });
-    }
-
-    function selectMadaniDoc(idx) {
-      currentMadaniDocIdx = idx;
-      [0, 1, 2].forEach(i => {
-        const btn = document.getElementById('btn-vdoc-' + i);
-        if (btn) btn.classList.toggle('active', i === idx);
-      });
-
-      const d = MADANI_DOCS[idx];
-      const container = document.getElementById('madani-vision-results');
-      if (!container) return;
-
-      container.innerHTML = `
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <strong style="color:var(--crimson); font-size:13.5px;">📷 نتيجة الفحص البصري: ${d.title}</strong>
-          <button type="button" style="background:none; border:none; cursor:pointer;" onclick="madaniSpeak('${d.sworn.replace(/'/g, "\\'")}')">🔊</button>
-        </div>
-        <div style="background:var(--bg-card); padding:8px 12px; border-radius:8px; border:1px solid var(--border-line); margin-bottom:10px; font-size:11.5px; line-height:1.5;">
-          <div style="color:var(--text-dim); font-size:10.5px; margin-bottom:2px;">النص المستخرج عبر الماسح الضوئي (OCR):</div>
-          ${d.ocr}
-        </div>
-        <div style="background:#ecfdf5; border:1px solid #10b981; padding:10px 12px; border-radius:8px; margin-bottom:10px; font-size:12px; color:#065f46; line-height:1.6;">
-          <div style="font-weight:800; font-size:11px; margin-bottom:3px;">مسودة الترجمة المحلفة المعتمدة:</div>
-          ${d.sworn}
-        </div>
-        <div style="margin-bottom:8px;">
-          <strong style="font-size:11.5px;">معايير التوثيق المحلف المرصودة:</strong>
-          <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:4px;">
-            ${d.checks.map(c => `
-              <span style="font-size:11px; color:#047857; font-weight:700;">✓ ${c}</span>
-            `).join('')}
-          </div>
-        </div>
-        <div style="background:#fef3c7; border:1px solid #f59e0b; padding:8px 12px; border-radius:8px; font-size:11px; color:#92400e;">
-          ⚠️ <strong>تنبيه مدني المهني:</strong> ${d.alert}
-        </div>
-      `;
-    }
-
-    function handleMadaniCustomUpload(input) {
-      if (input.files && input.files[0]) {
-        const file = input.files[0];
-        const container = document.getElementById('madani-vision-results');
-        if (container) {
-          container.innerHTML = `
-            <div style="text-align:center; padding:16px;">
-              <div style="font-size:24px; margin-bottom:8px;">📷</div>
-              <strong style="color:var(--crimson);">تم استلام الملف: ${file.name}</strong>
-              <div style="font-size:12px; color:var(--text-dim); margin:6px 0 12px;">مدني يقوم بالفحص البصري واستخراج النصوص والمصطلحات...</div>
-              <div style="background:#ecfdf5; border:1px solid #10b981; padding:10px; border-radius:8px; font-size:12px; color:#065f46; text-align:right;">
-                ✓ تم التحقق من أختام الوثيقة وصلاحيتها وفق معيار ISO 17100 للترجمة المحلفة المعتمدة.
-              </div>
-            </div>
-          `;
-        }
-      }
-    }
-  </script>
+  
 
 </body>
 </html>

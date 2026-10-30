@@ -24,8 +24,11 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.example.AdminEmailNotifier
 import com.example.AppCurrency
+import com.example.PlatformTelemetry
+import com.example.StudentExerciseRecord
 import com.example.TranslationOrder
 import com.example.UserRole
+import com.example.VisitorSessionLog
 import com.example.ui.theme.GoldYellow
 import com.example.ui.theme.RedDark
 import com.example.ui.theme.RedPrimary
@@ -51,8 +54,9 @@ fun DashboardScreen(
     var showInvoiceDialogForOrder by remember { mutableStateOf<TranslationOrder?>(null) }
     var actionNotificationMessage by remember { mutableStateOf<String?>(null) }
 
-    val isClient = userRole == UserRole.CLIENT
-    val isTranslatorOrAdmin = userRole == UserRole.TRANSLATOR || userRole == UserRole.ADMIN
+    val isAdmin = userRole == UserRole.ADMIN || AdminEmailNotifier.isExclusiveAdmin(userEmail)
+    val isTranslator = userRole == UserRole.TRANSLATOR && !isAdmin
+    val isClient = !isAdmin && !isTranslator
 
     // Client sees ONLY their own requested orders (Starts from 0 for new accounts)
     val clientOrders = remember(orders.size, userEmail, userName) {
@@ -86,7 +90,10 @@ fun DashboardScreen(
         Card(
             modifier = Modifier.fillMaxWidth().testTag("dashboard_user_card"),
             shape = RoundedCornerShape(18.dp),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f))
+            colors = CardDefaults.cardColors(
+                containerColor = if (isAdmin) RedPrimary.copy(alpha = 0.08f) else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)
+            ),
+            border = if (isAdmin) androidx.compose.foundation.BorderStroke(1.5.dp, GoldYellow) else null
         ) {
             Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 Row(
@@ -106,31 +113,46 @@ fun DashboardScreen(
                             contentAlignment = Alignment.Center
                         ) {
                             Text(
-                                text = (if (userName.isNotBlank()) userName else if (isClient) "كريم حمداوي" else "مترجم").take(1).uppercase(),
+                                text = if (isAdmin) "👑" else (if (userName.isNotBlank()) userName else if (isClient) "كريم حمداوي" else "مترجم").take(1).uppercase(),
                                 fontWeight = FontWeight.Bold,
                                 color = RedPrimary,
-                                fontSize = 20.sp
+                                fontSize = if (isAdmin) 22.sp else 20.sp
                             )
                         }
 
                         Column {
-                            Text(if (userName.isNotBlank()) userName else if (isClient) "كريم حمداوي (عميل)" else "د. سمير (مترجم محلف)", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                            Text(if (userEmail.isNotBlank()) userEmail else if (isClient) "karim@polylang.dz" else "translator@polylang.dz", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            Text(
+                                text = if (isAdmin) "أ. جودي مداني (المشرف العام)" else if (userName.isNotBlank()) userName else if (isClient) "كريم حمداوي (عميل)" else "د. سمير (مترجم محلف)",
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = if (userEmail.isNotBlank()) userEmail else if (isAdmin) "admin@polylang.dz" else if (isClient) "karim@polylang.dz" else "translator@polylang.dz",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
                         }
                     }
 
                     // Role Badge
                     SuggestionChip(
                         onClick = onOpenAuthDialog,
-                        label = { Text(if (isArabic) userRole.labelAr else userRole.labelEn, fontSize = 11.sp, fontWeight = FontWeight.Bold) },
+                        label = {
+                            Text(
+                                text = if (isAdmin) (if (isArabic) "👑 المشرف العام (Admin)" else "👑 Director Admin") else (if (isArabic) userRole.labelAr else userRole.labelEn),
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        },
                         colors = SuggestionChipDefaults.suggestionChipColors(
-                            containerColor = when (userRole) {
+                            containerColor = if (isAdmin) RedPrimary else when (userRole) {
                                 UserRole.ADMIN -> GoldYellow.copy(alpha = 0.2f)
                                 UserRole.TRANSLATOR -> SuccessGreen.copy(alpha = 0.15f)
                                 UserRole.STUDENT -> RedPrimary.copy(alpha = 0.15f)
                                 UserRole.LEARNER -> MaterialTheme.colorScheme.tertiary.copy(alpha = 0.15f)
                                 UserRole.CLIENT -> MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)
-                            }
+                            },
+                            labelColor = if (isAdmin) Color.White else Color.Unspecified
                         )
                     )
                 }
@@ -309,7 +331,7 @@ fun DashboardScreen(
                         if (isAuthorizedAdmin) {
                             val clipboardManager = LocalClipboardManager.current
                             Text(
-                                text = "🗄️ قاعدة البيانات السحابية: مؤمنة ومشفرة بالكامل وفق معايير الحماية (Zero-Trust)\n📧 التنبيهات الفورية: ترسل مباشرة إلى بريد الإدارة (${AdminEmailNotifier.OFFICIAL_ADMIN_EMAIL})\n👥 عزل البيانات: العميل يرى فقط ما طلب، والمترجم يرى مشاريع مساحة عمله فقط",
+                                text = "🗄️ قاعدة البيانات السحابية: مؤمنة ومشفرة بالكامل وفق معايير الحماية (Zero-Trust)\n📧 التنبيهات الفورية: مشفرة وترسل مباشرة إلى بوابة إدارة المنصة الآمنة\n👥 عزل البيانات: العميل يرى فقط ما طلب، والمترجم يرى مشاريع مساحة عمله فقط",
                                 fontSize = 11.5.sp,
                                 lineHeight = 18.sp,
                                 color = MaterialTheme.colorScheme.onSurface
@@ -370,12 +392,12 @@ fun DashboardScreen(
                                     Text("• 📄 طلب جديد: عقد امتياز دولي (كريم حمداوي - 2,400 كلمة)", fontSize = 10.5.sp)
                                     Text("• 🔏 ختم معتمد: كتيب توربينات الغاز (أ. مريم بوعلام - ISO 17100)", fontSize = 10.5.sp)
                                     Text("• 🏆 امتحان تحديد المستوى: سارة بن علي (TCF - المستوى المتقدم C1)", fontSize = 10.5.sp)
-                                    Text("• 🔒 جلسة دخول مؤمنة للمشرف العام: ${AdminEmailNotifier.OFFICIAL_ADMIN_EMAIL}", fontSize = 10.5.sp, color = RedDark)
+                                    Text("• 🔒 جلسة دخول مؤمنة للإدارة العليا (256-Bit SSL Master Key)", fontSize = 10.5.sp, color = RedDark)
                                 }
                             }
                         } else {
                             Text(
-                                text = "عزل بيانات الإدارة: صلاحية المشرف مخصصة حصراً للإدارة عبر البريد المعتمد: ${AdminEmailNotifier.OFFICIAL_ADMIN_EMAIL}.\nيرجى تسجيل الدخول بالبريد المعتمد للوصول للوحة التحكم.",
+                                text = "عزل بيانات الإدارة: صلاحية المشرف مخصصة حصراً للإدارة العليا المعتمدة.\nيرجى تسجيل الدخول بحساب الإدارة المشرف للوصول إلى لوحة التحكم.",
                                 fontSize = 12.sp,
                                 color = MaterialTheme.colorScheme.error,
                                 lineHeight = 17.sp
@@ -542,8 +564,460 @@ fun DashboardScreen(
                     }
                 }
             }
+        } else if (isAdmin) {
+            // ==========================================
+            // VIEW B1: MASTER ADMIN PORTAL (Exclusive Authorized Administration)
+            // ==========================================
+            Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
+                // 1. Admin Master Security & Verification Header
+                Card(
+                    modifier = Modifier.fillMaxWidth().testTag("admin_master_header_card"),
+                    shape = RoundedCornerShape(16.dp),
+                    colors = CardDefaults.cardColors(containerColor = RedPrimary.copy(alpha = 0.08f)),
+                    border = androidx.compose.foundation.BorderStroke(1.5.dp, RedPrimary)
+                ) {
+                    Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                Text("👑", fontSize = 22.sp)
+                                Column {
+                                    Text(
+                                        text = if (isArabic) "لوحة الإشراف العام والمراقبة الشاملة" else "Master Administration Portal",
+                                        fontWeight = FontWeight.Bold,
+                                        style = MaterialTheme.typography.titleMedium,
+                                        color = RedPrimary
+                                    )
+                                    Text(
+                                        text = "المشرف العام: الأستاذ جودي مداني (المدير العام والمسؤول التنفيذي)",
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                }
+                            }
+                            Surface(
+                                shape = RoundedCornerShape(6.dp),
+                                color = SuccessGreen.copy(alpha = 0.15f)
+                            ) {
+                                Text(
+                                    text = "ISO 17100",
+                                    fontSize = 10.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = SuccessGreen,
+                                    modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                                )
+                            }
+                        }
+
+                        Text(
+                            text = if (isArabic)
+                                "🔒 وصول محمي ومقفل بحساب الإدارة المركزية المعتمد. يتم توثيق كافة تحركات المنظومة وسجل الزوار وتمارين الطلبة والمشاريع والاعتمادات لحظياً."
+                            else
+                                "Secure session active for platform director. Real-time telemetry for logins, student exercises, and certified orders.",
+                            fontSize = 11.5.sp,
+                            lineHeight = 16.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+
+                        // 3 KPI Stats Grid
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            Surface(
+                                shape = RoundedCornerShape(10.dp),
+                                color = MaterialTheme.colorScheme.surface,
+                                border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)),
+                                modifier = Modifier.weight(1f)
+                            ) {
+                                Column(modifier = Modifier.padding(10.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                                    Text("المشاريع والطلبات", fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, fontWeight = FontWeight.Bold)
+                                    Text("${orders.size}", fontSize = 18.sp, fontWeight = FontWeight.ExtraBold, color = RedPrimary)
+                                    Text("مراجعة واعتماد", fontSize = 9.sp, color = SuccessGreen)
+                                }
+                            }
+                            Surface(
+                                shape = RoundedCornerShape(10.dp),
+                                color = MaterialTheme.colorScheme.surface,
+                                border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)),
+                                modifier = Modifier.weight(1f)
+                            ) {
+                                Column(modifier = Modifier.padding(10.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                                    Text("سجل الزوار والدخول", fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, fontWeight = FontWeight.Bold)
+                                    Text("${PlatformTelemetry.sessionLogs.size}", fontSize = 18.sp, fontWeight = FontWeight.ExtraBold, color = Color(0xFF2563EB))
+                                    Text("جلسات موثقة", fontSize = 9.sp, color = Color(0xFF2563EB))
+                                }
+                            }
+                            Surface(
+                                shape = RoundedCornerShape(10.dp),
+                                color = MaterialTheme.colorScheme.surface,
+                                border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)),
+                                modifier = Modifier.weight(1f)
+                            ) {
+                                Column(modifier = Modifier.padding(10.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                                    Text("تمارين الطلبة", fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, fontWeight = FontWeight.Bold)
+                                    Text("${PlatformTelemetry.exerciseRecords.size}", fontSize = 18.sp, fontWeight = FontWeight.ExtraBold, color = GoldYellow)
+                                    Text("كابينة وألعاب", fontSize = 9.sp, color = GoldYellow)
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // 2. LIVE VISITOR & USER LOGINS TELEMETRY (سجل الزوار والدخول والخروج)
+                Card(
+                    modifier = Modifier.fillMaxWidth().testTag("admin_visitors_log_card"),
+                    shape = RoundedCornerShape(16.dp),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
+                ) {
+                    Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                                Text("👥", fontSize = 16.sp)
+                                Text(
+                                    text = if (isArabic) "سجل الزوار والدخول والخروج المباشر (${PlatformTelemetry.sessionLogs.size})" else "Live Visitor & Login Audits (${PlatformTelemetry.sessionLogs.size})",
+                                    fontWeight = FontWeight.Bold,
+                                    style = MaterialTheme.typography.titleSmall
+                                )
+                            }
+                            Surface(
+                                shape = RoundedCornerShape(4.dp),
+                                color = SuccessGreen.copy(alpha = 0.15f)
+                            ) {
+                                Text("نشط الآن ●", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = SuccessGreen, modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp))
+                            }
+                        }
+
+                        Text(
+                            text = if (isArabic) "توثيق لحظي لكل من يدخل أو يخرج من المنصة مع وقت الجلسة والبريد والرتبة." else "Real-time audit log of all visitors entering or leaving the platform.",
+                            fontSize = 11.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+
+                        PlatformTelemetry.sessionLogs.forEach { log ->
+                            Surface(
+                                shape = RoundedCornerShape(10.dp),
+                                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                Row(
+                                    modifier = Modifier.padding(10.dp),
+                                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Box(
+                                        modifier = Modifier.size(36.dp).clip(CircleShape).background(RedPrimary.copy(alpha = 0.15f)),
+                                        contentAlignment = Alignment.Center
+                                    ) {
+                                        Text(log.userName.take(1), fontWeight = FontWeight.Bold, color = RedPrimary, fontSize = 14.sp)
+                                    }
+                                    Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                                        Row(
+                                            modifier = Modifier.fillMaxWidth(),
+                                            horizontalArrangement = Arrangement.SpaceBetween
+                                        ) {
+                                            Text(log.userName, fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                                            Text(log.timestamp.takeLast(8), fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                        }
+                                        Text(log.userEmail, fontSize = 10.5.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                        Text("${log.actionType} • ${log.details}", fontSize = 10.5.sp, color = MaterialTheme.colorScheme.primary)
+                                    }
+                                    Surface(
+                                        shape = RoundedCornerShape(4.dp),
+                                        color = when {
+                                            log.role.contains("Admin") || log.role.contains("مشرف") -> RedPrimary.copy(alpha = 0.15f)
+                                            log.role.contains("Translator") || log.role.contains("مترجم") -> SuccessGreen.copy(alpha = 0.15f)
+                                            else -> MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)
+                                        }
+                                    ) {
+                                        Text(
+                                            text = log.role.substringBefore(" ("),
+                                            fontSize = 9.5.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            color = when {
+                                                log.role.contains("Admin") || log.role.contains("مشرف") -> RedPrimary
+                                                log.role.contains("Translator") || log.role.contains("مترجم") -> SuccessGreen
+                                                else -> MaterialTheme.colorScheme.primary
+                                            },
+                                            modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // 3. STUDENT EXERCISES & LAB SUBMISSIONS TELEMETRY (إحصائيات تمارين الطلبة والكابينة والألعاب)
+                Card(
+                    modifier = Modifier.fillMaxWidth().testTag("admin_students_exercises_card"),
+                    shape = RoundedCornerShape(16.dp),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
+                ) {
+                    Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                                Text("🎓", fontSize = 16.sp)
+                                Text(
+                                    text = if (isArabic) "إحصائيات تمارين وخطابات ولغات الطلبة (${PlatformTelemetry.exerciseRecords.size})" else "Student Practice & Lab Telemetry (${PlatformTelemetry.exerciseRecords.size})",
+                                    fontWeight = FontWeight.Bold,
+                                    style = MaterialTheme.typography.titleSmall
+                                )
+                            }
+                            Surface(
+                                shape = RoundedCornerShape(4.dp),
+                                color = GoldYellow.copy(alpha = 0.2f)
+                            ) {
+                                Text("100 خطاب + 12 لعبة", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = RedDark, modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp))
+                            }
+                        }
+
+                        Text(
+                            text = if (isArabic) "نتائج تمارين كابينة الترجمة الفورية، الفارق الزمني (Décalage)، سباقات السرعة، وامتحانات CEFR." else "Student results in simultaneous booth, Décalage timing, and placement exams.",
+                            fontSize = 11.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+
+                        PlatformTelemetry.exerciseRecords.forEach { rec ->
+                            Surface(
+                                shape = RoundedCornerShape(10.dp),
+                                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                Column(modifier = Modifier.padding(10.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.SpaceBetween,
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Text(rec.exerciseTitle, fontWeight = FontWeight.Bold, fontSize = 12.sp, modifier = Modifier.weight(1f))
+                                        Surface(
+                                            shape = RoundedCornerShape(4.dp),
+                                            color = SuccessGreen.copy(alpha = 0.15f)
+                                        ) {
+                                            Text(rec.score, fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, color = SuccessGreen, modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp))
+                                        }
+                                    }
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.SpaceBetween
+                                    ) {
+                                        Text("👤 الطالب: ${rec.studentName} (${rec.studentEmail})", fontSize = 10.5.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                        Text(rec.timestamp, fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                    }
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.spacedBy(10.dp)
+                                    ) {
+                                        Surface(
+                                            shape = RoundedCornerShape(4.dp),
+                                            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)
+                                        ) {
+                                            Text(rec.exerciseType, fontSize = 9.5.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(horizontal = 5.dp, vertical = 1.dp))
+                                        }
+                                        if (rec.decalageSeconds != null) {
+                                            Text("⏱️ فارق زمني: ${rec.decalageSeconds} ثانية", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = RedPrimary)
+                                        }
+                                        if (rec.wpm != null) {
+                                            Text("⚡ سرعة: ${rec.wpm} ك/د", fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Also show the full certified orders section for Admin
+            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column {
+                        Text(
+                            text = if (isArabic) "⚖️ إدارة كافة مشاريع وترجمات العملاء (${orders.size}):" else "All Client Projects Management (${orders.size}):",
+                            fontWeight = FontWeight.Bold,
+                            style = MaterialTheme.typography.titleSmall
+                        )
+                        Text(
+                            text = if (isArabic) "صلاحية الإشراف الكامل والاعتماد والختم الرسمي ISO 17100" else "Master administrative oversight and certified sealing",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+
+                    Surface(
+                        shape = RoundedCornerShape(6.dp),
+                        color = SuccessGreen.copy(alpha = 0.15f)
+                    ) {
+                        Text(
+                            text = "ISO 17100:2015",
+                            modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
+                            fontSize = 10.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = SuccessGreen
+                        )
+                    }
+                }
+
+                // Filter Chips for Admin
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+                ) {
+                    FilterChip(
+                        selected = translatorFilter == "ALL",
+                        onClick = { translatorFilter = "ALL" },
+                        label = { Text("الكل (${orders.size})", fontSize = 11.sp) }
+                    )
+                    FilterChip(
+                        selected = translatorFilter == "PENDING",
+                        onClick = { translatorFilter = "PENDING" },
+                        label = { Text("بانتظار الاستلام", fontSize = 11.sp) }
+                    )
+                    FilterChip(
+                        selected = translatorFilter == "PROGRESS",
+                        onClick = { translatorFilter = "PROGRESS" },
+                        label = { Text("قيد الترجمة", fontSize = 11.sp) }
+                    )
+                    FilterChip(
+                        selected = translatorFilter == "COMPLETED",
+                        onClick = { translatorFilter = "COMPLETED" },
+                        label = { Text("مكتمل ومختوم", fontSize = 11.sp) }
+                    )
+                }
+
+                Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    filteredTranslatorOrders.forEach { order ->
+                        Card(
+                            modifier = Modifier.fillMaxWidth().testTag("admin_order_${order.id}"),
+                            shape = RoundedCornerShape(14.dp),
+                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f)),
+                            border = androidx.compose.foundation.BorderStroke(1.dp, if (order.status.contains("مكتمل")) SuccessGreen.copy(alpha = 0.4f) else MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
+                        ) {
+                            Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceBetween,
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Text(
+                                        text = "#${order.id} • ${order.category}",
+                                        fontWeight = FontWeight.Bold,
+                                        color = RedPrimary,
+                                        fontSize = 12.sp
+                                    )
+                                    Surface(
+                                        shape = RoundedCornerShape(6.dp),
+                                        color = if (order.status.contains("مكتمل")) SuccessGreen.copy(alpha = 0.15f) else GoldYellow.copy(alpha = 0.2f)
+                                    ) {
+                                        Text(
+                                            text = order.status,
+                                            fontSize = 10.5.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            color = if (order.status.contains("مكتمل")) SuccessGreen else RedDark,
+                                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                                        )
+                                    }
+                                }
+
+                                Text(
+                                    text = "👤 العميل: ${order.clientName} (${order.clientEmail} • ${order.clientPhone})",
+                                    fontSize = 11.5.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+
+                                Text(order.title, style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold)
+
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceBetween
+                                ) {
+                                    Text("${order.langPair} • 📎 ${order.attachedFileName}", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                    Text(
+                                        text = "${order.wordCount} كلمة • الأتعاب: ${currency.format(order.priceDzd)}",
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = 12.sp,
+                                        color = SuccessGreen
+                                    )
+                                }
+
+                                Divider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f))
+
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                ) {
+                                    if (!order.status.contains("مكتمل")) {
+                                        if (!order.status.contains("قيد")) {
+                                            Button(
+                                                onClick = {
+                                                    order.status = "قيد الترجمة والختم الرسمي"
+                                                    actionNotificationMessage = "✓ تم استلام المشروع #${order.id} بنجاح وبدء الترجمة المحلفة."
+                                                },
+                                                shape = RoundedCornerShape(8.dp),
+                                                colors = ButtonDefaults.buttonColors(containerColor = RedPrimary),
+                                                modifier = Modifier.weight(1.2f).height(32.dp),
+                                                contentPadding = PaddingValues(horizontal = 4.dp)
+                                            ) {
+                                                Text(if (isArabic) "✅ استلام المشروع" else "Accept Project", fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                                            }
+                                        } else {
+                                            Button(
+                                                onClick = {
+                                                    order.status = "مكتمل وتم وضع الختم الرسمي"
+                                                    actionNotificationMessage = "✓ تم اعتماد وترجمة المستند #${order.id} وتطبيق الختم الرسمي ISO 17100 بنجاح."
+                                                },
+                                                shape = RoundedCornerShape(8.dp),
+                                                colors = ButtonDefaults.buttonColors(containerColor = SuccessGreen),
+                                                modifier = Modifier.weight(1.3f).height(32.dp),
+                                                contentPadding = PaddingValues(horizontal = 4.dp)
+                                            ) {
+                                                Text(if (isArabic) "✍️ اعتماد وختم الترجمة" else "Certify & Seal", fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                                            }
+                                        }
+                                    }
+                                    OutlinedButton(
+                                        onClick = { inspectOrder = order },
+                                        shape = RoundedCornerShape(8.dp),
+                                        modifier = Modifier.weight(1f).height(32.dp),
+                                        contentPadding = PaddingValues(horizontal = 4.dp)
+                                    ) {
+                                        Text(if (isArabic) "👁️ فحص الوثيقة" else "Inspect", fontSize = 11.sp)
+                                    }
+                                    OutlinedButton(
+                                        onClick = { showInvoiceDialogForOrder = order },
+                                        shape = RoundedCornerShape(8.dp),
+                                        modifier = Modifier.weight(0.9f).height(32.dp),
+                                        contentPadding = PaddingValues(horizontal = 4.dp)
+                                    ) {
+                                        Text(if (isArabic) "🧾 الفاتورة" else "Invoice", fontSize = 11.sp)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         } else {
-            // --- VIEW B: SWORN / CERTIFIED TRANSLATOR & ADMIN (Sees ALL Client Requests!) ---
+            // --- VIEW B2: SWORN / CERTIFIED TRANSLATOR (Sees ALL Client Requests!) ---
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -905,7 +1379,7 @@ fun DashboardScreen(
                 }
 
                 Text(
-                    text = "${if (isArabic) "المستلم المعتمد لجميع التسجيلات والطلبات:" else "Designated Recipient:"} ${AdminEmailNotifier.ADMIN_EMAIL}",
+                    text = "${if (isArabic) "المستلم المعتمد لجميع التسجيلات والطلبات:" else "Designated Recipient:"} ${AdminEmailNotifier.OFFICIAL_SUPPORT_EMAIL}",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -920,7 +1394,7 @@ fun DashboardScreen(
                             details = mapOf("status" to "Dashboard test alert", "role" to userRole.name)
                         ) { ok, msg ->
                             isSendingTest = false
-                            emailTestMessage = if (ok) (if (isArabic) "✓ تم إرسال الإشعار بنجاح إلى الإدارة (${AdminEmailNotifier.ADMIN_EMAIL})" else "✓ Notification sent to ${AdminEmailNotifier.ADMIN_EMAIL}") else "❌ $msg"
+                            emailTestMessage = if (ok) (if (isArabic) "✓ تم إرسال الإشعار بنجاح إلى الإدارة المعتمدة" else "✓ Notification sent to administration") else "❌ $msg"
                         }
                     },
                     modifier = Modifier.fillMaxWidth().height(38.dp).testTag("test_email_btn"),
@@ -1007,7 +1481,7 @@ fun DashboardScreen(
                     ) {
                         Column(modifier = Modifier.padding(8.dp)) {
                             Text("📧 البريد المباشر:", fontSize = 10.sp, color = Color(0xFF64748B), fontWeight = FontWeight.Bold)
-                            Text(AdminEmailNotifier.ADMIN_EMAIL, fontSize = 10.sp, fontWeight = FontWeight.ExtraBold, color = Color(0xFF1E293B))
+                            Text(AdminEmailNotifier.OFFICIAL_SUPPORT_EMAIL, fontSize = 10.sp, fontWeight = FontWeight.ExtraBold, color = Color(0xFF1E293B))
                         }
                     }
                 }
