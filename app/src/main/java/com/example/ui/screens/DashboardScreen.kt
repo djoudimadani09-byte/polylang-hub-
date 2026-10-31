@@ -622,7 +622,7 @@ fun DashboardScreen(
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
 
-                        // 3 KPI Stats Grid
+                        // Clean Business Metrics Grid
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -646,9 +646,9 @@ fun DashboardScreen(
                                 modifier = Modifier.weight(1f)
                             ) {
                                 Column(modifier = Modifier.padding(10.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                                    Text("سجل الزوار والدخول", fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, fontWeight = FontWeight.Bold)
-                                    Text("${PlatformTelemetry.sessionLogs.size}", fontSize = 18.sp, fontWeight = FontWeight.ExtraBold, color = Color(0xFF2563EB))
-                                    Text("جلسات موثقة", fontSize = 9.sp, color = Color(0xFF2563EB))
+                                    Text("اللغات المعتمدة", fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, fontWeight = FontWeight.Bold)
+                                    Text("7", fontSize = 18.sp, fontWeight = FontWeight.ExtraBold, color = Color(0xFF2563EB))
+                                    Text("عربي • فرنسي • ألماني...", fontSize = 9.sp, color = Color(0xFF2563EB))
                                 }
                             }
                             Surface(
@@ -658,183 +658,9 @@ fun DashboardScreen(
                                 modifier = Modifier.weight(1f)
                             ) {
                                 Column(modifier = Modifier.padding(10.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                                    Text("تمارين الطلبة", fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, fontWeight = FontWeight.Bold)
-                                    Text("${PlatformTelemetry.exerciseRecords.size}", fontSize = 18.sp, fontWeight = FontWeight.ExtraBold, color = GoldYellow)
-                                    Text("كابينة وألعاب", fontSize = 9.sp, color = GoldYellow)
-                                }
-                            }
-                        }
-                    }
-                }
-
-                // 2. LIVE VISITOR & USER LOGINS TELEMETRY (سجل الزوار والدخول والخروج)
-                Card(
-                    modifier = Modifier.fillMaxWidth().testTag("admin_visitors_log_card"),
-                    shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                    border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
-                ) {
-                    Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                                Text("👥", fontSize = 16.sp)
-                                Text(
-                                    text = if (isArabic) "سجل الزوار والدخول والخروج المباشر (${PlatformTelemetry.sessionLogs.size})" else "Live Visitor & Login Audits (${PlatformTelemetry.sessionLogs.size})",
-                                    fontWeight = FontWeight.Bold,
-                                    style = MaterialTheme.typography.titleSmall
-                                )
-                            }
-                            Surface(
-                                shape = RoundedCornerShape(4.dp),
-                                color = SuccessGreen.copy(alpha = 0.15f)
-                            ) {
-                                Text("نشط الآن ●", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = SuccessGreen, modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp))
-                            }
-                        }
-
-                        Text(
-                            text = if (isArabic) "توثيق لحظي لكل من يدخل أو يخرج من المنصة مع وقت الجلسة والبريد والرتبة." else "Real-time audit log of all visitors entering or leaving the platform.",
-                            fontSize = 11.sp,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-
-                        PlatformTelemetry.sessionLogs.forEach { log ->
-                            Surface(
-                                shape = RoundedCornerShape(10.dp),
-                                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
-                                modifier = Modifier.fillMaxWidth()
-                            ) {
-                                Row(
-                                    modifier = Modifier.padding(10.dp),
-                                    horizontalArrangement = Arrangement.spacedBy(10.dp),
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-                                    Box(
-                                        modifier = Modifier.size(36.dp).clip(CircleShape).background(RedPrimary.copy(alpha = 0.15f)),
-                                        contentAlignment = Alignment.Center
-                                    ) {
-                                        Text(log.userName.take(1), fontWeight = FontWeight.Bold, color = RedPrimary, fontSize = 14.sp)
-                                    }
-                                    Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                                        Row(
-                                            modifier = Modifier.fillMaxWidth(),
-                                            horizontalArrangement = Arrangement.SpaceBetween
-                                        ) {
-                                            Text(log.userName, fontWeight = FontWeight.Bold, fontSize = 12.sp)
-                                            Text(log.timestamp.takeLast(8), fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                        }
-                                        Text(log.userEmail, fontSize = 10.5.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                        Text("${log.actionType} • ${log.details}", fontSize = 10.5.sp, color = MaterialTheme.colorScheme.primary)
-                                    }
-                                    Surface(
-                                        shape = RoundedCornerShape(4.dp),
-                                        color = when {
-                                            log.role.contains("Admin") || log.role.contains("مشرف") -> RedPrimary.copy(alpha = 0.15f)
-                                            log.role.contains("Translator") || log.role.contains("مترجم") -> SuccessGreen.copy(alpha = 0.15f)
-                                            else -> MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)
-                                        }
-                                    ) {
-                                        Text(
-                                            text = log.role.substringBefore(" ("),
-                                            fontSize = 9.5.sp,
-                                            fontWeight = FontWeight.Bold,
-                                            color = when {
-                                                log.role.contains("Admin") || log.role.contains("مشرف") -> RedPrimary
-                                                log.role.contains("Translator") || log.role.contains("مترجم") -> SuccessGreen
-                                                else -> MaterialTheme.colorScheme.primary
-                                            },
-                                            modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
-                                        )
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                // 3. STUDENT EXERCISES & LAB SUBMISSIONS TELEMETRY (إحصائيات تمارين الطلبة والكابينة والألعاب)
-                Card(
-                    modifier = Modifier.fillMaxWidth().testTag("admin_students_exercises_card"),
-                    shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                    border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
-                ) {
-                    Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                                Text("🎓", fontSize = 16.sp)
-                                Text(
-                                    text = if (isArabic) "إحصائيات تمارين وخطابات ولغات الطلبة (${PlatformTelemetry.exerciseRecords.size})" else "Student Practice & Lab Telemetry (${PlatformTelemetry.exerciseRecords.size})",
-                                    fontWeight = FontWeight.Bold,
-                                    style = MaterialTheme.typography.titleSmall
-                                )
-                            }
-                            Surface(
-                                shape = RoundedCornerShape(4.dp),
-                                color = GoldYellow.copy(alpha = 0.2f)
-                            ) {
-                                Text("100 خطاب + 12 لعبة", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = RedDark, modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp))
-                            }
-                        }
-
-                        Text(
-                            text = if (isArabic) "نتائج تمارين كابينة الترجمة الفورية، الفارق الزمني (Décalage)، سباقات السرعة، وامتحانات CEFR." else "Student results in simultaneous booth, Décalage timing, and placement exams.",
-                            fontSize = 11.sp,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-
-                        PlatformTelemetry.exerciseRecords.forEach { rec ->
-                            Surface(
-                                shape = RoundedCornerShape(10.dp),
-                                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
-                                modifier = Modifier.fillMaxWidth()
-                            ) {
-                                Column(modifier = Modifier.padding(10.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                                    Row(
-                                        modifier = Modifier.fillMaxWidth(),
-                                        horizontalArrangement = Arrangement.SpaceBetween,
-                                        verticalAlignment = Alignment.CenterVertically
-                                    ) {
-                                        Text(rec.exerciseTitle, fontWeight = FontWeight.Bold, fontSize = 12.sp, modifier = Modifier.weight(1f))
-                                        Surface(
-                                            shape = RoundedCornerShape(4.dp),
-                                            color = SuccessGreen.copy(alpha = 0.15f)
-                                        ) {
-                                            Text(rec.score, fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, color = SuccessGreen, modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp))
-                                        }
-                                    }
-                                    Row(
-                                        modifier = Modifier.fillMaxWidth(),
-                                        horizontalArrangement = Arrangement.SpaceBetween
-                                    ) {
-                                        Text("👤 الطالب: ${rec.studentName} (${rec.studentEmail})", fontSize = 10.5.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                        Text(rec.timestamp, fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                    }
-                                    Row(
-                                        modifier = Modifier.fillMaxWidth(),
-                                        horizontalArrangement = Arrangement.spacedBy(10.dp)
-                                    ) {
-                                        Surface(
-                                            shape = RoundedCornerShape(4.dp),
-                                            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)
-                                        ) {
-                                            Text(rec.exerciseType, fontSize = 9.5.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(horizontal = 5.dp, vertical = 1.dp))
-                                        }
-                                        if (rec.decalageSeconds != null) {
-                                            Text("⏱️ فارق زمني: ${rec.decalageSeconds} ثانية", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = RedPrimary)
-                                        }
-                                        if (rec.wpm != null) {
-                                            Text("⚡ سرعة: ${rec.wpm} ك/د", fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                        }
-                                    }
+                                    Text("معايير الجودة", fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, fontWeight = FontWeight.Bold)
+                                    Text("ISO 17100", fontSize = 14.sp, fontWeight = FontWeight.ExtraBold, color = GoldYellow)
+                                    Text("اعتماد دولي محلف", fontSize = 9.sp, color = GoldYellow)
                                 }
                             }
                         }

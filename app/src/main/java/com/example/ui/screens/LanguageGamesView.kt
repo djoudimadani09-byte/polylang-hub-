@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.PlatformTelemetry
 import com.example.ui.theme.GoldYellow
 import com.example.ui.theme.RedDark
 import com.example.ui.theme.RedPrimary
@@ -52,6 +53,27 @@ fun LanguageGamesView(
 ) {
     var selectedGame by remember { mutableStateOf(GameType.SPEED_MATCH) }
     var totalGamerScore by remember { mutableIntStateOf(160) }
+
+    LaunchedEffect(Unit) {
+        PlatformTelemetry.logSession(
+            userName = userName,
+            userEmail = "learner@polylang.dz",
+            role = "طالب / متعلم",
+            actionType = "دخول استوديو الألعاب",
+            details = "بدء تدريب تفاعلي على 12 لعبة لغات وتثبيت مصطلحات"
+        )
+    }
+
+    fun onGameScoreEarned(pts: Int) {
+        totalGamerScore += pts
+        PlatformTelemetry.logExercise(
+            studentName = userName,
+            studentEmail = "learner@polylang.dz",
+            type = "ألعاب اللغات",
+            title = selectedGame.titleAr,
+            score = "+$pts نقطة (المجموع: $totalGamerScore)"
+        )
+    }
 
     Column(
         modifier = Modifier
@@ -151,51 +173,51 @@ fun LanguageGamesView(
         when (selectedGame) {
             GameType.SPEED_MATCH -> SpeedTerminologyMatchGame(
                 isArabic = isArabic,
-                onAddScore = { totalGamerScore += it }
+                onAddScore = { onGameScoreEarned(it) }
             )
             GameType.FALSE_FRIENDS -> FalseFriendsDetectiveGame(
                 isArabic = isArabic,
-                onAddScore = { totalGamerScore += it }
+                onAddScore = { onGameScoreEarned(it) }
             )
             GameType.SENTENCE_BUILDER -> SentenceBuilderGame(
                 isArabic = isArabic,
-                onAddScore = { totalGamerScore += it }
+                onAddScore = { onGameScoreEarned(it) }
             )
             GameType.BOOTH_REFLEX -> BoothReflexRushGame(
                 isArabic = isArabic,
-                onAddScore = { totalGamerScore += it }
+                onAddScore = { onGameScoreEarned(it) }
             )
             GameType.IDIOMS_MASTER -> IdiomsDeciphererGame(
                 isArabic = isArabic,
-                onAddScore = { totalGamerScore += it }
+                onAddScore = { onGameScoreEarned(it) }
             )
             GameType.ACRONYM_CRACKER -> AcronymsCrackerGame(
                 isArabic = isArabic,
-                onAddScore = { totalGamerScore += it }
+                onAddScore = { onGameScoreEarned(it) }
             )
             GameType.SIGHT_TRANSLATION_SPRINT -> SightTranslationSprintGame(
                 isArabic = isArabic,
-                onAddScore = { totalGamerScore += it }
+                onAddScore = { onGameScoreEarned(it) }
             )
             GameType.TERMINOLOGY_BATTLE -> TerminologyBattleGame(
                 isArabic = isArabic,
-                onAddScore = { totalGamerScore += it }
+                onAddScore = { onGameScoreEarned(it) }
             )
             GameType.COLLOCATION_MASTER -> CollocationMasterGame(
                 isArabic = isArabic,
-                onAddScore = { totalGamerScore += it }
+                onAddScore = { onGameScoreEarned(it) }
             )
             GameType.PROOFREADER_CHALLENGE -> ProofreaderChallengeGame(
                 isArabic = isArabic,
-                onAddScore = { totalGamerScore += it }
+                onAddScore = { onGameScoreEarned(it) }
             )
             GameType.CULTURAL_NUANCE_QUEST -> CulturalNuancesGame(
                 isArabic = isArabic,
-                onAddScore = { totalGamerScore += it }
+                onAddScore = { onGameScoreEarned(it) }
             )
             GameType.AUDIO_SHADOWING_CHALLENGE -> AudioShadowingGame(
                 isArabic = isArabic,
-                onAddScore = { totalGamerScore += it }
+                onAddScore = { onGameScoreEarned(it) }
             )
         }
     }
