@@ -17,9 +17,9 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "SUPPORT_EMAIL", "\"contact@polylang.dz\"")
-        buildConfigField("String", "ADMIN_EMAIL", "\"admin@polylang.dz\"")
-        buildConfigField("String", "API_BASE_URL", "\"https://api.polylang.dz/v1\"")
+        buildConfigField("String", "SUPPORT_EMAIL", "\"support@example.com\"")
+        buildConfigField("String", "ADMIN_EMAIL", "\"admin@example.com\"")
+        buildConfigField("String", "API_BASE_URL", "\"https://api.example.com/v1\"")
     }
 
     buildTypes {
