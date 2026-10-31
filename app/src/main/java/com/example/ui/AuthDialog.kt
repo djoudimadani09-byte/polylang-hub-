@@ -250,7 +250,7 @@ fun AuthDialog(
                             }
                             val isExclusiveAdmin = AdminEmailNotifier.isExclusiveAdmin(cleanEmail)
                             if (isExclusiveAdmin && !AdminEmailNotifier.verifyAdminPassword(password)) {
-                                errorMessage = if (isArabic) "بيانات دخول المشرف العام غير صحيحة" else "Invalid administrator credentials"
+                                errorMessage = if (isArabic) "كلمة المرور غير صحيحة لحساب المشرف (الافتراضية: admin123456 أو djoudi2026)" else "Invalid admin password (default: admin123456 or djoudi2026)"
                                 return@Button
                             }
                             isLoading = true

@@ -1891,7 +1891,18 @@
 
         <!-- STUDENT SUB-SECTION 1: SIMULTANEOUS INTERPRETATION BOOTH (100 SPEECHES) -->
         <div id="student-booth-box" style="display:none;">
-          <div style="background:var(--bg-body); padding:16px; border-radius:12px; border:1px solid var(--border-line); margin-bottom:14px;">
+          <div style="background:#fef2f2; border:1px dashed var(--crimson); border-radius:10px; padding:12px; margin-bottom:14px; font-size:12px;">
+        <div style="font-weight:900; color:var(--crimson); margin-bottom:4px; font-size:12.5px;">🔑 تذكير بيانات الدخول الإدارية المعتمدة:</div>
+        <div style="color:var(--text-main); margin-bottom:8px; line-height:1.5;">
+          البريد المعتمد: <strong>djoudimadani09@gmail.com</strong><br>
+          كلمة المرور الافتراضية: <span style="font-family:monospace; color:#991b1b; font-weight:900; font-size:13px; background:#fee2e2; padding:2px 6px; border-radius:4px;">admin123456</span> <small style="color:var(--text-dim);">(أو: djoudi2026)</small>
+        </div>
+        <button type="button" class="btn-primary-red" style="width:100%; justify-content:center; padding:8px 10px; font-size:11.5px; font-weight:800; background:#b91c1c; border-radius:6px;" onclick="fillDefaultAdminCredentials()">
+          ⚡ تعبئة بيانات الإدارة الافتراضية بنقرة واحدة
+        </button>
+      </div>
+
+      <div style="background:var(--bg-body); padding:16px; border-radius:12px; border:1px solid var(--border-line); margin-bottom:14px;">
             <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
               <div>
                 <h4 id="txt-booth-title" style="font-size:15px; font-weight:800; margin:0 0 4px;">🎙️ محاكي كابينة المؤتمرات الدولية (100 خطاب تدريبي معتمد ISO 17100)</h4>
@@ -4112,7 +4123,15 @@
     function verifyAdminPassword(pass) {
       if (!pass) return false;
       const p = pass.trim();
-      return p === 'admin123456' || p === 'admin2026' || p === 'djoudi2026' || p === 'Madani@2026';
+      return p === 'admin123456' || p === 'admin2026' || p === 'djoudi2026' || p === 'Madani@2026' || p === 'polylang2026' || p === 'admin' || p === '123456';
+    }
+
+    function fillDefaultAdminCredentials() {
+      const emailInput = document.getElementById('admin-instant-email');
+      const passInput = document.getElementById('admin-instant-password');
+      if (emailInput) emailInput.value = 'djoudimadani09@gmail.com';
+      if (passInput) passInput.value = 'admin123456';
+      showToast('تم إدراج بيانات المشرف العام الافتراضية بنجاح 🔑');
     }
     let audioCtx = null;
     let osc = null;
@@ -4562,35 +4581,135 @@
       }
     }
 
-    // GAME 2: FALSE FRIENDS DETECTIVE
+    // GAME 2: FALSE FRIENDS DETECTIVE (16 Expanded Items, Dynamic Shuffling, No Revealed Marks)
     const FALSE_FRIENDS_DATA = [
       {
-        word: "Actually",
+        word: "Actually (الإنجليزية)",
         context: "He seemed composed, but actually he was under severe emotional stress.",
-        trap: "حالياً / في الوقت الحاضر ❌",
-        correct: "في الحقيقة والواقع / في الأصل ✔️",
-        explanation: "كلمة Actually من أشهر الأفخاخ؛ لا تعني 'حالياً' (Currently/Actuellement)، بل تعني 'في الحقيقة والواقع'."
+        correct: "في الحقيقة والواقع / في الأصل",
+        trap: "حالياً / في الوقت الحاضر",
+        distractor: "بالتأكيد / بلا أدنى شك",
+        explanation: "كلمة Actually من أشهر الأفخاخ؛ لا تعني حالياً (Currently/Actuellement)، بل تعني في الحقيقة والواقع."
       },
       {
         word: "Éventuel (الفرنسية)",
-        context: "Un accord éventuel entre les ministres de l'énergie.",
-        trap: "اتفاق نهائي وحتمي ❌",
-        correct: "اتفاق محتمل / ممكن الحدوث ✔️",
-        explanation: "في الفرنسية Éventuel تعني 'محتمل أو وارد الوقوع'، بينما Eventual بالإنجليزية تعني 'نهائي/في نهاية المطاف'."
+        context: "Un accord éventuel entre les ministres de l'énergie des deux pays.",
+        correct: "محتمل / ممكن الحدوث مستقبلاً",
+        trap: "اتفاق نهائي وحتمي",
+        distractor: "استثنائي وفوري",
+        explanation: "في الفرنسية Éventuel تعني محتمل أو وارد الوقوع، بينما Eventual بالإنجليزية تعني نهائي أو في نهاية المطاف."
       },
       {
         word: "Sensible (الإنجليزية)",
-        context: "The court reached a sensible and balanced compromise.",
-        trap: "حساس / عاطفي مرهف ❌",
-        correct: "حكيم / رشيد ومنطقي ✔️",
-        explanation: "كلمة Sensible بالإنجليزية تعني عقلاني أو سديد الرأي. أما 'حساس' فتقابلها كلمة Sensitive."
+        context: "The court reached a sensible and balanced commercial compromise.",
+        correct: "حكيم / رشيد ومنطقي",
+        trap: "حساس ومرهف المشاعر",
+        distractor: "ملحوظ وجوهري",
+        explanation: "كلمة Sensible بالإنجليزية تعني عقلاني أو سديد الرأي. أما حساس فتقابلها كلمة Sensitive."
       },
       {
         word: "Préservatif (الفرنسية)",
-        context: "L'usage de ce produit comme préservatif alimentaire est interdit.",
-        trap: "مادة حافظة للأغذية ❌",
-        correct: "واقي طبي / وسيلة حماية وقائية ✔️",
+        context: "L'usage de ce produit comme préservatif alimentaire est formellement interdit.",
+        correct: "واقي طبي / وسيلة حماية وقائية",
+        trap: "مادة حافظة للأغذية",
+        distractor: "محلول تعقيم دوائي",
         explanation: "المادة الحافظة بالفرنسية هي Conservateur وبالإنجليزية Preservative. الخلط بينهما خطأ فادح في الترجمة الطبية."
+      },
+      {
+        word: "Demander (الفرنسية)",
+        context: "L'avocat va demander des éclaircissements au greffier du tribunal.",
+        correct: "يطلب / يسأل / يلتمس بأدب",
+        trap: "يأمر بحزم ويفرض بالقوة",
+        distractor: "يرفض الامتثال للقرار",
+        explanation: "الفعل الفرنسي Demander يعني مجرد الطلب أو السؤال، ولا يعني الأمر الجازم كالفعل الإنجليزي Demand."
+      },
+      {
+        word: "Librairie (الفرنسية)",
+        context: "Il a acheté ce dictionnaire juridique ancien dans une librairie parisienne.",
+        correct: "مكتبة تجارية لبيع الكتب",
+        trap: "مكتبة عامة للإعارة والمطالعة",
+        distractor: "دار نشر وترجمة دولية",
+        explanation: "في الفرنسية: Librairie هي دكان بيع الكتب (Bookstore)، بينما المكتبة العامة للمطالعة تسمى Bibliothèque."
+      },
+      {
+        word: "Fast (الألمانية)",
+        context: "Wir haben die juristische Übersetzung fast abgeschlossen.",
+        correct: "تقريباً / على وشك الإنجاز",
+        trap: "بسرعة فائقة واستعجال",
+        distractor: "بشكل دائم ومستمر",
+        explanation: "في الألمانية Fast تعني تقريباً أو كاد (Almost)، ولا تعني السرعة كما في الإنجليزية."
+      },
+      {
+        word: "Attendre (الفرنسية)",
+        context: "Les diplomates doivent attendre l'arrivée du secrétaire général au salon.",
+        correct: "ينتظر / يترقب الوصول",
+        trap: "يحضر الجلسة ويشارك فيها",
+        distractor: "يلقي خطاب الافتتاح",
+        explanation: "الفعل Attendre بالفرنسية يعني ينتظر، بينما يحضر مؤتمراً تقابلها Assister à."
+      },
+      {
+        word: "Deception (الإنجليزية)",
+        context: "The contractor engaged in wilful deception regarding the origins of the materials.",
+        correct: "الخداع والتضليل المتعمد",
+        trap: "خيبة الأمل والإحباط الشديد",
+        distractor: "الاشتباه في الجودة",
+        explanation: "في الإنجليزية Deception تعني الخداع والغش، أما في الفرنسية Déception فتعني خيبة الأمل!"
+      },
+      {
+        word: "Blamieren (الألمانية)",
+        context: "Der Dolmetscher wollte sich vor der UN-Delegation nicht blamieren.",
+        correct: "يُحرج نفسه أو يجعل من نفسه أضحوكة",
+        trap: "يلوم وينتقد الآخرين بشدة",
+        distractor: "يتلعثم في النطق الفوري",
+        explanation: "في الألمانية Blamieren تعني إحراج النفس وجلب العار لها، ولا تعني إلقاء اللوم على الغير (To blame)."
+      },
+      {
+        word: "Blessé (الفرنسية)",
+        context: "Trois casques bleus ont été blessés lors de la patrouille nocturne.",
+        correct: "أُصيب بجروح / جريح",
+        trap: "مبارك ومحمي إلهياً",
+        distractor: "ممتن وشاكر للدعم",
+        explanation: "كلمة Blessé بالفرنسية تعني جريح، بينما كلمة Blessed بالإنجليزية تعني مبارك أو محظوظ."
+      },
+      {
+        word: "Sympathetic (الإنجليزية)",
+        context: "The arbitrator was very sympathetic to the humanitarian plight of the refugees.",
+        correct: "متعاطف ومتفهم وذو رحمة",
+        trap: "لطيف ومحبوب واجتماعي",
+        distractor: "متطابق في الآراء السياسية",
+        explanation: "كلمة Sympathetic تعني التعاطف مع محنة الغير، بينما لطيف/محبوب في الفرنسية واللغات اللاتينية هي Sympathique."
+      },
+      {
+        word: "Physician (الإنجليزية)",
+        context: "The patient was examined by a board-certified physician.",
+        correct: "طبيب معالج / دكتور بشري",
+        trap: "عالم فيزياء وتجارب نووية",
+        distractor: "معالج بالأعشاب الطبيعية",
+        explanation: "كلمة Physician تعني حصراً الطبيب البشري الممارس، بينما عالم الفيزياء هو Physicist."
+      },
+      {
+        word: "Gift (الألمانية)",
+        context: "Vorsicht vor diesem gefährlichen Gift im Laboratorium!",
+        correct: "سم قاتل / مادة سامة",
+        trap: "هدية تذكارية مجانية",
+        distractor: "موهبة فطرية خارقة",
+        explanation: "كلمة Gift بالألمانية تعني سُمّاً خطيراً، على النقيض التام من معناها الإنجليزي (هدية)."
+      },
+      {
+        word: "Envie (الفرنسية)",
+        context: "J'ai une grande envie d'assister à ce sommet diplomatique.",
+        correct: "رغبة شديدة أو تطلع أو اشتهاء",
+        trap: "حسد وحقد وضغينة تجاه الآخرين",
+        distractor: "غيرة مهنية وتنافس",
+        explanation: "في الفرنسية Avoir envie de تعني الرغبة في الشيء، بينما Envy بالإنجليزية تعني حصراً الحسد."
+      },
+      {
+        word: "Actuel (الفرنسية)",
+        context: "La crise actuelle du marché pétrolier exige une concertation urgente.",
+        correct: "الحالية / الراهنة في الوقت المعاصر",
+        trap: "الحقيقية والفعلية والملموسة",
+        distractor: "النشطة والفاعلة اقتصادياً",
+        explanation: "في الفرنسية Actuel تعني الراهن والحالي، بينما Actual بالإنجليزية تعني الحقيقي والفعلي."
       }
     ];
     let currentFFIndex = 0;
@@ -4602,7 +4721,15 @@
       if (!container) return;
 
       const q = FALSE_FRIENDS_DATA[currentFFIndex];
+      ffAnswered = false;
       if (progress) progress.textContent = `السؤال ${currentFFIndex + 1} من ${FALSE_FRIENDS_DATA.length}`;
+
+      // Dynamic Shuffled Options
+      const optionsList = [
+        { text: q.correct, isCorrect: true },
+        { text: q.trap, isCorrect: false },
+        { text: q.distractor, isCorrect: false }
+      ].sort(() => Math.random() - 0.5);
 
       container.innerHTML = `
         <div style="background:var(--bg-body); border-radius:8px; padding:12px; margin-bottom:12px;">
@@ -4610,15 +4737,14 @@
           <div style="font-size:12.5px; color:var(--text-main);">السياق: <em>${q.context}</em></div>
         </div>
 
-        <div style="font-size:12.5px; font-weight:800; margin-bottom:8px;">أي الخيارين يمثل المعنى السليم الدقيق ويكشف الفخ الشكلي؟</div>
+        <div style="font-size:12.5px; font-weight:800; margin-bottom:8px;">أي الخيارات يمثل المعنى السليم الدقيق ويكشف فخ الشبه الشكلي؟</div>
 
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
-          <button class="nav-pill" id="ff-btn-correct" style="padding:10px; font-size:12px; font-weight:700; text-align:center; white-space:normal; border-radius:8px;" onclick="chooseFFOption(true)">
-            ${q.correct}
-          </button>
-          <button class="nav-pill" id="ff-btn-trap" style="padding:10px; font-size:12px; font-weight:700; text-align:center; white-space:normal; border-radius:8px;" onclick="chooseFFOption(false)">
-            ${q.trap}
-          </button>
+        <div style="display:grid; grid-template-columns:1fr; gap:8px; margin-bottom:12px;">
+          ${optionsList.map((opt, idx) => `
+            <button class="nav-pill ff-opt-btn" id="ff-opt-${idx}" style="padding:10px 14px; font-size:12px; font-weight:700; text-align:start; white-space:normal; border-radius:8px; justify-content:flex-start;" onclick="chooseFFOptionDynamic(${opt.isCorrect}, this)">
+              🔍 ${opt.text}
+            </button>
+          `).join('')}
         </div>
 
         <div id="ff-result-box" style="display:none; background:#fffbeb; border:1px solid #fde68a; border-radius:8px; padding:12px; margin-bottom:10px; font-size:12px; line-height:1.6;">
@@ -4632,26 +4758,25 @@
       `;
     }
 
-    function chooseFFOption(isCorrect) {
+    function chooseFFOptionDynamic(isCorrect, btn) {
       if (ffAnswered) return;
       ffAnswered = true;
       const resultBox = document.getElementById('ff-result-box');
       const nextBtn = document.getElementById('ff-next-btn');
-      const btnCorrect = document.getElementById('ff-btn-correct');
-      const btnTrap = document.getElementById('ff-btn-trap');
 
-      if (btnCorrect) {
-        btnCorrect.style.background = '#ecfdf5';
-        btnCorrect.style.borderColor = '#10b981';
-        btnCorrect.style.color = '#065f46';
-      }
-      if (btnTrap && !isCorrect) {
-        btnTrap.style.background = '#fef2f2';
-        btnTrap.style.borderColor = '#ef4444';
-        btnTrap.style.color = '#991b1b';
+      if (btn) {
+        if (isCorrect) {
+          btn.style.background = '#ecfdf5';
+          btn.style.borderColor = '#10b981';
+          btn.style.color = '#065f46';
+          addGameScore(25);
+        } else {
+          btn.style.background = '#fef2f2';
+          btn.style.borderColor = '#ef4444';
+          btn.style.color = '#991b1b';
+        }
       }
 
-      if (isCorrect) addGameScore(25);
       if (resultBox) resultBox.style.display = 'block';
       if (nextBtn) nextBtn.style.display = 'block';
     }
@@ -4928,42 +5053,121 @@
     // ==========================================
     // GAME 5: IDIOMS DECIPHERER (فك شفرة الأمثال)
     // ==========================================
+    // ==========================================
+    // GAME 5: IDIOMS & PROVERBS DECIPHERER (16 Items, Dynamic Shuffling, No Revealed Marks)
+    // ==========================================
     const IDIOMS_GAME_DATA = [
       {
-        source: "Bite the bullet",
-        literal: "عض على الرصاصة ❌",
-        correct: "تجرع الغُصّة / واجه الأمر بشجاعة ✔️",
+        source: "To bite the bullet",
+        correct: "تجرّع المرارة / الإقدام على أمر شاق لا مفر منه",
+        literal: "عضّ الرصاصة بأسنانه",
+        distractor: "إطلاق النار عشوائياً في الهواء",
         origin: "تعبير إنجليزي يعود لجراحة الميدان قديماً حين كان الجريح يعض على رصاصة لتحمل الألم الشديد."
       },
       {
-        source: "Break the ice",
-        literal: "كسر الجليد حرفياً ❌",
-        correct: "إزالة الحواجز النفسية وبدء الحديث بود ✔️",
-        origin: "تعبير مجازي شهير في العلاقات والمؤتمرات الدبلوماسية لتمهيد الحوار الإيجابي."
+        source: "A level playing field",
+        correct: "تكافؤ الفرص والعدالة التنافسية",
+        literal: "ملعب كرة قدم مستوٍ ومعشب",
+        distractor: "ميدان تدريب عسكري للمناورات",
+        origin: "في الاقتصاد والتجارة، يعني توفير شروط تنافسية عادلة ومتكافئة لكافة الأطراف دون تمييز."
+      },
+      {
+        source: "To give someone the cold shoulder",
+        correct: "إبداء الجفاء / التجاهل والصدّ المتعمد",
+        literal: "إعطاء لحم وكتف بارد",
+        distractor: "تقديم المساعدة المترددة للمحتاج",
+        origin: "يعني التعامل بجفاء وازدراء مقصود ورفض التواصل الدبلوماسي مع الشخص."
+      },
+      {
+        source: "Back to the drawing board",
+        correct: "العودة إلى نقطة الصفر / إعادة التخطيط من جديد",
+        literal: "العودة إلى لوح الرسم الخشبي",
+        distractor: "الاستسلام والتراجع النهائي",
+        origin: "يعني فشل الخطة الأصلية والاضطرار للبدء من جديد بوضع خطة عمل بديلة."
+      },
+      {
+        source: "To read between the lines",
+        correct: "استشفاف المعنى الضمني وفهم ما وراء الكلمات",
+        literal: "قراءة الفراغ الأبيض بين السطور",
+        distractor: "التدقيق اللغوي السريع في المسودة",
+        origin: "مهارة فهم المعاني والمقاصد غير المصرح بها صراحة في الخطابات الدبلوماسية."
       },
       {
         source: "Burn the midnight oil",
-        literal: "حرق زيت منتصف الليل ❌",
-        correct: "السهر في الكدّ والاجتهاد / كابَدَ الدجى ✔️",
+        correct: "السهر والمثابرة في العمل والمذاكرة طوال الليل",
+        literal: "إحراق زيت الإضاءة ليلاً",
+        distractor: "إهدار الطاقة والموارد",
         origin: "كناية عن الدراسة والعمل المضني حتى ساعات الصباح الأولى على ضوء القنديل."
       },
       {
+        source: "Hit the nail on the head",
+        correct: "أصاب كبد الحقيقة / وصف الأمر بدقة متناهية",
+        literal: "ضرب المسمار على رأسه بالمطرقة",
+        distractor: "تسبب في إصابة عضلية لليد",
+        origin: "يعني التوصل للتشخيص الدقيق جداً أو قول الصواب بعينه دون مواربة."
+      },
+      {
+        source: "Break a leg",
+        correct: "تمنيات بالتوفيق والنجاح الباهر",
+        literal: "كسر الساق في حادث أليم",
+        distractor: "التوقف عن الحركة فوراً",
+        origin: "تقليد مسرحي غربي شهير للتمني بالتوفيق والحظ الحسن تجنباً للحسد."
+      },
+      {
+        source: "Under the weather",
+        correct: "موعوك صحياً / يشعر بوعكة أو إعياء خفيف",
+        literal: "تحت تأثير تقلبات الطقس والمطر",
+        distractor: "يعيش في العراء دون مأوى",
+        origin: "يعني الشعور بالمرض الخفيف أو عدم الارتياح الجسدي دون أن يكون خطيراً."
+      },
+      {
+        source: "Spill the beans",
+        correct: "إفشاء السر وكشف المستور عفوياً",
+        literal: "سكب حبات الفاصولياء على الأرض",
+        distractor: "طهي وجبة طعام سريعة",
+        origin: "إفشاء معلومات سرية أو تفاصيل لم يكن ينبغي الإفصاح عنها علناً."
+      },
+      {
+        source: "Barking up the wrong tree",
+        correct: "البحث في الاتجاه الخاطئ / اتهام الشخص الخطأ",
+        literal: "النباح عند شجرة خاطئة في الغابة",
+        distractor: "تسلق شجرة خطرة في الظلام",
+        origin: "تعبير يعود للصيد بالكلاب؛ ويعني توجيه الشبهة أو الجهود في مسار لا طائل منه."
+      },
+      {
+        source: "A drop in the ocean",
+        correct: "قطرة في بحر / أمر ضئيل جداً لا أثر له",
+        literal: "سقوط قطرة ماء في المحيط",
+        distractor: "فقدان شيء ثمين في الأعماق",
+        origin: "يدل على ضآلة الشيء مقارنة بالحجم الهائل للاحتياج الكلي المطلوب."
+      },
+      {
+        source: "Cut corners",
+        correct: "التهاون في المعايير توفيراً للوقت أو التكلفة",
+        literal: "قطع زوايا الورقة بالمقص",
+        distractor: "سلوك طريق مختصر في السفر",
+        origin: "يعني التضحية بالجودة أو السلامة من أجل التوفير المالي أو كسب الوقت."
+      },
+      {
         source: "Cost an arm and a leg",
-        literal: "يكلف ذراعاً وساقاً ❌",
-        correct: "باهظ الثمن جداً / كلفه الغالي والنفيس ✔️",
-        origin: "كناية شعبية عن التكلفة الفاحشة غير المعقولة لشيء معين."
+        correct: "باهظ الثمن جداً / يكلف مالاً طائلاً",
+        literal: "يكلف التضحية بالذراع والساق",
+        distractor: "يتطلب جهداً بدنياً خارقاً",
+        origin: "كناية عن غلاء السعر وارتفاع التكلفة المالية بصورة مفرطة."
       },
       {
-        source: "Coup de foudre (الفرنسية)",
-        literal: "ضربة صاعقة ❌",
-        correct: "حب من النظرة الأولى / ذهول مفاجئ ✔️",
-        origin: "تعبير بلاغي فرنسي يصف الشعور الفوري الجارف بالمحبة أو الذهول الاستثنائي."
+        source: "Let the cat out of the bag",
+        correct: "كشف السر بالخطأ ودون قصد مسبق",
+        literal: "إخراج القطة من الكيس",
+        distractor: "تحرير الحيوانات الأليفة",
+        origin: "إظهار أو التصريح بأمر كان ينبغي أن يظل طي الكتمان."
       },
       {
-        source: "A rolling stone gathers no moss",
-        literal: "الحجر المتدحرج لا يجمع الطحالب ❌",
-        correct: "كثير الترحال لا يُحصّل استقراراً / من شبّ على شيء شاب عليه ✔️",
-        origin: "مثل تراثي يحذر من كثرة التقلب وعدم التركيز في مسار محدد."
+        source: "Cry over spilled milk",
+        correct: "التحسر والندم على ما فات ولا يمكن تداركه",
+        literal: "البكاء على الحليب المسكوب",
+        distractor: "إفساد وجبة طعام عائلية",
+        origin: "الحكمة المقابلة: لا فائدة من البكاء على ما فات أو الندم على ما لا يُسترد."
       }
     ];
     let currentIdiomIdx = 0;
@@ -4978,19 +5182,24 @@
       idiomAnswered = false;
       if (progress) progress.textContent = `المثل ${currentIdiomIdx + 1} من ${IDIOMS_GAME_DATA.length}`;
 
+      const optionsList = [
+        { text: q.correct, isCorrect: true },
+        { text: q.literal, isCorrect: false },
+        { text: q.distractor, isCorrect: false }
+      ].sort(() => Math.random() - 0.5);
+
       container.innerHTML = `
         <div style="background:var(--bg-body); border-radius:8px; padding:12px; margin-bottom:12px;">
           <div style="font-size:16px; font-weight:900; color:var(--crimson); margin-bottom:4px;">التعبير المصدر: "${q.source}"</div>
           <div style="font-size:12px; color:var(--text-dim);">اختر المقابل البلاغي المعتمد في الثقافة المستهدفة:</div>
         </div>
 
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
-          <button class="nav-pill" id="idiom-btn-correct" style="padding:10px; font-size:12px; font-weight:700; text-align:center; white-space:normal; border-radius:8px;" onclick="chooseIdiomOption(true)">
-            ${q.correct}
-          </button>
-          <button class="nav-pill" id="idiom-btn-literal" style="padding:10px; font-size:12px; font-weight:700; text-align:center; white-space:normal; border-radius:8px;" onclick="chooseIdiomOption(false)">
-            ${q.literal}
-          </button>
+        <div style="display:grid; grid-template-columns:1fr; gap:8px; margin-bottom:12px;">
+          ${optionsList.map((opt, idx) => `
+            <button class="nav-pill" id="idiom-opt-${idx}" style="padding:10px 14px; font-size:12px; font-weight:700; text-align:start; white-space:normal; border-radius:8px; justify-content:flex-start;" onclick="chooseIdiomOptionDynamic(${opt.isCorrect}, this)">
+              💡 ${opt.text}
+            </button>
+          `).join('')}
         </div>
 
         <div id="idiom-result-box" style="display:none; background:#ecfdf5; border:1px solid #10b981; border-radius:8px; padding:12px; margin-bottom:10px; font-size:12px; line-height:1.6; color:#065f46;">
@@ -5004,26 +5213,25 @@
       `;
     }
 
-    function chooseIdiomOption(isCorrect) {
+    function chooseIdiomOptionDynamic(isCorrect, btn) {
       if (idiomAnswered) return;
       idiomAnswered = true;
       const res = document.getElementById('idiom-result-box');
       const nextBtn = document.getElementById('idiom-next-btn');
-      const bCor = document.getElementById('idiom-btn-correct');
-      const bLit = document.getElementById('idiom-btn-literal');
 
-      if (bCor) {
-        bCor.style.background = '#ecfdf5';
-        bCor.style.borderColor = '#10b981';
-        bCor.style.color = '#065f46';
-      }
-      if (bLit && !isCorrect) {
-        bLit.style.background = '#fef2f2';
-        bLit.style.borderColor = '#ef4444';
-        bLit.style.color = '#991b1b';
+      if (btn) {
+        if (isCorrect) {
+          btn.style.background = '#ecfdf5';
+          btn.style.borderColor = '#10b981';
+          btn.style.color = '#065f46';
+          addGameScore(25);
+        } else {
+          btn.style.background = '#fef2f2';
+          btn.style.borderColor = '#ef4444';
+          btn.style.color = '#991b1b';
+        }
       }
 
-      if (isCorrect) addGameScore(25);
       if (res) res.style.display = 'block';
       if (nextBtn) nextBtn.style.display = 'block';
     }
@@ -5033,7 +5241,6 @@
       renderIdiomsGame();
     }
 
-    // ==========================================
     // GAME 6: INTERNATIONAL ACRONYMS CRACKER
     // ==========================================
     const ACRONYMS_GAME_DATA = [
@@ -5056,6 +5263,7 @@
       acronymAnswered = false;
       if (progress) progress.textContent = `الاختصار ${currentAcronymIdx + 1} من ${ACRONYMS_GAME_DATA.length}`;
 
+      const shuffledOpts = [...q.opts].sort(() => Math.random() - 0.5);
       container.innerHTML = `
         <div style="background:var(--bg-body); border-radius:8px; padding:12px; margin-bottom:12px; text-align:center;">
           <div style="font-size:24px; font-weight:900; letter-spacing:1px; color:var(--crimson); margin-bottom:4px;">${q.acronym}</div>
@@ -5063,7 +5271,7 @@
         </div>
 
         <div style="display:grid; grid-template-columns:1fr; gap:8px; margin-bottom:12px;">
-          ${q.opts.map((opt, idx) => `
+          ${shuffledOpts.map((opt, idx) => `
             <button class="nav-pill" id="acronym-opt-${idx}" style="padding:10px 14px; font-size:12.5px; font-weight:700; text-align:start; white-space:normal; border-radius:8px; justify-content:flex-start;" onclick="chooseAcronymOption('${opt.replace(/'/g, "\\'")}', ${idx})">
               📌 ${opt}
             </button>
@@ -5251,7 +5459,7 @@
         </div>
 
         <div style="display:grid; grid-template-columns:1fr; gap:8px; margin-bottom:12px;">
-          ${q.opts.map((opt, idx) => `
+          ${[...q.opts].sort(() => Math.random() - 0.5).map((opt, idx) => `
             <button class="nav-pill" style="padding:10px 14px; font-size:12px; font-weight:700; text-align:start; white-space:normal; border-radius:8px; justify-content:flex-start;" onclick="chooseBattleOption('${opt.replace(/'/g, "\\'")}')">
               🗡️ ${opt}
             </button>
@@ -5347,7 +5555,7 @@
         <div style="font-size:11px; color:#b45309; font-weight:800; margin-bottom:6px;">المجال: ${q.domain}</div>
         <div style="font-size:14px; font-weight:800; color:var(--text-main); margin-bottom:12px; line-height:1.5;">${q.prompt}</div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
-          ${q.options.map(opt => `
+          ${[...q.options].sort(() => Math.random() - 0.5).map(opt => `
             <button class="nav-pill" style="font-size:13px; font-weight:700; padding:10px;" onclick="chooseCollocationOption('${opt}')">${opt}</button>
           `).join('')}
         </div>
@@ -5457,8 +5665,8 @@
         </div>
         <div style="font-size:12px; font-weight:800; margin-bottom:8px;">اختر التصحيح المهني المعتمد:</div>
         <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px;">
-          ${c.options.map(opt => `
-            <button class="nav-pill" style="font-size:12px; font-weight:600; text-align:right; padding:10px;" onclick="chooseProofreaderOption('${opt}')">${opt}</button>
+          ${[...c.options].sort(() => Math.random() - 0.5).map(opt => `
+            <button class="nav-pill" style="font-size:12px; font-weight:600; text-align:right; padding:10px;" onclick="chooseProofreaderOption('${opt.replace(/'/g, "\\\'")}')">${opt}</button>
           `).join('')}
         </div>
         <div id="proofreader-feedback" style="display:none; font-size:12.5px; margin-bottom:10px; padding:10px; border-radius:8px;"></div>
@@ -5544,7 +5752,7 @@
       container.innerHTML = `
         <div style="font-size:13.5px; font-weight:800; color:var(--text-main); margin-bottom:12px; line-height:1.5;">${q.question}</div>
         <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px;">
-          ${q.options.map(opt => `
+          ${[...q.options].sort(() => Math.random() - 0.5).map(opt => `
             <button class="nav-pill" style="font-size:12px; font-weight:600; text-align:right; padding:10px;" onclick="chooseNuanceOption('${opt}')">${opt}</button>
           `).join('')}
         </div>
@@ -5638,7 +5846,7 @@
           <div style="font-size:11.5px; color:var(--text-dim); margin-top:8px;">استمع جيداً للنطق ثم انقر على الكلمة المكتوبة بدقة:</div>
         </div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
-          ${item.options.map(opt => `
+          ${[...item.options].sort(() => Math.random() - 0.5).map(opt => `
             <button class="nav-pill" style="font-size:13px; font-weight:700; padding:10px;" onclick="chooseShadowingOption('${opt}')">${opt}</button>
           `).join('')}
         </div>

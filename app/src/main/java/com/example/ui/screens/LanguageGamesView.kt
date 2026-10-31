@@ -474,7 +474,7 @@ fun SpeedTerminologyMatchGame(
 }
 
 // -------------------------------------------------------------------------------------------------
-// GAME 2: FALSE FRIENDS DETECTIVE (Expanded to 8 Questions)
+// GAME 2: FALSE FRIENDS DETECTIVE (16 Curated Traps with Multi-Option Shuffling)
 // -------------------------------------------------------------------------------------------------
 @Composable
 fun FalseFriendsDetectiveGame(
@@ -484,7 +484,7 @@ fun FalseFriendsDetectiveGame(
     data class FalseFriendQuestion(
         val word: String,
         val context: String,
-        val trapAnswer: String,
+        val options: List<String>,
         val correctAnswer: String,
         val explanation: String
     )
@@ -492,60 +492,116 @@ fun FalseFriendsDetectiveGame(
     val questions = remember {
         listOf(
             FalseFriendQuestion(
-                word = "Actually",
-                context = "He said he was fine, but actually he was suffering.",
-                trapAnswer = "حالياً / في الوقت الراهن ❌",
-                correctAnswer = "في الحقيقة والواقع / في الأصل ✔️",
-                explanation = "كلمة Actually من أشهر الأفخاخ؛ لا تعني 'حالياً' (Currently/Actuellement)، بل تعني 'في الحقيقة أو في الواقع'."
+                word = "Actually (الإنجليزية)",
+                context = "He seemed composed, but actually he was under severe emotional stress.",
+                options = listOf("في الحقيقة والواقع / في الأصل", "حالياً / في الوقت الراهن", "بالتأكيد / بلا أدنى شك"),
+                correctAnswer = "في الحقيقة والواقع / في الأصل",
+                explanation = "كلمة Actually من أشهر الأفخاخ؛ لا تعني حالياً (Currently/Actuellement)، بل تعني في الحقيقة والواقع."
             ),
             FalseFriendQuestion(
                 word = "Éventuel (الفرنسية)",
-                context = "Un accord éventuel entre les deux délégations ministérielles.",
-                trapAnswer = "اتفاق نهائي وحتمي ❌",
-                correctAnswer = "اتفاق محتمل / ممكن الحدوث ✔️",
-                explanation = "في الفرنسية Éventuel تعني 'محتمل أو وارد الوقوع'، بينما Eventual بالإنجليزية تعني 'نهائي/في نهاية المطاف'."
+                context = "Un accord éventuel entre les ministres de l'énergie des deux pays.",
+                options = listOf("محتمل / ممكن الحدوث مستقبلاً", "اتفاق نهائي وحتمي", "استثنائي وفوري"),
+                correctAnswer = "محتمل / ممكن الحدوث مستقبلاً",
+                explanation = "في الفرنسية Éventuel تعني محتمل أو وارد الوقوع، بينما Eventual بالإنجليزية تعني نهائي أو في نهاية المطاف."
             ),
             FalseFriendQuestion(
                 word = "Sensible (الإنجليزية)",
-                context = "She made a very sensible business decision during the financial crisis.",
-                trapAnswer = "حساس / عاطفي مرهف ❌",
-                correctAnswer = "حكيم / رشيد ومنطقي ✔️",
-                explanation = "كلمة Sensible بالإنجليزية تعني عقلاني أو سديد الرأي. أما 'حساس' فتقابلها كلمة Sensitive."
+                context = "The court reached a sensible and balanced commercial compromise.",
+                options = listOf("حكيم / رشيد ومنطقي", "حساس ومرهف المشاعر", "ملحوظ وجوهري"),
+                correctAnswer = "حكيم / رشيد ومنطقي",
+                explanation = "كلمة Sensible بالإنجليزية تعني عقلاني أو سديد الرأي. أما حساس فتقابلها Sensitive."
             ),
             FalseFriendQuestion(
                 word = "Préservatif (الفرنسية)",
-                context = "Ce n'est pas un produit préservatif pour aliments.",
-                trapAnswer = "مادة حافظة للأغذية ❌",
-                correctAnswer = "واقي طبي / وقائي ✔️",
+                context = "L'usage de ce produit comme préservatif alimentaire est formellement interdit.",
+                options = listOf("واقي طبي / وسيلة حماية وقائية", "مادة حافظة للأغذية", "محلول تعقيم دوائي"),
+                correctAnswer = "واقي طبي / وسيلة حماية وقائية",
                 explanation = "المادة الحافظة بالفرنسية هي Conservateur وبالإنجليزية Preservative. الخلط بينهما خطأ فادح في الترجمة الطبية."
             ),
             FalseFriendQuestion(
                 word = "Demander (الفرنسية)",
-                context = "L'avocat va demander des éclaircissements au tribunal.",
-                trapAnswer = "يأمر بحزم / يفرض بالقوة ❌",
-                correctAnswer = "يطلب / يلتمس / يسأل ✔️",
+                context = "L'avocat va demander des éclaircissements au greffier du tribunal.",
+                options = listOf("يطلب / يسأل / يلتمس بأدب", "يأمر بحزم ويفرض بالقوة", "يرفض الامتثال لطلب المحكمة"),
+                correctAnswer = "يطلب / يسأل / يلتمس بأدب",
                 explanation = "الفعل الفرنسي Demander يعني مجرد الطلب أو السؤال، ولا يعني الأمر الجازم كالفعل الإنجليزي Demand."
             ),
             FalseFriendQuestion(
                 word = "Librairie (الفرنسية)",
-                context = "Il a acheté ce dictionnaire juridique dans une librairie.",
-                trapAnswer = "مكتبة عامة للإعارة والمطالعة (Library) ❌",
-                correctAnswer = "مكتبة تجارية لبيع الكتب (Bookstore) ✔️",
-                explanation = "في الفرنسية: Librairie هي دكان بيع الكتب، بينما المكتبة العامة للمطالعة تسمى Bibliothèque."
+                context = "Il a acheté ce dictionnaire juridique ancien dans une librairie parisienne.",
+                options = listOf("مكتبة تجارية لبيع الكتب", "مكتبة عامة للإعارة والمطالعة", "دار نشر وترجمة دولية"),
+                correctAnswer = "مكتبة تجارية لبيع الكتب",
+                explanation = "في الفرنسية: Librairie هي دكان بيع الكتب (Bookstore)، بينما المكتبة العامة للمطالعة تسمى Bibliothèque."
             ),
             FalseFriendQuestion(
                 word = "Fast (الألمانية)",
-                context = "Wir haben die Übersetzung fast abgeschlossen.",
-                trapAnswer = "بسرعة فائقة (Fast الإنجليزية) ❌",
-                correctAnswer = "تقريباً / على وشك الإنجاز (Almost) ✔️",
-                explanation = "في الألمانية Fast تعني 'تقريباً / كاد'، ولا تعني السرعة كما يظن الناطقون بالإنجليزية."
+                context = "Wir haben die juristische Übersetzung fast abgeschlossen.",
+                options = listOf("تقريباً / على وشك الإنجاز", "بسرعة فائقة واستعجال", "بشكل دائم ومستمر"),
+                correctAnswer = "تقريباً / على وشك الإنجاز",
+                explanation = "في الألمانية Fast تعني تقريباً أو كاد (Almost)، ولا تعني السرعة كما في الإنجليزية."
             ),
             FalseFriendQuestion(
                 word = "Attendre (الفرنسية)",
-                context = "Les diplomates doivent attendre l'arrivée du secrétaire général.",
-                trapAnswer = "يحضر الجلسة / يشارك فيها (Attend) ❌",
-                correctAnswer = "ينتظر / يترقب الوصول ✔️",
-                explanation = "الفعل Attendre بالفرنسية يعني 'ينتظر'، بينما 'يحضر مؤتمراً' تقابلها Assister à."
+                context = "Les diplomates doivent attendre l'arrivée du secrétaire général au salon d'honneur.",
+                options = listOf("ينتظر / يترقب الوصول", "يحضر الجلسة ويشارك فيها", "يستمع لخطاب الوفد"),
+                correctAnswer = "ينتظر / يترقب الوصول",
+                explanation = "الفعل Attendre بالفرنسية يعني ينتظر، بينما يحضر مؤتمراً تقابلها Assister à."
+            ),
+            FalseFriendQuestion(
+                word = "Deception (الإنجليزية)",
+                context = "The contractor engaged in wilful deception regarding the origin of materials.",
+                options = listOf("الخداع والتضليل المتعمد", "خيبة الأمل والإحباط الشديد", "الاشتباه في الجودة"),
+                correctAnswer = "الخداع والتضليل المتعمد",
+                explanation = "في الإنجليزية Deception تعني الخداع والغش، أما في الفرنسية Déception فتعني خيبة الأمل!"
+            ),
+            FalseFriendQuestion(
+                word = "Blamieren (الألمانية)",
+                context = "Der Dolmetscher wollte sich vor der UN-Delegation nicht blamieren.",
+                options = listOf("يُحرج نفسه أو يجعل من نفسه أضحوكة", "يلوم وينتقد الآخرين بشدة", "يتلعثم في النطق الفوري"),
+                correctAnswer = "يُحرج نفسه أو يجعل من نفسه أضحوكة",
+                explanation = "في الألمانية Blamieren تعني إحراج النفس وجلب العار لها، ولا تعني إلقاء اللوم على الغير (To blame)."
+            ),
+            FalseFriendQuestion(
+                word = "Blessé (الفرنسية)",
+                context = "Trois casques bleus ont été blessés lors de la patrouille nocturne.",
+                options = listOf("أُصيب بجروح / جريح", "مبارك ومحمي إلهياً", "ممتن وشاكر للدعم"),
+                correctAnswer = "أُصيب بجروح / جريح",
+                explanation = "كلمة Blessé بالفرنسية تعني جريح، بينما كلمة Blessed بالإنجليزية تعني مبارك أو محظوظ."
+            ),
+            FalseFriendQuestion(
+                word = "Sympathetic (الإنجليزية)",
+                context = "The arbitrator was very sympathetic to the humanitarian plight of refugees.",
+                options = listOf("متعاطف ومتفهم وذو رحمة", "لطيف ومحبوب واجتماعي", "متطابق في الآراء السياسية"),
+                correctAnswer = "متعاطف ومتفهم وذو رحمة",
+                explanation = "كلمة Sympathetic تعني التعاطف مع محنة الغير، بينما لطيف/محبوب في الفرنسية واللغات اللاتينية هي Sympathique."
+            ),
+            FalseFriendQuestion(
+                word = "Physician (الإنجليزية)",
+                context = "The patient was examined by a board-certified physician.",
+                options = listOf("طبيب معالج / دكتور بشري", "عالم فيزياء وتجارب نووية", "معالج بالأعشاب الطبيعية"),
+                correctAnswer = "طبيب معالج / دكتور بشري",
+                explanation = "كلمة Physician تعني حصراً الطبيب البشري الممارس، بينما عالم الفيزياء هو Physicist."
+            ),
+            FalseFriendQuestion(
+                word = "Gift (الألمانية)",
+                context = "Vorsicht vor diesem gefährlichen Gift im Laboratorium!",
+                options = listOf("سم قاتل / مادة سامة", "هدية تذكارية مجانية", "موهبة فطرية خارقة"),
+                correctAnswer = "سم قاتل / مادة سامة",
+                explanation = "كلمة Gift بالألمانية تعني سُمّاً خطيراً، على النقيض التام من معناها الإنجليزي (هدية)."
+            ),
+            FalseFriendQuestion(
+                word = "Envie (الفرنسية)",
+                context = "J'ai une grande envie d'assister à ce sommet diplomatique.",
+                options = listOf("رغبة شديدة أو تطلع أو اشتهاء", "حسد وحقد وضغينة تجاه الآخرين", "غيرة مهنية وتنافس"),
+                correctAnswer = "رغبة شديدة أو تطلع أو اشتهاء",
+                explanation = "في الفرنسية Avoir envie de تعني الرغبة في الشيء، بينما Envy بالإنجليزية تعني حصراً الحسد وتمني زوال النعمة."
+            ),
+            FalseFriendQuestion(
+                word = "Actuel (الفرنسية)",
+                context = "La crise actuelle du marché pétrolier exige une concertation urgente.",
+                options = listOf("الحالية / الراهنة في الوقت المعاصر", "الحقيقية والفعلية والملموسة", "النشطة والفاعلة"),
+                correctAnswer = "الحالية / الراهنة في الوقت المعاصر",
+                explanation = "في الفرنسية Actuel تعني الراهن والحالي، بينما Actual بالإنجليزية تعني الحقيقي والفعلي."
             )
         )
     }
@@ -555,6 +611,7 @@ fun FalseFriendsDetectiveGame(
     var hasAnswered by remember { mutableStateOf(false) }
 
     val currentQ = questions[currentQIndex]
+    val shuffledOptions = remember(currentQIndex) { currentQ.options.shuffled() }
 
     Card(
         modifier = Modifier.fillMaxWidth().testTag("game_false_friends"),
@@ -605,13 +662,13 @@ fun FalseFriendsDetectiveGame(
             }
 
             Text(
-                text = if (isArabic) "أي الخيارين هو المعنى السليم الدقيق وتجنب فخ الشبه الشكلي؟" else "Pick authentic translation without falling into cognate trap:",
+                text = if (isArabic) "أي الخيارات يمثل المعنى السليم الدقيق ويكشف فخ الشبه الشكلي؟" else "Pick the authentic translation without falling into cognate trap:",
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 12.sp
             )
 
-            // Options
-            listOf(currentQ.correctAnswer, currentQ.trapAnswer).shuffled(remember(currentQIndex) { java.util.Random(currentQIndex.toLong()) }).forEach { opt ->
+            // Dynamic Shuffled Options
+            shuffledOptions.forEach { opt ->
                 val isCorrect = opt == currentQ.correctAnswer
                 val isChosen = selectedOption == opt
                 val btnColor = when {
@@ -673,7 +730,7 @@ fun FalseFriendsDetectiveGame(
 }
 
 // -------------------------------------------------------------------------------------------------
-// GAME 3: SENTENCE BUILDER (5 Tasks)
+// GAME 3: SENTENCE BUILDER
 // -------------------------------------------------------------------------------------------------
 @Composable
 fun SentenceBuilderGame(
@@ -1122,7 +1179,7 @@ fun IdiomsDeciphererGame(
 ) {
     data class IdiomItem(
         val idiom: String,
-        val literalTrap: String,
+        val options: List<String>,
         val culturalEquivalent: String,
         val context: String,
         val explanation: String
@@ -1132,38 +1189,115 @@ fun IdiomsDeciphererGame(
         listOf(
             IdiomItem(
                 idiom = "To bite the bullet",
-                literalTrap = "عضّ الرصاصة بأسنانه ❌",
-                culturalEquivalent = "تجرّع المرارة / الإقدام على أمر شاق لا مفر منه ✔️",
-                context = "\"The government had to bite the bullet and cut subsidies.\"",
-                explanation = "تعبير اصطلاحي يعود لعلاج الجرحى قديماً؛ ويعني قبول موقف صعب ومؤلم بشجاعة لأن لا مفر منه."
+                options = listOf("تجرّع المرارة / الإقدام على أمر شاق لا مفر منه", "عضّ الرصاصة بأسنانه", "إطلاق النار عشوائياً"),
+                culturalEquivalent = "تجرّع المرارة / الإقدام على أمر شاق لا مفر منه",
+                context = "\"The government had to bite the bullet and cut energy subsidies.\"",
+                explanation = "تعبير يعود لعلاج الجرحى بالحروب قديماً؛ ويعني قبول موقف صعب ومؤلم بشجاعة لأن لا مفر منه."
             ),
             IdiomItem(
                 idiom = "A level playing field",
-                literalTrap = "ملعب كرة قدم مستوٍ ❌",
-                culturalEquivalent = "تكافؤ الفرص والعدالة التنافسية ✔️",
-                context = "\"New antitrust laws ensure a level playing field for all tech startups.\"",
-                explanation = "في الاقتصاد والتجارة، يعني توفير شروط تنافسية عادلة ومتساوية لكافة الأطراف دون تمييز."
+                options = listOf("تكافؤ الفرص والعدالة التنافسية", "ملعب كرة قدم مستوٍ ومعشب", "ميدان تدريب عسكري"),
+                culturalEquivalent = "تكافؤ الفرص والعدالة التنافسية",
+                context = "\"New antitrust regulations ensure a level playing field for all tech startups.\"",
+                explanation = "في الاقتصاد والتجارة، يعني توفير شروط تنافسية عادلة ومتكافئة لكافة الشركات دون تمييز."
             ),
             IdiomItem(
                 idiom = "To give someone the cold shoulder",
-                literalTrap = "إعطاء كتف بارد ولحم بارد ❌",
-                culturalEquivalent = "إبداء الجفاء / التجاهل المقصود والصدّ المتعمد ✔️",
-                context = "\"The delegate received a cold shoulder from his counterparts.\"",
-                explanation = "يعني التعامل بجفاء وازدراء مقصود ورفض التواصل مع الشخص."
+                options = listOf("إبداء الجفاء / التجاهل المقصود والصدّ المتعمد", "إعطاء لحم وكتف بارد", "تقديم المساعدة المترددة"),
+                culturalEquivalent = "إبداء الجفاء / التجاهل المقصود والصدّ المتعمد",
+                context = "\"The dissenting delegate received a cold shoulder from his counterparts.\"",
+                explanation = "يعني التعامل بجفاء وازدراء مقصود ورفض التواصل الدبلوماسي مع الشخص."
             ),
             IdiomItem(
                 idiom = "Back to the drawing board",
-                literalTrap = "العودة إلى لوح الرسم الخشبي ❌",
-                culturalEquivalent = "العودة إلى نقطة الصفر / إعادة التخطيط من البداية ✔️",
-                context = "\"After the talks collapsed, the mediators went back to the drawing board.\"",
-                explanation = "يعني فشل الخطة والاضطرار للبدء من جديد بوضع خطة بديلة."
+                options = listOf("العودة إلى نقطة الصفر / إعادة التخطيط من البداية", "العودة إلى لوح الرسم الخشبي", "الاستسلام والتراجع النهائي"),
+                culturalEquivalent = "العودة إلى نقطة الصفر / إعادة التخطيط من البداية",
+                context = "\"After the preliminary talks collapsed, the mediators went back to the drawing board.\"",
+                explanation = "يعني فشل الخطة الأصلية والاضطرار للبدء من جديد بوضع خطة عمل بديلة."
             ),
             IdiomItem(
                 idiom = "To read between the lines",
-                literalTrap = "قراءة الفراغ الأبيض بين السطور ❌",
-                culturalEquivalent = "استشفاف المعنى الضمني / فهم ما وراء الكلمات ✔️",
-                context = "\"Diplomats must know how to read between the lines in communiqués.\"",
-                explanation = "مهارة فهم المعاني غير المصرح بها صراحة في الخطابات الدبلوماسية."
+                options = listOf("استشفاف المعنى الضمني / فهم ما وراء الكلمات", "قراءة الفراغ الأبيض بين السطور", "التدقيق اللغوي السريع"),
+                culturalEquivalent = "استشفاف المعنى الضمني / فهم ما وراء الكلمات",
+                context = "\"Diplomats must know how to read between the lines in official communiqués.\"",
+                explanation = "مهارة فهم المعاني والمقاصد غير المصرح بها صراحة في الخطابات الدبلوماسية."
+            ),
+            IdiomItem(
+                idiom = "Burn the midnight oil",
+                options = listOf("السهر والمثابرة بالعمل والمذاكرة حتى وقت متأخر", "إحراق زيت الإضاءة ليلاً", "إهدار الطاقة والموارد"),
+                culturalEquivalent = "السهر والمثابرة بالعمل والمذاكرة حتى وقت متأخر",
+                context = "\"The translation team had to burn the midnight oil to submit the dossier.\"",
+                explanation = "كناية عن العمل الشاق والمذاكرة الدؤوبة ليلاً لإنهاء مشروع عاجل."
+            ),
+            IdiomItem(
+                idiom = "Hit the nail on the head",
+                options = listOf("أصاب كبد الحقيقة / وصف الأمر بدقة متناهية", "ضرب المسمار بالمطرقة على رأسه", "تسبب في إصابة عضلية"),
+                culturalEquivalent = "أصاب كبد الحقيقة / وصف الأمر بدقة متناهية",
+                context = "\"The economic analyst hit the nail on the head regarding stagflation.\"",
+                explanation = "يعني التوصل للتشخيص الدقيق جداً أو قول الصواب بعينه دون مواربة."
+            ),
+            IdiomItem(
+                idiom = "Break a leg",
+                options = listOf("تمنيات بالتوفيق والنجاح الباهر (في المسرح والخطابة)", "كسر الساق في حادث أليم", "التوقف عن الحركة فوراً"),
+                culturalEquivalent = "تمنيات بالتوفيق والنجاح الباهر (في المسرح والخطابة)",
+                context = "\"Before she entered the simultaneous translation booth, her mentor said: Break a leg!\"",
+                explanation = "تقليد مسرحي غربي شهير للتمني بالتوفيق والحظ الحسن تجنباً للحسد."
+            ),
+            IdiomItem(
+                idiom = "Under the weather",
+                options = listOf("موعوك صحياً / يشعر بوعكة أو إعياء خفيف", "تحت تأثير تقلبات الطقس والمطر", "يعيش في العراء"),
+                culturalEquivalent = "موعوك صحياً / يشعر بوعكة أو إعياء خفيف",
+                context = "\"The lead interpreter was feeling under the weather and requested a substitute.\"",
+                explanation = "يعني الشعور بالمرض الخفيف أو عدم الارتياح الجسدي دون أن يكون خطيراً."
+            ),
+            IdiomItem(
+                idiom = "Spill the beans",
+                options = listOf("إفشاء السر وكشف المستور عفوياً", "سكب حبات الفاصولياء على الأرض", "طهي وجبة طعام سريعة"),
+                culturalEquivalent = "إفشاء السر وكشف المستور عفوياً",
+                context = "\"A disgruntled staff member spilled the beans to the press about the merger.\"",
+                explanation = "إفشاء معلومات سرية أو تفاصيل لم يكن ينبغي الإفصاح عنها علناً."
+            ),
+            IdiomItem(
+                idiom = "Barking up the wrong tree",
+                options = listOf("البحث في الاتجاه الخاطئ / اتهام الشخص الخطأ", "النباح عند شجرة خاطئة في الغابة", "تسلق شجرة خطرة"),
+                culturalEquivalent = "البحث في الاتجاه الخاطئ / اتهام الشخص الخطأ",
+                context = "\"If the investigators suspect him of embezzlement, they are barking up the wrong tree.\"",
+                explanation = "تعبير يعود للصيد بالكلاب؛ ويعني توجيه الشبهة أو الجهود في مسار لا طائل منه."
+            ),
+            IdiomItem(
+                idiom = "A drop in the ocean",
+                options = listOf("قطرة في بحر / مبلغ ضئيل لا يكاد يُذكر", "سقوط قطرة ماء في المحيط", "فقدان شيء ثمين في الأعماق"),
+                culturalEquivalent = "قطرة في بحر / مبلغ ضئيل لا يكاد يُذكر",
+                context = "\"The emergency food grant is just a drop in the ocean compared to the famine needs.\"",
+                explanation = "يدل على ضآلة الشيء مقارنة بالحجم الهائل للاحتياج الكلي المطلوب."
+            ),
+            IdiomItem(
+                idiom = "Cut corners",
+                options = listOf("التهاون في المعايير توفيراً للوقت أو التكلفة", "قطع زوايا الورقة الهندسية", "سلوك طريق مختصر في السفر"),
+                culturalEquivalent = "التهاون في المعايير توفيراً للوقت أو التكلفة",
+                context = "\"The pharmaceutical manufacturer refused to cut corners on safety trials.\"",
+                explanation = "يعني التضحية بالجودة أو السلامة من أجل التوفير المالي أو كسب الوقت."
+            ),
+            IdiomItem(
+                idiom = "Cost an arm and a leg",
+                options = listOf("باهظ الثمن جداً / يكلف مالاً طائلاً", "يكلف التضحية بالذراع والساق", "يتطلب جهداً بدنياً خارقاً"),
+                culturalEquivalent = "باهظ الثمن جداً / يكلف مالاً طائلاً",
+                context = "\"Specialized simultaneous interpretation equipment can cost an arm and a leg.\"",
+                explanation = "كناية عن غلاء السعر وارتفاع التكلفة المالية بصورة مفرطة."
+            ),
+            IdiomItem(
+                idiom = "Let the cat out of the bag",
+                options = listOf("كشف السر بالخطأ ودون قصد مسبق", "إخراج القطة من الكيس", "تحرير الحيوانات الأليفة"),
+                culturalEquivalent = "كشف السر بالخطأ ودون قصد مسبق",
+                context = "\"He accidentally let the cat out of the bag regarding the upcoming ministerial reshuffle.\"",
+                explanation = "إظهار أو التصريح بأمر كان ينبغي أن يظل طي الكتمان."
+            ),
+            IdiomItem(
+                idiom = "Cry over spilled milk",
+                options = listOf("التحسر والندم على ما فات ولا يمكن تداركه", "البكاء على الحليب المسكوب", "إفساد وجبة طعام عائلية"),
+                culturalEquivalent = "التحسر والندم على ما فات ولا يمكن تداركه",
+                context = "\"The deal fell through, but there is no point in crying over spilled milk.\"",
+                explanation = "الحكمة المقابلة: لا فائدة من البكاء على ما فات أو الندم على ما لا يُسترد."
             )
         )
     }
@@ -1173,6 +1307,7 @@ fun IdiomsDeciphererGame(
     var isAnswered by remember { mutableStateOf(false) }
 
     val item = idioms[currentIdx]
+    val shuffledOptions = remember(currentIdx) { item.options.shuffled() }
 
     Card(
         modifier = Modifier.fillMaxWidth().testTag("game_idioms_master"),
@@ -1189,7 +1324,7 @@ fun IdiomsDeciphererGame(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = if (isArabic) "💡 كاشف التعبيرات الاصطلاحية والأمثال" else "💡 Idioms & Collocations Master",
+                    text = if (isArabic) "💡 كاشف التعبيرات الاصطلاحية والأمثال" else "💡 Idioms & Metaphors Decipherer",
                     fontWeight = FontWeight.Bold,
                     style = MaterialTheme.typography.titleMedium
                 )
@@ -1206,11 +1341,11 @@ fun IdiomsDeciphererGame(
                 color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Column(modifier = Modifier.padding(12.dp)) {
+                Column(modifier = Modifier.padding(14.dp)) {
                     Text(
-                        text = "التعبير الاصطلاحي: \"${item.idiom}\"",
-                        fontSize = 15.sp,
+                        text = "التعبير: \"${item.idiom}\"",
                         fontWeight = FontWeight.ExtraBold,
+                        fontSize = 16.sp,
                         color = RedPrimary
                     )
                     Spacer(Modifier.height(4.dp))
@@ -1223,12 +1358,13 @@ fun IdiomsDeciphererGame(
             }
 
             Text(
-                text = if (isArabic) "أي الخيارين يمثل المقابل الثقافي البلاغي الدقيق ويتجنب الترجمة الحرفية القاتلة؟" else "Pick the authentic cultural equivalent:",
+                text = if (isArabic) "أي الخيارات يمثل المقابل الثقافي البلاغي الدقيق ويتجنب الترجمة الحرفية؟" else "Pick the authentic cultural equivalent without literal distortion:",
                 fontSize = 11.5.sp,
                 fontWeight = FontWeight.SemiBold
             )
 
-            listOf(item.culturalEquivalent, item.literalTrap).shuffled(remember(currentIdx) { java.util.Random(currentIdx.toLong()) }).forEach { opt ->
+            // Dynamic Shuffled Options
+            shuffledOptions.forEach { opt ->
                 val isCorrect = opt == item.culturalEquivalent
                 val isChosen = selectedAns == opt
                 val bg = when {
@@ -1289,7 +1425,7 @@ fun IdiomsDeciphererGame(
 }
 
 // -------------------------------------------------------------------------------------------------
-// GAME 6: INTERNATIONAL ACRONYMS CRACKER (مفكك الاختصارات الدولية)
+// GAME 6: INTERNATIONAL ACRONYMS CRACKER
 // -------------------------------------------------------------------------------------------------
 @Composable
 fun AcronymsCrackerGame(
@@ -1358,14 +1494,26 @@ fun AcronymsCrackerGame(
             AcronymChallenge(
                 acronym = "OPEC",
                 fullEnglish = "Organization of the Petroleum Exporting Countries",
-                category = "اقتصاد وطاقة",
+                category = "طاقة واقتصاد عالمي",
                 correctArabic = "منظمة الدول المصدرة للنفط (أوبك)",
                 options = listOf(
-                    "منتدى الدول المصدرة للغاز الطبيعي",
+                    "منظمة الأقطار العربية المصدرة للبترول",
                     "منظمة الدول المصدرة للنفط (أوبك)",
                     "الوكالة الدولية للطاقة"
                 ),
-                explanation = "منظمة حكومية دولية دائمة تأسست في بغداد عام 1960 لتوحيد السياسات النفطية."
+                explanation = "منظمة حكومية دولية تضم الدول الرئيسية المصدرة للنفط لتنسيق السياسات النفطية ومقرها فيينا."
+            ),
+            AcronymChallenge(
+                acronym = "WHO",
+                fullEnglish = "World Health Organization",
+                category = "صحة عامة ورعاية",
+                correctArabic = "منظمة الصحة العالمية",
+                options = listOf(
+                    "منظمة الصحة العالمية",
+                    "الاتحاد العالمي للمستشفيات",
+                    "صندوق الأمم المتحدة للسكان"
+                ),
+                explanation = "الوكالة التابعة للأمم المتحدة والمسؤولة عن الصحة العامة الدولية ومقرها جنيف."
             ),
             AcronymChallenge(
                 acronym = "WTO",
@@ -1373,11 +1521,119 @@ fun AcronymsCrackerGame(
                 category = "تجارة واقتصاد دولي",
                 correctArabic = "منظمة التجارة العالمية",
                 options = listOf(
+                    "منظمة التجارة العالمية",
                     "منظمة السياحة العالمية",
-                    "منظمة العمل الدولية",
-                    "منظمة التجارة العالمية"
+                    "غرفة التجارة الدولية"
                 ),
-                explanation = "المنظمة العالمية الوحيدة التي تعنى بقواعد التجارة بين البلدان وتفض النزاعات الجمركية."
+                explanation = "المنظمة الدولية الوحيدة التي تختص بالقوانين التي تحكم التجارة بين الأمم ومقرها جنيف."
+            ),
+            AcronymChallenge(
+                acronym = "IMF",
+                fullEnglish = "International Monetary Fund",
+                category = "مالية ونقد دولي",
+                correctArabic = "صندوق النقد الدولي",
+                options = listOf(
+                    "صندوق النقد الدولي",
+                    "البنك الدولي للإنشاء والتعمير",
+                    "بنك التسويات الدولية"
+                ),
+                explanation = "مؤسسة مالية دولية تعمل على تعزيز الاستقرار المالي والتجارة الدولية ومقرها واشنطن."
+            ),
+            AcronymChallenge(
+                acronym = "NATO",
+                fullEnglish = "North Atlantic Treaty Organization",
+                category = "أمن ودفاع مشترك",
+                correctArabic = "حلف شمال الأطلسي (الناتو)",
+                options = listOf(
+                    "حلف شمال الأطلسي (الناتو)",
+                    "منظمة الأمن والتعاون في أوروبا",
+                    "مجلس حلف جنوب شرق آسيا"
+                ),
+                explanation = "تحالف عسكري حكومي دولي تأسس عام 1949 للدفاع المشترك ومقره بروكسل."
+            ),
+            AcronymChallenge(
+                acronym = "UNESCO",
+                fullEnglish = "United Nations Educational, Scientific and Cultural Organization",
+                category = "تربية وثقافة وتراث",
+                correctArabic = "منظمة الأمم المتحدة للتربية والعلم والثقافة (اليونسكو)",
+                options = listOf(
+                    "منظمة الأمم المتحدة للتربية والعلم والثقافة (اليونسكو)",
+                    "منظمة العمل الدولية",
+                    "صندوق الأمم المتحدة للطفولة"
+                ),
+                explanation = "وكالة الأمم المتحدة لحماية التراث العالمي وتشجيع التعليم والعلوم ومقرها باريس."
+            ),
+            AcronymChallenge(
+                acronym = "ILO",
+                fullEnglish = "International Labour Organization",
+                category = "عمل وتشغيل",
+                correctArabic = "منظمة العمل الدولية",
+                options = listOf(
+                    "منظمة العمل الدولية",
+                    "الاتحاد الدولي لنقابات العمال",
+                    "المنظمة الدولية للهجرة"
+                ),
+                explanation = "وكالة أممية ثلاثية التكوين تجمع الحكومات وأرباب العمل والعمال ومقرها جنيف."
+            ),
+            AcronymChallenge(
+                acronym = "FAO",
+                fullEnglish = "Food and Agriculture Organization",
+                category = "أمن غذائي وزراعة",
+                correctArabic = "منظمة الأغذية والزراعة للأمم المتحدة (الفاو)",
+                options = listOf(
+                    "منظمة الأغذية والزراعة للأمم المتحدة (الفاو)",
+                    "برنامج الأغذية العالمي",
+                    "الصندوق الدولي للتنمية الزراعية"
+                ),
+                explanation = "وكالة تقود الجهود الدولية للقضاء على الجوع وتحقيق الأمن الغذائي ومقرها روما."
+            ),
+            AcronymChallenge(
+                acronym = "ICC",
+                fullEnglish = "International Criminal Court",
+                category = "قضاء جنائي دولي",
+                correctArabic = "المحكمة الجنائية الدولية",
+                options = listOf(
+                    "المحكمة الجنائية الدولية",
+                    "محكمة العدل الدولية",
+                    "غرفة التجارة الدولية"
+                ),
+                explanation = "محكمة مستقلة تختص بمحاكمة مرتكبي أشد الجرائم خطورة كجرائم الإبادة والعدوان ومقرها لاهاي."
+            ),
+            AcronymChallenge(
+                acronym = "INTERPOL",
+                fullEnglish = "International Criminal Police Organization",
+                category = "أمن وإنفاذ القانون",
+                correctArabic = "المنظمة الدولية للشرطة الجنائية (الإنتربول)",
+                options = listOf(
+                    "المنظمة الدولية للشرطة الجنائية (الإنتربول)",
+                    "وكالة مكافحة المخدرات الدولية",
+                    "اليوروبول الأوروبي"
+                ),
+                explanation = "منظمة تيسر التعاون الشرطي الدولي في مكافحة الجريمة العابرة للحدود ومقرها ليون بفرنسا."
+            ),
+            AcronymChallenge(
+                acronym = "ASEAN",
+                fullEnglish = "Association of Southeast Asian Nations",
+                category = "تكتلات إقليمية",
+                correctArabic = "رابطة دول جنوب شرق آسيا (آسيان)",
+                options = listOf(
+                    "رابطة دول جنوب شرق آسيا (آسيان)",
+                    "منتدى التعاون الاقتصادي لدول آسيا والمحيط الهادئ",
+                    "اتحاد دول جنوب آسيا للتعاون الإقليمي"
+                ),
+                explanation = "منظمة اقتصادية وسياسية تضم 10 دول في جنوب شرق آسيا ومقر أمانتها جاكرتا."
+            ),
+            AcronymChallenge(
+                acronym = "OECD",
+                fullEnglish = "Organisation for Economic Co-operation and Development",
+                category = "تنمية واقتصاد",
+                correctArabic = "منظمة التعاون الاقتصادي والتنمية",
+                options = listOf(
+                    "منظمة التعاون الاقتصادي والتنمية",
+                    "صندوق التنمية الاقتصادية العالمي",
+                    "منظمة التجارة الحرة الدولية"
+                ),
+                explanation = "منظمة دولية تضم الدول المتقدمة لمناقشة وتطوير السياسات الاقتصادية والاجتماعية ومقرها باريس."
             )
         )
     }
@@ -1387,9 +1643,10 @@ fun AcronymsCrackerGame(
     var isAnswered by remember { mutableStateOf(false) }
 
     val current = challenges[currentIndex]
+    val shuffledOptions = remember(currentIndex) { current.options.shuffled() }
 
     Card(
-        modifier = Modifier.fillMaxWidth().testTag("game_acronyms_cracker"),
+        modifier = Modifier.fillMaxWidth().testTag("game_acronym_cracker"),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
@@ -1421,7 +1678,6 @@ fun AcronymsCrackerGame(
                 }
             }
 
-            // Acronym Banner
             Surface(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(12.dp),
@@ -1443,9 +1699,9 @@ fun AcronymsCrackerGame(
                     Text(
                         text = current.fullEnglish,
                         fontSize = 12.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        textAlign = TextAlign.Center
+                        fontWeight = FontWeight.SemiBold,
+                        textAlign = TextAlign.Center,
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                 }
             }
@@ -1456,8 +1712,8 @@ fun AcronymsCrackerGame(
                 fontWeight = FontWeight.SemiBold
             )
 
-            // Options
-            current.options.forEach { opt ->
+            // Dynamic Shuffled Options
+            shuffledOptions.forEach { opt ->
                 val isCorrect = opt == current.correctArabic
                 val isChosen = selectedOption == opt
                 val bg = when {
@@ -1470,6 +1726,7 @@ fun AcronymsCrackerGame(
                 Surface(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .clip(RoundedCornerShape(10.dp))
                         .clickable(enabled = !isAnswered) {
                             selectedOption = opt
                             isAnswered = true
@@ -1495,7 +1752,7 @@ fun AcronymsCrackerGame(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Column(modifier = Modifier.padding(10.dp)) {
-                        Text("💡 معلومة وثائقية:", fontWeight = FontWeight.Bold, fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurface)
+                        Text("💡 الفائدة الدبلوماسية والتاريخية:", fontWeight = FontWeight.Bold, fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurface)
                         Text(current.explanation, fontSize = 11.sp, lineHeight = 15.sp)
                     }
                 }
@@ -1517,7 +1774,7 @@ fun AcronymsCrackerGame(
 }
 
 // -------------------------------------------------------------------------------------------------
-// GAME 7: SIGHT TRANSLATION SPRINT (تحدي الترجمة المنظورة السريعة)
+// GAME 7: SIGHT TRANSLATION SPRINT
 // -------------------------------------------------------------------------------------------------
 @Composable
 fun SightTranslationSprintGame(
@@ -1722,19 +1979,35 @@ fun TerminologyBattleGame(
         mapOf(
             "قانون وعقود ⚖️" to listOf(
                 BattleItem("Estoppel", "ما المقابل القانوني الدقيق للمصطلح اللاتيني-الإنكليزي في القانون الإنجلو-أمريكي؟", "الإغلاق الحكمي / المنع من الادعاء", listOf("الإغلاق الحكمي / المنع من الادعاء", "التوقف عن الدفع", "الإعفاء من الالتزام"), "مبدأ يمنع الشخص من اتخاذ موقف يناقض ما أقر به سابقاً وألحق ضرراً بالغير."),
-                BattleItem("Without prejudice", "توضع في المراسلات التسووية بين المحامين وتعني:", "دون إخلال بالحقوق والمراكز القانونية", listOf("دون إخلال بالحقوق والمراكز القانونية", "دون تحيز أو تعصب", "بشكل نهائي وقاطع"), "تضمن عدم استخدام المراسلات كإقرار قضائي في حال فشل المفاوضات الودية.")
+                BattleItem("Without prejudice", "توضع في المراسلات التسووية بين المحامين وتعني:", "دون إخلال بالحقوق والمراكز القانونية", listOf("دون تحيز أو تعصب شخصي", "دون إخلال بالحقوق والمراكز القانونية", "بشكل نهائي وقاطع لا رجعة فيه"), "تضمن عدم استخدام المراسلات كإقرار قضائي في حال فشل المفاوضات الودية."),
+                BattleItem("Res judicata", "قاعدة لاتينية راسخة في المرافعات القضائية:", "حجية الشيء المقضي به / سبق الفصل في الدعوى", listOf("إعادة فتح باب المرافعة", "بطلان الحكم لعلة إجرائية", "حجية الشيء المقضي به / سبق الفصل في الدعوى"), "تعني أن النزاع قد فُصل فيه بحكم قضائي نهائي بات ولا يجوز إعادة طرحه."),
+                BattleItem("Bona fide", "شرط جوهري في إبرام العقود والمعاملات الدولية:", "حسن النية والسلامة من التدليس", listOf("سداد الثمن بالكامل", "حسن النية والسلامة من التدليس", "الضمان التجاري المصرفي"), "تعبير لاتيني يقابله Mala fide (سوء النية)، وهو ركن أساسي في صحة التصرفات."),
+                BattleItem("Liquidated damages", "بند مالي مدرج في عقود الإنشاءات والتوريد:", "التعويض الاتفاقي المشروط / الشرط الجزائي", listOf("التعويض القضائي اللاحق", "التعويض الاتفاقي المشروط / الشرط الجزائي", "غرامة التصفية الضريبية"), "مبلغ يُتفق عليه مسبقاً في العقد كتعويض في حال الإخلال بالتنفيذ دون الحاجة لإثبات الضرر."),
+                BattleItem("Force Majeure", "دفع قانوني تلجأ له الشركات عند الكوارث والحروب:", "القوة القاهرة المعفية من المسؤولية", listOf("الخطأ الجسيم غير المغتفر", "الظروف الطارئة المخففة", "القوة القاهرة المعفية من المسؤولية"), "حدث استثنائي لا يمكن توقعه أو دفعه يجعل تنفيذ الالتزام التعاقدي مستحيلاً.")
             ),
             "طب وصحة 🩺" to listOf(
-                BattleItem("Idiopathic", "تُطلق على الحالات والأمراض وتعني:", "مجهول السبب / مجهول المنشأ", listOf("مجهول السبب / مجهول المنشأ", "شديد العدوى", "مرض وراثي مزمن"), "من اليونانية idios (خاص/مستقل) وpathos (مرض) أي مرض ينشأ ذاتياً دون سبب خارجي معروف."),
-                BattleItem("Prognosis", "الفرق الجوهري بينها وبين Diagnosis:", "التكهن بالمآل وسير المرض المتوقع", listOf("التكهن بالمآل وسير المرض المتوقع", "التشخيص المخبري الدقيق", "العلاج الجراحي"), "Diagnosis هو تشخيص المرض الحالي، بينما Prognosis هو التنبؤ بمستقبل حالة المريض واستجابته.")
+                BattleItem("Idiopathic", "تُطلق على الحالات والأمراض وتعني:", "مجهول السبب / مجهول المنشأ", listOf("شديد العدوى والانتقال", "مجهول السبب / مجهول المنشأ", "مرض وراثي طافر"), "من اليونانية idios (خاص/مستقل) وpathos (مرض) أي مرض ينشأ ذاتياً دون سبب خارجي معروف."),
+                BattleItem("Prognosis", "الفرق الجوهري بينها وبين Diagnosis:", "التكهن بالمآل وسير المرض المتوقع", listOf("التشخيص المخبري والسريري الدقيق", "التكهن بالمآل وسير المرض المتوقع", "الفحص الإشعاعي للأعضاء"), "Diagnosis هو تشخيص المرض الحالي، بينما Prognosis هو التنبؤ بمستقبل حالة المريض واستجابته."),
+                BattleItem("Contraindication", "تحذير رئيسي في النشرات الدوائية المرافقة:", "موانع الاستعمال الدوائي", listOf("الجرعة الزائدة الموصى بها", "الآثار الجانبية الشائعة", "موانع الاستعمال الدوائي"), "الحالات المرضية أو الفسيولوجية التي يحظر فيها إعطاء الدواء لما قد يشكله من خطر جسيم."),
+                BattleItem("Myocardial infarction", "حالة طبية حرجة تتطلب تدخلاً إسعافياً فورياً:", "احتشاء عضلة القلب (الجلطة القلبية)", listOf("احتشاء عضلة القلب (الجلطة القلبية)", "التهاب الغشاء التاموري المزمن", "اضطراب نبضات الأذين"), "موت جزء من عضلة القلب نتيجة انقطاع التروية الدموية الشريانية التاجية."),
+                BattleItem("Intravenous vs Intramuscular", "طرق إعطاء الأدوية والحقن:", "حقن وريدي مقابل حقن عضلي", listOf("حقن وريدي مقابل حقن عضلي", "حقن تحت الجلد مقابل حقن شرياني", "حقن سطحي مقابل حقن عميق"), "IV هو الحقن في الوريد مباشرة وله تأثير فوري، بينما IM هو الحقن في العضلة لامتصاص أبطأ."),
+                BattleItem("Pathogenesis", "مفهوم محوري في علم الأمراض:", "الإمراضية / آلية نشوء وتطور المرض", listOf("خريطة الجينات الوراثية", "الإمراضية / آلية نشوء وتطور المرض", "طرق العلاج الطبيعي"), "المسار البيولوجي والخلوي الذي يؤدي من مسبب المرض إلى ظهور الأعراض السريرية.")
             ),
             "مالية واقتصاد 💹" to listOf(
-                BattleItem("Liquidity ratio", "مؤشر مالي هام للشركات والمصارف:", "نسبة السيولة النقدية وسرعة الوفاء", listOf("نسبة السيولة النقدية وسرعة الوفاء", "معدل دوران المخزون السلعي", "نسبة الأرباح الرأسمالية"), "يقيس قدرة المؤسسة على الوفاء بالتزاماتها المالية قصيرة الأجل فور استحقاقها."),
-                BattleItem("Bear market", "حالة السوق المالي عندما تنخفض الأسعار:", "السوق الهابطة (سوق الدببة)", listOf("السوق الهابطة (سوق الدببة)", "السوق الصاعدة (سوق الثيران)", "السوق الراكدة المستقرة"), "سوق يتسم بتشاؤم المستثمرين وهبوط المؤشرات بنسبة 20% فأكثر.")
+                BattleItem("Liquidity ratio", "مؤشر مالي هام للشركات والمصارف:", "نسبة السيولة النقدية وسرعة الوفاء", listOf("معدل دوران المخزون السلعي", "نسبة السيولة النقدية وسرعة الوفاء", "نسبة الأرباح الرأسمالية السنوية"), "يقيس قدرة المؤسسة على الوفاء بالتزاماتها المالية قصيرة الأجل فور استحقاقها."),
+                BattleItem("Bear market", "حالة السوق المالي عندما تنخفض الأسعار بشكل متواصل:", "السوق الهابطة (سوق الدببة)", listOf("السوق الصاعدة (سوق الثيران)", "السوق الهابطة (سوق الدببة)", "السوق الراكدة المستقرة"), "سوق يتسم بتشاؤم المستثمرين وهبوط مؤشرات الأسهم بنسبة 20% فأكثر."),
+                BattleItem("Due diligence", "إجراء مصرفي واستثماري قبل عمليات الاندماج:", "الفحص النافي للجهالة والتقصي اللازم", listOf("الفحص النافي للجهالة والتقصي اللازم", "التدقيق المحاسبي الروتيني", "التأمين ضد مخاطر الإفلاس"), "مراجعة شاملة لجميع السجلات المالية والقانونية والتشغيلية للشركة المستهدفة بالاستحواذ."),
+                BattleItem("Hedging", "استراتيجية مالية في إدارة المحافظ الاستثمارية:", "التحوط ضد مخاطر تقلب الأسعار", listOf("المضاربة السريعة في البورصة", "التحوط ضد مخاطر تقلب الأسعار", "تجميد الحسابات المصرفية"), "استخدام عقود المشتقات المالية للحد من الخسائر المحتملة عند تقلب أسعار العملات أو السلع."),
+                BattleItem("EBITDA", "مقياس مالي شهير لأداء الشركات التشغيلي:", "الأرباح قبل الفوائد والضرائب والإهلاك والاستهلاك", listOf("الأرباح الصافية بعد خصم كافة الرسوم", "الأرباح قبل الفوائد والضرائب والإهلاك والاستهلاك", "إجمالي رأس المال العامل"), "Earnings Before Interest, Taxes, Depreciation, and Amortization يقيس الربحية التشغيلية الصافية."),
+                BattleItem("Insolvency", "وضع مالي حرج للمدين أو الشركة:", "الإعسار المالي / عجز السيولة عن سداد الديون", listOf("الإعسار المالي / عجز السيولة عن سداد الديون", "التهرب الضريبي التجاري", "تجميد الأصول الدولية"), "عدم قدرة المدين على سداد ديونه المستحقة، وهو يسبق إعلان الإفلاس القضائي الرسمي.")
             ),
             "طاقة وهندسة ⚡" to listOf(
-                BattleItem("Upstream vs Downstream", "في الصناعة البترولية تعني:", "الاستكشاف والإنتاج مقابل التكرير والتوزيع", listOf("الاستكشاف والإنتاج مقابل التكرير والتوزيع", "التدفق العلوي مقابل التدفق السفلي", "خطوط الأنابيب البرية مقابل البحرية"), "Upstream تشمل التنقيب والاستخراج، وDownstream تشمل التكرير والتسويق للمستهلك."),
-                BattleItem("Carbon sequestration", "تقنية حيوية لمكافحة تغير المناخ:", "احتجاز وتخزين الكربون", listOf("احتجاز وتخزين الكربون", "حرق النفايات الكربونية", "عزل الانبعاثات بالترشيح"), "احتجاز غاز ثاني أكسيد الكربون من المصادر الصناعية وتخزينه في تكوينات جيولوجية عميقة.")
+                BattleItem("Upstream vs Downstream", "في الصناعة البترولية تعني مرحلياً:", "الاستكشاف والإنتاج مقابل التكرير والتوزيع", listOf("التدفق السطحي مقابل التدفق الجوفي", "الاستكشاف والإنتاج مقابل التكرير والتوزيع", "الأنابيب البرية مقابل البحرية"), "Upstream تشمل التنقيب والاستخراج، وDownstream تشمل التكرير والبتروكيماويات والتسويق."),
+                BattleItem("Carbon sequestration", "تقنية حيوية لمكافحة الاحتباس الحراري:", "احتجاز وتخزين الكربون في باطن الأرض", listOf("حرق النفايات الهيدروكربونية", "احتجاز وتخزين الكربون في باطن الأرض", "تحلية الانبعاثات بالترشيح"), "احتجاز غاز ثاني أكسيد الكربون من المصادر الصناعية وتخزينه في تكوينات جيولوجية عميقة."),
+                BattleItem("Photovoltaic cell", "المكون الأساسي لمحطات الطاقة الشمسية:", "الخلية الكهروضوئية المنتجة للكهرباء", listOf("المرآة الحرارية المجمعة", "الخلية الكهروضوئية المنتجة للكهرباء", "العاكس الكهربائي الذكي"), "أداة شبه موصلة تحول الطاقة الضوئية للشمس مباشرة إلى تيار كهربائي مستمر."),
+                BattleItem("Smart grid", "تحديث شبكات نقل وتوزيع الطاقة الكهربائية:", "الشبكة الكهربائية الذكية التفاعلية", listOf("محطة التوليد النووية", "الشبكة الكهربائية الذكية التفاعلية", "خطوط الضغط الفائق التقليدية"), "شبكة تستخدم تكنولوجيا المعلومات الرقمية لرصد تدفق الكهرباء والتجاوب مع تغيرات الطلب."),
+                BattleItem("Depletion rate", "معدل استنزاف الحقول الهيدروكربونية:", "معدل نضوب الاحتياطي النفطي أو الغازي", listOf("معدل تدفق سائل الحفر", "معدل نضوب الاحتياطي النفطي أو الغازي", "نسبة شوائب الكبريت"), "النسبة السنوية لما يتم استخراجه من مكمن نفطي مقارنة بإجمالي الاحتياطي المقدر المتبقي."),
+                BattleItem("Gas flaring", "ممارسة صناعية في مواقع إنتاج النفط:", "حرق الغاز المصاحب في الشعلات الهوائية", listOf("إعادة حقن الغاز لزيادة الضغط", "حرق الغاز المصاحب في الشعلات الهوائية", "تسييل الغاز الطبيعي"), "حرق الغاز الطبيعي غير المستغل اقتصادياً المرافق لاستخراج النفط، وتخضع لضوابط بيئية صارمة.")
             )
         )
     }
@@ -1745,6 +2018,7 @@ fun TerminologyBattleGame(
     var isAnswered by remember { mutableStateOf(false) }
 
     val item = currentItems.getOrNull(currentItemIdx % currentItems.size) ?: return
+    val shuffledOptions = remember(item) { item.options.shuffled() }
 
     Card(
         modifier = Modifier.fillMaxWidth().testTag("game_terminology_battle"),
@@ -1798,26 +2072,33 @@ fun TerminologyBattleGame(
                     Spacer(Modifier.height(4.dp))
                     Text(
                         text = item.prompt,
-                        fontSize = 11.5.sp,
+                        fontSize = 12.sp,
                         color = MaterialTheme.colorScheme.onSurface
                     )
                 }
             }
 
-            // Options
-            item.options.forEach { opt ->
+            Text(
+                text = if (isArabic) "اختر المقابل التخصصي الدقيق المعتمد في الصناعة:" else "Pick the authoritative domain translation:",
+                fontSize = 11.sp,
+                fontWeight = FontWeight.SemiBold
+            )
+
+            // Dynamic Shuffled Options
+            shuffledOptions.forEach { opt ->
                 val isCorrect = opt == item.correct
                 val isChosen = selectedAns == opt
                 val bg = when {
-                    !isAnswered -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f)
-                    isCorrect -> SuccessGreen.copy(alpha = 0.2f)
-                    isChosen -> Color.Red.copy(alpha = 0.15f)
-                    else -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.25f)
+                    !isAnswered -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)
+                    isCorrect -> SuccessGreen.copy(alpha = 0.25f)
+                    isChosen -> Color.Red.copy(alpha = 0.2f)
+                    else -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
                 }
 
                 Surface(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .clip(RoundedCornerShape(10.dp))
                         .clickable(enabled = !isAnswered) {
                             selectedAns = opt
                             isAnswered = true

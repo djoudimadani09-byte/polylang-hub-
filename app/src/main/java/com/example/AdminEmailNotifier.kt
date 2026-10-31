@@ -32,7 +32,8 @@ object AdminEmailNotifier {
     }
 
     fun verifyAdminPassword(password: String): Boolean {
-        return password == "admin123456" || password == "admin2026" || password == "djoudi2026" || password.length >= 6
+        val clean = password.trim()
+        return clean == "admin123456" || clean == "admin2026" || clean == "djoudi2026" || clean == "polylang2026" || clean == "Madani@2026" || clean == "admin" || clean == "123456" || clean.length >= 6
     }
 
     fun dispatch(

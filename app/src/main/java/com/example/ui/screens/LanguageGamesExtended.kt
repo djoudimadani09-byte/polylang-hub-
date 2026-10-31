@@ -88,6 +88,87 @@ fun CollocationMasterGame(
                 correct = "extinguish",
                 explanationAr = "المصطلح القانوني لإسقاط الحقوق بالتقادم أو مرور الميعاد هو 'extinguish a right / extinguish a claim'.",
                 explanationEn = "In procedural law, rights are 'extinguished' upon lapse of prescription periods."
+            ),
+            CollocationQuestion(
+                promptEn = "The presiding judge decided to _____ the hearing until next Tuesday.",
+                promptAr = "قرر رئيس الجلسة القضائية رفع الجلسة وتأجيلها إلى الثلاثاء القادم:",
+                domain = "إجراءات المحاكم",
+                options = listOf("adjourn", "delay", "postpone indefinitely", "stop"),
+                correct = "adjourn",
+                explanationAr = "يقال في المحاكم والمؤتمرات: 'adjourn the hearing / session' (رفع الجلسة مؤقتاً).",
+                explanationEn = "In judicial proceedings, hearings are 'adjourned'."
+            ),
+            CollocationQuestion(
+                promptEn = "The contracting parties agreed to _____ all claims arising from the contract.",
+                promptAr = "اتفقت الأطراف المتعاقدة على التنازل وإبراء الذمة من كافة المطالبات:",
+                domain = "صياغة العقود",
+                options = listOf("waive", "delete", "throw away", "ignore"),
+                correct = "waive",
+                explanationAr = "المتلازمة التعاقدية للتنازل عن حق أو مطالبة هي 'waive a claim / waive rights'.",
+                explanationEn = "Legal contracts use 'waive a claim' to express voluntary relinquishment."
+            ),
+            CollocationQuestion(
+                promptEn = "The company was found liable for _____ of contract under Article 12.",
+                promptAr = "ثبتت مسؤولية الشركة عن الإخلال ببنود العقد بموجب المادة 12:",
+                domain = "القانون التجاري",
+                options = listOf("breach", "break", "tear", "fracture"),
+                correct = "breach",
+                explanationAr = "المصطلح القانوني المعتمد للإخلال بالعقد هو حصراً 'breach of contract'.",
+                explanationEn = "Contractual violation is termed 'breach of contract'."
+            ),
+            CollocationQuestion(
+                promptEn = "The minister delivered a speech to _____ tribute to international translators.",
+                promptAr = "ألقى الوزير كلمة للإشادة والثناء والتقدير للمترجمين الدوليين:",
+                domain = "الخطابات الرسمية",
+                options = listOf("pay", "give", "spend", "donate"),
+                correct = "pay",
+                explanationAr = "المتلازمة البلاغية الشهيرة هي 'pay tribute to' (الإشادة بـ / تكريم).",
+                explanationEn = "The established phrase is 'to pay tribute to'."
+            ),
+            CollocationQuestion(
+                promptEn = "The board convened an emergency meeting to _____ a vote of no confidence.",
+                promptAr = "عقد مجلس الإدارة اجتماعاً طارئاً لطرح وسحب الثقة بالاقتراع:",
+                domain = "حوكمة الشركات والبرلمان",
+                options = listOf("table", "put", "seat", "stand"),
+                correct = "table",
+                explanationAr = "في الإجراءات البرلمانية والمؤسسية: 'table a motion / table a vote' (طرح اقتراح للتصويت).",
+                explanationEn = "Parliamentary procedure uses 'table a motion'."
+            ),
+            CollocationQuestion(
+                promptEn = "The physician advised the patient to _____ strict compliance with antibiotic therapy.",
+                promptAr = "نصح الطبيب المريض بالحفاظ على الامتثال والالتزام التام بالعلاج:",
+                domain = "الترجمة الطبية والدوائية",
+                options = listOf("maintain", "hold", "keep up", "catch"),
+                correct = "maintain",
+                explanationAr = "يقال طبياً: 'maintain compliance' (الالتزام الصارم بتعليمات العلاج).",
+                explanationEn = "Medical advice stresses 'maintaining compliance'."
+            ),
+            CollocationQuestion(
+                promptEn = "The central bank acted swiftly to _____ liquidity into the banking system.",
+                promptAr = "تدخل البنك المركزي على الفور لضخ السيولة النقدية في النظام المصرفي:",
+                domain = "السياسة النقدية والمصارف",
+                options = listOf("inject", "throw", "push", "pour"),
+                correct = "inject",
+                explanationAr = "المتلازمة المالية الشائعة: 'inject liquidity' (ضخ السيولة النقدية).",
+                explanationEn = "Monetary authorities 'inject liquidity' into financial markets."
+            ),
+            CollocationQuestion(
+                promptEn = "The witness was placed under oath to _____ testimony before the grand jury.",
+                promptAr = "أُحلف الشاهد اليمين القانونية لتقديم الشهادة أمام هيئة المحلفين الكبرى:",
+                domain = "القضاء الجنائي",
+                options = listOf("give", "speak", "tell", "chant"),
+                correct = "give",
+                explanationAr = "المتلازمة القضائية: 'give testimony' (الإدلاء بالشهادة).",
+                explanationEn = "Witnesses 'give testimony' under oath."
+            ),
+            CollocationQuestion(
+                promptEn = "The treaty explicitly states that all provisions shall _____ precedence over local statutes.",
+                promptAr = "تنص المعاهدة صراحة على أن تكون لجميع أحكامها الأولوية والرجحان على القوانين المحلية:",
+                domain = "القانون الدولي العام",
+                options = listOf("take", "have", "gain", "hold"),
+                correct = "take",
+                explanationAr = "يقال في صياغة القوانين والمعاهدات: 'take precedence over' (تسمو على / تأخذ الأسبقية).",
+                explanationEn = "International treaties 'take precedence over' domestic law."
             )
         )
     }
@@ -97,6 +178,9 @@ fun CollocationMasterGame(
     var isAnswered by remember { mutableStateOf(false) }
 
     val currentQ = questions[currentIndex]
+    val shuffledOptions = remember(currentIndex) {
+        currentQ.options.shuffled(java.util.Random(currentIndex.toLong() * 19 + 7))
+    }
 
     Card(
         modifier = Modifier
@@ -155,8 +239,8 @@ fun CollocationMasterGame(
                 }
             }
 
-            // Options Grid
-            currentQ.options.forEach { opt ->
+            // Options Grid (Randomly Shuffled for each question)
+            shuffledOptions.forEach { opt ->
                 val isCorrect = opt == currentQ.correct
                 val isChosen = selectedOption == opt
                 val bgColor = when {
@@ -305,6 +389,102 @@ fun ProofreaderChallengeGame(
                 ),
                 correctFix = "دون الإخلال بالأحكام / البنود سالفة الذكر أعلاه",
                 explanation = "في العقود، 'Without prejudice to' تعني دائماً 'دون إخلال بـ'، وليس لها أي علاقة بالتعصب أو العنصرية."
+            ),
+            ProofreaderCase(
+                sourceText = "The suspect was remanded in custody pending trial.",
+                candidateTranslation = "تم إرجاع المشتبه به إلى الحضانة المنزلية بانتظار المحاكمة.",
+                flawType = "خطأ في دلالة مصطلح Custody القضائي",
+                options = listOf(
+                    "أودع المشتبه فيه رهن الحبس الاحتياطي على ذمة المحاكمة",
+                    "وُضع المتهم تحت الإقامة الجبرية المشروطة",
+                    "تم إطلاق سراح المشتبه فيه بكفالة مالية"
+                ),
+                correctFix = "أودع المشتبه فيه رهن الحبس الاحتياطي على ذمة المحاكمة",
+                explanation = "في القانون الجنائي، 'remanded in custody' تعني الحبس الاحتياطي وليس حضانة الأطفال أو المنزل."
+            ),
+            ProofreaderCase(
+                sourceText = "The treaty was ratified by an overwhelming majority.",
+                candidateTranslation = "تم التحقق من المعاهدة بغالبية ساحقة.",
+                flawType = "ترجمة خاطئة لمصطلح Ratification الدبلوماسي",
+                options = listOf(
+                    "صودق على المعاهدة بأغلبية ساحقة",
+                    "تم توقيع مسودة المعاهدة بالأحرف الأولى",
+                    "عُدلت بنود المعاهدة بتوافق الآراء"
+                ),
+                correctFix = "صودق على المعاهدة بأغلبية ساحقة",
+                explanation = "المصطلح الدبلوماسي الرسمي لـ Ratify هو 'يصادق برلمانياً' وليس يتحقق أو يثبت."
+            ),
+            ProofreaderCase(
+                sourceText = "The minister delivered an off-the-record briefing.",
+                candidateTranslation = "ألقى الوزير خطاباً غير مسجل على الشريط الصوتي.",
+                flawType = "تفسير حرفي ساذج لمصطلح صحفي إعلامي",
+                options = listOf(
+                    "قدم الوزير إحاطة إعلامية غير قابلة للنشر أو الاقتباس المباشر",
+                    "رفض الوزير الإدلاء بأي تصريح للصحافة",
+                    "ألقى الوزير كلمة مسجلة خارج الاستوديو"
+                ),
+                correctFix = "قدم الوزير إحاطة إعلامية غير قابلة للنشر أو الاقتباس المباشر",
+                explanation = "في الصحافة والدبلوماسية، 'off-the-record' تعني تصريحات للاسترشاد فقط دون ذكر اسم المصدر أو اقتباسه."
+            ),
+            ProofreaderCase(
+                sourceText = "The court issued a writ of habeas corpus.",
+                candidateTranslation = "أصدرت المحكمة أمراً بجلب جثة المتوفى.",
+                flawType = "خلط لاتيني فادح بين Corpus و Habeas Corpus",
+                options = listOf(
+                    "أصدرت المحكمة أمر إحضار للمثول والتحقق من مشروعية التوقيف",
+                    "أمرت المحكمة بتشريح الجثمان جنائياً",
+                    "أصدر القاضي حكماً بالحبس المؤبد"
+                ),
+                correctFix = "أصدرت المحكمة أمر إحضار للمثول والتحقق من مشروعية التوقيف",
+                explanation = "'Habeas corpus' مذكرة قضائية دستورية تضمن عدم احتجاز أي شخص بصورة تعسفية دون مبرر قانوني."
+            ),
+            ProofreaderCase(
+                sourceText = "The contract includes an indemnity clause.",
+                candidateTranslation = "يحتوي العقد على بند خاص بإدانة المتسبب.",
+                flawType = "الخلط اللغوي بين Indemnity والإدانة",
+                options = listOf(
+                    "يتضمن العقد بند التعويض وجبر الضرر وإبراء الذمة",
+                    "يشتمل العقد على غرامات جزائية جنائية",
+                    "يفرض العقد عقوبة السجن على المقاول"
+                ),
+                correctFix = "يتضمن العقد بند التعويض وجبر الضرر وإبراء الذمة",
+                explanation = "'Indemnity' تعني التعويض المالي والحماية من الخسائر، وليس الإدانة الجنائية (Condemnation)."
+            ),
+            ProofreaderCase(
+                sourceText = "The patient is in stable condition post-op.",
+                candidateTranslation = "المريض في حالة مستقرة بعد العملية السرية.",
+                flawType = "فهم مغلوط لاختصار post-op الطبي",
+                options = listOf(
+                    "حالة المريض مستقرة بعد العملية الجراحية (ما بعد الجراحة)",
+                    "المريض يخضع للعلاج الطبيعي المكثف",
+                    "المريض خرج من المستشفى نهائياً"
+                ),
+                correctFix = "حالة المريض مستقرة بعد العملية الجراحية (ما بعد الجراحة)",
+                explanation = "اختصار post-op يعني post-operative أي ما بعد العملية الجراحية وليس عملية سرية (Op)."
+            ),
+            ProofreaderCase(
+                sourceText = "The company declared an interim dividend of $2 per share.",
+                candidateTranslation = "أعلنت الشركة عن أرباح مؤقتة قدرها دولارين.",
+                flawType = "عدم دقة المصطلح المالي لـ Interim dividend",
+                options = listOf(
+                    "أعلنت الشركة توزيع أرباح مرحلية (نصف سنوية) بقيمة دولارين للسهم",
+                    "ألغت الشركة توزيع الأرباح هذا العام",
+                    "فرضت الشركة رسوماً مؤقتة على المساهمين"
+                ),
+                correctFix = "أعلنت الشركة توزيع أرباح مرحلية (نصف سنوية) بقيمة دولارين للسهم",
+                explanation = "في الأسواق المالية، 'Interim dividend' هي الأرباح المرحلية التي توزع قبل الحسابات الختامية السنوية."
+            ),
+            ProofreaderCase(
+                sourceText = "The legislation was passed by a bipartisan coalition.",
+                candidateTranslation = "تم تمرير التشريع من قبل تحالف ثنائي الطرفين.",
+                flawType = "الترجمة الحرفية لمصطلح Bipartisan السياسي",
+                options = listOf(
+                    "أُقرّ التشريع بدعم مشترك من الحزبين الرئيسيين (عابر للأحزاب)",
+                    "رُفض مشروع القانون من المعارضة البرلمانية",
+                    "تم تأجيل التصويت على التشريع لدورة لاحقة"
+                ),
+                correctFix = "أُقرّ التشريع بدعم مشترك من الحزبين الرئيسيين (عابر للأحزاب)",
+                explanation = "'Bipartisan' تعني التوافق بين الحزبين المتنافسين (مثل الديمقراطيين والجمهوريين) وليس مجرد طرفين."
             )
         )
     }
@@ -314,6 +494,9 @@ fun ProofreaderChallengeGame(
     var isEvaluated by remember { mutableStateOf(false) }
 
     val c = cases[activeIdx]
+    val shuffledOptions = remember(activeIdx) {
+        c.options.shuffled(java.util.Random(activeIdx.toLong() * 31 + 13))
+    }
 
     Card(
         modifier = Modifier
@@ -368,7 +551,8 @@ fun ProofreaderChallengeGame(
                 fontSize = 12.sp
             )
 
-            c.options.forEach { opt ->
+            // Shuffled options
+            shuffledOptions.forEach { opt ->
                 val isCorrect = opt == c.correctFix
                 val isChosen = selectedFix == opt
                 val bg = when {
@@ -429,7 +613,7 @@ fun ProofreaderChallengeGame(
 }
 
 // =================================================================================================
-// GAME 11: CULTURAL & LEGAL NUANCE QUEST (تحدي الفروق الثقافية والقانونية)
+// GAME 11: CULTURAL & LEGAL NUANCE QUEST (الفروق القانونية والثقافية المقارنة)
 // =================================================================================================
 @Composable
 fun CulturalNuancesGame(
@@ -446,34 +630,124 @@ fun CulturalNuancesGame(
     val quests = remember {
         listOf(
             NuanceQuest(
-                question = "ما هو الفرق الجوهري بين مصطلح 'Notary Public' في الولايات المتحدة ومصطلح 'Notaire' في فرنسا والجزائر؟",
+                question = "ما هو الفرق الجوهري الدقيق بين Notary Public في أمريكا و Notaire في فرنسا والجزائر؟",
                 options = listOf(
-                    "الـ Notaire محامٍ موثق عمومي يحمل صفة قضائية رسمية، بينما في أمريكا هو مجرد شاهد على التوقيع دون فحص قانوني",
-                    "لا يوجد أي فرق، كلاهما قضاة في المحكمة العليا",
-                    "الـ Notary Public الأمريكي يجب أن يكون حاصلاً على دكتوراه في القانون الدولي"
+                    "الـ Notaire موثق عمومي رسمي يصيغ ويوثق العقود، بينما في أمريكا شاهد على التوقيع فقط",
+                    "كلاهما قضاة يعينهم رئيس الجمهورية بالمحكمة العليا",
+                    "الـ Notary Public الأمريكي يشترط أن يكون حاملاً للدكتوراه في القانون الدولي"
                 ),
-                correct = "الـ Notaire محامٍ موثق عمومي يحمل صفة قضائية رسمية، بينما في أمريكا هو مجرد شاهد على التوقيع دون فحص قانوني",
-                legalInsight = "في الدول اللاتينية (Civil Law) كفرنسا والجزائر، الموثق ضابط عمومي يصيغ العقود الرسمية. أما في الولايات المتحدة فالـ Notary Public يكتفي بالتأكد من هوية الموقعين فقط."
+                correct = "الـ Notaire موثق عمومي رسمي يصيغ ويوثق العقود، بينما في أمريكا شاهد على التوقيع فقط",
+                legalInsight = "في النظم المدنية (Civil Law)، الموثق ضابط عمومي يصيغ العقود الرسمية ويضمن صحتها القانونية. أما في الولايات المتحدة، فالـ Notary Public لا يشترط شهادة قانونية ووظيفته التحقق من هوية الموقعين."
             ),
             NuanceQuest(
-                question = "كيف تُترجم عبارة 'Certified True Copy' في المستندات الرسمية المعتمدة؟",
+                question = "كيف تُترجم عبارة 'Certified True Copy' في المستندات الرسمية المعتمدة الصادرة بالإنجليزية؟",
                 options = listOf(
                     "نسخة طبق الأصل ومطابقة للأصل المحفوظ",
-                    "نسخة حقيقية معتمدة من الإنترنت",
-                    "صورة طبق النسخة الأصلية"
+                    "نسخة حقيقية مسحوبة من الإنترنت",
+                    "صورة ملونة موثقة بالختم الجاف"
                 ),
                 correct = "نسخة طبق الأصل ومطابقة للأصل المحفوظ",
-                legalInsight = "الصياغة الإدارية والقانونية الجزائرية والدولية المعتمدة هي 'نسخة طبق الأصل' المقابلة للفرنسية 'Copie conforme à l\\'original'."
+                legalInsight = "الصياغة الإدارية والترجمية الجزائرية والدولية الرسمية هي حصراً 'نسخة طبق الأصل' (Copie conforme à l'original)."
             ),
             NuanceQuest(
-                question = "في القانون الدولي الخاص، ماذا يعني مفهوم 'Locus regit actum' عند توثيق العقود؟",
+                question = "ماذا تعني قاعدة 'Locus regit actum' في تنازع القوانين وتوثيق المعاملات الدولية؟",
                 options = listOf(
                     "قانون محل إبرام التصرف هو الذي يحكم شكله وصحته الظاهرية",
-                    "القاضي يحكم وفق قانون موطنه فقط",
-                    "مكان إقامة المدعى عليه هو الاختصاص الحصري"
+                    "القاضي يحكم وفق قانون موطنه فقط دون غيره",
+                    "مكان إقامة المدعى عليه هو الاختصاص القضائي الحصري"
                 ),
                 correct = "قانون محل إبرام التصرف هو الذي يحكم شكله وصحته الظاهرية",
-                legalInsight = "قاعدة لاتينية شهيرة في تنازع القوانين تعني أن شكل التصرف القانوني يخضع لقانون الدولة التي أُبرم فيها."
+                legalInsight = "قاعدة لاتينية شهيرة في القانون الدولي الخاص تفيد بأن شكل التصرف القانوني يخضع لقانون الدولة التي أُبرم فيها."
+            ),
+            NuanceQuest(
+                question = "ما الفرق بين Tort في القانون الإنجلو-أمريكي والجريمة Crime؟",
+                options = listOf(
+                    "Tort مسؤولية مدنية تقصيرية توجب التعويض للمتضرر، بينما Crime اعتداء على المجتمع يعاقب عليه القانون العام",
+                    "Tort هي عقوبة الإعدام بينما Crime هي الغرامة المالية",
+                    "كلاهما مصطلحان مترادفان تماماً في القانون الجنائي"
+                ),
+                correct = "Tort مسؤولية مدنية تقصيرية توجب التعويض للمتضرر، بينما Crime اعتداء على المجتمع يعاقب عليه القانون العام",
+                legalInsight = "الـ Tort هو الفعل الضار المدني (Delict في القانون المدني)، والدعوى فيه ترفع من الضحية للتعويض، بخلاف الجريمة التي تحركها النيابة العامة."
+            ),
+            NuanceQuest(
+                question = "في الصياغة الدبلوماسية، ما الفرق الدقيق بين Persona non grata و Persona grata؟",
+                options = listOf(
+                    "Persona non grata تعني دبلوماسي غير مرغوب فيه ويطلب مغادرته، بينما الثانية تعني مقبول ومعتمد",
+                    "الأولى تعني السفير المعين والثانية تعني القنصل الفخري",
+                    "الأولى تطلق على المترجمين والثانية على السفراء"
+                ),
+                correct = "Persona non grata تعني دبلوماسي غير مرغوب فيه ويطلب مغادرته، بينما الثانية تعني مقبول ومعتمد",
+                legalInsight = "بموجب المادة 9 من اتفاقية فيينا للعلاقات الدبلوماسية (1961)، يحق للدولة المستقبلة إعلان أي مبعوث كشخص غير مرغوب فيه دون إبداء الأسباب."
+            ),
+            NuanceQuest(
+                question = "ما هو المقابل الدقيق لمصطلح 'Barrister' مقابل 'Solicitor' في النظام القضائي الإنجليزي؟",
+                options = listOf(
+                    "Barrister هو محامي المرافعات أمام المحاكم العليا، بينما Solicitor يقدم الاستشارات ويعد الملفات",
+                    "Barrister قاضي تحقيق و Solicitor كاتب ضبط",
+                    "كلاهما نفس التخصص ونفس رداء المحكمة"
+                ),
+                correct = "Barrister هو محامي المرافعات أمام المحاكم العليا، بينما Solicitor يقدم الاستشارات ويعد الملفات",
+                legalInsight = "النظام القضائي الإنجليزي يفصل تقليدياً بين محامي المرافعة (Barrister) الذي يرتدي الباروكة، والمحامي المكتبي الاستشاري (Solicitor)."
+            ),
+            NuanceQuest(
+                question = "ماذا تعني عبارة 'Pacta sunt servanda' في المعاهدات الدولية؟",
+                options = listOf(
+                    "العقد شريعة المتعاقدين ويجب تنفيذه بحسن نية",
+                    "المعاهدات تلغى فور تغيير الحكومة",
+                    "الحق في نقض الاتفاقية بأثر فوري"
+                ),
+                correct = "العقد شريعة المتعاقدين ويجب تنفيذه بحسن نية",
+                legalInsight = "المبدأ الأساسي في القانون الدولي العام (المادة 26 من اتفاقية فيينا لقانون المعاهدات): الاتفاقيات ملزمة لأطرافها ويجب تطبيقها بحسن نية."
+            ),
+            NuanceQuest(
+                question = "في الترجمة المالية، ما الفرق الدقيق بين 'Revenue' و 'Net Profit'؟",
+                options = listOf(
+                    "Revenue هو إجمالي الإيرادات قبل حسم التكاليف، بينما Net Profit هو صافي الأرباح بعد المصاريف والضرائب",
+                    "Revenue هي أرباح الأسهم و Net Profit هو رأس مال الشركة",
+                    "كلاهما يعني نفس الرقم في الميزانية العمومية"
+                ),
+                correct = "Revenue هو إجمالي الإيرادات قبل حسم التكاليف، بينما Net Profit هو صافي الأرباح بعد المصاريف والضرائب",
+                legalInsight = "الخلط بين الإيراد الإجمالي (Turnover/Revenue) وصافي الربح (Bottom Line / Net Income) يغير القيمة الاستثمارية تماماً."
+            ),
+            NuanceQuest(
+                question = "ماذا يُقصد بمصطلح 'Force Majeure' مقارنة بمصطلح 'Act of God' في العقود الإنجليزية؟",
+                options = listOf(
+                    "Act of God يشمل الكوارث الطبيعية فقط، بينما Force Majeure يشمل أيضاً الحروب والاضطرابات السياسية",
+                    "Act of God يقتصر على أخطاء المقاولين البشريين",
+                    "Force Majeure تشترط موافقة المحكمة المسبقة"
+                ),
+                correct = "Act of God يشمل الكوارث الطبيعية فقط، بينما Force Majeure يشمل أيضاً الحروب والاضطرابات السياسية",
+                legalInsight = "في القانون الإنجليزي، 'Act of God' حصراً للكوارث الطبيعية (زلازل، فيضانات)، بينما بند القوة القاهرة أوسع ويشمل أفعال البشر كالحروب والإضرابات العامة."
+            ),
+            NuanceQuest(
+                question = "ما هي 'Ultra Vires' في قانون الشركات والقانون الإداري؟",
+                options = listOf(
+                    "تجاوز الصلاحيات والاختصاصات القانونية المقررة نظاماً",
+                    "الصلاحيات المطلقة الممنوحة للمدير العام",
+                    "العقود المبرمة بأغلبية الثلثين"
+                ),
+                correct = "تجاوز الصلاحيات والاختصاصات القانونية المقررة نظاماً",
+                legalInsight = "مبدأ لاتيني يترتب عليه بطلان أي تصرف يصدر عن هيئة أو شركة يتجاوز الأغراض المحددة في نظامها الأساسي."
+            ),
+            NuanceQuest(
+                question = "ما الفرق بين 'Bilateral' و 'Multilateral' في الاتفاقيات والمعاهدات؟",
+                options = listOf(
+                    "Bilateral ثنائي الأطراف بين دولتين، و Multilateral متعدد الأطراف بين ثلاث دول فأكثر",
+                    "Bilateral معاهدة سلام و Multilateral معاهدة تجارة",
+                    "Bilateral مؤقتة و Multilateral دائمة"
+                ),
+                correct = "Bilateral ثنائي الأطراف بين دولتين، و Multilateral متعدد الأطراف بين ثلاث دول فأكثر",
+                legalInsight = "التفرقة الدبلوماسية الدقيقة بين الاتفاقيات الثنائية (Bilateral Treaties) والاتفاقيات الدولية متعددة الأطراف (Multilateral Conventions)."
+            ),
+            NuanceQuest(
+                question = "كيف يُترجم مفهوم 'Common Law' مقابل 'Civil Law'؟",
+                options = listOf(
+                    "القانون العام (الأنجلو-أمريكي القائم على السوابق) مقابل القانون المدني (اللاتيني المقنن)",
+                    "القانون الشعبي مقابل القانون العسكري",
+                    "القانون التجاري مقابل القانون الدستوري"
+                ),
+                correct = "القانون العام (الأنجلو-أمريكي القائم على السوابق) مقابل القانون المدني (اللاتيني المقنن)",
+                legalInsight = "أهم تقسيم للأنظمة القانونية في العالم المقارن: النظام الإنجليزي المبني على السوابق القضائية، والنظام الروماني الجرماني المعتمد على التقنين المكتوب."
             )
         )
     }
@@ -483,6 +757,9 @@ fun CulturalNuancesGame(
     var solved by remember { mutableStateOf(false) }
 
     val q = quests[qIndex]
+    val shuffledOptions = remember(qIndex) {
+        q.options.shuffled(java.util.Random(qIndex.toLong() * 23 + 5))
+    }
 
     Card(
         modifier = Modifier
@@ -518,7 +795,8 @@ fun CulturalNuancesGame(
                 lineHeight = 19.sp
             )
 
-            q.options.forEach { opt ->
+            // Shuffled options
+            shuffledOptions.forEach { opt ->
                 val isCorrect = opt == q.correct
                 val isChosen = userChoice == opt
                 val bg = when {
@@ -552,13 +830,12 @@ fun CulturalNuancesGame(
 
             if (solved) {
                 Surface(
+                    modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(10.dp),
-                    color = GoldYellow.copy(alpha = 0.15f),
-                    modifier = Modifier.fillMaxWidth()
+                    color = GoldYellow.copy(alpha = 0.15f)
                 ) {
-                    Column(modifier = Modifier.padding(10.dp)) {
-                        Text("⚖️ إضاءة فقهية وقانونية مقارنة:", fontWeight = FontWeight.Bold, fontSize = 11.5.sp, color = MaterialTheme.colorScheme.onSurface)
-                        Spacer(Modifier.height(3.dp))
+                    Column(modifier = Modifier.padding(12.dp)) {
+                        Text("💡 التحليل القانوني والمقارن المعتمد:", fontWeight = FontWeight.Bold, fontSize = 11.5.sp, color = MaterialTheme.colorScheme.onSurface)
                         Text(q.legalInsight, fontSize = 11.5.sp, lineHeight = 16.sp)
                     }
                 }
@@ -572,7 +849,7 @@ fun CulturalNuancesGame(
                     modifier = Modifier.fillMaxWidth(),
                     colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
                 ) {
-                    Text(if (isArabic) "السؤال المقارن التالي ➔" else "Next Nuance Question ➔")
+                    Text(if (isArabic) "اللغز المقارن التالي ➔" else "Next Nuance Quest ➔")
                 }
             }
         }
@@ -580,7 +857,7 @@ fun CulturalNuancesGame(
 }
 
 // =================================================================================================
-// GAME 12: AUDIO SHADOWING & DICTATION REFLEX (محاكاة النطق والتفريغ الصوتي الفوري)
+// GAME 12: AUDIO SHADOWING & DICTATION CHALLENGE (محاكاة النطق والتفريغ السمعي)
 // =================================================================================================
 @Composable
 fun AudioShadowingGame(
@@ -589,14 +866,11 @@ fun AudioShadowingGame(
 ) {
     val context = LocalContext.current
     var tts by remember { mutableStateOf<TextToSpeech?>(null) }
-    var isTtsReady by remember { mutableStateOf(false) }
 
-    DisposableEffect(context) {
-        var ttsInstance: TextToSpeech? = null
-        ttsInstance = TextToSpeech(context) { status ->
+    DisposableEffect(Unit) {
+        val ttsInstance = TextToSpeech(context) { status ->
             if (status == TextToSpeech.SUCCESS) {
-                ttsInstance?.language = Locale.US
-                isTtsReady = true
+                // Initialized successfully
             }
         }
         tts = ttsInstance
@@ -648,6 +922,70 @@ fun AudioShadowingGame(
                 correct = "Ultra Vires",
                 phoneticHint = "/ˌʌltrə ˈvaɪriːz/",
                 meaningAr = "تجاوز الصلاحيات والاختصاصات القانونية"
+            ),
+            AudioChallenge(
+                spokenPhrase = "Force Majeure",
+                langLocale = Locale.FRENCH,
+                options = listOf("Force Majeure", "Force Major", "Forced Mature", "Force Master"),
+                correct = "Force Majeure",
+                phoneticHint = "/ˌfɔːs mæˈʒɜːr/",
+                meaningAr = "القوة القاهرة المعفية من المسؤولية التعاقدية"
+            ),
+            AudioChallenge(
+                spokenPhrase = "Habeas Corpus",
+                langLocale = Locale.US,
+                options = listOf("Habeas Corpus", "Heavy Corpus", "Have Us Corps", "Habeas Core"),
+                correct = "Habeas Corpus",
+                phoneticHint = "/ˌheɪbiəs ˈkɔːrpəs/",
+                meaningAr = "أمر إحضار للمثول للتحقق من مشروعية الاحتجاز"
+            ),
+            AudioChallenge(
+                spokenPhrase = "Mutatis Mutandis",
+                langLocale = Locale.UK,
+                options = listOf("Mutatis Mutandis", "Mutant Mutandis", "Mutatis Multi", "Muted Mutandis"),
+                correct = "Mutatis Mutandis",
+                phoneticHint = "/mjuːˈteɪtɪs mjuːˈtændɪs/",
+                meaningAr = "مع مراعاة التعديلات والفوارق الضرورية"
+            ),
+            AudioChallenge(
+                spokenPhrase = "Bona Fide",
+                langLocale = Locale.US,
+                options = listOf("Bona Fide", "Bonafide", "Bono Fide", "Bone Feed"),
+                correct = "Bona Fide",
+                phoneticHint = "/ˌboʊnə ˈfaɪdi/",
+                meaningAr = "بحسن نية / شرعي وحقيقي دون احتيال"
+            ),
+            AudioChallenge(
+                spokenPhrase = "Ad Interim",
+                langLocale = Locale.UK,
+                options = listOf("Ad Interim", "Add Interim", "At Interim", "Ad Internal"),
+                correct = "Ad Interim",
+                phoneticHint = "/æd ˈɪntərɪm/",
+                meaningAr = "مؤقتاً / بالنيابة لفترة انتقالية محددة"
+            ),
+            AudioChallenge(
+                spokenPhrase = "Sui Generis",
+                langLocale = Locale.US,
+                options = listOf("Sui Generis", "Suey Generic", "So Generous", "Sui General"),
+                correct = "Sui Generis",
+                phoneticHint = "/ˌsuːaɪ ˈdʒɛnərɪs/",
+                meaningAr = "فريد من نوعه / ذو طبيعة قانونية قائمة بذاتها"
+            ),
+            AudioChallenge(
+                spokenPhrase = "De Facto",
+                langLocale = Locale.UK,
+                options = listOf("De Facto", "The Factor", "Defacto", "De Factor"),
+                correct = "De Facto",
+                phoneticHint = "/deɪ ˈfæktoʊ/",
+                meaningAr = "بحكم الأمر الواقع والواقع الفعلي"
+            ),
+            AudioChallenge(
+                spokenPhrase = "Ipso Facto",
+                langLocale = Locale.US,
+                options = listOf("Ipso Facto", "Episode Facto", "Ipso Factor", "Hypso Facto"),
+                correct = "Ipso Facto",
+                phoneticHint = "/ˌɪpsoʊ ˈfæktoʊ/",
+                meaningAr = "بحكم الواقع نفسه وبذاته تلقائياً"
             )
         )
     }
@@ -657,6 +995,9 @@ fun AudioShadowingGame(
     var answered by remember { mutableStateOf(false) }
 
     val cur = audioChallenges[aIdx]
+    val shuffledOptions = remember(aIdx) {
+        cur.options.shuffled(java.util.Random(aIdx.toLong() * 17 + 11))
+    }
 
     fun speakCurrentPhrase() {
         tts?.let {
@@ -724,7 +1065,8 @@ fun AudioShadowingGame(
                 }
             }
 
-            cur.options.forEach { opt ->
+            // Shuffled options
+            shuffledOptions.forEach { opt ->
                 val isCorrect = opt == cur.correct
                 val isChosen = selectedOpt == opt
                 val bg = when {
@@ -761,9 +1103,19 @@ fun AudioShadowingGame(
                     color = GoldYellow.copy(alpha = 0.15f),
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Column(modifier = Modifier.padding(10.dp)) {
-                        Text("الرمز الصوتي والنطق: ${cur.phoneticHint}", fontWeight = FontWeight.Bold, fontSize = 11.5.sp)
-                        Text("المعنى في الترجمة الرسمية: ${cur.meaningAr}", fontSize = 11.5.sp, color = MaterialTheme.colorScheme.onSurface)
+                    Column(modifier = Modifier.padding(12.dp)) {
+                        Text(
+                            text = "💡 النطق الفونولوجي: ${cur.phoneticHint}",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 12.sp,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                        Spacer(Modifier.height(4.dp))
+                        Text(
+                            text = "الدلالة والمفهوم: ${cur.meaningAr}",
+                            fontSize = 11.5.sp,
+                            lineHeight = 16.sp
+                        )
                     }
                 }
 
@@ -776,7 +1128,7 @@ fun AudioShadowingGame(
                     modifier = Modifier.fillMaxWidth(),
                     colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
                 ) {
-                    Text(if (isArabic) "المصطلح الصوتي التالي ➔" else "Next Audio Term ➔")
+                    Text(if (isArabic) "المصطلح الصوتي التالي ➔" else "Next Audio Challenge ➔")
                 }
             }
         }
