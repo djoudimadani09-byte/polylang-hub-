@@ -1,3 +1,4 @@
+    // Data State
     val allCourses = remember { CourseData.sampleCourses }
     val orders = remember {
         mutableStateListOf(
@@ -11,7 +12,7 @@
                 status = "قيد التدقيق المحلف",
                 isInterpretation = false,
                 clientName = "كريم حمداوي",
-                clientEmail = "client@polylang.dz",
+                clientEmail = "client@example.com",
                 clientPhone = "+213 555 12 34 56",
                 attachedFileName = "Concession_Agreement_2026.pdf",
                 date = "2026-10-11",
@@ -27,7 +28,7 @@
                 status = "مكتمل وتم التسليم",
                 isInterpretation = false,
                 clientName = "شركة المقاولات والأشغال الكبرى",
-                clientEmail = "projects@polylang.dz",
+                clientEmail = "projects@example.com",
                 clientPhone = "+213 550 44 33 22",
                 attachedFileName = "Turbine_Specs_Rev3.pdf",
                 date = "2026-10-09",
@@ -43,7 +44,7 @@
                 status = "مؤكد ومجدول",
                 isInterpretation = true,
                 clientName = "وزارة الطاقة والمناجم",
-                clientEmail = "energy@polylang.dz",
+                clientEmail = "energy@example.com",
                 clientPhone = "+213 21 66 77 88",
                 attachedFileName = "Agenda_Summit_2026.pdf",
                 date = "2026-10-08",

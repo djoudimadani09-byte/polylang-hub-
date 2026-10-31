@@ -22,13 +22,13 @@ import java.util.Locale
  */
 object AdminEmailNotifier {
     // Official platform admin email
-    val OFFICIAL_ADMIN_EMAIL: String = "admin@polylang.dz"
-    val OFFICIAL_SUPPORT_EMAIL: String = BuildConfig.SUPPORT_EMAIL.ifBlank { "support@polylang.dz" }
+    val OFFICIAL_ADMIN_EMAIL: String = "admin@example.com"
+    val OFFICIAL_SUPPORT_EMAIL: String = BuildConfig.SUPPORT_EMAIL.ifBlank { "support@example.com" }
 
-    const val ADMIN_EMAIL = "admin@polylang.dz"
+    const val ADMIN_EMAIL = "admin@example.com"
 
     fun isExclusiveAdmin(email: String): Boolean {
-        return email.trim().equals("admin@polylang.dz", ignoreCase = true)
+        return email.trim().equals("admin@example.com", ignoreCase = true)
     }
 
     fun verifyAdminPassword(password: String): Boolean {
@@ -55,7 +55,7 @@ object AdminEmailNotifier {
                 jsonObj.put("eventType", eventType)
                 jsonObj.put("timestamp", timestamp)
                 jsonObj.put("userName", userName.ifBlank { "زائر معتمد" })
-                jsonObj.put("userEmail", userEmail.ifBlank { "user@polylang.dz" })
+                jsonObj.put("userEmail", userEmail.ifBlank { "user@example.com" })
                 jsonObj.put("recipient", OFFICIAL_ADMIN_EMAIL)
 
                 val detailsObj = JSONObject()
