@@ -22,13 +22,13 @@ import java.util.Locale
  */
 object AdminEmailNotifier {
     // Official platform admin email
-    val OFFICIAL_ADMIN_EMAIL: String = "damel2865@gmail.com"
-    val OFFICIAL_SUPPORT_EMAIL: String = BuildConfig.SUPPORT_EMAIL.ifBlank { "contact@polylang.dz" }
+    val OFFICIAL_ADMIN_EMAIL: String = "admin@polylang.dz"
+    val OFFICIAL_SUPPORT_EMAIL: String = BuildConfig.SUPPORT_EMAIL.ifBlank { "support@polylang.dz" }
 
-    const val ADMIN_EMAIL = "damel2865@gmail.com"
+    const val ADMIN_EMAIL = "admin@polylang.dz"
 
     fun isExclusiveAdmin(email: String): Boolean {
-        return email.trim().equals("damel2865@gmail.com", ignoreCase = true)
+        return email.trim().equals("admin@polylang.dz", ignoreCase = true)
     }
 
     fun verifyAdminPassword(password: String): Boolean {
@@ -89,29 +89,3 @@ object AdminEmailNotifier {
                     success = true
                     responseMessage = "تم حفظ وتوثيق المعاملة بنجاح في سجل المنصة المعتمد"
                 } finally {
-                    conn.disconnect()
-                }
-            } catch (e: Exception) {
-                success = true
-                responseMessage = "تم توثيق الطلب بنجاح محلياً"
-            }
-
-            withContext(Dispatchers.Main) {
-                onResult(success, responseMessage)
-            }
-        }
-    }
-
-    fun openMailClient(context: Context, subject: String, body: String) {
-        try {
-            val intent = Intent(Intent.ACTION_SENDTO).apply {
-                data = Uri.parse("mailto:$OFFICIAL_SUPPORT_EMAIL")
-                putExtra(Intent.EXTRA_EMAIL, arrayOf(OFFICIAL_SUPPORT_EMAIL))
-                putExtra(Intent.EXTRA_SUBJECT, subject)
-                putExtra(Intent.EXTRA_TEXT, body)
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            }
-            context.startActivity(intent)
-        } catch (_: Exception) {}
-    }
-}

@@ -54,7 +54,7 @@ data class TranslationOrder(
     var status: String,
     val isInterpretation: Boolean = false,
     val clientName: String = "كريم حمداوي",
-    val clientEmail: String = "karim@polylang.dz",
+    val clientEmail: String = "client@polylang.dz",
     val clientPhone: String = "+213 555 12 34 56",
     val attachedFileName: String = "document.pdf",
     val date: String = "2026-10-12",
