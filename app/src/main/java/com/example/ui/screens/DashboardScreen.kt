@@ -54,7 +54,7 @@ fun DashboardScreen(
     var showInvoiceDialogForOrder by remember { mutableStateOf<TranslationOrder?>(null) }
     var actionNotificationMessage by remember { mutableStateOf<String?>(null) }
 
-    val isAdmin = userRole == UserRole.ADMIN || AdminEmailNotifier.isExclusiveAdmin(userEmail)
+    val isAdmin = AdminEmailNotifier.isExclusiveAdmin(userEmail)
     val isTranslator = userRole == UserRole.TRANSLATOR && !isAdmin
     val isClient = !isAdmin && !isTranslator
 
@@ -113,7 +113,7 @@ fun DashboardScreen(
                             contentAlignment = Alignment.Center
                         ) {
                             Text(
-                                text = if (isAdmin) "👑" else (if (userName.isNotBlank()) userName else if (isClient) "كريم حمداوي" else "مترجم").take(1).uppercase(),
+                                text = if (isAdmin) "👑" else (if (userName.isNotBlank()) userName else "مستخدم").take(1).uppercase(),
                                 fontWeight = FontWeight.Bold,
                                 color = RedPrimary,
                                 fontSize = if (isAdmin) 22.sp else 20.sp
@@ -122,12 +122,12 @@ fun DashboardScreen(
 
                         Column {
                             Text(
-                                text = if (isAdmin) "أ. جودي مداني (المشرف العام)" else if (userName.isNotBlank()) userName else if (isClient) "كريم حمداوي (عميل)" else "د. سمير (مترجم محلف)",
+                                text = if (isAdmin) "المشرف العام (Administrator)" else if (userName.isNotBlank()) userName else if (isClient) "عميل معتمد (Client)" else "مترجم محلف (Translator)",
                                 style = MaterialTheme.typography.titleMedium,
                                 fontWeight = FontWeight.Bold
                             )
                             Text(
-                                text = if (userEmail.isNotBlank()) userEmail else if (isAdmin) "admin@polylang.dz" else if (isClient) "karim@polylang.dz" else "translator@polylang.dz",
+                                text = if (userEmail.isNotBlank()) userEmail else if (isAdmin) AdminEmailNotifier.ADMIN_EMAIL else if (isClient) "client@polylang.dz" else "translator@polylang.dz",
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -321,7 +321,7 @@ fun DashboardScreen(
                                 color = if (isAuthorizedAdmin) RedDark else MaterialTheme.colorScheme.error
                             )
                             Text(
-                                text = if (isAuthorizedAdmin) "✓ مصرح: أ. جودي مداني" else "غير مصرح",
+                                text = if (isAuthorizedAdmin) "✓ مصرح: المشرف العام (${AdminEmailNotifier.ADMIN_EMAIL})" else "غير مصرح (مغلق)",
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = if (isAuthorizedAdmin) SuccessGreen else MaterialTheme.colorScheme.error
@@ -331,7 +331,7 @@ fun DashboardScreen(
                         if (isAuthorizedAdmin) {
                             val clipboardManager = LocalClipboardManager.current
                             Text(
-                                text = "🗄️ قاعدة البيانات السحابية: مؤمنة ومشفرة بالكامل وفق معايير الحماية (Zero-Trust)\n📧 التنبيهات الفورية: مشفرة وترسل مباشرة إلى بوابة إدارة المنصة الآمنة\n👥 عزل البيانات: العميل يرى فقط ما طلب، والمترجم يرى مشاريع مساحة عمله فقط",
+                                text = "🗄️ قاعدة البيانات والمعاملات: مؤمنة ومشفرة بالكامل وفق معايير الحماية الدولية (Zero-Trust)\n📧 التنبيهات الرسمية: مشفرة وترسل مباشرة إلى بوابة إدارة المنصة المعتمدة\n👥 خصوصية تامة: العميل يرى فقط طلباته الخاصة، وكافة العمليات معزولة تماماً",
                                 fontSize = 11.5.sp,
                                 lineHeight = 18.sp,
                                 color = MaterialTheme.colorScheme.onSurface
@@ -376,7 +376,7 @@ fun DashboardScreen(
                                 }
                             }
 
-                            // Live Platform Activity Timeline
+                            // Security & Compliance Status
                             Card(
                                 shape = RoundedCornerShape(10.dp),
                                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
@@ -384,20 +384,19 @@ fun DashboardScreen(
                             ) {
                                 Column(modifier = Modifier.padding(10.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                                     Text(
-                                        text = "⚡ البث الحي لأحداث المنصة (Live Activity Stream):",
+                                        text = "🔒 منظومة الأمان والامتثال (Security & Zero-Trust):",
                                         fontWeight = FontWeight.Bold,
                                         fontSize = 11.sp,
                                         color = SuccessGreen
                                     )
-                                    Text("• 📄 طلب جديد: عقد امتياز دولي (كريم حمداوي - 2,400 كلمة)", fontSize = 10.5.sp)
-                                    Text("• 🔏 ختم معتمد: كتيب توربينات الغاز (أ. مريم بوعلام - ISO 17100)", fontSize = 10.5.sp)
-                                    Text("• 🏆 امتحان تحديد المستوى: سارة بن علي (TCF - المستوى المتقدم C1)", fontSize = 10.5.sp)
-                                    Text("• 🔒 جلسة دخول مؤمنة للإدارة العليا (256-Bit SSL Master Key)", fontSize = 10.5.sp, color = RedDark)
+                                    Text("• تشفير الاتصال والبيانات بنظام 256-Bit SSL/TLS", fontSize = 10.5.sp)
+                                    Text("• لوحة المشرف مقفلة ومحصورة حصرياً للبريد المعتمد ${AdminEmailNotifier.ADMIN_EMAIL}", fontSize = 10.5.sp)
+                                    Text("• تطبيق معايير الأمان الدولية ISO 27001 ومعايير الجودة ISO 17100:2015", fontSize = 10.5.sp)
                                 }
                             }
                         } else {
                             Text(
-                                text = "عزل بيانات الإدارة: صلاحية المشرف مخصصة حصراً للإدارة العليا المعتمدة.\nيرجى تسجيل الدخول بحساب الإدارة المشرف للوصول إلى لوحة التحكم.",
+                                text = "🔒 الوصول مقفل: لوحة الإدارة العامة محمية بالكامل وتخضع لمعايير الأمان العالمية الصارمة (Zero-Trust).\nلا يمكن للغرباء أو الحسابات غير المصرح لها الاطلاع على هذه البيانات.\nيسمح بالولوج حصرياً للمشرف المعتمد (${AdminEmailNotifier.ADMIN_EMAIL}).",
                                 fontSize = 12.sp,
                                 color = MaterialTheme.colorScheme.error,
                                 lineHeight = 17.sp
@@ -410,7 +409,7 @@ fun DashboardScreen(
                             ) {
                                 Icon(Icons.Default.Lock, contentDescription = null, modifier = Modifier.size(16.dp))
                                 Spacer(modifier = Modifier.width(6.dp))
-                                Text(if (isArabic) "تسجيل الدخول بحساب المشرف المعتمد" else "Login as Authorized Admin", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                Text(if (isArabic) "تسجيل الدخول بحساب المشرف المصرح به" else "Login as Authorized Admin", fontSize = 12.sp, fontWeight = FontWeight.Bold)
                             }
                         }
                     }
@@ -592,7 +591,7 @@ fun DashboardScreen(
                                         color = RedPrimary
                                     )
                                     Text(
-                                        text = "المشرف العام: الأستاذ جودي مداني (المدير العام والمسؤول التنفيذي)",
+                                        text = "المشرف العام: الإدارة المركزية المعتمدة (${AdminEmailNotifier.ADMIN_EMAIL})",
                                         style = MaterialTheme.typography.bodySmall,
                                         color = MaterialTheme.colorScheme.onSurfaceVariant
                                     )
@@ -1169,7 +1168,7 @@ fun DashboardScreen(
                             }
                         }
 
-                        Text("مجمع بوليلانغ الدولي للترجمة المعتمدة • الجزائر العاصمة • إشراف أ. جودي مداني", fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text("مجمع بوليلانغ الدولي للترجمة المعتمدة • الجزائر العاصمة • معتمد ISO 17100", fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
 
                         Button(
                             onClick = { showInvoiceDialogForOrder = null },
