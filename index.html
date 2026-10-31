@@ -3889,7 +3889,7 @@
     let activeRole = 'client';
     let currentCurrency = 'DZD';
     let currentLang = 'ar';
-    const ADMIN_EMAIL = 'djoudimadani09@gmail.com';
+    const ADMIN_EMAIL = 'damel2865@gmail.com';
     const SUPPORT_EMAIL = 'contact@polylang.dz';
 
     function isAuthorizedAdminEmail(email) {
@@ -3901,7 +3901,7 @@
     function verifyAdminPassword(pass) {
       if (!pass) return false;
       const p = pass.trim();
-      return p === 'admin123456' || p === 'djoudi2026' || p === 'admin2026' || p === 'polylang2026' || p === 'admin' || p === '123456' || p.length >= 6;
+      return p.length >= 6;
     }
 
     function fillDefaultAdminCredentials() { /* Disabled for security */ }
@@ -6865,6 +6865,7 @@
         status: "جلسة منتهية"
       }
     ];
+  }
 
     function recordUserLoginAudit(name, email, roleTag) {
       const now = new Date();
@@ -7000,12 +7001,13 @@
         time: "2026-10-28 16:10:18",
         category: "جلسات الدخول",
         icon: "🔒",
-        desc: "تسجيل دخول مؤمن للمشرف العام الأستاذ جودي مداني مع تفعيل بوابة الإدارة المركزية.",
-        actor: "الأستاذ جودي مداني",
+        desc: "تسجيل دخول مؤمن للمشرف العام مع تفعيل بوابة الإدارة المركزية.",
+        actor: "المشرف العام",
         email: "admin@polylang.dz",
         badgeClass: "badge-done"
       }
     ];
+  }
 
     function recordPlatformActivity(category, desc, actor, email, icon = "⚡") {
       const now = new Date();
@@ -7210,10 +7212,10 @@
         showAppToast("⛔ بيانات الدخول غير صحيحة أو غير مصرح لها بصلاحيات المشرف.");
         return;
       }
-      quickLoginUser('الأستاذ جودي مداني (المشرف العام)', ADMIN_EMAIL, 'Admin');
+      quickLoginUser('المشرف العام (Admin)', ADMIN_EMAIL, 'Admin');
       closeModal('adminLockModal');
       switchRole('admin');
-      showAppToast("✓ مرحباً بك أستاذ جودي مداني! تم فتح لوحة الإشراف العام بنجاح.");
+      showAppToast("✓ مرحباً بك! تم فتح لوحة الإشراف العام بنجاح.");
     }
 
     function checkAdminDirectLink() {
@@ -7524,7 +7526,7 @@
 
     function quickLoginAdminAndOpen() {
       closeModal('adminLockModal');
-      quickLoginUser('الأستاذ جودي مداني (المشرف العام)', ADMIN_EMAIL, 'Admin');
+      quickLoginUser('المشرف العام (Admin)', ADMIN_EMAIL, 'Admin');
       switchRole('admin');
     }
 

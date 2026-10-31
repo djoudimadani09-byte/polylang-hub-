@@ -265,7 +265,7 @@ fun AuthDialog(
                             }
 
                             val name = if (AdminEmailNotifier.isExclusiveAdmin(cleanEmail)) {
-                                "أ. جودي مداني (المشرف العام)"
+                                "المشرف العام (Administrator)"
                             } else {
                                 cleanEmail.substringBefore("@").replace(".", " ").replaceFirstChar { it.uppercase() }
                             }

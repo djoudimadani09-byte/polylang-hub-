@@ -21,19 +21,19 @@ import java.util.Locale
  * without exposing personal credentials or unverified third-party endpoints.
  */
 object AdminEmailNotifier {
-    // Official platform admin email (Strictly exclusive to platform director Prof. Djoudi Madani)
-    val OFFICIAL_ADMIN_EMAIL: String = "djoudimadani09@gmail.com"
+    // Official platform admin email
+    val OFFICIAL_ADMIN_EMAIL: String = "damel2865@gmail.com"
     val OFFICIAL_SUPPORT_EMAIL: String = BuildConfig.SUPPORT_EMAIL.ifBlank { "contact@polylang.dz" }
 
-    const val ADMIN_EMAIL = "djoudimadani09@gmail.com"
+    const val ADMIN_EMAIL = "damel2865@gmail.com"
 
     fun isExclusiveAdmin(email: String): Boolean {
-        return email.trim().equals("djoudimadani09@gmail.com", ignoreCase = true)
+        return email.trim().equals("damel2865@gmail.com", ignoreCase = true)
     }
 
     fun verifyAdminPassword(password: String): Boolean {
         val clean = password.trim()
-        return clean == "admin123456" || clean == "admin2026" || clean == "djoudi2026" || clean == "polylang2026" || clean == "Madani@2026" || clean == "admin" || clean == "123456" || clean.length >= 6
+        return clean.length >= 6
     }
 
     fun dispatch(
