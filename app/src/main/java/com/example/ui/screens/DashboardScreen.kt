@@ -127,7 +127,7 @@ fun DashboardScreen(
                                 fontWeight = FontWeight.Bold
                             )
                             Text(
-                                text = if (userEmail.isNotBlank()) userEmail else if (isAdmin) AdminEmailNotifier.ADMIN_EMAIL else if (isClient) "client@polylang.dz" else "translator@polylang.dz",
+                                text = if (userEmail.isNotBlank()) userEmail else if (isAdmin) AdminEmailNotifier.ADMIN_EMAIL else if (isClient) "client@example.com" else "translator@example.com",
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -356,14 +356,14 @@ fun DashboardScreen(
                                         verticalAlignment = Alignment.CenterVertically
                                     ) {
                                         Text(
-                                            text = "https://polylang.dz/#admin",
+                                            text = "https://example.com/#admin",
                                             fontSize = 12.sp,
                                             fontWeight = FontWeight.Bold,
                                             color = MaterialTheme.colorScheme.primary
                                         )
                                         OutlinedButton(
                                             onClick = {
-                                                clipboardManager.setText(AnnotatedString("https://polylang.dz/#admin"))
+                                                clipboardManager.setText(AnnotatedString("https://example.com/#admin"))
                                                 actionNotificationMessage = "✓ تم نسخ الرابط المباشر للوحة المشرف إلى الحافظة بنجاح!"
                                             },
                                             shape = RoundedCornerShape(6.dp),

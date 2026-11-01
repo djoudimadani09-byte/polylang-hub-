@@ -169,7 +169,7 @@ fun AiTermbaseDialog(
                                             AdminEmailNotifier.dispatch(
                                                 eventType = "اقتراح مصطلح جديد في المسرد",
                                                 userName = "مستخدم المسرد",
-                                                userEmail = "user@polylang.dz",
+                                                userEmail = "user@example.com",
                                                 details = mapOf(
                                                     "foreignTerm" to newTermEn,
                                                     "arabicTranslation" to newTermAr,

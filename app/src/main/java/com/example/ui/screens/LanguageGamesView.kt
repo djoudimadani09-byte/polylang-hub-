@@ -57,7 +57,7 @@ fun LanguageGamesView(
     LaunchedEffect(Unit) {
         PlatformTelemetry.logSession(
             userName = userName,
-            userEmail = "learner@polylang.dz",
+            userEmail = "learner@example.com",
             role = "طالب / متعلم",
             actionType = "دخول استوديو الألعاب",
             details = "بدء تدريب تفاعلي على 12 لعبة لغات وتثبيت مصطلحات"
@@ -68,7 +68,7 @@ fun LanguageGamesView(
         totalGamerScore += pts
         PlatformTelemetry.logExercise(
             studentName = userName,
-            studentEmail = "learner@polylang.dz",
+            studentEmail = "learner@example.com",
             type = "ألعاب اللغات",
             title = selectedGame.titleAr,
             score = "+$pts نقطة (المجموع: $totalGamerScore)"

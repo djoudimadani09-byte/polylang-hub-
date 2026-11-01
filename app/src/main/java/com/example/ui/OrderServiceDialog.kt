@@ -551,7 +551,7 @@ fun OrderServiceDialog(
                         val orderId = "PL-${(1000..9999).random()}"
                         val isInterp = selectedCategory.contains("فورية")
                         val finalSenderName = clientName.ifBlank { "عميل جديد" }
-                        val finalSenderEmail = clientContact.ifBlank { "contact@client.dz" }
+                        val finalSenderEmail = clientContact.ifBlank { "client@example.com" }
 
                         val newOrder = TranslationOrder(
                             id = orderId,

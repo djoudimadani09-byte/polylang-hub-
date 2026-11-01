@@ -1325,9 +1325,6 @@
 
       <!-- Compact, Horizontally Scrollable Role Tabs -->
       <div class="role-buttons-grid" style="display:flex; gap:6px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; padding:4px 0; flex-wrap:nowrap;">
-        <button class="role-chip" id="chip-admin" onclick="switchRole('admin')" style="padding:6px 14px; font-size:11.5px; border-radius:18px; white-space:nowrap; flex-shrink:0;">
-          <span id="txt-chip-admin">🔒 المشرف العام (Admin)</span>
-        </button>
         <button class="role-chip" id="chip-translator" onclick="switchRole('translator')" style="padding:6px 14px; font-size:11.5px; border-radius:18px; white-space:nowrap; flex-shrink:0;">
           <span id="txt-chip-translator">🎓 مترجم معتمد (Translator)</span>
         </button>
@@ -1371,8 +1368,8 @@
               <button id="founder-btn-academy" class="btn-outline-action" style="padding:5px 12px; font-size:11.5px; border-radius:8px;" onclick="switchRole('enthusiast')">
                 🎓 استكشاف 100 فيديو تعليمي
               </button>
-              <a id="founder-btn-email" href="mailto:contact@polylang.dz" class="btn-outline-action" style="padding:5px 12px; font-size:11.5px; border-radius:8px; text-decoration:none; display:inline-flex; align-items:center;">
-                ✉️ contact@polylang.dz
+              <a id="founder-btn-email" href="mailto:support@example.com" class="btn-outline-action" style="padding:5px 12px; font-size:11.5px; border-radius:8px; text-decoration:none; display:inline-flex; align-items:center;">
+                ✉️ support@example.com
               </a>
             </div>
           </div>
@@ -2910,13 +2907,13 @@
           <div>
             <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:4px;">
               <h3 style="font-size:20px; font-weight:900; margin:0; color:var(--text-main);">
-                🔒 لوحة الإشراف العام ومراقبة المنصة (Master Admin Portal)
+                🔒 لوحة الإشراف العام المعتمدة (Master Admin Portal)
               </h3>
-              <span class="badge-gold" style="font-size:11px; padding:3px 8px;">👑 المدير العام الأستاذ جودي مداني</span>
+              <span class="badge-gold" style="font-size:11px; padding:3px 8px;">👑 الإدارة العامة المعتمدة</span>
               <span class="badge-iso-green" style="font-size:11px; padding:3px 8px;">ISO 17100:2015 Verified</span>
             </div>
             <p style="margin:0; font-size:12.5px; color:var(--text-dim); line-height:1.6;">
-              الوصول مقفل ومحمي حصرياً للإدارة المركزية العليا. تتضمن اللوحة تقارير حية وفورية عن حركة الخادم، سجل تسجيلات الدخول لجميع المستخدمين، إدارة الطلبات والمشاريع، وفحص الربط البريدي.
+              الوصول مقفل ومحمي حصرياً للإدارة المركزية العليا المصرح بها. تتضمن اللوحة إدارة الطلبات والمشاريع، توثيق الاعتماد، وفحص الاتصال البريدي الآمن.
             </p>
           </div>
           <div style="display:flex; align-items:center; gap:8px;">
@@ -2949,14 +2946,14 @@
             <div style="font-size:10px; color:var(--text-dim); margin-top:2px;">معتمدة بموجب ISO 17100</div>
           </div>
           <div style="background:var(--bg-body); padding:14px; border-radius:10px; border:1px solid var(--border-line); text-align:center;">
-            <div style="font-size:11.5px; color:var(--text-dim); font-weight:700;">حالة خادم PostgreSQL Neon</div>
-            <div style="font-size:16px; font-weight:900; color:#10b981; margin-top:6px;">● متصل ونشط</div>
-            <div style="font-size:10px; color:var(--text-dim); margin-top:2px;">Cloud Server Pooler</div>
+            <div style="font-size:11.5px; color:var(--text-dim); font-weight:700;">معايير الأمان والحماية</div>
+            <div style="font-size:15px; font-weight:900; color:#10b981; margin-top:6px;">● 256-Bit SSL/TLS</div>
+            <div style="font-size:10px; color:var(--text-dim); margin-top:2px;">Zero-Trust Architecture</div>
           </div>
         </div>
       </div>
 
-        <!-- 1. DEDICATED DIRECT DASHBOARD LINK FOR DJOUDIMADANI09@GMAIL.COM -->
+        <!-- 1. DEDICATED DIRECT DASHBOARD LINK FOR ADMINISTRATOR -->
         <div style="background:var(--bg-body); border:2px solid #f59e0b; border-radius:12px; padding:14px 16px; margin-top:16px; box-shadow:0 4px 14px rgba(245,158,11,0.15);">
           <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
             <div>
@@ -3178,7 +3175,7 @@
       </div>
 
       <div style="display:flex; justify-content:space-between; align-items:center; font-size:11.5px; color:var(--text-dim); flex-wrap:wrap; gap:6px;">
-        <span>📧 الدعم الفني المعتمد: contact@polylang.dz</span>
+        <span>📧 الدعم الفني المعتمد: support@example.com</span>
         <a href="#" style="color:var(--crimson); font-weight:800; text-decoration:none;" onclick="closeModal('adminLockModal'); openModal('authModal'); return false;">تسجيل كعميل أو مترجم ⟵</a>
       </div>
     </div>
@@ -3192,7 +3189,7 @@
         <div style="font-size:36px; margin-bottom:6px;">⭐</div>
         <h3 style="font-size:19px; font-weight:900; color:var(--text-main); margin:0 0 4px;">تقييم تجربة الزائر والخدمات</h3>
         <p style="font-size:12px; color:var(--text-dim); margin:0;">
-          رأيك وتقييمك يساعدنا على التطوير المستمر لمنصة بوليلانغ المعتمدة بإشراف الأستاذ جودي مداني
+          رأيك وتقييمك يساعدنا على التطوير المستمر لخدمات منصة بوليلانغ المعتمدة وفق معايير الجودة الدولية ISO 17100.
         </p>
       </div>
 
@@ -3380,7 +3377,7 @@
         <div style="font-size:12.5px; background:var(--bg-card); padding:10px; border-radius:8px;">
           <div>📍 <strong>المقر الرئيسي:</strong> الجزائر العاصمة (Algiers, Algeria)</div>
           <div>🌐 <strong>لغات التخصص:</strong> العربية، الإنجليزية، الفرنسية، الألمانية، والإسبانية.</div>
-          <div>📧 <strong>البريد الإلكتروني المعتمد:</strong> contact@polylang.dz</div>
+          <div>📧 <strong>البريد الإلكتروني المعتمد:</strong> support@example.com</div>
         </div>
       </div>
 
@@ -3392,29 +3389,6 @@
           🎙️ تجربة مقصورة الترجمة الفورية
         </button>
       </div>
-    </div>
-  </div>
-
-  <!-- 5. DATABASE / NESTJS STATUS MODAL -->
-  <div id="dbModal" class="modal-backdrop">
-    <div class="modal-sheet">
-      <div class="modal-close-x" onclick="closeModal('dbModal')">✕</div>
-      <h3 style="font-size:18px; font-weight:800; margin-bottom:6px;">حالة الاتصال بقاعدة البيانات والباك أند</h3>
-      <p style="font-size:12px; color:var(--text-dim); margin-bottom:14px;">
-        PostgreSQL Neon Cloud Connection & API Telemetry
-      </p>
-
-      <div style="background:#090d16; color:#a7f3d0; padding:14px; border-radius:10px; font-family:monospace; font-size:11.5px; line-height:1.6; margin-bottom:14px;">
-        <div>● STATUS: ONLINE (Active Pooler)</div>
-        <div>● HOST: db.polylang-hub.internal (SSL Encrypted)</div>
-        <div>● DATABASE: [SECURED] | SSL: Required</div>
-        <div>● NOTIFICATIONS: SECURE DISPATCH GATEWAY [ACTIVE]</div>
-        <div>● RESPONSE LATENCY: 42ms</div>
-      </div>
-
-      <button class="btn-primary-red" style="width:100%; justify-content:center;" onclick="alert('✅ قاعدة البيانات متصلة وتعمل بكامل طاقتها!')">
-        فحص الاتصال (Ping DB)
-      </button>
     </div>
   </div>
 
@@ -3702,7 +3676,7 @@
             </button>
           </div>
           <div style="font-size:11px; color:var(--text-dim);">
-            بمجرد إرسال الإشعار أو التواصل مع الإدارة عبر <strong>contact@polylang.dz</strong> يتم تفعيل الباقة فورياً.
+            بمجرد إرسال الإشعار أو التواصل مع الإدارة عبر <strong>support@example.com</strong> يتم تفعيل الباقة فورياً.
           </div>
         </div>
       </div>
@@ -3850,7 +3824,7 @@
         © 2026 منصة بوليلانغ للترجمة المعتمدة (Polylang Hub). برئاسة الأستاذ جودي مداني.
       </div>
       <div>
-        ISO 17100:2015 Verified • بريد التواصل المعتمد: <strong>contact@polylang.dz</strong>
+        ISO 17100:2015 Verified • بريد التواصل المعتمد: <strong>support@example.com</strong>
       </div>
     </div>
   </footer>
@@ -3889,8 +3863,8 @@
     let activeRole = 'client';
     let currentCurrency = 'DZD';
     let currentLang = 'ar';
-    const ADMIN_EMAIL = 'damel2865@gmail.com';
-    const SUPPORT_EMAIL = 'contact@polylang.dz';
+    const ADMIN_EMAIL = 'admin@example.com';
+    const SUPPORT_EMAIL = 'support@example.com';
 
     function isAuthorizedAdminEmail(email) {
       if (!email) return false;
@@ -3940,7 +3914,7 @@
         {
           id: "PL-8421",
           clientName: "شركة البترول والمحروقات",
-          clientEmail: "contracts@sonatrach-partner.dz",
+          clientEmail: "contracts@client.example.com",
           clientPhone: "+213 555 12 34 56",
           title: "عقد امتياز واستثمار دولي",
           service: "قانونية ورسمية",
@@ -3957,7 +3931,7 @@
         {
           id: "PL-9032",
           clientName: "شركة المقاولات والأشغال الكبرى",
-          clientEmail: "algeria.projects@tp-dz.com",
+          clientEmail: "projects@client.example.com",
           clientPhone: "+213 550 44 33 22",
           title: "كتيب مواصفات توربينات الغاز",
           service: "تقنية وهندسية",
@@ -3974,7 +3948,7 @@
         {
           id: "PL-3114",
           clientName: "وزارة الطاقة والمناجم",
-          clientEmail: "energy.summit@algeria.gov.dz",
+          clientEmail: "summit@client.example.com",
           clientPhone: "+213 21 66 77 88",
           title: "كابينة الترجمة لقمة الطاقة بالجزائر",
           service: "ترجمة فورية للمؤتمرات",
@@ -4130,7 +4104,7 @@
       if (currentUserEmail && currentUserEmail.toLowerCase() === ADMIN_EMAIL.toLowerCase()) return true;
 
       // Guest cannot access protected role portals directly
-      if (!currentUserEmail || currentUserEmail === 'guest@polylang.dz') return false;
+      if (!currentUserEmail || currentUserEmail === 'guest@example.com') return false;
 
       // Map roles
       const roleMapping = {
@@ -4185,7 +4159,7 @@
       if (chip) chip.classList.add('active');
 
       const titles = {
-        admin: "Platform Administrator (إشراف الأستاذ جودي مداني)",
+        admin: "Platform Administrator (بوابة الإدارة المركزية)",
         translator: "Certified Translator & SRT Studio (واجهة المترجم المعتمد)",
         client: "Client Portal & Project Orders (بوابة العميل المعتمدة)",
         student: "Translation Students Lab (بوابة ومختبر طلبة الترجمة واللغات)",
@@ -6293,7 +6267,7 @@
         }).catch(e => console.log(e));
       }
 
-      alert(`📩 تم تسجيل طلب الحصول على بيانات ${typeLabel} بنجاح!\nتصلك بيانات الحساب المشفرة من الإدارة المعتمدة فورياً.\nيمكنك أيضاً مراسلة الإدارة مباشرة: ${typeof SUPPORT_EMAIL !== 'undefined' ? SUPPORT_EMAIL : 'contact@polylang.dz'}`);
+      alert(`📩 تم تسجيل طلب الحصول على بيانات ${typeLabel} بنجاح!\nتصلك بيانات الحساب المشفرة من الإدارة المعتمدة فورياً.\nيمكنك أيضاً مراسلة الإدارة مباشرة: ${typeof SUPPORT_EMAIL !== 'undefined' ? SUPPORT_EMAIL : 'support@example.com'}`);
     }
 
     function selectSubscriptionPlan(planTier, priceDzd) {
@@ -6830,42 +6804,9 @@
       }
     } catch(e) {}
 
-    if (!platformLoginLogs || platformLoginLogs.length === 0) {
-      platformLoginLogs = [
-      {
-        time: "2026-10-13 22:45:12",
-        name: "الأستاذ جودي مداني",
-        email: "admin@polylang.dz",
-        role: "Admin (المشرف العام)",
-        authType: "256-Bit SSL Master Key",
-        status: "نشط الآن (Active)"
-      },
-      {
-        time: "2026-10-13 21:18:04",
-        name: "أ. مريم بوعلام",
-        email: "mariem.trans@polylang.dz",
-        role: "Translator (مترجم محلف)",
-        authType: "Direct Email & Password",
-        status: "سجل خروج (Logged Out)"
-      },
-      {
-        time: "2026-10-13 19:30:22",
-        name: "سارة بن علي",
-        email: "sara.student@univ-alger2.dz",
-        role: "Student (طالبة معهد الترجمة)",
-        authType: "Academic Portal SSO",
-        status: "جلسة منتهية"
-      },
-      {
-        time: "2026-10-13 18:05:40",
-        name: "كريم حمداوي",
-        email: "karim@polylang.dz",
-        role: "Client (عميل مؤسساتي)",
-        authType: "HTTPS Direct",
-        status: "جلسة منتهية"
-      }
-    ];
-  }
+    if (!platformLoginLogs) {
+      platformLoginLogs = [];
+    }
 
     function recordUserLoginAudit(name, email, roleTag) {
       const now = new Date();
@@ -6967,7 +6908,7 @@
         icon: "📄",
         desc: "أودع العميل كريم حمداوي طلباً جديداً لترجمة عقد امتياز واستثمار دولي (2,400 كلمة).",
         actor: "كريم حمداوي",
-        email: "karim@polylang.dz",
+        email: "client@example.com",
         badgeClass: "badge-scheduled"
       },
       {
@@ -6976,7 +6917,7 @@
         icon: "🔏",
         desc: "اعتمد المترجم المحلف وثيقة كتيب توربينات الغاز بالختم الرسمي الرقمي (DZ-TRANS-8842 / ISO 17100).",
         actor: "أ. مريم بوعلام",
-        email: "mariem.trans@polylang.dz",
+        email: "translator@example.com",
         badgeClass: "badge-done"
       },
       {
@@ -6985,7 +6926,7 @@
         icon: "🏆",
         desc: "أتمت الطالبة سارة بن علي امتحان تحديد المستوى (TCF الفرنسي) وحققت درجة المستوى المتقدم C1.",
         actor: "سارة بن علي",
-        email: "sara.student@univ-alger2.dz",
+        email: "student@example.com",
         badgeClass: "badge-gold"
       },
       {
@@ -6994,7 +6935,7 @@
         icon: "🎙️",
         desc: "أنجز متدرب جلسة تدريب على الترجمة الفورية لخطاب قمة دافوس للاقتصاد مع حساب الفارق الزمني (Décalage).",
         actor: "يوسف مراد",
-        email: "youssef.learner@gmail.com",
+        email: "learner@example.com",
         badgeClass: "badge-training"
       },
       {
@@ -7003,7 +6944,7 @@
         icon: "🔒",
         desc: "تسجيل دخول مؤمن للمشرف العام مع تفعيل بوابة الإدارة المركزية.",
         actor: "المشرف العام",
-        email: "admin@polylang.dz",
+        email: "admin@example.com",
         badgeClass: "badge-done"
       }
     ];
@@ -7024,7 +6965,7 @@
         icon: icon,
         desc: desc,
         actor: actor || currentUserName || 'مستخدم المنصة',
-        email: email || currentUserEmail || 'user@polylang.dz',
+        email: email || currentUserEmail || 'user@example.com',
         badgeClass: category.includes('ختم') ? 'badge-done' : (category.includes('طلب') ? 'badge-scheduled' : 'badge-gold')
       });
 
@@ -7138,7 +7079,7 @@
           sessionStorage.setItem('polylang_tracked_session', 'true');
           const guestNum = Math.floor(1000 + Math.random() * 9000);
           const guestUser = currentUserName || `زائر جديد (#${guestNum})`;
-          const guestEmail = currentUserEmail || `visitor_${guestNum}@guest.polylang.dz`;
+          const guestEmail = currentUserEmail || `visitor_${guestNum}@guest.example.com`;
           recordPlatformActivity("دخول وتصفح المنصة", `زيارة جديدة للمنصة واستعراض خدمات الترجمة المعتمدة وقواميس اللغات`, guestUser, guestEmail, "🌐");
           recordUserLoginAudit(guestUser, guestEmail, "Visitor (زائر جديد)");
         }
@@ -7208,8 +7149,12 @@
         showAppToast("⚠️ يرجى إدخال البريد الإلكتروني وكلمة المرور الخاصة بالإدارة.");
         return;
       }
-      if (!isAuthorizedAdminEmail(email) || !verifyAdminPassword(pass)) {
-        showAppToast("⛔ بيانات الدخول غير صحيحة أو غير مصرح لها بصلاحيات المشرف.");
+      if (!isAuthorizedAdminEmail(email)) {
+        showAppToast("⛔ تم رفض الوصول: هذه البوابة مقفلة ومخصصة حصرياً للبريد المصرح به فقط.");
+        return;
+      }
+      if (!verifyAdminPassword(pass)) {
+        showAppToast("⛔ كلمة المرور غير صحيحة لحساب المشرف العام.");
         return;
       }
       quickLoginUser('المشرف العام (Admin)', ADMIN_EMAIL, 'Admin');
@@ -7394,7 +7339,7 @@
       const o = ordersList.find(item => item.id === id);
       if (!o) return;
       const transName = currentUserName || 'أ. مريم بوعلام (مترجمة محلفة)';
-      const transEmail = currentUserEmail || 'translator@polylang.dz';
+      const transEmail = currentUserEmail || 'translator@example.com';
       o.assignedTranslatorEmail = transEmail;
       o.assignedTranslatorName = transName;
       o.status = "قيد الترجمة والتدقيق المحلف لدى: " + transName;
@@ -7425,7 +7370,7 @@
         "اعتماد وأختام",
         `تم تطبيق الختم الرقمي المعتمد DZ-TRANS-8842 على وثيقة المشروع #${o.id} (${o.title}) وجاهزة للتسليم للعميل.`,
         transName,
-        currentUserEmail || 'translator@polylang.dz',
+        currentUserEmail || 'translator@example.com',
         "🔏"
       );
 
@@ -7435,8 +7380,13 @@
 
 
     function renderAdminDashboard() {
-      renderAdminLoginLogs();
-      renderAdminActivityStream();
+      if (!currentUserEmail || !isAuthorizedAdminEmail(currentUserEmail)) {
+        if (activeRole === 'admin') {
+          switchRole('client');
+          openModal('adminLockModal');
+        }
+        return;
+      }
       renderAdminOrdersTable();
       renderAdminVisitorReviews();
       const linkInput = document.getElementById('admin-direct-link-input');
@@ -7524,12 +7474,6 @@
       showAppToast(`✓ مرحباً بك يا ${name}! تم تفعيل واجهة ${roleTag} بنجاح.`);
     }
 
-    function quickLoginAdminAndOpen() {
-      closeModal('adminLockModal');
-      quickLoginUser('المشرف العام (Admin)', ADMIN_EMAIL, 'Admin');
-      switchRole('admin');
-    }
-
     // ==========================================
     // VISITOR REVIEWS & RATINGS ENGINE (تقييم كل زائر)
     // ==========================================
@@ -7541,7 +7485,7 @@
         category: "الترجمة المعتمدة والمحلفة",
         rating: 5,
         comment: "ترجمة فائقة الدقة للتقارير الهندسية والمناقصات البترولية. الختم الرسمي معتمد وسرعة الإنجاز استثنائية وفق ISO 17100.",
-        contact: "a.belkacem@sonatrach.dz",
+        contact: "client@example.com",
         date: "2026-10-27 15:40"
       },
       {
@@ -7551,7 +7495,7 @@
         category: "كابينة ومحاكي الترجمة الفورية",
         rating: 5,
         comment: "المقصورة الصوتية ونظام روزان للترجمة التتابعية يحاكي تماماً قاعات المؤتمرات الدولية. تجربة تدريبية عظيمة.",
-        contact: "khadidja.trans@gmail.com",
+        contact: "reviewer@example.com",
         date: "2026-10-26 12:20"
       },
       {
@@ -7561,7 +7505,7 @@
         category: "امتحانات تحديد المستوى CEFR",
         rating: 5,
         comment: "الامتحان المكون من 100 سؤال دقيق وشامل، ويوضح نقاط القوة والضعف بدقة علمية مذهلة.",
-        contact: "karim.bouzid@univ-alger2.dz",
+        contact: "student2@example.com",
         date: "2026-10-25 18:10"
       },
       {
@@ -7571,7 +7515,7 @@
         category: "سهولة وسرعة المنصة",
         rating: 4,
         comment: "منصة ممتازة وسلسة للغاية، تم استلام الترجمة القانونية للعقود مع الفاتورة الرسمية في وقت قياسي.",
-        contact: "sofiane.import@gmail.com",
+        contact: "client2@example.com",
         date: "2026-10-24 09:30"
       }
     ];
@@ -7670,7 +7614,7 @@
         "تقييم زائر",
         `قدم ${name} (${role}) تقييماً بمعدل (${score}/5 نجوم) حول "${category}": "${comment.substring(0, 50)}..."`,
         name,
-        contact || "visitor@polylang.dz",
+        contact || "visitor@example.com",
         "⭐"
       );
 
@@ -7801,7 +7745,7 @@
     }
 
     function forgotPasswordNotice() {
-      alert("🔒 استعادة كلمة المرور:\nلأسباب أمنية وتوافقاً مع معايير حماية البيانات، يتم إرسال رمز التحقق وإعادة التعيين عبر البريد الإلكتروني المعتمد.\nيرجى التواصل مع الإدارة: contact@polylang.dz");
+      alert("🔒 استعادة كلمة المرور:\nلأسباب أمنية وتوافقاً مع معايير حماية البيانات، يتم إرسال رمز التحقق وإعادة التعيين عبر البريد الإلكتروني المعتمد.\nيرجى التواصل مع الإدارة: support@example.com");
     }
 
     function customFormLogin() {

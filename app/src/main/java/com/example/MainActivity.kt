@@ -1,3 +1,61 @@
+package com.example
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
+import androidx.activity.compose.setContent
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.LayoutDirection
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.ui.*
+import com.example.ui.screens.*
+import com.example.ui.theme.PolylangTheme
+import com.example.ui.theme.RedPrimary
+import kotlinx.coroutines.launch
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            PolylangTheme {
+                PolylangHubApp()
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun PolylangHubApp() {
+    val coroutineScope = rememberCoroutineScope()
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    // Navigation & Localization States
+    var currentTab by remember { mutableStateOf(AppTab.HOME) }
+    var isArabic by remember { mutableStateOf(true) }
+    var currentCurrency by remember { mutableStateOf(AppCurrency.DZD) }
+
+    // User Session State (Default: clean visitor / client state)
+    var userName by remember { mutableStateOf("") }
+    var userEmail by remember { mutableStateOf("") }
+    var userRole by remember { mutableStateOf(UserRole.CLIENT) }
+    var userPlan by remember { mutableStateOf("حساب عميل جديد") }
+
     // Data State
     val allCourses = remember { CourseData.sampleCourses }
     val orders = remember {
@@ -28,7 +86,7 @@
                 status = "مكتمل وتم التسليم",
                 isInterpretation = false,
                 clientName = "شركة المقاولات والأشغال الكبرى",
-                clientEmail = "projects@example.com",
+                clientEmail = "projects@client.example.com",
                 clientPhone = "+213 550 44 33 22",
                 attachedFileName = "Turbine_Specs_Rev3.pdf",
                 date = "2026-10-09",
@@ -44,7 +102,7 @@
                 status = "مؤكد ومجدول",
                 isInterpretation = true,
                 clientName = "وزارة الطاقة والمناجم",
-                clientEmail = "energy@example.com",
+                clientEmail = "summit@client.example.com",
                 clientPhone = "+213 21 66 77 88",
                 attachedFileName = "Agenda_Summit_2026.pdf",
                 date = "2026-10-08",
@@ -52,3 +110,425 @@
             )
         )
     }
+
+    val subtitleCues = remember {
+        mutableStateListOf(
+            SrtCue(1, "00:00:01,000", "00:00:04,200", "Welcome to Polylang Hub official platform.", "مرحباً بكم في منصة بوليلانغ هاب الرسمية."),
+            SrtCue(2, "00:00:04,500", "00:00:08,100", "We provide certified sworn translations under ISO 17100.", "نقدم خدمات الترجمة المحلفة المعتمدة وفق معيار ISO 17100."),
+            SrtCue(3, "00:00:08,300", "00:00:12,500", "Simultaneous interpretation and professional masterclasses.", "ترجمة فورية للمؤتمرات ومساقات تدريبية احترافية.")
+        )
+    }
+
+    // Dialog Visibility States
+    var showAuthDialog by remember { mutableStateOf(false) }
+    var activeCourseForViewer by remember { mutableStateOf<MasterclassCourse?>(null) }
+    var showOrderDialog by remember { mutableStateOf(false) }
+    var initialOrderServiceType by remember { mutableStateOf("قانونية ورسمية") }
+    var showPaymentDialog by remember { mutableStateOf(false) }
+    var pendingPaymentPlan by remember { mutableStateOf("Pro Translator") }
+    var pendingPaymentPriceDzd by remember { mutableStateOf(4500) }
+    var showCertificateDialog by remember { mutableStateOf(false) }
+    var certificateCourseTitle by remember { mutableStateOf("الترجمة القانونية وصياغة العقود الدولية") }
+    var showTermbaseDialog by remember { mutableStateOf(false) }
+
+    // Currency Menu
+    var showCurrencyMenu by remember { mutableStateOf(false) }
+
+    CompositionLocalProvider(LocalLayoutDirection provides (if (isArabic) LayoutDirection.Rtl else LayoutDirection.Ltr)) {
+        Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) },
+        topBar = {
+            TopAppBar(
+                title = {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Text(
+                            text = "Polylang Hub",
+                            fontWeight = FontWeight.Bold,
+                            color = RedPrimary,
+                            style = MaterialTheme.typography.titleLarge
+                        )
+                        SuggestionChip(
+                            onClick = {},
+                            label = { Text("ISO 17100", fontSize = 9.sp, fontWeight = FontWeight.Bold) },
+                            colors = SuggestionChipDefaults.suggestionChipColors(
+                                containerColor = RedPrimary.copy(alpha = 0.1f),
+                                labelColor = RedPrimary
+                            )
+                        )
+                    }
+                },
+                actions = {
+                    // Currency Selector
+                    Box {
+                        TextButton(
+                            onClick = { showCurrencyMenu = true },
+                            modifier = Modifier.testTag("currency_selector_btn")
+                        ) {
+                            Text(currentCurrency.code, fontWeight = FontWeight.Bold, color = RedPrimary, fontSize = 12.sp)
+                            Icon(Icons.Default.ArrowDropDown, contentDescription = null, tint = RedPrimary)
+                        }
+                        DropdownMenu(
+                            expanded = showCurrencyMenu,
+                            onDismissRequest = { showCurrencyMenu = false }
+                        ) {
+                            AppCurrency.values().forEach { curr ->
+                                DropdownMenuItem(
+                                    text = { Text("${curr.code} (${curr.symbol})") },
+                                    onClick = {
+                                        currentCurrency = curr
+                                        showCurrencyMenu = false
+                                    }
+                                )
+                            }
+                        }
+                    }
+
+                    // Language Toggle
+                    IconButton(
+                        onClick = { isArabic = !isArabic },
+                        modifier = Modifier.testTag("lang_toggle_btn")
+                    ) {
+                        Text(if (isArabic) "EN" else "عربي", fontWeight = FontWeight.Bold, fontSize = 12.sp, color = RedPrimary)
+                    }
+
+                    // Account / Login Button
+                    IconButton(
+                        onClick = { showAuthDialog = true },
+                        modifier = Modifier.testTag("top_auth_btn")
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.AccountCircle,
+                            contentDescription = "User Account & Login",
+                            tint = RedPrimary
+                        )
+                    }
+
+                    // Exclusive Director Admin Indicator
+                    if (userRole == UserRole.ADMIN) {
+                        SuggestionChip(
+                            onClick = { currentTab = AppTab.DASHBOARD },
+                            label = { Text(if (isArabic) "👑 الإدارة" else "Admin", fontSize = 11.sp, fontWeight = FontWeight.Bold) },
+                            colors = SuggestionChipDefaults.suggestionChipColors(
+                                containerColor = RedPrimary,
+                                labelColor = Color.White
+                            ),
+                            modifier = Modifier.testTag("top_admin_chip")
+                        )
+                    }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.surface
+                )
+            )
+        },
+        bottomBar = {
+            NavigationBar(
+                containerColor = MaterialTheme.colorScheme.surface,
+                modifier = Modifier.testTag("main_bottom_nav")
+            ) {
+                // 1. Home
+                NavigationBarItem(
+                    selected = currentTab == AppTab.HOME,
+                    onClick = { currentTab = AppTab.HOME },
+                    icon = { Icon(Icons.Default.Home, contentDescription = null) },
+                    label = { Text(if (isArabic) "الرئيسية" else "Home", fontSize = 11.5.sp, fontWeight = if (currentTab == AppTab.HOME) FontWeight.Bold else FontWeight.Normal) },
+                    modifier = Modifier.testTag("nav_home")
+                )
+                // 2. Services
+                NavigationBarItem(
+                    selected = currentTab == AppTab.SERVICES || currentTab == AppTab.SUBTITLING,
+                    onClick = { currentTab = AppTab.SERVICES },
+                    icon = { Icon(Icons.Default.Translate, contentDescription = null) },
+                    label = { Text(if (isArabic) "الخدمات" else "Services", fontSize = 11.5.sp, fontWeight = if (currentTab == AppTab.SERVICES) FontWeight.Bold else FontWeight.Normal) },
+                    modifier = Modifier.testTag("nav_services")
+                )
+                // 3. Academy
+                NavigationBarItem(
+                    selected = currentTab == AppTab.ACADEMY,
+                    onClick = { currentTab = AppTab.ACADEMY },
+                    icon = { Icon(Icons.Default.School, contentDescription = null) },
+                    label = { Text(if (isArabic) "الأكاديمية" else "Academy", fontSize = 11.5.sp, fontWeight = if (currentTab == AppTab.ACADEMY) FontWeight.Bold else FontWeight.Normal) },
+                    modifier = Modifier.testTag("nav_academy")
+                )
+                // 4. Pricing
+                NavigationBarItem(
+                    selected = currentTab == AppTab.PRICING,
+                    onClick = { currentTab = AppTab.PRICING },
+                    icon = { Icon(Icons.Default.Sell, contentDescription = null) },
+                    label = { Text(if (isArabic) "الأسعار" else "Pricing", fontSize = 11.5.sp, fontWeight = if (currentTab == AppTab.PRICING) FontWeight.Bold else FontWeight.Normal) },
+                    modifier = Modifier.testTag("nav_pricing")
+                )
+                // 5. Dashboard / Admin Portal
+                NavigationBarItem(
+                    selected = currentTab == AppTab.DASHBOARD,
+                    onClick = { currentTab = AppTab.DASHBOARD },
+                    icon = {
+                        Icon(
+                            if (userRole == UserRole.ADMIN) Icons.Default.AdminPanelSettings else Icons.Default.Person,
+                            contentDescription = null
+                        )
+                    },
+                    label = {
+                        Text(
+                            text = if (userRole == UserRole.ADMIN) (if (isArabic) "الإدارة 👑" else "Admin 👑") else (if (isArabic) "حسابي" else "Profile"),
+                            fontSize = 11.5.sp,
+                            fontWeight = if (currentTab == AppTab.DASHBOARD) FontWeight.Bold else FontWeight.Normal
+                        )
+                    },
+                    modifier = Modifier.testTag("nav_dashboard")
+                )
+            }
+        }
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+        ) {
+            // Tribute to Scientific Club "نادي الأمل" at University of Algiers 2
+            Surface(
+                color = Color(0xFF7F1D1D),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag("top_el_amel_banner")
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 14.dp, vertical = 7.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Text("🎓", fontSize = 16.sp)
+                        Text(
+                            text = if (isArabic)
+                                "تحية طيبة وفخر واعتزاز لأعضاء النادي العلمي «نادي الأمل» بجامعة الجزائر 2 وفريق «ترانز - TransUp» ✨"
+                            else
+                                "Warm greetings & tribute to Scientific Club 'El-Amel' at Univ Algiers 2 & the 'TransUp' team ✨",
+                            color = Color.White,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            maxLines = 1
+                        )
+                    }
+                    Surface(
+                        shape = RoundedCornerShape(10.dp),
+                        color = Color(0xFFFEF08A)
+                    ) {
+                        Text(
+                            text = if (isArabic) "جامعة الجزائر 2 • ترانز اب" else "Univ Algiers 2 • TransUp",
+                            modifier = Modifier.padding(horizontal = 7.dp, vertical = 2.dp),
+                            fontSize = 9.5.sp,
+                            fontWeight = FontWeight.ExtraBold,
+                            color = Color(0xFF78350F)
+                        )
+                    }
+                }
+            }
+
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .weight(1f)
+            ) {
+            Crossfade(
+                targetState = currentTab,
+                animationSpec = tween(280),
+                label = "TabCrossfade"
+            ) { targetTab ->
+                when (targetTab) {
+                    AppTab.HOME -> HomeScreen(
+                        isArabic = isArabic,
+                        onNavigate = { currentTab = it },
+                        onOpenOrderDialog = { service ->
+                            initialOrderServiceType = service
+                            showOrderDialog = true
+                        },
+                        onOpenAuthDialog = { showAuthDialog = true }
+                    )
+                    AppTab.SERVICES -> ServicesScreen(
+                        isArabic = isArabic,
+                        currency = currentCurrency,
+                        onOpenOrderDialog = { service ->
+                            initialOrderServiceType = service
+                            showOrderDialog = true
+                        },
+                        onOpenTermbase = { showTermbaseDialog = true },
+                        onOpenSubtitling = { currentTab = AppTab.SUBTITLING }
+                    )
+                    AppTab.SUBTITLING -> {
+                        BackHandler { currentTab = AppTab.SERVICES }
+                        Column(modifier = Modifier.fillMaxSize()) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 16.dp, vertical = 6.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                TextButton(onClick = { currentTab = AppTab.SERVICES }) {
+                                    Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                                    Spacer(modifier = Modifier.width(4.dp))
+                                    Text(if (isArabic) "العودة للخدمات" else "Back to Services", fontWeight = FontWeight.Bold)
+                                }
+                            }
+                            SubtitlingScreen(
+                                isArabic = isArabic,
+                                cues = subtitleCues,
+                                onExportSrt = {
+                                    coroutineScope.launch {
+                                        snackbarHostState.showSnackbar(
+                                            message = if (isArabic) "✓ تم تجهيز وتصدير ملف Subtitles.srt بنجاح" else "✓ Subtitles.srt successfully exported"
+                                        )
+                                    }
+                                }
+                            )
+                        }
+                    }
+                    AppTab.ACADEMY -> AcademyScreen(
+                        isArabic = isArabic,
+                        courses = allCourses,
+                        userName = userName,
+                        userEmail = userEmail,
+                        onOpenCourse = { course ->
+                            // User clicked on course content -> open viewer!
+                            activeCourseForViewer = course
+                        },
+                        onClaimCertificate = { title ->
+                            certificateCourseTitle = title
+                            showCertificateDialog = true
+                        }
+                    )
+                    AppTab.PRICING -> PricingScreen(
+                        isArabic = isArabic,
+                        currency = currentCurrency,
+                        onSelectPlan = { plan, price ->
+                            pendingPaymentPlan = plan
+                            pendingPaymentPriceDzd = price
+                            showPaymentDialog = true
+                        }
+                    )
+                    AppTab.DASHBOARD -> DashboardScreen(
+                        isArabic = isArabic,
+                        currency = currentCurrency,
+                        userName = userName,
+                        userEmail = userEmail,
+                        userPlan = userPlan,
+                        userRole = userRole,
+                        orders = orders,
+                        onOpenAuthDialog = { showAuthDialog = true },
+                        onOpenOrderDialog = { service ->
+                            initialOrderServiceType = service
+                            showOrderDialog = true
+                        },
+                        onOpenAcademy = { currentTab = AppTab.ACADEMY }
+                    )
+                }
+            }
+        }
+    }
+}
+
+    // 1. Auth Dialog (Sign In / Register)
+    if (showAuthDialog) {
+        AuthDialog(
+            isArabic = isArabic,
+            onDismiss = { showAuthDialog = false },
+            onLoginSuccess = { name, email, role ->
+                userName = name
+                userEmail = email
+                userRole = role
+                showAuthDialog = false
+                currentTab = AppTab.DASHBOARD
+                coroutineScope.launch {
+                    snackbarHostState.showSnackbar(
+                        message = if (isArabic) "مرحباً بك يا $name! تم تسجيل الدخول بصلاحية: ${role.labelAr}" else "Welcome $name! Logged in as: ${role.name}"
+                    )
+                }
+            }
+        )
+    }
+
+    // 2. Course Viewer Dialog (Content viewer)
+    activeCourseForViewer?.let { course ->
+        CourseViewerDialog(
+            course = course,
+            isArabic = isArabic,
+            onDismiss = { activeCourseForViewer = null },
+            onClaimCertificate = { title ->
+                certificateCourseTitle = title
+                showCertificateDialog = true
+            }
+        )
+    }
+
+    // 3. Order Service Dialog
+    if (showOrderDialog) {
+        OrderServiceDialog(
+            initialServiceType = initialOrderServiceType,
+            currency = currentCurrency,
+            isArabic = isArabic,
+            userName = userName,
+            userEmail = userEmail,
+            onDismiss = { showOrderDialog = false },
+            onSubmitOrder = { newOrder ->
+                orders.add(0, newOrder)
+                showOrderDialog = false
+                currentTab = AppTab.DASHBOARD
+                coroutineScope.launch {
+                    snackbarHostState.showSnackbar(
+                        message = if (isArabic) "✓ تم تأكيد وإرسال طلب الترجمة #${newOrder.id} بنجاح!" else "✓ Order #${newOrder.id} placed successfully!"
+                    )
+                }
+            }
+        )
+    }
+
+    // 4. Payment / Subscription Dialog
+    if (showPaymentDialog) {
+        PaymentDialog(
+            isArabic = isArabic,
+            currency = currentCurrency,
+            planName = pendingPaymentPlan,
+            priceDzd = pendingPaymentPriceDzd,
+            userName = userName,
+            userEmail = userEmail,
+            onDismiss = { showPaymentDialog = false },
+            onPaymentSuccess = {
+                userPlan = pendingPaymentPlan
+                showPaymentDialog = false
+                coroutineScope.launch {
+                    snackbarHostState.showSnackbar(
+                        message = if (isArabic) "✓ تم تأكيد عملية الدفع وتفعيل باقة $pendingPaymentPlan بنجاح!" else "✓ Plan $pendingPaymentPlan activated successfully!"
+                    )
+                }
+            }
+        )
+    }
+
+    // 5. Official Certificate Dialog
+    if (showCertificateDialog) {
+        CertificateDialog(
+            isArabic = isArabic,
+            studentName = userName,
+            courseTitle = certificateCourseTitle,
+            onDismiss = { showCertificateDialog = false }
+        )
+    }
+
+    // 6. AI Termbase Dialog
+    if (showTermbaseDialog) {
+        AiTermbaseDialog(
+            isArabic = isArabic,
+            onDismiss = { showTermbaseDialog = false }
+        )
+    }
+    }
+}

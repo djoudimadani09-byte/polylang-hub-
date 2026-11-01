@@ -5,12 +5,11 @@
 
 # 1. Environment variables and secrets (Strictly ignored)
 .env
+.env.*
 .env.local
-.env.*.local
-*.env
 .env.production
+.env.development
 .env.staging
-# Keep the template file tracked for public documentation
 !.env.example
 
 # 2. Local Android properties & Keystores

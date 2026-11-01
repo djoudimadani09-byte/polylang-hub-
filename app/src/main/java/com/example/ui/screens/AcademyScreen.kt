@@ -29,7 +29,7 @@ fun AcademyScreen(
     isArabic: Boolean,
     courses: List<MasterclassCourse>,
     userName: String = "طالب الترجمة",
-    userEmail: String = "user@polylang.dz",
+    userEmail: String = "user@example.com",
     onOpenCourse: (MasterclassCourse) -> Unit,
     onClaimCertificate: (courseTitle: String) -> Unit
 ) {

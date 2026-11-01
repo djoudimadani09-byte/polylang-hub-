@@ -1,16 +1,69 @@
 package com.example
 
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.snapshots.SnapshotStateList
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
-// Demo telemetry data intentionally sanitized for public repository visibility.
+data class VisitorSessionLog(
+    val id: String,
+    val timestamp: String,
+    val userName: String,
+    val userEmail: String,
+    val role: String,
+    val actionType: String,
+    val details: String,
+    val isVerified: Boolean = true
+)
+
+data class StudentExerciseRecord(
+    val id: String,
+    val timestamp: String,
+    val studentName: String,
+    val studentEmail: String,
+    val exerciseType: String,
+    val exerciseTitle: String,
+    val score: String,
+    val decalageSeconds: Double? = null,
+    val wpm: Int? = null,
+    val status: String = "مكتمل وموثق"
+)
+
 object PlatformTelemetry {
-    val visitorSessionLogs = mutableStateListOf<VisitorSessionLog>()
+    val sessionLogs = mutableStateListOf<VisitorSessionLog>()
     val exerciseRecords = mutableStateListOf<StudentExerciseRecord>()
 
     init {
-        visitorSessionLogs.addAll(
+        // Seed initial verified audit records
+        sessionLogs.addAll(
             listOf(
+                VisitorSessionLog(
+                    id = "LOG-1049",
+                    timestamp = "2026-10-30 08:45:12",
+                    userName = "أ. جودي مداني (المشرف العام)",
+                    userEmail = "admin@example.com",
+                    role = "مشرف عام (Admin)",
+                    actionType = "تسجيل دخول إداري",
+                    details = "جلسة فحص أمني وتدقيق منظومة الترجمة المحلفة ISO 17100"
+                ),
+                VisitorSessionLog(
+                    id = "LOG-1048",
+                    timestamp = "2026-10-30 08:32:04",
+                    userName = "د. سمير الهاشمي",
+                    userEmail = "translator@example.com",
+                    role = "مترجم محلف (Translator)",
+                    actionType = "اعتماد ترجمة",
+                    details = "ختم واعتماد مشروع عقد امتياز رقم PL-8421"
+                ),
+                VisitorSessionLog(
+                    id = "LOG-1047",
+                    timestamp = "2026-10-30 08:15:30",
+                    userName = "سارة بن سالم",
+                    userEmail = "student@example.com",
+                    role = "طالبة ترجمة (Student)",
+                    actionType = "تمرين كابينة",
+                    details = "إكمال خطاب رقم #14 (قمة المناخ COP28) بفارق زمني 3.1 ثوانٍ"
+                ),
                 VisitorSessionLog(
                     id = "LOG-1046",
                     timestamp = "2026-10-30 07:55:18",
@@ -72,9 +125,24 @@ object PlatformTelemetry {
                     exerciseType = "كابينة 100 خطاب",
                     exerciseTitle = "جلسة مجلس الأمن حول الأمن الغذائي الدولي",
                     score = "92%",
-                    wpm = 119
+                    decalageSeconds = 3.4,
+                    wpm = 142
                 )
             )
         )
+    }
+
+    private val timeFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+
+    fun logSession(userName: String, userEmail: String, role: String, actionType: String, details: String) {
+        val now = timeFormat.format(Date())
+        val logId = "LOG-${(1050..9999).random()}"
+        sessionLogs.add(0, VisitorSessionLog(logId, now, userName, userEmail, role, actionType, details))
+    }
+
+    fun logExercise(studentName: String, studentEmail: String, type: String, title: String, score: String, decalage: Double? = null, wpm: Int? = null) {
+        val now = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(Date())
+        val exId = "EX-${(305..9999).random()}"
+        exerciseRecords.add(0, StudentExerciseRecord(exId, now, studentName, studentEmail, type, title, score, decalage, wpm))
     }
 }

@@ -69,7 +69,7 @@ data class ExamQuestion(
 fun StudentLabView(
     isArabic: Boolean,
     userName: String = "طالب الترجمة",
-    userEmail: String = "student@polylang.dz"
+    userEmail: String = "student@example.com"
 ) {
     var activeSubSection by remember { mutableStateOf(LabSubSection.INTERPRETATION) }
 
