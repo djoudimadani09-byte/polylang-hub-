@@ -248,27 +248,23 @@ fun AuthDialog(
                                 errorMessage = if (isArabic) "كلمة المرور يجب أن لا تقل عن 4 خانات" else "Password must be at least 4 characters"
                                 return@Button
                             }
-                            val isExclusiveAdmin = AdminEmailNotifier.isExclusiveAdmin(cleanEmail)
-                            if (isExclusiveAdmin && !AdminEmailNotifier.verifyAdminPassword(password)) {
-                                errorMessage = if (isArabic) "كلمة المرور غير صحيحة لحساب المشرف." else "Invalid admin password."
+                            if (cleanEmail.contains("admin", ignoreCase = true)) {
+                                errorMessage = if (isArabic)
+                                    "⚠️ المصادقة الإدارية معطلة افتراضياً (Fail-Closed): لا يتوفر خادم مصادقة خلفي موثوق في المستودع. لا يمكن منح صلاحية المشرف محلياً."
+                                else
+                                    "Admin Authentication Unavailable: No verified backend server configured. Admin login is disabled by default (Fail-Closed)."
                                 return@Button
                             }
                             isLoading = true
-                            // Determine role: Admin is STRICTLY AND EXCLUSIVELY granted to the authorized administrator
-                            val role = if (isExclusiveAdmin) {
-                                UserRole.ADMIN
-                            } else when {
+                            // Client roles are strictly limited to non-admin roles (Fail-Closed)
+                            val role = when {
                                 cleanEmail.contains("trans", ignoreCase = true) || cleanEmail.contains("samir", ignoreCase = true) -> UserRole.TRANSLATOR
                                 cleanEmail.contains("student", ignoreCase = true) || cleanEmail.contains("sarah", ignoreCase = true) -> UserRole.STUDENT
                                 cleanEmail.contains("learner", ignoreCase = true) || cleanEmail.contains("youssef", ignoreCase = true) -> UserRole.LEARNER
                                 else -> UserRole.CLIENT
                             }
 
-                            val name = if (AdminEmailNotifier.isExclusiveAdmin(cleanEmail)) {
-                                "المشرف العام (Administrator)"
-                            } else {
-                                cleanEmail.substringBefore("@").replace(".", " ").replaceFirstChar { it.uppercase() }
-                            }
+                            val name = cleanEmail.substringBefore("@").replace(".", " ").replaceFirstChar { it.uppercase() }
 
                             AdminEmailNotifier.dispatch(
                                 eventType = "تسجيل دخول مستخدم",
@@ -425,28 +421,28 @@ fun AuthDialog(
 
                     Button(
                         onClick = {
-                            if (fullName.isBlank()) {
+                            val cleanName = fullName.trim()
+                            val cleanEmail = email.trim()
+                            if (cleanName.isBlank()) {
                                 errorMessage = if (isArabic) "يرجى كتابة الاسم الكامل" else "Please enter your full name"
                                 return@Button
                             }
-                            if (email.isBlank() || !email.contains("@")) {
-                                errorMessage = if (isArabic) "يرجى إدخال بريد إلكتروني صالح" else "Please enter a valid email"
+                            if (cleanEmail.isBlank()) {
+                                errorMessage = if (isArabic) "يرجى إدخال البريد الإلكتروني" else "Please enter your email"
                                 return@Button
                             }
-                            if (password.length < 4) {
-                                errorMessage = if (isArabic) "كلمة المرور يجب أن لا تقل عن 4 خانات" else "Password must be at least 4 characters"
+                            if (cleanEmail.contains("admin", ignoreCase = true) || selectedRole == UserRole.ADMIN) {
+                                errorMessage = if (isArabic)
+                                    "⚠️ لا يمكن إنشاء حساب مشرف من شاشة التسجيل (Fail-Closed). يتطلب دور المشرف خادماً موثوقاً للتحقق من الهوية والصلاحيات."
+                                else
+                                    "Admin accounts cannot be registered from the client application. Server-side authorization is required."
                                 return@Button
                             }
                             isLoading = true
-                            val cleanEmail = email.trim()
-                            val finalRole = if (AdminEmailNotifier.isExclusiveAdmin(cleanEmail)) {
-                                UserRole.ADMIN
-                            } else {
-                                selectedRole
-                            }
+                            val finalRole = if (selectedRole == UserRole.ADMIN) UserRole.CLIENT else selectedRole
                             AdminEmailNotifier.dispatch(
                                 eventType = "تسجيل حساب جديد بالمنصة",
-                                userName = fullName,
+                                userName = cleanName,
                                 userEmail = cleanEmail,
                                 details = mapOf(
                                     "phone" to phone,
@@ -455,13 +451,13 @@ fun AuthDialog(
                                 )
                             )
                             PlatformTelemetry.logSession(
-                                userName = fullName,
+                                userName = cleanName,
                                 userEmail = cleanEmail,
                                 role = finalRole.labelAr,
                                 actionType = "إنشاء حساب جديد",
                                 details = "تم إنشاء حساب جديد بنجاح"
                             )
-                            onLoginSuccess(fullName, cleanEmail, finalRole)
+                            onLoginSuccess(cleanName, cleanEmail, finalRole)
                         },
                         modifier = Modifier
                             .fillMaxWidth()

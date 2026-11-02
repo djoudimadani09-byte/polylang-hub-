@@ -16,26 +16,99 @@ import java.util.Date
 import java.util.Locale
 
 /**
- * Enterprise Notification Service for Polylang Hub.
- * Routes notifications safely through the official platform API
- * without exposing personal credentials or unverified third-party endpoints.
+ * Enterprise Notification & Security Service for Polylang Hub.
+ * Enforces Fail-Closed security:
+ * - Admin authorization is strictly server-gated (fails closed without verified server token).
+ * - Client-side role claims or email checks are never accepted as proof of admin privilege.
+ * - Network failures report honest error status, never faked success.
  */
 object AdminEmailNotifier {
-    // Official platform admin email (configurable via environment/BuildConfig)
     val OFFICIAL_ADMIN_EMAIL: String = BuildConfig.ADMIN_EMAIL.ifBlank { "admin@example.com" }
     val OFFICIAL_SUPPORT_EMAIL: String = BuildConfig.SUPPORT_EMAIL.ifBlank { "support@example.com" }
+    val ADMIN_EMAIL: String = OFFICIAL_ADMIN_EMAIL
 
-    const val ADMIN_EMAIL = "admin@example.com"
-
-    fun isExclusiveAdmin(email: String): Boolean {
-        return email.trim().equals(ADMIN_EMAIL, ignoreCase = true) || email.trim().equals(OFFICIAL_ADMIN_EMAIL, ignoreCase = true)
+    /**
+     * Fail-Closed Security Policy:
+     * Without a verified backend session token issued by a trusted authentication server,
+     * administrative authorization is strictly denied.
+     */
+    fun isServerAuthenticatedAdmin(authToken: String?): Boolean {
+        // Fail-Closed: tokens must be verified by a real server. No client-side mock bypass.
+        if (authToken.isNullOrBlank()) return false
+        // Placeholder check: In a production deployment, this verifies JWT signature against the backend.
+        return false
     }
 
-    fun verifyAdminPassword(password: String): Boolean {
-        val clean = password.trim()
-        return clean.length >= 6
+    /**
+     * Sends notification synchronously within coroutine scope.
+     * Returns Pair(success, responseMessage).
+     * Strictly enforces Fail-Closed error reporting without fake success.
+     */
+    suspend fun sendNotification(
+        eventType: String,
+        userName: String,
+        userEmail: String,
+        details: Map<String, String>
+    ): Pair<Boolean, String> = withContext(Dispatchers.IO) {
+        val baseUrl = BuildConfig.API_BASE_URL
+        // Fail closed if backend endpoint is an unconfigured placeholder
+        if (baseUrl.isBlank() || baseUrl.contains("example.com")) {
+            return@withContext Pair(
+                false,
+                "فشل الإرسال: الخادم الخلفي غير مهيأ (Backend Unconfigured - Fail-Closed)"
+            )
+        }
+
+        try {
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+            val timestamp = dateFormat.format(Date())
+
+            val jsonObj = JSONObject().apply {
+                put("source", "PolylangHub-Android")
+                put("eventType", eventType)
+                put("timestamp", timestamp)
+                put("userName", userName.ifBlank { "زائر" })
+                put("userEmail", userEmail.ifBlank { "user@example.com" })
+                put("details", JSONObject(details))
+            }
+
+            val apiUrl = URL("$baseUrl/notifications")
+            val conn = (apiUrl.openConnection() as HttpURLConnection).apply {
+                requestMethod = "POST"
+                setRequestProperty("Content-Type", "application/json; charset=UTF-8")
+                setRequestProperty("Accept", "application/json")
+                setRequestProperty("User-Agent", "PolylangHub-Android/${BuildConfig.VERSION_NAME}")
+                doOutput = true
+                connectTimeout = 5000
+                readTimeout = 5000
+            }
+
+            try {
+                OutputStreamWriter(conn.outputStream, "UTF-8").use {
+                    it.write(jsonObj.toString())
+                    it.flush()
+                }
+                val code = conn.responseCode
+                if (code in 200..299) {
+                    Pair(true, "تم تأكيد الاستلام بنجاح من الخادم (رمز: $code)")
+                } else {
+                    Pair(false, "فشل استلام الخادم للطلب (رمز الاستجابة: $code)")
+                }
+            } finally {
+                conn.disconnect()
+            }
+        } catch (netErr: Exception) {
+            // Honest error reporting: never report false positive success
+            Pair(false, "تعذر الاتصال بالخادم: ${netErr.message ?: "خطأ في الشبكة"}")
+        }
     }
 
+    /**
+     * Dispatches notifications asynchronously.
+     * Enforces honest reporting:
+     * - If the backend URL is unconfigured (example.com placeholder) or unreachable, reports failure.
+     * - Never reports success on network error or offline fallback.
+     */
     fun dispatch(
         eventType: String,
         userName: String,
@@ -44,59 +117,12 @@ object AdminEmailNotifier {
         onResult: (Boolean, String) -> Unit = { _, _ -> }
     ) {
         CoroutineScope(Dispatchers.IO).launch {
-            var success = false
-            var responseMessage = ""
+            val (success, responseMessage) = sendNotification(eventType, userName, userEmail, details)
             try {
-                val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-                val timestamp = dateFormat.format(Date())
-
-                val jsonObj = JSONObject()
-                jsonObj.put("source", "PolylangHub-Android")
-                jsonObj.put("eventType", eventType)
-                jsonObj.put("timestamp", timestamp)
-                jsonObj.put("userName", userName.ifBlank { "زائر معتمد" })
-                jsonObj.put("userEmail", userEmail.ifBlank { "user@example.com" })
-                jsonObj.put("recipient", OFFICIAL_ADMIN_EMAIL)
-
-                val detailsObj = JSONObject()
-                for ((key, value) in details) {
-                    detailsObj.put(key, value)
+                withContext(Dispatchers.Main) {
+                    onResult(success, responseMessage)
                 }
-                jsonObj.put("details", detailsObj)
-
-                // Dispatch via official SSL API endpoint
-                val apiUrl = URL("${BuildConfig.API_BASE_URL}/notifications")
-                val conn = (apiUrl.openConnection() as HttpURLConnection).apply {
-                    requestMethod = "POST"
-                    setRequestProperty("Content-Type", "application/json; charset=UTF-8")
-                    setRequestProperty("Accept", "application/json")
-                    setRequestProperty("User-Agent", "PolylangHub-Android/${BuildConfig.VERSION_NAME}")
-                    doOutput = true
-                    connectTimeout = 5000
-                    readTimeout = 5000
-                }
-
-                try {
-                    OutputStreamWriter(conn.outputStream, "UTF-8").use {
-                        it.write(jsonObj.toString())
-                        it.flush()
-                    }
-                    val code = conn.responseCode
-                    success = (code in 200..299)
-                    responseMessage = if (success) "تم توثيق الإشعار رسمياً في المنظومة" else "حفظ محلي (رمز: $code)"
-                } catch (netErr: Exception) {
-                    // Safe offline queue fallback when backend is in sandbox mode
-                    success = true
-                    responseMessage = "تم حفظ وتوثيق المعاملة بنجاح في سجل المنصة المعتمد"
-                } finally {
-                    conn.disconnect()
-                }
-            } catch (e: Exception) {
-                success = true
-                responseMessage = "تم توثيق الطلب بنجاح محلياً"
-            }
-
-            withContext(Dispatchers.Main) {
+            } catch (_: Exception) {
                 onResult(success, responseMessage)
             }
         }

@@ -54,9 +54,9 @@ fun DashboardScreen(
     var showInvoiceDialogForOrder by remember { mutableStateOf<TranslationOrder?>(null) }
     var actionNotificationMessage by remember { mutableStateOf<String?>(null) }
 
-    val isAdmin = AdminEmailNotifier.isExclusiveAdmin(userEmail)
-    val isTranslator = userRole == UserRole.TRANSLATOR && !isAdmin
-    val isClient = !isAdmin && !isTranslator
+    val isAdmin = false // Fail-Closed: Administrative privilege requires verified backend session token
+    val isTranslator = userRole == UserRole.TRANSLATOR
+    val isClient = !isTranslator
 
     // Client sees ONLY their own requested orders (Starts from 0 for new accounts)
     val clientOrders = remember(orders.size, userEmail, userName) {
@@ -301,117 +301,45 @@ fun DashboardScreen(
                 }
             }
             UserRole.ADMIN -> {
-                val isAuthorizedAdmin = userEmail.equals(AdminEmailNotifier.ADMIN_EMAIL, ignoreCase = true)
                 Card(
                     modifier = Modifier.fillMaxWidth().testTag("admin_dash_panel"),
                     shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = if (isAuthorizedAdmin) GoldYellow.copy(alpha = 0.12f) else MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.4f)),
-                    border = androidx.compose.foundation.BorderStroke(1.dp, if (isAuthorizedAdmin) GoldYellow else MaterialTheme.colorScheme.error)
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.25f)),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.error)
                 ) {
-                    Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = if (isAuthorizedAdmin) "🔐 لوحة التحكم المركزية للأدمن" else "⚠️ تنبيه صلاحيات المشرف",
+                                text = "⚠️ لوحة التحكم معطلة افتراضياً (Fail-Closed)",
                                 fontWeight = FontWeight.Black,
                                 fontSize = 14.sp,
-                                color = if (isAuthorizedAdmin) RedDark else MaterialTheme.colorScheme.error
+                                color = MaterialTheme.colorScheme.error
                             )
                             Text(
-                                text = if (isAuthorizedAdmin) "✓ مصرح: المشرف العام (${AdminEmailNotifier.ADMIN_EMAIL})" else "غير مصرح (مغلق)",
+                                text = "المصادقة غير مهيأة",
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = if (isAuthorizedAdmin) SuccessGreen else MaterialTheme.colorScheme.error
+                                color = MaterialTheme.colorScheme.error
                             )
                         }
 
-                        if (isAuthorizedAdmin) {
-                            val clipboardManager = LocalClipboardManager.current
-                            Text(
-                                text = "🗄️ قاعدة البيانات والمعاملات: مؤمنة ومشفرة بالكامل وفق معايير الحماية الدولية (Zero-Trust)\n📧 التنبيهات الرسمية: مشفرة وترسل مباشرة إلى بوابة إدارة المنصة المعتمدة\n👥 خصوصية تامة: العميل يرى فقط طلباته الخاصة، وكافة العمليات معزولة تماماً",
-                                fontSize = 11.5.sp,
-                                lineHeight = 18.sp,
-                                color = MaterialTheme.colorScheme.onSurface
-                            )
+                        Text(
+                            text = "تنبيه أمني صارم: لا يتوفر خادم مصادقة خلفي موثوق (Backend Auth Provider) في هذا المستودع. وفقاً لأفضل الممارسات الأمنية، تم تعطيل الصلاحيات الإدارية افتراضياً (Fail-Closed) ولا يمكن تفعيلها محلياً من تطبيق العميل دون مصادقة خادمية موثقة ومتحقق منها عند كل طلب.",
+                            fontSize = 12.sp,
+                            color = MaterialTheme.colorScheme.onErrorContainer,
+                            lineHeight = 18.sp
+                        )
 
-                            // Direct Admin Dashboard URL Card
-                            Card(
-                                shape = RoundedCornerShape(10.dp),
-                                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                                modifier = Modifier.fillMaxWidth().padding(top = 4.dp)
-                            ) {
-                                Column(modifier = Modifier.padding(10.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                                    Text(
-                                        text = "🔗 الرابط المباشر للوحة المشرف (Direct Admin URL):",
-                                        fontWeight = FontWeight.Bold,
-                                        fontSize = 11.sp,
-                                        color = RedDark
-                                    )
-                                    Row(
-                                        modifier = Modifier.fillMaxWidth(),
-                                        horizontalArrangement = Arrangement.SpaceBetween,
-                                        verticalAlignment = Alignment.CenterVertically
-                                    ) {
-                                        Text(
-                                            text = "https://example.com/#admin",
-                                            fontSize = 12.sp,
-                                            fontWeight = FontWeight.Bold,
-                                            color = MaterialTheme.colorScheme.primary
-                                        )
-                                        OutlinedButton(
-                                            onClick = {
-                                                clipboardManager.setText(AnnotatedString("https://example.com/#admin"))
-                                                actionNotificationMessage = "✓ تم نسخ الرابط المباشر للوحة المشرف إلى الحافظة بنجاح!"
-                                            },
-                                            shape = RoundedCornerShape(6.dp),
-                                            contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp),
-                                            modifier = Modifier.height(30.dp)
-                                        ) {
-                                            Text(if (isArabic) "📋 نسخ الرابط" else "Copy URL", fontSize = 11.sp)
-                                        }
-                                    }
-                                }
-                            }
-
-                            // Security & Compliance Status
-                            Card(
-                                shape = RoundedCornerShape(10.dp),
-                                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                                modifier = Modifier.fillMaxWidth().padding(top = 4.dp)
-                            ) {
-                                Column(modifier = Modifier.padding(10.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                                    Text(
-                                        text = "🔒 منظومة الأمان والامتثال (Security & Zero-Trust):",
-                                        fontWeight = FontWeight.Bold,
-                                        fontSize = 11.sp,
-                                        color = SuccessGreen
-                                    )
-                                    Text("• تشفير الاتصال والبيانات بنظام 256-Bit SSL/TLS", fontSize = 10.5.sp)
-                                    Text("• لوحة المشرف مقفلة ومحصورة حصرياً للبريد المعتمد ${AdminEmailNotifier.ADMIN_EMAIL}", fontSize = 10.5.sp)
-                                    Text("• تطبيق معايير الأمان الدولية ISO 27001 ومعايير الجودة ISO 17100:2015", fontSize = 10.5.sp)
-                                }
-                            }
-                        } else {
-                            Text(
-                                text = "🔒 الوصول مقفل: لوحة الإدارة العامة محمية بالكامل وتخضع لمعايير الأمان العالمية الصارمة (Zero-Trust).\nلا يمكن للغرباء أو الحسابات غير المصرح لها الاطلاع على هذه البيانات.\nيسمح بالولوج حصرياً للمشرف المعتمد (${AdminEmailNotifier.ADMIN_EMAIL}).",
-                                fontSize = 12.sp,
-                                color = MaterialTheme.colorScheme.error,
-                                lineHeight = 17.sp
-                            )
-                            Button(
-                                onClick = onOpenAuthDialog,
-                                modifier = Modifier.fillMaxWidth().testTag("admin_login_cta"),
-                                colors = ButtonDefaults.buttonColors(containerColor = RedDark),
-                                shape = RoundedCornerShape(8.dp)
-                            ) {
-                                Icon(Icons.Default.Lock, contentDescription = null, modifier = Modifier.size(16.dp))
-                                Spacer(modifier = Modifier.width(6.dp))
-                                Text(if (isArabic) "تسجيل الدخول بحساب المشرف المصرح به" else "Login as Authorized Admin", fontSize = 12.sp, fontWeight = FontWeight.Bold)
-                            }
-                        }
+                        Text(
+                            text = "متطلبات التفعيل الإنتاجي:\n1. ربط مزود مصادقة خادمي موثوق (مثل Firebase Auth أو خادم OAuth موثق).\n2. التحقق من صلاحيات المشرف في الخادم الخلفي وليس في تطبيق العميل.\n3. تأمين جميع نقاط الاتصال عبر HTTPS ومصادقة الطلبات بتوكنات مشفرة.",
+                            fontSize = 11.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            lineHeight = 16.sp
+                        )
                     }
                 }
             }

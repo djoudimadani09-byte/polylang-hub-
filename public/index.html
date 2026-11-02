@@ -3144,42 +3144,34 @@
     </div>
   </div>
 
-  <!-- ADMIN SECURITY GATE & DIRECT SUPERVISOR ACCESS MODAL -->
+  <!-- ADMIN SECURITY GATE MODAL (FAIL-CLOSED) -->
   <div id="adminLockModal" class="modal-backdrop">
     <div class="modal-sheet" style="border-top:4px solid var(--crimson); max-width:500px;">
       <div class="modal-close-x" onclick="closeModal('adminLockModal')">✕</div>
       <div style="text-align:center; margin-bottom:14px;">
-        <div style="font-size:38px; margin-bottom:6px;">👑</div>
-        <h3 style="font-size:18px; font-weight:900; color:var(--crimson); margin:0 0 4px;">بوابة تسجيل دخول المشرف العام المباشرة</h3>
+        <div style="font-size:38px; margin-bottom:6px;">🛡️</div>
+        <h3 style="font-size:18px; font-weight:900; color:var(--crimson); margin:0 0 4px;">بوابة الإدارة المركزية مغلقة بأمان (Fail-Closed)</h3>
         <p style="font-size:12.5px; color:var(--text-dim); line-height:1.6; margin:0;">
-          لوحة الإشراف العام ومراقبة السيرفر مقفلة ومحمية بحساب الإدارة العليا المعتمدة.
+          وفق المعايير الأمنية، لا يمكن منح صلاحيات المشرف أو مصادقتها من جانب العميل بدون خادم خلفي موثوق (Backend Authentication Server).
         </p>
       </div>
 
-      <div style="background:var(--bg-body); padding:16px; border-radius:12px; border:1px solid var(--border-line); margin-bottom:14px;">
-        <div style="margin-bottom:12px;">
-          <label style="font-size:12px; font-weight:800; display:block; margin-bottom:4px; color:var(--text-main);">البريد الإلكتروني المعتمد للإدارة:</label>
-          <input type="email" id="admin-instant-email" class="form-control" placeholder="أدخل البريد الإلكتروني المعتمد للإدارة..." value="" style="background:#fff; font-weight:700; color:var(--text-main); font-size:12.5px;">
-        </div>
-        <div style="margin-bottom:14px;">
-          <label style="font-size:12px; font-weight:800; display:block; margin-bottom:4px; color:var(--text-main);">كلمة مرور المشرف العام:</label>
-          <div style="position:relative; display:flex; align-items:center;">
-            <input type="password" id="admin-instant-password" class="form-control" placeholder="أدخل كلمة مرور المشرف..." value="" onkeydown="if(event.key==='Enter') executeAdminInstantLogin();" style="padding:10px 12px; font-size:13px; border-radius:8px; width:100%;">
-            <button type="button" onclick="toggleInstantPassVisibility()" style="position:absolute; left:8px; background:none; border:none; cursor:pointer; font-size:14px; color:var(--text-dim);" title="إظهار/إخفاء">👁️</button>
-          </div>
-          <span style="font-size:11px; color:#10b981; font-weight:700; margin-top:4px; display:block;">🔒 مشفر ومعتمد بنظام 256-Bit SSL Master Key</span>
-        </div>
-        <button class="btn-primary-red" style="width:100%; justify-content:center; padding:12px; font-size:13.5px; font-weight:900; border-radius:8px; background:linear-gradient(135deg, var(--crimson), #991b1b); box-shadow:0 4px 15px var(--crimson-glow);" onclick="executeAdminInstantLogin()">
-          🔓 تسجيل الدخول وفتح لوحة المشرف الآن
-        </button>
+      <div style="background:var(--bg-body); padding:16px; border-radius:12px; border:1px solid var(--border-line); margin-bottom:14px; font-size:12.5px; color:var(--text-main); line-height:1.7;">
+        <div style="font-weight:800; color:var(--crimson); margin-bottom:6px;">🔒 متطلبات تفعيل الإشراف:</div>
+        <ul style="margin:0; padding-right:18px; color:var(--text-dim);">
+          <li>خادم موثوق يتحقق من صلاحية الجلسة (JWT / OAuth2).</li>
+          <li>منع أي ترقية دور من طرف تطبيق العميل أو المتصفح.</li>
+          <li>التحقق من الصلاحيات الإدارية عند كل عملية على الخادم.</li>
+        </ul>
       </div>
 
       <div style="display:flex; justify-content:space-between; align-items:center; font-size:11.5px; color:var(--text-dim); flex-wrap:wrap; gap:6px;">
-        <span>📧 الدعم الفني المعتمد: support@example.com</span>
-        <a href="#" style="color:var(--crimson); font-weight:800; text-decoration:none;" onclick="closeModal('adminLockModal'); openModal('authModal'); return false;">تسجيل كعميل أو مترجم ⟵</a>
+        <span>📧 الدعم الفني: support@example.com</span>
+        <button class="btn-primary" style="padding:8px 14px; font-size:12px;" onclick="closeModal('adminLockModal'); switchRole('client');">العودة لبوابة العملاء</button>
       </div>
     </div>
   </div>
+
 
   <!-- 2. VISITOR RATING & REVIEW MODAL (تقييم كل زائر) -->
   <div id="ratingModal" class="modal-backdrop">
@@ -3867,16 +3859,16 @@
     const SUPPORT_EMAIL = 'support@example.com';
 
     function isAuthorizedAdminEmail(email) {
-      if (!email) return false;
-      const e = email.toLowerCase().trim();
-      return e === ADMIN_EMAIL.toLowerCase();
+      // Fail-Closed: Client-side email matching cannot confer administrative privileges.
+      // A verified backend authentication server token is strictly required.
+      return false;
     }
 
     function verifyAdminPassword(pass) {
-      if (!pass) return false;
-      const p = pass.trim();
-      return p.length >= 6;
+      // Fail-Closed: Passwords must be securely verified by a backend server, not by local string length.
+      return false;
     }
+
 
     function fillDefaultAdminCredentials() { /* Disabled for security */ }
     let audioCtx = null;
@@ -3915,7 +3907,7 @@
           id: "PL-8421",
           clientName: "شركة البترول والمحروقات",
           clientEmail: "contracts@example.com",
-          clientPhone: "+213 555 12 34 56",
+          clientPhone: "+213 555 00 00 00",
           title: "عقد امتياز واستثمار دولي",
           service: "قانونية ورسمية",
           langs: "الإنجليزية ⇄ العربية",
@@ -3932,7 +3924,7 @@
           id: "PL-9032",
           clientName: "شركة المقاولات والأشغال الكبرى",
           clientEmail: "projects@example.com",
-          clientPhone: "+213 550 44 33 22",
+          clientPhone: "+213 555 00 00 00",
           title: "كتيب مواصفات توربينات الغاز",
           service: "تقنية وهندسية",
           langs: "الفرنسية ⇄ العربية",
@@ -3949,7 +3941,7 @@
           id: "PL-3114",
           clientName: "وزارة الطاقة والمناجم",
           clientEmail: "summit@example.com",
-          clientPhone: "+213 21 66 77 88",
+          clientPhone: "+213 555 00 00 00",
           title: "كابينة الترجمة لقمة الطاقة بالجزائر",
           service: "ترجمة فورية للمؤتمرات",
           langs: "الإنجليزية ⇄ الفرنسية",
@@ -3986,9 +3978,8 @@
       if (!tbody) return;
       tbody.innerHTML = '';
 
-      // Client sees ONLY their own orders (Starts from 0 for new accounts)
+      // Client sees ONLY their own orders
       const clientOrders = ordersList.filter(o => {
-        if (currentUserEmail && currentUserEmail.toLowerCase() === ADMIN_EMAIL.toLowerCase()) return true;
         if (!currentUserEmail) return false;
         return o.clientEmail.toLowerCase() === currentUserEmail.toLowerCase() || (currentUserName && o.clientName.toLowerCase() === currentUserName.toLowerCase());
       });
@@ -4100,19 +4091,18 @@
     let pendingRoleSwitch = null;
 
     function isUserAuthenticatedForRole(role) {
-      // Authorized Admin has instant universal master access to all views
-      if (currentUserEmail && currentUserEmail.toLowerCase() === ADMIN_EMAIL.toLowerCase()) return true;
+      if (role === 'admin') return false; // Fail-Closed: Admin role strictly requires backend server authorization
 
       // Guest cannot access protected role portals directly
       if (!currentUserEmail || currentUserEmail === 'guest@example.com') return false;
 
-      // Map roles
+      // Map client roles
       const roleMapping = {
-        'admin': ['Admin'],
-        'translator': ['Translator', 'Admin'],
-        'student': ['Student', 'Admin'],
-        'enthusiast': ['Learner', 'Student', 'Admin'],
-        'client': ['Client', 'Admin', 'Translator', 'Student', 'Learner']
+        'admin': [],
+        'translator': ['Translator'],
+        'student': ['Student'],
+        'enthusiast': ['Learner', 'Student'],
+        'client': ['Client', 'Translator', 'Student', 'Learner']
       };
 
       const allowedRoles = roleMapping[role] || [];
@@ -4120,12 +4110,10 @@
     }
 
     function switchRole(role) {
-      // 1. Admin Portal Protection: strictly authorized admin
+      // 1. Admin Portal Protection: strictly Fail-Closed without a verified backend server
       if (role === 'admin') {
-        if (!currentUserEmail || !isAuthorizedAdminEmail(currentUserEmail)) {
-          openModal('adminLockModal');
-          return;
-        }
+        openModal('adminLockModal');
+        return;
       }
 
       // 2. All other portals require authentication for the specific role unless Admin
@@ -6251,23 +6239,10 @@
       const statusBox = document.getElementById('account-request-status-box');
       if (statusBox) {
         statusBox.style.display = 'block';
-        statusBox.textContent = `✓ تم تسجيل طلب الحصول على بيانات ${typeLabel} بنجاح! سيتم تزويدك بالبيانات الرسمية المشفرة فورياً عبر بريدك المسجل أو رسالة مباشرة.`;
-      }
-      if (typeof ADMIN_EMAIL !== 'undefined') {
-        fetch(`https://formsubmit.co/ajax/${ADMIN_EMAIL}`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json", "Accept": "application/json" },
-          body: JSON.stringify({
-            _subject: `[Polylang] طلب بيانات الحساب المالي: ${typeLabel}`,
-            user: typeof currentUserName !== 'undefined' ? currentUserName : "عميل المنصة",
-            email: typeof currentUserEmail !== 'undefined' ? currentUserEmail : "",
-            accountType: typeLabel,
-            time: new Date().toISOString()
-          })
-        }).catch(e => console.log(e));
+        statusBox.textContent = `✓ تم تسجيل طلب الحصول على بيانات ${typeLabel} بنجاح! سيتم تزويدك بالبيانات الرسمية عبر بريدك المسجل أو رسالة مباشرة.`;
       }
 
-      alert(`📩 تم تسجيل طلب الحصول على بيانات ${typeLabel} بنجاح!\nتصلك بيانات الحساب المشفرة من الإدارة المعتمدة فورياً.\nيمكنك أيضاً مراسلة الإدارة مباشرة: ${typeof SUPPORT_EMAIL !== 'undefined' ? SUPPORT_EMAIL : 'support@example.com'}`);
+      alert(`📩 تم تسجيل طلب الحصول على بيانات ${typeLabel} بنجاح!\nتصلك بيانات الحساب من الإدارة المعتمدة.\nيمكنك أيضاً مراسلة الإدارة مباشرة: ${typeof SUPPORT_EMAIL !== 'undefined' ? SUPPORT_EMAIL : 'support@example.com'}`);
     }
 
     function selectSubscriptionPlan(planTier, priceDzd) {
@@ -6300,24 +6275,9 @@
       localStorage.setItem('polylang_payment_receipt', tx);
       if (typeof isUserVip !== 'undefined') isUserVip = true;
 
-      if (typeof ADMIN_EMAIL !== 'undefined') {
-        fetch(`https://formsubmit.co/ajax/${ADMIN_EMAIL}`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json", "Accept": "application/json" },
-          body: JSON.stringify({
-            _subject: `[Polylang VIP] إشعار دفع جديد وصل: ${tx}`,
-            user: typeof currentUserName !== 'undefined' ? currentUserName : "عميل",
-            email: typeof currentUserEmail !== 'undefined' ? currentUserEmail : "",
-            transaction: tx,
-            target: "طلب الحساب المعتمد للإدارة",
-            time: new Date().toISOString()
-          })
-        }).catch(e => console.log(e));
-      }
-
       if (typeof closeModal === 'function') closeModal('premiumSubModal');
       if (typeof renderAcademyCards === 'function') renderAcademyCards();
-      alert(`✅ تم إرسال إشعار عملية الدفع رقم (${tx}) بنجاح!\nتم توثيق طلبك لدى الإدارة وسيتم تفعيل كامل باقات VIP والمساقات لك فوراً.`);
+      alert(`✅ تم حفظ إشعار عملية الدفع رقم (${tx}) بنجاح!\nسيتم تفعيل باقة VIP بعد مطابقة العملية من قبل الإدارة.`);
     }
 
     let isAghilasPromoActive = true;
@@ -7140,27 +7100,9 @@
     }
 
     function executeAdminInstantLogin() {
-      const emailInput = document.getElementById('admin-instant-email');
-      const passInput = document.getElementById('admin-instant-password');
-      const email = emailInput ? emailInput.value.trim().toLowerCase() : '';
-      const pass = passInput ? passInput.value.trim() : '';
-
-      if (!email || !pass) {
-        showAppToast("⚠️ يرجى إدخال البريد الإلكتروني وكلمة المرور الخاصة بالإدارة.");
-        return;
-      }
-      if (!isAuthorizedAdminEmail(email)) {
-        showAppToast("⛔ تم رفض الوصول: هذه البوابة مقفلة ومخصصة حصرياً للبريد المصرح به فقط.");
-        return;
-      }
-      if (!verifyAdminPassword(pass)) {
-        showAppToast("⛔ كلمة المرور غير صحيحة لحساب المشرف العام.");
-        return;
-      }
-      quickLoginUser('المشرف العام (Admin)', ADMIN_EMAIL, 'Admin');
+      showAppToast("⛔ الوصول مرفوض (Fail-Closed): لا يمكن ترقية الحساب إلى مشرف من واجهة العميل بدون خادم مصادقة موثوق.");
       closeModal('adminLockModal');
-      switchRole('admin');
-      showAppToast("✓ مرحباً بك! تم فتح لوحة الإشراف العام بنجاح.");
+      switchRole('client');
     }
 
     function checkAdminDirectLink() {
@@ -7173,15 +7115,7 @@
       if (linkInput) linkInput.value = getAdminDirectUrl();
 
       if (isDirectAdmin) {
-        if (currentUserEmail && isAuthorizedAdminEmail(currentUserEmail)) {
-          switchRole('admin');
-        } else {
-          openModal('adminLockModal');
-          setTimeout(() => {
-            const passInp = document.getElementById('admin-instant-password');
-            if (passInp) passInp.focus();
-          }, 300);
-        }
+        openModal('adminLockModal');
       }
     }
 
@@ -7401,7 +7335,8 @@
           if (sess && sess.email) {
             currentUserEmail = sess.email;
             currentUserName = sess.name || sess.email.split('@')[0];
-            currentUserRole = (sess.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) ? 'Admin' : (sess.role || 'Client');
+            // Fail-Closed: Never restore an Admin role from client storage without server verification
+            currentUserRole = (sess.role === 'Admin') ? 'Client' : (sess.role || 'Client');
             const nameEl = document.getElementById('user-display-name');
             const roleEl = document.getElementById('user-role-badge');
             const initEl = document.getElementById('user-avatar-initial');
@@ -7417,8 +7352,8 @@
 
     // Authentic Login Session Engine
     function quickLoginUser(name, email, roleTag) {
-      // Security enforcement: ONLY authorized admin can ever hold Admin role
-      if (roleTag === 'Admin' && (!email || !isAuthorizedAdminEmail(email))) {
+      // Fail-Closed: Client-side registration or login can never grant Admin privileges
+      if (roleTag === 'Admin') {
         roleTag = 'Client';
       }
       currentUserEmail = email;
@@ -7444,9 +7379,7 @@
       recordUserLoginAudit(name, email, roleTag);
 
       // Switch to the appropriate view based on role
-      if (roleTag === 'Admin' || isAuthorizedAdminEmail(email)) {
-        switchRole('admin');
-      } else if (roleTag === 'Translator') {
+      if (roleTag === 'Translator') {
         switchRole('translator');
       } else if (roleTag === 'Student') {
         switchRole('student');
@@ -7457,20 +7390,6 @@
       }
 
       renderOrdersTable();
-
-      // Notify admin email asynchronously
-      fetch(`https://formsubmit.co/ajax/${ADMIN_EMAIL}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify({
-          _subject: `[Polylang Hub] تسجيل دخول جديد: ${name}`,
-          user: name,
-          email: email,
-          role: roleTag,
-          time: new Date().toISOString()
-        })
-      }).catch(err => console.log(err));
-
       showAppToast(`✓ مرحباً بك يا ${name}! تم تفعيل واجهة ${roleTag} بنجاح.`);
     }
 
@@ -9059,24 +8978,6 @@
       document.getElementById('exam-level-grade').textContent = grade;
       document.getElementById('exam-score-percent').textContent = `الدرجة الفعلية: ${scorePercent}% (${correctCount} إجابات صحيحة من أصل ${questions.length})`;
       document.getElementById('exam-feedback-text').textContent = feedback;
-
-      // Dispatch Exam Results and Student Details
-      fetch(`https://formsubmit.co/ajax/${ADMIN_EMAIL}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify({
-          _subject: `[Polylang Hub] نتيجة امتحان تحديد المستوى 100 سؤال: ${currentUserName || 'مستخدم المنصة'} - ${grade}`,
-          studentName: currentUserName || 'مستخدم المنصة',
-          studentEmail: currentUserEmail || ADMIN_EMAIL,
-          examTrack: examData.title,
-          grade: grade,
-          scorePercent: `${scorePercent}%`,
-          correctAnswers: `${correctCount} من أصل ${questions.length}`,
-          rubricTier: rubricTier.toUpperCase(),
-          feedback: feedback,
-          timestamp: new Date().toISOString()
-        })
-      }).catch(err => console.log("Exam email dispatch notice:", err));
     }
 
     function toggleExamAnswersReview() {
@@ -9247,42 +9148,12 @@
       persistOrdersList();
       renderOrdersTable();
 
-      // Dispatch AJAX notification to admin gateway with PDF info
-      fetch(`https://formsubmit.co/ajax/${ADMIN_EMAIL}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify({
-          _subject: `[Polylang Hub] طلب ترجمة جديد: ${name} (${newId})`,
-          orderId: newId,
-          clientName: name,
-          clientEmail: email,
-          clientPhone: phone,
-          service: service,
-          languages: langs,
-          attachedPdf: currentOrderPdfName ? `${currentOrderPdfName} (${currentOrderPdfSize})` : "لم يتم إرفاق PDF",
-          notes: notes,
-          time: new Date().toISOString()
-        })
-      }).catch(err => console.log(err));
-
-      alert(`تم تسجيل طلبك بنجاح برقم: ${newId}\nتم إرسال إشعار فوري ومشفر إلى إدارة المنصة متضمناً تفاصيل الملف المرفق.\nسيتواصل معك فريق المنصة في أقرب وقت.`);
+      alert(`تم تسجيل طلبك بنجاح برقم: ${newId}\nتم توثيق طلبك محلياً في قائمة الطلبات.\nسيتواصل معك فريق المنصة في أقرب وقت.`);
       closeModal('orderModal');
     }
 
     function triggerTestEmail() {
-      fetch(`https://formsubmit.co/ajax/${ADMIN_EMAIL}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify({
-          _subject: `[Polylang Hub] فحص الاتصال والتنبيهات المباشرة`,
-          message: "تم فحص نظام الإشعارات وتأكيد الربط مع الخادم بنجاح.",
-          time: new Date().toISOString()
-        })
-      }).then(() => {
-        alert(`✅ تم إرسال رسالة التنبيه بنجاح إلى: ${ADMIN_EMAIL}`);
-      }).catch(() => {
-        alert(`تم إرسال التنبيه إلى: ${ADMIN_EMAIL}`);
-      });
+      alert("⚠️ التنبيهات الخارجية تتطلب خادماً خلفياً موثوقاً (Backend Server). لا توجد إشعارات غير مصرح بها يتم إرسالها إلى خدمات طرف ثالث.");
     }
 
     // Audio Greetings (Web Speech API)
