@@ -34,40 +34,40 @@ object PlatformTelemetry {
     val exerciseRecords = mutableStateListOf<StudentExerciseRecord>()
 
     init {
-        // Seed initial verified audit records
+        // Seed initial synthetic demo audit records
         sessionLogs.addAll(
             listOf(
                 VisitorSessionLog(
                     id = "LOG-1049",
                     timestamp = "2026-10-30 08:45:12",
-                    userName = "أ. جودي مداني (المشرف العام)",
+                    userName = "مشرف تجريبي (Demo Admin)",
                     userEmail = "admin@example.com",
                     role = "مشرف عام (Admin)",
                     actionType = "تسجيل دخول إداري",
-                    details = "جلسة فحص أمني وتدقيق منظومة الترجمة المحلفة ISO 17100"
+                    details = "جلسة فحص أمني وتدقيق منظومة الترجمة المحلفة"
                 ),
                 VisitorSessionLog(
                     id = "LOG-1048",
                     timestamp = "2026-10-30 08:32:04",
-                    userName = "د. سمير الهاشمي",
+                    userName = "مترجم تجريبي (Demo Translator)",
                     userEmail = "translator@example.com",
                     role = "مترجم محلف (Translator)",
                     actionType = "اعتماد ترجمة",
-                    details = "ختم واعتماد مشروع عقد امتياز رقم PL-8421"
+                    details = "ختم واعتماد مشروع تجريبي رقم DEMO-001"
                 ),
                 VisitorSessionLog(
                     id = "LOG-1047",
                     timestamp = "2026-10-30 08:15:30",
-                    userName = "سارة بن سالم",
+                    userName = "طالب تجريبي 1 (Demo Student 1)",
                     userEmail = "student@example.com",
                     role = "طالبة ترجمة (Student)",
                     actionType = "تمرين كابينة",
-                    details = "إكمال خطاب رقم #14 (قمة المناخ COP28) بفارق زمني 3.1 ثوانٍ"
+                    details = "إكمال تمرين كابينة تجريبي بفارق زمني 3.1 ثوانٍ"
                 ),
                 VisitorSessionLog(
                     id = "LOG-1046",
                     timestamp = "2026-10-30 07:55:18",
-                    userName = "يوسف قادري",
+                    userName = "متعلم تجريبي (Demo Learner)",
                     userEmail = "learner@example.com",
                     role = "متعلم لغات (Learner)",
                     actionType = "لعبة لغات",
@@ -76,11 +76,11 @@ object PlatformTelemetry {
                 VisitorSessionLog(
                     id = "LOG-1045",
                     timestamp = "2026-10-30 07:20:00",
-                    userName = "كريم حمداوي",
+                    userName = "عميل تجريبي (Demo Client)",
                     userEmail = "client@example.com",
                     role = "عميل (Client)",
                     actionType = "طلب ترجمة",
-                    details = "إيداع ملف عقد استثماري رسمي للترجمة والختم"
+                    details = "إيداع ملف تجريبي للترجمة والختم"
                 )
             )
         )
@@ -90,7 +90,7 @@ object PlatformTelemetry {
                 StudentExerciseRecord(
                     id = "EX-301",
                     timestamp = "2026-10-30 08:15",
-                    studentName = "سارة بن سالم",
+                    studentName = "طالب تجريبي 1 (Demo Student 1)",
                     studentEmail = "student@example.com",
                     exerciseType = "كابينة 100 خطاب",
                     exerciseTitle = "خطاب قمة المناخ COP28 - كلمة رئيس الوفد",
@@ -101,7 +101,7 @@ object PlatformTelemetry {
                 StudentExerciseRecord(
                     id = "EX-302",
                     timestamp = "2026-10-30 07:55",
-                    studentName = "يوسف قادري",
+                    studentName = "متعلم تجريبي (Demo Learner)",
                     studentEmail = "learner@example.com",
                     exerciseType = "12 لعبة لغات",
                     exerciseTitle = "سباق السرعة للمصطلحات القانونية والدبلوماسية",
@@ -111,7 +111,7 @@ object PlatformTelemetry {
                 StudentExerciseRecord(
                     id = "EX-303",
                     timestamp = "2026-10-29 19:40",
-                    studentName = "أمين بوحفص",
+                    studentName = "طالب تجريبي 2 (Demo Student 2)",
                     studentEmail = "student@example.com",
                     exerciseType = "امتحان تحديد مستوى CEFR",
                     exerciseTitle = "امتحان TCF الفرنسي الشامل (مستوى C1)",
@@ -120,7 +120,7 @@ object PlatformTelemetry {
                 StudentExerciseRecord(
                     id = "EX-304",
                     timestamp = "2026-10-29 16:10",
-                    studentName = "مريم زروقي",
+                    studentName = "طالب تجريبي 3 (Demo Student 3)",
                     studentEmail = "student@example.com",
                     exerciseType = "كابينة 100 خطاب",
                     exerciseTitle = "جلسة مجلس الأمن حول الأمن الغذائي الدولي",

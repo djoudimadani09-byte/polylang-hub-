@@ -7399,42 +7399,42 @@
     const DEFAULT_VISITOR_REVIEWS = [
       {
         id: "REV-101",
-        name: "د. عبد القادر بلقاسم",
+        name: "مستخدم تجريبي 1 (Demo User 1)",
         role: "عميل ترجمة",
         category: "الترجمة المعتمدة والمحلفة",
         rating: 5,
-        comment: "ترجمة فائقة الدقة للتقارير الهندسية والمناقصات البترولية. الختم الرسمي معتمد وسرعة الإنجاز استثنائية وفق ISO 17100.",
-        contact: "client@example.com",
+        comment: "ترجمة دقيقة للتقارير الهندسية والمناقصات. نموذج تقييم تجريبي.",
+        contact: "demo1@example.com",
         date: "2026-10-27 15:40"
       },
       {
         id: "REV-102",
-        name: "أ. خديجة عمراوي",
+        name: "مستخدم تجريبي 2 (Demo User 2)",
         role: "مترجم محلف",
         category: "كابينة ومحاكي الترجمة الفورية",
         rating: 5,
-        comment: "المقصورة الصوتية ونظام روزان للترجمة التتابعية يحاكي تماماً قاعات المؤتمرات الدولية. تجربة تدريبية عظيمة.",
-        contact: "reviewer@example.com",
+        comment: "المقصورة الصوتية ونظام روزان للترجمة التتابعية. نموذج تجريبي.",
+        contact: "demo2@example.com",
         date: "2026-10-26 12:20"
       },
       {
         id: "REV-103",
-        name: "م. كريم بوزيد",
+        name: "مستخدم تجريبي 3 (Demo User 3)",
         role: "طالب ترجمة",
         category: "امتحانات تحديد المستوى CEFR",
         rating: 5,
-        comment: "الامتحان المكون من 100 سؤال دقيق وشامل، ويوضح نقاط القوة والضعف بدقة علمية مذهلة.",
-        contact: "student2@example.com",
+        comment: "الامتحان المكون من 100 سؤال دقيق وشامل. نموذج تقييم تجريبي.",
+        contact: "demo3@example.com",
         date: "2026-10-25 18:10"
       },
       {
         id: "REV-104",
-        name: "سفيان بن عيسى",
+        name: "مستخدم تجريبي 4 (Demo User 4)",
         role: "عميل ترجمة",
         category: "سهولة وسرعة المنصة",
         rating: 4,
-        comment: "منصة ممتازة وسلسة للغاية، تم استلام الترجمة القانونية للعقود مع الفاتورة الرسمية في وقت قياسي.",
-        contact: "client2@example.com",
+        comment: "منصة ممتازة وسلسة للغاية. نموذج تقييم تجريبي.",
+        contact: "demo4@example.com",
         date: "2026-10-24 09:30"
       }
     ];
@@ -10013,9 +10013,9 @@
       // Update User Chip label if demo user
       const userChipLabel = document.getElementById('user-display-name');
       if (userChipLabel) {
-        if (lang === 'ar') userChipLabel.textContent = 'كريم حمداوي (عميل مؤسساتي)';
-        else if (lang === 'fr') userChipLabel.textContent = 'Karim Hamdaoui (Client Entreprise)';
-        else userChipLabel.textContent = 'Karim Hamdaoui (Corporate Client)';
+        if (lang === 'ar') userChipLabel.textContent = 'عميل تجريبي (Demo Client)';
+        else if (lang === 'fr') userChipLabel.textContent = 'Client Démo (Demo Client)';
+        else userChipLabel.textContent = 'Demo Client (Demo Mode)';
       }
 
       // Re-render order tables and admin dashboard to update column texts and statuses

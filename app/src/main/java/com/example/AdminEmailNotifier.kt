@@ -63,13 +63,20 @@ object AdminEmailNotifier {
             val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
             val timestamp = dateFormat.format(Date())
 
+            // Data Minimization: strictly filter out any potential credentials or sensitive personal fields
+            val sanitizedDetails = details.filterKeys { key ->
+                val lower = key.lowercase()
+                !lower.contains("pass") && !lower.contains("phone") && !lower.contains("card") &&
+                !lower.contains("token") && !lower.contains("secret") && !lower.contains("holder")
+            }
+
             val jsonObj = JSONObject().apply {
                 put("source", "PolylangHub-Android")
                 put("eventType", eventType)
                 put("timestamp", timestamp)
-                put("userName", userName.ifBlank { "زائر" })
-                put("userEmail", userEmail.ifBlank { "user@example.com" })
-                put("details", JSONObject(details))
+                put("userName", userName.ifBlank { "زائر تجريبي" })
+                put("userEmail", userEmail.ifBlank { "demo@example.com" })
+                put("details", JSONObject(sanitizedDetails))
             }
 
             val apiUrl = URL("$baseUrl/notifications")

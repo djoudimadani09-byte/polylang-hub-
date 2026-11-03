@@ -564,15 +564,15 @@ fun OrderServiceDialog(
                             isInterpretation = isInterp,
                             clientName = finalSenderName,
                             clientEmail = finalSenderEmail,
-                            clientPhone = if (clientContact.contains("@")) "+213 555 12 34 56" else clientContact,
-                            attachedFileName = attachedPdfName ?: "وثيقة_رسمية.pdf",
+                            clientPhone = if (clientContact.contains("@")) "555-0100" else clientContact,
+                            attachedFileName = attachedPdfName ?: "sample_document.pdf",
                             date = "2026-10-12",
-                            notes = "طلب ترجمة معتمدة رسمي مع إرفاق وثيقة التحقق."
+                            notes = "نموذج طلب ترجمة تجريبي."
                         )
 
-                        // 3. Dispatch official notification to platform administration
+                        // 3. Dispatch notification to platform administration
                         AdminEmailNotifier.dispatch(
-                            eventType = "طلب ترجمة معتمدة جديد",
+                            eventType = "طلب ترجمة جديد",
                             userName = finalSenderName,
                             userEmail = finalSenderEmail,
                             details = mapOf(
@@ -580,18 +580,13 @@ fun OrderServiceDialog(
                                 "documentTitle" to title,
                                 "category" to selectedCategory,
                                 "languagePair" to selectedLangPair,
-                                "attachedPdfFile" to (attachedPdfName ?: "لم يتم إرفاق ملف خارجي"),
-                                "attachedPdfSize" to (attachedPdfSize ?: "0 KB"),
-                                "wordCount" to "$wordCount كلمة",
-                                "estimatedPrice" to currency.format(estimatedDzd),
-                                "isUrgent" to if (isUrgent) "نعم (خلال 24 ساعة)" else "عادي",
-                                "recipientAdmin" to AdminEmailNotifier.ADMIN_EMAIL
+                                "estimatedPrice" to currency.format(estimatedDzd)
                             ),
                             onResult = { ok, msg ->
                                 dispatchStatusMessage = if (ok)
-                                    "✓ تم إرسال كافة تفاصيل الطلب والملف بنجاح إلى الإدارة المعتمدة"
+                                    "✓ تم تأكيد استلام الخادم للطلب"
                                 else
-                                    "تم تسجيل الطلب وإشعار الإدارة"
+                                    "⚠️ تم توثيق الطلب محلياً (إشعار الخادم غير متصل - Fail-Closed)"
                             }
                         )
 

@@ -144,9 +144,9 @@ fun AuthDialog(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Security & Authentication Notice
+                // Security & Authentication Notice (Strictly Fail-Closed)
                 Card(
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.25f)),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.25f)),
                     shape = RoundedCornerShape(12.dp),
                     modifier = Modifier.fillMaxWidth()
                 ) {
@@ -156,26 +156,25 @@ fun AuthDialog(
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         Icon(
-                            Icons.Default.VerifiedUser,
+                            Icons.Default.Security,
                             contentDescription = null,
-                            tint = RedPrimary,
+                            tint = MaterialTheme.colorScheme.error,
                             modifier = Modifier.size(20.dp)
                         )
                         Text(
                             text = if (isArabic)
-                                "تسجيل دخول حقيقي وآمن ومشفّر (256-Bit SSL/TLS). صلاحية المشرف العام محصورة ومحمية ببريد الإدارة المعتمد."
+                                "⚠️ نظام المصادقة معطّل افتراضياً (Fail-Closed): لا يتوفر خادم مصادقة مركزي موثوق (Backend Server) في هذا المستودع. لا يمكن إنشاء جلسة أو تفعيل صلاحيات حقيقية من جانب العميل دون خادم موثوق."
                             else
-                                "Secure authentic encrypted login. Admin privileges strictly restricted to authorized platform owner.",
+                                "Authentication Disabled (Fail-Closed): No verified backend authentication server configured. Session creation and privilege escalation are blocked.",
                             style = MaterialTheme.typography.bodySmall,
                             fontSize = 11.sp,
                             lineHeight = 15.sp,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                            color = MaterialTheme.colorScheme.onErrorContainer
                         )
                     }
                 }
 
                 Spacer(modifier = Modifier.height(14.dp))
-
 
                 // Error Banner
                 if (errorMessage != null) {
@@ -248,40 +247,11 @@ fun AuthDialog(
                                 errorMessage = if (isArabic) "كلمة المرور يجب أن لا تقل عن 4 خانات" else "Password must be at least 4 characters"
                                 return@Button
                             }
-                            if (cleanEmail.contains("admin", ignoreCase = true)) {
-                                errorMessage = if (isArabic)
-                                    "⚠️ المصادقة الإدارية معطلة افتراضياً (Fail-Closed): لا يتوفر خادم مصادقة خلفي موثوق في المستودع. لا يمكن منح صلاحية المشرف محلياً."
-                                else
-                                    "Admin Authentication Unavailable: No verified backend server configured. Admin login is disabled by default (Fail-Closed)."
-                                return@Button
-                            }
-                            isLoading = true
-                            // Client roles are strictly limited to non-admin roles (Fail-Closed)
-                            val role = when {
-                                cleanEmail.contains("trans", ignoreCase = true) || cleanEmail.contains("samir", ignoreCase = true) -> UserRole.TRANSLATOR
-                                cleanEmail.contains("student", ignoreCase = true) || cleanEmail.contains("sarah", ignoreCase = true) -> UserRole.STUDENT
-                                cleanEmail.contains("learner", ignoreCase = true) || cleanEmail.contains("youssef", ignoreCase = true) -> UserRole.LEARNER
-                                else -> UserRole.CLIENT
-                            }
-
-                            val name = cleanEmail.substringBefore("@").replace(".", " ").replaceFirstChar { it.uppercase() }
-
-                            AdminEmailNotifier.dispatch(
-                                eventType = "تسجيل دخول مستخدم",
-                                userName = name,
-                                userEmail = cleanEmail,
-                                details = mapOf("action" to "Login", "role" to role.name)
-                            )
-
-                            PlatformTelemetry.logSession(
-                                userName = name,
-                                userEmail = cleanEmail,
-                                role = role.labelAr,
-                                actionType = if (role == UserRole.ADMIN) "تسجيل دخول إداري" else "تسجيل دخول",
-                                details = if (role == UserRole.ADMIN) "فتح لوحة الإشراف العام والمراقبة الشاملة" else "دخول مستخدم معتمد إلى المنصة"
-                            )
-
-                            onLoginSuccess(name, cleanEmail, role)
+                            // Fail-Closed: No verified backend server configured. Never issue fake sessions.
+                            errorMessage = if (isArabic)
+                                "⚠️ تعذر تسجيل الدخول: نظام المصادقة معطّل افتراضياً (Fail-Closed). يتطلب تسجيل الدخول وتحديد الصلاحيات خادماً موثوقاً (Backend Server) للتحقق من الهوية ولا يمكن إنشاؤها محلياً."
+                            else
+                                "Sign in unavailable (Fail-Closed): A verified backend authentication server is required to issue valid sessions."
                         },
                         modifier = Modifier
                             .fillMaxWidth()
@@ -290,12 +260,27 @@ fun AuthDialog(
                         shape = RoundedCornerShape(12.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
                     ) {
-                        Icon(Icons.Default.Login, contentDescription = null)
+                        Icon(Icons.Default.Lock, contentDescription = null)
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = if (isArabic) "تسجيل الدخول إلى المنصة" else "Sign In to Platform",
+                            text = if (isArabic) "تسجيل الدخول (معطل - Fail-Closed)" else "Sign In (Disabled - Fail-Closed)",
                             fontWeight = FontWeight.Bold,
-                            fontSize = 15.sp
+                            fontSize = 14.sp
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    OutlinedButton(
+                        onClick = onDismiss,
+                        modifier = Modifier.fillMaxWidth().height(44.dp).testTag("demo_mode_login_btn"),
+                        shape = RoundedCornerShape(12.dp)
+                    ) {
+                        Icon(Icons.Default.Visibility, contentDescription = null, modifier = Modifier.size(16.dp))
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text(
+                            text = if (isArabic) "المتابعة في وضع المعاينة التجريبي (Demo Mode)" else "Continue in Demo Preview Mode",
+                            fontSize = 12.sp
                         )
                     }
                 } else {
@@ -431,47 +416,40 @@ fun AuthDialog(
                                 errorMessage = if (isArabic) "يرجى إدخال البريد الإلكتروني" else "Please enter your email"
                                 return@Button
                             }
-                            if (cleanEmail.contains("admin", ignoreCase = true) || selectedRole == UserRole.ADMIN) {
-                                errorMessage = if (isArabic)
-                                    "⚠️ لا يمكن إنشاء حساب مشرف من شاشة التسجيل (Fail-Closed). يتطلب دور المشرف خادماً موثوقاً للتحقق من الهوية والصلاحيات."
-                                else
-                                    "Admin accounts cannot be registered from the client application. Server-side authorization is required."
-                                return@Button
-                            }
-                            isLoading = true
-                            val finalRole = if (selectedRole == UserRole.ADMIN) UserRole.CLIENT else selectedRole
-                            AdminEmailNotifier.dispatch(
-                                eventType = "تسجيل حساب جديد بالمنصة",
-                                userName = cleanName,
-                                userEmail = cleanEmail,
-                                details = mapOf(
-                                    "phone" to phone,
-                                    "role" to finalRole.name,
-                                    "registeredRole" to finalRole.labelAr
-                                )
-                            )
-                            PlatformTelemetry.logSession(
-                                userName = cleanName,
-                                userEmail = cleanEmail,
-                                role = finalRole.labelAr,
-                                actionType = "إنشاء حساب جديد",
-                                details = "تم إنشاء حساب جديد بنجاح"
-                            )
-                            onLoginSuccess(cleanName, cleanEmail, finalRole)
+                            // Fail-Closed: No verified backend server configured. Never issue fake registered accounts.
+                            errorMessage = if (isArabic)
+                                "⚠️ تعذر إنشاء الحساب: خدمة التسجيل معطّلة افتراضياً (Fail-Closed). يتطلب إنشاء الحسابات خادماً خلفياً موثوقاً لتسجيل المستخدمين والتحقق منهم ولا يمكن إنشاؤها محلياً."
+                            else
+                                "Registration unavailable (Fail-Closed): A trusted backend server is required to register users."
                         },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(50.dp)
                             .testTag("submit_register_btn"),
                         shape = RoundedCornerShape(12.dp),
-                        colors = ButtonDefaults.buttonColors(containerColor = SuccessGreen)
+                        colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
                     ) {
-                        Icon(Icons.Default.PersonAdd, contentDescription = null)
+                        Icon(Icons.Default.Lock, contentDescription = null)
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = if (isArabic) "إنشاء الحساب وبدء الاستخدام" else "Create Account & Start",
+                            text = if (isArabic) "إنشاء حساب (معطل - Fail-Closed)" else "Register (Disabled - Fail-Closed)",
                             fontWeight = FontWeight.Bold,
-                            fontSize = 15.sp
+                            fontSize = 14.sp
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    OutlinedButton(
+                        onClick = onDismiss,
+                        modifier = Modifier.fillMaxWidth().height(44.dp).testTag("demo_mode_reg_btn"),
+                        shape = RoundedCornerShape(12.dp)
+                    ) {
+                        Icon(Icons.Default.Visibility, contentDescription = null, modifier = Modifier.size(16.dp))
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text(
+                            text = if (isArabic) "المتابعة في وضع المعاينة التجريبي (Demo Mode)" else "Continue in Demo Preview Mode",
+                            fontSize = 12.sp
                         )
                     }
                 }

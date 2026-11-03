@@ -86,6 +86,45 @@ fun DashboardScreen(
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+        // Fail-Closed Public Demo Banner
+        Card(
+            modifier = Modifier.fillMaxWidth().testTag("demo_security_notice_card"),
+            shape = RoundedCornerShape(14.dp),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f)),
+            border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
+        ) {
+            Row(
+                modifier = Modifier.padding(12.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                Icon(
+                    Icons.Default.Security,
+                    contentDescription = null,
+                    tint = RedPrimary,
+                    modifier = Modifier.size(22.dp)
+                )
+                Column {
+                    Text(
+                        text = if (isArabic) "🔒 وضع المعاينة العامة (Public Demo - Fail-Closed)" else "Public Demo Mode (Fail-Closed)",
+                        fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.titleSmall,
+                        color = RedPrimary
+                    )
+                    Text(
+                        text = if (isArabic)
+                            "تنبيه أمني: لا يتوفر خادم خلفي متصل للمصادقة وتفويض الحسابات. لمنع كشف بيانات العملاء الحقيقية، تُعرض فقط نماذج تجريبية عامة معلّمة بوضوح. تعديل الواجهة المحلية أو تبديل الدور لا يمنح أي وصول لبيانات سرية."
+                        else
+                            "Notice: No backend server configured for identity verification. To prevent cross-account exposure, only clearly labeled synthetic demo data is shown.",
+                        style = MaterialTheme.typography.bodySmall,
+                        fontSize = 11.sp,
+                        lineHeight = 15.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+        }
+
         // User Profile Card
         Card(
             modifier = Modifier.fillMaxWidth().testTag("dashboard_user_card"),
@@ -982,9 +1021,9 @@ fun DashboardScreen(
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                                Text("معلومات العميل وصاحب الطلب:", fontWeight = FontWeight.Bold, fontSize = 11.sp, color = MaterialTheme.colorScheme.primary)
-                                Text("الاسم: ${order.clientName}", fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
-                                Text("البريد: ${order.clientEmail} • الهاتف: ${order.clientPhone}", fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                Text("معلومات الطلب (نموذج تجريبي / Demo Sample):", fontWeight = FontWeight.Bold, fontSize = 11.sp, color = MaterialTheme.colorScheme.primary)
+                                Text("صاحب الطلب: ${order.clientName}", fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
+                                Text("بيانات الاتصال: demo@example.com • 555-0100 (محجوب أمنياً)", fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                             }
                         }
 

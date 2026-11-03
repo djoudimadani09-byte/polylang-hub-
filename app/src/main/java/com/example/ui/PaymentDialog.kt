@@ -263,9 +263,9 @@ fun PaymentDialog(
                                     )
                                 ) { success, _ ->
                                     accountRequestedStatus = if (success)
-                                        "✓ تم تسجيل طلبك بنجاح! ستصلك بيانات الحساب البريدي والمصرفي الرسمي فورياً عبر البريد الإلكتروني."
+                                        "✓ تم تأكيد استلام الخادم للطلب بنجاح."
                                     else
-                                        "✓ تم استلام طلب الحساب من قبل الإدارة وسيتم الرد فوراً."
+                                        "⚠️ تعذر الاتصال بالخادم (Fail-Closed): الخادم غير مهيأ. الدعم: ${AdminEmailNotifier.OFFICIAL_SUPPORT_EMAIL}"
                                 }
                             },
                             shape = RoundedCornerShape(8.dp),
@@ -338,12 +338,8 @@ fun PaymentDialog(
                             details = mapOf(
                                 "plan" to planName,
                                 "price" to "$activePrice DZD",
-                                "originalPrice" to "$priceDzd DZD",
-                                "couponCode" to if (isCouponActive) couponInput.trim() else "None",
-                                "offerReference" to "TRANSUP-DZ",
                                 "paymentMethod" to selectedMethod,
-                                "holder" to cardHolder,
-                                "transactionNumber" to cardNumber
+                                "offerReference" to "TRANSUP-DZ"
                             )
                         )
                         onPaymentSuccess()

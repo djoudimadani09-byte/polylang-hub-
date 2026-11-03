@@ -53,12 +53,12 @@ data class TranslationOrder(
     val priceDzd: Int,
     var status: String,
     val isInterpretation: Boolean = false,
-    val clientName: String = "كريم حمداوي",
-    val clientEmail: String = "client@example.com",
-    val clientPhone: String = "+213 555 12 34 56",
-    val attachedFileName: String = "document.pdf",
+    val clientName: String = "عميل تجريبي (Demo Client)",
+    val clientEmail: String = "demo-client@example.com",
+    val clientPhone: String = "555-0100",
+    val attachedFileName: String = "sample_document.pdf",
     val date: String = "2026-10-12",
-    val notes: String = "يرجى اعتماد الختم الرسمي وفق معيار ISO 17100"
+    val notes: String = "نموذج تجريبي للترجمة المعتمدة"
 )
 
 data class SrtCue(
