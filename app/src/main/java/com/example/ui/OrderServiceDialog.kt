@@ -401,7 +401,7 @@ fun OrderServiceDialog(
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Text(
-                                    text = "📋 معاينة الصياغة والاعتماد ISO 17100:",
+                                    text = "📋 معاينة الصياغة النموذجية (تجريبية):",
                                     fontWeight = FontWeight.Bold,
                                     fontSize = 12.5.sp,
                                     color = RedPrimary
@@ -512,7 +512,7 @@ fun OrderServiceDialog(
                         }
                         SuggestionChip(
                             onClick = {},
-                            label = { Text("معيار ISO 17100 ✓", fontSize = 11.sp, fontWeight = FontWeight.Bold) }
+                            label = { Text("نموذج تجريبي ✓", fontSize = 11.sp, fontWeight = FontWeight.Bold) }
                         )
                     }
                 }

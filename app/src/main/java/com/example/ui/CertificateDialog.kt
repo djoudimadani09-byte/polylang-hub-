@@ -161,11 +161,11 @@ fun CertificateDialog(
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
                             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                Text("د. ليلى مزياني", fontWeight = FontWeight.Bold, fontSize = 12.sp, color = Color(0xFF1E293B))
-                                Text("مترجم محلف ومعتمد", fontSize = 10.sp, color = Color(0xFF64748B))
+                                Text("مترجم معتمد تجريبي", fontWeight = FontWeight.Bold, fontSize = 12.sp, color = Color(0xFF1E293B))
+                                Text("قسم الترجمة المعتمدة", fontSize = 10.sp, color = Color(0xFF64748B))
                             }
                             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                Text("أ. مداني جودي", fontWeight = FontWeight.Bold, fontSize = 12.sp, color = Color(0xFF1E293B))
+                                Text("إدارة التدقيق التجريبية", fontWeight = FontWeight.Bold, fontSize = 12.sp, color = Color(0xFF1E293B))
                                 Text("المشرف العام للمنصة", fontSize = 10.sp, color = Color(0xFF64748B))
                             }
                         }
@@ -173,7 +173,7 @@ fun CertificateDialog(
                         Spacer(modifier = Modifier.height(4.dp))
 
                         Text(
-                            text = "Serial: $certId • ISO 17100:2015 Accredited",
+                            text = "Serial: $certId • نموذج شهادة تجريبي / Demo Certificate",
                             fontSize = 10.sp,
                             fontWeight = FontWeight.SemiBold,
                             color = Color(0xFF64748B)

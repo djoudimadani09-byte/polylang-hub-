@@ -152,10 +152,10 @@ fun PolylangHubApp() {
                         )
                         SuggestionChip(
                             onClick = {},
-                            label = { Text("ISO 17100", fontSize = 9.sp, fontWeight = FontWeight.Bold) },
+                            label = { Text("Demo App", fontSize = 9.sp, fontWeight = FontWeight.Bold) },
                             colors = SuggestionChipDefaults.suggestionChipColors(
-                                containerColor = RedPrimary.copy(alpha = 0.1f),
-                                labelColor = RedPrimary
+                                containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                                labelColor = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         )
                     }
