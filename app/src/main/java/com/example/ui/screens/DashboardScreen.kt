@@ -55,8 +55,8 @@ fun DashboardScreen(
     var actionNotificationMessage by remember { mutableStateOf<String?>(null) }
 
     val isAdmin = false // Fail-Closed: Administrative privilege requires verified backend session token
-    val isTranslator = userRole == UserRole.TRANSLATOR
-    val isClient = !isTranslator
+    val isTranslator = false // Fail-Closed: Elevated translator access requires verified server authorization token
+    val isClient = true // Safe default: Client mode only views client's own synthetic demo records
 
     // Client sees ONLY their own requested orders (Starts from 0 for new accounts)
     val clientOrders = remember(orders.size, userEmail, userName) {
@@ -339,6 +339,32 @@ fun DashboardScreen(
                     }
                 }
             }
+            UserRole.TRANSLATOR -> {
+                Card(
+                    modifier = Modifier.fillMaxWidth().testTag("translator_dash_panel"),
+                    shape = RoundedCornerShape(16.dp),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f)),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
+                ) {
+                    Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text(
+                            text = if (isArabic) "🔒 لوحة المترجم المعتمد معطلة (Fail-Closed)" else "Translator Portal Disabled (Fail-Closed)",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 13.sp,
+                            color = MaterialTheme.colorScheme.error
+                        )
+                        Text(
+                            text = if (isArabic)
+                                "تنبيه أمني: يتطلب الوصول إلى لوحة استلام مشاريع العملاء واعتمادها رمز توثيق خادم رسمي (Server Authorization Token). في غياب الخادم، تبقى الصلاحيات مغلقة ولا تُعرض بيانات مشاريع العملاء محلياً."
+                            else
+                                "Notice: Accessing client translation orders requires verified server credentials. In the absence of a server, elevated access is restricted.",
+                            style = MaterialTheme.typography.bodySmall,
+                            fontSize = 11.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
+            }
             UserRole.ADMIN -> {
                 Card(
                     modifier = Modifier.fillMaxWidth().testTag("admin_dash_panel"),
@@ -569,7 +595,7 @@ fun DashboardScreen(
                                 color = SuccessGreen.copy(alpha = 0.15f)
                             ) {
                                 Text(
-                                    text = "ISO 17100",
+                                    text = "نموذج تجريبي / Demo",
                                     fontSize = 10.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = SuccessGreen,
@@ -625,8 +651,8 @@ fun DashboardScreen(
                             ) {
                                 Column(modifier = Modifier.padding(10.dp), horizontalAlignment = Alignment.CenterHorizontally) {
                                     Text("معايير الجودة", fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, fontWeight = FontWeight.Bold)
-                                    Text("ISO 17100", fontSize = 14.sp, fontWeight = FontWeight.ExtraBold, color = GoldYellow)
-                                    Text("اعتماد دولي محلف", fontSize = 9.sp, color = GoldYellow)
+                                    Text("نموذج تجريبي", fontSize = 14.sp, fontWeight = FontWeight.ExtraBold, color = GoldYellow)
+                                    Text("معاينة منصة تجريبية", fontSize = 9.sp, color = GoldYellow)
                                 }
                             }
                         }
@@ -648,7 +674,7 @@ fun DashboardScreen(
                             style = MaterialTheme.typography.titleSmall
                         )
                         Text(
-                            text = if (isArabic) "صلاحية الإشراف الكامل والاعتماد والختم الرسمي ISO 17100" else "Master administrative oversight and certified sealing",
+                            text = if (isArabic) "معاينة الإشراف الإداري (نموذج تجريبي)" else "Master administrative demo preview",
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -659,7 +685,7 @@ fun DashboardScreen(
                         color = SuccessGreen.copy(alpha = 0.15f)
                     ) {
                         Text(
-                            text = "ISO 17100:2015",
+                            text = "نموذج تجريبي / Demo",
                             modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
                             fontSize = 10.sp,
                             fontWeight = FontWeight.Bold,
@@ -775,7 +801,7 @@ fun DashboardScreen(
                                             Button(
                                                 onClick = {
                                                     order.status = "مكتمل وتم وضع الختم الرسمي"
-                                                    actionNotificationMessage = "✓ تم اعتماد وترجمة المستند #${order.id} وتطبيق الختم الرسمي ISO 17100 بنجاح."
+                                                    actionNotificationMessage = "✓ تم اعتماد وترجمة المستند #${order.id} كنموذج تجريبي بنجاح."
                                                 },
                                                 shape = RoundedCornerShape(8.dp),
                                                 colors = ButtonDefaults.buttonColors(containerColor = SuccessGreen),
@@ -834,7 +860,7 @@ fun DashboardScreen(
                         color = SuccessGreen.copy(alpha = 0.15f)
                     ) {
                         Text(
-                            text = "ISO 17100:2015",
+                            text = "نموذج تجريبي / Demo",
                             modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
                             fontSize = 10.sp,
                             fontWeight = FontWeight.Bold,
@@ -951,7 +977,7 @@ fun DashboardScreen(
                                             Button(
                                                 onClick = {
                                                     order.status = "مكتمل وتم وضع الختم الرسمي"
-                                                    actionNotificationMessage = "✓ تم اعتماد وترجمة المستند #${order.id} وتطبيق الختم الرسمي ISO 17100 بنجاح."
+                                                    actionNotificationMessage = "✓ تم اعتماد وترجمة المستند #${order.id} كنموذج تجريبي بنجاح."
                                                 },
                                                 shape = RoundedCornerShape(8.dp),
                                                 colors = ButtonDefaults.buttonColors(containerColor = SuccessGreen),
@@ -1050,7 +1076,7 @@ fun DashboardScreen(
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                                Text("مسار الاعتماد الرسمي (ISO 17100):", fontWeight = FontWeight.Bold, fontSize = 11.5.sp, color = SuccessGreen)
+                                Text("مسار الاعتماد النموذجي (معاينة تجريبية):", fontWeight = FontWeight.Bold, fontSize = 11.5.sp, color = SuccessGreen)
                                 Text("✓ الخطوة 1: استلام الوثيقة وتدقيق المصطلحات التخصصية", fontSize = 11.sp)
                                 Text("✓ الخطوة 2: الترجمة المزدوجة والمطابقة اللغوية", fontSize = 11.sp)
                                 Text(if (order.status.contains("مكتمل")) "✓ الخطوة 3: تطبيق الختم الرسمي للمترجم المحلف والباركود" else "⏳ الخطوة 3: قيد وضع الختم الرسمي للمترجم المحلف", fontSize = 11.sp, fontWeight = FontWeight.Bold)
@@ -1107,7 +1133,7 @@ fun DashboardScreen(
                                 shape = RoundedCornerShape(4.dp),
                                 color = SuccessGreen.copy(alpha = 0.15f)
                             ) {
-                                Text("ISO 17100", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = SuccessGreen, modifier = Modifier.padding(4.dp))
+                                Text("نموذج تجريبي / Demo", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = SuccessGreen, modifier = Modifier.padding(4.dp))
                             }
                         }
 
@@ -1135,7 +1161,7 @@ fun DashboardScreen(
                             }
                         }
 
-                        Text("مجمع بوليلانغ الدولي للترجمة المعتمدة • الجزائر العاصمة • معتمد ISO 17100", fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text("مجمع بوليلانغ الدولي للترجمة المعتمدة • الجزائر العاصمة • منصة تجريبية (Demo)", fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
 
                         Button(
                             onClick = { showInvoiceDialogForOrder = null },
@@ -1233,7 +1259,7 @@ fun DashboardScreen(
                         color = Color(0xFFDCFCE7)
                     ) {
                         Text(
-                            text = "ISO 17100 معتمد",
+                            text = "منصة تجريبية (Demo)",
                             fontSize = 10.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color(0xFF15803D),

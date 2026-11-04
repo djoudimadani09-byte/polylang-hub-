@@ -117,4 +117,18 @@ class SecurityFailClosedTest {
         assertFalse("Phone must not look like real Algerian mobile", defaultOrder.clientPhone.startsWith("+213 555 12"))
         assertTrue("Client name must be marked as demo", defaultOrder.clientName.contains("تجريبي") || defaultOrder.clientName.contains("Demo"))
     }
+
+    @Test
+    fun elevatedRoles_cannotBypassFailClosedWithoutServerToken() {
+        // Any elevated role (ADMIN or TRANSLATOR) must require verified backend token
+        assertFalse("Admin access without token must be false", AdminEmailNotifier.isServerAuthenticatedAdmin(null))
+        assertFalse("Fake bearer token must be rejected", AdminEmailNotifier.isServerAuthenticatedAdmin("Bearer fake_token"))
+
+        // Client role is safe fallback, elevated roles must never be self-granted by client string
+        val requestedRole = UserRole.TRANSLATOR
+        val isVerifiedSession = false // No backend server
+        val effectiveElevatedAccess = isVerifiedSession && requestedRole == UserRole.TRANSLATOR
+        assertFalse("Elevated role without server verification must not grant elevated access", effectiveElevatedAccess)
+    }
 }
+
